@@ -21,12 +21,12 @@
     <![endif]-->
         
         
-      <ng-include src="'views/header/Header.template.html'" ng-controller="HeaderController"></ng-include>
+      <ng-include src="'views/Header.template.html'" ng-controller="HeaderController"></ng-include>
       <br/>
       <br/>
       <ui-view></ui-view>
     
-    <footer> Je suis le footer</footer>
+    <footer class="navbar navbar-default navbar-fixed-bottom"> Je suis le footer</footer>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -63,10 +63,9 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/HeaderController.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

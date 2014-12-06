@@ -21,11 +21,19 @@ var myapp = angular
   ]).config(function($stateProvider, $urlRouterProvider){
       
       // For any unmatched url, send to /route1
-      $urlRouterProvider.otherwise("/");
+      $urlRouterProvider.otherwise("/accueil");
       
       $stateProvider
         .state('accueil', {
-            url: "/",
-            templateUrl: "views/accueil/Accueil.template.html"
+            url: "/accueil",
+            templateUrl: "views/Accueil.template.html"
+        })
+        .state('meslivres', {
+            url: "/meslivres",
+            templateUrl: "views/MesLivres.template.html"
+        })
+        .state('apropros', {
+            url: "/apropos",
+            templateUrl: "views/APropos.template.html"
         })
     })
