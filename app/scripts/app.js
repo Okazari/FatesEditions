@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var myapp = angular
   .module('myVisualStoryBookApp', [
     'ngAnimate',
     'ngCookies',
@@ -16,26 +16,23 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-	'ui.utils',
-	'ui.router'
-  ])
-  
-myVisualStoryBookApp.config(function($stateProvider, $urlRouterProvider) {
-  //
-  // For any unmatched url, redirect to /state1
-  $urlRouterProvider.otherwise("/");
-  //
-  // Now set up the states
-  $stateProvider
-    .state('accueil', {
-      url: "/accueil",
-      templateUrl: "view/Accueil/Accueil.template.html"
+    'ui.utils',
+    'ui.router'
+  ]).config(function($stateProvider, $urlRouterProvider){
+      
+      // For any unmatched url, send to /route1
+      $urlRouterProvider.otherwise("/");
+      
+      $stateProvider
+        .state('accueil', {
+            url: "/accueil",
+            templateUrl: "views/accueil/Accueil.template.html"
+        })
+          .state('route1.list', {
+              url: "/list",
+              templateUrl: "route1.list.html",
+              controller: function($scope){
+                $scope.items = ["A", "List", "Of", "Items"];
+              }
+          })
     })
-    .state('accueil.detail', {
-      url: "/detail",
-      templateUrl: "partials/state1.list.html",
-      controller: function($scope) {
-        $scope.items = ["A", "List", "Of", "Items"];
-      }
-    })
-});
