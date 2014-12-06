@@ -15,19 +15,27 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+	'ui.utils',
+	'ui.router'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+  
+myVisualStoryBookApp.config(function($stateProvider, $urlRouterProvider) {
+  //
+  // For any unmatched url, redirect to /state1
+  $urlRouterProvider.otherwise("/");
+  //
+  // Now set up the states
+  $stateProvider
+    .state('accueil', {
+      url: "/accueil",
+      templateUrl: "view/Accueil/Accueil.template.html"
+    })
+    .state('accueil.detail', {
+      url: "/detail",
+      templateUrl: "partials/state1.list.html",
+      controller: function($scope) {
+        $scope.items = ["A", "List", "Of", "Items"];
+      }
+    })
+});
