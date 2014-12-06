@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 var myapp = angular
-  .module('myVisualStoryBookApp', [
+  .module('myVirtualStoryBookApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

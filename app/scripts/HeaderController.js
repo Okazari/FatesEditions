@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myVisualStoryBookApp')
+angular.module('myVirtualStoryBookApp')
   .controller('HeaderController', function ($scope, $state) {
     $scope.MenuItems = [];
     
