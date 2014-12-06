@@ -25,14 +25,7 @@ var myapp = angular
       
       $stateProvider
         .state('accueil', {
-            url: "/accueil",
+            url: "/",
             templateUrl: "views/accueil/Accueil.template.html"
         })
-          .state('route1.list', {
-              url: "/list",
-              templateUrl: "route1.list.html",
-              controller: function($scope){
-                $scope.items = ["A", "List", "Of", "Items"];
-              }
-          })
     })

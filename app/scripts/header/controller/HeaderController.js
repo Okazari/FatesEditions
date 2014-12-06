@@ -8,10 +8,6 @@
  * Controller of the myVisualStoryBookApp
  */
 angular.module('myVisualStoryBookApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('HeaderController', function ($scope) {
+    $scope.MenuItems = ['Accueil','Mes livres','A propos'];
   });
