@@ -13,9 +13,14 @@ body {
 }
 
 div.portalContainer>div{
+    width:100%;
     margin:20px;
     text-align:center;
-    opacity: 0.92;
+    opacity: 0.95;
+}
+
+div.portalContainer label.title{
+    font-size:2em;
 }
 
 div.portalContainer>div label{
@@ -23,21 +28,32 @@ div.portalContainer>div label{
 }
 
 div.portalContainer>div button{
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 div.portalContainer>div div{
     text-align:left;
 }
 
-div.portalContainer>div div label{
-    margin-top: 10px;
+div.portalContainer>div>div>label{
+    margin-top: 20px;
     margin-left: 5px;
 }
 
 div.portalContainer button span.glyphicon{
     margin-right: 1px;
 }
+
+span.left{
+    float:right;
+}
+
+div.portalContainer>div div>span{
+    margin-top: 50px;
+    margin-left: 5px;
+}
+
+
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,

@@ -1,0 +1,47 @@
+<div class="portalContainer container">
+    <div class="well">
+    
+        <label class="title">S'inscrire sur MyVirtualStoryBook !</label>
+        
+        <div>
+            <label>Nom du compte</label>
+            <input type="text" class="form-control" placeholder="Nom d'utilisateur">
+        </div>
+        
+        <div>
+            <label>Mot de passe</label>
+            <input type="text" class="form-control" placeholder="************">
+        </div>
+        
+        <div>
+            <label>Adresse mail</label>
+            <input type="text" class="form-control" placeholder="myvirtual@storybook.fr">
+        </div>
+        
+        <div>
+            <label>Choisissez votre expérience</label>
+            <div class="btn-group">
+                <label class="btn btn-primary" ng-model="experience.author" btn-checkbox>Auteur</label>
+                <label class="btn btn-primary" ng-model="experience.player" btn-checkbox>Joueur</label>
+            </div>
+        </div>
+        
+        <div ng-if="experience.author">
+            <label>Nom d'auteur</label>
+            <input type="text" class="form-control" placeholder="Okazari">
+        </div>
+        
+        <div ng-if="experience.player">
+            <label>Nom de joueur</label>
+            <input type="text" class="form-control" placeholder="Redeamon">
+        </div>
+        
+        <div>
+            <button type="button" class="btn btn-default btn-lg">
+                <a href="#/experience">S'inscrire</a>
+            </button>
+            <span class="left">Déjà un compte ? <a href="#/signin">Connecte toi !</a></span>
+        </div>
+        
+    </div>
+</div>

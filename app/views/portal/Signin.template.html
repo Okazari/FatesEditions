@@ -1,0 +1,26 @@
+<div class="portalContainer container">
+    <div class="well">
+        <label class="title">Se connecter sur MyVirtualStoryBook !</label>
+        <div>
+            <label>Nom du compte</label>
+            <input type="text" class="form-control" placeholder="Nom d'utilisateur">
+        </div>
+        <div>
+            <label>Mot de passe</label>
+            <input type="text" class="form-control" placeholder="************">
+        </div>
+         <div>
+            <label>Se connecter en tant que :</label>
+            <div class="btn-group">
+                <label class="btn btn-primary" ng-model="experience" btn-radio="'author'">Auteur</label>
+                <label class="btn btn-primary" ng-model="experience" btn-radio="'player'">Joueur</label>
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default btn-lg">
+                <a href="#/experience">Se Connecter</a>
+            </button>
+            <span class="left">Pas de compte ? <a href="#/singup">Inscrit toi !</a></span>
+        </div>
+    </div>
+</div>

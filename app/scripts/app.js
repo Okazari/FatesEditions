@@ -17,31 +17,36 @@ var myapp = angular
     'ngSanitize',
     'ngTouch',
     'ui.utils',
-    'ui.router'
+    'ui.router',
+    'ui.bootstrap'
   ]).config(function($stateProvider, $urlRouterProvider){
       
       // For any unmatched url, send to /route1
-      $urlRouterProvider.otherwise("/portal");
+      $urlRouterProvider.otherwise("/signup");
       
       $stateProvider
-        .state('portal', {
-            url: "/portal",
-            templateUrl: "views/Portal.template.html"
+        .state('signup', {
+            url: "/signup",
+            templateUrl: "views/portal/Portal.template.html"
+        })
+        .state('signin', {
+            url: "/signin",
+            templateUrl: "views/portal/Signin.template.html"
         })
         .state('player', {
             url: "/player",
-            templateUrl: "views/Player.template.html"
+            templateUrl: "views/player/Player.template.html"
         })
         .state('player.home', {
             url: "/home",
-            templateUrl: "views/Home.template.html"
+            templateUrl: "views/player/Home.template.html"
         })
         .state('player.mybooks', {
             url: "/mybooks",
-            templateUrl: "views/MyBooks.template.html"
+            templateUrl: "views/player/MyBooks.template.html"
         })
         .state('player.about', {
             url: "/about",
-            templateUrl: "views/About.template.html"
+            templateUrl: "views/player/About.template.html"
         })
     })
