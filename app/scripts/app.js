@@ -21,19 +21,27 @@ var myapp = angular
   ]).config(function($stateProvider, $urlRouterProvider){
       
       // For any unmatched url, send to /route1
-      $urlRouterProvider.otherwise("/accueil");
+      $urlRouterProvider.otherwise("/portal");
       
       $stateProvider
-        .state('accueil', {
-            url: "/accueil",
-            templateUrl: "views/Accueil.template.html"
+        .state('portal', {
+            url: "/portal",
+            templateUrl: "views/Portal.template.html"
         })
-        .state('meslivres', {
-            url: "/meslivres",
-            templateUrl: "views/MesLivres.template.html"
+        .state('player', {
+            url: "/player",
+            templateUrl: "views/Player.template.html"
         })
-        .state('apropros', {
-            url: "/apropos",
-            templateUrl: "views/APropos.template.html"
+        .state('player.home', {
+            url: "/home",
+            templateUrl: "views/Home.template.html"
+        })
+        .state('player.mybooks', {
+            url: "/mybooks",
+            templateUrl: "views/MyBooks.template.html"
+        })
+        .state('player.about', {
+            url: "/about",
+            templateUrl: "views/About.template.html"
         })
     })

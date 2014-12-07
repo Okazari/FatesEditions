@@ -1,7 +1,42 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+    position: relative;
+    display:block;
+}
+
+.full {
+  background: url(../images/portal.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+div.portalContainer>div{
+    margin:20px;
+    text-align:center;
+    opacity: 0.92;
+}
+
+div.portalContainer>div label{
+    display:block;
+}
+
+div.portalContainer>div button{
+    margin-top: 10px;
+}
+
+div.portalContainer>div div{
+    text-align:left;
+}
+
+div.portalContainer>div div label{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+div.portalContainer button span.glyphicon{
+    margin-right: 1px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
