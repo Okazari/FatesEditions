@@ -50,6 +50,10 @@ var myapp = angular
                 url: "/mygames",
                 templateUrl: "feature/player/view/MyGames.html"
             })
+            .state('player.profile', {
+                url: "/profile",
+                templateUrl: "feature/common/profile/Profile.html"
+            })
             .state('author', {
                 url: "/author",
                 templateUrl: "feature/author/template/Author.template.html"
@@ -57,6 +61,10 @@ var myapp = angular
             .state('author.mybooks', {
                 url: "/mybooks",
                 templateUrl: "feature/author/view/MyBooks.html"
+            })
+            .state('author.profile', {
+                url: "/profile",
+                templateUrl: "feature/common/profile/Profile.html"
             })
             .state('game', {
                 url: "/game",
