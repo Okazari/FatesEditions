@@ -34,6 +34,7 @@ var myapp = angular
         //idem
         $urlRouterProvider.when("/game","/game/current");
         $stateProvider
+            //Portail
             .state('signup', {
                 url: "/signup",
                 templateUrl: "feature/portal/view/Signup.html"
@@ -42,6 +43,9 @@ var myapp = angular
                 url: "/signin",
                 templateUrl: "feature/portal/view/Signin.html"
             })
+            
+            
+            //Joueur
             .state('player', {
                 url: "/player",
                 templateUrl: "feature/player/template/Player.template.html"
@@ -54,6 +58,9 @@ var myapp = angular
                 url: "/profile",
                 templateUrl: "feature/common/profile/Profile.html"
             })
+            
+            
+            //Auteur
             .state('author', {
                 url: "/author",
                 templateUrl: "feature/author/template/Author.template.html"
@@ -66,6 +73,8 @@ var myapp = angular
                 url: "/profile",
                 templateUrl: "feature/common/profile/Profile.html"
             })
+            
+            //Jeu
             .state('game', {
                 url: "/game",
                 templateUrl: "feature/game/template/Game.template.html"

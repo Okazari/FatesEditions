@@ -56,26 +56,40 @@ div.portalContainer>div div>span{
     margin-left: 5px;
 }
 
-nav.navbar-fixed-top .nav{
+nav.navbar-static-top .nav{
     width:100%;
 }
 
-nav.navbar-fixed-top .nav li:last-of-type{
+nav.navbar-static-top .nav li:last-of-type{
     float:right;
 }
 
-nav.navbar-fixed-top .nav span:last-child{
+nav.navbar-static-top .nav span:last-child{
     float:right;
     cursor:default;
 }
 
-nav.navbar-fixed-top .nav span:last-child:hover{
+nav.navbar-static-top .nav span:last-child:hover{
     color:#9d9d9d;
 }
 
-/*Player Css*/
+.navbar-static-top{
+  margin-bottom:0;
+}
+/*Common Css*/
 
-
+.mainContainer{
+  color:black;
+  max-width:1750px!important;
+  width:100%;
+}
+  
+.mainContainer>.well{
+  background-color: white;
+  height:100%;
+  opacity: 0.70;
+  width:100%;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
