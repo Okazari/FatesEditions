@@ -1,15 +1,16 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('PlayerHeaderController', function ($scope, $state) {
+  .controller('PlayerHeaderController', function ($scope) {
     $scope.MenuItems = [];
-    
-    $scope._createMenuItem = function(url,label,isActive){
+
+
+
+    $scope._createMenuItem = function(url,label){
         return {"url":url, "label":label};
     };
-    
-    $scope.MenuItems.push($scope._createMenuItem("player/home","Accueil"));
-    $scope.MenuItems.push($scope._createMenuItem("player/mybooks","Mes Livres"));
-    $scope.MenuItems.push($scope._createMenuItem("player/about","A propos"));
-    
+
+    $scope.changeMod = $scope._createMenuItem("author","Mode Auteur");
+
+    $scope.MenuItems.push($scope._createMenuItem("player/mygames","Mes Parties"));
   });

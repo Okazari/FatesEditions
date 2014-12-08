@@ -12,6 +12,9 @@ body {
   background-size: cover;
 }
 
+
+/* Portal CSS */
+
 div.portalContainer>div{
     width:100%;
     margin:20px;
@@ -53,6 +56,15 @@ div.portalContainer>div div>span{
     margin-left: 5px;
 }
 
+nav.navbar-fixed-top .nav{
+    width:100%;
+}
+
+nav.navbar-fixed-top .nav a:last-child{
+    float:right;
+}
+
+/*Player Css*/
 
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
