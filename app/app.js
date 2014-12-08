@@ -21,33 +21,49 @@ var myapp = angular
     'ui.bootstrap'
   ]).config(function($stateProvider, $urlRouterProvider){
 
-        // For any unmatched url, send to /route1
+        // For any unmatched url, send to /signup
+        //TODO: à changer plus tard.
         $urlRouterProvider.otherwise("/signup");
+        
+        // /player place seulement le header, on redirige donc vers une page avec un contenu.
         $urlRouterProvider.when("/player","/player/mygames");
+        
+        //idem
         $urlRouterProvider.when("/author","/author/mybooks");
+        
+        //idem
+        $urlRouterProvider.when("/game","/game/current");
         $stateProvider
             .state('signup', {
                 url: "/signup",
-                templateUrl: "views/portal/Portal.template.html"
+                templateUrl: "feature/portal/view/Signup.html"
             })
             .state('signin', {
                 url: "/signin",
-                templateUrl: "views/portal/Signin.template.html"
+                templateUrl: "feature/portal/view/Signin.html"
             })
             .state('player', {
                 url: "/player",
-                templateUrl: "views/player/Player.template.html"
+                templateUrl: "feature/player/template/Player.template.html"
             })
             .state('player.mygames', {
                 url: "/mygames",
-                templateUrl: "views/player/MyGames.template.html"
+                templateUrl: "feature/player/view/MyGames.html"
             })
             .state('author', {
                 url: "/author",
-                templateUrl: "views/author/Author.template.html"
+                templateUrl: "feature/author/template/Author.template.html"
             })
             .state('author.mybooks', {
                 url: "/mybooks",
-                templateUrl: "views/author/MyBooks.template.html"
+                templateUrl: "feature/author/view/MyBooks.html"
+            })
+            .state('game', {
+                url: "/game",
+                templateUrl: "feature/game/template/Game.template.html"
+            })
+            .state('game.current', {
+                url: "/current",
+                templateUrl: "feature/game/view/CurrentGame.html"
             })
     });

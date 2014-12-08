@@ -3,7 +3,7 @@
         <ul class="nav navbar-nav">
             <a class="navbar-brand" href="#/">MyVirtualStoryBook</a>
             <li ng-class="getClassIfActive($index)" ng-repeat="item in MenuItems"><a href="#/{{item.url}}">{{item.label}}<span class="sr-only"></span></a></li>
-            <a class="navbar-brand" href="#/{{changeMod.url}}">{{changeMod.label}}</a>
+            <span class="navbar-brand">{{currentMod.label}}</span>
         </ul>
       </div>
     </nav>
