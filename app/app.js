@@ -18,7 +18,8 @@ var myapp = angular
     'ngTouch',
     'ui.utils',
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angular.layout'
   ]).config(function($stateProvider, $urlRouterProvider){
 
         // For any unmatched url, send to /signup
