@@ -1,13 +1,13 @@
 <div class="portalContainer container">
-    <div class="well">
+    <div class="container well">
         <label class="title">Se connecter sur MyVirtualStoryBook !</label>
         <div>
             <label>Nom du compte</label>
-            <input type="text" class="form-control" placeholder="Nom d'utilisateur">
+            <input ng-model="userName" type="text" class="form-control" ng-class="userNameInputClass" placeholder="Nom d'utilisateur">
         </div>
         <div>
             <label>Mot de passe</label>
-            <input type="text" class="form-control" placeholder="************">
+            <input ngModel="password" type="text" class="form-control" ng-class="passwordInputClass" placeholder="************">
         </div>
          <div>
             <label>Se connecter en tant que :</label>
@@ -16,9 +16,9 @@
                 <label class="btn btn-primary" ng-model="experience" btn-radio="'player'">Joueur</label>
             </div>
         </div>
-        <div>
-            <button type="button" class="btn btn-default btn-lg">
-                <a href="#/{{experience.player ? 'player' : 'author'}}">Se Connecter</a>
+        <div >
+            <button type="button" class="btn btn-default btn-lg" ng-click="signIn()">
+                Se Connecter
             </button>
             <span class="left">Pas de compte ? <a href="#/singup">Inscris toi !</a></span>
         </div>

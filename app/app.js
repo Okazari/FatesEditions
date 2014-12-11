@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-var myapp = angular
+var myVirtualStoryBookApp = angular
   .module('myVirtualStoryBookApp', [
     'ngAnimate',
     'ngCookies',
@@ -42,7 +42,8 @@ var myapp = angular
             })
             .state('signin', {
                 url: "/signin",
-                templateUrl: "feature/portal/view/Signin.html"
+                templateUrl: "feature/portal/view/Signin.html",
+                controller: "SignInController"
             })
             
             
