@@ -1,26 +1,27 @@
 <div class="portalContainer container">
-    <div class="container well">
-        <label class="title">Se connecter sur MyVirtualStoryBook !</label>
-        <div>
-            <label>Nom du compte</label>
-            <input ng-model="userName" type="text" class="form-control" ng-class="userNameInputClass" placeholder="Nom d'utilisateur">
-        </div>
-        <div>
-            <label>Mot de passe</label>
-            <input ngModel="password" type="text" class="form-control" ng-class="passwordInputClass" placeholder="************">
-        </div>
-         <div>
-            <label>Se connecter en tant que :</label>
-            <div class="btn-group">
-                <label class="btn btn-primary" ng-model="experience" btn-radio="'author'">Auteur</label>
-                <label class="btn btn-primary" ng-model="experience" btn-radio="'player'">Joueur</label>
+    <div class="container well" role="form">
+        <form role="form">
+            <label class="title">Se connecter sur MyVirtualStoryBook !</label>
+            <div ng-repeat="input in inputs" class="form-group" ng-class="input.class">
+                <label class="control-label">
+                   {{input.label}}
+                </label>
+                <input id="{{input.id}}" ng-blur="errorInputIfEmptyVar(input)" ng-model="input.var" type="{{input.type}}" class="form-control" placeholder="{{::input.placeholder}}">
             </div>
-        </div>
-        <div >
-            <button type="button" class="btn btn-default btn-lg" ng-click="signIn()">
-                Se Connecter
-            </button>
-            <span class="left">Pas de compte ? <a href="#/singup">Inscris toi !</a></span>
-        </div>
+            <div class="form-group">
+                <label>Se connecter en tant que :</label>
+                <div class="btn-group">
+                    <label class="btn btn-primary" ng-model="experience" btn-radio="'author.mybooks'">Auteur</label>
+                    <label class="btn btn-primary" ng-model="experience" btn-radio="'player.mygames'">Joueur</label>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-default btn-lg" ng-click="signIn()">
+                    Se Connecter
+                </button>
+                <div class="alert alert-danger" ng-show="showErrorMessage">{{errorMessage}}</div>
+                <span class="left">Pas de compte ? <a href ui-sref="signup">Inscris toi !</a></span>
+            </div>
+        </form>
     </div>
 </div>

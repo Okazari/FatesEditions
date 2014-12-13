@@ -35,18 +35,19 @@ div.portalContainer>div label{
 
 div.portalContainer>div button{
     min-width: 100px;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 div.portalContainer>div .alert{
-    margin-top: 20px;
+    display:inline;
+    padding-left:15px;
 }
 
 div.portalContainer>div div{
     text-align:left;
 }
 
-div.portalContainer>div>div>label{
+div.portalContainer>div>form>label{
     margin-top: 20px;
     margin-left: 5px;
 }

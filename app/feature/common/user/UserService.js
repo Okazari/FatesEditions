@@ -5,9 +5,29 @@ myVirtualStoryBookApp.service("UserService", [
         
         service.users = [{
             userName: "Okazari",
-            password: "***",
+            password: "1",
             playerProfile: "Oka",
             authorProfile: "Teijiro"
+        },{
+            userName: "Redeamon",
+            password: "1",
+            playerProfile: "Red",
+            authorProfile: "Redmamon"
+        },{
+            userName: "Nexus",
+            password: "1",
+            playerProfile: "Nex",
+            authorProfile: "DevilNexus"
+        },{
+            userName: "Darkdeuss",
+            password: "1",
+            playerProfile: "Dark",
+            authorProfile: "Deuss"
+        },{
+            userName: "1",
+            password: "1",
+            playerProfile: "TestPlayerName",
+            authorProfile: "TestAuthorName"
         }];
  
         service.authentify = function(userName, password) {
@@ -16,12 +36,14 @@ myVirtualStoryBookApp.service("UserService", [
                                              || password === ""){
                 throw 400;
             }
-            var user = angular.forEach(service.users, function(user, key, userName, password){
+            var authorizedUser;
+            angular.forEach(service.users, function(user){
                if (userName === user.userName && password === user.password){
-                   return user;
+                   authorizedUser = user
                }
             });
-            return user;
+            if(authorizedUser === undefined) throw 403;
+            return authorizedUser;
         };
  
         return service;

@@ -24,7 +24,7 @@ var myVirtualStoryBookApp = angular
 
         // For any unmatched url, send to /signup
         //TODO: à changer plus tard.
-        $urlRouterProvider.otherwise("/signup");
+        $urlRouterProvider.otherwise("/signin");
         
         // /player place seulement le header, on redirige donc vers une page avec un contenu.
         $urlRouterProvider.when("/player","/player/mygames");
@@ -65,7 +65,8 @@ var myVirtualStoryBookApp = angular
             //Auteur
             .state('author', {
                 url: "/author",
-                templateUrl: "feature/author/template/Author.template.html"
+                templateUrl: "feature/author/template/Author.template.html",
+                abstract: true
             })
             .state('author.mybooks', {
                 url: "/mybooks",
