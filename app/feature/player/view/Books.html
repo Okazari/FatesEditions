@@ -1,0 +1,25 @@
+<div class="mainContainer container">
+    <div class="well">
+        <h1>Les livres</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-bordered table-hover">
+                    <tr ng-repeat="book in books" ng-click="selectBook(book)">
+                        <td>{{book.name}}</td>
+                        <td>{{book.genre}}</td>
+                        <td><span ng-repeat="tag in book.tags">{{tag}} </span></td>
+                        <td>{{book.synopsis}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    {{displayedBook.name}}
+                    {{displayedBook.genre}}
+                    <span ng-repeat="tag in displayedBook.tags">{{tag}} </span>
+                    {{displayedBook.synopsis}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

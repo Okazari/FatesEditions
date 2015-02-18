@@ -22,7 +22,8 @@ div.portalContainer>div{
     width:100%;
     margin:20px;
     text-align:center;
-    opacity: 0.95;
+    /*opacity: 0.95;*/
+    background-color: rgba(255,255,255,0.95);
 }
 
 div.portalContainer label.title{
@@ -96,7 +97,7 @@ nav.navbar-static-top .nav span:last-child:hover{
 .mainContainer>.well{
   background-color: white;
   height:100%;
-  opacity: 0.70;
+  background-color: rgba(255,255,255,0.70);
   width:100%;
 }
 /* Everything but the jumbotron gets side spacing for mobile first views */

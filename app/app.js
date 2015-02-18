@@ -56,6 +56,11 @@ var myVirtualStoryBookApp = angular
                 url: "/mygames",
                 templateUrl: "feature/player/view/MyGames.html"
             })
+            .state('player.books', {
+                url: "/books",
+                templateUrl: "feature/player/view/Books.html",
+                controller: "PlayerBooksController"
+            })
             .state('player.profile', {
                 url: "/profile",
                 templateUrl: "feature/common/profile/Profile.html"
