@@ -80,7 +80,6 @@ nav.navbar-static-top .nav span:last-child{
 }
 
 nav.navbar-static-top .nav span:last-child:hover{
-    color:#9d9d9d;
 }
 
 .navbar-static-top{
@@ -106,13 +105,17 @@ nav.navbar-static-top .nav span:last-child:hover{
 }
 
 .coverPreview{
-  max-height: 350px;
-  max-height: 350px;
+  max-height: 70%!important;
+  max-width: 70%!important;
 }
 
-.bookDetail{
-  position:fixed;
-  right:0px;
+.bookInformations{
+  height: 500px;
+}
+
+.livreContainer{
+  heigth: 100px;
+  overflow: scroll;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
