@@ -317,6 +317,11 @@ img {
 .table-striped > tbody > tr:nth-child(odd) > th {
   background-color: #f3f4f5;
 }
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+  background-color: white;
+}
+
 .table.no-border,
 .table.no-border td,
 .table.no-border th {

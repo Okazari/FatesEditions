@@ -3,21 +3,41 @@
         <h1>Les livres</h1>
         <div class="row">
             <div class="col-md-6">
-                <table class="table table-bordered table-hover">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>Nom du livre</th>
+                        <th>Genre</th> 
+                        <th>Tags</th>
+                        <th>Synopsis</th>
+                    </tr>
                     <tr ng-repeat="book in books" ng-click="selectBook(book)">
-                        <td>{{book.name}}</td>
-                        <td>{{book.genre}}</td>
-                        <td><span ng-repeat="tag in book.tags">{{tag}} </span></td>
+                        <td class="largeTd">{{book.name}}</td>
+                        <td class="largeTd">{{book.genre}}</td>
+                        <td class="largeTd"><span ng-repeat="tag in book.tags">{{tag}}<span ng-if="!$last">, </span></span></td>
                         <td>{{book.synopsis}}</td>
                     </tr>
                 </table>
             </div>
-            <div class="col-md-6">
-                <div>
-                    {{displayedBook.name}}
-                    {{displayedBook.genre}}
-                    <span ng-repeat="tag in displayedBook.tags">{{tag}} </span>
-                    {{displayedBook.synopsis}}
+            <div class="col-md-6 bookDetail">
+                <div class="row">
+                    <div class="col-xs-6">
+                       <div>
+                           <h2>{{displayedBook.name}}</h2>
+                       </div>
+                       <div>
+                           <h3>{{displayedBook.genre}}</h3>
+                       </div>
+                        <div>
+                            Tags : <span ng-repeat="tag in displayedBook.tags">{{tag}}<span ng-if="!$last">, </span></span>
+                        </div>
+                        <div>
+                            Synopsis : <br/>
+                            {{displayedBook.synopsis}}
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                       <img class="coverPreview" src="{{displayedBook.cover}}" alt="Book cover"> 
+                    </div>
                 </div>
             </div>
         </div>
