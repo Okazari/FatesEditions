@@ -111,6 +111,18 @@ nav.navbar-static-top .nav span:last-child:hover{
   max-width: 70%!important;
 }
 
+.coverRow{
+  text-align:right;
+}
+
+.bookInformations{
+  height: 500px;
+}
+
+.livreContainer{
+  height: 500px;
+  overflow-y: auto;
+}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,

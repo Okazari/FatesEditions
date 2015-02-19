@@ -33,7 +33,7 @@
                                 {{displayedBook.synopsis}}
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="coverRow col-xs-6">
                            <img class="coverPreview" src="{{displayedBook.cover}}" alt="Book cover"> 
                         </div>
                     </div>
@@ -49,9 +49,28 @@
             <accordion close-others="true">
                 <accordion-group ng-repeat="book in books">
                     <accordion-heading>
-                        {{book.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': book.status.open, 'glyphicon-chevron-right': !book.status.open}"></i>
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-6">{{book.name}}</div>
+                            <div class="col-sm-6 col-xs-6">Genre : {{book.genre}}</div>
+                            <div class="col-sm-12 col-xs-12">Tags : <span ng-repeat="tag in book.tags">{{tag}}<span ng-if="!$last">, </span></span></div>
+                        </div>
                     </accordion-heading>
-                  {{book.synopsis}}
+                <div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div>
+                                Synopsis : <br/>
+                                {{book.synopsis}}
+                            </div>
+                        </div>
+                        <div class="col-xs-6 coverRow">
+                           <img class="coverPreview" src="{{book.cover}}" alt="Book cover"> 
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default btn-lg">
+                        Jouer !
+                    </button>
+                </div>
                 </accordion-group>
             </accordion>
         </div>
