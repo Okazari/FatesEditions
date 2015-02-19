@@ -1,25 +1,22 @@
 <div class="mainContainer container">
-    <div class="well">
+    <div class="pageContent well">
         <h1>Les livres</h1>
-        <div class="row livreContainer">
+        <!-- Desktop view  START-->
+        <div class="row hidden-xs hidden-sm">
             <div class="col-md-6">
-                <table class="table table-striped table-bordered">
-                    <tr>
-                        <th>Nom du livre</th>
-                        <th>Genre</th> 
-                        <th>Tags</th>
-                        <th>Synopsis</th>
-                    </tr>
-                    <tr ng-repeat="book in books" ng-click="selectBook(book)">
-                        <td class="largeTd">{{book.name}}</td>
-                        <td class="largeTd">{{book.genre}}</td>
-                        <td class="largeTd"><span ng-repeat="tag in book.tags">{{tag}}<span ng-if="!$last">, </span></span></td>
-                        <td>{{book.synopsis}}</td>
-                    </tr>
-                </table>
+                <div class="livreContainer">
+                    <div class="well" ng-repeat="book in books" ng-click="selectBook(book)">
+                        <div class="row">
+                            <div class="largediv col-md-2">{{book.name}}</div>
+                            <div class="largediv col-md-2">{{book.genre}}</div>
+                            <div class="largediv col-md-2"><span ng-repeat="tag in book.tags">{{tag}}<span ng-if="!$last">, </span></span></div>
+                            <div class="col-md-6">{{book.synopsis}}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 bookDetail well">
-                <div>
+            <div class="col-md-6">
+                <div class="bookDetail well">
                     <div class="row bookInformations">
                         <div class="col-xs-6">
                            <div>
@@ -46,5 +43,18 @@
                 </div>
             </div>
         </div>
+        <!-- Desktop view END-->
+        <!-- Mobile view START-->
+        <div class="visible-xs visible-sm">
+            <accordion close-others="true">
+                <accordion-group ng-repeat="book in books">
+                    <accordion-heading>
+                        {{book.name}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': book.status.open, 'glyphicon-chevron-right': !book.status.open}"></i>
+                    </accordion-heading>
+                  {{book.synopsis}}
+                </accordion-group>
+            </accordion>
+        </div>
+        <!-- Mobile view END-->
     </div>
 </div>

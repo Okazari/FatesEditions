@@ -95,9 +95,11 @@ nav.navbar-static-top .nav span:last-child:hover{
   
 .mainContainer>.well{
   background-color: white;
-  height:100%;
+  height:90vh;
   background-color: rgba(255,255,255,0.70);
   width:100%;
+  margin-bottom:0px;
+  overflow: auto;
 }
 
 .largeTd{
@@ -109,14 +111,6 @@ nav.navbar-static-top .nav span:last-child:hover{
   max-width: 70%!important;
 }
 
-.bookInformations{
-  height: 500px;
-}
-
-.livreContainer{
-  heigth: 100px;
-  overflow: scroll;
-}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
