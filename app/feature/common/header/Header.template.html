@@ -1,9 +1,21 @@
-    <nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
-      <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <a class="navbar-brand" href="#/">MyVirtualStoryBook</a>
-            <li ng-class="getClassIfActive($index)" ng-repeat="item in MenuItems"><a href="#/{{item.url}}">{{item.label}}<span class="sr-only"></span></a></li>
-            <span class="navbar-brand">{{currentMod.label}}</span>
-        </ul>
-      </div>
-    </nav>
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-bar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">MyVirtualStoryBook</a>
+      
+    </div>
+    <div class="collapse navbar-collapse" id="nav-bar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="divider" ng-class="getClassIfActive($index)" ng-repeat="item in MenuItems"><a href="#/{{item.url}}">{{item.label}}<span class="sr-only"></span></a></li>
+      </ul>
+    </div>
+    
+  </div>
+</nav>
+    

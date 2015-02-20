@@ -4,15 +4,15 @@
         <!-- Desktop view  START-->
         <div class="row hidden-xs hidden-sm">
             <div class="col-md-6">
-                <div class="livreContainer">
-                    <div class="well" ng-repeat="book in books" ng-click="selectBook(book)">
-                        <div class="row">
-                            <div class="largediv col-md-2">{{book.name}}</div>
-                            <div class="largediv col-md-2">{{book.genre}}</div>
-                            <div class="largediv col-md-2"><span ng-repeat="tag in book.tags">{{tag}}<span ng-if="!$last">, </span></span></div>
-                            <div class="col-md-6">{{book.synopsis}}</div>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-condensed table-striped table-bordered">
+                        <tr ng-repeat="book in books" ng-click="selectBook(book)">
+                            <td class="largediv">{{book.name}}</td>
+                            <td class="largediv">{{book.genre}}</td>
+                            <td class="largediv"><span ng-repeat="tag in book.tags">{{tag}}<span ng-if="!$last">, </span></span></td>
+                            <td>{{book.synopsis}}</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="col-md-6">

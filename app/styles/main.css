@@ -14,6 +14,7 @@ body {
 
 .footer {
   background-color: white;
+  height: 50px;
 }
 
 /* Portal CSS */
@@ -66,23 +67,7 @@ div.portalContainer>div div>span{
     margin-left: 5px;
 }
 
-nav.navbar-static-top .nav{
-    width:100%;
-}
-
-nav.navbar-static-top .nav li:last-of-type{
-    float:right;
-}
-
-nav.navbar-static-top .nav span:last-child{
-    float:right;
-    cursor:default;
-}
-
-nav.navbar-static-top .nav span:last-child:hover{
-}
-
-.navbar-static-top{
+.navbar{
   margin-bottom:0;
 }
 /*Common Css*/
@@ -95,7 +80,14 @@ nav.navbar-static-top .nav span:last-child:hover{
   
 .mainContainer>.well{
   background-color: white;
-  height:90vh;
+  /* Firefox */
+  height: -moz-calc(100vh - 102px);
+  /* WebKit */
+  height: -webkit-calc(100vh - 102px);
+  /* Opera */
+  height: -o-calc(100vh - 102px);
+  /* Standard */
+  height: calc(100vh - 102px);
   background-color: rgba(255,255,255,0.70);
   width:100%;
   margin-bottom:0px;
@@ -116,13 +108,18 @@ nav.navbar-static-top .nav span:last-child:hover{
 }
 
 .bookInformations{
-  height: 500px;
+  height: 100%;
 }
 
 .livreContainer{
-  height: 500px;
+  height: 100%;
   overflow-y: auto;
 }
+
+.pageContent{
+  height: 100%;
+}
+
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
