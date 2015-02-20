@@ -1,8 +1,8 @@
-<div class="mainContainer container">
-    <div class="pageContent well">
+<div class="mainContainer container  hidden-xs hidden-sm">
+    <div class="pageContent well fullSize">
         <h1>Les livres</h1>
         <!-- Desktop view  START-->
-        <div class="row hidden-xs hidden-sm">
+        <div class="row">
             <div class="col-md-6">
                 <div class="table-responsive">
                     <table class="table table-condensed table-striped table-bordered">
@@ -43,37 +43,37 @@
                 </div>
             </div>
         </div>
-        <!-- Desktop view END-->
-        <!-- Mobile view START-->
-        <div class="visible-xs visible-sm">
-            <accordion close-others="true">
-                <accordion-group ng-repeat="book in books">
-                    <accordion-heading>
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-6">{{book.name}}</div>
-                            <div class="col-sm-6 col-xs-6">Genre : {{book.genre}}</div>
-                            <div class="col-sm-12 col-xs-12">Tags : <span ng-repeat="tag in book.tags">{{tag}}<span ng-if="!$last">, </span></span></div>
-                        </div>
-                    </accordion-heading>
-                <div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div>
-                                Synopsis : <br/>
-                                {{book.synopsis}}
-                            </div>
-                        </div>
-                        <div class="col-xs-6 coverRow">
-                           <img class="coverPreview" src="{{book.cover}}" alt="Book cover"> 
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-default btn-lg">
-                        Jouer !
-                    </button>
-                </div>
-                </accordion-group>
-            </accordion>
-        </div>
-        <!-- Mobile view END-->
     </div>
 </div>
+<!-- Desktop view END-->
+<!-- Mobile view START-->
+<div class="visible-xs visible-sm fullSize">
+    <accordion class="reformatPanel" close-others="true">
+        <accordion-group ng-repeat="book in books" class="reformatPanel" ng-class="{secondaryColor: $even}">
+            <accordion-heading>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-6">{{book.name}}</div>
+                    <div class="col-sm-6 col-xs-6">Genre : {{book.genre}}</div>
+                    <div class="col-sm-12 col-xs-12">Tags : <span ng-repeat="tag in book.tags">{{tag}}<span ng-if="!$last">, </span></span></div>
+                </div>
+            </accordion-heading>
+        <div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div>
+                        Synopsis : <br/>
+                        {{book.synopsis}}
+                    </div>
+                </div>
+                <div class="col-xs-6 coverRow">
+                   <img class="coverPreview" src="{{book.cover}}" alt="Book cover"> 
+                </div>
+            </div>
+            <button type="button" class="btn btn-default btn-lg">
+                Jouer !
+            </button>
+        </div>
+        </accordion-group>
+    </accordion>
+</div>
+<!-- Mobile view END-->

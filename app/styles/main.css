@@ -80,7 +80,13 @@ div.portalContainer>div div>span{
   
 .mainContainer>.well{
   background-color: white;
-  /* Firefox */
+  background-color: rgba(255,255,255,0.70);
+  width:100%;
+  margin-bottom:0px;
+}
+
+.fullSize{
+    /* Firefox */
   height: -moz-calc(100vh - 102px);
   /* WebKit */
   height: -webkit-calc(100vh - 102px);
@@ -88,9 +94,6 @@ div.portalContainer>div div>span{
   height: -o-calc(100vh - 102px);
   /* Standard */
   height: calc(100vh - 102px);
-  background-color: rgba(255,255,255,0.70);
-  width:100%;
-  margin-bottom:0px;
   overflow: auto;
 }
 
@@ -116,11 +119,27 @@ div.portalContainer>div div>span{
   overflow-y: auto;
 }
 
-.pageContent{
+.fillParent{
   height: 100%;
 }
 
+.reformatPanel{
+  margin-top:0px!important;
+  margin-bottom:0px!important;
+  border:50px!important;
+  border-color:green!important;
+  border-radius:0!important;
+}
 
+.reformatPanel > .panel-group{
+  margin-bottom:0px!important;
+}
+
+.secondaryColor > .panel-heading{
+  background-color: #E3E3E3;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
