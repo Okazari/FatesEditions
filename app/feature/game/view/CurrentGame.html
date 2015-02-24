@@ -18,7 +18,7 @@
        <h4>Objets</h4>
     </div>
     <div ng-show="subMenuObjectsShow">
-        <div class="rightMenuItem rightSubMenuItem" tooltip-trigger="click" tooltip-placement="left" tooltip="{{object.description}}" ng-repeat="object in currentGame.character.objects">
+        <div class="rightMenuItem rightSubMenuItem" tooltip-placement="left" tooltip="{{object.description}}" ng-repeat="object in currentGame.character.objects">
             {{object.name}}
         </div>
     </div>
