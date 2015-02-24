@@ -150,6 +150,10 @@ div.portalContainer>div div>span{
   margin-left:60px;
 }
 
+.tooltip-inner{
+  text-align:left;
+}
+
 .largeTd{
   min-width: 100px;
 }
@@ -193,7 +197,6 @@ div.portalContainer>div div>span{
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
 
 
 /* Custom page CSS
