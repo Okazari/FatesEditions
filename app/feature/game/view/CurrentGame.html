@@ -1,11 +1,31 @@
-<div class="rightMenuContent" ng-click="toggleRightMenu()" ng-show="displayMenu">
-        
-</div>
-<div class="rightMenu" ng-click="toggleRightMenu()">
-        
+<div ng-class="{'menuCollapsed':!displayMenu, 'menuNonCollapsed':displayMenu}" class="rightMenu">
+    <button class="rightMenuButton" ng-click="toggleRightMenu()">
+        <span class="glyphicon" ng-class="{'glyphicon-chevron-left':!displayMenu, 'glyphicon-chevron-right':displayMenu}" aria-hidden="true"></span>
+    </button>
+    
+    <div class="rightMenuItem rightMenuItemTitle">
+        <h3>{{currentGame.character.name}}</h3>
+    </div>
+    <div class="rightMenuItem" ng-click="subMenuStatsShow = !subMenuStatsShow">
+       <h4>Caractéristiques</h4>
+    </div>
+    <div ng-show="subMenuStatsShow">
+        <div class="rightMenuItem rightSubMenuItem" ng-repeat="stat in currentGame.character.stats">
+            {{stat.name}} : {{stat.value}}
+        </div>
+    </div>
+    <div class="rightMenuItem" ng-click="subMenuObjectsShow = !subMenuObjectsShow">
+       <h4>Objets</h4>
+    </div>
+    <div ng-show="subMenuObjectsShow">
+        <div class="rightMenuItem rightSubMenuItem" ng-repeat="object in currentGame.character.objects">
+            {{object.name}}
+        </div>
+    </div>
+    
 </div>
 <div class="mainContainer container">
     <div class="well">
-    Game en cours, whooooooooooooooo
+     {{currentGame}}
     </div>
 </div>
