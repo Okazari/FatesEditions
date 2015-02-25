@@ -23,10 +23,12 @@ myVirtualStoryBookApp.service("GameService", [
                         }],
                 stats:[{
                             name:"Chance",
-                            value:777
+                            value:777,
+                            description:"Lucky boy"
                       },{
                             name:"Geekeness",
-                            value:9001
+                            value:9001,
+                            description:"It's over 9000 !"
                       }]
             }
         };

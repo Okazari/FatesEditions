@@ -1,29 +1,32 @@
-<div ng-class="{'menuCollapsed':!displayMenu, 'menuNonCollapsed':displayMenu}" class="rightMenu">
+<!-- Menu de droite -->
+<div class="rightMenu">
     <button class="rightMenuButton" ng-click="toggleRightMenu()">
         <span class="glyphicon" ng-class="{'glyphicon-chevron-left':!displayMenu, 'glyphicon-chevron-right':displayMenu}" aria-hidden="true"></span>
     </button>
-    
-    <div class="rightMenuItem rightMenuItemTitle">
-        <h3>{{currentGame.character.name}}</h3>
-    </div>
-    <div class="rightMenuItem" ng-click="subMenuStatsShow = !subMenuStatsShow">
-       <h4>Caractéristiques</h4>
-    </div>
-    <div ng-show="subMenuStatsShow">
-        <div class="rightMenuItem rightSubMenuItem" ng-repeat="stat in currentGame.character.stats">
-            {{stat.name}} : {{stat.value}}
+    <div ng-class="{'menuCollapsed':!displayMenu, 'menuNonCollapsed':displayMenu}" class="rightMenu">
+        <div class="list-group">
+          <div class="list-group-item menuTitle">
+              {{currentGame.character.name}}
+          </div>
+          <div class="list-group-item subList btn btn-default" ng-click="displayStats = !displayStats">
+              <span class="badge">{{currentGame.character.stats.length}}</span>
+              Caractéristiques
+          </div>
+          <div class="list-group-item subItem" tooltip-placement="left" tooltip="{{stat.description}}" ng-show="displayStats" ng-repeat="stat in currentGame.character.stats">
+                {{stat.name}} : {{stat.value}}
+          </div>
+          <div class="list-group-item subList btn btn-default" ng-click="displayObjects = !displayObjects">
+              <span class="badge">{{currentGame.character.objects.length}}</span>
+              Objets
+          </div>
+          <div class="list-group-item subItem" ng-show="displayObjects" tooltip-placement="left" tooltip="{{object.description}}" ng-repeat="object in currentGame.character.objects">
+                {{object.name}}
+          </div>
         </div>
     </div>
-    <div class="rightMenuItem" ng-click="subMenuObjectsShow = !subMenuObjectsShow">
-       <h4>Objets</h4>
-    </div>
-    <div ng-show="subMenuObjectsShow">
-        <div class="rightMenuItem rightSubMenuItem" tooltip-placement="left" tooltip="{{object.description}}" ng-repeat="object in currentGame.character.objects">
-            {{object.name}}
-        </div>
-    </div>
-    
 </div>
+
+<!-- Contenu de la page -->
 <div class="mainContainer container">
     <div class="well">
      {{currentGame}}
