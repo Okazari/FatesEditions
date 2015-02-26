@@ -2,12 +2,15 @@
 
 
 .full {
-  background: url(../images/portal.jpg) no-repeat center center fixed;
+  /*background: url(../images/portal.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover;*/
+  background-color:#444;
 }
+
+
 
 
 /* Sticky footer styles
@@ -115,11 +118,18 @@ div.portalContainer>div div>span{
   background-color:#333;
 }
 
-.rightMenu.menuCollapsed {
+.rightMenu.ng-hide-add.ng-hide-add-active .rightMenuContent,
+.rightMenu.ng-hide-remove.ng-hide-remove-active .rightMenuContent{
+  -webkit-transition: all linear 0.2s;
+  transition: all linear 0.2s;
+}
+
+.rightMenu.ng-hide .rightMenuContent{
   width:0px;
 }
 
-.rightMenu.menuNonCollapsed {
+.rightMenuContent {
+  margin-left:30px;
   width:200px;
 }
 
@@ -143,11 +153,8 @@ div.portalContainer>div div>span{
   padding-left:25px;
 }
 
-.rightMenu.menuCollapsed .list-group{
+.rightMenu.ng-hide .list-group{
   display:none;
-}
-
-.rightMenu.menuCollapsed .list-group-item{
 }
 
 .tooltip-inner{

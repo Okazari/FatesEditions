@@ -1,9 +1,9 @@
 <!-- Menu de droite -->
 <div class="rightMenu">
-    <button class="rightMenuButton" ng-click="toggleRightMenu()">
+    <button class="rightMenuButton" ng-click="displayMenu = !displayMenu">
         <span class="glyphicon" ng-class="{'glyphicon-chevron-left':!displayMenu, 'glyphicon-chevron-right':displayMenu}" aria-hidden="true"></span>
     </button>
-    <div ng-class="{'menuCollapsed':!displayMenu, 'menuNonCollapsed':displayMenu}" class="rightMenu">
+    <div ng-show="displayMenu" class="rightMenuContent">
         <div class="list-group">
           <div class="list-group-item menuTitle">
               {{currentGame.character.name}}
