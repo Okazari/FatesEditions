@@ -1,79 +1,57 @@
-<div class="mainContainer container  hidden-xs hidden-sm">
-    <div class="pageContent well fullSize">
-        <h1>Les livres</h1>
-        <!-- Desktop view  START-->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="tableContainer">
-                    <table class="table table-condensed table-striped table-bordered">
-                        <tr ng-repeat="book in books" ng-click="selectBook(book)">
-                            <td class="largediv">{{book.name}}</td>
-                            <td class="largediv">{{book.genre}}</td>
-                            <td class="largediv"><span class="label label-default spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></span></td>
-                            <td>{{book.synopsis}}</td>
-                        </tr>
-                    </table>
+<section class="content-header"><h1>Les livres</h1></section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Livres<i class="fa fa-tag"></i></h3>
+                </div>
+                <div class="box-body">
+                  <div class="row">
+                        <table class="table table-condensed table-striped table-bordered">
+                            <tr ng-repeat="book in books" ng-click="selectBook(book)">
+                                <td class="largediv">{{book.name}}</td>
+                                <td class="largediv">{{book.genre}}</td>
+                                <td class="largediv"><span class="label label-default spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></span></td>
+                                <td>{{book.synopsis}}</td>
+                            </tr>
+                        </table>
+                  </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="bookDetail well">
-                    <div class="row bookInformations">
+        </div>
+        <div class="col-md-6">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Preview<i class="fa fa-tag"></i></h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
                         <div class="col-xs-6">
-                           <div>
-                               <h2>{{displayedBook.name}}</h2>
-                           </div>
-                           <div>
-                               <h3>{{displayedBook.genre}}</h3>
-                           </div>
-                            <div>
-                                <span class="label label-default spaceLabel" ng-repeat="tag in displayedBook.tags">{{tag}}</span>
+                               <div>
+                                   <h2>{{displayedBook.name}}</h2>
+                               </div>
+                               <div>
+                                   <h3>{{displayedBook.genre}}</h3>
+                               </div>
+                                <div>
+                                    <span class="label label-default spaceLabel" ng-repeat="tag in displayedBook.tags">{{tag}}</span>
+                                </div>
+                                <div>
+                                    Synopsis : <br/>
+                                    {{displayedBook.synopsis}}
+                                </div>
                             </div>
-                            <div>
-                                Synopsis : <br/>
-                                {{displayedBook.synopsis}}
+                            <div class="coverRow col-xs-6">
+                               <img class="coverPreview" src="{{displayedBook.cover}}" alt="Book cover"> 
                             </div>
                         </div>
-                        <div class="coverRow col-xs-6">
-                           <img class="coverPreview" src="{{displayedBook.cover}}" alt="Book cover"> 
-                        </div>
+                        <button type="button" class="btn btn-default btn-lg">
+                            Jouer !
+                        </button>
                     </div>
-                    <button type="button" class="btn btn-default btn-lg">
-                        Jouer !
-                    </button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Desktop view END-->
-<!-- Mobile view START-->
-<div class="visible-xs visible-sm fullSize">
-    <accordion class="reformatPanel" close-others="true">
-        <accordion-group ng-repeat="book in books" class="reformatPanel" ng-class="{secondaryColor: $even}">
-            <accordion-heading>
-                <div class="row">
-                    <div class="col-sm-6 col-xs-6">{{book.name}}</div>
-                    <div class="col-sm-6 col-xs-6">Genre : {{book.genre}}</div>
-                    <div class="col-sm-12 col-xs-12"><span class="label label-default spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></div>
-                </div>
-            </accordion-heading>
-        <div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <div>
-                        Synopsis : <br/>
-                        {{book.synopsis}}
-                    </div>
-                </div>
-                <div class="col-xs-6 coverRow">
-                   <img class="coverPreview" src="{{book.cover}}" alt="Book cover"> 
-                </div>
-            </div>
-            <button type="button" class="btn btn-default btn-lg">
-                Jouer !
-            </button>
-        </div>
-        </accordion-group>
-    </accordion>
-</div>
-<!-- Mobile view END-->
+</section>
