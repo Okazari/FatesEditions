@@ -19,7 +19,34 @@ body {
   text-align: center;
 }
 
+.navbar-brand{
+  color:white;
+}
 
+.spaceLabel{
+  margin-right:5px!important;
+  margin-left:5px!important;
+}
+
+.coverPreview{
+  max-width:100%;
+  max-height:100%;
+}
+
+.float-left{
+  float:left;
+}
+
+.bookTable tbody tr td{
+  max-width:0px; /* Customise it accordingly */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.compact{
+  margin:0;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

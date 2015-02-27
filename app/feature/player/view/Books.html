@@ -1,14 +1,22 @@
-<section class="content-header"><h1>Les livres</h1></section>
-<section class="content">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Livres<i class="fa fa-tag"></i></h3>
-                </div>
-                <div class="box-body">
-                  <div class="row">
-                        <table class="table table-condensed table-striped table-bordered">
+<div class="content-wrapper">
+    <section class="content-header"><h1>Les livres</h1></section>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Livres<i class="fa fa-tag"></i></h3>
+                    </div>
+                    
+                    <div class="box-body compact">
+                        <table class="table table-bordered table-hover dataTable bookTable">
+                            <thead>
+                              <tr role="row">
+                                  <th role="columnheader" rowspan="1" colspan="1">Titre</th>
+                                  <th role="columnheader" rowspan="1" colspan="1">Genre</th>
+                                  <th role="columnheader" rowspan="1" colspan="1">Tags</th>
+                                  <th role="columnheader" rowspan="1" colspan="1">Synopsis</th>
+                            </thead>
                             <tr ng-repeat="book in books" ng-click="selectBook(book)">
                                 <td class="largediv">{{book.name}}</td>
                                 <td class="largediv">{{book.genre}}</td>
@@ -16,42 +24,44 @@
                                 <td>{{book.synopsis}}</td>
                             </tr>
                         </table>
-                  </div>
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Preview<i class="fa fa-tag"></i></h3>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-xs-6">
-                               <div>
-                                   <h2>{{displayedBook.name}}</h2>
-                               </div>
-                               <div>
-                                   <h3>{{displayedBook.genre}}</h3>
-                               </div>
-                                <div>
-                                    <span class="label label-default spaceLabel" ng-repeat="tag in displayedBook.tags">{{tag}}</span>
+            <div class="col-md-6">
+                <div class="box box-primary box-solid" data-spy="affix" data-offset-top="6">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Previsualisation<i class="fa fa-tag"></i></h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                   <div>
+                                       <h2>{{displayedBook.name}}</h2>
+                                   </div>
+                                   <div>
+                                       <span class="spaceLabel glyphicon" ng-class="getGenreIcon(displayedBook.genre)"></span>
+                                       {{displayedBook.genre}}
+                                   </div>
+                                    <div>
+                                        <span class="label label-default spaceLabel" ng-repeat="tag in displayedBook.tags">{{tag}}</span>
+                                    </div>
+                                    <div>
+                                        Synopsis : <br/>
+                                        {{displayedBook.synopsis}}
+                                    </div>
                                 </div>
-                                <div>
-                                    Synopsis : <br/>
-                                    {{displayedBook.synopsis}}
+                                <div class="coverRow col-xs-6 pull-right">
+                                   <img class="coverPreview" src="{{displayedBook.cover}}" alt="Book cover"> 
                                 </div>
                             </div>
-                            <div class="coverRow col-xs-6">
-                               <img class="coverPreview" src="{{displayedBook.cover}}" alt="Book cover"> 
-                            </div>
+                            <button type="button" class="btn btn-default btn-lg">
+                                Jouer !
+                            </button>
                         </div>
-                        <button type="button" class="btn btn-default btn-lg">
-                            Jouer !
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
