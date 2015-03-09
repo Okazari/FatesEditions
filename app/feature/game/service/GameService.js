@@ -3,13 +3,15 @@ myVirtualStoryBookApp.service("GameService", [
         
         var service = {};
         
-        service.game = {
+        service.game = [{
             id : 1,
+            currentPage: 50,
             release : {
+                id : 1,
                 name:"Histoire n°1",
                 genre: "Aventure",
                 tags: ['Canards','aventure','pomme'],
-                synopsis: "C'est l'histoire d'un canard qui volle un tarte au pomme ... vous devez vous cacher !",
+                synopsis: "C'est l'histoire d'un canard qui vole une tarte au pomme ... vous devez vous cacher !",
                 cover: "http://dn.world.free.fr/Images%20site%20death%20note/couverture_6.jpg"
             },
             character : {
@@ -31,10 +33,38 @@ myVirtualStoryBookApp.service("GameService", [
                             description:"It's over 9000 !"
                       }]
             }
-        };
+        },
+        {
+            id : 2,
+            currentPage: 13,
+            release : {
+                id : 1,
+                name:"Histoire n°1",
+                genre: "Aventure",
+                tags: ['Canards','aventure','pomme'],
+                synopsis: "C'est l'histoire d'un canard qui vole une tarte au pomme ... vous devez vous cacher !",
+                cover: "http://dn.world.free.fr/Images%20site%20death%20note/couverture_6.jpg"
+            },
+            character : {
+                name:"Teijiro",
+                objects:[{
+                            name:"Noeud papillon",
+                            description:"A qui peut il bien appartenir ?"
+                        }],
+                stats:[{
+                            name:"Chance",
+                            value:666,
+                            description:"Bad news ..."
+                      },{
+                            name:"Geekeness",
+                            value:0,
+                            description:"Crap"
+                      }]
+            }
+        }];
  
         service.getGame = function(gameId){
-            return service.game;
+            return service.game[gameId-1];
         }
  
         return service;

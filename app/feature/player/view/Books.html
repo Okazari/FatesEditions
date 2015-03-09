@@ -12,10 +12,10 @@
                         <table class="table table-bordered table-hover dataTable bookTable">
                             <thead>
                               <tr role="row">
-                                  <th role="columnheader" rowspan="1" colspan="1">Titre</th>
-                                  <th role="columnheader" rowspan="1" colspan="1">Genre</th>
-                                  <th role="columnheader" rowspan="1" colspan="1">Tags</th>
-                                  <th role="columnheader" rowspan="1" colspan="1">Synopsis</th>
+                                  <th class="col-xs-2 col-sm-2 col-md-2" role="columnheader" rowspan="1" colspan="1">Titre</th>
+                                  <th class="col-xs-1 col-sm-1  col-md-1" role="columnheader" rowspan="1" colspan="1">Genre</th>
+                                  <th class="col-xs-2 col-sm-2  col-md-2" role="columnheader" rowspan="1" colspan="1">Tags</th>
+                                  <th class="col-xs-4 col-sm-4 col-md-4" role="columnheader" rowspan="1" colspan="1">Synopsis</th>
                             </thead>
                             <tr ng-repeat="book in books" ng-click="selectBook(book)">
                                 <td class="largediv">{{book.name}}</td>

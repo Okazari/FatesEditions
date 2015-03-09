@@ -33,7 +33,7 @@ var myVirtualStoryBookApp = angular
         $urlRouterProvider.when("/author","/author/mybooks");
         
         //idem
-        $urlRouterProvider.when("/game","/game/current");
+        $urlRouterProvider.when("/game","/player/mygames");
         $stateProvider
             //Portail
             .state('signup', {
@@ -54,7 +54,8 @@ var myVirtualStoryBookApp = angular
             })
             .state('player.mygames', {
                 url: "/mygames",
-                templateUrl: "feature/player/view/MyGames.html"
+                templateUrl: "feature/player/view/MyGames.html",
+                controller: "PlayerGamesController"
             })
             .state('player.books', {
                 url: "/books",
@@ -88,7 +89,7 @@ var myVirtualStoryBookApp = angular
                 templateUrl: "feature/game/template/Game.template.html"
             })
             .state('game.current', {
-                url: "/current",
+                url: "/{id}",
                 templateUrl: "feature/game/view/CurrentGame.html",
                 controller: "GameController"
             })

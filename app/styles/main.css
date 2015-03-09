@@ -1,24 +1,5 @@
 /* Space out content a bit */
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 50px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 50px;
-  text-align: center;
-}
-
 .navbar-brand{
   color:white;
 }
@@ -30,7 +11,7 @@ body {
 
 .coverPreview{
   max-width:100%;
-  max-height:100%;
+  max-height:300px;
 }
 
 .float-left{
@@ -47,6 +28,20 @@ body {
 .compact{
   margin:0;
 }
+
+.main-sidebar.right-sidebar{
+  right:0;
+  left:auto;
+}
+
+.content-wrapper.with-right-sidebar{
+  margin-right:230px;
+}
+
+.main-sidebar .list-group-item{
+  border-radius:0px;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

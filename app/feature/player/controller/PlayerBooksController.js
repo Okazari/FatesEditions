@@ -4,6 +4,8 @@ angular.module('myVirtualStoryBookApp')
   .controller('PlayerBooksController', function ($scope, PlayerBooksService) {
     $scope.books = PlayerBooksService.getPublishedBook();
     $scope.displayedBook = $scope.books[0];
+    
+    //a externaliser dans un filtre
     $scope.genreIconMap = {"romance" : "glyphicon-heart",
                            "rpg": "glyphicon-tower",
                            "aventure": "glyphicon-road",

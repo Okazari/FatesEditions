@@ -1,36 +1,81 @@
-<div class="content-wrapper" style="min-height: 1068px;">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Blank page
-            <small>it all starts here</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Examples</a></li>
-            <li class="active">Blank page</li>
-          </ol>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-
-          <!-- Default box -->
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Title</h3>
-              <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
-                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove"><i class="fa fa-times"></i></button>
-              </div>
+<div class="content-wrapper">
+    <section class="content-header"><h1>Les livres</h1></section>
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Livres<i class="fa fa-tag"></i></h3>
+                    </div>
+                    
+                    <div class="box-body compact">
+                        <table class="table table-bordered table-hover dataTable bookTable">
+                            <thead>
+                              <tr role="row">
+                                  <th class="col-xs-2 col-sm-2 col-md-2" role="columnheader" rowspan="1" colspan="1">Release</th>
+                                  <th class="col-xs-1 col-sm-1 col-md-1" role="columnheader" rowspan="1" colspan="1">Genre</th>
+                                  <th class="col-xs-4 col-sm-4 col-md-4" role="columnheader" rowspan="1" colspan="1">Personnage</th>
+                                  <th class="col-xs-2 col-sm-2 col-md-1" role="columnheader" rowspan="1" colspan="1">Page</th>
+                            </thead>
+                            <tr ng-repeat="game in games" ng-click="selectGame(game)">
+                                <td>{{game.release.name}}</td>
+                                <td>{{game.release.genre}}</td>
+                                <td>{{game.character.name}}</td>
+                                <td>{{game.currentPage}}</td>
+                            </tr>
+                        </table>
+                        
+                    </div>
+                </div>
             </div>
-            <div class="box-body">
-              Start creating your amazing application!
-            </div><!-- /.box-body -->
-            <div class="box-footer">
-              Footer
-            </div><!-- /.box-footer-->
-          </div><!-- /.box -->
-
-        </section><!-- /.content -->
-      </div>
+            <div class="col-md-6">
+                <div class="box box-primary box-solid" data-spy="affix" data-offset-top="6">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Previsualisation<i class="fa fa-tag"></i></h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                   <div>
+                                       <h2>{{displayedGame.release.name}}</h2>
+                                   </div>
+                                   <div>
+                                       <span class="spaceLabel glyphicon" ng-class="getGenreIcon(displayedGame.release.genre)"></span>
+                                       {{displayedGame.release.genre}}
+                                   </div>
+                                   <div class="list-group-item menuTitle">
+                                        {{displayedGame.character.name}}
+                                    </div>
+                                    <div class="list-group-item subList btn btn-default" ng-click="displayStats = !displayStats">
+                                        <span class="badge">{{displayedGame.character.stats.length}}</span>
+                                        Caractéristiques
+                                    </div>
+                                    <div class="list-group-item subItem" tooltip-placement="left" tooltip="{{stat.description}}" ng-show="displayStats" ng-repeat="stat in displayedGame.character.stats">
+                                          {{stat.name}} : {{stat.value}}
+                                    </div>
+                                    <div class="list-group-item subList btn btn-default" ng-click="displayObjects = !displayObjects">
+                                        <span class="badge">{{displayedGame.character.objects.length}}</span>
+                                        Objets
+                                    </div>
+                                    <div class="list-group-item subItem" ng-show="displayObjects" tooltip-placement="left" tooltip="{{object.description}}" ng-repeat="object in displayedGame.character.objects">
+                                          {{object.name}}
+                                    </div>
+                                    <div>
+                                        Synopsis : <br/>
+                                        {{displayedGame.release.synopsis}}
+                                    </div>
+                                </div>
+                                <div class="coverRow col-xs-6 pull-right">
+                                   <img class="coverPreview" src="{{displayedGame.release.cover}}" alt="Book cover"> 
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default btn-lg" ui-sref="game.current({ id: displayedGame.id })">
+                                Jouer !
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
