@@ -85,12 +85,10 @@ var myVirtualStoryBookApp = angular
             
             //Jeu
             .state('game', {
-                url: "/game",
-                templateUrl: "feature/game/template/Game.template.html"
-            })
-            .state('game.current', {
-                url: "/{id}",
+                url: "/game/{id}",
                 templateUrl: "feature/game/view/CurrentGame.html",
                 controller: "GameController"
+            })
+            .state('game.current', {
             })
     });

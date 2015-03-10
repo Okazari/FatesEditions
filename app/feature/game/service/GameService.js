@@ -67,6 +67,10 @@ myVirtualStoryBookApp.service("GameService", [
             return service.game[gameId-1];
         }
  
+        service.saveGame = function(game){
+            service.game[game.id] = game;
+        }
+ 
         return service;
     }
 ]);

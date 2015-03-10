@@ -1,35 +1,36 @@
+<ng-include src="'feature/common/header/Header.template.html'"></ng-include>
+<div ng-show="showRightMenu" class="main-sidebar right-sidebar">
+ <button class="btn btn-default pinned fa fa-user" ng-click="showRightMenu = !showRightMenu"></button>
+  <!-- Inner sidebar -->
+  <div class="-pull-right">
+    <!-- user panel (Optional) -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img src="http://pmcdn.priceminister.com/photo/affiche-poster-death-note-kira-light-yagami-yeux-rouges-portrait-manga-29-7-x-42-cm-a3-1005017583_ML.jpg" class="img-circle" alt="User Image" />
+      </div>
+      <div class="pull-left info">
+        <p>{{currentGame.character.name}}</p>
+      </div>
+    </div><!-- /.user-panel -->
 
- <div class="main-sidebar right-sidebar">
-    <!-- Inner sidebar -->
-    <div class="-pull-right">
-      <!-- user panel (Optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="http://pmcdn.priceminister.com/photo/affiche-poster-death-note-kira-light-yagami-yeux-rouges-portrait-manga-29-7-x-42-cm-a3-1005017583_ML.jpg" class="img-circle" alt="User Image" />
-        </div>
-        <div class="pull-left info">
-          <p>{{currentGame.character.name}}</p>
-        </div>
-      </div><!-- /.user-panel -->
-  
-      <div class="list-group-item btn btn-default" ng-click="displayStats = !displayStats">
-          <span class="badge">{{currentGame.character.stats.length}}</span>
-          Caractéristiques
-      </div>
-      <div class="list-group-item" tooltip-placement="left" tooltip="{{stat.description}}" ng-show="displayStats" ng-repeat="stat in currentGame.character.stats">
-            {{stat.name}} : {{stat.value}}
-      </div>
-      <div class="list-group-item btn btn-default" ng-click="displayObjects = !displayObjects">
-          <span class="badge">{{currentGame.character.objects.length}}</span>
-          Objets
-      </div>
-      <div class="list-group-item" ng-show="displayObjects" tooltip-placement="left" tooltip="{{object.description}}" ng-repeat="object in currentGame.character.objects">
-            {{object.name}}
-      </div>
-    </div><!-- /.sidebar -->
-  </div><!-- /.main-sidebar -->
+    <div class="list-group-item btn btn-default" ng-click="displayStats = !displayStats">
+        <span class="badge">{{currentGame.character.stats.length}}</span>
+        Caractéristiques
+    </div>
+    <div class="list-group-item" tooltip-placement="left" tooltip="{{stat.description}}" ng-show="displayStats" ng-repeat="stat in currentGame.character.stats">
+          {{stat.name}} : {{stat.value}}
+    </div>
+    <div class="list-group-item btn btn-default" ng-click="displayObjects = !displayObjects">
+        <span class="badge">{{currentGame.character.objects.length}}</span>
+        Objets
+    </div>
+    <div class="list-group-item" ng-show="displayObjects" tooltip-placement="left" tooltip="{{object.description}}" ng-repeat="object in currentGame.character.objects">
+          {{object.name}}
+    </div>
+  </div><!-- /.sidebar -->
+</div><!-- /.main-sidebar -->
 <!-- Contenu de la page -->
-<div class="content-wrapper with-right-sidebar">
+<div class="content-wrapper" ng-class="{'with-right-sidebar': showRightMenu}">
   <!-- Content Header (Page header) -->
   <section class="content-header">
   </section>
@@ -53,3 +54,4 @@
   
   <!-- =============================================== -->
 </div>
+<ng-include src="'feature/common/footer/Footer.template.html'"></ng-include>

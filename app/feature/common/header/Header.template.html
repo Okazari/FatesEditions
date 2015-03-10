@@ -10,7 +10,11 @@
       </div>
       <div class="collapse navbar-collapse" id="nav-bar-collapse">
         <ul class="nav navbar-nav">
-          <li class="divider" ng-class="getClassIfActive($index)" ng-repeat="item in MenuItems"><a href="#/{{item.url}}">{{item.label}}<span class="sr-only"></span></a></li>
+          <li class="divider" ng-class="getClassIfActive($index)" ng-repeat="item in MenuItems">
+            <a ng-if="item.url" href="#/{{item.url}}">{{item.label}}<span class="sr-only"></span>
+            </a>
+            <a ng-if="item.click" ng-click="item.click()">{{item.label}}<span class="sr-only"></span></a>
+          </li>
         </ul>
       </div>
     </div>

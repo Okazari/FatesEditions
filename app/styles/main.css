@@ -25,21 +25,67 @@
   text-overflow: ellipsis;
 }
 
+a:hover{
+  cursor:pointer;
+}
+
 .compact{
   margin:0;
 }
 
+/* SIDE BAR STYLE */
 .main-sidebar.right-sidebar{
   right:0;
+  padding-top:0;
+  z-index:2000;
   left:auto;
+  -webkit-transform: none; /* Safari and Chrome */
+  -moz-transform: none; /* Firefox */
+  -ms-transform: none; /* IE 9 */
+  -o-transform: none; /* Opera */
+  transform: none;
 }
 
-.content-wrapper.with-right-sidebar{
-  margin-right:230px;
+.main-sidebar.right-sidebar.ng-hide{
+  display:block!important;
+  width:0;
 }
+
+.with-right-sidebar{
+  -webkit-transform: translate(-230px, 0); 
+  -ms-transform: translate(-230px, 0);
+  -o-transform: translate(-230px, 0);
+  transform: translate(-230px, 0); 
+} 
+.main-sidebar .pinned{
+  position:absolute;
+  left:-50px;
+  top:0;
+  background:#222d32;
+  border-color:#222d32;
+  color:white;
+  height:50px;
+  width:50px;
+  border-radius: 0px;
+}
+
+.main-sidebar .pinned:hover{
+  border-color:#222d32;
+}
+
+.main-sidebar .pinned:focus{
+  background-color:#222d32;
+  border-color:#222d32;
+  color:white;
+}
+
 
 .main-sidebar .list-group-item{
   border-radius:0px;
+}
+
+.main-sidebar.ng-hide .badge{
+  display:none;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
