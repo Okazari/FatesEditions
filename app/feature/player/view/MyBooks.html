@@ -30,11 +30,11 @@
                   <div class="small-box bg-aqua">
                     <div class="inner">
                       <h4>{{book.name}}</h4>
-                      <p>New Orders</p>
+                      <p><span class="label label-primary spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></span></p>
                     </div>
                     <img src="{{book.cover}}" class="coverPreviewtiny" alt="User Image">
-                    <a href="#" class="small-box-footer">
-                      More info <i class="fa fa-arrow-circle-right"></i>
+                    <a class="small-box-footer">
+                      Synopsis <i class="fa fa-arrow-circle-right" ng-click="book.showSynopsis = !book.showSynopsis"></i>
                     </a>
                   </div>
                 </div>
