@@ -89,6 +89,4 @@ var myVirtualStoryBookApp = angular
                 templateUrl: "feature/game/view/CurrentGame.html",
                 controller: "GameController"
             })
-            .state('game.current', {
-            })
     });

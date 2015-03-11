@@ -5,21 +5,21 @@
             <div class="col-md-6">
                 <div class="box box-primary box-solid">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Livres<i class="fa fa-tag"></i></h3>
+                      <h3 class="box-title">Livres</h3>
                     </div>
                     
                     <div class="box-body compact">
                         <table class="table table-bordered table-hover dataTable bookTable">
                             <thead>
                               <tr role="row">
-                                  <th class="col-xs-2 col-sm-2 col-md-2" role="columnheader" rowspan="1" colspan="1">Release</th>
+                                  <th class="col-xs-2 col-sm-2 col-md-2" role="columnheader" rowspan="1" colspan="1">Livre</th>
                                   <th class="col-xs-1 col-sm-1 col-md-1" role="columnheader" rowspan="1" colspan="1">Genre</th>
                                   <th class="col-xs-4 col-sm-4 col-md-4" role="columnheader" rowspan="1" colspan="1">Personnage</th>
                                   <th class="col-xs-2 col-sm-2 col-md-1" role="columnheader" rowspan="1" colspan="1">Page</th>
                             </thead>
                             <tr ng-repeat="game in games" ng-click="selectGame(game)">
-                                <td>{{game.release.name}}</td>
-                                <td>{{game.release.genre}}</td>
+                                <td>{{game.book.name}}</td>
+                                <td>{{game.book.genre}}</td>
                                 <td>{{game.character.name}}</td>
                                 <td>{{game.currentPage}}</td>
                             </tr>
@@ -31,17 +31,17 @@
             <div class="col-md-6">
                 <div class="box box-primary box-solid" data-spy="affix" data-offset-top="6">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Previsualisation<i class="fa fa-tag"></i></h3>
+                      <h3 class="box-title">Previsualisation</h3>
                     </div>
                     <div class="box-body">
                         <div class="row">
                             <div class="col-xs-6">
                                    <div>
-                                       <h2>{{displayedGame.release.name}}</h2>
+                                       <h2>{{displayedGame.book.name}}</h2>
                                    </div>
                                    <div>
-                                       <span class="spaceLabel glyphicon" ng-class="getGenreIcon(displayedGame.release.genre)"></span>
-                                       {{displayedGame.release.genre}}
+                                       <span class="spaceLabel glyphicon" ng-class="getGenreIcon(displayedGame.book.genre)"></span>
+                                       {{displayedGame.book.genre}}
                                    </div>
                                    <div class="list-group-item menuTitle">
                                         {{displayedGame.character.name}}
@@ -62,11 +62,11 @@
                                     </div>
                                     <div>
                                         Synopsis : <br/>
-                                        {{displayedGame.release.synopsis}}
+                                        {{displayedGame.book.synopsis}}
                                     </div>
                                 </div>
                                 <div class="coverRow col-xs-6 pull-right">
-                                   <img class="coverPreview" src="{{displayedGame.release.cover}}" alt="Book cover"> 
+                                   <img class="coverPreview" src="{{displayedGame.book.cover}}" alt="Book cover"> 
                                 </div>
                             </div>
                             <button type="button" class="btn btn-default btn-lg" ui-sref="game.current({ id: displayedGame.id })">
