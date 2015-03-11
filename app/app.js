@@ -30,7 +30,7 @@ var myVirtualStoryBookApp = angular
         $urlRouterProvider.when("/player","/player/mygames");
         
         //idem
-        $urlRouterProvider.when("/author","/author/mybooks");
+        $urlRouterProvider.when("/edition","/player/mygames");
         
         //idem
         $urlRouterProvider.when("/game","/player/mygames");
@@ -66,21 +66,18 @@ var myVirtualStoryBookApp = angular
                 url: "/profile",
                 templateUrl: "feature/common/profile/Profile.html"
             })
-            
-            
-            //Auteur
-            .state('author', {
-                url: "/author",
-                templateUrl: "feature/author/template/Author.template.html",
-                abstract: true
-            })
-            .state('author.mybooks', {
+            .state('player.mybooks', {
                 url: "/mybooks",
-                templateUrl: "feature/author/view/MyBooks.html"
+                templateUrl: "feature/player/view/MyBooks.html",
+                controller: "PlayerBooksController"
             })
-            .state('author.profile', {
-                url: "/profile",
-                templateUrl: "feature/common/profile/Profile.html"
+            
+            
+            //Edition
+            .state('edition', {
+                url: "/edition",
+                templateUrl: "feature/edition/template/Edition.template.html",
+                abstract: true
             })
             
             //Jeu
