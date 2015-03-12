@@ -1,3 +1,4 @@
-app:
-    resource: @AppBundle/Controller/
-    type:     annotation
+mvsb_my_virtual_story_book:
+    resource: "@MVSBMyVirtualStoryBookBundle/Resources/config/routing.yml"
+    prefix:   /
+

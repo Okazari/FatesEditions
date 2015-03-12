@@ -1,0 +1,3 @@
+mvsb_my_virtual_story_book:
+    resource: "@MVSBMyVirtualStoryBookBundle/Controller/PlayersController.php"
+    type:     annotation

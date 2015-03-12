@@ -1,0 +1,73 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Mon profil
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Mes parties</h3>
+        <div class="box-tools pull-right">
+          <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div ng-repeat="game in games" class="col-lg-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-navy book-widget">
+              <div class="inner top-widget">
+                <h4>{{game.book.name}} - {{game.character.name}}</h4>
+                <p><span class="label label-primary spaceLabel" ng-repeat="tag in game.book.tags">{{tag}}</span></span></p>
+                <img src="{{game.book.cover}}" class="coverPreviewtiny" alt="User Image">
+                <div class="inner">Page : {{game.currentPage}}</div>
+              </div>
+              <a ng-click="playGame(game.id)" class="small-box-footer">
+                Jouer <i class="fa fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.box-body -->
+      <div class="box-footer">
+        
+      </div><!-- /.box-footer-->
+    </div><!-- /.box -->
+
+    <!-- Default box -->
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Mes Livres</h3>
+        <div class="box-tools pull-right">
+          <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div ng-repeat="book in books" class="col-lg-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-aqua book-widget">
+              <div class="inner top-widget">
+                <h4>{{book.name}}</h4>
+                <p><span class="label label-primary spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></span></p>
+                <img src="{{book.cover}}" class="coverPreviewtiny" alt="User Image">
+                <div class="inner">{{book.synopsis}}</div>
+              </div>
+              <a ng-click="newGame(book)" class="small-box-footer">
+                Editer <i class="fa fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.box-body -->
+      <div class="box-footer">
+        
+      </div><!-- /.box-footer-->
+    </div><!-- /.box -->
+
+  </section><!-- /.content -->
+</div>
