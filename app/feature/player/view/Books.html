@@ -1,67 +1,36 @@
 <div class="content-wrapper">
-    <section class="content-header"><h1>Les livres</h1></section>
-    <section class="content">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="box box-primary box-solid">
-                    <div class="box-header with-border">
-                      <h3 class="box-title">Livres</h3>
-                    </div>
-                    
-                    <div class="box-body compact">
-                        <table class="table table-bordered table-hover dataTable bookTable">
-                            <thead>
-                              <tr role="row">
-                                  <th class="col-xs-2 col-sm-2 col-md-2" role="columnheader" rowspan="1" colspan="1">Titre</th>
-                                  <th class="col-xs-1 col-sm-1  col-md-1" role="columnheader" rowspan="1" colspan="1">Genre</th>
-                                  <th class="col-xs-2 col-sm-2  col-md-2" role="columnheader" rowspan="1" colspan="1">Tags</th>
-                                  <th class="col-xs-4 col-sm-4 col-md-4" role="columnheader" rowspan="1" colspan="1">Synopsis</th>
-                            </thead>
-                            <tr ng-repeat="book in books" ng-click="selectBook(book)">
-                                <td class="largediv">{{book.name}}</td>
-                                <td class="largediv">{{book.genre}}</td>
-                                <td class="largediv"><span class="label label-default spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></span></td>
-                                <td>{{book.synopsis}}</td>
-                            </tr>
-                        </table>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="box box-primary box-solid" data-spy="affix" data-offset-top="6">
-                    <div class="box-header with-border">
-                      <h3 class="box-title">Previsualisation</h3>
-                    </div>
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                   <div>
-                                       <h2>{{displayedBook.name}}</h2>
-                                   </div>
-                                   <div>
-                                       <span class="spaceLabel glyphicon" ng-class="getGenreIcon(displayedBook.genre)"></span>
-                                       {{displayedBook.genre}}
-                                   </div>
-                                    <div>
-                                        <span class="label label-default spaceLabel" ng-repeat="tag in displayedBook.tags">{{tag}}</span>
-                                    </div>
-                                    <div>
-                                        Synopsis : <br/>
-                                        {{displayedBook.synopsis}}
-                                    </div>
-                                </div>
-                                <div class="coverRow col-xs-6 pull-right">
-                                   <img class="coverPreview" src="{{displayedBook.cover}}" alt="Book cover"> 
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-default btn-lg" ng-click="newGame(displayedBook)">
-                                Jouer !
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Les livres</h3>
+        <div class="box-tools pull-right">
+          <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+          <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove"><i class="fa fa-times"></i></button>
         </div>
-    </section>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <div ng-repeat="book in books" class="col-lg-3 col-sm-6 col-xs-12">
+            <div class="small-box bg-aqua book-widget">
+              <div class="inner top-widget">
+                <h4>{{book.name}}</h4>
+                <p><span class="label label-primary spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></span></p>
+                <img src="{{book.cover}}" class="coverPreviewtiny" alt="User Image">
+                <div class="inner">{{book.synopsis}}</div>
+              </div>
+              <a ng-click="newGame(book)" class="small-box-footer">
+                Jouer <i class="fa fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.box-body -->
+      <div class="box-footer">
+        
+      </div><!-- /.box-footer-->
+    </div><!-- /.box -->
+
+  </section><!-- /.content -->
 </div>

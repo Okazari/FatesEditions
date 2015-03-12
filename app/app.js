@@ -52,24 +52,15 @@ var myVirtualStoryBookApp = angular
                 url: "/player",
                 templateUrl: "feature/player/template/Player.template.html"
             })
-            .state('player.mygames', {
-                url: "/mygames",
-                templateUrl: "feature/player/view/MyGames.html",
-                controller: "PlayerGamesController"
-            })
             .state('player.books', {
                 url: "/books",
                 templateUrl: "feature/player/view/Books.html",
                 controller: "PlayerBooksController"
             })
-            .state('player.profile', {
-                url: "/profile",
-                templateUrl: "feature/common/profile/Profile.html"
-            })
-            .state('player.mybooks', {
-                url: "/mybooks",
-                templateUrl: "feature/player/view/MyBooks.html",
-                controller: "PlayerBooksController"
+            .state('player.myprofile', {
+                url: "/myprofile",
+                templateUrl: "feature/player/view/MyProfile.html",
+                controller: "PlayerProfileController"
             })
             
             

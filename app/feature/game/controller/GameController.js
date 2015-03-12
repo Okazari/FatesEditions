@@ -9,7 +9,7 @@ angular.module('myVirtualStoryBookApp')
     };
     $scope.saveAndQuit = function(){
       GameService.saveGame($scope.currentGame);
-      $state.go('player.mygames',{reload:true})
+      $state.go('player.myprofile',{reload:true})
     }
     $scope.MenuItems.push({"click":$scope.saveAndQuit, "label":"Sauvegarder et quitter"});
     

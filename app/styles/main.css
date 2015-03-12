@@ -96,6 +96,13 @@ a:hover{
   display:none;
 }
 
+.small-box.book-widget{
+  height:200px;
+}
+
+.top-widget{
+  height:174px;
+}
 
 .wrapper.custom-wrapper{
   background:#ecf0f5;

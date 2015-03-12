@@ -11,7 +11,6 @@ angular.module('myVirtualStoryBookApp')
     $scope.currentMod = $scope._createMenuItem("","Mode Joueur");
 
     $scope.MenuItems.push($scope._createMenuItem("player.books","Les livres"));
-    $scope.MenuItems.push($scope._createMenuItem("player.mygames","Mes Parties"));
-    $scope.MenuItems.push($scope._createMenuItem("player.mybooks","Mes livres"));
+    $scope.MenuItems.push($scope._createMenuItem("player.myprofile","Mon profil"));
 
   });
