@@ -20,7 +20,9 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle": "0.13.*",
-        "friendsofsymfony/rest-bundle": "~1.5"
+        "friendsofsymfony/rest-bundle": "~1.5",
+	"doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
