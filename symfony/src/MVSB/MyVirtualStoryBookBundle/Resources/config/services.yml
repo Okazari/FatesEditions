@@ -2,3 +2,12 @@ services:
 #    mvsb_my_virtual_story_book.example:
 #        class: MVSB\MyVirtualStoryBookBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    mvsb.player.repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments:
+            - MVSB\MyVirtualStoryBookBundle\Entity\Player
+    mvsb.player.service:
+        class: MVSB\MyVirtualStoryBookBundle\Service\PlayerService
+        arguments: [@mvsb.player.repository]

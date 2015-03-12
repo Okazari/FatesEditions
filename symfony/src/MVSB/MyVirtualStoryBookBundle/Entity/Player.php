@@ -3,12 +3,15 @@
 namespace MVSB\MyVirtualStoryBookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Player
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="MVSB\MyVirtualStoryBookBundle\Entity\PlayerRepository")
+ * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="user_unique",columns={"username"})})
+ * @ORM\Entity(repositoryClass="MVSB\MyVirtualStoryBookBundle\Repository\PlayerRepository")
+ * 
+ * @Serializer\ExclusionPolicy("all");
  */
 class Player
 {
@@ -23,14 +26,14 @@ class Player
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="userName", type="string", length=255)
+     * @Serializer\Expose
+     * @ORM\Column(name="username", type="string", length=255)
      */
-    private $userName;
+    private $username;
 
     /**
      * @var string
-     *
+     * @Serializer\Expose
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
