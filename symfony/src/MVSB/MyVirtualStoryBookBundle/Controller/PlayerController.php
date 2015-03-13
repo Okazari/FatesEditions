@@ -2,13 +2,12 @@
 
 namespace MVSB\MyVirtualStoryBookBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-class PlayersController extends Controller
+class PlayerController extends MVSBController
 {
     /**
      * @Post("/players")
@@ -24,7 +23,7 @@ class PlayersController extends Controller
         
         $playerService->addNewPlayer($player);
         
-        return new Response("coucou");
+        return new Response('',Response::HTTP_NO_CONTENT);
     }
     
     /**
@@ -32,13 +31,20 @@ class PlayersController extends Controller
      */
     public function getPlayerByNameAction(Request $request, $username)
     {
-        $serializer = $this->get('jms_serializer');
         $playerService = $this->get('mvsb.player.service');
-        
-        $player = $playerService->getByPlayerByUsername($username);
-        
-        $jsonResponse = $serializer->serialize($player, 'json');
+        $player = $playerService->getPlayerByUsername($username);
 
-        return new Response($jsonResponse);
+        return $this->serializeAndBuildSONResponse($player,Response::HTTP_OK);
+    }
+    
+    /**
+     * @Get("/players/{username}/books")
+     */
+    public function getPlayerDraftAction(Request $request, $username)
+    {
+        $playerService = $this->get('mvsb.player.service');
+        $books = $playerService->getPlayerBooks($username);
+
+        return $this->serializeAndBuildSONResponse($books,Response::HTTP_OK);
     }
 }

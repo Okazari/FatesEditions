@@ -13,11 +13,16 @@ class PlayerService{
     }
 
     public function addNewPlayer(Player $player){
-        $this->playerRepository->addPlayerToBase($player);
+        $this->playerRepository->addEntityToBase($player);
     }
 
-    public function getByPlayerByUsername($username){
+    public function getPlayerByUsername($username){
         return $this->playerRepository->findOneByUsername($username);
+    }
+
+    public function getPlayerBooks($username){
+        $player = $this->playerRepository->findOneByUsername($username);
+        return $player->getBooks();
     }
 
 }

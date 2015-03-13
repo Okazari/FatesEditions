@@ -9,8 +9,8 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
             return $http.get("http://myvirtualstorybook-okazari-4.c9.io/symfony/web/app_dev.php/players/"+name);
         }
  
-        service.getConnectedPlayerDrafts = function(){
-            return BookService.getPlayerDraft(service.currentPlayer.username);
+        service.getConnectedPlayerBooks = function(){
+            return BookService.getPlayerBooks(service.currentPlayer.username);
         }
  
         service.getConnectedPlayerGames = function(){

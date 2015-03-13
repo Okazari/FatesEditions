@@ -2,7 +2,9 @@
 
 angular.module('myVirtualStoryBookApp')
   .controller('PlayerProfileController', function ($scope, $state, PlayerService, GameService) {
-    $scope.books = PlayerService.getConnectedPlayerDrafts();
+    PlayerService.getConnectedPlayerBooks().success(function(books){
+      $scope.books = books;  
+    });
     $scope.games = PlayerService.getConnectedPlayerGames();
     //a externaliser dans un filtre
     $scope.genreIconMap = {"romance" : "glyphicon-heart",

@@ -38,6 +38,10 @@ class Player
      */
     private $password;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="author")
+     **/
+    private $books;
 
     /**
      * Get id
@@ -50,26 +54,26 @@ class Player
     }
 
     /**
-     * Set userNAme
+     * Set username
      *
-     * @param string $userNAme
+     * @param string $username
      * @return Player
      */
-    public function setUserNAme($userNAme)
+    public function setUsername($username)
     {
-        $this->userNAme = $userNAme;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get userNAme
+     * Get username
      *
      * @return string 
      */
-    public function getUserNAme()
+    public function getUsername()
     {
-        return $this->userNAme;
+        return $this->username;
     }
 
     /**
@@ -93,5 +97,27 @@ class Player
     public function getPassword()
     {
         return $this->password;
+    }
+    /**
+     * Set books
+     *
+     * @param string $books
+     * @return Player
+     */
+    public function setBooks($books)
+    {
+        $this->books = $books;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getBooks()
+    {
+        return $this->books;
     }
 }
