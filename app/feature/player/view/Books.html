@@ -13,9 +13,9 @@
       <div class="box-body">
         <div class="row">
           <div ng-repeat="book in books" class="col-lg-3 col-sm-6 col-xs-12">
-            <div class="small-box bg-aqua book-widget">
+            <div class="small-box bg-primary book-widget">
               <div class="inner top-widget">
-                <h4>{{book.name}}</h4>
+                <h4>{{book.name}} - {{book.genre.name}}</h4>
                 <p><span class="label label-primary spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></span></p>
                 <img src="{{book.cover}}" class="coverPreviewtiny" alt="User Image">
                 <div class="inner">{{book.synopsis}}</div>

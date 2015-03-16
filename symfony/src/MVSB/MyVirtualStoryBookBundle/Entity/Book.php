@@ -64,6 +64,14 @@ class Book
      **/
 
     private $author;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Genre", inversedBy="books")
+     * @ORM\JoinColumn(name="genre_id", referencedColumnName="id")
+     * @Serializer\Expose
+     **/
+
+    private $genre;
 
     /**
      * @var boolean
@@ -149,6 +157,28 @@ class Book
     public function getAuthor()
     {
         return $this->author;
+    }
+    
+    /**
+     * Set genre
+     *
+     * param $genre
+     * @return Book
+     */
+    public function setGenre($genre)
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+    
+    /**
+     * Get genre
+     *
+     */
+    public function getGenrer()
+    {
+        return $this->genre;
     }
 
     /**
