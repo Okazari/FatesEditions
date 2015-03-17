@@ -18,6 +18,12 @@
   height:100%;
 }
 
+.genre-icon{
+  margin-left:5px;
+}
+.synopsis-preview{
+  margin-top:10px;
+}
 .top-widget{
   padding:15px;
 }

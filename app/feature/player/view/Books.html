@@ -20,9 +20,8 @@
                 </div>
                 <div class="col-lg-8 col-sm-8 col-xs-8 inner">
                   <h4>{{book.name}}</h4>
-                  <h4>{{book.genre.name}} <i class="fa fa-{{book.genre.icon}}"></i></h4>
-                  <p><span class="label label-primary spaceLabel" ng-repeat="tag in book.tags">{{tag}}</span></span></p>
-                  <div class="inner">{{book.synopsis}}</div>
+                  <h4 class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
+                  <div class="inner synopsis-preview">{{book.synopsis}}</div>
                 </div>
               </div>
               <a ng-click="newGame(book)" class="small-box-footer">
