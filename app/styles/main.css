@@ -38,6 +38,10 @@
   float:left;
 }
 
+.small-box h4{
+  margin-top:0px;
+}
+
 .bookTable tbody tr td{
   max-width:0px; /* Customise it accordingly */
   white-space: nowrap;

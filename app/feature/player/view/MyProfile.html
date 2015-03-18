@@ -31,7 +31,7 @@
                   <div class="inner synopsis-preview">{{game.book.synopsis}}</div>
                 </div>
               </div>
-              <a ng-click="playGame(game.id)" class="small-box-footer">
+              <a ng-click="playGame(game)" class="small-box-footer">
                 Jouer <i class="fa fa-arrow-circle-right"></i>
               </a>
             </div>
@@ -54,7 +54,7 @@
             <div class="small-box bg-primary book-widget">
               <div class="box-tools pull-right">
                 <a class="fa fa-pencil icon-tool" ng-click="editBook(book)"></a>
-                <a class="fa fa-remove icon-tool" ng-click="deleteBook(book)"></a>
+                <a class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
               </div>
               <div class="row top-widget">
                 <div class="col-lg-4 col-sm-4 col-xs-4 preview-container">              
@@ -64,11 +64,11 @@
                   <h4>{{book.name}}</h4>
                   <h4 ng-if="book.draft" class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
                   <h4 ng-if="!book.draft" class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
-                  <h4 class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
+                  <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
                   <div class="inner synopsis-preview">{{book.synopsis}}</div>
                 </div>
               </div>
-              <a ng-click="newGame(book)" class="small-box-footer">
+              <a ng-click="editBook(book)" class="small-box-footer">
                 Editer <i class="fa fa-arrow-circle-right"></i>
               </a>
             </div>
