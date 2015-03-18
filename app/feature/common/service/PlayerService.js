@@ -20,7 +20,18 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         service.setCurrentPlayer = function(player){
             service.currentPlayer = player;
         }
+        
+        service.createBookForCurrentUser = function(){
+            return BookService.createPlayerBook(service.currentPlayer.username);
+        }
+    
+        service.isAuthor = function(author,book){
+            return author.username === book.author.username;
+        }
  
+        service.isCurrentPlayerAuthor = function(book){
+            return service.isAuthor(service.currentPlayer,book);
+        }
         return service;
     }
 ]);

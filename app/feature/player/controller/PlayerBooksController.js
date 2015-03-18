@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('PlayerBooksController', function ($scope, $state, BookService, GameService) {
+  .controller('PlayerBooksController', function ($scope, $state, PlayerService, BookService, GameService) {
 
     BookService.getPublishedBooks().success(function(books){
       $scope.books = books;
@@ -16,6 +16,11 @@ angular.module('myVirtualStoryBookApp')
     $scope.getGenreIcon = function(genre){
       return $scope.genreIconMap[genre.toLowerCase()];
     }
+    
+    $scope.isAuthor = function(book){
+      return PlayerService.isCurrentPlayerAuthor(book);
+    }
+    
     $scope.newGame = function(book){
       var newGame = GameService.newGame("Stub",book);
       $state.go("game",{id:newGame.id});

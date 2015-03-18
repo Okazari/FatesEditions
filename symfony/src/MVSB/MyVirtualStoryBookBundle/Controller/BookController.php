@@ -3,6 +3,7 @@
 namespace MVSB\MyVirtualStoryBookBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +36,17 @@ class BookController extends MVSBController
         $book = $bookService->getBookById($id);
 
         return $this->serializeAndBuildSONResponse($book,Response::HTTP_OK);
+    }
+    
+    /**
+     * @Delete("/books/{id}")
+     */
+    public function deleteBookByIdAction(Request $request, $id)
+    {
+        $bookService = $this->get('mvsb.book.service');
+        $bookService->deleteBookById($id);
+
+        return new Response('',Response::HTTP_NO_CONTENT);
     }
     
     /**

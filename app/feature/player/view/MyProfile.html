@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-lg-8 col-sm-8 col-xs-8 inner">
                   <h4><h4>{{game.book.name}} - {{game.character.name}}</h4></h4>
-                  <h4 class="label label-primary">{{game.book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
+                  <h4 class="label label-primary">Page : {{game.currentPage}}</h4>
                   <div class="inner synopsis-preview">{{game.book.synopsis}}</div>
                 </div>
               </div>
@@ -36,6 +36,7 @@
               </a>
             </div>
           </div>
+        </div>
       </div><!-- /.box-footer-->
     </div><!-- /.box -->
 
@@ -44,25 +45,31 @@
       <div class="box-header with-border">
         <h3 class="box-title">Mes Livres</h3>
         <div class="box-tools pull-right">
-          <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+          <button class="btn btn-success" ng-click="newBook()"><i class="fa fa-plus"> Créer un livre</i></button>
         </div>
       </div>
       <div class="box-body">
         <div class="row">
           <div ng-repeat="book in books" class="col-lg-4 col-sm-6 col-xs-12">
             <div class="small-box bg-primary book-widget">
+              <div class="box-tools pull-right">
+                <a class="fa fa-pencil icon-tool" ng-click="editBook(book)"></a>
+                <a class="fa fa-remove icon-tool" ng-click="deleteBook(book)"></a>
+              </div>
               <div class="row top-widget">
                 <div class="col-lg-4 col-sm-4 col-xs-4 preview-container">              
                   <img src="{{book.cover}}" class="cover-preview" alt="User Image">
                 </div>
                 <div class="col-lg-8 col-sm-8 col-xs-8 inner">
                   <h4>{{book.name}}</h4>
+                  <h4 ng-if="book.draft" class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
+                  <h4 ng-if="!book.draft" class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
                   <h4 class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
                   <div class="inner synopsis-preview">{{book.synopsis}}</div>
                 </div>
               </div>
               <a ng-click="newGame(book)" class="small-box-footer">
-                Jouer <i class="fa fa-arrow-circle-right"></i>
+                Editer <i class="fa fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>

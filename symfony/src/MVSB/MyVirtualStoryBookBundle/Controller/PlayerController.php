@@ -47,4 +47,15 @@ class PlayerController extends MVSBController
 
         return $this->serializeAndBuildSONResponse($books,Response::HTTP_OK);
     }
+    
+    /**
+     * @Post("/players/{username}/books")
+     */
+    public function createNewBookAction(Request $request, $username)
+    {
+        $playerService = $this->get('mvsb.player.service');
+        $player = $playerService->createNewBook($username);
+
+        return $this->serializeAndBuildSONResponse($player,Response::HTTP_CREATED);
+    }
 }

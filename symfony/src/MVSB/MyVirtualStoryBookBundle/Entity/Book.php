@@ -182,26 +182,26 @@ class Book
     }
 
     /**
-     * Set synopsisText
+     * Set synopsis
      *
-     * @param string $synopsisText
+     * @param string $synopsis
      * @return Book
      */
-    public function setSynopsisText($synopsisText)
+    public function setSynopsis($synopsis)
     {
-        $this->synopsisText = $synopsisText;
+        $this->synopsis = $synopsis;
 
         return $this;
     }
 
     /**
-     * Get synopsisText
+     * Get synopsis
      *
      * @return string 
      */
-    public function getSynopsisText()
+    public function getSynopsis()
     {
-        return $this->synopsisText;
+        return $this->synopsis;
     }
 
     /**

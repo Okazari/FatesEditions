@@ -17,4 +17,15 @@ class MVSBRepository extends EntityRepository{
         $em->persist($entity);
         $em->flush($entity);
     }
+    
+    public function flushEntityToBase($entity){
+        $em = $this->getEntityManager();
+        $em->flush($entity);
+    }
+    
+    public function removeEntityFromBase($entity){
+        $em = $this->getEntityManager();
+        $em->remove($entity);
+        $em->flush($entity);
+    }
 }

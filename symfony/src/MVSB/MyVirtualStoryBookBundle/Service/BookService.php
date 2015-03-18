@@ -23,4 +23,9 @@ class BookService{
     public function getPublishedBooks(){
         return $this->bookRepository->findByDraft(false);
     }
+    
+    public function deleteBookById($id){
+        $book = $this->bookRepository->findOneById($id);
+        $this->bookRepository->removeEntityFromBase($book);
+    }
 }

@@ -39,7 +39,7 @@ class Player
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="Book", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="Book", mappedBy="author", cascade={"persist"})
      **/
     private $books;
 

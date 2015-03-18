@@ -10,7 +10,7 @@ services:
             - MVSB\MyVirtualStoryBookBundle\Entity\Player
     mvsb.player.service:
         class: MVSB\MyVirtualStoryBookBundle\Service\PlayerService
-        arguments: [@mvsb.player.repository]
+        arguments: [@mvsb.player.repository, @mvsb.book.builder]
     mvsb.book.repository:
         class: Doctrine\ORM\EntityRepository
         factory_service: doctrine.orm.default_entity_manager
@@ -20,3 +20,6 @@ services:
     mvsb.book.service:
         class: MVSB\MyVirtualStoryBookBundle\Service\BookService
         arguments: [@mvsb.book.repository]
+    mvsb.book.builder:
+        class: MVSB\MyVirtualStoryBookBundle\Builder\BookBuilder
+        arguments: []
