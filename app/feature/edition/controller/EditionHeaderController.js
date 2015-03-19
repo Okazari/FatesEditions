@@ -8,9 +8,6 @@ angular.module('myVirtualStoryBookApp')
             return {"url":url, "label":label};
         };
 
-        $scope.currentMod = $scope._createMenuItem("","Mode Auteur");
-
         $scope.MenuItems.push($scope._createMenuItem("author/mybooks","Mes Livres"));
-        $scope.MenuItems.push($scope._createMenuItem("player","Changer de mode"));
         
     });

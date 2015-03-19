@@ -28,12 +28,6 @@ var myVirtualStoryBookApp = angular
         
         // /player place seulement le header, on redirige donc vers une page avec un contenu.
         $urlRouterProvider.when("/player","/player/mygames");
-        
-        //idem
-        $urlRouterProvider.when("/edition","/player/mygames");
-        
-        //idem
-        $urlRouterProvider.when("/game","/player/mygames");
         $stateProvider
             //Portail
             .state('signup', {

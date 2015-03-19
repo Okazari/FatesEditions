@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('PlayerProfileController', function ($scope, $state, $modal, PlayerService, BookService, GameService) {
+  .controller('PlayerProfileController', function ($scope, $state, $modal, D3Service, PlayerService, BookService, GameService) {
 
     $scope.playGame = function(game){
       $state.go("game",{id:game.id});
@@ -37,10 +37,15 @@ angular.module('myVirtualStoryBookApp')
         scope: $scope
       });
     }
+    
     $scope.newBook = function(){
       PlayerService.createBookForCurrentUser().success($scope.updateBooks);
+      
     }
 
     $scope.updateBooks();
     $scope.games = PlayerService.getConnectedPlayerGames();
+    
+    D3Service.addLink("Coco","Titi");
+    D3Service.init(".svg-container",200,200);
   });
