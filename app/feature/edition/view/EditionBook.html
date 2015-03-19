@@ -1,0 +1,27 @@
+<ng-include src="'feature/common/header/Header.template.html'"></ng-include>
+<!-- Contenu de la page -->
+<div class="content-wrapper" ng-class="{'with-right-sidebar': showRightMenu}">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      <div class="box-body">
+        {{currentPage.pageContent.text}}
+      </div><!-- /.box-body -->
+      <div class="box-footer">
+        <div class="list-group-item btn btn-default" ng-click="changePage(transition.nextPage)" ng-repeat="transition in currentPage.transitions">
+            <p>- {{transition.text}}</p>
+        </div>
+      </div><!-- /.box-footer-->
+    </div><!-- /.box -->
+
+  </section><!-- /.content -->
+  
+  <!-- =============================================== -->
+</div>
+<ng-include src="'feature/common/footer/Footer.template.html'"></ng-include>

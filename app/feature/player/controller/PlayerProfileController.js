@@ -7,7 +7,7 @@ angular.module('myVirtualStoryBookApp')
       $state.go("game",{id:game.id});
     }
     $scope.editBook = function(book){
-      $state.go("edition.book",{id:book.id});
+      $state.go("editionbook",{id:book.id});
     }
     $scope.updateBooks = function(){
       PlayerService.getConnectedPlayerBooks().success(function(books){
@@ -40,7 +40,6 @@ angular.module('myVirtualStoryBookApp')
     
     $scope.newBook = function(){
       PlayerService.createBookForCurrentUser().success($scope.updateBooks);
-      
     }
 
     $scope.updateBooks();

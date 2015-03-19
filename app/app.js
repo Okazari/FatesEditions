@@ -59,10 +59,10 @@ var myVirtualStoryBookApp = angular
             
             
             //Edition
-            .state('edition', {
-                url: "/edition",
-                templateUrl: "feature/edition/template/Edition.template.html",
-                abstract: true
+            .state('editionbook', {
+                url: "/edition/book/{id}",
+                templateUrl: "feature/edition/view/EditionBook.html",
+                controller: "EditionBookController"
             })
             
             //Jeu
