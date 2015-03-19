@@ -7,37 +7,46 @@
   <!-- Main content -->
   <section class="content row">
     <!-- Default box -->
-    <div class="box box-primary">
-      <div class="box-body row">
-        {{book}}
-        <form>
-          <div class="col-lg-3 col-sm-3 col-xs-3 changer-cover">              
-            <img src="{{book.cover}}" class="cover-preview" alt="User Image">
-            <div class="input-group margin-top">
-                <span class="input-group-addon">URL</span>
-                <input type="text"  max="20" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="book.cover" ng-change="displayMessage = false" required>
+    <form>
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Votre livre</h3>
+          <div class="box-tools pull-right">
+            <div class="btn-group">
+              <label class="btn btn-primary" ng-class="{'btn-success':!book.draft}" ng-disabled="!book.draft" ng-change="book.draft = !book.draft" ng-model="_release" btn-checkbox><i class="fa fa-eye"></i> Publié</label>
+              <label class="btn btn-primary" ng-class="{'btn-danger':book.draft}" ng-disabled="book.draft" ng-change="_release = !_release" ng-model="book.draft" btn-checkbox><i class="fa fa-eye-slash"></i> Brouillon</label>
             </div>
           </div>
-          <div class="col-lg-9 col-sm-9 col-xs-9">
-            <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
-                <label>Titre</label> 
-                <input type="text"  max="20" name="cover" class="form-control" placeholder="Titre du livre" ng-model="book.name" ng-change="displayMessage = false" required>
+        </div>
+        <div class="box-body row">
+            <div class="col-lg-3 col-sm-3 col-xs-3 changer-cover">              
+              <img src="{{book.cover}}" class="cover-preview" alt="User Image">
+              <div class="input-group margin-top">
+                  <span class="input-group-addon">URL</span>
+                  <input type="text"  max="20" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="book.cover" ng-change="displayMessage = false" required>
+              </div>
             </div>
-            <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
-              <label>Genre</label>
-              <select ng-model="selectedGenre" ng-options="genre.id as genre.name for genre in genres" ng-change="book.genre = genres[selectedGenre-1]" class="form-control">
-              </select>
+            <div class="col-lg-9 col-sm-9 col-xs-9">
+              
+              <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
+                  <label>Titre</label> 
+                  <input type="text"  max="20" name="cover" class="form-control" placeholder="Titre du livre" ng-model="book.name" ng-change="displayMessage = false" required>
+              </div>
+              <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
+                <label>Genre</label>
+                <select ng-model="selectedGenre" ng-options="genre.id as genre.name for genre in genres" ng-change="book.genre = genres[selectedGenre-1]" class="form-control">
+                </select>
+              </div>
+              <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
+                <label>Synopsis</label> 
+                <textarea rows="5" name="synopsis" class="form-control" placeholder="Synopsis" ng-model="book.synopsis" ng-change="displayMessage = false" required>
+              </div>
             </div>
-            <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
-              <label>Synopsis</label> 
-              <textarea rows="5" name="synopsis" class="form-control" placeholder="Synopsis" ng-model="book.synopsis" ng-change="displayMessage = false" required>
-            </div>
-          </div>
-        </form>
-      </div><!-- /.box-body -->
-      <div class="box-footer">
-      </div><!-- /.box-footer-->
-    </div><!-- /.box -->
+        </div><!-- /.box-body -->
+        <div class="box-footer">
+        </div><!-- /.box-footer-->
+      </div><!-- /.box -->
+    </form>
   </section><!-- /.content -->
   
   <!-- =============================================== -->
