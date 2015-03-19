@@ -21,6 +21,10 @@ myVirtualStoryBookApp.service("BookService", ["$http",
             return $http.delete(BASE_URL+"/books/"+book.id);
         }
  
+        service.getBook = function(bookId){
+            return $http.get(BASE_URL+"/books/"+bookId);
+        }
+ 
         return service;
     }
 ]);

@@ -26,4 +26,8 @@ angular.module('myVirtualStoryBookApp')
     $scope.MenuItems.push({"click":$scope.discardAndQuit, "label":"Annuler et quitter"});
     
     /**********************Page control************************/
+    $scope.book = BookService.getBook($stateParams.id).success(function(book){
+      $scope.book = book;
+    });
+    
   });
