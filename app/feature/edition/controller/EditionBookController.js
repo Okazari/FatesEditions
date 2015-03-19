@@ -8,14 +8,16 @@ angular.module('myVirtualStoryBookApp')
         return {"url":url, "label":label};
     };
     $scope.save = function(){
-      alert("sauvegardé");
+      BookService.updateBook($scope.book).success(function(){
+        alert("Sauvegardé !");
+      });
     }
     $scope.saveAndQuit = function(){
-      $scope.save();
-      $scope.quit();
+      BookService.updateBook($scope.book).success(function(){
+        $scope.quit();
+      });
     }
     $scope.discardAndQuit = function(){
-      alert("Non sauvegardé");
       $scope.quit();
     }
     $scope.quit = function(){

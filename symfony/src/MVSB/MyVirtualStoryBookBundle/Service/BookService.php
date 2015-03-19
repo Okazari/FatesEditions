@@ -35,4 +35,17 @@ class BookService{
     public function getAllBookGenres(){
         return $genres = $this->genreRepository->findAll();
     }
+    
+    public function updateBook($id, $properties){
+        $book = $this->bookRepository->findOneById($id);
+        
+        if(isset($properties->name)) $book->setName($properties->name);
+        if(isset($properties->cover)) $book->setCover($properties->cover);
+        if(isset($properties->synopsis)) $book->setSynopsis($properties->synopsis);
+        if(isset($properties->draft)) $book->setDraft($properties->draft);
+        if(isset($properties->genre) && isset($properties->genre->id)) $book->setGenre($this->genreRepository->findOneById($properties->genre->id));
+        
+        $this->bookRepository->flushEntityToBase($book);
+        return $book;
+    }
 }

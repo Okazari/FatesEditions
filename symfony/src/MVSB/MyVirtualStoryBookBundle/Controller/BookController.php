@@ -3,6 +3,7 @@
 namespace MVSB\MyVirtualStoryBookBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,6 @@ class BookController extends MVSBController
     {
         $serializer = $this->get('jms_serializer');
         $bookService = $this->get('mvsb.book.service');
-        
         
         $json = $request->getContent();
         $book = $serializer->deserialize($json, 'MVSB\MyVirtualStoryBookBundle\Entity\Book', 'json');
@@ -36,6 +36,21 @@ class BookController extends MVSBController
         $book = $bookService->getBookById($id);
 
         return $this->serializeAndBuildSONResponse($book,Response::HTTP_OK);
+    }
+    
+    /**
+     * @Patch("/books/{id}")
+     */
+    public function putBookByIdAction(Request $request, $id)
+    {
+        $serializer = $this->get('jms_serializer');
+        $bookService = $this->get('mvsb.book.service');
+        
+        $json = $request->getContent();
+        $properties = json_decode($json);
+        $book = $bookService->updateBook($id,$properties);
+        
+        return new Response('',Response::HTTP_OK);
     }
     
     /**

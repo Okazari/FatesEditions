@@ -29,6 +29,10 @@ myVirtualStoryBookApp.service("BookService", ["$http",
             return $http.get(BASE_URL+"/genres");
         }
  
+        service.updateBook = function(book){
+            return $http.patch(BASE_URL+"/books/"+book.id, book);
+        }
+ 
         return service;
     }
 ]);
