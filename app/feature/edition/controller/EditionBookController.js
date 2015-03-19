@@ -28,6 +28,11 @@ angular.module('myVirtualStoryBookApp')
     /**********************Page control************************/
     $scope.book = BookService.getBook($stateParams.id).success(function(book){
       $scope.book = book;
+      $scope.selectedGenre = book.genre.id;
+    });
+    
+    $scope.genres = BookService.getAllGenre().success(function(genres){
+      $scope.genres = genres;
     });
     
   });

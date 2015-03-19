@@ -2,7 +2,6 @@
 
 namespace MVSB\MyVirtualStoryBookBundle\Repository;
 
-use MVSB\MyVirtualStoryBookBundle\Entity\Player;
 use Doctrine\ORM\EntityRepository;
 
 /**

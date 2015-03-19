@@ -60,4 +60,15 @@ class BookController extends MVSBController
         return $this->serializeAndBuildSONResponse($books,Response::HTTP_OK);
     }
     
+    /**
+     * @Get("/genres")
+     */
+    public function getAllBookGenresAction(Request $request)
+    {
+        $bookService = $this->get('mvsb.book.service');
+        $genres = $bookService->getAllBookGenres();
+
+        return $this->serializeAndBuildSONResponse($genres,Response::HTTP_OK);
+    }
+    
 }

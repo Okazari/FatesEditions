@@ -2,14 +2,17 @@
 namespace MVSB\MyVirtualStoryBookBundle\Service;
 
 use MVSB\MyVirtualStoryBookBundle\Repository\BookRepository;
+use MVSB\MyVirtualStoryBookBundle\Repository\GenreRepository;
 use MVSB\MyVirtualStoryBookBundle\Entity\Book;
 
 class BookService{
     
     private $bookRepository;
+    private $genreRepository;
 
-    public function __construct(BookRepository $bookRepository){
+    public function __construct(BookRepository $bookRepository, GenreRepository $genreRepository){
         $this->bookRepository = $bookRepository;
+        $this->genreRepository = $genreRepository;
     }
 
     public function addNewBook(Book $book){
@@ -27,5 +30,9 @@ class BookService{
     public function deleteBookById($id){
         $book = $this->bookRepository->findOneById($id);
         $this->bookRepository->removeEntityFromBase($book);
+    }
+    
+    public function getAllBookGenres(){
+        return $genres = $this->genreRepository->findAll();
     }
 }
