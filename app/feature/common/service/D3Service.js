@@ -80,23 +80,32 @@ myVirtualStoryBookApp.service("D3Service", [
                                                 .text(function(d) { return d.name; });
         }
     
-    // Use elliptical arc path segments to doubly-encode directionality.
-    service.tick = function() {
-      service.path.attr("d", service.linkArc);
-      service.circle.attr("transform", service.transform);
-      service.text.attr("transform", service.transform);
-    }
-    
-    service.linkArc = function(d) {
-      var dx = d.target.x - d.source.x,
-          dy = d.target.y - d.source.y,
-          dr = Math.sqrt(dx * dx + dy * dy);
-      return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
-    }
-    
-    service.transform = function(d) {
-      return "translate(" + d.x + "," + d.y + ")";
-    }
+        // Use elliptical arc path segments to doubly-encode directionality.
+        service.tick = function() {
+          service.path.attr("d", service.linkArc);
+          service.circle.attr("transform", service.transform);
+          service.text.attr("transform", service.transform);
+        }
+        
+        service.linkArc = function(d) {
+          var dx = d.target.x - d.source.x,
+              dy = d.target.y - d.source.y,
+              dr = Math.sqrt(dx * dx + dy * dy);
+          return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+        }
+        
+        service.transform = function(d) {
+          return "translate(" + d.x + "," + d.y + ")";
+        }
+        
+        service.buildLinkFromBookPages = function(pages){
+            angular.forEach(pages,function(page) {
+                page.transitions.forEach(function(transition){
+                   var pageId = transition.to_page;
+                   service.addLink(page.title,pages[pageId].title); 
+                });
+            });
+        }
         
         return service;
     }

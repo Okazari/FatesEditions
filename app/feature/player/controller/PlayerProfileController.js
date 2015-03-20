@@ -50,6 +50,4 @@ angular.module('myVirtualStoryBookApp')
     $scope.updateBooks();
     $scope.games = PlayerService.getConnectedPlayerGames();
     
-    //D3Service.addLink("Coco","Titi");
-    //D3Service.init(".svg-container",200,200);
   });

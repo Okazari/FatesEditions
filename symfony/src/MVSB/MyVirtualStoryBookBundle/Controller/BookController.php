@@ -98,8 +98,12 @@ class BookController extends MVSBController
     {
         $bookService = $this->get('mvsb.book.service');
         $book = $bookService->getBookById($id);
-
-        return $this->serializeAndBuildSONResponse($book->getPages(),Response::HTTP_OK);
+        $pages = $book->getPages();
+        $result = array();
+        foreach($pages as $page){
+            $result[$page->getId()] = $page; 
+        }
+        return $this->serializeAndBuildSONResponse($result,Response::HTTP_OK);
     }
     
     /**

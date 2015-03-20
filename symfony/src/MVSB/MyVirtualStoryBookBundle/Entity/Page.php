@@ -58,7 +58,7 @@ class Page
 
     /**
      * @var array
-     * @ORM\OneToMany(targetEntity="Page", mappedBy="book", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Transition", mappedBy="fromPage", cascade={"persist"})
      * @Serializer\Expose
      */
     private $transitions;

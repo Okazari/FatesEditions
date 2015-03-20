@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('EditionBookController', function ($scope, $state, $stateParams, BookService) {
+  .controller('EditionBookController', function ($scope, $state, $stateParams, BookService, D3Service) {
     /**********************Header control***********************/
     $scope.MenuItems = [];
     $scope._createMenuItem = function(url,label){
@@ -37,6 +37,8 @@ angular.module('myVirtualStoryBookApp')
     
     BookService.getBookPages($stateParams.id).success(function(pages){
       $scope.pages = pages;
+      D3Service.buildLinkFromBookPages(pages);
+      D3Service.init("#pageGraph",300,400);
     })
     
     $scope.genres = BookService.getAllGenre().success(function(genres){
