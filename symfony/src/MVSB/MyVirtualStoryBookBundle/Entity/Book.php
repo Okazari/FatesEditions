@@ -82,6 +82,11 @@ class Book
     private $draft;
 
     /**
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="book", cascade={"persist"})
+     **/
+    private $pages;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -247,5 +252,28 @@ class Book
     public function getDraft()
     {
         return $this->draft;
+    }
+    
+    /**
+     * Set pages
+     *
+     * @param Page $pages
+     * @return Player
+     */
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
+
+        return $this;
+    }
+
+    /**
+     * Get pages
+     *
+     * @return Page 
+     */
+    public function getPages()
+    {
+        return $this->pages;
     }
 }

@@ -102,7 +102,7 @@ class Player
     /**
      * Set books
      *
-     * @param string $books
+     * @param Book $books
      * @return Player
      */
     public function setBooks($books)
@@ -113,9 +113,9 @@ class Player
     }
 
     /**
-     * Get password
+     * Get book
      *
-     * @return string 
+     * @return Book 
      */
     public function getBooks()
     {
