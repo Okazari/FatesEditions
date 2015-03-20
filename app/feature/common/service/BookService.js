@@ -33,6 +33,10 @@ myVirtualStoryBookApp.service("BookService", ["$http",
             return $http.patch(BASE_URL+"/books/"+book.id, book);
         }
  
+        service.getBookPages = function(bookId){
+            return $http.get(BASE_URL+"/books/"+bookId+"/pages");
+        }
+ 
         return service;
     }
 ]);

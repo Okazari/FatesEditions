@@ -76,6 +76,33 @@ class BookController extends MVSBController
     }
     
     /**
+     * @Post("/books/{id}/pages")
+     */
+    public function addBookPageAction(Request $request, $id)
+    {
+        $serializer = $this->get('jms_serializer');
+        $bookService = $this->get('mvsb.book.service');
+        
+        $json = $request->getContent();
+        $page = $serializer->deserialize($json, 'MVSB\MyVirtualStoryBookBundle\Entity\Page', 'json');
+        
+        $bookService->addPage($id,$page);
+        
+        return new Response('',Response::HTTP_NO_CONTENT);
+    }
+    
+    /**
+     * @Get("/books/{id}/pages")
+     */
+    public function getBookPagesAction(Request $request, $id)
+    {
+        $bookService = $this->get('mvsb.book.service');
+        $book = $bookService->getBookById($id);
+
+        return $this->serializeAndBuildSONResponse($book->getPages(),Response::HTTP_OK);
+    }
+    
+    /**
      * @Get("/genres")
      */
     public function getAllBookGenresAction(Request $request)

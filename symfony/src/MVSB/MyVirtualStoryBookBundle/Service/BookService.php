@@ -48,4 +48,12 @@ class BookService{
         $this->bookRepository->flushEntityToBase($book);
         return $book;
     }
+    
+    public function addPage($id,$page){
+        $book = $this->bookRepository->findOneById($id);
+        $page->setBook($book);
+        $pages = $book->getPages();
+        $pages[] = $page;
+        return $this->bookRepository->flushEntityToBase($book);
+    }
 }

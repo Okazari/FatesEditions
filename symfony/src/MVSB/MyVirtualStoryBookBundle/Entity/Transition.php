@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Transition
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="MVSB\MyVirtualStoryBookBundle\Entity\TransitionRepository")
+ * @ORM\Entity(repositoryClass="MVSB\MyVirtualStoryBookBundle\Repository\TransitionRepository")
  */
 class Transition
 {
@@ -29,9 +29,9 @@ class Transition
     private $fromPage;
 
     /**
-     * @var \Page
+     * @var integer
      *
-     * @ORM\Column(name="to_page", type="object")
+     * @ORM\Column(name="to_page", type="integer")
      */
     private $toPage;
 

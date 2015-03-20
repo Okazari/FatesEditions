@@ -2,13 +2,15 @@
 
 namespace MVSB\MyVirtualStoryBookBundle\Entity;
 
+use JMS\Serializer\Annotation as Serializer;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Page
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="MVSB\MyVirtualStoryBookBundle\Entity\PageRepository")
+ * @ORM\Entity(repositoryClass="MVSB\MyVirtualStoryBookBundle\Repository\PageRepository")
+ * @Serializer\ExclusionPolicy("all");
  */
 class Page
 {
@@ -18,26 +20,46 @@ class Page
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose
      */
     private $id;
-
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     * @Serializer\Expose
+     */
+    private $title;
+    
     /**
      * @var string
      *
      * @ORM\Column(name="text", type="text")
+     * @Serializer\Expose
      */
     private $text;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="description", type="text")
+     * @Serializer\Expose
+     */
+    private $description;
+
+    /**
+     * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image", type="text")
+     * @Serializer\Expose
      */
     private $image;
 
     /**
      * @var array
      * @ORM\OneToMany(targetEntity="Page", mappedBy="book", cascade={"persist"})
+     * @Serializer\Expose
      */
     private $transitions;
 
