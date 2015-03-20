@@ -22,8 +22,6 @@ myVirtualStoryBookApp.service("D3Service", [
     
         service.init = function(selector, width, height){
             
-            d3.select("svg").remove();
-            
             service.width = width;
             service.height = height;
             
@@ -78,6 +76,7 @@ myVirtualStoryBookApp.service("D3Service", [
                                                 .attr("x", 8)
                                                 .attr("y", ".31em")
                                                 .text(function(d) { return d.name; });
+                        
         }
     
         // Use elliptical arc path segments to doubly-encode directionality.
@@ -85,6 +84,16 @@ myVirtualStoryBookApp.service("D3Service", [
           service.path.attr("d", service.linkArc);
           service.circle.attr("transform", service.transform);
           service.text.attr("transform", service.transform);
+        }
+        
+        service.clear = function(){
+            service.clearLinks();
+            service.nodes = {};
+            if(angular.isDefined(service.svg)) service.svg.remove();
+            if(angular.isDefined(service.circle)) service.circle.remove();
+            service.force = {};
+            if(angular.isDefined(service.path)) service.path.remove();
+            if(angular.isDefined(service.text)) service.text.remove();
         }
         
         service.linkArc = function(d) {
@@ -104,6 +113,10 @@ myVirtualStoryBookApp.service("D3Service", [
                    var pageId = transition.to_page;
                    service.addLink(page.title,pages[pageId].title); 
                 });
+                
+                if(page.transitions.length === 0){
+                    service.addLink(page.title,page.title);
+                }
             });
         }
         

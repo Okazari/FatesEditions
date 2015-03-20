@@ -37,8 +37,9 @@ angular.module('myVirtualStoryBookApp')
     
     BookService.getBookPages($stateParams.id).success(function(pages){
       $scope.pages = pages;
+      D3Service.clear();
       D3Service.buildLinkFromBookPages(pages);
-      D3Service.init("#pageGraph",300,400);
+      D3Service.init("#pageGraph",500,400);
     })
     
     $scope.genres = BookService.getAllGenre().success(function(genres){
