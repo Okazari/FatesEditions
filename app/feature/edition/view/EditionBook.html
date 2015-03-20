@@ -13,8 +13,8 @@
           <h3 class="box-title">Votre livre</h3>
           <div class="box-tools pull-right">
             <div class="btn-group">
-              <label class="btn btn-primary" ng-class="{'btn-success':!book.draft}" ng-disabled="!book.draft" ng-change="book.draft = !book.draft" ng-model="_release" btn-checkbox><i class="fa fa-eye"></i> Publié</label>
-              <label class="btn btn-primary" ng-class="{'btn-danger':book.draft}" ng-disabled="book.draft" ng-change="_release = !_release" ng-model="book.draft" btn-checkbox><i class="fa fa-eye-slash"></i> Brouillon</label>
+              <label class="label label-success" ng-if="init && !book.draft"><i class="fa fa-book"></i> Publié</label>
+              <label class="label label-danger" ng-if="init && book.draft"><i class="fa fa-pencil"></i> Brouillon</label>
             </div>
           </div>
         </div>

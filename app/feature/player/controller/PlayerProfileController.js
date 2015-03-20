@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('PlayerProfileController', function ($scope, $state, $modal, D3Service, PlayerService, BookService, GameService) {
+  .controller('PlayerProfileController', function ($scope, $state, $modal, PlayerService, BookService, GameService) {
 
     $scope.playGame = function(game){
       $state.go("game",{id:game.id});
@@ -11,13 +11,13 @@ angular.module('myVirtualStoryBookApp')
     }
     $scope.updateBooks = function(){
       PlayerService.getConnectedPlayerBooks().success(function(books){
-        $scope.books = books;  
+        $scope.books = books;
       });
     }
     $scope.openDeleteBookModal = function(book){
       $scope.modalYesNo = {
         title:"Demande de confirmation",
-        content:"Voulez vous supprimer definitivement le brouillon '"+book.name+"' ?",
+        content:"Voulez vous supprimer definitivement le livre '"+book.name+"' ?",
         yes:{
           label:"Oui",
           action: function(){
@@ -42,9 +42,14 @@ angular.module('myVirtualStoryBookApp')
       PlayerService.createBookForCurrentUser().success($scope.updateBooks);
     }
 
+    $scope.newGame = function(book){
+      var newGame = GameService.newGame("Stub",book);
+      $state.go("game",{id:newGame.id});
+    }
+
     $scope.updateBooks();
     $scope.games = PlayerService.getConnectedPlayerGames();
     
-    D3Service.addLink("Coco","Titi");
-    D3Service.init(".svg-container",200,200);
+    //D3Service.addLink("Coco","Titi");
+    //D3Service.init(".svg-container",200,200);
   });

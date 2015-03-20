@@ -32,6 +32,7 @@ angular.module('myVirtualStoryBookApp')
       $scope.book = book;
       $scope.selectedGenre = book.genre.id;
       $scope._release = !book.draft;
+      $scope.init = true;
     });
     
     $scope.genres = BookService.getAllGenre().success(function(genres){
