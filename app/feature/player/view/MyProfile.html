@@ -50,7 +50,7 @@
       </div>
       <div class="box-body">
         <div class="row">
-          <div ng-if="book.draft" ng-repeat="book in books" class="col-lg-4 col-sm-6 col-xs-12">
+          <div ng-repeat="book in books | filter:{draft:true}" class="col-lg-4 col-sm-6 col-xs-12">
             <div class="small-box bg-primary book-widget">
               <div class="box-tools pull-right">
                 <a ng-if="book.draft" class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
@@ -61,8 +61,7 @@
                 </div>
                 <div class="col-lg-8 col-sm-8 col-xs-8 inner">
                   <h4>{{book.name}}</h4>
-                  <h4 ng-if="book.draft" class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
-                  <h4 ng-if="!book.draft" class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
+                  <h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
                   <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
                   <div class="inner synopsis-preview">{{book.synopsis}}</div>
                 </div>
@@ -80,12 +79,12 @@
         <div class="box-header with-border">
           <h3 class="box-title">Mes Publications</h3>
           <div class="box-tools pull-right">
-            <button class="btn btn-success" ng-click=""><i class="fa fa-plus"> Publier un brouillon</i></button>
+            <button class="btn btn-success" ng-click="openChooseBookModal()"><i class="fa fa-plus"> Publier un brouillon</i></button>
           </div>
         </div>
         <div class="box-body">
           <div class="row">
-            <div ng-if="!book.draft" ng-repeat="book in books" class="col-lg-4 col-sm-6 col-xs-12">
+            <div ng-repeat="book in books | filter:{draft:false}" class="col-lg-4 col-sm-6 col-xs-12">
               <div class="small-box bg-primary book-widget">
                 <div class="box-tools pull-right">
                   <a class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
@@ -96,14 +95,13 @@
                   </div>
                   <div class="col-lg-8 col-sm-8 col-xs-8 inner">
                     <h4>{{book.name}}</h4>
-                    <h4 ng-if="book.draft" class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
-                    <h4 ng-if="!book.draft" class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
+                    <h4 class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
                     <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
                     <div class="inner synopsis-preview">{{book.synopsis}}</div>
                   </div>
                 </div>
-                <a ng-click="newGame(book)" class="small-box-footer">
-                  Jouer <i class="fa fa-arrow-circle-right"></i>
+                <a ng-click="editBook(book)" class="small-box-footer">
+                  Editer <i class="fa fa-arrow-circle-right"></i>
                 </a>
               </div>
             </div>

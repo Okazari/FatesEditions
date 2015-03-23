@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('PlayerProfileController', function ($scope, $state, $modal, PlayerService, BookService, GameService) {
+  .controller('PlayerProfileController', function ($scope, $state, $modal, $filter, PlayerService, BookService, GameService) {
 
     $scope.playGame = function(game){
       $state.go("game",{id:game.id});
@@ -34,6 +34,33 @@ angular.module('myVirtualStoryBookApp')
       };
       $scope.modal = $modal.open({
         templateUrl: 'feature/common/modal/ModalYesNo.template.html',
+        scope: $scope
+      });
+    }
+    
+    $scope.openChooseBookModal = function(){
+      $scope.modalPickOne = {
+        title:"Publier un brouillon",
+        content:"Choisissez un brouillon à publier",
+        choice: {
+          items : $filter('filter')($scope.books,{draft:true})
+        },
+        validate:{
+          label:"Valider",
+          action: function(){
+            BookService.publishBook($scope.modalPickOne.choice.result).success($scope.updateBooks);
+            $scope.modal.close();
+          }
+        },
+        cancel:{
+          label:"Annuler",
+          action: function(){
+            $scope.modal.dismiss();
+          }
+        }
+      }
+      $scope.modal = $modal.open({
+        templateUrl: 'feature/common/modal/ModalPickOne.template.html',
         scope: $scope
       });
     }
