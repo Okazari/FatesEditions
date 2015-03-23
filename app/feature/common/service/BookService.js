@@ -36,6 +36,10 @@ myVirtualStoryBookApp.service("BookService", ["$http",
         service.getBookPages = function(bookId){
             return $http.get(BASE_URL+"/books/"+bookId+"/pages");
         }
+        
+        service.publishBook = function(bookId){
+            return $http.post(BASE_URL+"/books/"+bookId+"/publish");
+        }
  
         return service;
     }

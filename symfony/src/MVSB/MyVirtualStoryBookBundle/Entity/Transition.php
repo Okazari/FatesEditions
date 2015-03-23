@@ -2,13 +2,15 @@
 
 namespace MVSB\MyVirtualStoryBookBundle\Entity;
 
+use JMS\Serializer\Annotation as Serializer;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Transition
- *
+ * 
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="MVSB\MyVirtualStoryBookBundle\Repository\TransitionRepository")
+ * @Serializer\ExclusionPolicy("all");
  */
 class Transition
 {
@@ -30,15 +32,28 @@ class Transition
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="to_page", type="integer")
+     * @ORM\ManyToOne(targetEntity="Page", inversedBy="transitions")
+     * @ORM\JoinColumn(name="to_page", referencedColumnName="id")
+     * @Serializer\Expose
      */
     private $toPage;
+
+    /**
+     * @Serializer\SerializedName("to_page")
+     * @Serializer\Expose
+     * @Serializer\Accessor(getter="getToPageId") 
+     */
+    private $toPageId;
+
+    public function getToPageId(){
+        return $this->toPage->getId();
+    }
 
     /**
      * @var string
      *
      * @ORM\Column(name="text", type="text")
+     * @Serializer\Expose
      */
     private $text;
 

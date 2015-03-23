@@ -16,6 +16,30 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Book
 {
+    public function __clone() {
+        if ($this->id) {
+            $this->id = null;
+            $copy = array();
+            $newPagesMapping = array();
+            foreach($this->pages as $page){
+                $oldId = $page->getId();
+                
+                $page = clone $page;
+                $page->setBook($this);
+                
+                $newPagesMapping[$oldId] = $page;
+                $copy[] = $page;
+            }
+            foreach($copy as $page){
+                foreach($page->getTransitions() as $transition){
+                    $oldPageId = $transition->getToPage()->getId();
+                    $transition->setToPage($newPagesMapping[$oldPageId]);
+                }
+            }
+            $this->pages = $copy;
+        }
+    }
+    
     /**
      * @var integer
      *
@@ -82,7 +106,7 @@ class Book
     private $draft;
 
     /**
-     * @ORM\OneToMany(targetEntity="Page", mappedBy="book", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="book", cascade={"persist","remove"})
      **/
     private $pages;
 

@@ -56,4 +56,12 @@ class BookService{
         $pages[] = $page;
         return $this->bookRepository->flushEntityToBase($book);
     }
+    
+    public function publishBook($id){
+        $bookToPublish = $this->bookRepository->findOneById($id);
+        $publication = clone $bookToPublish;
+        $publication->setDraft(false);
+        return $this->bookRepository->addEntityToBase($publication);
+    }
+    
 }

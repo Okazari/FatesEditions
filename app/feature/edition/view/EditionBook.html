@@ -69,12 +69,12 @@
           <table class="table table-hover">
             <tbody>
               <tr>
-                <th style="width: 10px"><i class="fa fa-pencil"></i></th>
+                <th style="width: 10px"><button disabled class="btn btn-primary fa fa-pencil"></button></th>
                 <th>Titre</th>
                 <th>Description</th>
               </tr>
               <tr ng-repeat="page in pages">
-                <td ng-click="editPage(page)"><a class="fa fa-pencil"></a></td>
+                <td><button ng-disabled="!book.draft" ng-click="editPage(page)" class="btn btn-primary fa fa-pencil"></button></td>
                 <td>{{page.title}}</td>
                 <td>{{page.description}}</td>
               </tr>

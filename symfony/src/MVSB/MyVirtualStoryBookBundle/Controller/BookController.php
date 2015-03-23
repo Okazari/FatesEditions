@@ -117,4 +117,16 @@ class BookController extends MVSBController
         return $this->serializeAndBuildSONResponse($genres,Response::HTTP_OK);
     }
     
+    /**
+     * @Post("/books/{id}/publish")
+     */
+    public function publishBookPageAction(Request $request, $id)
+    {
+        $bookService = $this->get('mvsb.book.service');
+        
+        $bookService->publishBook($id);
+        
+        return new Response('',Response::HTTP_NO_CONTENT);
+    }
+    
 }

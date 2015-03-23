@@ -14,6 +14,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Page
 {
+    public function __clone() {
+        if ($this->id) {
+            $this->id = null;
+            $copy = array();
+            foreach($this->transitions as $transition){
+                $transition = clone $transition;
+                $transition->setFromPage($this);
+                $copy[] = $transition;
+            }
+            $this->transitions = $copy;
+        }
+    }
+    
     /**
      * @var integer
      *
@@ -58,7 +71,7 @@ class Page
 
     /**
      * @var array
-     * @ORM\OneToMany(targetEntity="Transition", mappedBy="fromPage", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Transition", mappedBy="fromPage", cascade={"persist","remove"})
      * @Serializer\Expose
      */
     private $transitions;
