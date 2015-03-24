@@ -28,6 +28,7 @@ angular.module('myVirtualStoryBookApp')
     $scope.MenuItems.push({"click":$scope.discardAndQuit, "label":"Annuler et quitter"});
     
     /**********************Page control************************/
+    
     BookService.getBook($stateParams.id).success(function(book){
       $scope.book = book;
       $scope.selectedGenre = book.genre.id;
@@ -35,15 +36,35 @@ angular.module('myVirtualStoryBookApp')
       $scope.init = true;
     });
     
-    BookService.getBookPages($stateParams.id).success(function(pages){
+    $scope.updatePages = function(pages){
       $scope.pages = pages;
+      $scope._buildD3Graph();
+    };
+    
+    BookService.getBookPages($stateParams.id).success($scope.updatePages);
+    
+    
+    
+    $scope._buildD3Graph = function(){
       D3Service.clear();
-      D3Service.buildLinkFromBookPages(pages);
+      D3Service.buildLinkFromBookPages($scope.pages);
       D3Service.init("#pageGraph",500,400);
-    })
+    };
     
     $scope.genres = BookService.getAllGenre().success(function(genres){
       $scope.genres = genres;
     });
+    
+    $scope.addNewPage = function(){
+      BookService.addNewPage($scope.book).success(function(){
+        BookService.getBookPages($stateParams.id).success($scope.updatePages)
+      });
+    }
+    
+    $scope.deletePage = function(page){
+      BookService.deletePage(page).success(function(){
+        BookService.getBookPages($stateParams.id).success($scope.updatePages)
+      });
+    }
     
   });

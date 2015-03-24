@@ -1,18 +1,25 @@
 <?php
 namespace MVSB\MyVirtualStoryBookBundle\Service;
 
+use MVSB\MyVirtualStoryBookBundle\Builder\PageBuilder;
 use MVSB\MyVirtualStoryBookBundle\Repository\BookRepository;
 use MVSB\MyVirtualStoryBookBundle\Repository\GenreRepository;
+use MVSB\MyVirtualStoryBookBundle\Repository\PageRepository;
 use MVSB\MyVirtualStoryBookBundle\Entity\Book;
 
 class BookService{
     
     private $bookRepository;
     private $genreRepository;
+    private $pageBuilder;
+    private $pageRepository;
 
-    public function __construct(BookRepository $bookRepository, GenreRepository $genreRepository){
+    public function __construct(BookRepository $bookRepository, GenreRepository $genreRepository,
+                                PageRepository $pageRepository, PageBuilder $pageBuilder){
+        $this->pageBuilder = $pageBuilder;
         $this->bookRepository = $bookRepository;
         $this->genreRepository = $genreRepository;
+        $this->pageRepository = $pageRepository;
     }
 
     public function addNewBook(Book $book){
@@ -64,4 +71,17 @@ class BookService{
         return $this->bookRepository->addEntityToBase($publication);
     }
     
+    public function createNewPage($id){
+        $book = $this->bookRepository->findOneById($id);
+        $bookPages = $book->getPages();
+        $newPage = $this->pageBuilder->createNewPage($book);
+        $bookPages[] = $newPage;
+        $this->bookRepository->flushEntityToBase($book);
+        return $newPage;
+    }
+    
+    public function deletePage($id){
+        $page = $this->pageRepository->findOneById($id);
+        return $this->pageRepository->removeEntityFromBase($page);
+    }
 }

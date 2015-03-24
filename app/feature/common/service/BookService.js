@@ -3,7 +3,7 @@ myVirtualStoryBookApp.service("BookService", ["$http",
         
         var service = {};
  
-        var BASE_URL = "https://myvirtualstorybook-okazari-4.c9.io/symfony/web/app_dev.php";
+        var BASE_URL = "/symfony/web/app_dev.php";
  
         service.getPublishedBooks = function(){
             return $http.get(BASE_URL+"/books");
@@ -41,6 +41,14 @@ myVirtualStoryBookApp.service("BookService", ["$http",
             return $http.post(BASE_URL+"/books/"+bookId+"/publish");
         }
  
+        service.addNewPage = function(book){
+            return $http.post(BASE_URL+"/books/"+book.id+"/pages");
+        }
+ 
+        service.deletePage = function(page){
+            return $http.delete(BASE_URL+"/pages/"+page.id);
+        }
+        
         return service;
     }
 ]);

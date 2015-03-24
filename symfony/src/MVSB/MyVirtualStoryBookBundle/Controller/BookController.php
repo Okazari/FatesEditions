@@ -80,15 +80,11 @@ class BookController extends MVSBController
      */
     public function addBookPageAction(Request $request, $id)
     {
-        $serializer = $this->get('jms_serializer');
-        $bookService = $this->get('mvsb.book.service');
+         $bookService = $this->get('mvsb.book.service');
+        $page = $bookService->createNewPage($id);
+
+        return $this->serializeAndBuildSONResponse($page,Response::HTTP_CREATED);
         
-        $json = $request->getContent();
-        $page = $serializer->deserialize($json, 'MVSB\MyVirtualStoryBookBundle\Entity\Page', 'json');
-        
-        $bookService->addPage($id,$page);
-        
-        return new Response('',Response::HTTP_NO_CONTENT);
     }
     
     /**
@@ -123,10 +119,20 @@ class BookController extends MVSBController
     public function publishBookPageAction(Request $request, $id)
     {
         $bookService = $this->get('mvsb.book.service');
-        
         $bookService->publishBook($id);
         
         return new Response('',Response::HTTP_NO_CONTENT);
+    }
+    
+    /**
+     * @Delete("/pages/{id}")
+     */
+    public function deletePageAction(Request $request, $id)
+    {
+        $bookService = $this->get('mvsb.book.service');
+        $bookService->deletePage($id);
+     
+        return new Response('',Response::HTTP_NO_CONTENT);   
     }
     
 }

@@ -64,7 +64,7 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="text")
+     * @ORM\Column(name="image", type="text", nullable=true)
      * @Serializer\Expose
      */
     private $image;
@@ -118,6 +118,32 @@ class Page
         return $this->text;
     }
 
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Page
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+    
+    /**
+     * Set Description
+     *
+     * @param string $description
+     * @return Page
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+    
     /**
      * Set image
      *

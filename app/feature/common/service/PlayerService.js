@@ -6,7 +6,7 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         service.currentPlayer = {"username":"Okazari","password":"1"};
         
         service.getPlayerByName = function(name){
-            return $http.get("https://myvirtualstorybook-okazari-4.c9.io/symfony/web/app_dev.php/players/"+name);
+            return $http.get("/symfony/web/app_dev.php/players/"+name);
         }
  
         service.getConnectedPlayerBooks = function(){
