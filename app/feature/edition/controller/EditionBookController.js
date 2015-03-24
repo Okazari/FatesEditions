@@ -43,11 +43,9 @@ angular.module('myVirtualStoryBookApp')
     
     BookService.getBookPages($stateParams.id).success($scope.updatePages);
     
-    
-    
     $scope._buildD3Graph = function(){
       D3Service.clear();
-      D3Service.buildLinkFromBookPages($scope.pages);
+      D3Service.buildLinksFromBookPages($scope.pages);
       D3Service.init("#pageGraph",500,400);
     };
     
@@ -67,4 +65,7 @@ angular.module('myVirtualStoryBookApp')
       });
     }
     
+    $scope.editPage = function(page){
+      $state.go("editionpage",{id:page.id});
+    }
   });

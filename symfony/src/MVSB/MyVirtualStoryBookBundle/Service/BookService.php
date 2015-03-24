@@ -84,4 +84,8 @@ class BookService{
         $page = $this->pageRepository->findOneById($id);
         return $this->pageRepository->removeEntityFromBase($page);
     }
+    
+    public function getPageById($id){
+        return $this->pageRepository->findOneById($id);
+    }
 }

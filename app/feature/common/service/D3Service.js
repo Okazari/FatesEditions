@@ -107,11 +107,11 @@ myVirtualStoryBookApp.service("D3Service", [
           return "translate(" + d.x + "," + d.y + ")";
         }
         
-        service.buildLinkFromBookPages = function(pages){
-            angular.forEach(pages,function(page) {
+        service.buildLinksFromBookPages = function(pages){
+            pages.forEach(function(page) {
                 page.transitions.forEach(function(transition){
                    var pageId = transition.to_page;
-                   service.addLink(page.title,pages[pageId].title); 
+                   service.addLink(page.title,transition.to_page.title); 
                 });
                 
                 if(page.transitions.length === 0){

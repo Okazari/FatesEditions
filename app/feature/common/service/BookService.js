@@ -49,6 +49,9 @@ myVirtualStoryBookApp.service("BookService", ["$http",
             return $http.delete(BASE_URL+"/pages/"+page.id);
         }
         
+        service.getPage = function(pageId){
+            return $http.get(BASE_URL+"/pages/"+pageId);
+        }
         return service;
     }
 ]);

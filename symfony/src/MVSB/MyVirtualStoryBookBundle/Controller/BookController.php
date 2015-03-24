@@ -95,11 +95,7 @@ class BookController extends MVSBController
         $bookService = $this->get('mvsb.book.service');
         $book = $bookService->getBookById($id);
         $pages = $book->getPages();
-        $result = array();
-        foreach($pages as $page){
-            $result[$page->getId()] = $page; 
-        }
-        return $this->serializeAndBuildSONResponse($result,Response::HTTP_OK);
+        return $this->serializeAndBuildSONResponse($pages,Response::HTTP_OK);
     }
     
     /**
@@ -133,6 +129,17 @@ class BookController extends MVSBController
         $bookService->deletePage($id);
      
         return new Response('',Response::HTTP_NO_CONTENT);   
+    }
+    
+    /**
+     * @Get("/pages/{id}")
+     */
+    public function getPageAction(Request $request, $id)
+    {
+        $bookService = $this->get('mvsb.book.service');
+        $page = $bookService->getPageById($id);
+
+        return $this->serializeAndBuildSONResponse($page,Response::HTTP_OK); 
     }
     
 }

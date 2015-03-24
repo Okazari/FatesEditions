@@ -39,17 +39,6 @@ class Transition
     private $toPage;
 
     /**
-     * @Serializer\SerializedName("to_page")
-     * @Serializer\Expose
-     * @Serializer\Accessor(getter="getToPageId") 
-     */
-    private $toPageId;
-
-    public function getToPageId(){
-        return $this->toPage->getId();
-    }
-
-    /**
      * @var string
      *
      * @ORM\Column(name="text", type="text")

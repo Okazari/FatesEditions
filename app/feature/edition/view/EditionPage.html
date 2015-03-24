@@ -1,0 +1,60 @@
+<ng-include src="'feature/common/header/Header.template.html'"></ng-include>
+<!-- Contenu de la page -->
+<div class="content-wrapper" ng-class="{'with-right-sidebar': showRightMenu}">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    {{page}}
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <!-- Default box -->
+    <div class="col-lg-4 col-sm-6 col-xs-12">
+      <div class="box box-primary ">
+        <div class="box-header with-border">
+          <h3 class="box-title">Contenu</h3>
+          <div class="box-tools pull-right">
+            <div class="btn-group"></div>
+          </div>
+        </div>
+        <div class="box-body">
+          <div id="pageGraph">
+            <textarea rows="20" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="page.text" ng-change="displayMessage = false" required></textarea>
+          </div>
+        </div><!-- /.box-body -->
+      </div>
+    </div>
+    <div class="col-lg-8 col-sm-6 col-xs-12">
+      <!-- Default box -->
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Transitions</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th>Page de destination</th>
+                <th>Texte de transition</th>
+                <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close"></button></th>
+              </tr>
+              <tr ng-repeat="transition in page.transitions">
+                <td><select ng-model="selectedPage" ng-options="page.id as page.title for page in pages" ng-change="transition.to_page = pages[selectedPage-1]" class="form-control">
+                </select>{{transition.to_page.title}}</td>
+                <td><textarea rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
+                <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close"></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.box-body -->
+        <div class="box-footer align-center">
+          <button ng-click="addNewPage()" ng-disabled="!book.draft" class="btn btn-primary">
+            Ajouter une transition
+          </button>
+        </div>
+      </div>
+    </div>
+  </section><!-- /.content -->
+  <!-- =============================================== -->
+</div>
+<ng-include src="'feature/common/footer/Footer.template.html'"></ng-include>

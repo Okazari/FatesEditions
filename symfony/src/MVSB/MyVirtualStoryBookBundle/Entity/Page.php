@@ -73,6 +73,7 @@ class Page
      * @var array
      * @ORM\OneToMany(targetEntity="Transition", mappedBy="fromPage", cascade={"persist","remove"})
      * @Serializer\Expose
+     * @Serializer\MaxDepth(4);
      */
     private $transitions;
 
