@@ -62,7 +62,7 @@
                 <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close"></button></th>
               </tr>
               <tr ng-repeat="transition in page.transitions">
-                <td>{{transition}}<select ng-model="transition.selectedPage" ng-options="page.id as page.title for page in pages" ng-change="transition.to_page = pages[getPageArrayKey(transition.selectedPage)]" class="form-control">
+                <td><select ng-model="transition.selectedPage" ng-options="page.id as page.title for page in pages" ng-change="transition.to_page = pages[getPageArrayKey(transition.selectedPage)]" class="form-control">
                 </select></td>
                 <td><textarea rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
                 <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close"></button></td>

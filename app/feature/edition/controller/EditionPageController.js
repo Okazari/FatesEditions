@@ -59,6 +59,7 @@ angular.module('myVirtualStoryBookApp')
     
     $scope.updateTransitions = function(transitions){
       $scope.page.transitions = transitions;
+      $scope.buildTransitionsSelects();
     }
     
     $scope.deleteTransition = function(transition){

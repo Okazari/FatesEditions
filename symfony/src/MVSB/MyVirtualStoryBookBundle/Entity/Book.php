@@ -111,6 +111,12 @@ class Book
     private $pages;
 
     /**
+     * @ORM\OneToOne(targetEntity="Page")
+     * @ORM\JoinColumn(name="starting_page_id", referencedColumnName="id")
+     **/
+    private $startingPage;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -282,7 +288,7 @@ class Book
      * Set pages
      *
      * @param Page $pages
-     * @return Player
+     * @return Book
      */
     public function setPages($pages)
     {
@@ -299,5 +305,29 @@ class Book
     public function getPages()
     {
         return $this->pages;
+    }
+    
+    
+    /**
+     * Set startingPage
+     *
+     * @param Page $startingPage
+     * @return Book
+     */
+    public function setStartingPage($startingPage)
+    {
+        $this->startingPage = $startingPage;
+
+        return $this;
+    }
+
+    /**
+     * Get pages
+     *
+     * @return Page 
+     */
+    public function getStartingPage()
+    {
+        return $this->startingPage;
     }
 }
