@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('EditionBookController', function ($scope, $state, $stateParams, BookService, D3Service) {
+  .controller('EditionBookController', function ($scope, $state, $stateParams, BookService, PageService, D3Service) {
     /**********************Header control***********************/
     $scope.MenuItems = [];
     $scope._createMenuItem = function(url,label){
@@ -60,7 +60,7 @@ angular.module('myVirtualStoryBookApp')
     }
     
     $scope.deletePage = function(page){
-      BookService.deletePage(page).success(function(){
+      PageService.deletePage(page).success(function(){
         BookService.getBookPages($stateParams.id).success($scope.updatePages)
       });
     }

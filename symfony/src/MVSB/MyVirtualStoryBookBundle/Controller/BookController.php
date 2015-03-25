@@ -120,26 +120,4 @@ class BookController extends MVSBController
         return new Response('',Response::HTTP_NO_CONTENT);
     }
     
-    /**
-     * @Delete("/pages/{id}")
-     */
-    public function deletePageAction(Request $request, $id)
-    {
-        $bookService = $this->get('mvsb.book.service');
-        $bookService->deletePage($id);
-     
-        return new Response('',Response::HTTP_NO_CONTENT);   
-    }
-    
-    /**
-     * @Get("/pages/{id}")
-     */
-    public function getPageAction(Request $request, $id)
-    {
-        $bookService = $this->get('mvsb.book.service');
-        $page = $bookService->getPageById($id);
-
-        return $this->serializeAndBuildSONResponse($page,Response::HTTP_OK); 
-    }
-    
 }

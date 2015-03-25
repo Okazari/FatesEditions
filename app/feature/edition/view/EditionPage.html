@@ -3,13 +3,38 @@
 <div class="content-wrapper" ng-class="{'with-right-sidebar': showRightMenu}">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    {{page}}
   </section>
   <!-- Main content -->
   <section class="content">
     <div class="row">
       <!-- Default box -->
-    <div class="col-lg-4 col-sm-6 col-xs-12">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+      <div class="box box-primary ">
+        <div class="box-header with-border">
+          <h3 class="box-title">Informations générales</h3>
+          <div class="box-tools pull-right">
+            <div class="btn-group"></div>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+              <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
+                <label>Titre</label> 
+                <input type="text" name="cover" class="form-control" placeholder="Titre de la page" ng-model="page.title" ng-change="displayMessage = false" required>
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-8 col-xs-12">
+              <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
+                <label>Memo</label> 
+                <input type="text" name="cover" class="form-control" placeholder="Decrivez rapidement ce qu'il se passe dans votre page" ng-model="page.description" ng-change="displayMessage = false" required>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.box-body -->
+      </div>
+    </div>
+    <div class="col-lg-12 col-sm-12 col-xs-12">
       <div class="box box-primary ">
         <div class="box-header with-border">
           <h3 class="box-title">Contenu</h3>
@@ -18,13 +43,11 @@
           </div>
         </div>
         <div class="box-body">
-          <div id="pageGraph">
-            <textarea rows="20" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="page.text" ng-change="displayMessage = false" required></textarea>
-          </div>
+          <textarea rows="10" name="cover" class="form-control" placeholder="L'histoire racontée dans cette page" ng-model="page.text" ng-change="displayMessage = false" required></textarea>
         </div><!-- /.box-body -->
       </div>
     </div>
-    <div class="col-lg-8 col-sm-6 col-xs-12">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
       <!-- Default box -->
       <div class="box box-primary">
         <div class="box-header">
@@ -39,8 +62,8 @@
                 <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close"></button></th>
               </tr>
               <tr ng-repeat="transition in page.transitions">
-                <td><select ng-model="selectedPage" ng-options="page.id as page.title for page in pages" ng-change="transition.to_page = pages[selectedPage-1]" class="form-control">
-                </select>{{transition.to_page.title}}</td>
+                <td>{{transition}}<select ng-model="transition.selectedPage" ng-options="page.id as page.title for page in pages" ng-change="transition.to_page = pages[getPageArrayKey(transition.selectedPage)]" class="form-control">
+                </select></td>
                 <td><textarea rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
                 <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close"></button></td>
               </tr>
@@ -48,7 +71,7 @@
           </table>
         </div><!-- /.box-body -->
         <div class="box-footer align-center">
-          <button ng-click="addNewPage()" ng-disabled="!book.draft" class="btn btn-primary">
+          <button ng-click="addNewTransition()" class="btn btn-primary">
             Ajouter une transition
           </button>
         </div>

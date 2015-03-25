@@ -5,6 +5,7 @@ use MVSB\MyVirtualStoryBookBundle\Builder\PageBuilder;
 use MVSB\MyVirtualStoryBookBundle\Repository\BookRepository;
 use MVSB\MyVirtualStoryBookBundle\Repository\GenreRepository;
 use MVSB\MyVirtualStoryBookBundle\Repository\PageRepository;
+use MVSB\MyVirtualStoryBookBundle\Repository\TransitionRepository;
 use MVSB\MyVirtualStoryBookBundle\Entity\Book;
 
 class BookService{
@@ -70,7 +71,7 @@ class BookService{
         $publication->setDraft(false);
         return $this->bookRepository->addEntityToBase($publication);
     }
-    
+
     public function createNewPage($id){
         $book = $this->bookRepository->findOneById($id);
         $bookPages = $book->getPages();
@@ -78,14 +79,5 @@ class BookService{
         $bookPages[] = $newPage;
         $this->bookRepository->flushEntityToBase($book);
         return $newPage;
-    }
-    
-    public function deletePage($id){
-        $page = $this->pageRepository->findOneById($id);
-        return $this->pageRepository->removeEntityFromBase($page);
-    }
-    
-    public function getPageById($id){
-        return $this->pageRepository->findOneById($id);
     }
 }

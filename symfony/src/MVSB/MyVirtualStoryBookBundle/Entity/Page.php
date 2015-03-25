@@ -71,7 +71,7 @@ class Page
 
     /**
      * @var array
-     * @ORM\OneToMany(targetEntity="Transition", mappedBy="fromPage", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Transition", mappedBy="fromPage", cascade={"persist","remove", "merge"})
      * @Serializer\Expose
      * @Serializer\MaxDepth(4);
      */
@@ -81,7 +81,7 @@ class Page
     /**
      * @ORM\ManyToOne(targetEntity="Book", inversedBy="pages")
      * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
-     * Serializer\Expose
+     * @Serializer\Expose
      **/
 
     private $book;
@@ -133,6 +133,16 @@ class Page
     }
     
     /**
+     * get title
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    
+    /**
      * Set Description
      *
      * @param string $description
@@ -143,6 +153,16 @@ class Page
         $this->description = $description;
 
         return $this;
+    }
+    
+    /**
+     * get description
+     *
+     * @return string description
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
     
     /**

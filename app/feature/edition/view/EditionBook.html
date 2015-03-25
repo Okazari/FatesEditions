@@ -24,13 +24,13 @@
               <img src="{{book.cover}}" class="cover-preview" alt="User Image">
               <div class="input-group margin-top">
                   <span class="input-group-addon">URL</span>
-                  <input type="text"  max="20" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="book.cover" ng-change="displayMessage = false" required>
+                  <input type="text" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="book.cover" ng-change="displayMessage = false" required>
               </div>
             </div>
             <div class="col-lg-9 col-sm-9 col-xs-9">
               <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
                   <label>Titre</label> 
-                  <input type="text" ng-disabled="!book.draft"  max="20" name="cover" class="form-control" placeholder="Titre du livre" ng-model="book.name" ng-change="displayMessage = false" required>
+                  <input ng-change="patchTitre()" type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Titre du livre" ng-model="book.name" ng-change="displayMessage = false" required>
               </div>
               <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
                 <label>Genre</label>

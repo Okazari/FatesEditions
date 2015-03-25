@@ -44,14 +44,7 @@ myVirtualStoryBookApp.service("BookService", ["$http",
         service.addNewPage = function(book){
             return $http.post(BASE_URL+"/books/"+book.id+"/pages");
         }
- 
-        service.deletePage = function(page){
-            return $http.delete(BASE_URL+"/pages/"+page.id);
-        }
         
-        service.getPage = function(pageId){
-            return $http.get(BASE_URL+"/pages/"+pageId);
-        }
         return service;
     }
 ]);

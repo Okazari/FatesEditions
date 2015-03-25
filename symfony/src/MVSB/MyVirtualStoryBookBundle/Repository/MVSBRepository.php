@@ -33,4 +33,9 @@ class MVSBRepository extends EntityRepository{
         $em->remove($entity);
         $em->flush($entity);
     }
+    
+    public function flushAll(){
+        $em = $this->getEntityManager();
+        $em->flush();
+    }
 }

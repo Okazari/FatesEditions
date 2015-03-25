@@ -20,6 +20,7 @@ class Transition
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Serializer\Expose
      */
     private $id;
 
@@ -41,7 +42,7 @@ class Transition
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="text")
+     * @ORM\Column(name="text", type="text", nullable=true)
      * @Serializer\Expose
      */
     private $text;
