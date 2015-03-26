@@ -6,7 +6,7 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
+use MVSB\MyVirtualStoryBookBundle\Security\MVSBToken;
 class PlayerController extends MVSBController
 {
     /**
@@ -58,4 +58,5 @@ class PlayerController extends MVSBController
 
         return $this->serializeAndBuildSONResponse($player,Response::HTTP_CREATED);
     }
+    
 }

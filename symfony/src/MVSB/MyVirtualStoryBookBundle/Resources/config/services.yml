@@ -50,3 +50,10 @@ services:
     mvsb.page.service:
         class: MVSB\MyVirtualStoryBookBundle\Service\PageService
         arguments: [@mvsb.page.repository, @mvsb.transition.repository]
+######################SECURITY#############################
+    mvsb.security.provider:
+        class:  MVSB\MyVirtualStoryBookBundle\Security\MVSBAuthenticationProvider
+        arguments: ['']
+    mvsb.security.listener:
+        class:  MVSB\MyVirtualStoryBookBundle\Security\MVSBListener
+        arguments: [@security.context, @security.authentication.manager, @security.http_utils]

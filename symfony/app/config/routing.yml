@@ -1,4 +1,7 @@
 mvsb_my_virtual_story_book:
     resource: "@MVSBMyVirtualStoryBookBundle/Resources/config/routing.yml"
     prefix:   /
-
+login:
+    pattern: /login
+logout:
+    pattern: /logout

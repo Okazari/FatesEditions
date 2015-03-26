@@ -4,6 +4,7 @@ namespace MVSB\MyVirtualStoryBookBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Player
@@ -13,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
  * 
  * @Serializer\ExclusionPolicy("all");
  */
-class Player
+class Player implements UserInterface
 {
     /**
      * @var integer
@@ -120,5 +121,18 @@ class Player
     public function getBooks()
     {
         return $this->books;
+    }
+    
+    public function getRoles(){
+        return array('ROLE_USER');
+    }
+    
+    public function getSalt(){
+        return "It's over 9000";
+    }
+    
+    public function eraseCredentials(){
+        $this->password = "";
+        $this->username = "";
     }
 }
