@@ -48,12 +48,22 @@ var myVirtualStoryBookApp = angular
             .state('player.books', {
                 url: "/books",
                 templateUrl: "feature/player/view/Books.html",
-                controller: "PlayerBooksController"
+                controller: "PlayerBooksController",
+                resolve: {
+                    "CurrentPlayer":function(PlayerService){
+                        return PlayerService.promise;
+                    }
+                }
             })
             .state('player.myprofile', {
                 url: "/myprofile",
                 templateUrl: "feature/player/view/MyProfile.html",
-                controller: "PlayerProfileController"
+                controller: "PlayerProfileController",
+                resolve: {
+                    "CurrentPlayer":function(PlayerService){
+                        return PlayerService.promise;
+                    }
+                }
             })
             
             //Edition
@@ -75,4 +85,23 @@ var myVirtualStoryBookApp = angular
                 templateUrl: "feature/game/view/CurrentGame.html",
                 controller: "GameController"
             })
-    });
+}); 
+
+myVirtualStoryBookApp.factory('httpErrorInterceptor', ['$q', '$injector', function ($q, $injector) {
+    var myInterceptor = {
+        'response': function (response) {
+            return response;
+        },
+        'responseError': function (rejection) {
+            if (rejection.status === 401) {
+                $injector.get('$state').go('signin');
+            }
+            return $q.reject(rejection);
+        }
+    };
+    return myInterceptor;
+}]);
+
+myVirtualStoryBookApp.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('httpErrorInterceptor');
+}]);

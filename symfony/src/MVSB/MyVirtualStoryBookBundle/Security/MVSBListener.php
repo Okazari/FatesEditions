@@ -38,10 +38,7 @@ class MVSBListener implements ListenerInterface
             $token = $this->securityContext->setToken(null);
             $event->setResponse(new Response("",Response::HTTP_OK));
         }else if($this->securityContext->getToken() === null){
-            $response = new Response();
-            $response->setContent(json_encode($this->securityContext->getToken()));
-            $response->setStatusCode(401);
-            $event->setResponse($response);
+            $event->setResponse(new Response("",Response::HTTP_UNAUTHORIZED));
         }
     }
 }

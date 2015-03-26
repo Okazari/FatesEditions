@@ -3,7 +3,17 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         
         var service = {};
         
-        service.currentPlayer = {"username":"Okazari","password":"1"};
+        service.getCurrentPlayer = function(){
+            return $http.get("/symfony/web/app_dev.php/user")
+        };
+        
+        service.promise = service.getCurrentPlayer().success(function(player){
+            service.currentPlayer = player;
+        });
+        
+        service.login = function(){
+            return $http.post("/symfony/web/app_dev.php/login")
+        }
         
         service.getPlayerByName = function(name){
             return $http.get("/symfony/web/app_dev.php/players/"+name);
@@ -32,6 +42,7 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         service.isCurrentPlayerAuthor = function(book){
             return service.isAuthor(service.currentPlayer,book);
         }
+        
         return service;
     }
 ]);

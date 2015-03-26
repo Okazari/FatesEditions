@@ -59,4 +59,16 @@ class PlayerController extends MVSBController
         return $this->serializeAndBuildSONResponse($player,Response::HTTP_CREATED);
     }
     
+    /**
+     * @Get("/user")
+     */
+    public function getCurrentPlayerAction(Request $request)
+    {
+        $securityContext = $this->get('security.context');
+        $playerService = $this->get('mvsb.player.service');
+        $player = $playerService->getPlayerByUsername($securityContext->getToken()->getUsername());
+
+        return $this->serializeAndBuildSONResponse($player,Response::HTTP_OK);
+    }
+    
 }

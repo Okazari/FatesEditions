@@ -7,17 +7,9 @@ angular.module('myVirtualStoryBookApp')
         if($scope.loginForm.$valid){
             $scope.displayMessage = true;
             $scope.displayMessageText = "Connexion en cours";
-            PlayerService.getPlayerByName($scope.user.username).success($scope._tryAuthenticate).error($scope._displayError);
-        }
-    }
-    
-    $scope._tryAuthenticate = function(player){
-        if(player.password !== $scope.user.password){
-            $scope._displayError();
-        } 
-        else{
-            PlayerService.setCurrentPlayer(player);
-            $state.go('player.myprofile');
+            PlayerService.login().success(function(){
+                $state.go('player.myprofile');
+            });
         }
     }
     

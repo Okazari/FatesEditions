@@ -35,7 +35,7 @@ class Player implements UserInterface
 
     /**
      * @var string
-     * @Serializer\Expose
+     * Serializer\Expose
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
