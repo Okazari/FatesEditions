@@ -11,8 +11,8 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
             service.currentPlayer = player;
         });
         
-        service.login = function(){
-            return $http.post("/symfony/web/app_dev.php/login")
+        service.login = function(credentials){
+            return $http.post("/symfony/web/app_dev.php/login", credentials)
         }
         
         service.getPlayerByName = function(name){

@@ -17,7 +17,6 @@ class PlayerController extends MVSBController
         $serializer = $this->get('jms_serializer');
         $playerService = $this->get('mvsb.player.service');
         
-        
         $json = $request->getContent();
         $player = $serializer->deserialize($json, 'MVSB\MyVirtualStoryBookBundle\Entity\Player', 'json');
         

@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\NonceExpiredException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class MVSBAuthenticationProvider implements AuthenticationProviderInterface
 {
@@ -19,16 +20,19 @@ class MVSBAuthenticationProvider implements AuthenticationProviderInterface
 
     public function authenticate(TokenInterface $token)
     {
-        $user = $this->userProvider->loadUserByUsername("Teijiro");
-        $token->setUser($user);
-        return $token;
-        if ($user && $user->getPassword() === $token->getPassword()) {
+        try{
+            $user = $this->userProvider->loadUserByUsername($token->getUsername());
+        } catch(UsernameNotFoundException $e){
+            return $token;
+        }
+
+        if ($user && $user->getPassword() === $token->getUser()->getPassword()) {
             $token->setAuthenticated(true);
             $token->setUser($user);
             return $token;
         }
 
-        throw new AuthenticationException('Bad credentials');
+        return $token;
     }
 
 

@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use MVSB\MyVirtualStoryBookBundle\Security\MVSBToken;
+use MVSB\MyVirtualStoryBookBundle\Entity\Player;
 use Symfony\Component\Security\Http\HttpUtils;
 
 class MVSBListener implements ListenerInterface
@@ -31,7 +32,21 @@ class MVSBListener implements ListenerInterface
         $targetUrlLogout = '/logout';
         if ($this->httpUtils->checkRequestPath($request, $targetUrlLogin)) {
             $token = new MVSBToken();
+            $json = $request->getContent();
+            $params = json_decode($json);
+            if(!isset($params->username) || !isset($params->password)){
+                $event->setResponse(new Response("",Response::HTTP_BAD_REQUEST));
+                return;
+            }
+            $user = new Player();
+            $user->setUsername($params->username)
+                 ->setPassword($params->password);
+            $token->setUser($user);
             $authenticatedToken = $this->authenticationManager->authenticate($token);
+            if($authenticatedToken->isAuthenticated() === false){
+                $event->setResponse(new Response("",Response::HTTP_BAD_REQUEST));
+                return;
+            }
             $this->securityContext->setToken($authenticatedToken);
             $event->setResponse(new Response("",Response::HTTP_OK));
         }else if($this->httpUtils->checkRequestPath($request, $targetUrlLogout)){

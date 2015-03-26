@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('SignInController', function ($scope, $state, $timeout, PlayerService) {
+  .controller('SignInController', function ($scope, $state, $timeout, ConnectionService) {
 
     $scope.authentify = function(){
         if($scope.loginForm.$valid){
             $scope.displayMessage = true;
             $scope.displayMessageText = "Connexion en cours";
-            PlayerService.login().success(function(){
+            ConnectionService.login($scope.user).success(function(){
                 $state.go('player.myprofile');
-            });
+            }).error($scope._displayError);
         }
     }
     
