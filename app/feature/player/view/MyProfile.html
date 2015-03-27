@@ -50,6 +50,12 @@
       </div>
       <div class="box-body">
         <div class="row">
+          <div ng-hide="(books | filter:{draft:true}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="callout">
+              <h4>Vous n'avez pas de brouillons</h4>
+              <p>Commençez dès maintenant et créez un brouillon</p>
+            </div>
+          </div>
           <div ng-repeat="book in books | filter:{draft:true}" class="col-lg-4 col-sm-6 col-xs-12">
             <div class="small-box bg-primary book-widget">
               <div class="box-tools pull-right">
@@ -73,6 +79,9 @@
           </div>
         </div>
       </div><!-- /.box-body -->
+      <div ng-show="booksLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+      </div>
     </div><!-- /.box -->
       <!-- Default box -->
       <div class="box">
@@ -84,6 +93,12 @@
         </div>
         <div class="box-body">
           <div class="row">
+            <div ng-hide="(books | filter:{draft:false}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="callout">
+              <h4>Vous n'avez pas de publication</h4>
+              <p>Dès que l'un de vos brouillons est finalisé, publiez le afin de le rendre visible et jouable pour tout les autres utilisateurs</p>
+            </div>
+          </div>
             <div ng-repeat="book in books | filter:{draft:false}" class="col-lg-4 col-sm-6 col-xs-12">
               <div class="small-box bg-primary book-widget">
                 <div class="box-tools pull-right">
@@ -107,6 +122,9 @@
             </div>
           </div>
         </div><!-- /.box-body -->
+        <div ng-show="booksLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
         <div class="box-footer">
       </div><!-- /.box-footer-->
     </div><!-- /.box -->

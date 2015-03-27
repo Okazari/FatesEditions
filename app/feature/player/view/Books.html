@@ -27,7 +27,7 @@
                 <div class="col-lg-8 col-sm-8 col-xs-8 inner">
                   <h4>{{book.name}}</h4>
                   <h4 class="label label-primary" ng-class="{'label-success':isAuthor(book)}">{{book.author.username}}</h4>
-                  <h4 class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
+                  <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
                   <div class="inner synopsis-preview">{{book.synopsis}}</div>
                 </div>
               </div>

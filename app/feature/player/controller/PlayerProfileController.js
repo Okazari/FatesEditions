@@ -10,8 +10,11 @@ angular.module('myVirtualStoryBookApp')
       $state.go("editionbook",{id:book.id});
     }
     $scope.updateBooks = function(){
+      $scope.booksLoading = true;
       PlayerService.getConnectedPlayerBooks().success(function(books){
         $scope.books = books;
+        $scope.booksLoading = false;
+        $scope.firstLoad = false;
       });
     }
     $scope.openDeleteBookModal = function(book){
@@ -74,6 +77,7 @@ angular.module('myVirtualStoryBookApp')
       $state.go("game",{id:newGame.id});
     }
 
+    $scope.firstLoad = true;
     $scope.updateBooks();
     $scope.games = PlayerService.getConnectedPlayerGames();
     
