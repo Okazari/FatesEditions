@@ -32,8 +32,10 @@ class Book
             }
             foreach($copy as $page){
                 foreach($page->getTransitions() as $transition){
-                    $oldPageId = $transition->getToPage()->getId();
-                    $transition->setToPage($newPagesMapping[$oldPageId]);
+                    if($transition->getToPage() !== null) {
+                        $oldPageId = $transition->getToPage()->getId();
+                        $transition->setToPage($newPagesMapping[$oldPageId]);
+                    }
                 }
             }
             $this->pages = $copy;
