@@ -18,6 +18,8 @@ Vous pouvez actuellement :
 - Modifier le détails des brouillons.
 - Modifier des informations non sensibles sur une publication.
 - Visualiser une synthèse des pages de votre livres.
+- Créer et modifier des pages.
+- Créer et modifier des transitions de pages à pages.
 
 Prochains objectifs
 -------------------
@@ -25,5 +27,4 @@ Les objectifs a court termes sont :
 - Visualiser ses parties en cours.
 - Créer une partie depuis la liste des livres.
 - Jouer une partie.
-- Créer et modifier des pages.
 - Créer un compte.
