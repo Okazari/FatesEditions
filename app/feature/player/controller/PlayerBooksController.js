@@ -3,8 +3,10 @@
 angular.module('myVirtualStoryBookApp')
   .controller('PlayerBooksController', function ($scope, $state, PlayerService, BookService, GameService) {
 
+    $scope.booksLoading = true;
     BookService.getPublishedBooks().success(function(books){
       $scope.books = books;
+      $scope.booksLoading = false;
     });
     
     //a externaliser dans un filtre

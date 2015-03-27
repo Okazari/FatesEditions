@@ -34,14 +34,16 @@ angular.module('myVirtualStoryBookApp')
       $scope.selectedGenre = book.genre.id;
       $scope._release = !book.draft;
       $scope.init = true;
+      //if(angular.isDefined(book.to_page)) transition.selectedPage = transition.to_page.id;
+      BookService.getBookPages($stateParams.id).success($scope.updatePages);
     });
-    
+
     $scope.updatePages = function(pages){
       $scope.pages = pages;
       $scope._buildD3Graph();
     };
     
-    BookService.getBookPages($stateParams.id).success($scope.updatePages);
+    
     
     $scope._buildD3Graph = function(){
       D3Service.clear();
