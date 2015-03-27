@@ -5,7 +5,7 @@ MyVisualStoryBook est une application web de création d'histoires interactives.
 
 Le site est actuallement en développement.
 
-Version actuelle
+Version actuelle : V1.0.0
 ----------------
 Vous pouvez actuellement :
 - Se connecter au site.
@@ -20,11 +20,12 @@ Vous pouvez actuellement :
 - Visualiser une synthèse des pages de votre livres.
 - Créer et modifier des pages.
 - Créer et modifier des transitions de pages à pages.
+- Visualiser ses parties en cours.
+- Créer une partie depuis la liste des livres.
+- Jouer une partie.
 
 Prochains objectifs
 -------------------
 Les objectifs a court termes sont :
-- Visualiser ses parties en cours.
-- Créer une partie depuis la liste des livres.
-- Jouer une partie.
+
 - Créer un compte.
