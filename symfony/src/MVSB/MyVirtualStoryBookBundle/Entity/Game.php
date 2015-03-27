@@ -32,7 +32,7 @@ class Game
     /**
      * @ORM\ManyToOne(targetEntity="Page")
      * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
-     * @Serializer\MaxDepth(1)
+     * @Serializer\MaxDepth(2)
      */
     private $currentPage;
 

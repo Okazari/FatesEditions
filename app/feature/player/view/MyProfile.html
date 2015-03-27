@@ -19,15 +19,24 @@
       </div>
       <div class="box-body">
         <div class="row">
+          <div ng-hide="games.length || gamesLoading" class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="callout">
+              <h4>Vous n'avez pas de partie en cours</h4>
+              <p>Rendez vous sur la page "Les livres", laissez vous tenter par une histoire et lancer une partie !</p>
+            </div>
+          </div>
           <div ng-repeat="game in games" class="col-lg-6 col-sm-6 col-xs-12">
             <div class="small-box bg-navy book-widget">
+              <div class="box-tools pull-right">
+                <a class="fa fa-remove icon-tool" ng-click="openDeleteGameModal(game)"></a>
+              </div>
               <div class="row top-widget">
                 <div class="col-lg-3 col-sm-3 col-xs-4 preview-container">              
                   <img src="{{game.book.cover}}" class="cover-preview" alt="User Image">
                 </div>
                 <div class="col-lg-9 col-sm-9 col-xs-8 inner">
-                  <h4><h4>{{game.book.name}} - {{game.character.name}}</h4></h4>
-                  <h4 class="label label-primary">Page : {{game.currentPage}}</h4>
+                  <h4><h4>{{game.book.name}}</h4></h4>
+                  <h4 class="label label-primary">Page : {{game.current_page.title}}</h4>
                   <div class="inner synopsis-preview">{{game.book.synopsis}}</div>
                 </div>
               </div>
@@ -37,6 +46,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div ng-show="gamesLoading" class="overlay">
+        <i class="fa fa-refresh fa-spin"></i>
       </div>
     </div><!-- /.box -->
 

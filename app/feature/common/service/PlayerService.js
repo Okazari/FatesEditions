@@ -3,12 +3,14 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         
         var service = {};
         
+        var BASE_URL = "/symfony/web/app_dev.php";
+        
         service.currentPlayerUsername = $window.sessionStorage.getItem('playerUsername');
         if(service.currentPlayerUsername === null){
             $state.go('signin');
         }
         service.getCurrentPlayer = function(){
-            return $http.get("/symfony/web/app_dev.php/user")
+            return $http.get(BASE_URL+"/user")
         };
         
         service.setCurrentPlayerUsername = function(username){
@@ -16,15 +18,15 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         }
         
         service.login = function(credentials){
-            return $http.post("/symfony/web/app_dev.php/login", credentials)
+            return $http.post(BASE_URL+"/login", credentials)
         }
         
         service.logout = function(){
-            return $http.post("/symfony/web/app_dev.php/logout")
+            return $http.post(BASE_URL+"/logout")
         }
         
         service.getPlayerByName = function(name){
-            return $http.get("/symfony/web/app_dev.php/players/"+name);
+            return $http.get(BASE_URL+"/players/"+name);
         }
  
         service.getConnectedPlayerBooks = function(){
@@ -49,6 +51,10 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
  
         service.isCurrentPlayerAuthor = function(book){
             return service.isAuthor(service.currentPlayerUsername,book);
+        }
+        
+        service.newGame = function(book){
+            return $http.post(BASE_URL+"/players/"+service.currentPlayerUsername+"/games",{bookId:book.id});
         }
         
         return service;

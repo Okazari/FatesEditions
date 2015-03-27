@@ -4,6 +4,19 @@
   color:white;
 }
 
+.pageText{
+  font-size:1.5em;
+  font-family:"Times New Roman";
+  padding:30px;
+  text-align:justify;
+}
+
+.transitionText{
+  text-align:left;
+  font-family:"Times New Roman";
+  padding-left:60px;
+}
+
 .spaceLabel{
   margin-right:5px!important;
   margin-left:5px!important;

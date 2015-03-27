@@ -17,6 +17,15 @@ angular.module('myVirtualStoryBookApp')
         $scope.firstLoad = false;
       });
     }
+    
+    $scope.updateGames = function(){
+      $scope.gamesLoading = true;
+      PlayerService.getConnectedPlayerGames().success(function(games){
+        $scope.games = games;
+        $scope.gamesLoading = false;
+      });
+    }
+    
     $scope.openDeleteBookModal = function(book){
       $scope.modalYesNo = {
         title:"Demande de confirmation",
@@ -40,6 +49,31 @@ angular.module('myVirtualStoryBookApp')
         scope: $scope
       });
     }
+    
+    $scope.openDeleteGameModal = function(game){
+      $scope.modalYesNo = {
+        title:"Demande de confirmation",
+        content:"Voulez vous supprimer definitivement cette partie ?",
+        yes:{
+          label:"Oui",
+          action: function(){
+            GameService.deleteGame(game).success($scope.updateGames);
+            $scope.modal.close();
+          }
+        },
+        no:{
+          label:"Non",
+          action: function(){
+            $scope.modal.dismiss()
+          }
+        }
+      };
+      $scope.modal = $modal.open({
+        templateUrl: 'feature/common/modal/ModalYesNo.template.html',
+        scope: $scope
+      });
+    }
+    
     
     $scope.openChooseBookModal = function(){
       $scope.modalPickOne = {
@@ -72,13 +106,12 @@ angular.module('myVirtualStoryBookApp')
       PlayerService.createBookForCurrentUser().success($scope.updateBooks);
     }
 
-    $scope.newGame = function(book){
-      var newGame = GameService.newGame("Stub",book);
-      $state.go("game",{id:newGame.id});
+    $scope.playGame = function(game){
+      $state.go("game",{id:game.id});
     }
 
     $scope.firstLoad = true;
     $scope.updateBooks();
-    $scope.games = PlayerService.getConnectedPlayerGames();
+    $scope.updateGames();
     
   });

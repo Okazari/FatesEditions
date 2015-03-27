@@ -36,8 +36,8 @@ class GameController extends MVSBController
         $json = $request->getContent();
         $properties = json_decode($json);
         
-        if((null !== $properties->currentPage) && (null !== $properties->currentPage->id)) {
-            $page = $pageRepository->findOneById($properties->currentPage->id);
+        if((isset($properties->current_page)) && (isset($properties->current_page->id))) {
+            $page = $pageRepository->findOneById($properties->current_page->id);
             $game->setCurrentPage($page);
         }
         $gameRepository->flushEntityToBase($game);
