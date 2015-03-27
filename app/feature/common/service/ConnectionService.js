@@ -4,7 +4,9 @@ myVirtualStoryBookApp.service("ConnectionService", ['$http',
         var service = {};
         
         service.login = function(credentials){
-            return $http.post("/symfony/web/app_dev.php/login", credentials)
+            credentials.password = CryptoJS.SHA512(credentials.password);
+            credentials.password = credentials.password.toString(CryptoJS.enc.Base64);
+            return $http.post("/symfony/web/app_dev.php/login", credentials);
         }
         
         return service;

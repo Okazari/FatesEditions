@@ -27,7 +27,7 @@ var myVirtualStoryBookApp = angular
         //$urlRouterProvider.otherwise("/signin");
         
         // /player place seulement le header, on redirige donc vers une page avec un contenu.
-        $urlRouterProvider.when("/player","/player/mygames");
+        $urlRouterProvider.when("/player","/player/myprofile");
         $stateProvider
             //Portail
             .state('signup', {
@@ -48,22 +48,12 @@ var myVirtualStoryBookApp = angular
             .state('player.books', {
                 url: "/books",
                 templateUrl: "feature/player/view/Books.html",
-                controller: "PlayerBooksController",
-                resolve: {
-                    "CurrentPlayer":function(PlayerService){
-                        return PlayerService.promise;
-                    }
-                }
+                controller: "PlayerBooksController"
             })
             .state('player.myprofile', {
                 url: "/myprofile",
                 templateUrl: "feature/player/view/MyProfile.html",
-                controller: "PlayerProfileController",
-                resolve: {
-                    "CurrentPlayer":function(PlayerService){
-                        return PlayerService.promise;
-                    }
-                }
+                controller: "PlayerProfileController"
             })
             
             //Edition
@@ -87,19 +77,20 @@ var myVirtualStoryBookApp = angular
             })
 }); 
 
-myVirtualStoryBookApp.factory('httpErrorInterceptor', ['$q', '$injector', function ($q, $injector) {
-    var myInterceptor = {
-        'response': function (response) {
-            return response;
-        },
-        'responseError': function (rejection) {
-            if (rejection.status === 401) {
-                $injector.get('$state').go('signin');
+myVirtualStoryBookApp.factory('httpErrorInterceptor', ['$q', '$injector', '$window', '$location',
+    function ($q, $injector, $window, $location) {
+        var myInterceptor = {
+            'response': function (response) {
+                return response;
+            },
+            'responseError': function (rejection) {
+                if (rejection.status === 401) {
+                    $injector.get('$state').go('signin');
+                return $q.reject(rejection);
+                }
             }
-            return $q.reject(rejection);
-        }
-    };
-    return myInterceptor;
+        };
+        return myInterceptor;
 }]);
 
 myVirtualStoryBookApp.config(['$httpProvider', function($httpProvider) {
