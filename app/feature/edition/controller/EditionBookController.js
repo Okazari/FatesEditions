@@ -31,7 +31,7 @@ angular.module('myVirtualStoryBookApp')
     
     BookService.getBook($stateParams.id).success(function(book){
       $scope.book = book;
-      $scope.selectedGenre = book.genre.id;
+      if(angular.isDefined(book.genre))$scope.selectedGenre = book.genre.id;
       $scope._release = !book.draft;
       $scope.init = true;
       //if(angular.isDefined(book.to_page)) transition.selectedPage = transition.to_page.id;
