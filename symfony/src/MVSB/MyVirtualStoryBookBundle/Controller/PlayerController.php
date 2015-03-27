@@ -57,17 +57,32 @@ class PlayerController extends MVSBController
 
         return $this->serializeAndBuildSONResponse($player,Response::HTTP_CREATED);
     }
+ 
+    /**
+     * @Post("/players/{username}/games")
+     */
+    public function createNewGameAction(Request $request, $username)
+    {
+        $playerService = $this->get('mvsb.player.service');
+        
+        $json = $request->getContent();
+        $properties = json_decode($json);
+        
+        if(isset($properties->bookId)) $game = $playerService->createNewGame($username, $properties->bookId);
+        
+
+        return $this->serializeAndBuildSONResponse($game,Response::HTTP_CREATED);
+    }
     
     /**
-     * @Get("/user")
+     * @Get("/players/{username}/games")
      */
-    public function getCurrentPlayerAction(Request $request)
+    public function getPlayerGamesAction(Request $request, $username)
     {
-        $securityContext = $this->get('security.context');
         $playerService = $this->get('mvsb.player.service');
-        $player = $playerService->getPlayerByUsername($securityContext->getToken()->getUsername());
+        $games = $playerService->getPlayerGames($username);
 
-        return $this->serializeAndBuildSONResponse($player,Response::HTTP_OK);
+        return $this->serializeAndBuildSONResponse($games,Response::HTTP_OK);
     }
     
 }

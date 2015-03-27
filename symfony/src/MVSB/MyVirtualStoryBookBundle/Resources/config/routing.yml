@@ -7,3 +7,6 @@ mvsb_my_virtual_story_book_book:
 mvsb_my_virtual_story_book_page:
     resource: "@MVSBMyVirtualStoryBookBundle/Controller/PageController.php"
     type:     annotation
+mvsb_my_virtual_story_book_game:
+    resource: "@MVSBMyVirtualStoryBookBundle/Controller/GameController.php"
+    type:     annotation

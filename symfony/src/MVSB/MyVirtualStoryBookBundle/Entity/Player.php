@@ -46,6 +46,11 @@ class Player implements UserInterface
     private $books;
 
     /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="player", cascade={"persist","remove"})
+     **/
+    private $games;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -121,6 +126,28 @@ class Player implements UserInterface
     public function getBooks()
     {
         return $this->books;
+    }
+    /**
+     * Set Games
+     *
+     * @param Game $games
+     * @return Player
+     */
+    public function setGames($games)
+    {
+        $this->games = $games;
+
+        return $this;
+    }
+
+    /**
+     * Get Games
+     *
+     * @return Game 
+     */
+    public function getGames()
+    {
+        return $this->games;
     }
     
     public function getRoles(){

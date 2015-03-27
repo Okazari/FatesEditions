@@ -16,11 +16,15 @@ angular.module('myVirtualStoryBookApp')
     /**********************Page control************************/
     $scope.showRightMenu = false;
     $scope.currentGame = GameService.getGame($stateParams.id);
-    $scope.currentPage = PageService.getPage($scope.currentGame.currentPage);
+    PageService.getPage($scope.currentGame.currentPage).success(function(page){
+      $scope.currentPage = page;
+    });
     
 
     $scope.changePage = function(newPageId){
-      $scope.currentPage = PageService.getPage(newPageId);
-      $scope.currentGame.currentPage = newPageId;
+      PageService.getPage(newPageId).success(function(page){
+        $scope.currentPage = page;
+        $scope.currentGame.currentPage = newPageId;
+      });
     }
   });

@@ -1,10 +1,12 @@
-myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$http','$window',
-    function(BookService,GameService, $http, $window){
+myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$http','$window','$state',
+    function(BookService,GameService, $http, $window, $state){
         
         var service = {};
         
         service.currentPlayerUsername = $window.sessionStorage.getItem('playerUsername');
-        
+        if(service.currentPlayerUsername === null){
+            $state.go('signin');
+        }
         service.getCurrentPlayer = function(){
             return $http.get("/symfony/web/app_dev.php/user")
         };

@@ -36,7 +36,7 @@ myVirtualStoryBookApp.service("GameService", [
         },
         {
             id : 2,
-            currentPage: 13,
+            currentPage: 153,
             book : {
                 id : 1,
                 name:"Histoire n°1",
