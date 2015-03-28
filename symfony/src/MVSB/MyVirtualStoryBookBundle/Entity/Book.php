@@ -115,6 +115,8 @@ class Book
     /**
      * @ORM\OneToOne(targetEntity="Page")
      * @ORM\JoinColumn(name="starting_page_id", referencedColumnName="id")
+     * @Serializer\Expose
+     * @Serializer\MaxDepth(2)
      **/
     private $startingPage;
 
