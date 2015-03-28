@@ -27,19 +27,23 @@
                   <input type="text" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="book.cover" ng-change="displayMessage = false" required>
               </div>
             </div>
-            <div class="col-lg-9 col-sm-9 col-xs-9">
-              <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
+            <div class="col-xs-9">
+              <div class="input-group margin-top col-xs-12">
                   <label>Titre</label> 
                   <input ng-change="patchTitre()" type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Titre du livre" ng-model="book.name" ng-change="displayMessage = false" required>
               </div>
-              <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
+              <div class="input-group margin-top col-xs-12">
                 <label>Genre</label>
                 <select ng-model="selectedGenre" ng-disabled="!book.draft" ng-options="genre.id as genre.name for genre in genres" ng-change="book.genre = genres[selectedGenre-1]" class="form-control">
                 </select>
               </div>
-              <div class="input-group margin-top col-lg-12 col-sm-12 col-xs-12">
+              <div class="input-group margin-top col-xs-12">
                 <label>Synopsis</label> 
                 <textarea rows="5" name="synopsis" class="form-control" placeholder="Synopsis" ng-model="book.synopsis" ng-change="displayMessage = false" required></textarea>
+              </div>
+              <div class="input-group margin-top col-xs-12">
+                <label>Page de début</label> 
+                <select ng-model="book.starting_page" ng-options="page as page.title for page in pages track by page.id" class="form-control"></select>
               </div>
             </div>
           </div><!-- /.box-body -->
