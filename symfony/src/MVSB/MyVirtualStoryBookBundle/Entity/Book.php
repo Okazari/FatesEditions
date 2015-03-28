@@ -38,6 +38,7 @@ class Book
                     }
                 }
             }
+            $this->startingPage = $newPagesMapping[$this->startingPage->getId()];
             $this->pages = $copy;
         }
     }
