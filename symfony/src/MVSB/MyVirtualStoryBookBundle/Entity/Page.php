@@ -233,4 +233,8 @@ class Page
     {
         return $this->book;
     }
+    
+    public function removeBook(){
+        $this->book->removeElement();
+    }
 }

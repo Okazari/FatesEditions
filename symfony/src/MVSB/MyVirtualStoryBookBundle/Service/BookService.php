@@ -37,7 +37,14 @@ class BookService{
     
     public function deleteBookById($id){
         $book = $this->bookRepository->findOneById($id);
-        $this->bookRepository->removeEntityFromBase($book);
+        $book->setStartingPage(null);
+        $pages = $book->getPages();
+        foreach($pages as $page){
+            $this->bookRepository->removeEntity($page);
+        };
+        $this->bookRepository->flushAll();
+        $this->bookRepository->removeEntity($book);
+        $this->bookRepository->flushAll();
     }
     
     public function getAllBookGenres(){

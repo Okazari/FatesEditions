@@ -28,6 +28,11 @@ class MVSBRepository extends EntityRepository{
         return $em->merge($entity);
     }
     
+    public function removeEntity($entity){
+        $em = $this->getEntityManager();
+        $em->remove($entity);
+    }
+    
     public function removeEntityFromBase($entity){
         $em = $this->getEntityManager();
         $em->remove($entity);
