@@ -24,7 +24,7 @@ var myVirtualStoryBookApp = angular
 
         // For any unmatched url, send to /signup
         //TODO: à changer plus tard.
-        //$urlRouterProvider.otherwise("/signin");
+        $urlRouterProvider.otherwise("/signin");
         
         // /player place seulement le header, on redirige donc vers une page avec un contenu.
         $urlRouterProvider.when("/player","/player/myprofile");
@@ -75,6 +75,7 @@ var myVirtualStoryBookApp = angular
                 templateUrl: "feature/game/view/CurrentGame.html",
                 controller: "GameController"
             })
+
 }); 
 
 myVirtualStoryBookApp.factory('httpErrorInterceptor', ['$q', '$injector', '$window', '$location',
