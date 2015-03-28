@@ -21,7 +21,7 @@
           </div>
           <div class="box-body row">
             <div class="col-lg-3 col-sm-3 col-xs-3 changer-cover">              
-              <img src="{{book.cover}}" class="cover-preview" alt="User Image">
+              <img ng-src="{{book.cover}}" class="cover-preview" alt="User Image">
               <div class="input-group margin-top">
                   <span class="input-group-addon">URL</span>
                   <input type="text" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="book.cover" ng-change="displayMessage = false" required>
