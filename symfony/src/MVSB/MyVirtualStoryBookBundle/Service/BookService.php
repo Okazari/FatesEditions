@@ -59,6 +59,7 @@ class BookService{
         if(isset($properties->synopsis)) $book->setSynopsis($properties->synopsis);
         if(isset($properties->draft)) $book->setDraft($properties->draft);
         if(isset($properties->genre) && isset($properties->genre->id)) $book->setGenre($this->genreRepository->findOneById($properties->genre->id));
+        if(isset($properties->starting_page) && isset($properties->starting_page->id)) $book->setStartingPage($this->pageRepository->findOneById($properties->starting_page->id));
         
         $this->bookRepository->flushEntityToBase($book);
         return $book;
