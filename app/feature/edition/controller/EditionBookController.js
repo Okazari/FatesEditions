@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('EditionBookController', function ($scope, $state, $stateParams, BookService, PageService, D3Service) {
+  .controller('EditionBookController', function ($scope, $state, $stateParams, BookService, PageService, D3Service, $timeout) {
     /**********************Header control***********************/
     $scope.MenuItems = [];
     $scope._createMenuItem = function(url,label){
@@ -9,7 +9,7 @@ angular.module('myVirtualStoryBookApp')
     };
     $scope.save = function(){
       BookService.updateBook($scope.book).success(function(){
-        alert("Sauvegardé !");
+        $scope.addAlert('success','Livre sauvegardé');
       });
     }
     $scope.saveAndQuit = function(){
@@ -70,4 +70,20 @@ angular.module('myVirtualStoryBookApp')
     $scope.editPage = function(page){
       $state.go("editionpage",{id:page.id});
     }
-  });
+    
+    $scope.alerts = [
+      { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
+      { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
+    ];
+    
+    $scope.addAlert = function(type, message) {
+      $scope.alerts.push({type:type, msg:message});
+      $timeout(function(){
+        $scope.alerts.pop();
+      },2000);
+    };
+  
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
+});
