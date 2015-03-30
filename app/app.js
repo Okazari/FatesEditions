@@ -24,7 +24,7 @@ var myVirtualStoryBookApp = angular
 
         // For any unmatched url, send to /signup
         //TODO: à changer plus tard.
-        $urlRouterProvider.otherwise("/signin");
+        $urlRouterProvider.otherwise("/player/myprofile");
         
         // /player place seulement le header, on redirige donc vers une page avec un contenu.
         $urlRouterProvider.when("/player","/player/myprofile");
