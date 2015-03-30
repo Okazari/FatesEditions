@@ -40,9 +40,10 @@ class PlayerService{
     public function createNewBook($username){
         $player = $this->playerRepository->findOneByUsername($username);
         $playerBooks = $player->getBooks();
-        $playerBooks[] = $this->bookBuilder->createNewBook($player);
+        $book = $this->bookBuilder->createNewBook($player);
+        $playerBooks[] = $book;
         $this->playerRepository->flushEntityToBase($player);
-        return $player;
+        return $book;
     }
     
     public function createNewGame($username, $bookId){

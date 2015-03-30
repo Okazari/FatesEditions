@@ -53,9 +53,9 @@ class PlayerController extends MVSBController
     public function createNewBookAction(Request $request, $username)
     {
         $playerService = $this->get('mvsb.player.service');
-        $player = $playerService->createNewBook($username);
+        $book = $playerService->createNewBook($username);
 
-        return $this->serializeAndBuildSONResponse($player,Response::HTTP_CREATED);
+        return $this->serializeAndBuildSONResponse($book,Response::HTTP_CREATED);
     }
  
     /**
@@ -70,7 +70,6 @@ class PlayerController extends MVSBController
         
         if(isset($properties->bookId)) $game = $playerService->createNewGame($username, $properties->bookId);
         
-
         return $this->serializeAndBuildSONResponse($game,Response::HTTP_CREATED);
     }
     

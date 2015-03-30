@@ -103,7 +103,9 @@ angular.module('myVirtualStoryBookApp')
     }
     
     $scope.newBook = function(){
-      PlayerService.createBookForCurrentUser().success($scope.updateBooks);
+      PlayerService.createBookForCurrentUser().success(function(book){
+        $state.go("editionbook",{id:book.id});
+      });
     }
 
     $scope.playGame = function(game){

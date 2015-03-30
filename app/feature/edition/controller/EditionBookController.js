@@ -56,8 +56,8 @@ angular.module('myVirtualStoryBookApp')
     });
     
     $scope.addNewPage = function(){
-      BookService.addNewPage($scope.book).success(function(){
-        BookService.getBookPages($stateParams.id).success($scope.updatePages)
+      BookService.addNewPage($scope.book).success(function(page){
+        $state.go("editionpage",{id:page.id});
       });
     }
     

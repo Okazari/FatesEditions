@@ -7,7 +7,7 @@ class PageBuilder{
     
     public function createNewPage($book){
         $page = new Page();
-        $page->setTitle("New_Page_".time())
+        $page->setTitle("")
              ->setText("")
              ->setDescription("")
              ->setBook($book);
