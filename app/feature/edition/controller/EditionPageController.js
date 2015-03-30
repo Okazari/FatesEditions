@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('EditionPageController', function ($scope, $state, $stateParams, BookService, PageService, D3Service) {
+  .controller('EditionPageController', function ($scope, $state, $stateParams, $timeout, BookService, PageService, D3Service) {
     /**********************Header control***********************/
     $scope.MenuItems = [];
     $scope._createMenuItem = function(url,label){
@@ -9,7 +9,7 @@ angular.module('myVirtualStoryBookApp')
     };
     $scope.save = function(){
       PageService.updatePage($scope.page).success(function(){
-        alert("Sauvegardé !");
+        $scope.addAlert('success','Page sauvegardé');
       });
     }
     $scope.saveAndQuit = function(){
@@ -68,6 +68,19 @@ angular.module('myVirtualStoryBookApp')
           PageService.getTransitions($scope.page).success($scope.updateTransitions);
         });
       })
+    };
+    
+    $scope.alerts = [];
+    
+    $scope.addAlert = function(type, message) {
+      $scope.alerts.push({type:type, msg:message});
+      $timeout(function(){
+        $scope.alerts.pop();
+      },2000);
+    };
+  
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
     };
     
   });

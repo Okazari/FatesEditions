@@ -17,9 +17,11 @@
   padding-left:60px;
 }
 
+/* Gestion des alerts et leurs animations */
+
 .floatingAlerts{
   bottom:0;
-  right:0;
+  left:20px;
   z-index:400;
   position:fixed;
   width:300px;

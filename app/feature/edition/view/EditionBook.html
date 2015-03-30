@@ -98,6 +98,6 @@
   <!-- =============================================== -->
 </div>
 <div class="floatingAlerts">
-  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+  <alert ng-repeat="alert in alerts" ng-animate="'animate'" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 </div>
 <ng-include src="'feature/common/footer/Footer.template.html'"></ng-include>
