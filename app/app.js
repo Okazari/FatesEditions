@@ -87,8 +87,8 @@ myVirtualStoryBookApp.factory('httpErrorInterceptor', ['$q', '$injector', '$wind
             'responseError': function (rejection) {
                 if (rejection.status === 401) {
                     $injector.get('$state').go('signin');
-                return $q.reject(rejection);
                 }
+                return $q.reject(rejection);
             }
         };
         return myInterceptor;
