@@ -19,8 +19,7 @@ var myVirtualStoryBookApp = angular
     'ui.utils',
     'ui.router',
     'ui.bootstrap',
-    'angular.layout',
-    'textAngular'
+    'angular.layout'
   ]).config(function($stateProvider, $urlRouterProvider){
 
         // For any unmatched url, send to /signup
