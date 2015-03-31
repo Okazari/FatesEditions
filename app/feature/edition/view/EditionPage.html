@@ -43,7 +43,18 @@
           </div>
         </div>
         <div class="box-body">
-          <textarea rows="10" name="cover" class="form-control" placeholder="L'histoire racontée dans cette page" ng-model="page.text" ng-change="displayMessage = false" required></textarea>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <textarea rows="10" name="cover" class="form-control" placeholder="L'histoire racontée dans cette page" ng-model="page.text" required></textarea>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <img ng-src="{{page.image}}" class="cover-preview" alt="Prévisualisation image de la page">
+              <div class="input-group margin-top">
+                  <span class="input-group-addon">URL</span>
+                  <input type="text" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="page.image" required>
+              </div>
+            </div>
+          </div>
         </div><!-- /.box-body -->
       </div>
     </div>

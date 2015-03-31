@@ -30,6 +30,7 @@ class PageService{
         $page->setTitle($pageFromJson->getTitle());
         $page->setDescription($pageFromJson->getDescription());
         $page->setText($pageFromJson->getText());
+        $page->setImage($pageFromJson->getImage());
         $transitions = [];
         $page->setTransitions($transitions);
         forEach($pageFromJson->getTransitions() as $transitionFromJson){
