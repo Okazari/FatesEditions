@@ -28,6 +28,17 @@
   opacity:0.9;
 }
 
+.floatingAlerts.signin{
+  top:10px;
+  left:10px;
+  z-index:400;
+  position:fixed;
+  width:500px;
+  text-align:justify;
+  opacity:0.9;
+}
+
+
 .spaceLabel{
   margin-right:5px!important;
   margin-left:5px!important;
