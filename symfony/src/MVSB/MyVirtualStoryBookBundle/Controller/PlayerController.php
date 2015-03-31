@@ -55,6 +55,8 @@ class PlayerController extends MVSBController
         $playerService = $this->get('mvsb.player.service');
         $book = $playerService->createNewBook($username);
 
+        $logger = $this->get('logger');
+        $logger->info("Joueur $username crée un brouillon");
         return $this->serializeAndBuildSONResponse($book,Response::HTTP_CREATED);
     }
  
@@ -67,7 +69,8 @@ class PlayerController extends MVSBController
         
         $json = $request->getContent();
         $properties = json_decode($json);
-        
+        $logger = $this->get('logger');
+        $logger->info("Joueur $username démarre une partie");
         if(isset($properties->bookId)) $game = $playerService->createNewGame($username, $properties->bookId);
         
         return $this->serializeAndBuildSONResponse($game,Response::HTTP_CREATED);
