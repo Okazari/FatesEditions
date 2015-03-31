@@ -42,20 +42,9 @@
     <div class="box">
       <div class="box-body">
         <div class="row">
-          <div ng-if="currentPage.image">
-            <div class="col-xs-6">
-            <p class="pageText">
-              {{currentPage.text}}
-            </p>
+          <div class="col-xs-12">
+            <div class="pageText" ng-bind-html="currentPage.text">
             </div>
-            <div class="col-xs-6">
-              <img ng-src="{{currentPage.image}}" class="cover-preview" alt="Image de la page">
-            </div>
-          </div>
-          <div ng-if="!currentPage.image" class="col-xs-12">
-            <p class="pageText">
-              {{currentPage.text}}
-            </p>
           </div>
         </div>
       </div><!-- /.box-body -->
