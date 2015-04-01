@@ -32,7 +32,7 @@
   top:10px;
   left:10px;
   z-index:400;
-  position:fixed;
+  position:relative;
   width:500px;
   text-align:justify;
   opacity:0.9;
