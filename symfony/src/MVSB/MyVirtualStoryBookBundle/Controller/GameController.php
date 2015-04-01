@@ -16,6 +16,7 @@ class GameController extends MVSBController
      */
     public function getGameByIdAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $serializer = $this->get('jms_serializer');
         $gameRepository = $this->get('mvsb.game.repository');
         $game = $gameRepository->findOneById($id);
@@ -28,6 +29,7 @@ class GameController extends MVSBController
      */
     public function patchGameByIdAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $serializer = $this->get('jms_serializer');
         $gameRepository = $this->get('mvsb.game.repository');
         $pageRepository = $this->get('mvsb.page.repository');
@@ -50,6 +52,7 @@ class GameController extends MVSBController
      */
     public function deleteGameByIdAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $gameRepository = $this->get('mvsb.game.repository');
         $game = $gameRepository->findOneById($id);
 

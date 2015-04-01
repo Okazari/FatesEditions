@@ -14,6 +14,7 @@ class PlayerController extends MVSBController
      */
     public function createPlayerAction(Request $request)
     {
+        $this->logRoute($request);
         $serializer = $this->get('jms_serializer');
         $playerService = $this->get('mvsb.player.service');
         
@@ -30,6 +31,7 @@ class PlayerController extends MVSBController
      */
     public function getPlayerByNameAction(Request $request, $username)
     {
+        $this->logRoute($request);
         $playerService = $this->get('mvsb.player.service');
         $player = $playerService->getPlayerByUsername($username);
 
@@ -41,6 +43,7 @@ class PlayerController extends MVSBController
      */
     public function getPlayerDraftAction(Request $request, $username)
     {
+        $this->logRoute($request);
         $playerService = $this->get('mvsb.player.service');
         $books = $playerService->getPlayerBooks($username);
 
@@ -52,11 +55,10 @@ class PlayerController extends MVSBController
      */
     public function createNewBookAction(Request $request, $username)
     {
+        $this->logRoute($request);
         $playerService = $this->get('mvsb.player.service');
         $book = $playerService->createNewBook($username);
 
-        $logger = $this->get('logger');
-        $logger->info("Joueur $username crée un brouillon");
         return $this->serializeAndBuildSONResponse($book,Response::HTTP_CREATED);
     }
  
@@ -65,12 +67,11 @@ class PlayerController extends MVSBController
      */
     public function createNewGameAction(Request $request, $username)
     {
+        $this->logRoute($request);
         $playerService = $this->get('mvsb.player.service');
         
         $json = $request->getContent();
         $properties = json_decode($json);
-        $logger = $this->get('logger');
-        $logger->info("Joueur $username démarre une partie");
         if(isset($properties->bookId)) $game = $playerService->createNewGame($username, $properties->bookId);
         
         return $this->serializeAndBuildSONResponse($game,Response::HTTP_CREATED);
@@ -81,6 +82,7 @@ class PlayerController extends MVSBController
      */
     public function getPlayerGamesAction(Request $request, $username)
     {
+        $this->logRoute($request);
         $playerService = $this->get('mvsb.player.service');
         $games = $playerService->getPlayerGames($username);
 

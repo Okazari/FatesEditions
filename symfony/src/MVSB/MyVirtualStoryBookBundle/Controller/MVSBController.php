@@ -21,4 +21,13 @@ class MVSBController extends Controller
         
     }
     
+    protected function logRoute($request){
+        $securityContext = $this->get('security.context');
+        $logger = $this->get('logger');
+        $username = $securityContext->getToken()->getUser()->getUsername();
+        $method = $request->getMethod();
+        $path = $request->getPathInfo();
+        $logger->info("ACCESS | $username $method $path");
+    }
+    
 }

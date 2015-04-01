@@ -16,6 +16,7 @@ class BookController extends MVSBController
      */
     public function createBookAction(Request $request)
     {
+        $this->logRoute($request);
         $serializer = $this->get('jms_serializer');
         $bookService = $this->get('mvsb.book.service');
         
@@ -32,6 +33,7 @@ class BookController extends MVSBController
      */
     public function getBookByIdAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $bookService = $this->get('mvsb.book.service');
         $book = $bookService->getBookById($id);
 
@@ -43,6 +45,7 @@ class BookController extends MVSBController
      */
     public function putBookByIdAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $serializer = $this->get('jms_serializer');
         $bookService = $this->get('mvsb.book.service');
         
@@ -58,6 +61,7 @@ class BookController extends MVSBController
      */
     public function deleteBookByIdAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $bookService = $this->get('mvsb.book.service');
         $bookService->deleteBookById($id);
 
@@ -69,6 +73,7 @@ class BookController extends MVSBController
      */
     public function getPublishedBooksAction(Request $request)
     {
+        $this->logRoute($request);
         $bookService = $this->get('mvsb.book.service');
         $books = $bookService->getPublishedBooks();
 
@@ -80,6 +85,7 @@ class BookController extends MVSBController
      */
     public function addBookPageAction(Request $request, $id)
     {
+        $this->logRoute($request);
          $bookService = $this->get('mvsb.book.service');
         $page = $bookService->createNewPage($id);
 
@@ -92,6 +98,7 @@ class BookController extends MVSBController
      */
     public function getBookPagesAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $bookService = $this->get('mvsb.book.service');
         $book = $bookService->getBookById($id);
         $pages = $book->getPages();
@@ -103,6 +110,7 @@ class BookController extends MVSBController
      */
     public function getAllBookGenresAction(Request $request)
     {
+        $this->logRoute($request);
         $bookService = $this->get('mvsb.book.service');
         $genres = $bookService->getAllBookGenres();
 
@@ -114,6 +122,7 @@ class BookController extends MVSBController
      */
     public function publishBookPageAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $bookService = $this->get('mvsb.book.service');
         $bookService->publishBook($id);
         

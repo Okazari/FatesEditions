@@ -17,6 +17,7 @@ class PageController extends MVSBController
      */
     public function deletePageAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $pageService = $this->get('mvsb.page.service');
         $pageService->deletePage($id);
      
@@ -28,6 +29,7 @@ class PageController extends MVSBController
      */
     public function getPageAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $pageService = $this->get('mvsb.page.service');
         $page = $pageService->getPageById($id);
 
@@ -39,6 +41,7 @@ class PageController extends MVSBController
      */
     public function putPageByIdAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $serializer = $this->get('jms_serializer');
         $pageService = $this->get('mvsb.page.service');
         
@@ -54,6 +57,7 @@ class PageController extends MVSBController
      */
     public function addNewTransitionAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $pageService = $this->get('mvsb.page.service');
         $pageService->addTransition($id);
      
@@ -65,6 +69,7 @@ class PageController extends MVSBController
      */
     public function getPageTransitionsAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $pageService = $this->get('mvsb.page.service');
         $page = $pageService->getPageById($id);
      
@@ -76,6 +81,7 @@ class PageController extends MVSBController
      */
     public function deleteTransitionAction(Request $request, $id)
     {
+        $this->logRoute($request);
         $pageService = $this->get('mvsb.page.service');
         $pageService->deleteTransition($id);
      
