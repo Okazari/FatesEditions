@@ -45,20 +45,8 @@
         <div class="box-body">
           <div class="row">
             <div class="col-xs-12">
-              <!--
-              <textarea rows="10" name="cover" class="form-control" placeholder="L'histoire racontée dans cette page" ng-model="page.text" required></textarea>
-              -->
               <div text-angular ng-model="page.text"></div>
             </div>
-            <!--
-            <div class="col-sm-6 col-xs-12">
-              <img ng-src="{{page.image}}" class="cover-preview" alt="Prévisualisation image de la page">
-              <div class="input-group margin-top">
-                  <span class="input-group-addon">URL</span>
-                  <input type="text" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="page.image" required>
-              </div>
-            </div>
-            -->
           </div>
         </div><!-- /.box-body -->
       </div>
@@ -73,13 +61,24 @@
           <table class="table table-hover">
             <tbody>
               <tr>
-                <th>Page de destination</th>
-                <th>Texte de transition</th>
-                <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close"></button></th>
+                <th style="width:35%">Page de destination</th>
+                <th style="width:60%">Texte de transition</th>
+                <th style="width:5%"><button disabled class="btn btn-primary fa fa-close"></button></th>
               </tr>
               <tr ng-repeat="transition in page.transitions">
-                <td><select ng-model="transition.selectedPage" ng-options="page.id as page.title for page in pages" ng-change="transition.to_page = pages[getPageArrayKey(transition.selectedPage)]" class="form-control">
-                </select></td>
+                <td>
+                  <div class="row">
+                    <div class="col-lg-7 col-sm-12 col-xs-12">
+                      <select ng-model="transition.to_page" ng-options="page as page.title for page in pages track by page.id" class="form-control">
+                        <option value="" selected>-- Créer une nouvelle page --</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-5">
+                      <button ng-show="transition.to_page" ng-click="goToPage(transition.to_page)" class="btn btn-primary">Editer cette page</button>
+                      <button ng-show="!transition.to_page" ng-click="addNewPage(transition)" class="btn btn-primary">Editer cette page</button>
+                    </div>
+                  </div>
+                </td>
                 <td><textarea rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
                 <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close"></button></td>
               </tr>

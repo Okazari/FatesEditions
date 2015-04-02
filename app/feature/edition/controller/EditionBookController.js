@@ -68,7 +68,9 @@ angular.module('myVirtualStoryBookApp')
     }
     
     $scope.editPage = function(page){
-      $state.go("editionpage",{id:page.id});
+      BookService.updateBook($scope.book).success(function(){
+        $state.go("editionpage",{id:page.id});
+      });
     }
     
     //Gestion des alerts de la page

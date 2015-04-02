@@ -83,4 +83,19 @@ angular.module('myVirtualStoryBookApp')
       $scope.alerts.splice(index, 1);
     };
     
+    $scope.goToPage = function(page){
+      PageService.updatePage($scope.page).success(function(){
+        $state.go("editionpage",{id:page.id});
+      });
+    }
+    
+    $scope.addNewPage = function(transition){
+      BookService.addNewPage($scope.page.book).success(function(page){
+        transition.to_page = page;
+        PageService.updatePage($scope.page).success(function(){
+          $state.go("editionpage",{id:page.id});
+        });
+      });
+    }
+    
   });

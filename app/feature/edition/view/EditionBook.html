@@ -34,7 +34,7 @@
               </div>
               <div class="input-group margin-top col-xs-12">
                 <label>Genre</label>
-                <select ng-model="selectedGenre" ng-disabled="!book.draft" ng-options="genre.id as genre.name for genre in genres" ng-change="book.genre = genres[selectedGenre-1]" class="form-control">
+                <select data-icon="fa fa-{{genre.icon}}" ng-model="book.genre" ng-disabled="!book.draft" ng-options="genre as genre.name for genre in genres track by genre.id" class="form-control">
                 </select>
               </div>
               <div class="input-group margin-top col-xs-12">
