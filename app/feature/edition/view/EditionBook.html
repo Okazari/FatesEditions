@@ -9,7 +9,7 @@
     <div class="row">
       <!-- Default box -->
       <div class="col-lg-12 col-sm-12 col-xs-12">
-        <div class="box box-primary">
+        <div class="box box-primary md-whiteframe-z1">
           <div class="box-header with-border">
             <h3 class="box-title">Votre livre</h3>
             <div class="box-tools pull-right">
@@ -47,10 +47,13 @@
               </div>
             </div>
           </div><!-- /.box-body -->
+          <div ng-show="bookLoading" class="overlay">
+            <i class="fa fa-refresh fa-spin"></i>
+          </div>
         </div><!-- /.box -->
       </div>
     <div class="col-lg-6 col-sm-6 col-xs-12">
-      <div class="box box-primary ">
+      <div class="box box-primary md-whiteframe-z1">
         <div class="box-header with-border">
           <h3 class="box-title">Graphique</h3>
           <div class="box-tools pull-right">
@@ -61,11 +64,14 @@
           <div id="pageGraph">
           </div>
         </div><!-- /.box-body -->
+        <div ng-show="pagesLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
       </div>
     </div>
     <div class="col-lg-6 col-sm-6 col-xs-12">
       <!-- Default box -->
-      <div class="box box-primary">
+      <div class="box box-primary md-whiteframe-z1">
         <div class="box-header">
           <h3 class="box-title">Pages</h3>
         </div><!-- /.box-header -->
@@ -88,9 +94,12 @@
           </table>
         </div><!-- /.box-body -->
         <div class="box-footer align-center">
-          <button ng-click="addNewPage()" ng-disabled="!book.draft" class="btn btn-primary">
+          <button ng-click="addNewPage()" ng-disabled="!book.draft" class="btn btn-primary md-whiteframe-z1">
             Ajouter une nouvelle page
           </button>
+        </div>
+        <div ng-show="pagesLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
         </div>
       </div>
     </div>

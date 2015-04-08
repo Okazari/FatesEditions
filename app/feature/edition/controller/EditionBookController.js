@@ -29,11 +29,15 @@ angular.module('myVirtualStoryBookApp')
     
     /**********************Page control************************/
     
+    $scope.bookLoading=true;
+    $scope.pagesLoading=true;
+
     BookService.getBook($stateParams.id).success(function(book){
       $scope.book = book;
       if(angular.isDefined(book.genre))$scope.selectedGenre = book.genre.id;
       $scope._release = !book.draft;
-      $scope.init = true;
+      $scope.init = true;    
+      $scope.bookLoading=false;
       //if(angular.isDefined(book.to_page)) transition.selectedPage = transition.to_page.id;
       BookService.getBookPages($stateParams.id).success($scope.updatePages);
     });
@@ -41,6 +45,7 @@ angular.module('myVirtualStoryBookApp')
     $scope.updatePages = function(pages){
       $scope.pages = pages;
       $scope._buildD3Graph();
+      $scope.pagesLoading=false;
     };
     
     

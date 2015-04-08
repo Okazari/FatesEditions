@@ -9,7 +9,7 @@
     <div class="row">
       <!-- Default box -->
     <div class="col-xs-12">
-      <div class="box box-primary ">
+      <div class="box box-primary md-whiteframe-z1">
         <div class="box-header with-border">
           <h3 class="box-title">Informations générales</h3>
           <div class="box-tools pull-right">
@@ -32,10 +32,13 @@
             </div>
           </div>
         </div><!-- /.box-body -->
+        <div ng-show="pageLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
       </div>
     </div>
     <div class="col-xs-12">
-      <div class="box box-primary ">
+      <div class="box box-primary md-whiteframe-z1">
         <div class="box-header with-border">
           <h3 class="box-title">Contenu</h3>
           <div class="box-tools pull-right">
@@ -49,11 +52,14 @@
             </div>
           </div>
         </div><!-- /.box-body -->
+        <div ng-show="pageLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
       </div>
     </div>
     <div class="col-xs-12">
       <!-- Default box -->
-      <div class="box box-primary">
+      <div class="box box-primary md-whiteframe-z1">
         <div class="box-header">
           <h3 class="box-title">Transitions</h3>
         </div><!-- /.box-header -->
@@ -86,9 +92,12 @@
           </table>
         </div><!-- /.box-body -->
         <div class="box-footer align-center">
-          <button ng-click="addNewTransition()" class="btn btn-primary">
+          <button ng-click="addNewTransition()" class="btn btn-primary md-whiteframe-z1">
             Ajouter une transition
           </button>
+        </div>
+        <div ng-show="transitionsLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
         </div>
       </div>
     </div>

@@ -29,27 +29,20 @@ angular.module('myVirtualStoryBookApp')
     
     /**********************Page control************************/
     
+    $scope.pageLoading=true;
+    $scope.transitionsLoading=true;
+    
     PageService.getPage($stateParams.id).success(function(page){
       $scope.page = page;
+      $scope.pageLoading=false;
       BookService.getBookPages($scope.page.book.id).success(function(pages){
         $scope.pages = pages;
-        $scope.buildTransitionsSelects();
+        $scope.transitionsLoading=false;
       });
     });
     
-    $scope.buildTransitionsSelects = function(){
-      $scope.page.transitions.forEach(function(transition){
-        if(angular.isDefined(transition.to_page)) transition.selectedPage = transition.to_page.id;
-      });
-    };
-    
-    $scope.getPageArrayKey = function(pageId){
-      for (var i = 0; i < $scope.pages.length; i++){
-        if($scope.pages[i].id === pageId) return i;
-      };
-    };
-    
     $scope.addNewTransition = function(){
+      $scope.transitionsLoading=true;
       PageService.updatePage($scope.page).success(function(){
         PageService.addNewTransition($scope.page).success(function(){
           PageService.getTransitions($scope.page).success($scope.updateTransitions);
@@ -59,7 +52,7 @@ angular.module('myVirtualStoryBookApp')
     
     $scope.updateTransitions = function(transitions){
       $scope.page.transitions = transitions;
-      $scope.buildTransitionsSelects();
+      $scope.transitionsLoading=false;
     }
     
     $scope.deleteTransition = function(transition){
