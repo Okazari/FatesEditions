@@ -14,17 +14,17 @@
             <h3 class="box-title">Votre livre</h3>
             <div class="box-tools pull-right">
               <div class="btn-group">
-                <label class="label label-success" ng-if="init && !book.draft"><i class="fa fa-book"></i> Publié</label>
-                <label class="label label-danger" ng-if="init && book.draft"><i class="fa fa-pencil"></i> Brouillon</label>
+                <label class="label label-success md-whiteframe-z1" ng-if="init && !book.draft"><i class="fa fa-book"></i> Publié</label>
+                <label class="label label-danger md-whiteframe-z1" ng-if="init && book.draft"><i class="fa fa-pencil"></i> Brouillon</label>
               </div>
             </div>
           </div>
           <div class="box-body row">
             <div class="col-lg-3 col-sm-3 col-xs-3 changer-cover">              
-              <img ng-src="{{book.cover}}" class="cover-preview" alt="User Image">
-              <div class="input-group margin-top">
+              <img ng-src="{{book.cover}}" class="cover-preview md-whiteframe-z1" alt="User Image">
+              <div class="input-group margin-top md-whiteframe-z1">
                   <span class="input-group-addon">URL</span>
-                  <input type="text" name="cover" class="form-control" placeholder="url de l'image de couverture" ng-model="book.cover" ng-change="displayMessage = false" required>
+                  <input type="text" name="cover" class="form-control " placeholder="url de l'image de couverture" ng-model="book.cover" ng-change="displayMessage = false" required>
               </div>
             </div>
             <div class="col-xs-9">
@@ -79,16 +79,16 @@
           <table class="table table-hover">
             <tbody>
               <tr>
-                <th style="width: 10px"><button disabled class="btn btn-primary fa fa-pencil"></button></th>
+                <th style="width: 10px"><button disabled class="btn btn-primary fa fa-pencil md-whiteframe-z1"></button></th>
                 <th>Titre</th>
                 <th>Description</th>
-                <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close"></button></th>
+                <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
               </tr>
               <tr ng-repeat="page in pages">
-                <td><button ng-disabled="!book.draft" ng-click="editPage(page)" class="btn btn-primary fa fa-pencil"></button></td>
+                <td><button ng-disabled="!book.draft" ng-click="editPage(page)" class="btn btn-primary fa fa-pencil md-whiteframe-z1"></button></td>
                 <td>{{page.title}}</td>
                 <td>{{page.description}}</td>
-                <td><button ng-disabled="!book.draft" ng-click="deletePage(page)" class="btn btn-primary fa fa-close"></button></td>
+                <td><button ng-disabled="!book.draft" ng-click="deletePage(page)" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
               </tr>
             </tbody>
           </table>

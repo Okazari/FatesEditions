@@ -21,7 +21,7 @@
             <div class="col-sm-4 col-xs-12">
               <div class="input-group margin-top col-xs-12">
                 <label>Titre</label> 
-                <input type="text" name="cover" class="form-control" placeholder="Titre de la page" ng-model="page.title" ng-change="displayMessage = false" required>
+                <input type="text" name="cover" class="form-control " placeholder="Titre de la page" ng-model="page.title" ng-change="displayMessage = false" required>
               </div>
             </div>
             <div class="col-lg-8 col-sm-8 col-xs-12">
@@ -64,12 +64,12 @@
           <h3 class="box-title">Transitions</h3>
         </div><!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
-          <table class="table table-hover">
+          <table class="table table-hover md-whiteframe-z1">
             <tbody>
               <tr>
                 <th style="width:35%">Page de destination</th>
                 <th style="width:60%">Texte de transition</th>
-                <th style="width:5%"><button disabled class="btn btn-primary fa fa-close"></button></th>
+                <th style="width:5%"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
               </tr>
               <tr ng-repeat="transition in page.transitions">
                 <td>
@@ -80,13 +80,13 @@
                       </select>
                     </div>
                     <div class="col-xs-5">
-                      <button ng-show="transition.to_page" ng-click="goToPage(transition.to_page)" class="btn btn-primary">Editer cette page</button>
-                      <button ng-show="!transition.to_page" ng-click="addNewPage(transition)" class="btn btn-primary">Editer cette page</button>
+                      <button ng-show="transition.to_page" ng-click="goToPage(transition.to_page)" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
+                      <button ng-show="!transition.to_page" ng-click="addNewPage(transition)" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
                     </div>
                   </div>
                 </td>
                 <td><textarea rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
-                <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close"></button></td>
+                <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
               </tr>
             </tbody>
           </table>
