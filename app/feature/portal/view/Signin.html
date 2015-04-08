@@ -34,24 +34,27 @@
       <img class="logo-signin" src="/app/images/logo.png">
     <b>MyVirtualStoryBook</b></a>
   </div><!-- /.login-logo -->
-  <div class="login-box-body md-whiteframe-z2">
-    <p class="login-box-msg">Renseignez vos identifiants</p>
-    <form name="loginForm">
-      <md-input-container>
-          <label>Nom d'utilisateur</label>
-          <input type="text"  max="20" name="username" class="form-control" placeholder="Entrez votre nom d'utilisateur" ng-model="user.username" ng-change="displayMessage = false" required>
-      </md-input-container>
-       <md-input-container>
-          <label>Mot de passe</label>
-          <input type="password" class="form-control" placeholder="Entrez votre mot de passe" ng-model="user.password" ng-change="displayMessage = false" required>
-      </md-input-container>
-      <div class="row">
-        <div class="col-xs-4">
-          <md-button type="submit" ng-click="authentify()" class="md-raised md-primary">Connexion</md-button>
-        </div><!-- /.col -->
-        <div class="col-xs-8" ng-show="displayMessage">{{displayMessageText}}</div>
+  <div class="box md-whiteframe-z2">
+    <div class="box-body">
+      <div class="box-header with-border align-center">
+        <h3 class="box-title">Renseignez vos identifiants</h3>
       </div>
-    </form>
-
+      <form name="loginForm">
+        <md-input-container>
+            <label>Nom d'utilisateur</label>
+            <input type="text"  max="20" name="username" class="form-control" placeholder="Entrez votre nom d'utilisateur" ng-model="user.username" ng-change="displayMessage = false" required>
+        </md-input-container>
+         <md-input-container>
+            <label>Mot de passe</label>
+            <input type="password" class="form-control" placeholder="Entrez votre mot de passe" ng-model="user.password" ng-change="displayMessage = false" required>
+        </md-input-container>
+        <div class="row">
+          <div class="col-xs-4">
+            <md-button type="submit" ng-click="authentify()" class="md-raised md-primary">Connexion</md-button>
+          </div><!-- /.col -->
+          <div class="col-xs-8" ng-show="displayMessage">{{displayMessageText}}</div>
+        </div>
+      </form>
+    </div>
   </div><!-- /.login-box-body -->
 </div>

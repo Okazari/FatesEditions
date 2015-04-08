@@ -1,5 +1,6 @@
 /* Space out content a bit */
 
+
 .navbar-brand{
   color:white;
 }
@@ -26,6 +27,8 @@
   text-align:left;
   font-family:"Times New Roman";
   padding-left:60px;
+  white-space:normal;
+  border-radius:0!important;
 }
 
 /* Gestion des alerts et leurs animations */

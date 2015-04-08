@@ -2,7 +2,7 @@
   <section class="content">
 
     <!-- Default box -->
-    <div class="box">
+    <div class="box md-whiteframe-z1">
       <div class="box-header with-border">
         <h3 class="box-title">Les livres</h3>
         <div class="box-tools pull-right">
@@ -13,13 +13,13 @@
       <div class="box-body">
         <div class="row">
           <div ng-hide="books.length || booksLoading" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="callout">
+            <div class="callout md-whiteframe-z1">
               <h4>Aucun livre disponible</h4>
               <p>Personne n'a encore publié de livre, attendez que quelqu'un en publie un ou créez votre propre livre et publiez le !</p>
             </div>
           </div>
           <div ng-repeat="book in books" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="small-box bg-primary book-widget">
+            <div class="small-box bg-primary book-widget md-whiteframe-z1">
               <div class="row top-widget">
                 <div class="col-lg-3 col-sm-3 col-xs-4 preview-container">              
                   <img ng-src="{{book.cover}}" class="cover-preview" alt="User Image">

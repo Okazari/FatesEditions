@@ -39,20 +39,23 @@
   <section class="content">
 
     <!-- Default box -->
-    <div class="box">
+    <div class="box md-whiteframe-z1">
       <div class="box-body">
         <div class="row">
           <div class="col-xs-12">
-            <div class="pageText" ng-bind-html="currentPage.text">
+            <div class="pageText " ng-bind-html="currentPage.text">
             </div>
           </div>
         </div>
       </div><!-- /.box-body -->
       <div class="box-footer">
-        <div class="list-group-item btn btn-default transitionText" ng-click="changePage(transition.to_page.id)" ng-repeat="transition in currentPage.transitions">
+        <div class="list-group-item btn btn-default transitionText md-whiteframe-z1" ng-click="changePage(transition.to_page.id)" ng-repeat="transition in currentPage.transitions">
             <p>- {{transition.text}}</p>
         </div>
       </div><!-- /.box-footer-->
+      <div ng-show="pageLoading" class="overlay">
+        <i class="fa fa-refresh fa-spin"></i>
+      </div>
     </div><!-- /.box -->
 
   </section><!-- /.content -->

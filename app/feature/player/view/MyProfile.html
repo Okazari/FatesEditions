@@ -10,7 +10,7 @@
   <section class="content">
 
     <!-- Default box -->
-    <div class="box">
+    <div class="box md-whiteframe-z1">
       <div class="box-header with-border">
         <h3 class="box-title">Mes parties</h3>
         <div class="box-tools pull-right">
@@ -20,13 +20,13 @@
       <div class="box-body">
         <div class="row">
           <div ng-hide="games.length || gamesLoading" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="callout">
+            <div class="callout md-whiteframe-z1">
               <h4>Vous n'avez pas de partie en cours</h4>
               <p>Rendez vous sur la page "Les livres", laissez vous tenter par une histoire et lancez une partie !</p>
             </div>
           </div>
           <div ng-repeat="game in games" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="small-box bg-navy book-widget">
+            <div class="small-box bg-navy book-widget md-whiteframe-z2">
               <div class="box-tools pull-right">
                 <a class="fa fa-remove icon-tool" ng-click="openDeleteGameModal(game)"></a>
               </div>
@@ -53,23 +53,23 @@
     </div><!-- /.box -->
 
     <!-- Default box -->
-    <div class="box">
+    <div class="box md-whiteframe-z1">
       <div class="box-header with-border">
         <h3 class="box-title">Mes Brouillons</h3>
         <div class="box-tools pull-right">
-          <button class="btn btn-success" ng-click="newBook()"><i class="fa fa-plus"> Créer un brouillon</i></button>
+          <md-button class="md-flat md-primary"  ng-click="newBook()"><i class="fa fa-plus"> Créer un brouillon</i></md-button>
         </div>
       </div>
       <div class="box-body">
         <div class="row">
           <div ng-hide="(books | filter:{draft:true}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="callout">
+            <div class="callout md-whiteframe-z1">
               <h4>Vous n'avez pas de brouillons</h4>
               <p>Commençez dès maintenant et créez un brouillon</p>
             </div>
           </div>
           <div ng-repeat="book in books | filter:{draft:true}" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="small-box bg-primary book-widget">
+            <div class="small-box bg-primary book-widget md-whiteframe-z2">
               <div class="box-tools pull-right">
                 <a ng-if="book.draft" class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
               </div>
@@ -96,23 +96,23 @@
       </div>
     </div><!-- /.box -->
       <!-- Default box -->
-      <div class="box">
+      <div class="box md-whiteframe-z1">
         <div class="box-header with-border">
           <h3 class="box-title">Mes Publications</h3>
           <div class="box-tools pull-right">
-            <button class="btn btn-success" ng-click="openChooseBookModal()"><i class="fa fa-plus"> Publier un brouillon</i></button>
+            <md-button class="md-flat md-primary" ng-click="openChooseBookModal()"><i class="fa fa-plus"> Publier un brouillon</i></md-button>
           </div>
         </div>
         <div class="box-body">
           <div class="row">
             <div ng-hide="(books | filter:{draft:false}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="callout">
+            <div class="callout md-whiteframe-z1">
               <h4>Vous n'avez pas de publication</h4>
               <p>Dès que l'un de vos brouillons est finalisé, publiez le afin de le rendre visible et jouable pour tout les autres utilisateurs</p>
             </div>
           </div>
             <div ng-repeat="book in books | filter:{draft:false}" class="col-lg-6 col-sm-6 col-xs-12">
-              <div class="small-box bg-primary book-widget">
+              <div class="small-box bg-primary book-widget md-whiteframe-z2">
                 <div class="box-tools pull-right">
                   <a class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
                 </div>
