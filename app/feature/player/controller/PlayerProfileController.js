@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('PlayerProfileController', function ($scope, $state, $modal, $filter, PlayerService, BookService, GameService) {
+  .controller('PlayerProfileController', function ($scope, $state,$mdSidenav, $modal, $filter, PlayerService, BookService, GameService) {
 
     $scope.playGame = function(game){
       $state.go("game",{id:game.id});
@@ -115,5 +115,9 @@ angular.module('myVirtualStoryBookApp')
     $scope.firstLoad = true;
     $scope.updateBooks();
     $scope.updateGames();
+    
+    $scope.toggleSidenav = function(menuId) {
+        $mdSidenav(menuId).toggle();
+    };
     
   });

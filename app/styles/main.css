@@ -4,6 +4,16 @@ body{
   overflow-y:scroll!important;
 }
 
+.skin-blue.layout-top-nav .main-header > .logo{
+  position:relative;
+  z-index:5000;
+  background-color:#367fa9;
+}
+
+.skin-blue.layout-top-nav .main-header > .logo:hover{
+  background-color:#367fa9;
+}
+
 .navbar-brand{
   color:white;
 }
@@ -16,7 +26,8 @@ body{
 .logo-header{
   max-height:30px;
   max-width:30px;
-  float:left;
+  margin-right:5px;
+  vertical-align:initial;
 }
 
 .pageText{
@@ -85,7 +96,7 @@ body{
 }
 
 .genre-icon{
-  margin-left:5px;
+  margin-left:10px;
 }
 .synopsis-preview{
   margin-top:10px;
@@ -117,64 +128,6 @@ a:hover{
   margin:0;
 }
 
-/* SIDE BAR STYLE */
-.main-sidebar.right-sidebar{
-  right:0;
-  padding-top:0;
-  z-index:2000;
-  left:auto;
-  -webkit-transform: none; /* Safari and Chrome */
-  -moz-transform: none; /* Firefox */
-  -ms-transform: none; /* IE 9 */
-  -o-transform: none; /* Opera */
-  transform: none;
-}
-
-.main-sidebar.right-sidebar.ng-hide{
-  display:block!important;
-  width:0;
-}
-
-.with-right-sidebar{
-  -webkit-transform: translate(-230px, 0); 
-  -ms-transform: translate(-230px, 0);
-  -o-transform: translate(-230px, 0);
-  transform: translate(-230px, 0); 
-} 
-.main-sidebar .pinned{
-  position:absolute;
-  left:-50px;
-  top:0;
-  background:#222d32;
-  border-color:#222d32;
-  color:white;
-  height:50px;
-  width:50px;
-  border-radius: 0px;
-}
-
-.main-sidebar .pinned:hover{
-  border-color:#222d32;
-}
-
-.main-sidebar .pinned:focus{
-  background-color:#222d32;
-  border-color:#222d32;
-  color:white;
-}
-
-
-.main-sidebar .list-group-item{
-  border-radius:0px;
-}
-
-.main-sidebar.ng-hide .badge{
-  display:none;
-}
-
-.small-box.book-widget{
-  /*height:200px;*/
-}
 
 .top-widget{
   /*height:174px;*/

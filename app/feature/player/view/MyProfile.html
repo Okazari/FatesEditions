@@ -88,6 +88,26 @@
               </a>
             </div>
           </div>
+          <div ng-repeat="book in books | filter:{draft:true}" class="col-lg-3 col-sm-2 col-xs-2">
+            <div class="small-box bg-primary book-widget-2 md-whiteframe-z2">
+              <div class="box-tools pull-right">
+                <a ng-if="book.draft" class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
+              </div>
+              <div class="top-widget">
+                
+                <h4>{{book.name}}</h4>
+                <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
+
+                <h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
+                <img ng-src="{{book.cover}}" class="cover-preview" alt="User Image">
+                  
+      
+              </div>
+              <a ng-click="editBook(book)" class="small-box-footer">
+                Editer <i class="fa fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div><!-- /.box-body -->
       <div ng-show="booksLoading" class="overlay">

@@ -1,23 +1,56 @@
-<header class="main-header">
+<!--<header class="main-header">
   <nav class="navbar navbar-static-top md-whiteframe-z1" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-bar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="fa fa-bars"></span>
-        </button>
-        <a class="navbar-brand" href="#/"><img class="logo-header" src="/app/images/logo.png"><span style="margin-left:10px">MyVirtualStoryBook</span></a>
-      </div>
-      <div class="collapse navbar-collapse" id="nav-bar-collapse">
+    
+  </nav>
+</header>-->
+<header class="main-header md-whiteframe-z2">
+    <a ui-sref="player.myprofile" class="logo"><img class="logo-header" src="/app/images/logo.png"><b style="font-size:0.8em;">MyVirtualStoryBook</b></a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <li class="divider" ng-class="getClassIfActive($index)" ng-repeat="item in MenuItems">
-            <a ng-if="item.url" ui-sref="{{item.url}}">{{item.label}}<span class="sr-only"></span>
-            </a>
-            <a ng-if="item.click" ng-click="item.click()">{{item.label}}<span class="sr-only"></span></a>
-          </li>
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="nav-bar-collapse">
+              <ul class="nav navbar-nav">
+                <li class="divider">
+                  <a ng-click="logout()">Déconnexion<span class="sr-only"></span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </ul>
       </div>
-    </div>
-  </nav>
-</header>
-    
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <!--<div class="user-panel">
+      <div class="pull-left image">
+      </div>
+      <div class="pull-left info">
+      </div>
+    </div>-->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <li class="header">Plan du site</li>
+      <li class="treeview" ng-class="{'active':menu.active}">
+        <a ng-click="menu.active = !menu.active">
+          <i class="fa fa-gamepad"></i> <span>Jouer</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu" ng-class="{'menu-open':menu.active}">
+          <li ng-repeat="item in MenuItems"><a ui-sref="{{item.url}}"><i class="fa fa-circle-o"></i>{{item.label}}</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>
