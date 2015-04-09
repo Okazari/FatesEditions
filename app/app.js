@@ -26,10 +26,7 @@ var myVirtualStoryBookApp = angular
 
         // For any unmatched url, send to /signup
         //TODO: à changer plus tard.
-        $urlRouterProvider.otherwise("/player/myprofile");
-        
-        // /player place seulement le header, on redirige donc vers une page avec un contenu.
-        $urlRouterProvider.when("/player","/player/myprofile");
+        $urlRouterProvider.otherwise("/play/books");
         $stateProvider
             //Portail
             .state('signup', {
@@ -41,9 +38,23 @@ var myVirtualStoryBookApp = angular
                 templateUrl: "feature/portal/view/Signin.html",
                 controller: "SignInController"
             })
-            
+
+            .state('app', {
+                templateUrl: "feature/common/template/Base.template.html",
+                abstract: true
+            })
+            .state('app.play',{
+                url:"/play",
+                template:"<div ui-view></div>",
+                abstract:true
+            })
+            .state('app.play.books', {
+                url: "/books",
+                controller:"BookListController",
+                templateUrl:"feature/play/view/BookList.html"  
+            })
             //Joueur
-            .state('player', {
+            /*.state('player', {
                 url: "/player",
                 templateUrl: "feature/player/template/Player.template.html"
             })
@@ -76,7 +87,7 @@ var myVirtualStoryBookApp = angular
                 url: "/game/{id}",
                 templateUrl: "feature/game/view/CurrentGame.html",
                 controller: "GameController"
-            })
+            })*/
 
 }); 
 

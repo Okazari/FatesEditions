@@ -14,7 +14,7 @@ angular.module('myVirtualStoryBookApp')
             ConnectionService.login(angular.copy($scope.user)).success(function(player){
                 $window.sessionStorage.setItem("playerUsername",$scope.user.username);
                 PlayerService.setCurrentPlayerUsername($scope.user.username);
-                $state.go('player.myprofile');
+                $state.go('app.play.books');
             }).error($scope._displayError);
         }
     }

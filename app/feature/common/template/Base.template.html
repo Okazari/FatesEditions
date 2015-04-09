@@ -1,0 +1,98 @@
+<div class="wrapper">
+    <header class="main-header md-whiteframe-z2">
+        <a ui-sref="player.myprofile" class="logo"><img class="logo-header" src="/app/images/logo.png"><b style="font-size:0.8em;">MyVirtualStoryBook</b></a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="nav-bar-collapse">
+                  <ul class="nav navbar-nav">
+                    <li class="divider">
+                      <a ng-click="logout()">Déconnexion<span class="sr-only"></span></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image col-xs-3">
+              <div style="color:white;">Okazari</div>
+              <img src="http://shimashimasha.com/img/diary/okazari.jpg">
+          </div>
+          <div class="pull-left info col-xs-9" style="padding-left:20px;">
+              <div style="margin-top:10px; width: 100%;">
+                  <div>Joueur niveau 7</div>
+                  <div class="progress" style="height: 2px; margin-bottom:10px;">
+                    <div class="progress-bar" style="width: 90%;"></div>
+                  </div>
+              </div>
+              <div style="margin-top:5px;">
+                  <div>Auteur niveau 3</div>
+                  <div class="progress" style="height: 2px;">
+                    <div class="progress-bar" style="width: 50%;"></div>
+                  </div>
+              </div>
+          </div>        <div class="row"></div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+          <li class="header">Plan du site</li>
+          <li class="treeview" ng-class="{'active':menu.play.active}">
+            <a ng-click="menu.play.active = !menu.play.active">
+              <i class="fa fa-gamepad"></i> <span>Joue</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu" ng-class="{'menu-open':menu.play.active}">
+              <li><a ui-sref="app.play.books"><i class="fa fa-circle-o"></i>Choisir un livre</a></li>
+              <li><a ui-sref="app.play.books"><i class="fa fa-circle-o"></i>Reprendre une partie</a></li>
+            </ul>
+          </li>
+          <li class="treeview" ng-class="{'active':menu.write.active}">
+            <a ng-click="menu.write.active = !menu.write.active">
+              <i class="fa fa-pencil"></i> <span>Ecris</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu" ng-class="{'menu-open':menu.write.active}">
+              <li><a ui-sref="app.write.books"><i class="fa fa-circle-o"></i>Créer un livre</a></li>
+              <li><a ui-sref="app.write.books"><i class="fa fa-circle-o"></i>Voir mes brouillons</a></li>
+            </ul>
+          </li>
+          <li class="treeview" ng-class="{'active':menu.share.active}">
+            <a ng-click="menu.share.active = !menu.share.active">
+              <i class="fa fa-share-alt"></i> <span>Partage</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu" ng-class="{'menu-open':menu.share.active}">
+              <li><a ui-sref="app.share.books"><i class="fa fa-circle-o"></i>Partager un livre</a></li>
+              <li><a ui-sref="app.share.books"><i class="fa fa-circle-o"></i>Voir mes livres partagés</a></li>
+              <li><a ui-sref="app.share.books"><i class="fa fa-circle-o"></i>Voir mon profil</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+    <div ui-view>
+        
+    </div>
+    <footer class="main-footer" ng-class="{'with-right-sidebar': showRightMenu}">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 1.1 BétaTest -<a href="mailto:myvirtualstorybook@gmail.com"> myvirtualstorybook@gmail.com</a> - 
+        Logo by Eliade - suivez le sur<a href="https://www.facebook.com/Eliadesdrawing?fref=ts"> facebook <i class="fa fa-facebook"></i></a>
+      </div>
+      <strong>MyVisualStoryBook <a href="">Okazari</a>.</strong> All rights reserved.
+      
+    </footer>
+</div>
