@@ -3,10 +3,6 @@
 angular.module('myVirtualStoryBookApp')
   .controller('GameListController', function ($scope, $state, $mdSidenav, $modal, $filter, PlayerService, BookService, GameService) {
 
-    $scope.playGame = function(game){
-      $state.go("game",{id:game.id});
-    }
-    
     $scope.updateGames = function(){
       $scope.gamesLoading = true;
       PlayerService.getConnectedPlayerGames().success(function(games){

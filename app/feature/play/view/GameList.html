@@ -31,7 +31,7 @@
                   <div class="inner synopsis-preview">{{game.book.synopsis}}</div>
                 </div>
               </div>
-              <a ng-click="playGame(game)" class="small-box-footer">
+              <a ui-sref="app.play.playing({id:game.id})" class="small-box-footer">
                 Jouer <i class="fa fa-arrow-circle-right"></i>
               </a>
             </div>
