@@ -41,6 +41,7 @@ var myVirtualStoryBookApp = angular
 
             .state('app', {
                 templateUrl: "feature/common/template/Base.template.html",
+                controller: "BaseController",
                 abstract: true
             })
             .state('app.play',{
@@ -52,6 +53,41 @@ var myVirtualStoryBookApp = angular
                 url: "/books",
                 controller:"BookListController",
                 templateUrl:"feature/play/view/BookList.html"  
+            })
+            .state('app.play.games', {
+                url: "/games",
+                controller:"GameListController",
+                templateUrl:"feature/play/view/GameList.html"  
+            })
+            .state('app.write',{
+                url:"/write",
+                template:"<div ui-view></div>",
+                abstract:true
+            })
+            .state('app.write.drafts', {
+                url: "/drafts",
+                controller:"DraftListController",
+                templateUrl:"feature/write/view/DraftList.html"  
+            })
+            .state('app.write.book', {
+                url: "/book/{id}",
+                controller:"WriteBookController",
+                templateUrl:"feature/write/view/WriteBook.html"  
+            })
+            .state('app.write.page', {
+                url: "/page/{id}",
+                controller:"WritePageController",
+                templateUrl:"feature/write/view/WritePage.html"  
+            })
+            .state('app.share',{
+                url:"/share",
+                template:"<div ui-view></div>",
+                abstract:true
+            })
+            .state('app.share.publication', {
+                url: "/publication",
+                controller:"PublicationListController",
+                templateUrl:"feature/share/view/PublicationList.html"  
             })
             //Joueur
             /*.state('player', {

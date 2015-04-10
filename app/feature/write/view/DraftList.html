@@ -1,33 +1,37 @@
 <div class="content-wrapper">
+  <!-- Main content -->
   <section class="content">
     <!-- Default box -->
     <div class="box md-whiteframe-z1">
       <div class="box-header with-border">
-        <h3 class="box-title">Les livres disponibles</h3>
+        <h3 class="box-title">Mes brouillons</h3>
       </div>
       <div class="box-body">
         <div class="row">
-          <div ng-hide="books.length || booksLoading" class="col-lg-6 col-sm-6 col-xs-12">
+          <div ng-hide="(books | filter:{draft:true}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
             <div class="callout md-whiteframe-z1">
-              <h4>Aucun livre disponible</h4>
-              <p>Personne n'a encore publié de livre, attendez que quelqu'un en publie un ou créez votre propre livre et publiez le !</p>
+              <h4>Vous n'avez pas de brouillons</h4>
+              <p>Commençez dès maintenant et créez un brouillon</p>
             </div>
           </div>
-          <div ng-repeat="book in books" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="small-box bg-primary book-widget md-whiteframe-z1">
+          <div ng-repeat="book in books | filter:{draft:true}" class="col-lg-6 col-sm-6 col-xs-12">
+            <div class="small-box bg-primary book-widget md-whiteframe-z2">
+              <div class="box-tools pull-right">
+                <a ng-if="book.draft" class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
+              </div>
               <div class="row top-widget">
                 <div class="col-lg-3 col-sm-3 col-xs-4 preview-container">              
                   <img ng-src="{{book.cover}}" class="cover-preview" alt="User Image">
                 </div>
                 <div class="col-lg-9 col-sm-9 col-xs-8 inner">
                   <h4>{{book.name}}</h4>
-                  <h4 class="label label-primary" ng-class="{'label-success':isAuthor(book)}">{{book.author.username}}</h4>
+                  <h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
                   <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
                   <div class="inner synopsis-preview">{{book.synopsis}}</div>
                 </div>
               </div>
-              <a ng-click="newGame(book)" class="small-box-footer">
-                Jouer <i class="fa fa-arrow-circle-right"></i>
+              <a ui-sref="app.write.book({id:book.id})" class="small-box-footer">
+                Editer <i class="fa fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
@@ -36,8 +40,6 @@
       <div ng-show="booksLoading" class="overlay">
           <i class="fa fa-refresh fa-spin"></i>
       </div>
-      <div class="box-footer">
-      </div><!-- /.box-footer-->
     </div><!-- /.box -->
   </section><!-- /.content -->
 </div>

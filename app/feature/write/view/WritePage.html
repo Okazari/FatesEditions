@@ -1,0 +1,108 @@
+<!-- Contenu de la page -->
+<div class="content-wrapper" ng-class="{'with-right-sidebar': showRightMenu}">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <!-- Default box -->
+    <div class="col-xs-12">
+      <div class="box box-primary md-whiteframe-z1">
+        <div class="box-header with-border">
+          <h3 class="box-title">Informations générales</h3>
+          <div class="box-tools pull-right">
+            <div class="btn-group"></div>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-sm-4 col-xs-12">
+              <div class="input-group margin-top col-xs-12">
+                <label>Titre</label> 
+                <input ng-change="savePage()" ng-model-options="{debounce:1000}" type="text" name="cover" class="form-control " placeholder="Titre de la page" ng-model="page.title" ng-change="displayMessage = false" required>
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-8 col-xs-12">
+              <div class="input-group margin-top col-xs-12">
+                <label>Memo</label> 
+                <input ng-change="savePage()" ng-model-options="{debounce:1000}" type="text" name="cover" class="form-control" placeholder="Decrivez rapidement ce qu'il se passe dans votre page" ng-model="page.description" ng-change="displayMessage = false" required>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.box-body -->
+        <div ng-show="pageLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="box box-primary md-whiteframe-z1">
+        <div class="box-header with-border">
+          <h3 class="box-title">Contenu</h3>
+          <div class="box-tools pull-right">
+            <div class="btn-group"></div>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-xs-12">
+              <div text-angular ng-change="savePage()" ng-model-options="{debounce:1000}" ng-model="page.text"></div>
+            </div>
+          </div>
+        </div><!-- /.box-body -->
+        <div ng-show="pageLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <!-- Default box -->
+      <div class="box box-primary md-whiteframe-z1">
+        <div class="box-header">
+          <h3 class="box-title">Transitions</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover md-whiteframe-z1">
+            <tbody>
+              <tr>
+                <th style="width:35%">Page de destination</th>
+                <th style="width:60%">Texte de transition</th>
+                <th style="width:5%"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
+              </tr>
+              <tr ng-repeat="transition in page.transitions">
+                <td>
+                  <div class="row">
+                    <div class="col-lg-7 col-sm-12 col-xs-12">
+                      <select ng-change="savePage()" ng-model="transition.to_page" ng-options="page as page.title for page in pages track by page.id" class="form-control">
+                        <option value="" selected>-- Créer une nouvelle page --</option>
+                      </select>
+                    </div>
+                    <div class="col-xs-5">
+                      <button ng-show="transition.to_page" ng-click="goToPage(transition.to_page)" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
+                      <button ng-show="!transition.to_page" ng-click="addNewPage(transition)" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
+                    </div>
+                  </div>
+                </td>
+                <td><textarea ng-change="savePage()" ng-model-options="{debounce:1000}" rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
+                <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.box-body -->
+        <div class="box-footer align-center">
+          <button ng-click="addNewTransition()" class="btn btn-primary md-whiteframe-z1">
+            Ajouter une transition
+          </button>
+        </div>
+        <div ng-show="transitionsLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+    </div>
+  </section><!-- /.content -->
+  <!-- =============================================== -->
+</div>
+<div class="floatingAlerts">
+  <alert ng-repeat="alert in alerts" ng-animate="'animate'" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+</div>

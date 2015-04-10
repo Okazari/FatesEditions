@@ -29,7 +29,7 @@
       <!-- sidebar: style can be found in sidebar.less -->
       <section class="sidebar">
         <!-- Sidebar user panel -->
-        <div class="user-panel">
+        <!--<div class="user-panel">
           <div class="pull-left image col-xs-3">
               <div style="color:white;">Okazari</div>
               <img src="http://shimashimasha.com/img/diary/okazari.jpg">
@@ -47,8 +47,8 @@
                     <div class="progress-bar" style="width: 50%;"></div>
                   </div>
               </div>
-          </div>        <div class="row"></div>
-        </div>
+          </div>
+        </div>-->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
           <li class="header">Plan du site</li>
@@ -58,7 +58,7 @@
             </a>
             <ul class="treeview-menu" ng-class="{'menu-open':menu.play.active}">
               <li><a ui-sref="app.play.books"><i class="fa fa-circle-o"></i>Choisir un livre</a></li>
-              <li><a ui-sref="app.play.books"><i class="fa fa-circle-o"></i>Reprendre une partie</a></li>
+              <li><a ui-sref="app.play.games"><i class="fa fa-circle-o"></i>Reprendre une partie</a></li>
             </ul>
           </li>
           <li class="treeview" ng-class="{'active':menu.write.active}">
@@ -66,8 +66,8 @@
               <i class="fa fa-pencil"></i> <span>Ecris</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu" ng-class="{'menu-open':menu.write.active}">
-              <li><a ui-sref="app.write.books"><i class="fa fa-circle-o"></i>Créer un livre</a></li>
-              <li><a ui-sref="app.write.books"><i class="fa fa-circle-o"></i>Voir mes brouillons</a></li>
+              <li><a ng-click="newBook()"><i class="fa fa-circle-o"></i>Créer un livre</a></li>
+              <li><a ui-sref="app.write.drafts"><i class="fa fa-circle-o"></i>Voir mes brouillons</a></li>
             </ul>
           </li>
           <li class="treeview" ng-class="{'active':menu.share.active}">
@@ -76,7 +76,7 @@
             </a>
             <ul class="treeview-menu" ng-class="{'menu-open':menu.share.active}">
               <li><a ui-sref="app.share.books"><i class="fa fa-circle-o"></i>Partager un livre</a></li>
-              <li><a ui-sref="app.share.books"><i class="fa fa-circle-o"></i>Voir mes livres partagés</a></li>
+              <li><a ui-sref="app.share.publication"><i class="fa fa-circle-o"></i>Voir mes livres partagés</a></li>
               <li><a ui-sref="app.share.books"><i class="fa fa-circle-o"></i>Voir mon profil</a></li>
             </ul>
           </li>

@@ -2,9 +2,9 @@
 <html class="full no-js">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>MyVirtualStoryBook</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width"> 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -69,8 +69,14 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <!-- Controllers -->
     <script src="./app.js"></script>
+    <script src="feature/common/controller/BaseController.js"></script>
     <script src="feature/portal/controller/SignInController.js"></script>
     <script src="feature/play/controller/BookListController.js"></script>
+    <script src="feature/play/controller/GameListController.js"></script>
+    <script src="feature/write/controller/DraftListController.js"></script>
+    <script src="feature/write/controller/WriteBookController.js"></script>
+    <script src="feature/write/controller/WritePageController.js"></script>
+    <script src="feature/share/controller/PublicationListController.js"></script>
     <!-- Services -->
     <script src="feature/common/service/BookService.js"></script>
     <script src="feature/common/service/ConnectionService.js"></script>
