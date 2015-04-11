@@ -91,6 +91,11 @@ body{
   max-height:100%;
 }
 
+.cover-preview.tiny{
+  max-width:50px;
+  max-height:50px;
+}
+
 .preview-container{
   height:100%;
 }
