@@ -1,14 +1,31 @@
 <div class="col-xs-12">
   <ul rn-carousel rn-carousel-index="carouselIndex" rn-carousel-controls rn-carousel-buffered rn-carousel-transition="hexagon" class="image col-md-offset-5 col-xs-2">
     <li ng-repeat="item in list">
-      <div class="layer">
-        <img ng-src="{{item.cover}}" class="cover-preview">
-        <div class="col-xs-12 text-center">{{item.name}}</div>
+      <div class="layer bgimage">
+        <div class="col-xs-12">
+          <div class="box box-primary md-whiteframe-z1">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{item.name}}</h3>
+              </div><!-- /.box-header -->
+              <div class="box-body" style="display: block;">
+                <div class="row">
+                  <div class="col-xs-4" style="height:400px">
+                    <img ng-src="{{item.cover}}" class="cover-preview md-whiteframe-z1" alt="User Image">
+                  </div>
+                  <div class="col-xs-8">
+                    <h4>{{item.name}}</h4>
+                    <h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
+                    <h4 ng-if="item.genre" class="label label-primary">{{item.genre.name}} <i class="fa fa-{{item.genre.icon}} genre-icon"></i></h4>
+                    <div class="inner synopsis-preview">{{item.synopsis}}</div>
+                  </div>
+                </div>
+              </div><!-- /.box-body -->
+            </div>
+        </div>
       </div>
     </li>
   </ul>
 </div>
-{{carouselIndex}}
 <div ng-if="list.length > 0" class="rn-carousel-indicator custom-indicator text-center col-xs-12">
   <span ng-repeat="item in list" ng-class="{active: $index==$parent.carouselIndex}" ng-click="changeCarouselIndex($index)" class="carousel-thumbnail">
     <img ng-src="{{item.cover}}" class="carousel-thumbnail">  
