@@ -10,11 +10,11 @@ angular.module('myVirtualStoryBookApp')
     });
     
     $scope.isAuthor = function(book){
-      return PlayerService.isCurrentPlayerAuthor(book);
+      return PlayerService.player.isAuthor(book);
     }
     
     $scope.newGame = function(book){
-      PlayerService.newGame(book).success(function(newGame){
+      PlayerService.player.newGame(book).success(function(newGame){
         $state.go("app.play.playing",{id:newGame.id});
       });
     }

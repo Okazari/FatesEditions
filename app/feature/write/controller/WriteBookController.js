@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('WriteBookController', function ($scope, $state, $stateParams, BookService, PageService, D3Service) {
+  .controller('WriteBookController', function ($scope, $state, $stateParams, PlayerService, BookService, PageService, D3Service) {
     
     $scope.bookLoading=true;
     $scope.pagesLoading=true;
@@ -23,7 +23,9 @@ angular.module('myVirtualStoryBookApp')
     };
     
     $scope.saveBook = function(){
-      BookService.updateBook($scope.book)
+      BookService.updateBook($scope.book).success(function(){
+        PlayerService.player.refreshBooks(false);
+      });
     }
     
     $scope._buildD3Graph = function(){

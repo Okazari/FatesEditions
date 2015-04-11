@@ -7,13 +7,12 @@ angular.module('myVirtualStoryBookApp')
       $state.go("editionbook",{id:book.id});
     }
     
+    $scope.books = PlayerService.player.books;
+    
+    $scope.loaders = PlayerService.player.loaders;
+    
     $scope.updateBooks = function(){
-      $scope.booksLoading = true;
-      PlayerService.getConnectedPlayerBooks().success(function(books){
-        $scope.books = books;
-        $scope.booksLoading = false;
-        $scope.firstLoad = false;
-      });
+      PlayerService.player.refreshBooks();
     }
     
     $scope.openDeleteBookModal = function(book){
@@ -39,14 +38,5 @@ angular.module('myVirtualStoryBookApp')
         scope: $scope
       });
     }
-    
-    $scope.newBook = function(){
-      PlayerService.createBookForCurrentUser().success(function(book){
-        $state.go("editionbook",{id:book.id});
-      });
-    }
-
-    $scope.firstLoad = true;
-    $scope.updateBooks();
     
   });

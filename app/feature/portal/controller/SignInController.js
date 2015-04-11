@@ -13,7 +13,7 @@ angular.module('myVirtualStoryBookApp')
             $scope.displayMessageText = "Connexion en cours";
             ConnectionService.login(angular.copy($scope.user)).success(function(player){
                 $window.sessionStorage.setItem("playerUsername",$scope.user.username);
-                PlayerService.setCurrentPlayerUsername($scope.user.username);
+                PlayerService.player.setUsername($scope.user.username);
                 $state.go('app.play.books');
             }).error($scope._displayError);
         }

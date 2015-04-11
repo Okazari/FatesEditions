@@ -5,17 +5,54 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         
         var BASE_URL = "/symfony/web/app_dev.php";
         
-        service.currentPlayerUsername = $window.sessionStorage.getItem('playerUsername');
-        if(service.currentPlayerUsername === null){
+        service.player = {};
+        
+        service.player.books = [];
+        
+        service.player.loaders = {
+            books:true
+        };
+
+        service.player.username = $window.sessionStorage.getItem('playerUsername');
+        if(service.player.username === null){
             $state.go('signin');
         }
+        
+        service.player.isAuthor = function(book){
+            return service.isAuthor(service.player.username,book);
+        }
+        
+        service.player.createBook = function(){
+            return BookService.createPlayerBook(service.player.username).success(service.player.refreshBooks);
+        }
+        
+        service.player.getBooks = function(){
+            service.player.refreshBooks;
+        }
+        
+        service.player.setUsername = function(username){
+            service.player.username = username
+        }
+        
+        service.player.refreshBooks = function(displayLoader){
+            if(angular.isUndefined(displayLoader) || displayLoader) service.player.loaders.books = true;
+            BookService.getPlayerBooks(service.player.username).success(function(books){
+                angular.copy(books, service.player.books);
+                service.player.loaders.books = false;
+            });
+        }
+        
+        service.player.getGames = function(){
+            return GameService.getPlayerGames(service.player.username);
+        }
+        
+        service.player.newGame = function(book){
+            return $http.post(BASE_URL+"/players/"+service.player.username+"/games",{bookId:book.id});
+        }
+        
         service.getCurrentPlayer = function(){
             return $http.get(BASE_URL+"/user")
         };
-        
-        service.setCurrentPlayerUsername = function(username){
-            service.currentPlayerUsername = username
-        }
         
         service.login = function(credentials){
             return $http.post(BASE_URL+"/login", credentials)
@@ -28,34 +65,12 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         service.getPlayerByName = function(name){
             return $http.get(BASE_URL+"/players/"+name);
         }
- 
-        service.getConnectedPlayerBooks = function(){
-            return BookService.getPlayerBooks(service.currentPlayerUsername);
-        }
- 
-        service.getConnectedPlayerGames = function(){
-            return GameService.getPlayerGames(service.currentPlayerUsername);
-        }
- 
-        service.setCurrentPlayer = function(player){
-            service.currentPlayer = player;
-        }
         
-        service.createBookForCurrentUser = function(){
-            return BookService.createPlayerBook(service.currentPlayerUsername);
-        }
-    
         service.isAuthor = function(username,book){
             return username === book.author.username;
         }
- 
-        service.isCurrentPlayerAuthor = function(book){
-            return service.isAuthor(service.currentPlayerUsername,book);
-        }
         
-        service.newGame = function(book){
-            return $http.post(BASE_URL+"/players/"+service.currentPlayerUsername+"/games",{bookId:book.id});
-        }
+        service.player.refreshBooks();
         
         return service;
     }

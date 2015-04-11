@@ -5,7 +5,7 @@ angular.module('myVirtualStoryBookApp')
 
     $scope.updateGames = function(){
       $scope.gamesLoading = true;
-      PlayerService.getConnectedPlayerGames().success(function(games){
+      PlayerService.player.getGames().success(function(games){
         $scope.games = games;
         $scope.gamesLoading = false;
       });

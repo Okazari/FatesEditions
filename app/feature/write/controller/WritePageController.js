@@ -45,7 +45,7 @@ angular.module('myVirtualStoryBookApp')
       BookService.addNewPage($scope.page.book).success(function(page){
         transition.to_page = page;
         PageService.updatePage($scope.page).success(function(){
-          $state.go("editionpage",{id:page.id});
+          $state.go("app.write.page",{id:page.id});
         });
       });
     }

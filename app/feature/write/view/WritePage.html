@@ -2,6 +2,13 @@
 <div class="content-wrapper" ng-class="{'with-right-sidebar': showRightMenu}">
   <!-- Content Header (Page header) -->
   <section class="content-header">
+    <h1>Edition de page</h1>
+    <ol class="breadcrumb">
+      <li><a ui-sref="app.play.books">MyVirtualStoryBook</a></li>
+      <li><a ui-sref="app.write.drafts">Mes brouillons</a></li>
+      <li><a ui-sref="app.write.book({id:page.book.id})">{{page.book.name}}</a></li>
+      <li class="active">{{page.title}}</li>
+    </ol>
   </section>
   <!-- Main content -->
   <section class="content">

@@ -1,5 +1,13 @@
 <!-- Contenu de la page -->
 <div class="content-wrapper">
+  <section class="content-header">
+    <h1>Livre - {{currentGame.book.name}}</h1>
+    <ol class="breadcrumb">
+      <li><a ui-sref="app.play.books">MyVirtualStoryBook</a></li>
+      <li><a ui-sref="app.play.games">Mes parties</a></li>
+      <li class="active">{{currentGame.book.name}}</li>
+    </ol>
+  </section>
   <!-- Main content -->
   <section class="content">
     <!-- Default box -->

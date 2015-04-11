@@ -1,27 +1,25 @@
 <div class="content-wrapper">
+
   <!-- Main content -->
-  <section class="content-header">
-    <h1>Mes brouillons</h1>
-    <ol class="breadcrumb">
-      <li><a ui-sref="app.play.books">MyVirtualStoryBook</a></li>
-      <li class="active">Mes brouillons</li>
-    </ol>
-  </section>
   <section class="content">
+
     <!-- Default box -->
     <div class="box md-whiteframe-z1">
+      <div class="box-header with-border">
+        <h3 class="box-title">Mes livres partagés</h3>
+      </div>
       <div class="box-body">
         <div class="row">
-          <div ng-hide="(books | filter:{draft:true}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="callout md-whiteframe-z1">
-              <h4>Vous n'avez pas de brouillons</h4>
-              <p>Commençez dès maintenant et créez un brouillon</p>
-            </div>
+          <div ng-hide="(books | filter:{draft:false}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
+          <div class="callout md-whiteframe-z1">
+            <h4>Vous n'avez pas de publication</h4>
+            <p>Dès que l'un de vos brouillons est finalisé, publiez le afin de le rendre visible et jouable pour tout les autres utilisateurs</p>
           </div>
-          <div ng-repeat="book in books | filter:{draft:true}" class="col-lg-6 col-sm-6 col-xs-12">
+        </div>
+          <div ng-repeat="book in books | filter:{draft:false}" class="col-lg-6 col-sm-6 col-xs-12">
             <div class="small-box bg-primary book-widget md-whiteframe-z2">
               <div class="box-tools pull-right">
-                <a ng-if="book.draft" class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
+                <a class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
               </div>
               <div class="row top-widget">
                 <div class="col-lg-3 col-sm-3 col-xs-4 preview-container">              
@@ -29,20 +27,20 @@
                 </div>
                 <div class="col-lg-9 col-sm-9 col-xs-8 inner">
                   <h4>{{book.name}}</h4>
-                  <h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
+                  <h4 class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
                   <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
                   <div class="inner synopsis-preview">{{book.synopsis}}</div>
                 </div>
               </div>
-              <a ui-sref="app.write.book({id:book.id})" class="small-box-footer">
+              <a ng-click="editBook(book)" class="small-box-footer">
                 Editer <i class="fa fa-arrow-circle-right"></i>
               </a>
             </div>
           </div>
         </div>
       </div><!-- /.box-body -->
-      <div ng-show="loaders.books" class="overlay">
-          <i class="fa fa-refresh fa-spin"></i>
+      <div ng-show="booksLoading" class="overlay">
+        <i class="fa fa-refresh fa-spin"></i>
       </div>
     </div><!-- /.box -->
   </section><!-- /.content -->
