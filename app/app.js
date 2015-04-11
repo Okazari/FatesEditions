@@ -21,7 +21,8 @@ var myVirtualStoryBookApp = angular
     'ui.bootstrap',
     'angular.layout',
     'textAngular',
-    'ngMaterial'
+    'ngMaterial',
+    'angular-carousel'
   ]).config(function($stateProvider, $urlRouterProvider){
 
         // For any unmatched url, send to /signup

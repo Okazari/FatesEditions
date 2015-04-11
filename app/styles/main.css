@@ -230,3 +230,15 @@ text {
   pointer-events: none;
   text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
 }
+
+ul[rn-carousel]{
+  height: 400px;
+}
+
+ul[rn-carousel] .layer{
+  height: 100%;
+}
+
+ul[rn-carousel] .layer>img{
+  height: 80%;
+}
