@@ -2,7 +2,8 @@
 
 angular.module('myVirtualStoryBookApp')
   .controller('BookListController', function ($scope, $state, PlayerService, BookService, GameService) {
-
+    
+    $scope.bookListIndex = 2;
     $scope.booksLoading = true;
     BookService.getPublishedBooks().success(function(books){
       $scope.books = books;

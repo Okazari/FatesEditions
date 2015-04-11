@@ -238,6 +238,7 @@ text {
 
 ul[rn-carousel]{
   height: 400px;
+  width: 200px;
 }
 
 ul[rn-carousel] .layer{
@@ -246,4 +247,13 @@ ul[rn-carousel] .layer{
 
 ul[rn-carousel] .layer>img{
   height: 80%;
+}
+
+.carousel-thumbnail{
+  height: 120px;
+  width: 60px;
+}
+
+.carousel-thumbnail.active>img {
+  border: 2px solid red;
 }

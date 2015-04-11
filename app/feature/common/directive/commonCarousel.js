@@ -3,7 +3,13 @@ myVirtualStoryBookApp.directive('commonCarousel', function() {
     restrict: 'E',
     templateUrl: '/app/feature/common/template/CommonCarousel.template.html',
     scope: {
-        list:'='
+        list:'=',
+        carouselIndex:'=carouselIndex'
+    },
+    controller: function($scope) {
+      $scope.changeCarouselIndex = function(index) {
+        $scope.carouselIndex = index;
+      }
     }
   };
 });

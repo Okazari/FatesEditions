@@ -1,8 +1,16 @@
-<ul rn-carousel class="image">
-  <li ng-repeat="item in list">
-    <div class="layer text-center">
-      <img ng-src="{{item.cover}}" class="cover-preview">
-      <div class="col-xs-12 text-center">{{item.name}}</div>
-    </div>
-  </li>
-</ul>
+<div class="col-xs-12">
+  <ul rn-carousel rn-carousel-index="carouselIndex" rn-carousel-controls rn-carousel-buffered rn-carousel-transition="hexagon" class="image col-md-offset-5 col-xs-2">
+    <li ng-repeat="item in list">
+      <div class="layer">
+        <img ng-src="{{item.cover}}" class="cover-preview">
+        <div class="col-xs-12 text-center">{{item.name}}</div>
+      </div>
+    </li>
+  </ul>
+</div>
+{{carouselIndex}}
+<div ng-if="list.length > 0" class="rn-carousel-indicator custom-indicator text-center col-xs-12">
+  <span ng-repeat="item in list" ng-class="{active: $index==$parent.carouselIndex}" ng-click="changeCarouselIndex($index)" class="carousel-thumbnail">
+    <img ng-src="{{item.cover}}" class="carousel-thumbnail">  
+  </span>
+</div>

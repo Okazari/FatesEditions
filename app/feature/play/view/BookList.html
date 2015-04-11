@@ -17,8 +17,8 @@
               <p>Personne n'a encore publié de livre, attendez que quelqu'un en publie un ou créez votre propre livre et publiez le !</p>
             </div>
           </div>
-          <div ng-if="books.length > 0" class="col-xs-12">
-            <common-carousel list="books" class="col-xs-12"></common-carousel>
+          <div ng-if="books.length > 0">
+            <common-carousel list="books" carousel-index="bookListIndex"></common-carousel>
           </div>
           <div ng-repeat="book in books" class="col-lg-6 col-sm-6 col-xs-12">
             <div class="small-box bg-primary book-widget md-whiteframe-z1">
