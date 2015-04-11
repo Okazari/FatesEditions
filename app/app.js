@@ -95,6 +95,11 @@ var myVirtualStoryBookApp = angular
                 controller:"PublicationListController",
                 templateUrl:"feature/share/view/PublicationList.html"  
             })
+            .state('app.share.book', {
+                url: "/book",
+                controller:"PublishBookController",
+                templateUrl:"feature/share/view/PublishBook.html"  
+            })
             //Joueur
             /*.state('player', {
                 url: "/player",

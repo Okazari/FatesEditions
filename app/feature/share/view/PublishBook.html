@@ -1,41 +1,51 @@
 <div class="content-wrapper">
 
+  <section class="content-header">
+    <h1>Publier un livre</h1>
+    <ol class="breadcrumb">
+      <li><a ui-sref="app.play.books">MyVirtualStoryBook</a></li>
+      <li class="active">Publier un livre</li>
+    </ol>
+  </section>
   <!-- Main content -->
   <section class="content">
 
     <!-- Default box -->
     <div class="box md-whiteframe-z1">
-      <div class="box-header with-border">
-        <h3 class="box-title">Mes livres partagés</h3>
-      </div>
       <div class="box-body">
-        <div class="row">
-          <div ng-hide="(books | filter:{draft:false}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
-          <div class="callout md-whiteframe-z1">
-            <h4>Vous n'avez pas de publication</h4>
-            <p>Dès que l'un de vos brouillons est finalisé, publiez le afin de le rendre visible et jouable pour tout les autres utilisateurs</p>
-          </div>
+        <div class="box box-warning box-solid md-whiteframe-z1">
+          <div class="box-header with-border">
+            <h3 class="box-title">Information importante</h3>
+          </div><!-- /.box-header -->
+          <div class="box-body" style="display: block;">
+            Publier l'un de vos brouillon créera une copie de celui-ci dans la section "Partage". Les autres membres de MyVirtualStoryBook pourrons alors trouver votre histoire dans la liste des livres jouables.
+          </div><!-- /.box-body -->
         </div>
-          <div ng-repeat="book in books | filter:{draft:false}" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="small-box bg-primary book-widget md-whiteframe-z2">
-              <div class="box-tools pull-right">
-                <a class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
+        <div class="input-group margin-top col-xs-12">
+          <label>Brouillon que vous souhaitez publier</label>
+          <select data-icon="fa fa-{{book.genre.icon}}" ng-model="bookToPublish" ng-options="book as book.name for book in books track by book.id" class="form-control">
+            <option value="" selected>-- Choisissez un brouillon à publier --</option>
+          </select>
+        </div>
+        <div ng-show="bookToPublish" class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-xs-4">
+                <img ng-src="{{bookToPublish.cover}}" class="cover-preview md-whiteframe-z1" alt="User Image">
               </div>
-              <div class="row top-widget">
-                <div class="col-lg-3 col-sm-3 col-xs-4 preview-container">              
-                  <img ng-src="{{book.cover}}" class="cover-preview" alt="User Image">
-                </div>
-                <div class="col-lg-9 col-sm-9 col-xs-8 inner">
-                  <h4>{{book.name}}</h4>
-                  <h4 class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
-                  <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
-                  <div class="inner synopsis-preview">{{book.synopsis}}</div>
-                </div>
+              <div class="col-xs-8">
+                 Titre : {{bookToPublish.name}}
+                 Genre : {{bookToPublish.genre.name}}
+                 Synopsis : {{bookToPublish.synopsis}}
               </div>
-              <a ng-click="editBook(book)" class="small-box-footer">
-                Editer <i class="fa fa-arrow-circle-right"></i>
-              </a>
             </div>
+          </div>
+          <div class="col-md-6">
+             <a class="btn btn-app" ng-click="publishBook(bookToPublish)"><i class="fa fa-share-alt"></i>Publier {{bookToPublish.name}}</a>
+             <div class="progress active">
+                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" style="width: {{loading}}%">
+                  <span class="sr-only">{{loading}}%</span>
+                </div>
           </div>
         </div>
       </div><!-- /.box-body -->
