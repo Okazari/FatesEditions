@@ -23,29 +23,47 @@
         </div>
         <div class="input-group margin-top col-xs-12">
           <label>Brouillon que vous souhaitez publier</label>
-          <select data-icon="fa fa-{{book.genre.icon}}" ng-model="bookToPublish" ng-options="book as book.name for book in books track by book.id" class="form-control">
+          <select data-icon="fa fa-{{book.genre.icon}}" ng-change="init()" ng-model="bookToPublish" ng-options="book as book.name for book in books | filter:{draft:true} track by book.id" class="form-control">
             <option value="" selected>-- Choisissez un brouillon à publier --</option>
           </select>
         </div>
-        <div ng-show="bookToPublish" class="row">
+        <div ng-show="bookToPublish" class="row margin-top">
           <div class="col-md-6">
-            <div class="row">
-              <div class="col-xs-4">
-                <img ng-src="{{bookToPublish.cover}}" class="cover-preview md-whiteframe-z1" alt="User Image">
-              </div>
-              <div class="col-xs-8">
-                 Titre : {{bookToPublish.name}}
-                 Genre : {{bookToPublish.genre.name}}
-                 Synopsis : {{bookToPublish.synopsis}}
-              </div>
+            <div class="box box-primary md-whiteframe-z1">
+              <div class="box-header with-border">
+                <h3 class="box-title">Livre à publier</h3>
+              </div><!-- /.box-header -->
+              <div class="box-body" style="display: block;">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <img ng-src="{{bookToPublish.cover}}" class="cover-preview md-whiteframe-z1" alt="User Image">
+                  </div>
+                  <div class="col-xs-8">
+                    <h4>{{bookToPublish.name}}</h4>
+                    <h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
+                    <h4 ng-if="bookToPublish.genre" class="label label-primary">{{bookToPublish.genre.name}} <i class="fa fa-{{bookToPublish.genre.icon}} genre-icon"></i></h4>
+                    <div class="inner synopsis-preview">{{bookToPublish.synopsis}}</div>
+                  </div>
+                </div>
+              </div><!-- /.box-body -->
             </div>
           </div>
           <div class="col-md-6">
-             <a class="btn btn-app" ng-click="publishBook(bookToPublish)"><i class="fa fa-share-alt"></i>Publier {{bookToPublish.name}}</a>
-             <div class="progress active">
-                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" style="width: {{loading}}%">
-                  <span class="sr-only">{{loading}}%</span>
+            <div class="box box-primary md-whiteframe-z1">
+              <div class="box-header with-border">
+                <h3 class="box-title">Publiez le !</h3>
+              </div><!-- /.box-header -->
+              <div class="box-body" style="display: block;">
+                <div style="text-align:center">
+                   <a class="btn btn-app" ng-disabled="publishedOnce" ng-click="publishBook(bookToPublish)"><i class="fa fa-share-alt"></i>Publier {{bookToPublish.name}}</a>
+                   <div class="progress active">
+                      <div class="progress-bar progress-bar-{{progressBarStyle}} progress-bar-striped" role="progressbar" style="width: {{loading}}%">
+                        <span class="sr-only">{{loading}}%</span>
+                      </div>
+                  </div>
                 </div>
+              </div><!-- /.box-body -->
+            </div>
           </div>
         </div>
       </div><!-- /.box-body -->
