@@ -1,0 +1,35 @@
+<div class="col-xs-12">
+  <ul rn-carousel rn-carousel-index="carouselIndex" rn-carousel-controls rn-carousel-buffered class="image col-md-offset-5 col-xs-2">
+    <li ng-repeat="item in (list | filter:myfilter)">
+      <div class="layer bgimage">
+        <div class="col-xs-12">
+          <div class="box box-primary md-whiteframe-z1">
+              <div class="box-header with-border">
+                <h3 class="box-title">{{item.book.name}}</h3>
+              </div><!-- /.box-header -->
+              <div class="box-body" style="display: block;">
+                <div class="row">
+                  <div class="col-xs-4" style="height:400px">
+                    <img ng-src="{{item.book.cover}}" class="cover-preview md-whiteframe-z1" alt="User Image">
+                  </div>
+                  <div class="col-xs-8">
+                    <h4>{{item.book.name}}</h4>
+                    <h4 class="label label-primary">{{item.current_page.title}}<i class="fa fa-pencil genre-icon"></i></h4>
+                    <div class="inner synopsis-preview">{{item.book.synopsis}}</div>
+                  </div>
+                  <div style="text-align:center; position:absolute; bottom:20px; left:42%;">
+                    <button class="btn btn-primary btn-lg md-whiteframe-z1" style="position:relative; bottom:10px;" ui-sref="app.play.playing({id:item.id})">Reprendre la partie</button>
+                  </div>
+                </div>
+              </div><!-- /.box-body -->
+            </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+<div ng-if="list.length > 0" class="rn-carousel-indicator custom-indicator text-center col-xs-12">
+  <div ng-repeat="item in list | filter:myfilter" ng-class="{active: $index==$parent.carouselIndex}" ng-click="changeCarouselIndex($index)" class="carousel-thumbnail">
+    <img ng-src="{{item.book.cover}}" class="carousel-thumbnail-img">  
+  </div>
+</div>

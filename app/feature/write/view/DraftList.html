@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-xs-12">
         <div ng-if="books.length > 0" style="height:500px">
-            <common-carousel list="books" carousel-index="bookListIndex"></common-carousel>
+            <draft-list-carousel list="books" carousel-index="draftListIndex"></draft-list-carousel>
         </div>
         <div class="col-xs-12">
           <div class="box md-whiteframe-z1">
@@ -28,7 +28,8 @@
                     <th rowspan="1" colspan="1">Genre</th>
                     <th rowspan="1" colspan="1">Visibilité</th>
                     <th rowspan="1" colspan="1">Synopsis</th>
-                    <th rowspan="1" colspan="1"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
+                    <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary md-whiteframe-z1">Editer</button></th>
+                    <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></th>
                   </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
@@ -37,7 +38,8 @@
                     <td><h4 ng-if="book.genre" class="label label-primary ng-binding ng-scope"><i class="fa fa-{{book.genre.icon}}" style="margin-right:5px"></i> {{book.genre.name}}</h4></td>
                     <td><h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4></td>
                     <td>{{book.synopsis}}</td>
-                    <td><button ng-click="openDeleteBookModal(book)" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
+                    <td><button ui-sref="app.write.book({id:book.id})" class="btn btn-primary  md-whiteframe-z1">Editer</button></td>
+                    <td><button ng-click="openDeleteBookModal(book)" class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></td>
                   </tr>
                 </tbody>
               </table>
