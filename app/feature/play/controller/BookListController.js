@@ -5,6 +5,7 @@ angular.module('myVirtualStoryBookApp')
     
     $scope.bookListIndex = 2;
     $scope.booksLoading = true;
+    $scope.carouselIndex = 0;
     BookService.getPublishedBooks().success(function(books){
       $scope.books = books;
       $scope.booksLoading = false;
@@ -19,4 +20,5 @@ angular.module('myVirtualStoryBookApp')
         $state.go("app.play.playing",{id:newGame.id});
       });
     }
-  });
+    
+});
