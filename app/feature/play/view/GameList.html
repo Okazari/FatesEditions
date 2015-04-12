@@ -18,6 +18,9 @@
               <p>Rendez vous sur la page "Les livres", laissez vous tenter par une histoire et lancez une partie !</p>
             </div>
           </div>
+          <div ng-if="books.length > 0" style="height:500px">
+            <common-carousel list="games" carousel-index="bookListIndex"></common-carousel>
+          </div>
           <div ng-repeat="game in games" class="col-lg-6 col-sm-6 col-xs-12">
             <div class="small-box bg-navy book-widget md-whiteframe-z2">
               <div class="box-tools pull-right">

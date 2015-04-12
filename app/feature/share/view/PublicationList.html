@@ -8,43 +8,56 @@
   </section>
   <!-- Main content -->
   <section class="content">
-
     <!-- Default box -->
-    <div class="box md-whiteframe-z1">
-      <div class="box-body">
-        <div class="row">
-          <div ng-hide="(books | filter:{draft:false}).length || firstLoad" class="col-lg-6 col-sm-6 col-xs-12">
-          <div class="callout md-whiteframe-z1">
-            <h4>Vous n'avez pas de publication</h4>
-            <p>Dès que l'un de vos brouillons est finalisé, publiez le afin de le rendre visible et jouable pour tout les autres utilisateurs</p>
+    <div class="row">
+      <div class="col-xs-12">
+        <div ng-if="books.length > 0" style="height:500px">
+            <common-carousel list="books" myfilter="{draft:false}" carousel-index="bookListIndex"></common-carousel>
           </div>
-        </div>
-          <div ng-repeat="book in books | filter:{draft:false}" class="col-lg-6 col-sm-6 col-xs-12">
-            <div class="small-box bg-primary book-widget md-whiteframe-z2">
-              <div class="box-tools pull-right">
-                <a class="fa fa-remove icon-tool" ng-click="openDeleteBookModal(book)"></a>
-              </div>
-              <div class="row top-widget">
-                <div class="col-lg-3 col-sm-3 col-xs-4 preview-container">              
-                  <img ng-src="{{book.cover}}" class="cover-preview" alt="User Image">
+          <div class="col-xs-12">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Liste complète</h3>
+              </div><!-- /.box-header -->
+              <div class="box-body">
+                <div class="dataTables_wrapper form-inline" role="grid"><div class="row"><div class="col-xs-6"><div class="dataTables_info" id="example1_info">{{books.length}} Livres</div></div><div class="col-xs-6"></div></div>
+                <table class="table table-bordered table-hover table-striped dataTable">
+                  <thead>
+                    <tr>
+                      <th rowspan="1" colspan="1" style="width:10%">Titre du livre</th>
+                      <th rowspan="1" colspan="1">Genre</th>
+                      <th rowspan="1" colspan="1">Visibilité</th>
+                      <th rowspan="1" colspan="1">Synopsis</th>
+                      <th rowspan="1" colspan="1"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
+                    </tr>
+                  </thead>
+                  <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
+                    <tr ng-repeat="book in books| filter:{draft:false}">
+                      <td>{{book.name}}</td>
+                      <td><h4 ng-if="book.genre" class="label label-primary ng-binding ng-scope"><i class="fa fa-{{book.genre.icon}}" style="margin-right:5px"></i> {{book.genre.name}}</h4></td>
+                      <td><h4 class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4></td>
+                      <td>{{book.synopsis}}</td>
+                      <td><button ng-click="openDeleteBookModal(book)" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+                  <div class="col-xs-6">
+                    
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="dataTables_paginate paging_bootstrap">
+                    </div>
+                  </div>
                 </div>
-                <div class="col-lg-9 col-sm-9 col-xs-8 inner">
-                  <h4>{{book.name}}</h4>
-                  <h4 class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
-                  <h4 ng-if="book.genre" class="label label-primary">{{book.genre.name}} <i class="fa fa-{{book.genre.icon}} genre-icon"></i></h4>
-                  <div class="inner synopsis-preview">{{book.synopsis}}</div>
                 </div>
+              </div><!-- /.box-body -->
+              <div ng-show="loaders.books" class="overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
               </div>
-              <a ng-click="editBook(book)" class="small-box-footer">
-                Editer <i class="fa fa-arrow-circle-right"></i>
-              </a>
             </div>
           </div>
         </div>
-      </div><!-- /.box-body -->
-      <div ng-show="booksLoading" class="overlay">
-        <i class="fa fa-refresh fa-spin"></i>
       </div>
-    </div><!-- /.box -->
   </section><!-- /.content -->
 </div>

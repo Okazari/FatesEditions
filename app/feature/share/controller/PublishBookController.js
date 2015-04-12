@@ -8,10 +8,12 @@ angular.module('myVirtualStoryBookApp')
       $scope.progressBarStyle = "primary";
       $scope.loading = 0;
       $scope.publishedOnce = false;
+      $scope.showError = false;
     }
     
     $scope.publishBook = function(book){
       $scope.publishedOnce = true;
+      $scope.showError = false;
       $scope.progressBarStyle = "primary";
       $scope.loading = 0;
       $interval(function(){
@@ -20,6 +22,9 @@ angular.module('myVirtualStoryBookApp')
         BookService.publishBook(book.id).success(function(){
           PlayerService.player.refreshBooks(false);
           $scope.progressBarStyle = "success";
+        }).error(function(){
+          $scope.progressBarStyle = "danger";
+          $scope.showError = true;
         });
       });
     };

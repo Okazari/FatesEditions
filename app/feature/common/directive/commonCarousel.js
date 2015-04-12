@@ -3,7 +3,8 @@ myVirtualStoryBookApp.directive('commonCarousel', function() {
     restrict: 'E',
     templateUrl: '/app/feature/common/template/CommonCarousel.template.html',
     scope: {
-        list:'=',
+        list:"=",
+        myfilter:"=",
         carouselIndex:'=carouselIndex'
     },
     controller: function($scope) {

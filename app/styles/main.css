@@ -238,8 +238,8 @@ text {
 
 ul[rn-carousel]{
   height: 500px;
-  width: 50%;
-  margin-left:25%;
+  width: 70%;
+  margin-left:15%;
 }
 
 ul[rn-carousel] .layer{
@@ -253,6 +253,13 @@ ul[rn-carousel] .layer>img{
 .carousel-thumbnail{
   height: 100px;
   width: 100px;
+  display:inline-block;
+  margin:10px;
+}
+
+.carousel-thumbnail-img{
+  max-height:100%;
+  max-width:100%;
 }
 
 .carousel-thumbnail.active>img {
@@ -270,7 +277,6 @@ ul[rn-carousel] .layer>img{
   text-align:center;
   height:30px;
   width:30px;
-  left: -20px;
 }
 .rn-carousel-control.rn-carousel-control-prev:before{
   content: "\f137";
@@ -287,7 +293,6 @@ ul[rn-carousel] .layer>img{
   text-align:center;
   height:30px;
   width:30px;
-  right: -20px;
 }
 .rn-carousel-control.rn-carousel-control-next:before{
   content: "\f138";

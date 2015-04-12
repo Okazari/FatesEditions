@@ -1,6 +1,6 @@
 <div class="col-xs-12">
-  <ul rn-carousel rn-carousel-index="carouselIndex" rn-carousel-controls rn-carousel-buffered rn-carousel-transition="hexagon" class="image col-md-offset-5 col-xs-2">
-    <li ng-repeat="item in list">
+  <ul rn-carousel rn-carousel-index="carouselIndex" rn-carousel-controls rn-carousel-buffered class="image col-md-offset-5 col-xs-2">
+    <li ng-repeat="item in (list | filter:myfilter)">
       <div class="layer bgimage">
         <div class="col-xs-12">
           <div class="box box-primary md-whiteframe-z1">
@@ -14,7 +14,8 @@
                   </div>
                   <div class="col-xs-8">
                     <h4>{{item.name}}</h4>
-                    <h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
+                    <h4 ng-if="item.draft" class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4>
+                    <h4 ng-if="!item.draft"  class="label label-success">Publié<i class="fa fa-book genre-icon"></i></h4>
                     <h4 ng-if="item.genre" class="label label-primary">{{item.genre.name}} <i class="fa fa-{{item.genre.icon}} genre-icon"></i></h4>
                     <div class="inner synopsis-preview">{{item.synopsis}}</div>
                   </div>
@@ -27,7 +28,7 @@
   </ul>
 </div>
 <div ng-if="list.length > 0" class="rn-carousel-indicator custom-indicator text-center col-xs-12">
-  <span ng-repeat="item in list" ng-class="{active: $index==$parent.carouselIndex}" ng-click="changeCarouselIndex($index)" class="carousel-thumbnail">
-    <img ng-src="{{item.cover}}" class="carousel-thumbnail">  
-  </span>
+  <div ng-repeat="item in list | filter:myfilter" ng-class="{active: $index==$parent.carouselIndex}" ng-click="changeCarouselIndex($index)" class="carousel-thumbnail">
+    <img ng-src="{{item.cover}}" class="carousel-thumbnail-img">  
+  </div>
 </div>
