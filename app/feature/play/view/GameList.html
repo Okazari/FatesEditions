@@ -26,6 +26,7 @@
                 <th rowspan="1" colspan="1">Page courante</th>
                 <th rowspan="1" colspan="1">Synopsis</th>
                 <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary md-whiteframe-z1">Reprendre la partie</button></th>
+                <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></th>
               </tr>
             </thead>
             <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
@@ -34,6 +35,7 @@
                 <td><h4 class="label label-primary">Page : {{game.current_page.title}}</h4></td>
                 <td>{{game.book.synopsis}}</td>
                 <td><button class="btn btn-primary md-whiteframe-z1" ui-sref="app.play.playing({id:game.id})">Reprendre la partie</button></td>
+                <td><button ng-click="openDeleteGameModal(game)" class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></td>
               </tr>
             </tbody>
           </table>
