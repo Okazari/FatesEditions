@@ -69,7 +69,7 @@
               <li><a ng-click="newBook()"><i class="fa fa-circle-o"></i>Créer un livre</a></li>
               <li><a ui-sref="app.write.drafts"><i class="fa fa-circle-o"></i>Voir mes brouillons</a></li>
               <li ng-show="!loaders.books" ng-repeat="book in playerDrafts | filter:{draft:true}"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-{{book.genre.icon}}"></i>{{book.name}}</a></li>
-              <li ng-show="loaders.books"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-refresh fa-spin"></i>Rafraichissement des livres</a></li>
+              <li ng-show="loaders.books"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-refresh"></i>Rafraichissement des livres</a></li>
             </ul>
           </li>
           <li class="treeview" ng-class="{'active': !menu.share.collapse}">
@@ -80,7 +80,7 @@
               <li><a ui-sref="app.share.book"><i class="fa fa-circle-o"></i>Partager un livre</a></li>
               <li><a ui-sref="app.share.publication"><i class="fa fa-circle-o"></i>Voir mes livres partagés</a></li>
               <li ng-show="!loaders.books" ng-repeat="book in playerDrafts | filter:{draft:false}"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-{{book.genre.icon}}"></i>{{book.name}}</a></li>
-              <li ng-show="loaders.books"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-refresh fa-spin"></i>Rafraichissement des livres</a></li>
+              <li ng-show="loaders.books"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-refresh"></i>Rafraichissement des livres</a></li>
             </ul>
           </li>
         </ul>
@@ -89,6 +89,9 @@
     </aside>
     <div ui-view>
         
+    </div>
+    <div class="musicPopUp">
+      <button ng-click="music.playPause()" ng-show="music.valid && music.playing" class="btn btn-primary"><i class="fa fa-pause margin-right"></i> {{music.band}} - {{music.title}}</button>
     </div>
     <footer class="main-footer" ng-class="{'with-right-sidebar': showRightMenu}">
       <div class="pull-right hidden-xs">

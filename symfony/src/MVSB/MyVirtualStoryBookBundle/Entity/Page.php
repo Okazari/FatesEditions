@@ -64,10 +64,10 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="text", nullable=true)
+     * @ORM\Column(name="backgroundMusic", type="text", nullable=true)
      * @Serializer\Expose
      */
-    private $image;
+    private $backgroundMusic;
 
     /**
      * @var array
@@ -166,26 +166,26 @@ class Page
     }
     
     /**
-     * Set image
+     * Set backgroundMusic
      *
-     * @param string $image
+     * @param string $backgroundMusic
      * @return Page
      */
-    public function setImage($image)
+    public function setBackgroundMusic($backgroundMusic)
     {
-        $this->image = $image;
+        $this->backgroundMusic = $backgroundMusic;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get backgroundMusic
      *
      * @return string 
      */
-    public function getImage()
+    public function getBackgroundMusic()
     {
-        return $this->image;
+        return $this->backgroundMusic;
     }
 
     /**

@@ -297,3 +297,13 @@ ul[rn-carousel] .layer>img{
 .rn-carousel-control.rn-carousel-control-next:before{
   content: "\f138";
 }
+
+.musicPopUp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+}
+
+.margin-right{
+  margin-right:10px;
+}

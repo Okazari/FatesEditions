@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('WritePageController', function ($scope, $state, $stateParams, $timeout, BookService, PageService, D3Service) {
+  .controller('WritePageController', function ($scope, $state, $stateParams, $timeout, BookService, PageService, D3Service, MusicPlayerService) {
+
+    $scope.music = MusicPlayerService.music;
 
     $scope.savePage = function(){
       PageService.updatePage($scope.page);
+      MusicPlayerService.load($scope.page.background_music);
     }
     
     $scope.pageLoading=true;
@@ -13,6 +16,7 @@ angular.module('myVirtualStoryBookApp')
     PageService.getPage($stateParams.id).success(function(page){
       $scope.page = page;
       $scope.pageLoading=false;
+      MusicPlayerService.load(page.background_music)
       BookService.getBookPages($scope.page.book.id).success(function(pages){
         $scope.pages = pages;
         $scope.transitionsLoading=false;
@@ -49,5 +53,4 @@ angular.module('myVirtualStoryBookApp')
         });
       });
     }
-    
   });

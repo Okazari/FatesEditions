@@ -42,6 +42,30 @@
           <i class="fa fa-refresh fa-spin"></i>
         </div>
       </div>
+    </div>  
+    <div class="col-xs-12">
+      <div class="box box-primary md-whiteframe-z1">
+        <div class="box-header with-border">
+          <h3 class="box-title">Musique de fond</h3>
+          <div class="box-tools pull-right">
+            <div class="btn-group"></div>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-sm-4 margin-top col-xs-12">
+              <label>Lien SoundCloud</label> 
+              <div class="input-group col-xs-12">
+                <div class="input-group-btn"><button ng-click="music.playPause()" class="btn btn-primary" ng-class="{'btn-danger':!music.valid}"><i class="fa" ng-class="{'fa-play':(music.valid && !music.playing), 'fa-pause':(music.valid && music.playing), 'fa-close':!music.valid}"></i></button></div>
+                <input ng-change="savePage()" ng-model-options="{debounce:1000}" type="text" name="cover" class="form-control " placeholder="Lien SoundCloud de votre musique de fond" ng-model="page.background_music" ng-change="displayMessage = false">
+              </div>
+            </div>
+          </div>
+        </div><!-- /.box-body -->
+        <div ng-show="pageLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
     </div>
     <div class="col-xs-12">
       <div class="box box-primary md-whiteframe-z1">

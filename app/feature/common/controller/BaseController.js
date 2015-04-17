@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('BaseController', function ($scope, $state, $rootScope, PlayerService, BookService, GameService) {
+  .controller('BaseController', function ($scope, $state, $rootScope, PlayerService, BookService, GameService, MusicPlayerService) {
 
     $rootScope.sidebar = 'open';
+
+    $scope.music = MusicPlayerService.music;
 
     $scope.newBook = function(){
       PlayerService.player.createBook().success(function(book){
