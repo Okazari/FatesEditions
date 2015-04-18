@@ -91,7 +91,7 @@
         
     </div>
     <div class="musicPopUp">
-      <button ng-click="music.playPause()" ng-show="music.valid && music.playing" class="btn btn-primary"><i class="fa fa-pause margin-right"></i> {{music.band}} - {{music.title}}</button>
+      <button ng-click="music.playPause()" ng-disabled="!music.valid" class="btn btn-primary"><i class="fa margin-right" ng-class="{'fa-pause':music.playing,'fa-play':!music.playing}"></i> {{music.band}} - {{music.title}}</button>
     </div>
     <footer class="main-footer" ng-class="{'with-right-sidebar': showRightMenu}">
       <div class="pull-right hidden-xs">
