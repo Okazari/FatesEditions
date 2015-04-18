@@ -64,7 +64,7 @@ myVirtualStoryBookApp.service("MusicPlayerService", ['$http',
         };
         
         service.music.isSame = function(string){
-            return (string === service.music.trackUrl || string == service.music.id);
+            return (string.split("//")[1] === (service.music.trackUrl.split("//")[1]) || string == service.music.id);
         }
         
         service.music.play = function(force){
