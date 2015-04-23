@@ -308,3 +308,7 @@ ul[rn-carousel] .layer>img{
 .margin-right{
   margin-right:10px;
 }
+
+.full-width{
+  width:100%;
+}
