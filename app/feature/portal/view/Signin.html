@@ -32,15 +32,15 @@
           <h3 class="box-title">Renseignez vos identifiants</h3>
         </div>
         <form name="loginForm">
-          <md-input-container>
-              <label>Nom d'utilisateur</label>
-              <input type="text"  max="20" name="username" class="form-control" placeholder="Entrez votre nom d'utilisateur" ng-model="user.username" ng-change="displayMessage = false" required>
-          </md-input-container>
-           <md-input-container>
-              <label>Mot de passe</label>
-              <input type="password" class="form-control" placeholder="Entrez votre mot de passe" ng-model="user.password" ng-change="displayMessage = false" required>
-          </md-input-container>
-          <div class="row">
+          <div class="input-group margin-top col-xs-12">
+            <label>Nom d'utilisateur</label>
+            <input type="text"  max="20" name="username" class="form-control" placeholder="Entrez votre nom d'utilisateur" ng-model="user.username" ng-change="displayMessage = false" required>
+          </div>
+          <div class="input-group margin-top col-xs-12">
+            <label>Mot de passe</label>
+            <input type="password" class="form-control" placeholder="Entrez votre mot de passe" ng-model="user.password" ng-change="displayMessage = false" required>
+          </div>
+          <div class="row margin-top">
             <div class="col-xs-4">
               <button type="submit" ng-click="authentify()" class="btn btn-primary">Connexion</md-button>
             </div><!-- /.col -->
