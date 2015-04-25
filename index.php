@@ -54,7 +54,7 @@
 
       
       <!-- about -->
-      <div class="about spacer" id="about" style="margin-bottom:80px;">
+      <div class="about spacer" id="about">
         <div class="container">
           <div class="row">
             <div class="col-md-6 wowload fadeInLeftBig">
@@ -66,6 +66,48 @@
         </div>
       </div>
       <!-- about -->
+      
+      <!-- create -->
+      <div class="create spacer" id="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 text-center"><a href="http://socialsteak.com/" target="_blank" title="credit www.socialsteak.com"><img src="images/photos/1.png" class="img-responsive wowload fadeInUp" alt="http://socialsteak.com/"></a></div>
+            <div class="col-md-6 wowload fadeInRightBig">
+              <h3>Crée</h3>
+              <p class="text-justify">Les livres-jeux sont des livres dont les paragraphes sont numérotés. À la fin de la lecture d'un paragraphe, le lecteur a le choix entre plusieurs possibilités, représentant les actions du personnage qu'il incarne. Ces possibilités renvoient à d'autres paragraphes, qui développent les conséquences des choix du lecteur. Les paragraphes ne sont donc pas lus dans l'ordre des numéros, et chaque lecteur ne lira pas les mêmes paragraphes, puisqu'il ne fera pas les mêmes choix. Le livre peut donc générer « plusieurs histoires ».</p>              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- create -->
+      
+      <!-- play -->
+      <div class="play spacer" id="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 wowload fadeInLeftBig">
+              <h3>Joue</h3>
+              <p class="text-justify">Les livres-jeux sont des livres dont les paragraphes sont numérotés. À la fin de la lecture d'un paragraphe, le lecteur a le choix entre plusieurs possibilités, représentant les actions du personnage qu'il incarne. Ces possibilités renvoient à d'autres paragraphes, qui développent les conséquences des choix du lecteur. Les paragraphes ne sont donc pas lus dans l'ordre des numéros, et chaque lecteur ne lira pas les mêmes paragraphes, puisqu'il ne fera pas les mêmes choix. Le livre peut donc générer « plusieurs histoires ».</p>              
+            </div>
+            <div class="col-md-6 text-center"><a href="http://socialsteak.com/" target="_blank" title="credit www.socialsteak.com"><img src="images/photos/2.png" class="img-responsive wowload fadeInUp" alt="http://socialsteak.com/"></a></div>
+          </div>
+        </div>
+      </div>
+      <!-- play -->
+      
+      <!-- share -->
+      <div class="share spacer" id="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 text-center"><a href="http://socialsteak.com/" target="_blank" title="credit www.socialsteak.com"><img src="images/photos/3.png" class="img-responsive wowload fadeInUp" alt="http://socialsteak.com/"></a></div>
+            <div class="col-md-6 wowload fadeInRightBig">
+              <h3>Partage</h3>
+              <p class="text-justify">Les livres-jeux sont des livres dont les paragraphes sont numérotés. À la fin de la lecture d'un paragraphe, le lecteur a le choix entre plusieurs possibilités, représentant les actions du personnage qu'il incarne. Ces possibilités renvoient à d'autres paragraphes, qui développent les conséquences des choix du lecteur. Les paragraphes ne sont donc pas lus dans l'ordre des numéros, et chaque lecteur ne lira pas les mêmes paragraphes, puisqu'il ne fera pas les mêmes choix. Le livre peut donc générer « plusieurs histoires ».</p>              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- share -->
 
 
       

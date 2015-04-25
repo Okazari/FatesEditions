@@ -33,7 +33,7 @@ h3{color: #333;margin-bottom: 20px;font-size: 2em;}
 
 .ab-wrap{display: table;height: 100%;width: 100%;}
 .ab-center{display: table-cell;vertical-align: middle;position: relative;text-align: center;}
-.spacer{padding: 5em 0 0 0;}
+.spacer{padding-bottom:40px; padding-top:40px;}
 
 /*intro*/
 .intro{background: url(../images/bg.png) center fixed repeat;position: relative;}
@@ -50,9 +50,30 @@ h3{color: #333;margin-bottom: 20px;font-size: 2em;}
 .about img{display: inline-block;}
 /*about*/
 
+/*create*/
+.create{ background-color: #ddd; font-size: 1.05em;line-height: 1.75em;}
+.create h3{margin-top: 50px;}
+.create p{margin-bottom:25px;}
+.create img{display: inline-block;}
+/*create*/
+
+/*play*/
+.play{font-size: 1.05em;line-height: 1.75em;}
+.play h3{margin-top: 50px;}
+.play p{margin-bottom:25px;}
+.play img{display: inline-block;}
+/*play*/
+
+/*share*/
+.share{background-color: #ddd; font-size: 1.05em;line-height: 1.75em;}
+.share h3{margin-top: 50px;}
+.share p{margin-bottom:25px;}
+.share img{display: inline-block;}
+/*share*/
+
 
 /*portfolio*/
-.portfolio{background-color: #ddd;}
+.portfolio{}
 .portfolio .slide{border:2em solid #333;border-bottom: none;
 -webkit-border-top-left-radius: 30px;
 -webkit-border-top-right-radius: 30px;
@@ -99,5 +120,5 @@ border-top-right-radius: 30px;
 	.carousel-control{display: none;}
 	.fullpage{height: auto !important;padding: 20px 0;	}
 
-	.spacer{padding: 3em 0 0 0;}
+	.spacer{}
 }
