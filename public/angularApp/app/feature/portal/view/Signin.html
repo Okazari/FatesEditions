@@ -1,0 +1,53 @@
+<div class="wrapper" style="background-color:#ecf0f5;">
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">News</h3>
+    </div>
+    <div class="box-body">
+      <div class="-floatingAlerts signin">
+        <div class="" role="alert">
+          Bienvenue sur la version <strong>Béta</strong> de <strong>MyVirtualStoryBook</strong> si vous souhaitez jeter un oeil vous pouvez utiliser le compte commun de test <br/>
+          Nom d'utilisateur : <strong>Mvsb</strong> <br/>
+          Mot de passe : <strong>mvsb</strong> <br/>
+          Pour toute remarque, suggestion ou si vous souhaitez un accès personnel <br/>
+          envoyez un mail à <strong>myvirtualstorybook@gmail.com</strong> <br/>
+          <br/>
+          Derniers ajouts Samedi 18 avril 2015 : <br/>
+          <br/>
+          Pour suivre les derniers ajouts, suivez nous sur la page facebook <br/>
+          <a href="https://www.facebook.com/myvirtualstorybook?ref=ts&fref=ts">https://www.facebook.com/myvirtualstorybook?ref=ts&fref=ts</a><br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login-box">
+    <div class="login-logo">
+      <a>
+        <img class="logo-signin" src="/app/app/images/logo/logo300x300.png">
+      <b>MyVirtualStoryBook</b></a>
+    </div><!-- /.login-logo -->
+    <div class="box md-whiteframe-z2">
+      <div class="box-body">
+        <div class="box-header with-border align-center">
+          <h3 class="box-title">Renseignez vos identifiants</h3>
+        </div>
+        <form name="loginForm">
+          <div class="input-group margin-top col-xs-12">
+            <label>Nom d'utilisateur</label>
+            <input type="text"  max="20" name="username" class="form-control" placeholder="Entrez votre nom d'utilisateur" ng-model="user.username" ng-change="displayMessage = false" required>
+          </div>
+          <div class="input-group margin-top col-xs-12">
+            <label>Mot de passe</label>
+            <input type="password" class="form-control" placeholder="Entrez votre mot de passe" ng-model="user.password" ng-change="displayMessage = false" required>
+          </div>
+          <div class="row margin-top">
+            <div class="col-xs-4">
+              <button type="submit" ng-click="authentify()" class="btn btn-primary">Connexion</md-button>
+            </div><!-- /.col -->
+            <div class="col-xs-8" ng-show="displayMessage">{{displayMessageText}}</div>
+          </div>
+        </form>
+      </div>
+    </div><!-- /.login-box-body -->
+  </div>
+</div>
