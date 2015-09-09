@@ -33,6 +33,10 @@ myVirtualStoryBookApp.service("BookService", ["$http",
             return $http.patch(BASE_URL+"/"+book._id, book);
         }
         
+        service.deleteBook = function(book){
+            return $http.delete(BASE_URL+"/"+book._id);
+        }
+        
         return service;
     }
 ]);

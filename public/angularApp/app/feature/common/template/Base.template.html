@@ -68,8 +68,8 @@
             <ul class="treeview-menu" ng-class="{'menu-open':!menu.write.collapse}">
               <li><a ng-click="newBook()"><i class="fa fa-circle-o"></i>Créer un livre</a></li>
               <li><a ui-sref="app.write.drafts"><i class="fa fa-circle-o"></i>Voir mes brouillons</a></li>
-              <li ng-show="!loaders.books" ng-repeat="book in playerDrafts | filter:{draft:true}"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-{{book.genre.icon}}"></i>{{book.name}}</a></li>
-              <li ng-show="loaders.books"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-refresh"></i>Rafraichissement des livres</a></li>
+              <li ng-show="!loaders.books" ng-repeat="book in playerDrafts.list | filter:{draft:true}"><a ui-sref="app.write.book({id:book._id})"><i class="fa fa-{{book.genre.icon}}"></i>{{book.name}}</a></li>
+              <li ng-show="loaders.books"><a ui-sref="app.write.book({id:book._id})"><i class="fa fa-refresh"></i>Rafraichissement des livres</a></li>
             </ul>
           </li>
           <li class="treeview" ng-class="{'active': !menu.share.collapse}">
@@ -79,7 +79,7 @@
             <ul class="treeview-menu" ng-class="{'menu-open':!menu.share.collapse}">
               <li><a ui-sref="app.share.book"><i class="fa fa-circle-o"></i>Partager un livre</a></li>
               <li><a ui-sref="app.share.publication"><i class="fa fa-circle-o"></i>Voir mes livres partagés</a></li>
-              <li ng-show="!loaders.books" ng-repeat="book in playerDrafts | filter:{draft:false}"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-{{book.genre.icon}}"></i>{{book.name}}</a></li>
+              <li ng-show="!loaders.books" ng-repeat="book in playerDrafts.list | filter:{draft:false}"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-{{book.genre.icon}}"></i>{{book.name}}</a></li>
               <li ng-show="loaders.books"><a ui-sref="app.write.book({id:book.id})"><i class="fa fa-refresh"></i>Rafraichissement des livres</a></li>
             </ul>
           </li>

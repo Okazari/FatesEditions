@@ -3,7 +3,7 @@ var router = express.Router();
 var https = require("https");
 var Genre = require('../models/GenreModel');
 
-/************CHAMPIONS**********/
+/************GENRES**********/
 router.get('/', function(req, res, next) {
     Genre.find(function(err, genres) {
             if (err)
@@ -11,6 +11,19 @@ router.get('/', function(req, res, next) {
 
             res.json(genres);
         });
+});
+
+
+router.post('/', function(req, res, next) {
+    var genre = new Genre();
+    genre.name = req.body.name;
+    genre.icon = req.body.icon;
+    genre.save(function(err) {
+        if (err)
+            res.send(err);
+        res.status(201);
+        res.send(genre);
+    });
 });
 
 module.exports = router;

@@ -21,12 +21,11 @@ router.post('/', function(req, res, next) {
     var book = new Book();
     book.authorId = req.body.userId;
     book.draft = true;
-    Book.remove({},function(err){
-        book.save(function(err){
-            if(err)
-                res.err(err);
-            res.json(book);
-        })
+    book.save(function(err){
+        if(err)
+            res.err(err);
+        res.status(201);
+        res.json(book);
     })
 });
 
@@ -69,6 +68,15 @@ router.patch('/:bookId', function(req, res, next) {
                 res.err(err);
             res.json(book);
         })
+    })
+});
+
+router.delete('/:bookId', function(req, res, next) {
+    Book.remove({_id:req.params.bookId},function(err){
+        if(err)
+            res.err(err);
+        
+        res.send(200);
     })
 });
 module.exports = router;

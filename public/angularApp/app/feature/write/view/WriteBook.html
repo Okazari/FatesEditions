@@ -39,11 +39,11 @@
             <div class="col-xs-9">
               <div class="input-group margin-top col-xs-12">
                 <label>Titre</label> 
-                <input ng-change="saveBook()"  type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Titre du livre" ng-model="book.name" ng-change="displayMessage = false" required>
+                <input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Titre du livre" ng-model="book.name" ng-change="displayMessage = false" required>
               </div>
               <div class="input-group margin-top col-xs-12">
                 <label>Genre</label>
-                <select  ng-change="saveBook()" data-icon="fa fa-{{genre.icon}}" ng-model="book.genre" ng-disabled="!book.draft" ng-options="genre as genre.name for genre in genres track by genre.id" class="form-control">
+                <select  ng-change="saveBook()" data-icon="fa fa-{{genre.icon}}" ng-model="book.genreId" ng-disabled="!book.draft" ng-options="genre._id as genre.name for genre in genres" class="form-control">
                   <option value="" selected>-- Aucun genre selectionné --</option>
                 </select>
               </div>
