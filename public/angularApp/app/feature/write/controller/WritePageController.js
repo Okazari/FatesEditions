@@ -25,7 +25,7 @@ angular.module('myVirtualStoryBookApp')
       }else{
         MusicPlayerService.music.unload();
       }
-      BookService.getBookPages($scope.page.book.id).success(function(pages){
+      BookService.getBookPages($scope.page.bookId).success(function(pages){
         $scope.pages = pages;
         $scope.transitionsLoading=false;
       });
@@ -57,7 +57,7 @@ angular.module('myVirtualStoryBookApp')
       BookService.addNewPage($scope.page.book).success(function(page){
         transition.to_page = page;
         PageService.updatePage($scope.page).success(function(){
-          $state.go("app.write.page",{id:page.id});
+          $state.go("app.write.page",{id:page._id});
         });
       });
     }

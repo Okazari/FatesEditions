@@ -32,7 +32,7 @@
                 <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
                   <tr ng-repeat="book in books.list | filter:{draft:true}">
                     <td>{{book.name}}</td>
-                    <td><h4 ng-if="book.genreId" class="label label-primary ng-binding ng-scope"><i class="fa fa-{{book.genre.icon}}" style="margin-right:5px"></i> {{book.genre.name}}</h4></td>
+                    <td><h4 ng-if="book.genreId" class="label label-primary ng-binding ng-scope"><i class="fa fa-{{genres.list[book.genreId].icon}}" style="margin-right:5px"></i> {{genres.list[book.genreId].name}}</h4></td>
                     <td><h4 class="label label-danger">Brouillon<i class="fa fa-pencil genre-icon"></i></h4></td>
                     <td>{{book.synopsis}}</td>
                     <td><button ui-sref="app.write.book({id:book._id})" class="btn btn-primary  md-whiteframe-z1">Editer</button></td>

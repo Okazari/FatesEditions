@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('BaseController', function ($scope, $state, $rootScope, PlayerService, BookService, GameService, MusicPlayerService) {
+  .controller('BaseController', function ($scope, $state, $rootScope, GenreService, PlayerService, BookService, GameService, MusicPlayerService) {
 
     $rootScope.sidebar = 'open';
 
@@ -30,5 +30,6 @@ angular.module('myVirtualStoryBookApp')
     
     $scope.playerDrafts = PlayerService.player.books;
     $scope.loaders = PlayerService.player.loaders;
+    $scope.genres = GenreService.genres;
     
 });

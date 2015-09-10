@@ -13,4 +13,51 @@ router.get('/', function(req, res, next) {
         });
 });
 
+router.get('/:pageId', function(req, res, next) {
+    Page.findOne({_id:req.params.pageId},function(err, page) {
+            if (err)
+                res.send(err);
+            res.json(page);
+        });
+});
+
+router.post('/', function(req, res, next) {
+    var page = new Page();
+    page.bookId = req.body.bookId;
+    page.save(function(err) {
+        if (err)
+            res.send(err);
+
+        res.json(page);
+    });
+});
+
+
+router.patch('/:pageId', function(req, res, next) {
+    Page.findOne({"_id":req.params.pageId},function(err, page){
+        if(err){
+            res.err(err);  
+        }
+        if(req.body.title) page.title = req.body.title;
+        if(req.body.text) page.text = req.body.text;
+        if(req.body.description) page.description = req.body.description;
+        if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
+        if(req.body.bookId) page.bookId = req.body.bookId;
+        page.save(function(err){
+            if(err)
+                res.err(err);
+            res.json(page);
+        })
+    })
+});
+
+router.delete('/:pageId', function(req, res, next) {
+    Page.remove({_id:req.params.pageId},function(err){
+        if(err)
+            res.err(err);
+        
+        res.send(200);
+    })
+});
+
 module.exports = router;

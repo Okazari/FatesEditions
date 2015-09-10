@@ -68,7 +68,7 @@
             <ul class="treeview-menu" ng-class="{'menu-open':!menu.write.collapse}">
               <li><a ng-click="newBook()"><i class="fa fa-circle-o"></i>Créer un livre</a></li>
               <li><a ui-sref="app.write.drafts"><i class="fa fa-circle-o"></i>Voir mes brouillons</a></li>
-              <li ng-show="!loaders.books" ng-repeat="book in playerDrafts.list | filter:{draft:true}"><a ui-sref="app.write.book({id:book._id})"><i class="fa fa-{{book.genre.icon}}"></i>{{book.name}}</a></li>
+              <li ng-show="!loaders.books" ng-repeat="book in playerDrafts.list | filter:{draft:true}"><a ui-sref="app.write.book({id:book._id})"><i class="fa fa-{{genres.list[book.genreId].icon}}"></i>{{book.name}}</a></li>
               <li ng-show="loaders.books"><a ui-sref="app.write.book({id:book._id})"><i class="fa fa-refresh"></i>Rafraichissement des livres</a></li>
             </ul>
           </li>

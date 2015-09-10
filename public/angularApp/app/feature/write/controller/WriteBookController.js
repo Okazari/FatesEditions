@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('WriteBookController', function ($scope, $state, $stateParams, PlayerService, BookService, PageService, D3Service) {
+  .controller('WriteBookController', function ($scope, $state, $stateParams, GenreService, PlayerService, BookService, PageService, D3Service) {
     
     $scope.bookLoading=true;
     $scope.pagesLoading=true;
@@ -18,7 +18,7 @@ angular.module('myVirtualStoryBookApp')
 
     $scope.updatePages = function(pages){
       $scope.pages = pages;
-      $scope._buildD3Graph();
+      //$scope._buildD3Graph();
       $scope.pagesLoading=false;
     };
     
@@ -34,13 +34,11 @@ angular.module('myVirtualStoryBookApp')
       D3Service.init("#pageGraph",500,400);
     };
     
-    $scope.genres = BookService.getAllGenre().success(function(genres){
-      $scope.genres = genres;
-    });
+    $scope.genres = GenreService.genres;
     
     $scope.addNewPage = function(){
-      BookService.addNewPage($scope.book).success(function(page){
-        $state.go("app.write.page",{id:page.id});
+      PageService.addBookNewPage($scope.book).success(function(page){
+        $state.go("app.write.page",{id:page._id});
       });
     }
     

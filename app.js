@@ -8,11 +8,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://"+process.env.IP+':27017/myvirtualstorybook');
 
-var portal = require('./routes/portal');
-var player = require('./routes/player');
-var book = require('./routes/book');
-var genre = require('./routes/genre');
-
 var app = express();
 
 // view engine setup
@@ -28,11 +23,19 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/app', express.static(path.join(__dirname, 'public/angularApp')));
 
+/********IMPORT ROUTES*********/
+var portal = require('./routes/portal');
+var player = require('./routes/player');
+var book = require('./routes/book');
+var genre = require('./routes/genre');
+var page = require('./routes/page');
+
 /******REST ROUTES*******/
 app.use('/api',portal);
 app.use('/api/player',player);
 app.use('/api/book',book);
 app.use('/api/genre',genre);
+app.use('/api/page',page);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

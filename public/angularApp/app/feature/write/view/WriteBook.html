@@ -43,7 +43,7 @@
               </div>
               <div class="input-group margin-top col-xs-12">
                 <label>Genre</label>
-                <select  ng-change="saveBook()" data-icon="fa fa-{{genre.icon}}" ng-model="book.genreId" ng-disabled="!book.draft" ng-options="genre._id as genre.name for genre in genres" class="form-control">
+                <select  ng-change="saveBook()" data-icon="fa fa-{{genre.icon}}" ng-model="book.genreId" ng-disabled="!book.draft" ng-options="genre._id as genre.name for (key,genre) in genres.list" class="form-control">
                   <option value="" selected>-- Aucun genre selectionné --</option>
                 </select>
               </div>
@@ -53,7 +53,7 @@
               </div>
               <div class="input-group margin-top col-xs-12">
                 <label>Page de début</label> 
-                <select  ng-change="saveBook()" ng-model="book.starting_page" ng-options="page as page.title for page in pages track by page.id" class="form-control">
+                <select  ng-change="saveBook()" ng-model="book.startingPageId" ng-options="page._id as page.title for page in pages" class="form-control">
                   <option value="" selected>-- Aucune page selectionnée --</option>
                 </select>
               </div>
@@ -97,7 +97,7 @@
                 <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
               </tr>
               <tr ng-repeat="page in pages">
-                <td><button ng-disabled="!book.draft" ui-sref="app.write.page({id:page.id})" class="btn btn-primary fa fa-pencil md-whiteframe-z1"></button></td>
+                <td><button ng-disabled="!book.draft" ui-sref="app.write.page({id:page._id})" class="btn btn-primary fa fa-pencil md-whiteframe-z1"></button></td>
                 <td>{{page.title}}</td>
                 <td>{{page.description}}</td>
                 <td><button ng-disabled="!book.draft" ng-click="deletePage(page)" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
