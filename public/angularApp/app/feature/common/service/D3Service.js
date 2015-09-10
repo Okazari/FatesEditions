@@ -1,5 +1,5 @@
-myVirtualStoryBookApp.service("D3Service", [
-    function(){
+myVirtualStoryBookApp.service("D3Service", 
+    function(TransitionService){
         
         var service = {};
         
@@ -107,23 +107,14 @@ myVirtualStoryBookApp.service("D3Service", [
           return "translate(" + d.x + "," + d.y + ")";
         }
         
-        service.buildLinksFromBookPages = function(pages){
-            pages.forEach(function(page) {
-                var nbTransition = 0;
-                page.transitions.forEach(function(transition){
-                    if(angular.isDefined(transition.to_page)){
-                       var pageId = transition.to_page;
-                       service.addLink(page.title,transition.to_page.title);
-                       nbTransition++;
-                    }
-                });
-                
-                if(nbTransition === 0){
-                    service.addLink(page.title,page.title);
-                }
+        service.buildLinksForBook = function(book){
+            TransitionService.getTransitionsLinks(book).success(function(links){
+               angular.forEach(links,function(link){
+                   service.addLink(link.from,link.to);
+               });
             });
         }
         
         return service;
     }
-]);
+);

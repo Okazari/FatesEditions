@@ -6,7 +6,7 @@
     <ol class="breadcrumb">
       <li><a ui-sref="app.play.books">MyVirtualStoryBook</a></li>
       <li><a ui-sref="app.write.drafts">Mes brouillons</a></li>
-      <li><a ui-sref="app.write.book({id:page.book.id})">{{page.book.name}}</a></li>
+      <li><a ui-sref="app.write.book({id:page.bookId})">{{page.book.name}}</a></li>
       <li class="active">{{page.title}}</li>
     </ol>
   </section>
@@ -105,17 +105,17 @@
                 <td>
                   <div class="row">
                     <div class="col-lg-7 col-sm-12 col-xs-12">
-                      <select ng-change="savePage()" ng-model="transition.to_page" ng-options="page as page.title for page in pages track by page.id" class="form-control">
+                      <select ng-change="saveTransition(transition)" ng-model="transition.toPage" ng-options="page._id as page.title for page in pages" class="form-control">
                         <option value="" selected>-- Créer une nouvelle page --</option>
                       </select>
                     </div>
                     <div class="col-xs-5">
-                      <button ng-show="transition.to_page" ui-sref="app.write.page({id:transition.to_page.id})" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
-                      <button ng-show="!transition.to_page" ng-click="addNewPage(transition)" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
+                      <button ng-show="transition.toPage" ui-sref="app.write.page({id:transition.toPage})" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
+                      <button ng-show="!transition.toPage" ng-click="addNewPage(transition)" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
                     </div>
                   </div>
                 </td>
-                <td><textarea ng-change="savePage()" ng-model-options="{debounce:1000}" rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
+                <td><textarea ng-change="saveTransition(transition)" ng-model-options="{debounce:1000}" rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
                 <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
               </tr>
             </tbody>

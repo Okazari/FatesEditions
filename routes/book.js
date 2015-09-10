@@ -6,13 +6,13 @@ var Page = require('../models/PageModel');
 
 /************BOOKS**********/
 router.get('/', function(req, res, next) {
-    filter = {}
+    var filter = {}
     if(req.query.userId) filter.authorId = req.query.userId;
     if(req.query.draft) filter.draft = req.query.draft;
     Book.find(filter,function(err, books) {
-            if (err)
+            if (err){
                 res.send(err);
-
+            }
             res.json(books);
         });
 });

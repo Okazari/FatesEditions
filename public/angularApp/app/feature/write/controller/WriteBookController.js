@@ -12,13 +12,12 @@ angular.module('myVirtualStoryBookApp')
       $scope._release = !book.draft;
       $scope.init = true;    
       $scope.bookLoading=false;
-      //if(angular.isDefined(book.to_page)) transition.selectedPage = transition.to_page.id;
       BookService.getBookPages($stateParams.id).success($scope.updatePages);
     });
 
     $scope.updatePages = function(pages){
       $scope.pages = pages;
-      //$scope._buildD3Graph();
+      $scope._buildD3Graph();
       $scope.pagesLoading=false;
     };
     
@@ -30,7 +29,7 @@ angular.module('myVirtualStoryBookApp')
     
     $scope._buildD3Graph = function(){
       D3Service.clear();
-      D3Service.buildLinksFromBookPages($scope.pages);
+      D3Service.buildLinksForBook($scope.book);
       D3Service.init("#pageGraph",500,400);
     };
     

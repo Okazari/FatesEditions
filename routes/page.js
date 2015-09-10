@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 var https = require("https");
 var Page = require('../models/PageModel');
+var Transition = require('../models/TransitionModel');
 
 /************PAGES**********/
 router.get('/', function(req, res, next) {
     Page.find(function(err, pages) {
             if (err)
                 res.send(err);
-
             res.json(pages);
         });
 });
@@ -57,6 +57,20 @@ router.delete('/:pageId', function(req, res, next) {
             res.err(err);
         
         res.send(200);
+    })
+});
+
+router.get('/:pageId/transition', function(req, res, next) {
+    Page.findOne({"_id":req.params.pageId},function(err, page){
+        if(err){
+            res.err(err);  
+        }
+        Transition.find({"fromPage":req.params.pageId},function(err,transitions){
+            if(err){
+                res.err(err);
+            }
+            res.json(transitions);
+        })
     })
 });
 

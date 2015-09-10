@@ -21,6 +21,10 @@ myVirtualStoryBookApp.service("PageService", ["$http",
             return $http.delete(BASE_URL+"/"+page._id);
         }
         
+        service.getPageTransitions = function(page){
+            return $http.get(BASE_URL+"/"+page._id+"/transition");
+        }
+        
         return service;
     }
 ]);

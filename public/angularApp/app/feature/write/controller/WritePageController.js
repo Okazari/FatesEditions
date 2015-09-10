@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('WritePageController', function ($scope, $state, $stateParams, $timeout, BookService, PageService, D3Service, MusicPlayerService) {
+  .controller('WritePageController', function ($scope, $state, $stateParams, $timeout, TransitionService, BookService, PageService, D3Service, MusicPlayerService) {
 
     $scope.music = MusicPlayerService.music;
 
@@ -25,6 +25,7 @@ angular.module('myVirtualStoryBookApp')
       }else{
         MusicPlayerService.music.unload();
       }
+      PageService.getPageTransitions($scope.page).success($scope.updateTransitions);
       BookService.getBookPages($scope.page.bookId).success(function(pages){
         $scope.pages = pages;
         $scope.transitionsLoading=false;
@@ -33,10 +34,8 @@ angular.module('myVirtualStoryBookApp')
     
     $scope.addNewTransition = function(){
       $scope.transitionsLoading=true;
-      PageService.updatePage($scope.page).success(function(){
-        PageService.addNewTransition($scope.page).success(function(){
-          PageService.getTransitions($scope.page).success($scope.updateTransitions);
-        });
+      TransitionService.addNewTransition($scope.page).success(function(){
+        PageService.getPageTransitions($scope.page).success($scope.updateTransitions);
       });
     };
     
@@ -46,17 +45,20 @@ angular.module('myVirtualStoryBookApp')
     }
     
     $scope.deleteTransition = function(transition){
-      PageService.updatePage($scope.page).success(function(){
-        PageService.deleteTransition(transition).success(function(){
-          PageService.getTransitions($scope.page).success($scope.updateTransitions);
-        });
-      })
+      $scope.transitionsLoading=true;
+      TransitionService.deleteTransition(transition).success(function(){
+        PageService.getPageTransitions($scope.page).success($scope.updateTransitions);
+      });
     };
+    
+    $scope.saveTransition = function(transition){
+      TransitionService.updateTransition(transition);
+    }
     
     $scope.addNewPage = function(transition){
       BookService.addNewPage($scope.page.book).success(function(page){
         transition.to_page = page;
-        PageService.updatePage($scope.page).success(function(){
+        TransitionService.updateTransition(transition).success(function(){
           $state.go("app.write.page",{id:page._id});
         });
       });
