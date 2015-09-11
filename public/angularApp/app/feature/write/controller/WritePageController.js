@@ -60,7 +60,8 @@ angular.module('myVirtualStoryBookApp')
     
     $scope.addNewPage = function(transition){
       PageService.addBookNewPage($scope.book).success(function(page){
-        transition.to_page = page;
+        transition.toPage = page._id;
+        console.log(transition);
         TransitionService.updateTransition(transition).success(function(){
           $state.go("app.write.page",{id:page._id});
         });

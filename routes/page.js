@@ -52,12 +52,13 @@ router.patch('/:pageId', function(req, res, next) {
 });
 
 router.delete('/:pageId', function(req, res, next) {
-    Page.remove({_id:req.params.pageId},function(err){
-        if(err)
-            res.err(err);
-        
-        res.send(200);
-    })
+    Transition.remove({fromPage:req.params.pageId},function(err){
+        if(err) res.err(err);
+        Page.remove({_id:req.params.pageId},function(err){
+            if(err) res.err(err);
+            res.send(200);
+        })
+    });
 });
 
 router.get('/:pageId/transition', function(req, res, next) {

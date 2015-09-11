@@ -1,5 +1,6 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
+var PageModel    = require('./PageModel');
 
 var BookSchema   = new Schema({
     name: String,

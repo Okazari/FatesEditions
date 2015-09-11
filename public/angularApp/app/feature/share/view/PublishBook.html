@@ -23,7 +23,7 @@
         </div>
         <div class="input-group margin-top col-xs-12">
           <label>Brouillon que vous souhaitez publier</label>
-          <select data-icon="fa fa-{{book.genre.icon}}" ng-change="init()" ng-model="bookToPublish" ng-options="book as book.name for book in books | filter:{draft:true} track by book.id" class="form-control">
+          <select data-icon="fa fa-{{book.genre.icon}}" ng-change="init()" ng-model="bookToPublish" ng-options="book as book.name for book in books.list | filter:{draft:true}" class="form-control">
             <option value="" selected>-- Choisissez un brouillon à publier --</option>
           </select>
         </div>

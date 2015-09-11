@@ -11,55 +11,51 @@
     <!-- Default box -->
     <div class="row">
       <div class="col-xs-12">
-        <div ng-if="books.length > 0" style="height:500px">
-            <publication-list-carousel list="books" carousel-index="bookListIndex"></publication-list-carousel>
-          </div >
-          <div>
-            <div class="box md-whiteframe-z1">
-              <div class="box-header">
-                <h3 class="box-title">Liste complète</h3>
-              </div><!-- /.box-header -->
-              <div class="box-body">
-                <div class="dataTables_wrapper form-inline" role="grid"><div class="row"><div class="col-xs-6"><div class="dataTables_info" id="example1_info"></div></div><div class="col-xs-6"></div></div>
-                <table class="table table-bordered table-hover table-striped dataTable">
-                  <thead>
-                    <tr>
-                      <th rowspan="1" colspan="1" style="width:10%">Titre du livre</th>
-                      <th rowspan="1" colspan="1">Genre</th>
-                      <th rowspan="1" colspan="1">Visibilité</th>
-                      <th rowspan="1" colspan="1">Synopsis</th>
-                      <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary md-whiteframe-z1">Editer</button></th>
-                      <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></th>
-                    </tr>
-                  </thead>
-                  <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
-                    <tr ng-repeat="book in books | filter:{draft:false}">
-                      <td>{{book.name}}</td>
-                      <td><h4 ng-if="book.genre" class="label label-primary ng-binding ng-scope"><i class="fa fa-{{book.genre.icon}}" style="margin-right:5px"></i> {{book.genre.name}}</h4></td>
-                      <td><h4 class="label label-success">Publié<i class="fa fa-pencil genre-icon"></i></h4></td>
-                      <td>{{book.synopsis}}</td>
-                      <td><button ui-sref="app.write.book({id:book.id})" class="btn btn-primary  md-whiteframe-z1">Editer</button></td>
-                      <td><button ng-click="openDeleteBookModal(book)" class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="row">
-                  <div class="col-xs-6">
-                    
-                  </div>
-                  <div class="col-xs-6">
-                    <div class="dataTables_paginate paging_bootstrap">
-                    </div>
+        <div>
+          <div class="box md-whiteframe-z1">
+            <div class="box-header">
+              <h3 class="box-title">Liste complète</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="dataTables_wrapper form-inline" role="grid"><div class="row"><div class="col-xs-6"><div class="dataTables_info" id="example1_info"></div></div><div class="col-xs-6"></div></div>
+              <table class="table table-bordered table-hover table-striped dataTable">
+                <thead>
+                  <tr>
+                    <th rowspan="1" colspan="1" style="width:10%">Titre du livre</th>
+                    <th rowspan="1" colspan="1">Genre</th>
+                    <th rowspan="1" colspan="1">Visibilité</th>
+                    <th rowspan="1" colspan="1">Synopsis</th>
+                    <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary md-whiteframe-z1">Editer</button></th>
+                    <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></th>
+                  </tr>
+                </thead>
+                <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
+                  <tr ng-repeat="book in books.list | filter:{draft:false}">
+                    <td>{{book.name}}</td>
+                    <td><h4 ng-if="book.genre" class="label label-primary ng-binding ng-scope"><i class="fa fa-{{book.genre.icon}}" style="margin-right:5px"></i> {{book.genre.name}}</h4></td>
+                    <td><h4 class="label label-success">Publié<i class="fa fa-pencil genre-icon"></i></h4></td>
+                    <td>{{book.synopsis}}</td>
+                    <td><button ui-sref="app.write.book({id:book._id})" class="btn btn-primary  md-whiteframe-z1">Editer</button></td>
+                    <td><button ng-click="openDeleteBookModal(book)" class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col-xs-6">
+                </div>
+                <div class="col-xs-6">
+                  <div class="dataTables_paginate paging_bootstrap">
                   </div>
                 </div>
-                </div>
-              </div><!-- /.box-body -->
-              <div ng-show="loaders.books" class="overlay">
-                  <i class="fa fa-refresh fa-spin"></i>
               </div>
+              </div>
+            </div><!-- /.box-body -->
+            <div ng-show="loaders.books" class="overlay">
+                <i class="fa fa-refresh fa-spin"></i>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </section><!-- /.content -->
 </div>

@@ -19,7 +19,8 @@ angular.module('myVirtualStoryBookApp')
       $interval(function(){
         $scope.loading += 25;
       }, 500, 4).then(function(){
-        BookService.publishBook(book.id).success(function(){
+        book.draft=false;
+        BookService.updateBook(book).success(function(){
           PlayerService.player.refreshBooks(false);
           $scope.progressBarStyle = "success";
         }).error(function(){

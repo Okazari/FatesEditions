@@ -34,7 +34,7 @@ angular.module('myVirtualStoryBookApp')
         }
       };
       $scope.modal = $modal.open({
-        templateUrl: 'feature/common/modal/ModalYesNo.template.html',
+        templateUrl: 'app/feature/common/modal/ModalYesNo.template.html',
         scope: $scope
       });
     }
