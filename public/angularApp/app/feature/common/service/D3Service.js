@@ -108,7 +108,7 @@ myVirtualStoryBookApp.service("D3Service",
         }
         
         service.buildLinksForBook = function(book){
-            TransitionService.getTransitionsLinks(book).success(function(links){
+            return TransitionService.getTransitionsLinks(book).success(function(links){
                angular.forEach(links,function(link){
                    service.addLink(link.from,link.to);
                });

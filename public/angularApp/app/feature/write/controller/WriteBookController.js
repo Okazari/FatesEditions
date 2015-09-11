@@ -29,8 +29,9 @@ angular.module('myVirtualStoryBookApp')
     
     $scope._buildD3Graph = function(){
       D3Service.clear();
-      D3Service.buildLinksForBook($scope.book);
-      D3Service.init("#pageGraph",500,400);
+      D3Service.buildLinksForBook($scope.book).then(function(){
+        D3Service.init("#pageGraph",500,400);
+      });
     };
     
     $scope.genres = GenreService.genres;

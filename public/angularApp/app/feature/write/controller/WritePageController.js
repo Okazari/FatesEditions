@@ -30,6 +30,9 @@ angular.module('myVirtualStoryBookApp')
         $scope.pages = pages;
         $scope.transitionsLoading=false;
       });
+      BookService.getBook($scope.page.bookId).success(function(book){
+        $scope.book = book;
+      });
     });
     
     $scope.addNewTransition = function(){
@@ -56,7 +59,7 @@ angular.module('myVirtualStoryBookApp')
     }
     
     $scope.addNewPage = function(transition){
-      BookService.addNewPage($scope.page.book).success(function(page){
+      PageService.addBookNewPage($scope.book).success(function(page){
         transition.to_page = page;
         TransitionService.updateTransition(transition).success(function(){
           $state.go("app.write.page",{id:page._id});

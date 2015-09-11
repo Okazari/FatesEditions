@@ -18,7 +18,7 @@ myVirtualStoryBookApp.service("TransitionService", ["$http",
         }
         
         service.getTransitionsLinks = function(book){
-            return $http.get(BASE_URL+"/link",{params:{bookId:book._id}});
+            return $http.get(BASE_URL+"/links",{params:{bookId:book._id}});
         }
         
         return service;

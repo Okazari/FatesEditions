@@ -4,7 +4,7 @@ var https = require("https");
 var Transition = require('../models/TransitionModel');
 var Page = require('../models/PageModel');
 var Promise = require('promise');
-
+var async = require('async');
 /************TRANSITIONS**********/
 router.get('/', function(req, res, next) {
     var filter = {};
@@ -51,27 +51,37 @@ router.delete('/:transitionId', function(req, res, next) {
     })
 });
 
-router.get('/link', function(req, res, next) {
+router.get('/links', function(req, res, next) {
+    var transitionsArray = [];
     Page.find({"bookId":req.query.bookId},function(err, pages){
         if(err) res.err(err);
-        var promiseArray = [];
-        var transitionsArray = [];
-        var links = [];
-        pages.forEach(function(page){
-            promiseArray.push(new Promise(function(resolve, reject){
-                Transition.find({fromPage:page._id},function(err, transitions){
-                   transitionsArray = transitionsArray.concat(transitions);
-                   if(transitions.length === 0){
-                     links.push({from:page.title,to:page.title});
-                   }
-                   resolve();
-                });
-            }));
-        });
-        Promise.all(promiseArray).then(function(){
-            transitionsArray.forEach(function(transition){
+        async.each(pages, function(page,eachCallback){
+            Transition.find({"fromPage":page._id},function(err, transitions){
+                transitionsArray = transitionsArray.concat(transitions);
+                eachCallback();
             });
-            res.json(links);
+        },function(err){
+            var links = [];
+            async.each(transitionsArray,function(transition,eachCallback){
+                async.parallel([function(callback){
+                    Page.findOne({"_id":transition.fromPage}, function(err,page){
+                        var result = "UNDEFINED";
+                        if(page) result = page.title;
+                        callback(null,result);
+                    });
+                },function(callback){
+                    Page.findOne({"_id":transition.toPage}, function(err,page){
+                        var result = "UNDEFINED";
+                        if(page) result = page.title;
+                        callback(null,result);
+                    });
+                }],function(err, results){
+                    links.push({from:results[0],to:results[1]});
+                    eachCallback();
+                })
+            },function(err){
+                res.send(links);
+            });
         });
     })
 });
