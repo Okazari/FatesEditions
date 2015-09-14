@@ -63,6 +63,47 @@
           </div>
         </div><!-- /.box -->
       </div>
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+      <div class="box box-primary md-whiteframe-z1">
+        <div class="box-header with-border">
+          <h3 class="box-title">Caractéristiques</h3>
+          <div class="box-tools pull-right">
+            <div class="btn-group">
+            </div>
+          </div>
+        </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Valeur initiale</th>
+                <th>Minimum</th>
+                <th>Maximum</th>
+                <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
+              </tr>
+              <tr ng-repeat="stat in book.stats">
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Libellé" ng-model="stat.name" required></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Description" ng-model="stat.description" required></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="number" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Valeur initiale" ng-model="stat.initValue" required></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="number" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Minimum" ng-model="stat.min" required></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="number" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Maximum" ng-model="stat.max" required></td>
+                <td><button ng-disabled="!book.draft" ng-click="book.stats.splice($index,1);saveBook();" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.box-body -->
+        <div class="box-footer align-center">
+          <button ng-click="book.stats.push({})" ng-disabled="!book.draft" class="btn btn-primary md-whiteframe-z1">
+            Ajouter une caractéristique
+          </button>
+        </div>
+        <div ng-show="pagesLoading" class="overlay">
+          <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+    </div>
     <div class="col-lg-6 col-sm-6 col-xs-12">
       <div class="box box-primary md-whiteframe-z1">
         <div class="box-header with-border">

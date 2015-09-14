@@ -12,6 +12,13 @@ var BookSchema   = new Schema({
     genreId: String,
     draft: Boolean,
     startingPageId: String,
+    stats:[{
+        description: String,
+        initValue: Number,
+        max: Number,
+        min: Number,
+        name: String,
+    }]
 });
 
 module.exports = mongoose.model('Book', BookSchema);

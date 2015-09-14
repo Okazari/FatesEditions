@@ -66,6 +66,7 @@ router.patch('/:bookId', function(req, res, next) {
         if(req.body.synopsis) book.synopsis = req.body.synopsis;
         if(req.body.cover) book.cover = req.body.cover;
         if(req.body.genreId) book.genreId = req.body.genreId;
+        if(req.body.stats) book.stats = req.body.stats;
         if(req.body.draft === false || req.body.draft) book.draft = req.body.draft;
         if(req.body.startingPageId) book.startingPageId = req.body.startingPageId;
         book.save(function(err){

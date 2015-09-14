@@ -8,6 +8,7 @@ angular.module('myVirtualStoryBookApp')
 
     BookService.getBook($stateParams.id).success(function(book){
       $scope.book = book;
+      if(!book.stats) $scope.book.stats = [];
       if(angular.isDefined(book.genre))$scope.selectedGenre = book.genre.id;
       $scope._release = !book.draft;
       $scope.init = true;    
