@@ -30,6 +30,7 @@ var book = require('./routes/book');
 var genre = require('./routes/genre');
 var page = require('./routes/page');
 var transition = require('./routes/transition');
+var game = require('./routes/game');
 
 /******REST ROUTES*******/
 app.use('/api',portal);
@@ -38,6 +39,7 @@ app.use('/api/book',book);
 app.use('/api/genre',genre);
 app.use('/api/page',page);
 app.use('/api/transition',transition);
+app.use('/api/game',game);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

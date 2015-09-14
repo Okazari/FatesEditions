@@ -1,8 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var Player = require('../models/PlayerModel');
 
 router.post('/login', function(req, res, next) {
-  res.json({userId:1, username:"Okazari", accessToken:"fake"});
+   Player.findOne({username:req.body.username},function(err,player){
+      if(err) res.err(err);
+      if(!player){
+          res.sendStatus(403);
+      }else{
+          res.send(player); 
+      }
+   });
 });
 
 module.exports = router;

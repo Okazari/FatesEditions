@@ -4,12 +4,13 @@ var https = require("https");
 var Book = require('../models/BookModel');
 var Page = require('../models/PageModel');
 var Transition = require('../models/TransitionModel');
+var Player = require('../models/PlayerModel');
 var async = require('async');
 
 /************BOOKS**********/
 router.get('/', function(req, res, next) {
     var filter = {}
-    if(req.query.userId) filter.authorId = req.query.userId;
+    if(req.query.userId) filter.authorId = req.query.userId
     if(req.query.draft) filter.draft = req.query.draft;
     Book.find(filter,function(err, books) {
             if (err){
@@ -21,20 +22,22 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var book = new Book();
-    book.authorId = req.body.userId;
     book.draft = true;
-    book.save(function(err){
-        if(err)
-            res.err(err);
-        res.status(201);
-        res.json(book);
+    Player.findOne({_id:req.body.userId},function(err,player){
+        if(err) res.err(err);
+        book.authorName = player.username;
+        book.authorId = req.body.userId;
+        book.save(function(err){
+            if(err) res.err(err);
+            res.status(201);
+            res.json(book);
+        })
     })
 });
 
 router.get('/:bookId', function(req, res, next) {
     Book.findOne({"_id":req.params.bookId},function(err, book){
-        if(err)
-            res.err(err);
+        if(err) res.err(err);
         res.json(book);
     })
 });
@@ -92,6 +95,6 @@ router.delete('/:bookId', function(req, res, next) {
             });
         });
     })
-    
 });
+
 module.exports = router;

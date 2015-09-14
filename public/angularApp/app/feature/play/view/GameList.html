@@ -8,9 +8,6 @@
     </section>
   <!-- Main content -->
     <section class="content">
-    <div ng-if="games.length > 0" style="height:650px">
-      <game-list-carousel list="games" carousel-index="gameListIndex"></game-list-carousel>
-    </div>
     <!-- Default box -->
     <div>
       <div class="box md-whiteframe-z1">
@@ -32,9 +29,9 @@
             <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
               <tr ng-repeat="game in games">
                 <td>{{game.book.name}}</td>
-                <td><h4 class="label label-primary">Page : {{game.current_page.title}}</h4></td>
+                <td><h4 class="label label-primary">Page : {{game.currentPage.title}}</h4></td>
                 <td>{{game.book.synopsis}}</td>
-                <td><button class="btn btn-primary md-whiteframe-z1" ui-sref="app.play.playing({id:game.id})">Reprendre la partie</button></td>
+                <td><button class="btn btn-primary md-whiteframe-z1" ui-sref="app.play.playing({id:game._id})">Reprendre la partie</button></td>
                 <td><button ng-click="openDeleteGameModal(game)" class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></td>
               </tr>
             </tbody>

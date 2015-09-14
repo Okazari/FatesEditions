@@ -9,13 +9,16 @@ angular.module('myVirtualStoryBookApp')
     
     GameService.getGame($stateParams.id).success(function(game){
       $scope.currentGame = game;
-      PageService.getPage($scope.currentGame.current_page.id).success(function(page){
+      PageService.getPage($scope.currentGame.currentPageId).success(function(page){
         $scope.currentPage = page;
-        $scope.pageLoading = false;
-        if(angular.isDefined(page.background_music) && MusicPlayerService.isValidUrl(page.background_music)){ 
-          MusicPlayerService.play(page.background_music);
-          $scope.backgroundMusicFirstLoad = false;
-        };
+        PageService.getPageTransitions(page).success(function(transitions){
+          $scope.currentPage.transitions = transitions;
+          $scope.pageLoading = false;
+          if(angular.isDefined(page.background_music) && MusicPlayerService.isValidUrl(page.background_music)){ 
+            MusicPlayerService.play(page.background_music);
+            $scope.backgroundMusicFirstLoad = false;
+          };
+        });
       });
     });
     
@@ -23,7 +26,8 @@ angular.module('myVirtualStoryBookApp')
       $scope.pageLoading = true;
       PageService.getPage(newPageId).success(function(page){
         $scope.currentPage = page;
-        $scope.currentGame.current_page = page;
+        $scope.currentPageId = page._id;
+        $scope.currentGame.currentPageId = page._id;
         $scope.pageLoading = false;
         GameService.saveGame($scope.currentGame);
         if(angular.isDefined(page.background_music) 

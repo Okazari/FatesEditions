@@ -21,4 +21,16 @@ router.get('/:playerId', function(req, res, next) {
         });
 }); 
 
+router.post('/', function(req, res, next) {
+    
+    player = new Player();
+    
+    player.username = req.body.username;
+    
+    player.save(function(err) {
+        if (err) res.send(err);
+        res.json(player);
+    });
+}); 
+
 module.exports = router;

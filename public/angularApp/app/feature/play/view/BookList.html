@@ -7,9 +7,6 @@
     </ol>
   </section>
   <section class="content">
-    <div ng-if="books.length > 0" style="height:650px">
-      <book-list-carousel list="books" carousel-index="bookListIndex"></book-list-carousel>
-    </div>
     <!-- Default box -->
     <div>
       <div class="box md-whiteframe-z1">
@@ -31,8 +28,8 @@
             <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
               <tr ng-repeat="book in books">
                 <td>{{book.name}}</td>
-                <td><h4 ng-if="book.genre" class="label label-primary md-whiteframe-z1"><i class="fa fa-{{book.genre.icon}}" style="margin-right:5px"></i> {{book.genre.name}}</h4></td>
-                <td><h4 class="label label-primary md-whiteframe-z1"><i class="fa fa-pencil" style="margin-right:5px"></i>{{book.author.username}}</h4></td>
+                <td><h4 ng-if="book.genreId" class="label label-primary ng-binding ng-scope"><i class="fa fa-{{genres.list[book.genreId].icon}}" style="margin-right:5px"></i> {{genres.list[book.genreId].name}}</h4></td>
+                <td><h4 class="label label-primary md-whiteframe-z1"><i class="fa fa-pencil" style="margin-right:5px"></i>{{book.authorName}}</h4></td>
                 <td>{{book.synopsis}}</td>
                 <td><button class="btn btn-primary md-whiteframe-z1" ng-click="newGame(book)">Jouer</button></td>
               </tr>

@@ -12,18 +12,26 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         service.player.books = {};
         
         service.player.refreshBooks = function(){
-            BookService.getUserBooks(service.player.data.userId).success(function(books){
+            BookService.getUserBooks(service.player.data._id).success(function(books){
                 service.player.books.list = books;
             });
         }
         
         service.player.createBook = function(){
-            return BookService.createBook(service.player.data.userId).success(function(book){
+            return BookService.createBook(service.player.data._id).success(function(book){
                service.player.refreshBooks();
             });
         }
         
         service.player.refreshBooks();
+        
+        service.player.getGames = function(){
+            return GameService.getUserGames(service.player.data._id);
+        };
+        
+        service.player.newGame = function(book){
+            return GameService.newGame(service.player.data._id, book);
+        }
         
         return service;
     }

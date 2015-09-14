@@ -51,7 +51,62 @@ router.delete('/:transitionId', function(req, res, next) {
     })
 });
 
+var findPage = function(idPage, callback){
+       Page.findOne({"_id":idPage}, function(err,page){
+           var result = page ? page.title: "UNDEFINED";
+           callback(null,result);
+       });
+    };
+    
+var findTransitions = function(transition, eachCallback){
+   async.parallel({
+       'from': function(callback){
+           findPage(transition.fromPage, callback);
+       },
+       'to': function(callback){
+           findPage(transition.toPage, callback);
+       }
+   },function(err, results){
+       eachCallback(null, {from: results.from,to: results.to});
+   })
+};
+
+
 router.get('/links', function(req, res, next) {
+   var transitionsArray = [];
+   Page.find({"bookId":req.query.bookId},function(err, pages){
+       if(err) res.err(err);
+       async.each(pages, function(page,eachCallback){
+           Transition.find({"fromPage":page._id},function(err, transitions){
+               transitionsArray = transitionsArray.concat(transitions);
+               eachCallback();
+           });
+       },function(err){
+           if(!err) {
+               var links = [];
+               async.each(transitionsArray, function (transition, eachCallback) {
+                   findTransitions(transition, function (err, result) {
+                       if (!err) {
+                           links.push(result);
+                       }
+                       eachCallback(err);
+                   });
+               }, function (err) {
+                   if (!err) {
+                       res.send(links);
+                   } else {
+                       next(err);
+                   }
+               });
+           } else {
+               next(err);
+           }
+       });
+   })
+});
+
+/*router.get('/links', function(req, res, next) {
+    
     var transitionsArray = [];
     Page.find({"bookId":req.query.bookId},function(err, pages){
         if(err) res.err(err);
@@ -84,5 +139,5 @@ router.get('/links', function(req, res, next) {
             });
         });
     })
-});
+});*/
 module.exports = router;

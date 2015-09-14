@@ -17,7 +17,7 @@ angular.module('myVirtualStoryBookApp')
     
     $scope.newGame = function(book){
       PlayerService.player.newGame(book).success(function(newGame){
-        $state.go("app.play.playing",{id:newGame.id});
+        $state.go("app.play.playing",{id:newGame._id});
       });
     }
     
