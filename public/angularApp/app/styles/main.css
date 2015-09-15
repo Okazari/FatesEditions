@@ -76,6 +76,10 @@ body{
   text-align:center;
 }
 
+.float-right{
+  float:right;
+}
+
 .margin-top{
   margin-top:10px;
 }

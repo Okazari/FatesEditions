@@ -19,6 +19,8 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var transition = new Transition();
     transition.fromPage = req.body.fromPage;
+    transition.conditions = [];
+    transition.effects = [];
     transition.save(function(err) {
         if (err)
             res.send(err);
@@ -34,6 +36,8 @@ router.patch('/:transitionId', function(req, res, next) {
         }
         req.body.toPage ? transition.toPage = req.body.toPage : transition.toPage = "";
         req.body.text ? transition.text = req.body.text : transition.text = "";
+        req.body.conditions ? transition.conditions = req.body.conditions : transition.conditions = [];
+        req.body.effects ? transition.effects = req.body.effects : transition.effects = [];
         transition.save(function(err){
             if(err)
                 res.err(err);

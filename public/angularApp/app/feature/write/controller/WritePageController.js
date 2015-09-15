@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('WritePageController', function ($scope, $state, $stateParams, $timeout, TransitionService, BookService, PageService, D3Service, MusicPlayerService) {
+  .controller('WritePageController', function ($scope, $state, $stateParams, $timeout, TransitionService, TransitionHelperService, BookService, PageService, D3Service, MusicPlayerService) {
 
     $scope.music = MusicPlayerService.music;
+    $scope.conditions = TransitionHelperService.conditions;
+    $scope.effects = TransitionHelperService.effects;
 
     $scope.savePage = function(){
       PageService.updatePage($scope.page);

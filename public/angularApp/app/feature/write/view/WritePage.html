@@ -89,47 +89,98 @@
     </div>
     <div class="col-xs-12">
       <!-- Default box -->
-      <div class="box box-primary md-whiteframe-z1">
+      <div class="box box-primary md-whiteframe-z1" >
         <div class="box-header">
           <h3 class="box-title">Transitions</h3>
         </div><!-- /.box-header -->
-        <div class="box-body table-responsive no-padding">
-          <table class="table table-hover md-whiteframe-z1">
-            <tbody>
-              <tr>
-                <th style="width:35%">Page de destination</th>
-                <th style="width:30%">Texte de transition</th>
-                <th style="width:5%"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
-              </tr>
-              <tr ng-repeat="transition in page.transitions">
-                <td>
-                  <div class="row">
-                    <div class="col-lg-7 col-sm-12 col-xs-12">
-                      <select ng-change="saveTransition(transition)" ng-model="transition.toPage" ng-options="page._id as page.title for page in pages" class="form-control">
-                        <option value="" selected>-- Créer une nouvelle page --</option>
+        <div class="box-body">
+          <div class="box box-default md-whiteframe-z1 box-solid" ng-repeat="transition in page.transitions">
+            <div class="box-header">
+                <div class="input-group float-left">
+                  <label>Page de destination
+                    <button ng-show="transition.toPage" ui-sref="app.write.page({id:transition.toPage})" class="btn btn-primary btn-xs md-whiteframe-z1"><i style="color:white" class="fa fa-pencil"></i></button>
+                    <button ng-show="!transition.toPage" ng-click="addNewPage(transition)" class="btn btn-primary btn-xs md-whiteframe-z1"><i style="color:white" class="fa fa-plus"></i></button>
+                  </label> 
+                  <select ng-change="saveTransition(transition)" ng-model="transition.toPage" ng-options="page._id as page.title for page in pages" class="form-control">
+                    <option value="" selected>-- Créer une nouvelle page --</option>
+                  </select>
+                </div>
+                <div class="box-tools pull-right">
+                  <button ng-click="deleteTransition(transition)" class="btn btn-box-tool md-whiteframe-z1" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+              <div class="row no-margin">
+                <textarea ng-change="saveTransition(transition)" ng-model-options="{debounce:1000}" rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea>
+              </div>
+              <div class="row no-margin margin-top">
+                <div class="input-group col-xs-12">
+                  <label>Conditions</label>
+                  {{condition}}
+                  <div class="row margin-bottom" ng-repeat="condition in transition.conditions">
+                    <div class="col-xs-3">
+                      <select ng-change="saveTransition(transition)" ng-model="condition.type"  ng-options="conditionType as conditionObject.label for (conditionType,conditionObject) in conditions" class="form-control">
                       </select>
                     </div>
-                    <div class="col-xs-5">
-                      <button ng-show="transition.toPage" ui-sref="app.write.page({id:transition.toPage})" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
-                      <button ng-show="!transition.toPage" ng-click="addNewPage(transition)" class="btn btn-primary md-whiteframe-z1">Editer cette page</button>
+                    <div class="col-xs-3">
+                      <select ng-show="condition.type" ng-change="saveTransition(transition)" ng-model="condition.subject"  ng-options="thing.name as thing.name for thing in book[condition.type]" class="form-control">
+                      </select>
+                    </div>
+                    <div class="col-xs-3" >
+                      <select ng-show="condition.subject" ng-change="saveTransition(transition)" ng-model="condition.operator"  ng-options="operatorKey as conditionOperator for (operatorKey,conditionOperator) in conditions[condition.type].operators" class="form-control">
+                      </select>
+                    </div>
+                    <div class="col-xs-2" >
+                      <input ng-show="condition.operator && condition.type === 'stats'" ng-change="saveTransition(transition)" ng-model-options="{debounce:1000}" type="number" class="form-control"  placeholder="Valeur de la condition" ng-model="condition.value">
+                    </div>
+                    <div class="col-xs-1">
+                      <button ng-click="transition.conditions.splice($index,1);saveTransition(transition);" class="btn btn-primary fa fa-close md-whiteframe-z1"></button>
                     </div>
                   </div>
-                </td>
-                <td><textarea ng-change="saveTransition(transition)" ng-model-options="{debounce:1000}" rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea></td>
-                <td><button ng-click="deleteTransition(transition)" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div><!-- /.box-body -->
+                  <div class="col-xs-12" style="text-align:center">
+                    <button ng-click="transition.conditions.push({})" class="btn btn-primary btn-xs md-whiteframe-z1">
+                      Ajouter une Condition
+                    </button>
+                  </div>
+                </div>              
+              </div>
+              <div class="row no-margin margin-top">
+                <div class="input-group col-xs-12">
+                  <label>Effet</label>
+                  <div class="row margin-bottom" ng-repeat="effect in transition.effects">
+                    <div class="col-xs-3">
+                      <select ng-change="saveTransition(transition)" ng-model="effect.type"  ng-options="effectType as effectObject.label for (effectType,effectObject) in effects" class="form-control">
+                      </select>
+                    </div>
+                    <div class="col-xs-3">
+                      <select ng-show="effect.type" ng-change="saveTransition(transition)" ng-model="effect.subject"  ng-options="thing.name as thing.name for thing in book[effect.type]" class="form-control">
+                      </select>
+                    </div>
+                    <div class="col-xs-3" >
+                      <select ng-show="effect.subject" ng-change="saveTransition(transition)" ng-model="effect.operator"  ng-options="operatorKey as effectOperator for (operatorKey,effectOperator) in effects[effect.type].operators" class="form-control">
+                      </select>
+                    </div>
+                    <div class="col-xs-2" >
+                      <input ng-show="effect.operator && effect.type === 'stats'" ng-change="saveTransition(transition)" ng-model-options="{debounce:1000}" type="number" class="form-control"  placeholder="Valeur de la condition" ng-model="condition.value">
+                    </div>
+                    <div class="col-xs-1">
+                      <button ng-click="transition.effects.splice($index,1);saveTransition(transition);" class="btn btn-primary fa fa-close md-whiteframe-z1"></button>
+                    </div>
+                  </div>
+                  <div class="col-xs-12" style="text-align:center">
+                    <button ng-click="transition.effects.push({})" class="btn btn-primary btn-xs md-whiteframe-z1">
+                      Ajouter un Effet
+                    </button>
+                  </div>
+                </div>              
+              </div>
+            </div><!-- /.box-body -->
+          </div>
         <div class="box-footer align-center">
           <button ng-click="addNewTransition()" class="btn btn-primary md-whiteframe-z1">
             Ajouter une transition
           </button>
         </div>
-        <div ng-show="transitionsLoading" class="overlay">
-          <i class="fa fa-refresh fa-spin"></i>
-        </div>
-      </div>
     </div>
   </section><!-- /.content -->
   <!-- =============================================== -->
