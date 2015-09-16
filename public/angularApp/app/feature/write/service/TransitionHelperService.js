@@ -20,8 +20,8 @@ myVirtualStoryBookApp.service("TransitionHelperService",
                 label : "L'objet",
                 collection : "objects",
                 operators : {
-                    equal : "est possédé",
-                    notEqual : "n'est pas possédé",
+                    own : "est possédé",
+                    doNotOwn : "n'est pas possédé",
                 }
             }
         }
@@ -42,8 +42,8 @@ myVirtualStoryBookApp.service("TransitionHelperService",
                 label : "L'objet",
                 collection : "objects",
                 operators : {
-                    equal : "est ajouté",
-                    notEqual : "est retiré",
+                    add : "est ajouté",
+                    remove : "est retiré",
                 }
             }
             

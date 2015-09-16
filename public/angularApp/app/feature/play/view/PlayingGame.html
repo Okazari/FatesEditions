@@ -21,7 +21,7 @@
         </div>
       </div><!-- /.box-body -->
       <div class="box-footer">
-        <div class="list-group-item btn btn-default transitionText md-whiteframe-z1" ng-click="changePage(transition.toPage)" ng-repeat="transition in currentPage.transitions">
+        <div ng-show="showTransition(currentGame,transition)" class="list-group-item btn btn-default transitionText md-whiteframe-z1" ng-click="chooseTransition(transition)" ng-repeat="transition in currentPage.transitions">
             <p>- {{transition.text}}</p>
         </div>
       </div><!-- /.box-footer-->

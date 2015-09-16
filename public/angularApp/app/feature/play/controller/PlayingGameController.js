@@ -42,8 +42,14 @@ angular.module('myVirtualStoryBookApp')
             }
           }
         });
-        
       });
+    }
+    
+    $scope.showTransition = GameService.showTransition;
+    
+    $scope.chooseTransition = function(transition){
+      $scope.currentGame = GameService.applyEffects($scope.currentGame,transition);
+      $scope.changePage(transition.toPage);
     }
     
   });

@@ -119,11 +119,13 @@
               <tr>
                 <th>Nom</th>
                 <th>Description</th>
+                <th style="width: 10px">Début</th>
                 <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
               </tr>
               <tr ng-repeat="object in book.objects">
-                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Libellé" ng-model="object.name" required></td>
-                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Description" ng-model="object.description" required></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" class="form-control" placeholder="Libellé" ng-model="object.name" required></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" class="form-control" placeholder="Description" ng-model="object.description" required></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="checkbox" ng-disabled="!book.draft" ng-model="object.atStart"></td>
               <td><button ng-disabled="!book.draft" ng-click="book.objects.splice($index,1);saveBook();" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
               </tr>
             </tbody>

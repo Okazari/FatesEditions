@@ -25,6 +25,57 @@ myVirtualStoryBookApp.service("GameService", [ "$http",
             return $http.patch(BASE_URL+'/'+game._id, game);
         }
         
+        service.hasObject = function(game,key){
+            return game.objects.indexOf(key) >= 0;
+        }
+        
+        service.showTransition = function(game, transition){
+          var show = true;
+          angular.forEach(transition.conditions,function(condition){
+            if(condition.type === "objects"){
+              switch (condition.operator) {
+                case 'own':
+                  if(!service.hasObject(game,condition.subject)){
+                    show = false
+                  }
+                  break;
+                case 'doNotOwn':
+                  if(service.hasObject(game,condition.subject)){
+                    show = false
+                  }
+                  break;
+                
+                default:
+                  break;
+              }
+            }
+          });
+          return show;
+        }
+        
+        service.applyEffects = function(game,transition){
+          angular.forEach(transition.effects,function(effect){
+            if(effect.type === "objects"){
+              switch (effect.operator) {
+                case 'add':
+                    if(!service.hasObject(game,effect.subject)){
+                        game.objects.push(effect.subject);
+                    };
+                  break;
+                case 'remove':
+                    if(service.hasObject(game,effect.subject)){
+                        game.objects.splice(game.objects.indexOf(game,effect.subject),1);
+                    };
+                  break;
+                
+                default:
+                  break;
+              }
+            }
+          })
+          return game;
+        }
+        
         return service;
     }
 ]);

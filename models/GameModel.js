@@ -8,7 +8,12 @@ var GameSchema   = new Schema({
     book : {
             synopsis : String,
             name : String
-        }
+        },
+    objects : [String],
+    stats : [{
+        key:String,
+        value:Number
+    }]
 });
 
 module.exports = mongoose.model('Game', GameSchema);

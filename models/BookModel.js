@@ -22,6 +22,7 @@ var BookSchema   = new Schema({
     objects:[{
         description: String,
         name: String,
+        atStart: Boolean
     }]
 });
 

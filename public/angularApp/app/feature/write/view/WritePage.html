@@ -123,7 +123,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <select ng-show="condition.type" ng-change="saveTransition(transition)" ng-model="condition.subject"  ng-options="thing.name for thing in book[condition.type] track by thing.name" class="form-control">
+                      <select ng-show="condition.type" ng-change="saveTransition(transition)" ng-model="condition.subject"  ng-options="thing.name as thing.name for thing in book[condition.type]" class="form-control">
                       </select>
                     </div>
                     <div class="col-xs-3" >
@@ -153,7 +153,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <select ng-show="effect.type" ng-change="saveTransition(transition)" ng-model="effect.subject"  ng-options="thing.name for thing in book[effect.type] track by thing.name" class="form-control">
+                      <select ng-show="effect.type" ng-change="saveTransition(transition)" ng-model="effect.subject"  ng-options="thing.name as thing.name for thing in book[effect.type]" class="form-control">
                       </select>
                     </div>
                     <div class="col-xs-3" >

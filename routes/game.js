@@ -37,6 +37,14 @@ router.post('/', function(req, res, next) {
             synopsis : book.synopsis,
             name : book.name
         }
+        book.stats.forEach(function(stat){
+           game.stats.push({key:stat.name, value:stat.initValue});
+        });
+        book.objects.forEach(function(object){
+            if(object.atStart){
+                game.objects.push(object.name);
+            }
+        })
         game.save(function(err) {
             if (err) res.send(err);
             
@@ -57,6 +65,8 @@ router.patch('/:gameId', function(req, res, next) {
     Game.findOne({_id:req.params.gameId}, function(err,game){
         if(err) next(err);
         game.currentPageId = req.body.currentPageId;
+        game.objects = req.body.objects;
+        game.stats = req.body.stats;
         game.save(function(err){
             if(err) next(err);
             res.send(game);
