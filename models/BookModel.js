@@ -1,6 +1,6 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
-var PageModel    = require('./PageModel');
+var PageSchema    = require('./PageModel');
 
 var BookSchema   = new Schema({
     name: String,
@@ -23,7 +23,6 @@ var BookSchema   = new Schema({
         description: String,
         name: String,
     }]
-
 });
 
 module.exports = mongoose.model('Book', BookSchema);
