@@ -161,7 +161,7 @@
                       </select>
                     </div>
                     <div class="col-xs-2" >
-                      <input ng-show="effect.operator && effect.type === 'stats'" ng-change="saveTransition(transition)" ng-model-options="{debounce:1000}" type="number" class="form-control"  placeholder="Valeur de la condition" ng-model="condition.value">
+                      <input ng-show="effect.operator && effect.type === 'stats'" ng-change="saveTransition(transition)" ng-model-options="{debounce:1000}" type="number" class="form-control"  placeholder="Valeur de la condition" ng-model="effect.value">
                     </div>
                     <div class="col-xs-1">
                       <button ng-click="transition.effects.splice($index,1);saveTransition(transition);" class="btn btn-primary fa fa-close md-whiteframe-z1"></button>

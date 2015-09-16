@@ -29,6 +29,26 @@ myVirtualStoryBookApp.service("GameService", [ "$http",
             return game.objects.indexOf(key) >= 0;
         }
         
+        service.getStat = function(game,key,log){
+          var result = null;
+          angular.forEach(game.stats, function(stat){
+            if(stat.key == key){
+              result = stat.value;
+            }
+          })
+          return result;
+        }
+        
+        service.setStat = function(game, key, newValue){
+          angular.forEach(game.stats, function(stat){
+            if(stat.key == key){
+              stat.value = newValue;
+              return game;
+            }
+          })
+          return game;
+        }
+        
         service.showTransition = function(game, transition){
           var show = true;
           angular.forEach(transition.conditions,function(condition){
@@ -45,6 +65,41 @@ myVirtualStoryBookApp.service("GameService", [ "$http",
                   }
                   break;
                 
+                default:
+                  break;
+              }
+            }else if(condition.type ==="stats"){
+              switch (condition.operator) {
+                case 'equal':
+                  if(!(service.getStat(game,condition.subject) == condition.value)){
+                    show = false
+                  }
+                  break;
+                case 'notEqual':
+                  if(!(service.getStat(game,condition.subject) != condition.value)){
+                    show = false
+                  }
+                  break;
+                case 'less':
+                  if(!(service.getStat(game,condition.subject) < condition.value)){
+                    show = false
+                  }
+                  break;
+                case 'lessOrEqual':
+                  if(!(service.getStat(game,condition.subject) <= condition.value)){
+                    show = false
+                  }
+                  break;
+                case 'more':
+                  if(!(service.getStat(game,condition.subject) > condition.value)){
+                    show = false
+                  }
+                  break;
+                case 'moreOrEqual':
+                  if(!(service.getStat(game,condition.subject) >= condition.value)){
+                    show = false
+                  }
+                  break;
                 default:
                   break;
               }
@@ -66,6 +121,34 @@ myVirtualStoryBookApp.service("GameService", [ "$http",
                     if(service.hasObject(game,effect.subject)){
                         game.objects.splice(game.objects.indexOf(game,effect.subject),1);
                     };
+                  break;
+                
+                default:
+                  break;
+              }
+            }else if (effect.type === "stats"){
+              switch (effect.operator) {
+                case 'inc':
+                  var newValue = service.getStat(game,effect.subject) + effect.value;
+                  game = service.setStat(game,effect.subject,newValue);
+                  break;
+                case 'dec':
+                  var newValue = service.getStat(game,effect.subject) - effect.value;
+                  game = service.setStat(game,effect.subject,newValue);
+                  break;
+                case 'aff':
+                  var newValue = effect.value;
+                  game = service.setStat(game,effect.subject,newValue);
+                  break;
+                case 'mul':
+                  var newValue = service.getStat(game,effect.subject) * effect.value;
+                  game = service.setStat(game,effect.subject,newValue);
+                  break;
+                case 'div':
+                  if(effect.value != 0){
+                    var newValue = service.getStat(game,effect.subject) / effect.value;
+                    game = service.setStat(game,effect.subject,newValue);
+                  }
                   break;
                 
                 default:
