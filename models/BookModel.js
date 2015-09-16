@@ -18,7 +18,12 @@ var BookSchema   = new Schema({
         max: Number,
         min: Number,
         name: String,
+    }],
+    objects:[{
+        description: String,
+        name: String,
     }]
+
 });
 
 module.exports = mongoose.model('Book', BookSchema);
