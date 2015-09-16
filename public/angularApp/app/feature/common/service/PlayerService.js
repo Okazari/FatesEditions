@@ -12,9 +12,11 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         service.player.books = {};
         
         service.player.refreshBooks = function(){
-            BookService.getUserBooks(service.player.data._id).success(function(books){
-                service.player.books.list = books;
-            });
+            if(service.player.data){
+                BookService.getUserBooks(service.player.data._id).success(function(books){
+                    service.player.books.list = books;
+                });
+            }
         }
         
         service.player.createBook = function(){

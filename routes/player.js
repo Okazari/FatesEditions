@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
     player = new Player();
     
     player.username = req.body.username;
-    
+    player.password = req.body.password;
     player.save(function(err) {
         if (err) res.send(err);
         res.json(player);
