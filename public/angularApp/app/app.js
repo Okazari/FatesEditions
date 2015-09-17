@@ -132,6 +132,8 @@ var myVirtualStoryBookApp = angular
                 templateUrl: "app/feature/game/view/CurrentGame.html",
                 controller: "GameController"
             })*/
+            
+            
 
 }); 
 
@@ -154,3 +156,10 @@ myVirtualStoryBookApp.factory('httpErrorInterceptor', ['$q', '$injector', '$wind
 myVirtualStoryBookApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('httpErrorInterceptor');
 }]);
+
+myVirtualStoryBookApp.run( function($rootScope, $window, $location) {
+    $rootScope.$on('$stateChangeSuccess', 
+        function(event, toState, toParams, fromState, fromParams, error){
+        $window.ga('send', 'pageview', { page: $location.url(), title:toState.name});
+    })
+});
