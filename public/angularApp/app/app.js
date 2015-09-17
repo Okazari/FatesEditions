@@ -10,18 +10,15 @@
  */
 var myVirtualStoryBookApp = angular
   .module('myVirtualStoryBookApp', [
-    'ngAnimate',
     'ngCookies',
-    'ngResource',
-    'ngRoute',
     'ngSanitize',
-    'ngTouch',
     'ui.utils',
     'ui.router',
     'ui.bootstrap',
     'angular.layout',
     'textAngular',
     'ngMaterial',
+    'ngTouch',
     'angular-carousel'
   ]).config(function($stateProvider, $urlRouterProvider){
 

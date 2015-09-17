@@ -28,6 +28,14 @@ angular.module('myVirtualStoryBookApp')
       }
     }
     
+    $scope.showSlidebar = function(){
+        $rootScope.sidebar = 'open';
+    }
+    
+    $scope.hideSlidebar = function(){
+        $rootScope.sidebar = 'collapse';
+    }
+    
     $scope.playerDrafts = PlayerService.player.books;
     $scope.loaders = PlayerService.player.loaders;
     $scope.genres = GenreService.genres;
