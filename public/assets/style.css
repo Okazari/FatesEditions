@@ -50,8 +50,22 @@ h3{color: #333;margin-bottom: 20px;font-size: 2em;}
 .about img{display: inline-block;}
 /*about*/
 
+/*extract*/
+.extract{ font-size: 1.05em;line-height: 1.75em;}
+.extract h3{margin-top: 50px;}
+.extract p{margin-bottom:25px;}
+.extract img{display: inline-block;}
+/*extract*/
+
+/*start*/
+.start{background-color: #ddd; font-size: 1.05em;line-height: 1.75em;}
+.start h3{margin-top: 50px;}
+.start p{margin-bottom:25px;}
+.start img{display: inline-block;}
+/*start*/
+
 /*create*/
-.create{ background-color: #ddd; font-size: 1.05em;line-height: 1.75em;}
+.create{ font-size: 1.05em;line-height: 1.75em;}
 .create h3{margin-top: 50px;}
 .create p{margin-bottom:25px;}
 .create img{display: inline-block;}
@@ -65,7 +79,7 @@ h3{color: #333;margin-bottom: 20px;font-size: 2em;}
 /*play*/
 
 /*share*/
-.share{background-color: #ddd; font-size: 1.05em;line-height: 1.75em;}
+.share{font-size: 1.05em;line-height: 1.75em;}
 .share h3{margin-top: 50px;}
 .share p{margin-bottom:25px;}
 .share img{display: inline-block;}
