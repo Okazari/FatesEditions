@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
     var filter = {};
     Transition.find(function(err, transitions) {
             if (err)
-                res.send(err);
+                next(err);
 
             res.json(transitions);
         });
@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
     transition.effects = [];
     transition.save(function(err) {
         if (err)
-            res.send(err);
+            next(err);
 
         res.json(transition);
     });
@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
 router.patch('/:transitionId', function(req, res, next) {
     Transition.findOne({"_id":req.params.transitionId},function(err, transition){
         if(err){
-            res.err(err);  
+            next(err);  
         }
         req.body.toPage ? transition.toPage = req.body.toPage : transition.toPage = "";
         req.body.text ? transition.text = req.body.text : transition.text = "";
@@ -40,7 +40,7 @@ router.patch('/:transitionId', function(req, res, next) {
         req.body.effects ? transition.effects = req.body.effects : transition.effects = [];
         transition.save(function(err){
             if(err)
-                res.err(err);
+                next(err);
             res.json(transition);
         })
     })
@@ -49,7 +49,7 @@ router.patch('/:transitionId', function(req, res, next) {
 router.delete('/:transitionId', function(req, res, next) {
     Transition.remove({_id:req.params.transitionId},function(err){
         if(err)
-            res.err(err);
+            next(err);
         
         res.send(200);
     })
@@ -79,7 +79,7 @@ var findTransitions = function(transition, eachCallback){
 router.get('/links', function(req, res, next) {
    var transitionsArray = [];
    Page.find({"bookId":req.query.bookId},function(err, pages){
-       if(err) res.err(err);
+       if(err) next(err);
        async.each(pages, function(page,eachCallback){
            Transition.find({"fromPage":page._id},function(err, transitions){
                transitionsArray = transitionsArray.concat(transitions);
@@ -113,7 +113,7 @@ router.get('/links', function(req, res, next) {
     
     var transitionsArray = [];
     Page.find({"bookId":req.query.bookId},function(err, pages){
-        if(err) res.err(err);
+        if(err) next(err);
         async.each(pages, function(page,eachCallback){
             Transition.find({"fromPage":page._id},function(err, transitions){
                 transitionsArray = transitionsArray.concat(transitions);

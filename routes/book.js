@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
     if(req.query.draft) filter.draft = req.query.draft;
     Book.find(filter,function(err, books) {
             if (err){
-                res.send(err);
+                next(err);
             }
             res.json(books);
         });
@@ -24,11 +24,11 @@ router.post('/', function(req, res, next) {
     var book = new Book();
     book.draft = true;
     Player.findOne({_id:req.body.userId},function(err,player){
-        if(err) res.err(err);
+        if(err) next(err);
         book.authorName = player.username;
         book.authorId = req.body.userId;
         book.save(function(err){
-            if(err) res.err(err);
+            if(err) next(err);
             res.status(201);
             res.json(book);
         })
@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 
 router.get('/:bookId', function(req, res, next) {
     Book.findOne({"_id":req.params.bookId},function(err, book){
-        if(err) res.err(err);
+        if(err) next(err);
         res.json(book);
     })
 });
@@ -45,11 +45,11 @@ router.get('/:bookId', function(req, res, next) {
 router.get('/:bookId/page', function(req, res, next) {
     Book.findOne({"_id":req.params.bookId},function(err, book){
         if(err){
-            res.err(err);  
+            next(err);  
         }
         Page.find({"bookId":req.params.bookId},function(err,pages){
             if(err){
-                res.err(err);
+                next(err);
             }
             res.json(pages);
         })
@@ -59,7 +59,7 @@ router.get('/:bookId/page', function(req, res, next) {
 router.patch('/:bookId', function(req, res, next) {
     Book.findOne({"_id":req.params.bookId},function(err, book){
         if(err){
-            res.err(err);  
+            next(err);  
         }
         if(req.body.name) book.name = req.body.name;
         if(req.body.tags) book.tags = req.body.tags;
@@ -72,7 +72,7 @@ router.patch('/:bookId', function(req, res, next) {
         if(req.body.startingPageId) book.startingPageId = req.body.startingPageId;
         book.save(function(err){
             if(err)
-                res.err(err);
+                next(err);
             res.json(book);
         })
     })
@@ -81,17 +81,17 @@ router.patch('/:bookId', function(req, res, next) {
 router.delete('/:bookId', function(req, res, next) {
     
     Page.find({bookId:req.params.bookId},function(err, pages){
-        if(err) res.err(err);
+        if(err) next(err);
         async.each(pages,function(page,eachCallback){
             Transition.find({fromPage:page._id}).remove(function(err){
-                if(err) res.err(err);
+                if(err) next(err);
                 eachCallback();
             });
         },function(){
             Page.find({bookId:req.params.bookId}).remove(function(err){
-                if(err) res.err(err);
+                if(err) next(err);
                 Book.findOne({_id:req.params.bookId}).remove(function(err){
-                    if(err) res.err(err);
+                    if(err) next(err);
                     res.sendStatus(200);
                 });
             });

@@ -7,7 +7,7 @@ var Genre = require('../models/GenreModel');
 router.get('/', function(req, res, next) {
     Genre.find(function(err, genres) {
             if (err)
-                res.send(err);
+                next(err);
 
             res.json(genres);
         });
@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
     genre.icon = req.body.icon;
     genre.save(function(err) {
         if (err)
-            res.send(err);
+            next(err);
         res.status(201);
         res.send(genre);
     });

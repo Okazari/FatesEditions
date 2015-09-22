@@ -8,17 +8,22 @@ var Transition = require('../models/TransitionModel');
 router.get('/', function(req, res, next) {
     Page.find(function(err, pages) {
             if (err)
-                res.send(err);
+                next(err);
             res.json(pages);
         });
 });
 
 router.get('/:pageId', function(req, res, next) {
-    Page.findOne({_id:req.params.pageId},function(err, page) {
+    if(req.params.pageId !== "undefined"){
+        Page.findOne({_id:req.params.pageId},function(err, page) {
             if (err)
-                res.send(err);
+                next(err);
             res.json(page);
         });
+    }else{
+        res.sendStatus(404);
+    }
+    
 });
 
 router.post('/', function(req, res, next) {
@@ -26,7 +31,7 @@ router.post('/', function(req, res, next) {
     page.bookId = req.body.bookId;
     page.save(function(err) {
         if (err)
-            res.send(err);
+            next(err);
 
         res.json(page);
     });
@@ -36,7 +41,7 @@ router.post('/', function(req, res, next) {
 router.patch('/:pageId', function(req, res, next) {
     Page.findOne({"_id":req.params.pageId},function(err, page){
         if(err){
-            res.err(err);  
+            next(err);  
         }
         if(req.body.title) page.title = req.body.title;
         if(req.body.text) page.text = req.body.text;
@@ -45,7 +50,7 @@ router.patch('/:pageId', function(req, res, next) {
         if(req.body.bookId) page.bookId = req.body.bookId;
         page.save(function(err){
             if(err)
-                res.err(err);
+                next(err);
             res.json(page);
         })
     })
@@ -53,9 +58,9 @@ router.patch('/:pageId', function(req, res, next) {
 
 router.delete('/:pageId', function(req, res, next) {
     Transition.remove({fromPage:req.params.pageId},function(err){
-        if(err) res.err(err);
+        if(err) next(err);
         Page.remove({_id:req.params.pageId},function(err){
-            if(err) res.err(err);
+            if(err) next(err);
             res.send(200);
         })
     });
@@ -64,11 +69,11 @@ router.delete('/:pageId', function(req, res, next) {
 router.get('/:pageId/transition', function(req, res, next) {
     Page.findOne({"_id":req.params.pageId},function(err, page){
         if(err){
-            res.err(err);  
+            next(err);  
         }
         Transition.find({"fromPage":req.params.pageId},function(err,transitions){
             if(err){
-                res.err(err);
+                next(err);
             }
             res.json(transitions);
         })

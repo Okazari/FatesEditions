@@ -1,95 +1,66 @@
-<div class="register-box">
-  <div class="register-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+<div class="wrapper" style="background-color:#ecf0f5;">
+  <div class="box">
+    <div class="box-header with-border">
+      <h3 class="box-title">News</h3>
+    </div>
+    <div class="box-body">
+      <div class="-floatingAlerts signin">
+        <div class="" role="alert">
+          Bienvenue sur la version <strong>Béta</strong> de <strong>MyVirtualStoryBook</strong> si vous souhaitez jeter un oeil vous pouvez utiliser le compte commun de test <br/>
+          Nom d'utilisateur : <strong>Mvsb</strong> <br/>
+          Mot de passe : <strong>mvsb</strong> <br/>
+          Pour toute remarque, suggestion ou si vous souhaitez un accès personnel <br/>
+          envoyez un mail à <strong>myvirtualstorybook@gmail.com</strong> <br/>
+          <br/>
+          Derniers ajouts 17 Septembre : <br/>
+          <br/>
+          Ajout des stats et objets dans les livres <br/>
+          <a href="https://www.facebook.com/myvirtualstorybook?ref=ts&fref=ts">https://www.facebook.com/myvirtualstorybook?ref=ts&fref=ts</a><br/>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="register-box-body">
-    <p class="login-box-msg">Register a new membership</p>
-    <form action="../../index.html" method="post">
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Full name">
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Retype password">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">    
-          <div class="checkbox icheck">
-            <label>
-              <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div> I agree to the <a href="#">terms</a>
-            </label>
-          </div>                        
-        </div><!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
-        </div><!-- /.col -->
-      </div>
-    </form>        
-
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
-    </div>
-
-    <a href="login.html" class="text-center">I already have a membership</a>
-  </div><!-- /.form-box -->
-</div>
-    <!--OLD 
-<div class="portalContainer container">
-    <div class="well">
-    
-        <label class="title">S'inscrire sur MyVirtualStoryBook !</label>
-        
-        <div>
-            <label>Nom du compte</label>
-            <input type="text" class="form-control" placeholder="Nom d'utilisateur">
+  <div class="login-box">
+    <div class="login-logo">
+      <a>
+        <img class="logo-signin" src="/app/images/logo/logo300x300.png">
+      <b>MyVirtualStoryBook</b></a>
+    </div><!-- /.login-logo -->
+    <div class="box md-whiteframe-z2">
+      <div class="box-body">
+        <div class="box-header with-border align-center">
+          <h3 class="box-title">Completez le formulaire d'inscription</h3>
         </div>
-        
-        <div>
-            <label>Mot de passe</label>
-            <input type="text" class="form-control" placeholder="************">
-        </div>
-        
-        <div>
+        <form name="loginForm">
+          <div class="input-group margin-top col-xs-12">
+            <label>Nom d'utilisateur</label>
+            <input type="text"  max="30" name="username" class="form-control" placeholder="Entrez votre nom d'utilisateur" ng-model="user.username" ng-change="displayMessage = false" required>
+          </div>
+          <div class="input-group margin-top col-xs-12">
             <label>Adresse mail</label>
-            <input type="text" class="form-control" placeholder="myvirtual@storybook.fr">
-        </div>
-        
-        <div>
-            <label>Choisissez votre expérience</label>
-            <div class="btn-group">
-                <label class="btn btn-primary" ng-model="experience.author" btn-checkbox>Auteur</label>
-                <label class="btn btn-primary" ng-model="experience.player" btn-checkbox>Joueur</label>
-            </div>
-        </div>
-        
-        <div ng-if="experience.author">
-            <label>Nom d'auteur</label>
-            <input type="text" class="form-control" placeholder="Okazari">
-        </div>
-        
-        <div ng-if="experience.player">
-            <label>Nom de joueur</label>
-            <input type="text" class="form-control" placeholder="Redeamon">
-        </div>
-        
-        <div>
-            <button type="button" class="btn btn-default btn-lg">
-                <a href="#/experience">S'inscrire</a>
-            </button>
-            <span class="left">Déjà un compte ? <a href="#/signin">Connecte toi !</a></span>
-        </div>
-        
-    </div>
-</div>-->
+            <input type="text"  max="30" name="username" class="form-control" placeholder="Entrez votre addresse mail" ng-model="user.email" ng-change="displayMessage = false" required>
+          </div>
+          <div class="input-group margin-top col-xs-12">
+            <label>Mot de passe</label>
+            <input type="password" class="form-control" placeholder="Entrez votre mot de passe" ng-model="user.password" ng-change="displayMessage = false" required>
+          </div>
+          <div class="input-group margin-top col-xs-12">
+            <label>Mot de passe (vérification)</label>
+            <input type="password" class="form-control" placeholder="Vérifiez votre mot de passe" ng-model="user.verifyPassword" ng-change="displayMessage = false" required>
+          </div>
+          <div class="row margin-top">
+            <div class="col-xs-12">
+              <button style="width:100%" type="submit" ng-click="subscribe()" class="btn btn-primary">S'inscrire</md-button>
+            </div><!-- /.col -->
+          </div>
+          <div ng-show="displayMessage" class="row margin-top">
+              <div style="color:red; text-align:center" class="col-xs-12">{{displayMessageText}}</div>
+          </div>
+          <div class="row margin-top">
+              <div class="col-xs-12">Déjà inscris ? <a ui-sref="signin">Connecte toi !</a></div>
+          </div>
+        </form>
+      </div>
+    </div><!-- /.login-box-body -->
+  </div>
+</div>

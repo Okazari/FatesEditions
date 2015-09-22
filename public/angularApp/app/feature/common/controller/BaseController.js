@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('BaseController', function ($scope, $state, $rootScope, GenreService, PlayerService, BookService, GameService, MusicPlayerService) {
+  .controller('BaseController', function ($scope, $state, $rootScope, GenreService, ConnectionService, PlayerService, BookService, GameService, MusicPlayerService) {
 
     $rootScope.sidebar = 'open';
 
@@ -14,9 +14,8 @@ angular.module('myVirtualStoryBookApp')
     }
     
     $scope.logout = function(){
-      PlayerService.logout().success(function(){
+        ConnectionService.logout();
         $state.go('signin');
-      });
     };
     
     $scope.toggleSlidebar = function(){

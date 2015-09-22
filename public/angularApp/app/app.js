@@ -29,7 +29,8 @@ var myVirtualStoryBookApp = angular
             //Portail
             .state('signup', {
                 url: "/signup",
-                templateUrl: "app/feature/portal/view/Signup.html"
+                templateUrl: "app/feature/portal/view/Signup.html",
+                controller: "SignUpController"
             })
             .state('signin', {
                 url: "/signin",

@@ -41,10 +41,15 @@
             <input type="password" class="form-control" placeholder="Entrez votre mot de passe" ng-model="user.password" ng-change="displayMessage = false" required>
           </div>
           <div class="row margin-top">
-            <div class="col-xs-4">
-              <button type="submit" ng-click="authentify()" class="btn btn-primary">Connexion</md-button>
+            <div class="col-xs-12">
+              <button style="width:100%" type="submit" ng-click="authentify()" class="btn btn-primary">Connexion</md-button>
             </div><!-- /.col -->
-            <div class="col-xs-8" ng-show="displayMessage">{{displayMessageText}}</div>
+          </div>
+          <div ng-show="displayMessage" class="row margin-top">
+              <div class="col-xs-12">{{displayMessageText}}</div>
+          </div>
+          <div class="row margin-top">
+              <div class="col-xs-12">Pas encore de compte ? <a ui-sref="signup">Inscris-toi !</a></div>
           </div>
         </form>
       </div>
