@@ -108,8 +108,8 @@ myVirtualStoryBookApp.service("GameService", [ "$http",
           return show;
         }
         
-        service.applyEffects = function(game,transition){
-          angular.forEach(transition.effects,function(effect){
+        service.applyEffects = function(game,source){
+          angular.forEach(source.effects,function(effect){
             if(effect.type === "objects"){
               switch (effect.operator) {
                 case 'add':

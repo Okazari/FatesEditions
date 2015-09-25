@@ -29,6 +29,7 @@ angular.module('myVirtualStoryBookApp')
         PageService.getPageTransitions(page).success(function(transitions){
           $scope.currentPage = page;
           $scope.currentPage.transitions = transitions;
+          $scope.currentGame = GameService.applyEffects($scope.currentGame,page);
           GameService.saveGame($scope.currentGame);
           $scope.pageLoading = false;
           if(angular.isDefined(page.background_music) 

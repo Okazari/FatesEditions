@@ -7,7 +7,8 @@ var PageSchema   = new Schema({
     description: String,
     backgroundMusic: String,
     transitions: String,
-    bookId: String 
+    bookId: String,
+    effects: [Schema.Types.Mixed]
 });
 
 module.exports = mongoose.model('Page', PageSchema);

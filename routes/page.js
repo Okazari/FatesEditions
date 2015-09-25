@@ -48,6 +48,7 @@ router.patch('/:pageId', function(req, res, next) {
         if(req.body.description) page.description = req.body.description;
         if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
         if(req.body.bookId) page.bookId = req.body.bookId;
+        if(req.body.effects) page.effects = req.body.effects;
         page.save(function(err){
             if(err)
                 next(err);
