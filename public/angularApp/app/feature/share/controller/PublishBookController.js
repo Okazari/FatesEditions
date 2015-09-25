@@ -24,6 +24,7 @@ angular.module('myVirtualStoryBookApp')
           PlayerService.player.refreshBooks(false);
           $scope.progressBarStyle = "success";
         }).error(function(){
+          book.draft=true;
           $scope.progressBarStyle = "danger";
           $scope.showError = true;
         });

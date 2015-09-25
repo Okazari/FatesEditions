@@ -72,6 +72,7 @@ router.patch('/:bookId', function(req, res, next) {
         if(req.body.startingPageId) book.startingPageId = req.body.startingPageId;
         if(req.body.draft === true) {
             if(book.draft === false){
+            //Cas ou on dépublie un livre
                 Game.find({bookId:book._id}).remove(function(err){
                     if(err) next(err);
                     book.draft = true;
@@ -81,14 +82,35 @@ router.patch('/:bookId', function(req, res, next) {
                         res.json(book);
                     })
                 })
+            }else{
+               book.save(function(err){
+                    if(err)
+                        next(err);
+                    res.json(book);
+                }) 
             }
         }else if (req.body.draft === false){
-            book.draft = false;
-            book.save(function(err){
-                if(err)
-                    next(err);
-                res.json(book);
-            })
+            
+            if(book.draft === true){
+            //Cas ou on publie un livre
+                if(!book.startingPageId){
+                    res.status(400);
+                    res.send({message:"Le livre n'as pas de page de départ"});
+                }else{
+                    book.draft = false;
+                    book.save(function(err){
+                        if(err)
+                            next(err);
+                        res.json(book);
+                    })
+                }
+            }else{
+               book.save(function(err){
+                    if(err)
+                        next(err);
+                    res.json(book);
+                }) 
+            }
         }
     })
 });
