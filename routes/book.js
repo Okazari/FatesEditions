@@ -97,11 +97,14 @@ router.patch('/:bookId', function(req, res, next) {
                     res.status(400);
                     res.send({message:"Le livre n'as pas de page de départ"});
                 }else{
-                    book.draft = false;
-                    book.save(function(err){
-                        if(err)
-                            next(err);
-                        res.json(book);
+                    Game.find({bookId:book._id}).remove(function(err){
+                        if(err) next(err);
+                        book.draft = false;
+                        book.save(function(err){
+                            if(err)
+                                next(err);
+                            res.json(book);
+                        })
                     })
                 }
             }else{

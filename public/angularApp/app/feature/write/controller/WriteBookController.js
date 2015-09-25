@@ -43,6 +43,12 @@ angular.module('myVirtualStoryBookApp')
       });
     }
     
+    $scope.newGame = function(book){
+      PlayerService.player.newGame(book).success(function(newGame){
+        $state.go("app.play.playing",{id:newGame._id});
+      });
+    }
+    
     $scope.deletePage = function(page){
       PageService.deletePage(page).success(function(){
         BookService.getBookPages($stateParams.id).success($scope.updatePages)

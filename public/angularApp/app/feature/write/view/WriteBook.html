@@ -56,6 +56,9 @@
                   <option value="" selected>-- Aucune page selectionnée --</option>
                 </select>
               </div>
+              <div class="margin-top col-xs-12 text-center">
+                <button ng-disabled="!book.startingPageId" ng-click="newGame(book)" class="btn btn-primary">Essayer mon brouillon</button>
+              </div>
             </div>
           </div><!-- /.box-body -->
           <div ng-show="bookLoading" class="overlay">
