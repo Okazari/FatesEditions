@@ -15,14 +15,15 @@ angular.module('myVirtualStoryBookApp')
       PlayerService.player.refreshBooks();
     }
     
-    $scope.openDeleteBookModal = function(book){
+    $scope.openToDraftBookModal = function(book){
       $scope.modalYesNo = {
         title:"Demande de confirmation",
-        content:"Voulez vous supprimer definitivement le livre partagé : '"+book.name+"' ?",
+        content:"Êtes vous sur de vouloir repasser ce livre en brouillon, cela supprimera toutes les parties en cours sur ce livre : '"+book.name+"' ?",
         yes:{
           label:"Oui",
           action: function(){
-            BookService.deleteBook(book).success($scope.updateBooks);
+            book.draft = true;
+            BookService.updateBook(book).success($scope.updateBooks);
             $scope.modal.close();
           }
         },

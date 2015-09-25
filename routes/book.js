@@ -5,6 +5,7 @@ var Book = require('../models/BookModel');
 var Page = require('../models/PageModel');
 var Transition = require('../models/TransitionModel');
 var Player = require('../models/PlayerModel');
+var Game = require('../models/GameModel');
 var async = require('async');
 
 /************BOOKS**********/
@@ -68,13 +69,27 @@ router.patch('/:bookId', function(req, res, next) {
         if(req.body.genreId) book.genreId = req.body.genreId;
         if(req.body.stats) book.stats = req.body.stats;
         if(req.body.objects) book.objects = req.body.objects;
-        if(req.body.draft === false || req.body.draft) book.draft = req.body.draft;
         if(req.body.startingPageId) book.startingPageId = req.body.startingPageId;
-        book.save(function(err){
-            if(err)
-                next(err);
-            res.json(book);
-        })
+        if(req.body.draft === true) {
+            if(book.draft === false){
+                Game.find({bookId:book._id}).remove(function(err){
+                    if(err) next(err);
+                    book.draft = true;
+                    book.save(function(err){
+                        if(err)
+                            next(err);
+                        res.json(book);
+                    })
+                })
+            }
+        }else if (req.body.draft === false){
+            book.draft = false;
+            book.save(function(err){
+                if(err)
+                    next(err);
+                res.json(book);
+            })
+        }
     })
 });
 

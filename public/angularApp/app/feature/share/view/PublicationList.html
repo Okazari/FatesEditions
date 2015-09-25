@@ -26,7 +26,7 @@
                     <th rowspan="1" colspan="1">Visibilité</th>
                     <th rowspan="1" colspan="1">Synopsis</th>
                     <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary md-whiteframe-z1">Editer</button></th>
-                    <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></th>
+                    <th rowspan="1" colspan="1" style="width:1%"><button disabled class="btn btn-primary md-whiteframe-z1" style="height:34px">Passer en brouillon</button></th>
                   </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
@@ -36,7 +36,7 @@
                     <td><h4 class="label label-success">Publié<i class="fa fa-pencil genre-icon"></i></h4></td>
                     <td>{{book.synopsis}}</td>
                     <td><button ui-sref="app.write.book({id:book._id})" class="btn btn-primary  md-whiteframe-z1">Editer</button></td>
-                    <td><button ng-click="openDeleteBookModal(book)" class="btn btn-primary fa fa-close md-whiteframe-z1" style="height:34px"></button></td>
+                    <td><button ng-click="openToDraftBookModal(book)" class="btn btn-primary md-whiteframe-z1" style="height:34px">Passer en brouillon</button></td>
                   </tr>
                 </tbody>
               </table>
