@@ -13,8 +13,6 @@ myVirtualStoryBookApp.service("GenreService", ["$http",
             angular.forEach(genres,function(genre){
                service.genres.list[genre._id] = genre;
             });
-               console.log(service.genres);
-           //service.genres.list = genres;
         });
         
         return service;

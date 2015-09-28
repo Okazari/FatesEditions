@@ -1,0 +1,30 @@
+<div >
+  <section class="content-header">
+    <h1>Sanbox</h1>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div>
+          <div class="box md-whiteframe-z1">
+            <div class="box-header">
+              <h3 class="box-title">Sandbox</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body" style="height:500px; width:500px; background-color: #CCC; position:relative">
+              <div ng-repeat="guy in guys" tabindex="{{$index}}" ng-keypress="move($event,guy)" ng-style="guy.style">
+              </div>
+            </div><!-- /.box-body -->
+              <div>
+                <input placeholder="Top position" ng-model="top" type="number">
+                <input placeholder="Left position" ng-model="left" type="number">
+                <input placeholder="Color" ng-model="color" type="text">
+                <button ng-click="generateGuy(top,left,color)">Add guy</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- /.content -->
+</div>

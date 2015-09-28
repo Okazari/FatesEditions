@@ -18,13 +18,13 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/admin-lte/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css" />
     <link rel="stylesheet" href="bower_components/admin-lte/dist/css/AdminLTE.min.css" >
     <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css" >
     <link rel="stylesheet" href="bower_components/admin-lte/dist/css/skins/skin-blue.css" >
     <link rel='stylesheet' href='bower_components/textAngular/src/textAngular.css'>
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css"/>
+    <link rel="stylesheet" href="app/lib/angularIntro/introjs.min.css"/>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -49,7 +49,6 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
@@ -84,6 +83,7 @@
     <script src="app/feature/write/controller/WritePageController.js"></script>
     <script src="app/feature/share/controller/PublicationListController.js"></script>
     <script src="app/feature/share/controller/PublishBookController.js"></script>
+    <script src="app/feature/sandbox/controller/SandboxController.js"></script>
     
     <!-- Directives -->
 
@@ -97,11 +97,13 @@
     <script src="app/feature/common/service/MusicPlayerService.js"></script>
     <script src="app/feature/common/service/GenreService.js"></script>
     <script src="app/feature/common/service/TransitionService.js"></script>
+    <script src="app/feature/common/service/IntroService.js"></script>
     <script src="app/feature/write/service/TransitionHelperService.js"></script>
     <!-- endbuild -->
     
     <!-- External -->
     <script src="app/lib/D3/d3.v3.min.js"></script>
     <script src="app/lib/SHA512/sha512.js"></script>
+    <script src="app/lib/angularIntro/intro.min.js"></script>
 </body>
 </html>

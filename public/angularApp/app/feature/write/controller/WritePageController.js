@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('WritePageController', function ($scope, $state, $stateParams, $timeout, TransitionService, TransitionHelperService, BookService, PageService, D3Service, MusicPlayerService) {
+  .controller('WritePageController', function ($scope, IntroService, $state, $stateParams, TransitionService, TransitionHelperService, BookService, PageService, MusicPlayerService) {
 
     $scope.music = MusicPlayerService.music;
     $scope.conditions = TransitionHelperService.conditions;
@@ -63,10 +63,12 @@ angular.module('myVirtualStoryBookApp')
     $scope.addNewPage = function(transition){
       PageService.addBookNewPage($scope.book).success(function(page){
         transition.toPage = page._id;
-        console.log(transition);
         TransitionService.updateTransition(transition).success(function(){
           $state.go("app.write.page",{id:page._id});
         });
       });
     }
+    
+   IntroService.launchTour("writepagetour");
+    
   });

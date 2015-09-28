@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('BaseController', function ($scope, $state, $rootScope, GenreService, ConnectionService, PlayerService, BookService, GameService, MusicPlayerService) {
+  .controller('BaseController', function ($scope, $window, $state, $rootScope, IntroService, GenreService, ConnectionService, PlayerService, BookService, GameService, MusicPlayerService) {
 
-    $rootScope.sidebar = 'open';
+    $scope.isMobile = $window.matchMedia("(max-width: 767px)").matches;
+    if($scope.isMobile){
+       $rootScope.sidebar = 'collapse';
+    }else{
+       $rootScope.sidebar = 'open';
+    }
 
     $scope.music = MusicPlayerService.music;
 
@@ -18,12 +23,14 @@ angular.module('myVirtualStoryBookApp')
         $state.go('signin');
     };
     
-    $scope.toggleSlidebar = function(){
-      if($rootScope.sidebar === 'open'){
-        $rootScope.sidebar = 'collapse';
-      } 
-      else{
-        $rootScope.sidebar = 'open';
+    $scope.toggleSlidebar = function(force){
+      if(force || $scope.isMobile){
+        if($rootScope.sidebar === 'open'){
+          $rootScope.sidebar = 'collapse';
+        } 
+        else{
+          $rootScope.sidebar = 'open';
+        }
       }
     }
     
@@ -38,5 +45,7 @@ angular.module('myVirtualStoryBookApp')
     $scope.playerDrafts = PlayerService.player.books;
     $scope.loaders = PlayerService.player.loaders;
     $scope.genres = GenreService.genres;
+    
+    IntroService.launchTour("app");
     
 });

@@ -22,16 +22,16 @@
             <div class="btn-group"></div>
           </div>
         </div>
-        <div class="box-body">
+        <div id="page-info" class="box-body">
           <div class="row">
             <div class="col-sm-4 col-xs-12">
-              <div class="input-group margin-top col-xs-12">
+              <div id="page-title" class="input-group margin-top col-xs-12">
                 <label>Titre</label> 
                 <input ng-change="savePage()" ng-model-options="{debounce:1000}" type="text" name="cover" class="form-control " placeholder="Titre de la page" ng-model="page.title" ng-change="displayMessage = false" required>
               </div>
             </div>
             <div class="col-lg-8 col-sm-8 col-xs-12">
-              <div class="input-group margin-top col-xs-12">
+              <div id="page-memo" class="input-group margin-top col-xs-12">
                 <label>Memo</label> 
                 <input ng-change="savePage()" ng-model-options="{debounce:1000}" type="text" name="cover" class="form-control" placeholder="Decrivez rapidement ce qu'il se passe dans votre page" ng-model="page.description" ng-change="displayMessage = false" required>
               </div>
@@ -44,7 +44,7 @@
       </div>
     </div>  
     <div class="col-xs-12">
-      <div class="box box-primary md-whiteframe-z1">
+      <div id="page-effects" class="box box-primary md-whiteframe-z1">
         <div class="box-header with-border">
           <h3 class="box-title">Effets à l'arrivée sur la page</h3>
           <div class="box-tools pull-right">
@@ -85,7 +85,7 @@
       </div>
     </div> 
     <div class="col-xs-12">
-      <div class="box box-primary md-whiteframe-z1">
+      <div id="page-background-music" class="box box-primary md-whiteframe-z1">
         <div class="box-header with-border">
           <h3 class="box-title">Musique de fond</h3>
           <div class="box-tools pull-right">
@@ -109,7 +109,7 @@
       </div>
     </div>
     <div class="col-xs-12">
-      <div class="box box-primary md-whiteframe-z1">
+      <div id="page-content" class="box box-primary md-whiteframe-z1">
         <div class="box-header with-border">
           <h3 class="box-title">Contenu</h3>
           <div class="box-tools pull-right">
@@ -130,7 +130,7 @@
     </div>
     <div class="col-xs-12">
       <!-- Default box -->
-      <div class="box box-primary md-whiteframe-z1" >
+      <div id="page-transitions" class="box box-primary md-whiteframe-z1" >
         <div class="box-header">
           <h3 class="box-title">Transitions</h3>
         </div><!-- /.box-header -->
@@ -139,11 +139,11 @@
             <div class="box-header">
                 <div class="input-group float-left">
                   <label>Page de destination
-                    <button ng-show="transition.toPage" ui-sref="app.write.page({id:transition.toPage})" class="btn btn-primary btn-xs md-whiteframe-z1"><i style="color:white" class="fa fa-pencil"></i></button>
-                    <button ng-show="!transition.toPage" ng-click="addNewPage(transition)" class="btn btn-primary btn-xs md-whiteframe-z1"><i style="color:white" class="fa fa-plus"></i></button>
+                    <button ng-show="transition.toPage" ui-sref="app.write.page({id:transition.toPage})" style="color:white" class="btn btn-primary btn-xs md-whiteframe-z1"><i style="margin-right:5px" class="fa fa-pencil"></i>Editer la page de destination</button>
+                    <button ng-show="!transition.toPage" ng-click="addNewPage(transition)" style="color:white" class="btn btn-primary btn-xs md-whiteframe-z1"><i style="margin-right:5px" class="fa fa-plus"></i>Créer et lier la nouvelle page</button>
                   </label> 
                   <select ng-change="saveTransition(transition)" ng-model="transition.toPage" ng-options="page._id as page.title for page in pages" class="form-control">
-                    <option value="" selected>-- Créer une nouvelle page --</option>
+                    <option value="" selected>-- Vers une nouvelle page --</option>
                   </select>
                 </div>
                 <div class="box-tools pull-right">

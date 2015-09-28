@@ -2,7 +2,7 @@
 
 
 
-<div class="content-wrapper" ng-class="{'with-right-sidebar': showRightMenu}">
+<div class="content-wrapper" ng-class="{'with-right-sidebar': showRightMenu}" ng-intro-options="IntroOptions" ng-intro-method="IntroWriteBook" ng-intro-autorefresh="true" ng-intro-onchange="ChangeEvent">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>Edition de livre</h1>
@@ -36,7 +36,6 @@
               </div>
             </div>
             <div class="col-xs-9">
-              <button ng-click="launchTour()">Launch tour</button>
               <div id="book-title" class="input-group margin-top col-xs-12">
                 <label>Titre</label> 
                 <input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Titre du livre" ng-model="book.name" ng-change="displayMessage = false" required>
@@ -117,7 +116,7 @@
             </div>
           </div>
         </div>
-        <div class="box-body table-responsive no-padding">
+        <div id="book-objects" class="box-body table-responsive no-padding">
           <table class="table table-hover">
             <tbody>
               <tr>
@@ -145,8 +144,8 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-sm-6 col-xs-12">
-      <div class="box box-primary md-whiteframe-z1">
+    <div  class="col-lg-6 col-sm-6 col-xs-12">
+      <div id="book-graph" class="box box-primary md-whiteframe-z1">
         <div class="box-header with-border">
           <h3 class="box-title">Graphique</h3>
           <div class="box-tools pull-right">
@@ -164,7 +163,7 @@
     </div>
     <div class="col-lg-6 col-sm-6 col-xs-12">
       <!-- Default box -->
-      <div class="box box-primary md-whiteframe-z1">
+      <div  id="book-pages"  class="box box-primary md-whiteframe-z1">
         <div class="box-header">
           <h3 class="box-title">Pages</h3>
         </div><!-- /.box-header -->

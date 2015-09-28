@@ -4,6 +4,14 @@ body{
   overflow-y:scroll!important;
 }
 
+.tooltip-lg{
+  width:600px;
+}
+
+.introjs-tooltiptext{
+   text-align: justify;
+}
+
 .skin-blue.layout-top-nav .main-header > .logo{
   position:relative;
   z-index:5000;

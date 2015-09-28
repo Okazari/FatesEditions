@@ -98,6 +98,11 @@ var myVirtualStoryBookApp = angular
                 controller:"PublishBookController",
                 templateUrl:"app/feature/share/view/PublishBook.html"  
             })
+            .state("sanbox", {
+                url: "/sandbox",
+                controller:"SandboxController",
+                templateUrl:"app/feature/sandbox/view/Sandbox.html"  
+            })
             //Joueur
             /*.state('player', {
                 url: "/player",
@@ -158,7 +163,8 @@ myVirtualStoryBookApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('httpErrorInterceptor');
 }]);
 
-myVirtualStoryBookApp.run( function($rootScope, $window, $location) {
+myVirtualStoryBookApp.run( function($rootScope, $window, $location, IntroService) {
+    
     $rootScope.$on('$stateChangeSuccess', 
         function(event, toState, toParams, fromState, fromParams, error){
         $window.ga('send', 'pageview', { page: $location.url(), title:toState.name});
