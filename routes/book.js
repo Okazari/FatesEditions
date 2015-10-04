@@ -69,6 +69,7 @@ router.patch('/:bookId', function(req, res, next) {
         if(req.body.genreId) book.genreId = req.body.genreId;
         if(req.body.stats) book.stats = req.body.stats;
         if(req.body.objects) book.objects = req.body.objects;
+        //if(req.body.authorId) book.authorId = req.body.authorId;
         if(req.body.startingPageId) book.startingPageId = req.body.startingPageId;
         if(req.body.draft === true) {
             if(book.draft === false){
@@ -114,7 +115,14 @@ router.patch('/:bookId', function(req, res, next) {
                     res.json(book);
                 }) 
             }
+        }else{
+            book.save(function(err){
+                if(err)
+                    next(err);
+                res.json(book);
+            })
         }
+               
     })
 });
 
