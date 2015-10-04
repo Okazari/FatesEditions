@@ -186,7 +186,7 @@ myVirtualStoryBookApp.service("GameService", [ "$http",
                   break;
                 case 'remove':
                     if(service.hasObject(game,effect.subject)){
-                        game.objects.splice(game.objects.indexOf(game,effect.subject),1);
+                        game.objects.splice(game.objects.indexOf(game,effect.subject)-1,1);
                     };
                   break;
                 
