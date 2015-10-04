@@ -18,11 +18,13 @@ var BookSchema   = new Schema({
         max: Number,
         min: Number,
         name: String,
+        visible: { type: Boolean, default: true }
     }],
     objects:[{
         description: String,
         name: String,
-        atStart: Boolean
+        atStart: Boolean,
+        visible: { type: Boolean, default: true },
     }]
 });
 

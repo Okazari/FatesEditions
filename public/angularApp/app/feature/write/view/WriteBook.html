@@ -84,6 +84,7 @@
                 <th>Valeur initiale</th>
                 <th>Minimum</th>
                 <th>Maximum</th>
+                <th style="width: 10px">Visible</th>
                 <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
               </tr>
               <tr ng-repeat="stat in book.stats">
@@ -92,13 +93,14 @@
                 <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="number" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Valeur initiale" ng-model="stat.initValue" required></td>
                 <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="number" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Minimum" ng-model="stat.min" required></td>
                 <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="number" ng-disabled="!book.draft" name="cover" class="form-control" placeholder="Maximum" ng-model="stat.max" required></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="checkbox" ng-disabled="!book.draft" ng-model="stat.visible"></td>
                 <td><button ng-disabled="!book.draft" ng-click="book.stats.splice($index,1);saveBook();" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
               </tr>
             </tbody>
           </table>
         </div><!-- /.box-body -->
         <div class="box-footer align-center">
-          <button ng-click="book.stats.push({})" ng-disabled="!book.draft" class="btn btn-primary md-whiteframe-z1">
+          <button ng-click="book.stats.push({visible:true})" ng-disabled="!book.draft" class="btn btn-primary md-whiteframe-z1">
             Ajouter une caractéristique
           </button>
         </div>
@@ -123,19 +125,21 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th style="width: 10px">Début</th>
+                <th style="width: 10px">Visible</th>
                 <th style="width: 10px"><button disabled class="btn btn-primary fa fa-close md-whiteframe-z1"></button></th>
               </tr>
               <tr ng-repeat="object in book.objects">
                 <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" class="form-control" placeholder="Libellé" ng-model="object.name" required></td>
                 <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="text" ng-disabled="!book.draft" class="form-control" placeholder="Description" ng-model="object.description" required></td>
                 <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="checkbox" ng-disabled="!book.draft" ng-model="object.atStart"></td>
+                <td><input ng-change="saveBook()" ng-model-options="{debounce:1000}" type="checkbox" ng-disabled="!book.draft" ng-model="object.visible"></td>
               <td><button ng-disabled="!book.draft" ng-click="book.objects.splice($index,1);saveBook();" class="btn btn-primary fa fa-close md-whiteframe-z1"></button></td>
               </tr>
             </tbody>
           </table>
         </div><!-- /.box-body -->
         <div class="box-footer align-center">
-          <button ng-click="book.objects.push({})" ng-disabled="!book.draft" class="btn btn-primary md-whiteframe-z1">
+          <button ng-click="book.objects.push({visible:true})" ng-disabled="!book.draft" class="btn btn-primary md-whiteframe-z1">
             Ajouter un objet
           </button>
         </div>
