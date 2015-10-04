@@ -50,6 +50,73 @@ myVirtualStoryBookApp.service("GameService", [ "$http",
         }
         
         service.showTransition = function(game, transition){
+          if(transition.conditionOperator === 'or'){
+            return service.showTransitionWithOrOperator(game,transition);
+          }else{
+            return service.showTransitionWithAndOperator(game,transition);
+          }
+        }
+        
+        service.showTransitionWithOrOperator = function(game, transition){
+          var show = false;
+          angular.forEach(transition.conditions,function(condition){
+            if(condition.type === "objects"){
+              switch (condition.operator) {
+                case 'own':
+                  if(service.hasObject(game,condition.subject)){
+                    show = true
+                  }
+                  break;
+                case 'doNotOwn':
+                  if(!service.hasObject(game,condition.subject)){
+                    show = true
+                  }
+                  break;
+                
+                default:
+                  break;
+              }
+            }else if(condition.type ==="stats"){
+              switch (condition.operator) {
+                case 'equal':
+                  if(service.getStat(game,condition.subject) == condition.value){
+                    show = true
+                  }
+                  break;
+                case 'notEqual':
+                  if(service.getStat(game,condition.subject) != condition.value){
+                    show = true
+                  }
+                  break;
+                case 'less':
+                  if(service.getStat(game,condition.subject) < condition.value){
+                    show = true
+                  }
+                  break;
+                case 'lessOrEqual':
+                  if(service.getStat(game,condition.subject) <= condition.value){
+                    show = true
+                  }
+                  break;
+                case 'more':
+                  if(service.getStat(game,condition.subject) > condition.value){
+                    show = true
+                  }
+                  break;
+                case 'moreOrEqual':
+                  if(service.getStat(game,condition.subject) >= condition.value){
+                    show = true
+                  }
+                  break;
+                default:
+                  break;
+              }
+            }
+          });
+          return show;
+        }
+        
+        service.showTransitionWithAndOperator = function(game, transition){
           var show = true;
           angular.forEach(transition.conditions,function(condition){
             if(condition.type === "objects"){

@@ -155,9 +155,15 @@
                 <textarea ng-change="saveTransition(transition)" ng-model-options="{debounce:1000}" rows="5" name="cover" class="form-control" placeholder="Texte de la transition" ng-model="transition.text" ng-change="displayMessage = false" required></textarea>
               </div>
               <div class="row no-margin margin-top">
-                <div class="input-group col-xs-12">
+                <div class="margin-top input-group col-xs-12">
                   <label>Conditions</label>
-                  {{condition}}
+                <span class="margin-left">
+                  Opérateur de condition :
+                  <select ng-change="saveTransition(transition)" ng-model="transition.conditionOperator">
+                    <option value="and">ET</option>
+                    <option value="or">OU</option>
+                  </select>
+                </span>
                   <div class="row margin-bottom" ng-repeat="condition in transition.conditions">
                     <div class="col-xs-3">
                       <select ng-change="saveTransition(transition)" ng-model="condition.type"  ng-options="conditionType as conditionObject.label for (conditionType,conditionObject) in conditions" class="form-control">

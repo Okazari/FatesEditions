@@ -21,6 +21,7 @@ router.post('/', function(req, res, next) {
     transition.fromPage = req.body.fromPage;
     transition.conditions = [];
     transition.effects = [];
+    transition.conditionOperator = "and";
     transition.save(function(err) {
         if (err)
             next(err);
@@ -38,6 +39,7 @@ router.patch('/:transitionId', function(req, res, next) {
         req.body.text ? transition.text = req.body.text : transition.text = "";
         req.body.conditions ? transition.conditions = req.body.conditions : transition.conditions = [];
         req.body.effects ? transition.effects = req.body.effects : transition.effects = [];
+        req.body.conditionOperator ? transition.conditionOperator = req.body.conditionOperator : "";
         transition.save(function(err){
             if(err)
                 next(err);

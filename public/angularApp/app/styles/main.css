@@ -4,6 +4,10 @@ body{
   overflow-y:scroll!important;
 }
 
+.margin-left{
+  margin-left:10px;
+}
+
 .tooltip-lg{
   width:600px;
 }
@@ -40,7 +44,7 @@ body{
 
 .pageText{
   font-size:1.5em;
-  font-family:"Times New Roman";
+  font-family:Arial, Helvetica, sans-serif;
   padding:30px;
   text-align:justify;
 }

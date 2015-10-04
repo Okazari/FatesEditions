@@ -6,6 +6,7 @@ var TransitionSchema   = new Schema({
     toPage: String,
     text: String,
     conditions: [Schema.Types.Mixed],
+    conditionOperator: String,
     effects: [Schema.Types.Mixed]
 });
 
