@@ -58,8 +58,7 @@
               </select>
             </div>
             <div class="col-xs-3">
-              <select ng-show="effect.type" ng-change="savePage()" ng-model="effect.subject" class="form-control">
-                <option ng-repeat="thing in book[effect.type]" ng-value="thing.name">{{thing.name}}</option>
+              <select ng-show="effect.type" ng-options="thing._id as thing.name for thing in book[effect.type]" ng-change="savePage()" ng-model="effect.subject" class="form-control">
               </select>
             </div>
             <div class="col-xs-3" >
@@ -170,8 +169,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <select ng-show="condition.type" ng-change="saveTransition(transition)" ng-model="condition.subject" class="form-control">
-                        <option ng-repeat="thing in book[condition.type]" ng-value="thing.name">{{thing.name}}</option>
+                      <select ng-show="condition.type" ng-options="thing._id as thing.name for thing in  book[condition.type]" ng-change="saveTransition(transition)" ng-model="condition.subject" class="form-control">
                       </select>
                     </div>
                     <div class="col-xs-3" >
@@ -201,8 +199,7 @@
                       </select>
                     </div>
                     <div class="col-xs-3">
-                      <select ng-show="effect.type" ng-change="saveTransition(transition)" ng-model="effect.subject" class="form-control">
-                        <option ng-repeat="thing in book[effect.type]" ng-value="thing.name">{{thing.name}}</option>
+                      <select ng-show="effect.type" ng-options="thing._id as thing.name for thing in book[effect.type]" ng-change="saveTransition(transition)" ng-model="effect.subject" class="form-control">
                       </select>
                     </div>
                     <div class="col-xs-3" >
