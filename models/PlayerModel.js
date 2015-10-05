@@ -4,8 +4,7 @@ var Schema       = mongoose.Schema;
 var PlayerSchema   = new Schema({
     username: {type:String, unique:true},
     password: String,
-    tour: Boolean,
-    
+    email: String
 });
 
 module.exports = mongoose.model('Player', PlayerSchema);
