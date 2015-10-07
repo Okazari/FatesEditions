@@ -25,14 +25,19 @@ router.post('/', function(req, res, next) {
     var book = new Book();
     book.draft = true;
     Player.findOne({_id:req.body.userId},function(err,player){
-        if(err) next(err);
-        book.authorName = player.username;
-        book.authorId = req.body.userId;
-        book.save(function(err){
-            if(err) next(err);
-            res.status(201);
-            res.json(book);
-        })
+        if(player !== undefined){
+            book.authorName = player.username;
+            book.authorId = req.body.userId;
+            book.save(function(err){
+                if(err) next(err);
+                res.status(201);
+                res.json(book);
+            })
+        }else{
+            res.status(401);
+            res.json({message:"Compte innexistant"})
+        };
+        
     })
 });
 
