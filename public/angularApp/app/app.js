@@ -167,6 +167,6 @@ myVirtualStoryBookApp.run( function($rootScope, $window, $location, IntroService
     
     $rootScope.$on('$stateChangeSuccess', 
         function(event, toState, toParams, fromState, fromParams, error){
-        $window.ga('send', 'pageview', { page: $location.url(), title:toState.name});
+        $window.ga('send', 'pageview', { page: toState.name, title:toState.name});
     })
 });

@@ -10,6 +10,10 @@ angular.module('myVirtualStoryBookApp')
        $rootScope.sidebar = 'open';
     }
 
+    if(!$window.localStorage.getItem('user')){
+      $state.go('signin');
+    }
+
     $scope.music = MusicPlayerService.music;
 
     $scope.newBook = function(){
