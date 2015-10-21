@@ -10,20 +10,53 @@
   </section>
   <!-- Main content -->
   <section class="content">
-    <!-- Default box -->
-    <div class="box md-whiteframe-z1">
-      <div class="box-body">
-        <div class="row">
-          <div class="col-xs-12">
-            <div>Inventaire : <span ng-repeat="object in currentGame.objects">{{object}}<span ng-show="!$last">,</span></span></div>
-            <div>Stats : <span ng-repeat="stat in currentGame.stats">{{stat.key}} : {{stat.value}}<span ng-show="!$last">,</span></span></div>
+    <div class="row">
+      <div class="col-sm-6">
+        <!-- Default box -->
+        <div class="box md-whiteframe-z1">
+          <div class="box-body">
+            <div class="box-header">
+              <h3 class="box-title"><b>Objets et compétences</b></h3>
+            </div><!-- /.box-header -->
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="text-center">
+                  <div class="btn btn-primary margin-left margin-top" tooltip-placement="bottom" tooltip="{{objects[object].description}}" ng-repeat="object in currentGame.objects" ng-show="objects[object].visible">
+                    {{objects[object].name}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /.box-body -->
+          <div ng-show="pageLoading" class="overlay">
+            <i class="fa fa-refresh fa-spin"></i>
           </div>
-        </div>
-      </div><!-- /.box-body -->
-      <div ng-show="pageLoading" class="overlay">
-        <i class="fa fa-refresh fa-spin"></i>
+        </div><!-- /.box -->
+      </div>  
+      <div class="col-sm-6">
+        <!-- Default box -->
+        <div class="box md-whiteframe-z1">
+          <div class="box-body">
+            <div class="box-header">
+              <h3 class="box-title"><b>Statistiques</b></h3>
+            </div><!-- /.box-header -->
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="text-center">
+                  <span class="btn btn-primary margin-left margin-top" tooltip-placement="bottom" tooltip="{{stats[statKey].description}}" ng-repeat="(statKey,stat) in currentGame.stats" ng-show="stats[statKey].visible">
+                    {{stats[statKey].name}} : {{currentGame.stats[statKey]}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div><!-- /.box-body -->
+          <div ng-show="pageLoading" class="overlay">
+            <i class="fa fa-refresh fa-spin"></i>
+          </div>
+        </div><!-- /.box -->
       </div>
-    </div><!-- /.box --><!-- Default box -->
+    </div>
+    <!-- Default box -->
     <div class="box md-whiteframe-z1">
       <div class="box-body">
         <div class="row">

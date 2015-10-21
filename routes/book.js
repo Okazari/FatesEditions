@@ -43,6 +43,20 @@ router.get('/:bookId', function(req, res, next) {
     })
 });
 
+router.get('/:bookId/objects', function(req, res, next) {
+    Book.findOne({"_id":req.params.bookId},"objects",function(err, book){
+        if(err) next(err);
+        res.json(book.objects);
+    })
+});
+
+router.get('/:bookId/stats', function(req, res, next) {
+    Book.findOne({"_id":req.params.bookId},"stats",function(err, book){
+        if(err) next(err);
+        res.json(book.stats);
+    })
+});
+
 router.get('/:bookId/page', function(req, res, next) {
     Book.findOne({"_id":req.params.bookId},function(err, book){
         if(err){

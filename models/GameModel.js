@@ -10,10 +10,7 @@ var GameSchema   = new Schema({
             name : String
         },
     objects : [String],
-    stats : [{
-        key:String,
-        value:Number
-    }]
+    stats : Schema.Types.Mixed
 });
 
 module.exports = mongoose.model('Game', GameSchema);

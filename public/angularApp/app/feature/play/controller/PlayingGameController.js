@@ -1,10 +1,20 @@
 'use strict';
 
 angular.module('myVirtualStoryBookApp')
-  .controller('PlayingGameController', function ($scope, $state, $stateParams, GameService, PageService, MusicPlayerService) {
+  .controller('PlayingGameController', function ($scope, $state, $stateParams, BookService, GameService, PageService, MusicPlayerService) {
 
+    var isLoading = function(){
+      return $scope.gameLoading || $scope.bookLoading;
+    }
+
+    var refreshLoader = function(){
+        $scope.pageLoading = isLoading();
+    }
+    
     $scope.showRightMenu = false;
-    $scope.pageLoading = true;
+    $scope.gameLoading = true;
+    $scope.bookLoading = true;
+    refreshLoader();
     $scope.backgroundMusicFirstLoad = true;
     
     GameService.getGame($stateParams.id).success(function(game){
@@ -13,14 +23,29 @@ angular.module('myVirtualStoryBookApp')
         $scope.currentPage = page;
         PageService.getPageTransitions(page).success(function(transitions){
           $scope.currentPage.transitions = transitions;
-          $scope.pageLoading = false;
+          $scope.gameLoading = false;
+          refreshLoader();
           if(angular.isDefined(page.background_music) && MusicPlayerService.isValidUrl(page.background_music)){ 
             MusicPlayerService.play(page.background_music);
             $scope.backgroundMusicFirstLoad = false;
           };
         });
       });
+      BookService.getBook($scope.currentGame.bookId).success(function(book){
+         $scope.book = book;
+         $scope.objects = {};
+         $scope.stats = {};
+         angular.forEach($scope.book.objects, function(object){
+            $scope.objects[object._id] = object; 
+         });
+         angular.forEach($scope.book.stats, function(stat){
+            $scope.stats[stat._id] = stat; 
+         });
+         $scope.bookLoading = false;
+         refreshLoader();
+      });
     });
+    
     
     $scope.changePage = function(newPageId){
       $scope.pageLoading = true;
