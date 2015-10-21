@@ -29,20 +29,20 @@ myVirtualStoryBookApp.service("GameService", [ "$http",
             return game.objects.indexOf(key) >= 0;
         }
         
-        service.getStat = function(game,key,log){
+        service.getStat = function(game,key){
           var result = null;
-          angular.forEach(game.stats, function(stat){
-            if(stat.key == key){
-              result = stat.value;
+          angular.forEach(game.stats, function(statValue,statKey){
+            if(statKey == key){
+              result = statValue;
             }
           })
           return result;
         }
         
         service.setStat = function(game, key, newValue){
-          angular.forEach(game.stats, function(stat){
-            if(stat.key == key){
-              stat.value = newValue;
+          angular.forEach(game.stats, function(statValue, statKey){
+            if(statKey == key){
+              game.stats[statKey] = newValue;
               return game;
             }
           })

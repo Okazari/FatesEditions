@@ -35,14 +35,15 @@ router.post('/', function(req, res, next) {
     Book.findOne({_id:req.body.bookId},function(err,book){
         game.book = {
             synopsis : book.synopsis,
-            name : book.name
+            name : book.name,
         }
+        game.stats = {};
         book.stats.forEach(function(stat){
-           game.stats.push({key:stat.name, value:stat.initValue});
+           game.stats[stat._id] = stat.initValue;
         });
         book.objects.forEach(function(object){
             if(object.atStart){
-                game.objects.push(object.name);
+                game.objects.push(object._id);
             }
         })
         game.save(function(err) {
