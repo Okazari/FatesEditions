@@ -9,8 +9,8 @@ angular.module('myVirtualStoryBookApp')
 
     $scope.savePage = function(){
       PageService.updatePage($scope.page);
-      if(MusicPlayerService.isValidUrl($scope.page.background_music)){
-        MusicPlayerService.load($scope.page.background_music);
+      if(MusicPlayerService.isValidUrl($scope.page.backgroundMusic)){
+        MusicPlayerService.load($scope.page.backgroundMusic);
       }else{
         MusicPlayerService.music.unload();
       }
@@ -22,8 +22,8 @@ angular.module('myVirtualStoryBookApp')
     PageService.getPage($stateParams.id).success(function(page){
       $scope.page = page;
       $scope.pageLoading=false;
-      if(MusicPlayerService.isValidUrl($scope.page.background_music)){
-        MusicPlayerService.load($scope.page.background_music);
+      if(MusicPlayerService.isValidUrl($scope.page.backgroundMusic)){
+        MusicPlayerService.load($scope.page.backgroundMusic);
       }else{
         MusicPlayerService.music.unload();
       }
