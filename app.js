@@ -6,7 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-mongoose.connect(process.env[“MONGODB_ADDON_URI”]);
+var uriMongo = "mongodb://"+process.env.IP+':27017/myvirtualstorybook';
+if(process.env["MONGODB_ADDON_URI"]){
+  uriMongo = process.env["MONGODB_ADDON_URI"];
+}
+mongoose.connect(uriMongo);
 
 var app = express();
 
