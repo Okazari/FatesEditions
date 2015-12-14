@@ -97,7 +97,7 @@
               <label>Lien SoundCloud</label> 
               <div class="input-group col-xs-12">
                 <div class="input-group-btn"><button ng-click="music.playPause()" class="btn btn-primary" ng-disabled="!music.valid" ng-class="{'btn-danger':!music.valid}"><i class="fa" ng-class="{'fa-play':(music.valid && !music.playing), 'fa-pause':(music.valid && music.playing), 'fa-close':!music.valid}"></i></button></div>
-                <input ng-change="savePage()" ng-model-options="{debounce:1000}" type="text" name="cover" class="form-control " placeholder="Lien SoundCloud de votre musique de fond" ng-model="page.background_music" ng-change="displayMessage = false">
+                <input ng-change="savePage()" ng-model-options="{debounce:1000}" type="text" name="cover" class="form-control " placeholder="Lien SoundCloud de votre musique de fond" ng-model="page.backgroundMusic" ng-change="displayMessage = false">
               </div>
             </div>
           </div>
