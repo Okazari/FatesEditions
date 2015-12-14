@@ -4,7 +4,7 @@
 
 npm install bower -g
 npm install mongoose-data-migrate -g
-bower install
 cd public/angularApp/
+bower install
 cd ../../models/
 mongoose-data-migrate up
