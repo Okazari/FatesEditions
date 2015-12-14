@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-mongoose.connect(MONGODB_ADDON_URI);
+mongoose.connect(process.env[“MONGODB_ADDON_URI”]);
 
 var app = express();
 
