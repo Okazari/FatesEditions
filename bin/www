@@ -23,7 +23,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
+//var httpsServer = https.createServer(credentials, app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -33,9 +33,9 @@ httpServer.listen(port);
 httpServer.on('error', onError);
 httpServer.on('listening', onListening);
 
-httpsServer.listen(3443);
+/*httpsServer.listen(3443);
 httpsServer.on('error', onError);
-httpsServer.on('listening', onListening);
+httpsServer.on('listening', onListening);*/
 
 /**
  * Normalize a port into a number, string, or false.
