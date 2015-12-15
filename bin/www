@@ -9,8 +9,8 @@ var debug = require('debug')('workspace:server');
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var privateKey  = fs.readFileSync('../sslcert/key.pem', 'utf8');
-var certificate = fs.readFileSync('../sslcert/cert.pem', 'utf8');
+var privateKey  = fs.readFileSync('./sslcert/key.pem', 'utf8');
+var certificate = fs.readFileSync('./sslcert/cert.pem', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 /**
  * Get port from environment and store in Express.
