@@ -3,20 +3,20 @@ var router = express.Router();
 var Player = require('../models/PlayerModel');
 
 router.post('/login', function(req, res, next) {
-   Player.findOne({username:req.body.username},function(err,player){
-      if(err) next(err);
+   Player.findOne({username:req.body.username}).then(function(player){
       if(!player || req.body.password != player.password){
           res.sendStatus(403);
       }else{
           player.password = null;
           res.send(player); 
       }
-   });
+   },function(err){
+        next(err);
+    });
 });
 
 router.post('/subscribe', function(req, res, next) {
-   Player.findOne({username:req.body.username},function(err,player){
-      if(err) next(err);
+   Player.findOne({username:req.body.username}).then(function(player){
       if(!player){
           if(req.body.password === req.body.verifyPassword){
              var newPlayer = new Player();
@@ -35,6 +35,8 @@ router.post('/subscribe', function(req, res, next) {
           res.status(400);
           res.json({message:"Nom d'utilisateur déjà pris"});
       }
-   });
+   },function(err){
+        next(err);
+    });
 });
 module.exports = router;
