@@ -8,12 +8,11 @@ var async = require('async');
 /************TRANSITIONS**********/
 router.get('/', function(req, res, next) {
     var filter = {};
-    Transition.find(function(err, transitions) {
-            if (err)
-                next(err);
-
-            res.json(transitions);
-        });
+    Transition.find().then(function(transitions) {
+        res.json(transitions);
+    },function(err){
+        next(err);
+    });
 });
 
 router.post('/', function(req, res, next) {
@@ -22,47 +21,46 @@ router.post('/', function(req, res, next) {
     transition.conditions = [];
     transition.effects = [];
     transition.conditionOperator = "and";
-    transition.save(function(err) {
-        if (err)
-            next(err);
-
+    transition.save().then(function() {
         res.json(transition);
+    },function(err){
+        next(err);
     });
 });
 
 router.patch('/:transitionId', function(req, res, next) {
-    Transition.findOne({"_id":req.params.transitionId},function(err, transition){
-        if(err){
-            next(err);  
-        }
+    Transition.findOne({"_id":req.params.transitionId}).then(function(transition){
         req.body.toPage ? transition.toPage = req.body.toPage : transition.toPage = "";
         req.body.text ? transition.text = req.body.text : transition.text = "";
         req.body.conditions ? transition.conditions = req.body.conditions : transition.conditions = [];
         req.body.effects ? transition.effects = req.body.effects : transition.effects = [];
         req.body.conditionOperator ? transition.conditionOperator = req.body.conditionOperator : "";
-        transition.save(function(err){
-            if(err)
-                next(err);
+        transition.save().then(function(){
             res.json(transition);
-        })
+        },function(err){
+            next(err);
+        })  
+    },function(err){
+        next(err);
     })
 });
 
 router.delete('/:transitionId', function(req, res, next) {
-    Transition.remove({_id:req.params.transitionId},function(err){
-        if(err)
-            next(err);
-        
+    Transition.remove({_id:req.params.transitionId}).then(function(){
         res.send(200);
+    },function(err){
+        next(err);
     })
 });
 
 var findPage = function(idPage, callback){
-       Page.findOne({"_id":idPage}, function(err,page){
-           var result = page ? page.title: "UNDEFINED";
-           callback(null,result);
-       });
-    };
+   Page.findOne({"_id":idPage}).then(function(page){
+       var result = page ? page.title: "UNDEFINED";
+       callback(null,result);
+   },function(err){
+        next(err);
+    });
+};
     
 var findTransitions = function(transition, eachCallback){
    async.parallel({
@@ -80,13 +78,14 @@ var findTransitions = function(transition, eachCallback){
 
 router.get('/links', function(req, res, next) {
    var transitionsArray = [];
-   Page.find({"bookId":req.query.bookId},function(err, pages){
-       if(err) next(err);
+   Page.find({"bookId":req.query.bookId}).then(function(pages){
        async.each(pages, function(page,eachCallback){
-           Transition.find({"fromPage":page._id},function(err, transitions){
+           Transition.find({"fromPage":page._id}).then(function(transitions){
                transitionsArray = transitionsArray.concat(transitions);
                eachCallback();
-           });
+           },function(err){
+                next(err);
+            });
        },function(err){
            if(!err) {
                var links = [];
@@ -108,7 +107,9 @@ router.get('/links', function(req, res, next) {
                next(err);
            }
        });
-   })
+   },function(err){
+        next(err);
+    })
 });
 
 
