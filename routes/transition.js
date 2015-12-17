@@ -58,7 +58,7 @@ var findPage = function(idPage, callback){
        var result = page ? page.title: "UNDEFINED";
        callback(null,result);
    },function(err){
-        next(err);
+       callback(null,"UNDEFINED");
     });
 };
     
