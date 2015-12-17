@@ -38,7 +38,7 @@ router.post('/', function(req, res, next) {
 
 
 router.patch('/:pageId', function(req, res, next) {
-    Page.findOne({"_id":req.params.pageId},function(page){
+    Page.findOne({"_id":req.params.pageId}).then(function(page){
         if(req.body.title) page.title = req.body.title;
         if(req.body.text) page.text = req.body.text;
         if(req.body.description) page.description = req.body.description;
