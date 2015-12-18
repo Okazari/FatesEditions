@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var Player = require('../models/PlayerModel');
+var jwt = require('jsonwebtoken');
 
 router.post('/login', function(req, res, next) {
    Player.findOne({username:req.body.username}).then(function(player){
       if(!player || req.body.password != player.password){
           res.sendStatus(403);
       }else{
+          var token = jwt.sign(player,"mysecretstory");
           player.password = null;
-          res.send(player); 
+          res.send({token:token}); 
       }
    },function(err){
         next(err);
@@ -25,7 +27,8 @@ router.post('/subscribe', function(req, res, next) {
              newPlayer.password = req.body.password;
              newPlayer.tour = true;
              newPlayer.save(function(err,player){
-                res.send(player);
+                var token = jwt.sign(player,"mysecretstory");
+                res.send({token:token});
              })
           }else{
              res.status(400);
