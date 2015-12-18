@@ -8,9 +8,9 @@ router.post('/login', function(req, res, next) {
       if(!player || req.body.password != player.password){
           res.sendStatus(403);
       }else{
-          var token = jwt.sign(player,"mysecretstory");
+          var token = jwt.sign({user:player},"mysecretstory",{expiresIn:3600});
           player.password = null;
-          res.send({token:token}); 
+          res.send({token:token, user:player}); 
       }
    },function(err){
         next(err);
@@ -27,8 +27,8 @@ router.post('/subscribe', function(req, res, next) {
              newPlayer.password = req.body.password;
              newPlayer.tour = true;
              newPlayer.save(function(err,player){
-                var token = jwt.sign(player,"mysecretstory");
-                res.send({token:token});
+                var token = jwt.sign({user:player},"mysecretstory",{expiresIn:3600});
+                res.send({token:token, user:player});
              })
           }else{
              res.status(400);

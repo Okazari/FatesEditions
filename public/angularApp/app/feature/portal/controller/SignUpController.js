@@ -11,7 +11,8 @@ angular.module('myVirtualStoryBookApp')
         if($scope.loginForm.$valid){
             ConnectionService.subscribe(angular.copy($scope.user)).success(function(player){
                 PlayerService.player.data = player;
-                $window.localStorage.setItem('user',JSON.stringify(player));
+                $window.localStorage.setItem('user',JSON.stringify(player.user));
+                $window.localStorage.setItem('token',player.token);
                 PlayerService.player.refreshBooks(true);
                 $state.go('app.play.books');
             }).error($scope._displayError);

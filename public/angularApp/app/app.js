@@ -106,10 +106,21 @@ var myVirtualStoryBookApp = angular
 
 }); 
 
-myVirtualStoryBookApp.factory('httpErrorInterceptor', ['$q', '$injector', '$window', '$location',
+myVirtualStoryBookApp.factory('httpInterceptor', ['$q', '$injector', '$window', '$location',
     function ($q, $injector, $window, $location) {
         var myInterceptor = {
+            'request': function(config) {
+              var token = $window.localStorage.getItem('token');
+                if(token){
+                  config.headers.Authorization = token;
+                }
+              return config;
+            },
             'response': function (response) {
+                var token = response.headers('auth-token');
+                if(token){
+                    $window.localStorage.setItem('token',token);
+                }
                 return response;
             },
             'responseError': function (rejection) {
@@ -123,7 +134,7 @@ myVirtualStoryBookApp.factory('httpErrorInterceptor', ['$q', '$injector', '$wind
 }]);
 
 myVirtualStoryBookApp.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('httpErrorInterceptor');
+    $httpProvider.interceptors.push('httpInterceptor');
 }]);
 
 myVirtualStoryBookApp.run( function($rootScope, $window, $location, IntroService) {

@@ -19,6 +19,7 @@ myVirtualStoryBookApp.service("ConnectionService", ['$http','$window',
         
         service.logout = function(){
             $window.localStorage.removeItem('user');
+            $window.localStorage.removeItem('token');
         }
         
         return service;
