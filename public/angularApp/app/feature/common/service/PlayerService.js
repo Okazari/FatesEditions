@@ -7,14 +7,13 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         
         service.player = {};
         
-        service.player.data = JSON.parse($window.localStorage.getItem('user')); 
-        if(service.player.data === null){
-            $state.go("signin");
-        };
-        
         service.player.books = {};
         
         service.player.refreshBooks = function(){
+            service.player.data = JSON.parse($window.localStorage.getItem('user'));
+            if(service.player.data === null){
+                $state.go("signin");
+            };
             if(service.player.data){
                 BookService.getUserBooks(service.player.data._id).success(function(books){
                     service.player.books.list = books;
