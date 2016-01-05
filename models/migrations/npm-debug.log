@@ -1,0 +1,73 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/ubuntu/.nvm/v0.10.35/bin/node',
+1 verbose cli   '/home/ubuntu/.nvm/v0.10.35/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   'nodejs-jwt' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 warn package.json async@1.4.2 No README data
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'nodejs-jwt', null ]
+7 verbose cache add name=undefined spec="nodejs-jwt" args=["nodejs-jwt",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'nodejs-jwt',
+8 verbose parsed url   path: 'nodejs-jwt',
+8 verbose parsed url   href: 'nodejs-jwt' }
+9 silly lockFile 36c45bed-nodejs-jwt nodejs-jwt
+10 verbose lock nodejs-jwt /home/ubuntu/.npm/36c45bed-nodejs-jwt.lock
+11 silly lockFile 36c45bed-nodejs-jwt nodejs-jwt
+12 silly lockFile 36c45bed-nodejs-jwt nodejs-jwt
+13 verbose addNamed [ 'nodejs-jwt', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile f831bbac-nodejs-jwt nodejs-jwt@
+16 verbose lock nodejs-jwt@ /home/ubuntu/.npm/f831bbac-nodejs-jwt.lock
+17 silly addNameRange { name: 'nodejs-jwt', range: '*', hasData: false }
+18 verbose request where is /nodejs-jwt
+19 verbose request registry https://registry.npmjs.org/
+20 verbose request id 95225040b1bf052a
+21 verbose url raw /nodejs-jwt
+22 verbose url resolving [ 'https://registry.npmjs.org/', './nodejs-jwt' ]
+23 verbose url resolved https://registry.npmjs.org/nodejs-jwt
+24 verbose request where is https://registry.npmjs.org/nodejs-jwt
+25 info trying registry request attempt 1 at 08:59:59
+26 http GET https://registry.npmjs.org/nodejs-jwt
+27 http 404 https://registry.npmjs.org/nodejs-jwt
+28 silly registry.get cb [ 404,
+28 silly registry.get   { 'content-type': 'application/json',
+28 silly registry.get     'cache-control': 'max-age=0',
+28 silly registry.get     'content-length': '2',
+28 silly registry.get     'accept-ranges': 'bytes',
+28 silly registry.get     date: 'Fri, 18 Dec 2015 08:59:59 GMT',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     age: '0',
+28 silly registry.get     connection: 'keep-alive',
+28 silly registry.get     'x-served-by': 'cache-lcy1134-LCY',
+28 silly registry.get     'x-cache': 'MISS',
+28 silly registry.get     'x-cache-hits': '0',
+28 silly registry.get     'x-timer': 'S1450429199.234624,VS0,VE105' } ]
+29 silly lockFile f831bbac-nodejs-jwt nodejs-jwt@
+30 silly lockFile f831bbac-nodejs-jwt nodejs-jwt@
+31 error 404 Not Found
+31 error 404
+31 error 404 'nodejs-jwt' is not in the npm registry.
+31 error 404 You should bug the author to publish it
+31 error 404 It was specified as a dependency of 'workspace'
+31 error 404
+31 error 404 Note that you can also install from a
+31 error 404 tarball, folder, or http url, or git url.
+32 error System Linux 4.2.0-c9
+33 error command "/home/ubuntu/.nvm/v0.10.35/bin/node" "/home/ubuntu/.nvm/v0.10.35/bin/npm" "install" "--save" "nodejs-jwt"
+34 error cwd /home/ubuntu/workspace/models/migrations
+35 error node -v v0.10.35
+36 error npm -v 1.4.28
+37 error code E404
+38 verbose exit [ 1, true ]
