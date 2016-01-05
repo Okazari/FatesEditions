@@ -24,7 +24,8 @@ router.post('/', function(req, res, next) {
     var book = new Book();
     book.draft = true;
     Player.findOne({_id:req.body.userId}).then(function(player){
-        if(player !== undefined){
+        if(player !== undefined && player !== null){
+            console.log(player);
             book.authorName = player.username;
             book.authorId = req.body.userId;
             book.save().then(function(){
