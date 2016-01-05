@@ -5,7 +5,7 @@ var Player = require('../models/PlayerModel');
 
 /************Players**********/
 router.get('/', function(req, res, next) {
-    Player.find({},"username").then(function(players) {
+    Player.find({},"username email").then(function(players) {
         res.json(players);
     },function(err){
         next(err);
@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 }); 
 
 router.get('/:playerId', function(req, res, next) {
-    Player.findOne({_id:req.params.playerId},'username').then(function(player) {
+    Player.findOne({_id:req.params.playerId},'username email').then(function(player) {
         res.json(player);
     },function(err){
         next(err);
