@@ -1,0 +1,30 @@
+<div class="wrapper" style="background-color:#ecf0f5;">
+  <div class="login-box">
+    <div class="login-logo">
+      <a>
+        <img class="logo-signin" src="/app/images/logo/logo300x300.png">
+      <b>MyVirtualStoryBook</b></a>
+    </div><!-- /.login-logo -->
+    <div class="box md-whiteframe-z2">
+      <div class="box-body">
+        <div class="box-header with-border align-center">
+          <h3 class="box-title">Nom d'utilisateur/Mot de passe oublié</h3>
+        </div>
+        <form name="loginForm">
+          <div class="input-group margin-top col-xs-12">
+            <label>Email</label>
+            <input type="text"  max="20" name="email" class="form-control" placeholder="Email associé à votre compte" ng-model="email" ng-change="displayMessage = false" required>
+          </div>
+          <div class="row margin-top">
+            <div class="col-xs-12">
+              <button ng-show="state === 'init'" style="width:100%" type="submit" ng-click="recover()" class="btn btn-primary">M'envoyer un email de récupération de compte</md-button>
+              <button ng-show="state === 'sending'" disabled style="width:100%" type="submit" ng-click="recover()" class="btn btn-warning">Verification de l'email <span class="fa fa-spinner fa-spin"></span></md-button>
+              <button ng-show="state === 'success'" disabled style="width:100%" type="submit" ng-click="recover()" class="btn btn-success">Email envoyé <span class="fa fa-check"></span></md-button>
+              <button ng-show="state === 'error'" style="width:100%" type="submit" ng-click="recover()" class="btn btn-danger">L'email ne correspond à aucun compte, Réessayez</md-button>
+            </div><!-- /.col -->
+          </div>
+        </form>
+      </div>
+    </div><!-- /.login-box-body -->
+  </div>
+</div>

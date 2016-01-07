@@ -17,6 +17,10 @@ myVirtualStoryBookApp.service("ConnectionService", ['$http','$window',
             return $http.post("/api/subscribe", credentials);
         }
         
+        service.recover = function(email){
+            return $http.post("/api/recover", {email:email});
+        }
+        
         service.logout = function(){
             $window.localStorage.removeItem('user');
             $window.localStorage.removeItem('token');

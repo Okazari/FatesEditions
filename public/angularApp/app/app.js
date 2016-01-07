@@ -37,6 +37,11 @@ var myVirtualStoryBookApp = angular
                 templateUrl: "app/feature/portal/view/Signin.html",
                 controller: "SignInController"
             })
+            .state('recover', {
+                url: "/recover",
+                templateUrl: "app/feature/portal/view/Recover.html",
+                controller: "RecoverController"
+            })
 
             .state('app', {
                 templateUrl: "app/feature/common/template/Base.template.html",
