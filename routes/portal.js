@@ -58,7 +58,7 @@ router.post('/recover', function(req, res, next) {
         		            "<div>MyvirtualStorybook</div>",
         		"Recipients":[
         				{
-        						"Email": player.email;
+        						"Email": player.email
         				}
         		]
     	    }).on('success', function (response, body) {
