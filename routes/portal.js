@@ -41,7 +41,7 @@ router.post('/recover', function(req, res, next) {
         player.save().then(function(){
             mailjet.post("send").request({
         		"FromEmail":"myvirtualstorybook@gmail.com",
-        		"FromName":"Ne pas répondre",
+        		"FromName":"MyVirtualStoryBook",
         		"Subject":"Changement de mot de passe",
         		"Text-part":"",
         		"Html-part":"<div>Bonjour <b>"+player.username+"</b>,</div>"+
