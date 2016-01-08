@@ -103,6 +103,11 @@ var myVirtualStoryBookApp = angular
                 controller:"PublishBookController",
                 templateUrl:"app/feature/share/view/PublishBook.html"  
             })
+            .state('app.profile', {
+                url: "/profile",
+                controller:"ProfileController",
+                templateUrl:"app/feature/profile/view/Profile.html"  
+            })
             .state("sanbox", {
                 url: "/sandbox",
                 controller:"SandboxController",
