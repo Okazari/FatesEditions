@@ -34,8 +34,6 @@ router.post('/recover', function(req, res, next) {
             var key = Math.floor(Math.random() * chars.length);
             newpassword += chars[key];
         }
-        
-        console.log(player);
         player.password = SHA512(newpassword);
         
         player.save().then(function(){
@@ -45,7 +43,7 @@ router.post('/recover', function(req, res, next) {
         		"Subject":"Changement de mot de passe",
         		"Text-part":"",
         		"Html-part":"<div>Bonjour <b>"+player.username+"</b>,</div>"+
-        		            "<br/><div>vous recevez ce mail car vous avez demandé à réinitialisé votre mot de passe.</div>" +
+        		            "<br/><div>vous recevez ce mail car vous avez demandé à réinitialiser votre mot de passe.</div>" +
         		            "<div>Si vous n'avez jamais demandé à le changer, merci de contacter l'administateur du site en répondant à ce mail.</div>" +
         		            "<br/>"+
         		            "<div>Votre mot de passe temporaire est : <b>"+newpassword+"</b>" +
