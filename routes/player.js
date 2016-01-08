@@ -20,6 +20,33 @@ router.get('/:playerId', function(req, res, next) {
     });
 }); 
 
+router.patch('/:playerId',function(req,res,next){
+    Player.findOne({_id:req.params.playerId}).then(function(player){
+        var hadError = false;
+        if(req.body.passwords){
+            if(req.body.passwords.confirmation === req.body.passwords.new && req.body.passwords.old == player.password){
+                player.password = req.body.passwords.new;
+            }else{
+                hadError = true;
+                if(req.body.passwords.confirmation !== req.body.passwords.new){
+                    res.status(400).send({message:'Les mots de passe ne correspondent pas, Réessayez'});
+                }else{
+                    res.status(403).send({message:'Mauvais mot de passe, Réessayez'});
+                }
+            }
+        }
+        if(!hadError){
+            player.save().then(function(){
+                res.sendStatus(200);   
+            },function(err){
+                next(err)  
+            })
+        }
+    },function(err){
+        next(err)
+    })
+})
+
 router.post('/', function(req, res, next) {
     
     var player = new Player();

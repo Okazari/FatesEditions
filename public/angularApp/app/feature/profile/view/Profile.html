@@ -1,0 +1,50 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Mon profil</h1>
+    <ol class="breadcrumb">
+      <li><a ui-sref="app.play.books">MyVirtualStoryBook</a></li>
+      <li class="active">Mon profil</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+    <div class="row">
+      <div class="col-xs-6">
+        <div>
+          <div class="box md-whiteframe-z1">
+            <div class="box-header">
+              <h3 class="box-title">Changer de mot de passe</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body row">
+              <div class="col-xs-12">
+                <form name="loginForm">
+                  <div class="input-group margin-top" style="width:100%">
+                    <label>Nouveau mot de passe</label>
+                    <input type="password"  max="20" name="new" class="form-control" placeholder="Nouveau mot de passe" ng-model="passwords.new" ng-change="displayMessage = false" required>
+                  </div>
+                  <div class="input-group margin-top" style="width:100%">
+                    <label>Confirmation</label>
+                    <input type="password"  max="20" name="confirmation" class="form-control" placeholder="Confirmation" ng-model="passwords.confirmation" ng-change="displayMessage = false" required>
+                  </div>
+                  <div class="input-group margin-top" style="width:100%">
+                    <label>Ancien mot de passe</label>
+                    <input type="password"  max="20" name="old" class="form-control" placeholder="Ancien mot de passe" ng-model="passwords.old" ng-change="displayMessage = false" required>
+                  </div>
+                  <div class="row margin-top">
+                    <div class="col-xs-12">
+                      <button ng-show="state === 'init'" style="width:100%" type="submit" ng-click="changePassword(passwords)" class="btn btn-primary">Changer de mot de passe</md-button>
+                      <button ng-show="state === 'sending'" disabled style="width:100%" type="submit" class="btn btn-warning">Verification<span class="fa fa-spinner fa-spin"></span></md-button>
+                      <button ng-show="state === 'success'" disabled style="width:100%" type="submit" class="btn btn-success">Mot de passe changé <span class="fa fa-check"></span></md-button>
+                      <button ng-show="state === 'error'" style="width:100%" type="submit" ng-click="changePassword(passwords)" class="btn btn-danger">{{displayMessageText}}</md-button>
+                    </div><!-- /.col -->
+                  </div>
+                </form>
+              </div>
+            </div><!-- /.box-body -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- /.content -->
+</div>
