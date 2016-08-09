@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './style.scss'
 
-const Portal = () => {
+const Portal = ({ children }) => {
   return (
-    <div className={styles.app}>
-      Portal
+    <div className={styles.component}>
+      {children}
     </div>
   )
 }

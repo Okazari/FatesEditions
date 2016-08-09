@@ -1,0 +1,11 @@
+@import '~styles/colors.scss';
+@import '~styles/shadows.scss';
+
+.component {
+  background-color: $white;
+  box-shadow: $box-shadow-1;
+  border-radius: 3px;
+  &>div {
+    margin: 0;
+  }
+}
