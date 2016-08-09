@@ -1,4 +1,7 @@
-var path = require('path');
+
+root: [
+  path.resolve('./app/'),
+],var path = require('path');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -28,6 +31,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.json'],
+    root: [
+      path.resolve('./src/'),
+    ],
     alias: {
       // This `alias` section can be safely removed after ejection.
       // We do this because `babel-runtime` may be inside `react-scripts`,
