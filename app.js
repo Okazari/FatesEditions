@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-var uriMongo = "mongodb://"+process.env.IP+':27017/myvirtualstorybook';
+var uriMongo = "mongodb://"+(process.env.IP || 'localhost')+':27017/myvirtualstorybook';
 if(process.env["MONGODB_ADDON_URI"]){
   uriMongo = process.env["MONGODB_ADDON_URI"];
 }
@@ -25,7 +25,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/app', express.static(path.join(__dirname, 'public/angularApp')));
+app.use('/app', express.static(path.join(__dirname, 'public/build')));
+app.use('/static', express.static(path.join(__dirname, 'public/build/static')));
 
 /********IMPORT ROUTES*********/
 var portal = require('./routes/portal');
