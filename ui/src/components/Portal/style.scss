@@ -4,7 +4,9 @@
   display: flex;
   height: 100vh;
   background-color: $blue-grey;
-  justify-content: space-around;
-  align-items: center;
   font-family: 'Roboto';
+
+  &>div {
+    margin: auto;
+  }
 }

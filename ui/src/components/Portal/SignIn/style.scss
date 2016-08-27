@@ -6,6 +6,11 @@
   box-shadow: $box-shadow-1;
   border-radius: 3px;
   &>div {
+    min-width: 500px;
     margin: 0;
+  }
+
+  .header {
+    text-align: center;
   }
 }

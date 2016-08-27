@@ -4,12 +4,14 @@
 .component {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin-top: 10px;
+
   label {
     display: inline-block;
     margin-bottom: 5px;
     font-weight: bold;
   }
+  
   input {
     padding: 7px;
     border: 1px solid $grey-darken-20;

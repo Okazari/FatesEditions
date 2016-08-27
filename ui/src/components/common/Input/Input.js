@@ -3,7 +3,7 @@ import styles from './style.scss'
 
 const Input = ( { domProps, label } ) => {
   return (
-    <div className="input-group margin-top col-xs-12">
+    <div className={`input-group ${styles.component}`}>
       <label>{label}</label>
       <input className="form-control" {...domProps} />
     </div>
