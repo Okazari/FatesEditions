@@ -1,8 +1,7 @@
 import React from 'react'
 import styles from './style.scss'
-import Input from 'components/common/Input'
+import { Input, Button } from 'components/common'
 import {Box, BoxHeader} from 'components/common/Box'
-
 const SignIn = ( ) => {
   return (
     <div className={styles.component}>
@@ -22,6 +21,9 @@ const SignIn = ( ) => {
             placeholder: "Entrez votre mot de passe"
           }}
         />
+        <Button className={styles.button}>
+         CONNEXION
+        </Button>
       </Box>
     </div>
   )
