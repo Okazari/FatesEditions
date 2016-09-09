@@ -3,8 +3,7 @@ import 'normalize.css/normalize.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from 'components/App'
-import Portal from 'components/Portal'
-import SignIn from 'components/Portal/SignIn'
+import Portal, { SignIn, SignUp } from 'components/Portal'
 import { Router, Route, IndexRedirect, browserHistory } from 'react-router'
 
 ReactDOM.render(
@@ -14,6 +13,7 @@ ReactDOM.render(
       <Route path="portal" component={Portal}>
         <IndexRedirect to="signin" />
         <Route path="signin" component={SignIn} />
+        <Route path="signup" component={SignUp} />
       </Route>
       <Route path="app" component={App} />
     </Route>
