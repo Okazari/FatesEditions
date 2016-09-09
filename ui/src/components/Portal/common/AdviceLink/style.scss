@@ -3,6 +3,11 @@
 
 .component {
   margin-top: 5px;
+
+  &>label {
+    margin-bottom: 0;
+  }
+
   &>a {
     margin-left: 5px;
   }

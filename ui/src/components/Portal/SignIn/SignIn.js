@@ -22,6 +22,9 @@ const SignIn = ( ) => {
             placeholder: "Entrez votre mot de passe"
           }}
         />
+        <Button className={styles.button}>
+        CONNEXION
+        </Button>
         <AdviceLink
           advice="Pas encore de compte ?"
           label="Inscris toi !"
@@ -32,9 +35,6 @@ const SignIn = ( ) => {
           label="Aidez moi !"
           link="/portal/recover"
         />
-        <Button className={styles.button}>
-         CONNEXION
-        </Button>
       </Box>
     </div>
   )

@@ -38,6 +38,9 @@ const SignUp = ( ) => {
             type: 'password'
           }}
         />
+        <Button className={styles.button}>
+        INSCRIPTION
+        </Button>
         <AdviceLink
           advice="Déjà inscris ?"
           label="Connecte toi !"
@@ -48,9 +51,6 @@ const SignUp = ( ) => {
           label="Aidez moi !"
           link="/portal/recover"
         />
-        <Button className={styles.button}>
-         INSCRIPTION
-        </Button>
       </Box>
     </div>
   )
