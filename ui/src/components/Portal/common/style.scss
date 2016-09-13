@@ -5,10 +5,10 @@
   background-color: $white;
   border-radius: 3px;
   box-shadow: $box-shadow-1;
+  width: 500px;
 
   &>div {
     margin: 0;
-    min-width: 500px;
   }
 
   .header {
