@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './style.scss'
+import styles from '../common/style.scss'
 import { Input, Button } from 'components/common'
 import { Box, BoxHeader } from 'components/common/Box'
 import { AdviceLink } from 'components/Portal/common'
