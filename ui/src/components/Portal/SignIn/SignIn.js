@@ -13,13 +13,15 @@ const SignIn = ( ) => {
         <Input
           label="Nom d'utilisateur"
           domProps={{
-            placeholder: "Entrez votre nom d'utilisateur"
+            placeholder: "Entrez votre nom d'utilisateur",
+            type: "text"
           }}
         />
         <Input
           label="Mot de passe"
           domProps={{
-            placeholder: "Entrez votre mot de passe"
+            placeholder: "Entrez votre mot de passe",
+            type: "password"
           }}
         />
         <Button className={styles.button}>
