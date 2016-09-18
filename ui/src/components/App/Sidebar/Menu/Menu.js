@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './style.scss'
 import Title from './Title'
 import MenuCollapsable, { MenuItem } from './MenuCollapsable'
 

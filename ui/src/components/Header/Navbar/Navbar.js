@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './style.scss'
 import ToggleButton from './ToggleButton'
 import NavbarButton from './NavbarButton'
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-static-top">
