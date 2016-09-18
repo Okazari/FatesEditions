@@ -1,30 +1,30 @@
 import React from 'react'
 import Title from './Title'
 import MenuCollapsable, { MenuItem } from './MenuCollapsable'
-
+import { Link } from 'react-router'
 const Menu = () => {
   return (
     <ul className="sidebar-menu">
       <Title>Plan du site</Title>
       <MenuCollapsable icon="gamepad" label="Jouer">
-        <MenuItem label="Choisir un livre" />
-        <MenuItem label="Reprendre une partie" />
+        <MenuItem label="Choisir un livre" link="/app/play/books"/>
+        <MenuItem label="Reprendre une partie" link="/app/play/games"/>
       </MenuCollapsable>
       <MenuCollapsable icon="pencil" label="Ecrire">
         <MenuItem label="Créer un livre" />
-        <MenuItem label="Voir mes brouillons" />
-        <MenuItem label="Chez Zenika" icon="child"/>
-        <MenuItem label="Rafraichissement des livres" icon="refresh"/>
+        <MenuItem label="Voir mes brouillons" link="/app/write/drafts"/>
+        <MenuItem label="Chez Zenika" icon="child" />
+        <MenuItem label="Rafraichissement des livres" icon="refresh" />
       </MenuCollapsable>
       <MenuCollapsable icon="share-alt" label="Partager">
-        <MenuItem label="Partager un livre"/>
-        <MenuItem label="Voir mes livres partagés"/>
+        <MenuItem label="Partager un livre" link="/app/share/book"/>
+        <MenuItem label="Voir mes livres partagés" link="/app/share/publications"/>
         <MenuItem label="Rafraichissement des livres" icon="refresh"/>
       </MenuCollapsable>
       <li className="treeview">
-        <a ui-sref="app.profile" href="#/profile">
+        <Link to="/app/profile">
           <i className="fa fa-user"></i> <span>Mon profil</span>
-        </a>
+        </Link>
       </li>
     </ul>
   )

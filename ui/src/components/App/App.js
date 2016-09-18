@@ -3,8 +3,9 @@ import styles from './style.scss'
 import classnames from 'classnames'
 import Header from './Header'
 import Sidebar from './Sidebar'
+import Footer from './Footer'
 
-const App = () => {
+const App = ({ children }) => {
   const className = classnames(
     'skin-blue',
     'sidebar-mini',
@@ -16,6 +17,8 @@ const App = () => {
       <div className="wrapper">
         <Header />
         <Sidebar />
+        {children}
+        <Footer />
       </div>
     </div>
   )
