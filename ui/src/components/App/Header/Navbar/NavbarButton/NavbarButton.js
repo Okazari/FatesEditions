@@ -9,9 +9,9 @@ const NavbarButton = ({ children }) => {
   )
   return (
     <li className={className}>
-      <a ng-click="logout()">{children}<span className="sr-only"></span></a>
-    </li> 
-  ) 
+      <a>{children}<span className="sr-only"></span></a>
+    </li>
+  )
 }
 
 export default NavbarButton
