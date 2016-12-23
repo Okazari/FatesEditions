@@ -8,7 +8,9 @@ var mailjet = require ('node-mailjet')
 
 router.post('/login', function(req, res, next) {
    Player.findOne({username:req.body.username}).then(function(player){
-      if(!player || req.body.password != player.password){
+      console.log('Body', req.body)
+      console.log('Player', player)
+      if(!player || SHA512(req.body.password) != player.password){
           res.sendStatus(403);
       }else{
           var token = jwt.sign({user:player},"mysecretstory",{expiresIn:3600});
@@ -85,7 +87,7 @@ router.post('/subscribe', function(req, res, next) {
              var newPlayer = new Player();
              newPlayer.username = req.body.username;
              newPlayer.email = req.body.email;
-             newPlayer.password = req.body.password;
+             newPlayer.password = SHA512(req.body.password);
              newPlayer.tour = true;
              newPlayer.save(function(err,player){
                 var token = jwt.sign({user:player},"mysecretstory",{expiresIn:3600});

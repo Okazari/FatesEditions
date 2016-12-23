@@ -1,7 +1,4 @@
-
-root: [
-  path.resolve('./app/'),
-],var path = require('path');
+var path = require('path');
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
