@@ -15,11 +15,13 @@ const RestHOC = (Component, ResourceService) => {
           resource: resource.value
         }
         resource.subscribe({
-          next: (resource) => this.setState({resource})
+          next: resource => this.setState({resource}),
+          error: error => this.setState({error})
         })
       } else {
         ResourceService.subscribe({
-          next: (resources) => this.setState({resources: Object.keys(resources)})
+          next: resources => this.setState({resources: Object.keys(resources)}),
+          error: error => this.setState({error})
         })
       }
     }
@@ -41,6 +43,7 @@ const RestHOC = (Component, ResourceService) => {
         postResource: this.postResource,
         updateResource: this.updateResource,
         deleteResource: this.deleteResource,
+        error: this.error,
       }
       if (this.state.resource) injectedProps[ResourceService.options.name.single] = this.state.resource
       if (this.state.resources) injectedProps[ResourceService.options.name.plural] = this.state.resources

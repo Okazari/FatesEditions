@@ -2,11 +2,19 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
+const handleResponse = response => {
+  if (response.status >= 400) {
+    throw { status: response.status }
+  }
+  return response.json()
+}
+
 class Resource {
   constructor(url, initialValue, fetch) {
     this.fetch = fetch
     this.subscribers = []
     this.url = url
+    this.handleResponse = handleResponse.bind(this)
     if(!!initialValue) {
       this.value = initialValue
     } else {
@@ -22,22 +30,30 @@ class Resource {
     this.value = resource
     this.subscribers.forEach(subscriber => subscriber.next(resource))
   }
+  
+  notifyError(error) {
+    this.subscribers.map(subscriber => subscriber.error(error))
+    return {}
+  }
 
   update() {
     return this.fetch(this.url, { headers })
-      .then(response => response.json())
+      .then(this.handleResponse)
+      .catch(error => this.notifyError(error))
       .then(resource => this.setResource(resource))
   }
 
   put(resource) {
     return this.fetch(this.url, {method: 'PUT', headers, body: JSON.stringify(resource)})
-      .then(response => response.json())
+      .then(this.handleResponse)
+      .catch(error => this.notifyError(error))
       .then(() => this.setResource(resource))
   }
 
   delete() {
     return this.fetch(this.url, {method: 'DELETE', headers})
-      .then(response => response.json())
+      .then(this.handleResponse)
+      .catch(error => this.notifyError(error))
   }
 }
 
@@ -49,6 +65,7 @@ class ResourceService {
     this.fetch = options.proxy ? options.proxy : fetch
     this.options = options
     this.url = url
+    this.handleResponse = handleResponse.bind(this)
     this.map = {}
     this.subscribers = []
   }
@@ -62,9 +79,15 @@ class ResourceService {
     this.subscribers.map(subscriber => subscriber.next(this.map))
   }
 
+  notifyError(error) {
+    this.subscribers.map(subscriber => subscriber.error(error))
+    return []
+  }
+
   update() {
     this.fetch(this.url, { headers })
-    .then(response => response.json())
+    .then(this.handleResponse)
+    .catch(error => this.notifyError(error))
     .then(resources => {
       resources.forEach(
         (resource) => {
@@ -86,7 +109,7 @@ class ResourceService {
       headers,
       body: JSON.stringify(resource)
     })
-    .then(response => response.json())
+    .then(handleResponse)
     .then(data => {
       this.map[data.id] = new Resource(`${this.url}/${data.id}`, {...resource, id: data.id}, this.fetch)
       this.notify()
