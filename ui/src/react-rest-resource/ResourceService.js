@@ -4,7 +4,8 @@ const headers = {
 
 const handleResponse = response => {
   if (response.status >= 400) {
-    throw { status: response.status }
+    const error = { status: response.status }
+    throw error
   }
   return response.json()
 }
@@ -71,7 +72,7 @@ class ResourceService {
   }
 
   subscribe(subscriber) {
-    if(Object.keys(this.map).length == 0) this.update()
+    if(Object.keys(this.map).length === 0) this.update()
     this.subscribers.push(subscriber)
   }
 
@@ -91,7 +92,8 @@ class ResourceService {
     .then(resources => {
       resources.forEach(
         (resource) => {
-          if(!this.map[resource.id]) this.map[resource.id] = new Resource(`${this.url}/${resource.id}`, resource, this.fetch)
+          const resourceId = resource[this.options.name.id || 'id']
+          if(!this.map[resourceId]) this.map[resourceId] = new Resource(`${this.url}/${resourceId}`, resource, this.fetch)
         }
       )
       this.notify()
@@ -110,6 +112,7 @@ class ResourceService {
       body: JSON.stringify(resource)
     })
     .then(handleResponse)
+    .catch(error => this.notifyError(error))
     .then(data => {
       this.map[data.id] = new Resource(`${this.url}/${data.id}`, {...resource, id: data.id}, this.fetch)
       this.notify()
@@ -117,7 +120,8 @@ class ResourceService {
   }
 
   updateResource(resource) {
-    this.getById(resource.id).put(resource)
+    const resourceId = resource[this.options.name.id || 'id']
+    this.getById(resourceId).put(resource)
   }
 
   deleteResource(resourceId) {

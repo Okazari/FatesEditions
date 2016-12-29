@@ -1,4 +1,4 @@
-import Menu from './Menu'
+import BookMenuItem from './BookMenuItem'
 import { BookService } from 'services'
 import { RestHoc as restHoc } from 'react-rest-resource'
-export default restHoc(Menu, BookService)
+export default restHoc(BookMenuItem, BookService)

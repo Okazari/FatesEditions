@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import styles from './style.scss'
 import { Link } from 'react-router'
 
-const MenuItem = ({ label, link, icon = 'circle-o' }) => {
+const MenuItem = ({ label, link, onClick, icon = 'circle-o' }) => {
   const className = classnames('fa', `fa-${icon}`)
   let internalComponent = null
   if (link) {
@@ -23,7 +23,7 @@ const MenuItem = ({ label, link, icon = 'circle-o' }) => {
   }
   
   return (
-    <li className={styles.component}>
+    <li onClick={onClick} className={styles.component}>
       {internalComponent}
     </li>
   )

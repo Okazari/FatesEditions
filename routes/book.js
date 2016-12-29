@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var book = new Book();
     book.draft = true;
-    Player.findOne({_id:req.body.userId}).then(function(player){
+    Player.findOne({_id:req.payload.user._id}).then(function(player){
         if(player !== undefined && player !== null){
             console.log(player);
             book.authorName = player.username;

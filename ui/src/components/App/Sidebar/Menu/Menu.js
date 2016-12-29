@@ -1,8 +1,11 @@
 import React from 'react'
 import Title from './Title'
-import MenuCollapsable, { MenuItem } from './MenuCollapsable'
+import MenuCollapsable, { MenuItem, BookMenuItem } from './MenuCollapsable'
 import { Link } from 'react-router'
-const Menu = () => {
+const Menu = ({ postResource, books = [] }) => {
+  const onCreateBook = () => {
+    postResource({})
+  }
   return (
     <ul className="sidebar-menu">
       <Title>Plan du site</Title>
@@ -11,10 +14,13 @@ const Menu = () => {
         <MenuItem label="Reprendre une partie" link="/app/play/games"/>
       </MenuCollapsable>
       <MenuCollapsable icon="pencil" label="Ecrire">
-        <MenuItem label="Créer un livre" />
+        <MenuItem label="Créer un livre" onClick={onCreateBook} />
         <MenuItem label="Voir mes brouillons" link="/app/write/drafts"/>
-        <MenuItem label="Chez Zenika" icon="child" />
-        <MenuItem label="Rafraichissement des livres" icon="refresh" />
+        {
+          books.map(book => {
+            return <BookMenuItem bookId={book} key={book}/>
+          })
+        }
       </MenuCollapsable>
       <MenuCollapsable icon="share-alt" label="Partager">
         <MenuItem label="Partager un livre" link="/app/share/book"/>

@@ -7,6 +7,17 @@
   box-shadow: $box-shadow-1;
   width: 500px;
 
+  .message {
+    display: flex;
+    justify-content: center;
+    font-size: 1.1em;
+  }
+
+  .messageErr {
+    @extend .message;
+    color: red;
+  }
+
   &>div {
     margin: 0;
   }
