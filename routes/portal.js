@@ -8,8 +8,6 @@ var mailjet = require ('node-mailjet')
 
 router.post('/login', function(req, res, next) {
    Player.findOne({username:req.body.username}).then(function(player){
-      console.log('Body', req.body)
-      console.log('Player', player)
       if(!player || SHA512(req.body.password) != player.password){
           res.sendStatus(403);
       }else{
