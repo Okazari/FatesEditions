@@ -4,7 +4,7 @@ import { BookList } from 'components/common'
 const Books = () => {
   return (
     <Content title="Les livres disponibles" >
-      <BookList />
+      <BookList query={{ draft: false }}/>
     </Content>
   )
 }

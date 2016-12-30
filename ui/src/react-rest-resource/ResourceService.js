@@ -69,11 +69,24 @@ class ResourceService {
     this.handleResponse = handleResponse.bind(this)
     this.map = {}
     this.subscribers = []
+    this.lock = false
   }
 
   subscribe(subscriber) {
-    if(Object.keys(this.map).length === 0) this.update()
+    if(!this.lock && Object.keys(this.map).length === 0) {
+      this.lock = true
+      this.update().then(data => {
+        this.lock = false
+        return data
+      })
+    }
     this.subscribers.push(subscriber)
+    console.log(this.subscribers)
+  }
+
+  unsubscribe(subscriber) {
+    this.subscribers = this.subscribers.splice(this.subscribers.indexOf(subscriber) - 1, 1)
+    console.log(this.subscribers)
   }
 
   notify() {
@@ -85,8 +98,12 @@ class ResourceService {
     return []
   }
 
-  update() {
-    this.fetch(this.url, { headers })
+  update(query = {}) {
+    const queryParams = Object.keys(query).reduce((previous, key) => {
+      return `${ previous }${ previous === '' ? '' : '&' }${ key }=${ query[key] }`
+    }, '')
+    const urlToCall = `${this.url}${queryParams ? '?' : ''}${queryParams}`
+    return this.fetch(urlToCall, { headers })
     .then(this.handleResponse)
     .catch(error => this.notifyError(error))
     .then(resources => {
