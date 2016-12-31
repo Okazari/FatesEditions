@@ -2,6 +2,12 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
+const debug = false
+
+const info = (...log) => {
+  if(debug) console.info(...log)
+}
+
 const handleResponse = response => {
   if (response.status >= 400) {
     const error = { status: response.status }
@@ -68,52 +74,75 @@ class ResourceService {
     this.url = url
     this.handleResponse = handleResponse.bind(this)
     this.map = {}
-    this.subscribers = []
+    this.observableMap = {}
     this.lock = false
   }
 
-  subscribe(subscriber) {
-    if(!this.lock && Object.keys(this.map).length === 0) {
-      this.lock = true
-      this.update().then(data => {
-        this.lock = false
+  subscribe(subscriber, query) {
+    const queryKey = this.getQueryParamsKey(query)
+    info('Subscribing to', queryKey)
+    this.checkInitObservable(queryKey, query)
+    if(!this.observableMap[queryKey].lock) {
+      this.observableMap[queryKey].lock = true
+      this.update(query).then(data => {
+        this.observableMap[queryKey].lock = false
         return data
       })
     }
-    this.subscribers.push(subscriber)
-    console.log(this.subscribers)
+    this.notify(queryKey)
+    this.observableMap[queryKey].subscribers.push(subscriber)
   }
 
-  unsubscribe(subscriber) {
-    this.subscribers = this.subscribers.splice(this.subscribers.indexOf(subscriber) - 1, 1)
-    console.log(this.subscribers)
+  unsubscribe(subscriber, query) {
+    const queryKey = this.getQueryParamsKey(query)
+    info('Unsubscribing to', queryKey)
+    const subscriberIndex = this.observableMap[queryKey].subscribers.indexOf(subscriber)
+    this.observableMap[queryKey].subscribers = this.observableMap[queryKey].subscribers.splice(subscriberIndex + 1, 1)
   }
 
-  notify() {
-    this.subscribers.map(subscriber => subscriber.next(this.map))
+  notify(queryParams) {
+    const { subscribers, value } = this.observableMap[queryParams]
+    subscribers.map(subscriber => subscriber.next(value))
   }
 
-  notifyError(error) {
-    this.subscribers.map(subscriber => subscriber.error(error))
+  notifyError(queryParams, error) {
+    this.observableMap[queryParams].subscribers.map(subscriber => subscriber.error(error))
     return []
   }
 
-  update(query = {}) {
-    const queryParams = Object.keys(query).reduce((previous, key) => {
+  checkInitObservable(queryKey, query) {
+    if (!this.observableMap[queryKey]) {
+      info('Initialize', queryKey)
+      this.observableMap[queryKey] = {
+        value: [],
+        subscribers: [],
+        query,
+      }
+    }
+  }
+
+  getQueryParamsKey(query = {}) {
+    return Object.keys(query).sort().reduce((previous, key) => {
       return `${ previous }${ previous === '' ? '' : '&' }${ key }=${ query[key] }`
     }, '')
+  }
+
+  update(query = {}) {
+    const queryParams = this.getQueryParamsKey(query)
     const urlToCall = `${this.url}${queryParams ? '?' : ''}${queryParams}`
     return this.fetch(urlToCall, { headers })
     .then(this.handleResponse)
     .catch(error => this.notifyError(error))
     .then(resources => {
-      resources.forEach(
+      info('Updating', queryParams)
+      this.observableMap[queryParams].value = resources.map(
         (resource) => {
           const resourceId = resource[this.options.name.id || 'id']
           if(!this.map[resourceId]) this.map[resourceId] = new Resource(`${this.url}/${resourceId}`, resource, this.fetch)
+          return resourceId
         }
       )
-      this.notify()
+      this.notify(queryParams)
     })
   }
 
@@ -132,7 +161,7 @@ class ResourceService {
     .catch(error => this.notifyError(error))
     .then(data => {
       this.map[data.id] = new Resource(`${this.url}/${data.id}`, {...resource, id: data.id}, this.fetch)
-      this.notify()
+      Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query)) 
     })
   }
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import filter from 'lodash/filter'
 
 const getDisplayName = (c) => c.displayName || c.name || 'Component'
 
@@ -31,30 +30,33 @@ const RestHOC = (Component, ResourceService) => {
       } else {
         this.observer = {
           next: resources => this.setState({
-            resources: !query ? Object.keys(resources) : filter(resources, { value: this.props.query }).map(ressource => {
-              const { options } = ResourceService
-              const ressourceId = ressource.value[options.name.id ? options.name.id : 'id']
-              return ressourceId
-            })
+            resources,
           }),
           error: error => this.setState({error})
         }
         this.observable = ResourceService
-        this.subscribe()
-        if (query) ResourceService.update(query)
+        this.subscribe(query)
       }
     }
 
     componentWillUnmount() {
-      this.unsubscribe()
+      this.unsubscribe(this.props.query)
     }
 
-    subscribe() {
-      this.observable.subscribe(this.observer)
+    componentWillUpdate(nextProps, nextState) {
+      const { query } = nextProps
+      if (query !== this.props.query){
+        this.unsubscribe(this.props.query)
+        this.subscribe(query)
+      }
     }
 
-    unsubscribe() {
-      this.observable.unsubscribe(this.observer)
+    subscribe(query) {
+      this.observable.subscribe(this.observer, query)
+    }
+
+    unsubscribe(query) {
+      this.observable.unsubscribe(this.observer, query)
     }
 
     postResource(newResource) {
@@ -67,11 +69,6 @@ const RestHOC = (Component, ResourceService) => {
     
     deleteResource(resourceId) {
       ResourceService.deleteResource(resourceId)
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-      const { query } = nextProps
-      if (query !== this.props.query) ResourceService.update(query)
     }
 
     render() {
