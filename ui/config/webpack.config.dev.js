@@ -10,6 +10,7 @@ module.exports = {
   entry: [
     require.resolve('webpack-dev-server/client') + '?/',
     require.resolve('webpack/hot/dev-server'),
+    require.resolve('react-hot-loader/patch'),
     require.resolve('./polyfills'),
     path.join(paths.appSrc, 'index')
   ],
