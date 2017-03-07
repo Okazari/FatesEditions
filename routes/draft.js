@@ -8,10 +8,10 @@ var Player = require('../models/PlayerModel');
 var Game = require('../models/GameModel');
 var async = require('async');
 
-/************BOOKS**********/
+/************DRAFT**********/
 router.get('/', function(req, res, next) {
     var filter = {}
-    filter.draft = false;
+    filter.draft = true;
     if(req.query.userId) filter.authorId = req.query.userId;
     Book.find(filter).then(function(books) {
         res.json(books);
@@ -28,6 +28,7 @@ router.post('/', function(req, res, next) {
             console.log(player);
             book.authorName = player.username;
             book.authorId = req.body.userId;
+            book.draft = true;
             book.save().then(function(){
                 res.status(201);
                 res.json(book);
@@ -37,7 +38,7 @@ router.post('/', function(req, res, next) {
         }else{
             res.status(401);
             res.json({message:"Compte innexistant"})
-        };
+        }
     },function(err){
         next(err);
     })
