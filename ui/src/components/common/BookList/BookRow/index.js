@@ -1,1 +1,1 @@
-export default from './BookRow'
+export default from './BookRowContainer'

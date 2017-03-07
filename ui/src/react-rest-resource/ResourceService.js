@@ -31,13 +31,14 @@ class Resource {
 
   subscribe(subscriber) {
     this.subscribers.push(subscriber)
+    subscriber.next(this.value)
   }
 
   setResource(resource) {
     this.value = resource
     this.subscribers.forEach(subscriber => subscriber.next(resource))
   }
-  
+
   notifyError(error) {
     this.subscribers.map(subscriber => subscriber.error(error))
     return {}
@@ -88,8 +89,12 @@ class ResourceService {
         this.observableMap[queryKey].lock = false
         return data
       })
+      this.notify(queryKey)
     }
-    this.notify(queryKey)
+    else {
+      const { value } = this.observableMap[queryKey]
+      subscriber.next(value)
+    }
     this.observableMap[queryKey].subscribers.push(subscriber)
   }
 
@@ -149,7 +154,7 @@ class ResourceService {
   getById(id) {
     if (!this.map[id]) this.map[id] = new Resource(`${this.url}/${id}`, null, this.fetch)
     return this.map[id]
-  } 
+  }
 
   postResource(resource) {
     this.fetch(this.url, {
@@ -161,7 +166,7 @@ class ResourceService {
     .catch(error => this.notifyError(error))
     .then(data => {
       this.map[data.id] = new Resource(`${this.url}/${data.id}`, {...resource, id: data.id}, this.fetch)
-      Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query)) 
+      Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query))
     })
   }
 

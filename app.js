@@ -32,6 +32,7 @@ app.use('/static', express.static(path.join(__dirname, 'public/build/static')));
 var portal = require('./routes/portal');
 var player = require('./routes/player');
 var book = require('./routes/book');
+var draft = require('./routes/draft');
 var genre = require('./routes/genre');
 var page = require('./routes/page');
 var transition = require('./routes/transition');
@@ -64,6 +65,7 @@ app.use(function(req, res, next){
 /******REST ROUTES*******/
 app.use('/api/player',player);
 app.use('/api/book',book);
+app.use('/api/draft',draft);
 app.use('/api/genre',genre);
 app.use('/api/page',page);
 app.use('/api/transition',transition);
