@@ -1,13 +1,10 @@
 import React from 'react'
 
-const Box = ({ children }) => {
+const Box = ({ children, className }) => {
   return (
-    <div className="box">
-      <div className="box-body">
-        {children}
-      </div>
+    <div className={`box ${className}`}>
+      {children}
     </div>
-  )
-}
+  )}
 
 export default Box
