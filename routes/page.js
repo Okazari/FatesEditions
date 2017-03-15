@@ -1,12 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var https = require("https");
-var Page = require('../models/PageModel');
-var Transition = require('../models/TransitionModel');
+let express = require('express');
+let router = express.Router();
+let https = require("https");
+let Page = require('../models/PageModel');
+let Transition = require('../models/TransitionModel');
 
 /************PAGES**********/
 router.get('/', function(req, res, next) {
-    Page.find().then(function(pages) {
+    let filter = {};
+    if(req.query.bookId) filter.bookId = req.query.bookId;
+    Page.find(filter).then(function(pages) {
         res.json(pages);
     },function(err){
         next(err);
@@ -23,11 +25,11 @@ router.get('/:pageId', function(req, res, next) {
     }else{
         res.sendStatus(404);
     }
-    
+
 });
 
 router.post('/', function(req, res, next) {
-    var page = new Page();
+    let page = new Page();
     page.bookId = req.body.bookId;
     page.save().then(function() {
         res.json(page);
@@ -35,7 +37,6 @@ router.post('/', function(req, res, next) {
         next(err);
     });
 });
-
 
 router.patch('/:pageId', function(req, res, next) {
     Page.findOne({"_id":req.params.pageId}).then(function(page){

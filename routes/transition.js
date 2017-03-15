@@ -39,7 +39,7 @@ router.patch('/:transitionId', function(req, res, next) {
             res.json(transition);
         },function(err){
             next(err);
-        })  
+        })
     },function(err){
         next(err);
     })
@@ -53,6 +53,7 @@ router.delete('/:transitionId', function(req, res, next) {
     })
 });
 
+/*
 var findPage = function(idPage, callback){
    Page.findOne({"_id":idPage}).then(function(page){
        var result = page ? page.title: "UNDEFINED";
@@ -61,8 +62,9 @@ var findPage = function(idPage, callback){
        callback(null,"UNDEFINED");
     });
 };
-    
-var findTransitions = function(transition, eachCallback){
+*/
+
+/*var findTransitions = function(transition, eachCallback){
    async.parallel({
        'from': function(callback){
            findPage(transition.fromPage, callback);
@@ -73,10 +75,10 @@ var findTransitions = function(transition, eachCallback){
    },function(err, results){
        eachCallback(null, {from: results.from,to: results.to});
    })
-};
+};*/
 
 
-router.get('/links', function(req, res, next) {
+/*router.get('/links', function(req, res, next) {
    var transitionsArray = [];
    Page.find({"bookId":req.query.bookId}).then(function(pages){
        async.each(pages, function(page,eachCallback){
@@ -110,11 +112,11 @@ router.get('/links', function(req, res, next) {
    },function(err){
         next(err);
     })
-});
+});*/
 
 
 /*router.get('/links', function(req, res, next) {
-    
+
     var transitionsArray = [];
     Page.find({"bookId":req.query.bookId},function(err, pages){
         if(err) next(err);
@@ -148,4 +150,37 @@ router.get('/links', function(req, res, next) {
         });
     })
 });*/
+
+router.get('/links', function(req, res, next) {
+
+  let transitionsArray = {nodes: [], links: []};
+
+  let errCallback = (err) => next(err);
+
+  let findTransitions = (page, cb) => {
+    Transition.find({"fromPage": page._id}).then((transitions) => {
+      if(!transitions.length) {
+        transitionsArray.nodes.push({id: page.title});
+        cb();
+      }
+      else async.each(
+        transitions,
+        (transition, cb) => findPage(page.title, transition.toPage, cb),
+        cb
+      );
+    }, errCallback)
+  };
+
+  let findPage = (currentPage, pageId, cb) => {
+    Page.findOne({_id: pageId}).then((page) => {
+      transitionsArray.nodes.push({id: currentPage});
+      transitionsArray.links.push({source: currentPage, target: page.title});
+      cb();
+    }, errCallback)
+  };
+
+  Page.find({"bookId": req.query.bookId}).then((pages) => {
+    async.each(pages,(page, cb) => findTransitions(page, cb), (err) => err ? res.send(err) : res.send(transitionsArray));
+  }, errCallback)
+});
 module.exports = router;
