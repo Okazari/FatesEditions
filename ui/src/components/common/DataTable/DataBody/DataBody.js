@@ -1,3 +1,11 @@
-/**
- * Created by mahdi on 07/03/17.
- */
+import React from 'react'
+
+const DataBody = ({ children }) => {
+  return (
+    <tbody role="alert" aria-live="polite" aria-relevant="all">
+      {children}
+    </tbody>
+  )
+}
+
+export default DataBody

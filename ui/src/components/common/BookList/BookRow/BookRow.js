@@ -1,7 +1,6 @@
 import React from 'react'
 
 const BookRow = ({ book = {}, genre }) => {
-  console.log(book);
   return (
     <tr>
       <td>

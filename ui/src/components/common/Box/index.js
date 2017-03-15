@@ -1,3 +1,5 @@
 export Box from './Box'
 export BoxHeader from './Header'
+export BoxBody from './Body'
+export BoxFooter from './Footer'
 export default from './Box'
