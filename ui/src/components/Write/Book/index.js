@@ -1,1 +1,1 @@
-export default from './Book'
+export default from './BookContainer'
