@@ -1,3 +1,7 @@
 export BookService from './BookService'
+export PageService from './PageService'
+export TransitionService from './TransitionService'
+export DraftService from './DraftService'
 export HttpService from './HttpService'
 export AuthService from './AuthService'
+export D3Service from './D3Service'
