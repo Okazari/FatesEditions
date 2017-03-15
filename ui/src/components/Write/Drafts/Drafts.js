@@ -1,10 +1,10 @@
 import React from 'react'
 import { Content } from 'components/App'
-import { BookList } from 'components/common'
+import DraftList from './DraftList'
 const Drafts = () => {
   return (
     <Content title="Mes brouillons" >
-      <BookList />
+      <DraftList/>
     </Content>
   )
 }
