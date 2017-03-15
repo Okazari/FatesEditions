@@ -34,6 +34,11 @@ class Resource {
     subscriber.next(this.value)
   }
 
+  unsubscribe(subscriber) {
+    const subscriberIndex = this.subscribers.indexOf(subscriber)
+    this.subscribers = this.subscribers.splice(subscriberIndex + 1, 1)
+  }
+
   setResource(resource) {
     this.value = resource
     this.subscribers.forEach(subscriber => subscriber.next(resource))
