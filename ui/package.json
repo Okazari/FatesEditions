@@ -49,6 +49,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "d3": "^4.7.1",
+    "draft-js": "^0.10.0",
     "lodash": "^4.17.3",
     "normalize": "^0.3.1",
     "normalize.css": "^4.2.0",
