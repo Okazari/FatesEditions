@@ -1,6 +1,6 @@
 'use strict';
-var Transition = require('../TransitionModel');
-var Page = require('../PageModel');
+var Transition = require('../TransitionSchema');
+var Page = require('../PageSchema');
 var Book = require('../BookModel');
 var mongoose = require('../../node_modules/mongoose');
 
