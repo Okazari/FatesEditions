@@ -1,84 +1,133 @@
-let express = require('express');
-let router = express.Router();
-let https = require("https");
-let Page = require('../models/PageModel');
-let Transition = require('../models/TransitionModel');
+/**
+ * @description Page (view) endpoint
+ */
+const express = require('express');
+const router = express.Router();
+const https = require("https");
+const Book = require('../models/BookModel');
+const Transition = require('../models/TransitionSchema');
 
-/************PAGES**********/
-router.get('/', function(req, res, next) {
+/**
+ * @method GET
+ * @queryParam bookId
+ * @return page array
+ */
+router.get('/', (req, res, next) => {
     let filter = {};
     if(req.query.bookId) filter.bookId = req.query.bookId;
-    Page.find(filter).then(function(pages) {
-        res.json(pages);
-    },function(err){
-        next(err);
-    });
+    Book.find(filter, "pages").then(book => res.json(book.pages), err => next(err));
 });
 
-router.get('/:pageId', function(req, res, next) {
-    if(req.params.pageId !== "undefined"){
-        Page.findOne({_id:req.params.pageId}).then(function(page) {
-            res.json(page);
-        },function(err){
-            next(err);
-        });
-    }else{
-        res.sendStatus(404);
+/**
+ * @method GET
+ * @param pageId
+ * @queryParam bookId
+ * @return page object
+ */
+router.get('/:pageId', (req, res, next) => {
+    if(req.query.bookId !== undefined && req.query.bookId !== null) {
+        Book.findById(req.params.bookId)
+          .where("pages._id").equals(req.params.pageId)
+          .then(book => res.json(book.pages.find(page => page._id === req.params.pageId)),
+            err => next(err));
     }
-
+    else res.sendStatus(400);
 });
 
-router.post('/', function(req, res, next) {
-    let page = new Page();
-    page.bookId = req.body.bookId;
-    page.save().then(function() {
-        res.json(page);
-    },function(err){
-        next(err);
-    });
+/**
+ * @method POST
+ * @queryParam bookId
+ * @bodyParam page object
+ * @return page object
+ */
+router.post('/', (req, res, next) => {
+    if ((req.query.bookId !== undefined && req.query.bookId !== null) ||
+      (req.body.page !== undefined && req.body.page !== null)) {
+      Book.findById(req.query.bookId)
+        .then(book => {
+          book.pages.push(req.body.page);
+          book.save()
+            .then(book => res.status(201).json(book.pages), err => next(err));
+        }, err => next(err));
+    }
+    else res.sendStatus(400);
 });
 
-router.patch('/:pageId', function(req, res, next) {
-    Page.findOne({"_id":req.params.pageId}).then(function(page){
-        if(req.body.title) page.title = req.body.title;
-        if(req.body.text) page.text = req.body.text;
-        if(req.body.description) page.description = req.body.description;
-        if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
-        if(req.body.bookId) page.bookId = req.body.bookId;
-        if(req.body.effects) page.effects = req.body.effects;
-        if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
-        page.save().then(function(){
-            res.json(page);
-        },function(err){
-            next(err);
-        })
-    },function(err){
-        next(err);
-    })
+/**
+ * @method PUT
+ * @queryParam bookId
+ * @bodyParam page object
+ * @return page object
+ */
+router.put('/:pageId', (res, req, next) => {
+  if ((req.query.bookId !== undefined && req.query.bookId !== null) ||
+    (req.body.pages !== undefined && req.body.pages !== null)) {
+    Book.findById(req.query.bookId)
+      .where("pages._id").equals(req.params.pageId)
+      .then(book => {
+        book.pages = req.body.pages;
+        book.save()
+          .then(book => res.json(book), err => next(err));
+      }, err => next(err));
+  }
+  else res.sendStatus(400);
 });
 
-router.delete('/:pageId', function(req, res, next) {
-    Transition.remove({fromPage:req.params.pageId}).then(function(){
-        Page.remove({_id:req.params.pageId}).then(function(){
-            res.send(200);
-        },function(err){
-            next(err);
-        })
-    },function(err){
-        next(err);
-    });
+/**
+ * @method PATCH
+ * @queryParam bookId
+ * @return page object
+ */
+router.patch('/:pageId', (req, res, next) => {
+    if (req.query.bookId !== undefined && req.query.bookId !== null) {
+      Book.findById(req.query.bookId)
+        .where("pages._id").equals(req.params.pageId)
+        .then(book => {
+          let page = book.pages.find(page => page._id === req.params.pageId);
+          if(req.body.title) page.title = req.body.title;
+          if(req.body.text) page.text = req.body.text;
+          if(req.body.description) page.description = req.body.description;
+          if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
+          if(req.body.bookId) page.bookId = req.body.bookId;
+          if(req.body.effects) page.effects = req.body.effects;
+          if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
+          book.save()
+            .then(book => res.json(book.pages.find(page => page._id === req.params.pageId)),
+              err => next(err));
+        }, err => next(err));
+    }
+    else res.sendStatus(400);
 });
 
-router.get('/:pageId/transition', function(req, res, next) {
-    Page.findOne({"_id":req.params.pageId}).then(function(page){
-        Transition.find({"fromPage":req.params.pageId}).then(function(transitions){
-            res.json(transitions);
-        },function(err){
-            next(err);
-        })
-    },function(err){
-        next(err);
-    })
+/**
+ * @method DELETE
+ * @queryParam bookId
+ */
+router.delete('/:pageId', (req, res, next) => {
+    if (req.query.bookId !== undefined && req.query.bookId !== null) {
+      Book.findById(req.query.bookId)
+        .where("pages._id").equals(req.params.pageId)
+        .then(book => {
+          let page = book.pages.find(page => page._id === req.params.pageId);
+          book.pages.splice(book.pages.indexOf(page), 1);
+          book.save()
+            .then(() => {
+              Transition.remove({fromPage: req.params.pageId})
+                .then(() => res.sendStatus(200), err => next(err));
+            }, err => next(err));
+        });
+    }
+    else res.sendStatus(400);
+});
+
+/**
+ * @method GET
+ * @param pageId
+ * @return transition object
+ */
+router.get('/:pageId/transition', (req, res, next) => {
+    Transition.find({fromPage: req.params.pageId})
+      .then((transitions) => res.send(transitions), err => next(err));
 });
 
 module.exports = router;
