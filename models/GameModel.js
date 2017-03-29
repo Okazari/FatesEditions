@@ -1,15 +1,13 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+const mongoose     = require('mongoose');
+const Schema       = mongoose.Schema;
+const Book = require('./BookSchema');
 
-var GameSchema   = new Schema({
-    playerId: String,
-    currentPageId: String,
-    bookId: String,
-    book : {
-            synopsis : String,
-            name : String
-        },
-    objects : [String],
+const GameSchema   = new Schema({
+    playerId: Schema.Types.ObjectId,
+    currentPageId: Schema.Types.ObjectId,
+    bookId: Schema.Types.ObjectId,
+    book: Book,
+    bookStatus: String,
     stats : Schema.Types.Mixed
 });
 
