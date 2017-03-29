@@ -1,176 +1,167 @@
-var express = require('express');
-var router = express.Router();
-var https = require("https");
-var Book = require('../models/BookModel');
-var Page = require('../models/PageModel');
-var Transition = require('../models/TransitionModel');
-var Player = require('../models/PlayerModel');
-var Game = require('../models/GameModel');
-var async = require('async');
+/**
+ * @description Draft endpoint
+ */
+const express = require('express');
+const router = express.Router();
+const https = require("https");
+const Book = require('../models/BookModel');
+const User = require('../models/UserModel');
+const Genre = require('../models/GenreModel');
 
-/************DRAFT**********/
-router.get('/', function(req, res, next) {
-    var filter = {}
-    filter.draft = true;
-    if(req.query.userId) filter.authorId = req.query.userId;
-    Book.find(filter).then(function(books) {
-        res.json(books);
-    },function(err){
-        next(err);
-    });
+/**
+ * @method GET
+ * @return book array
+ */
+router.get('/', (req, res, next) => {
+    if(req.query.authorId) filter.authorId = req.query.authorId;
+    Book.find({draft: true})
+      .then(books => res.json(books), err => next(err));
 });
 
-router.post('/', function(req, res, next) {
-    var book = new Book();
-    book.draft = true;
-    Player.findOne({_id:req.payload.user._id}).then(function(player){
-        if(player !== undefined && player !== null){
-            console.log(player);
-            book.authorName = player.username;
-            book.authorId = req.body.userId;
-            book.draft = true;
-            book.save().then(function(){
-                res.status(201);
-                res.json(book);
-            },function(err){
-                next(err);
-            })
-        }else{
-            res.status(401);
-            res.json({message:"Compte innexistant"})
-        }
-    },function(err){
-        next(err);
-    })
+/**
+ * @method GET
+ * @param bookId
+ * @return book object
+ */
+router.get('/:bookId', (req, res, next) => {
+  Book.findOne({_id: req.params.bookId, draft: true},
+    "name tags synopsis cover authorId genreId bookRevision")
+    .then((book) => {
+      User.findById(book.authorId)
+        .then(author => {
+          book.author = author.username;
+          Genre.findById(book.genreId)
+            .then(genre => {
+              book.genre = genre;
+              res.json(book);
+            }, err => next(err));
+        }, err => next(err))
+    }, err => next(err));
 });
 
-router.get('/:bookId', function(req, res, next) {
-    Book.findOne({"_id":req.params.bookId}).then(function(book){
-        res.json(book);
-    },function(err){
-        next(err);
-    })
+/**
+ * @method GET
+ * @param bookId
+ * @return objects array
+ */
+router.get('/:bookId/objects', (req, res, next) => {
+  Book.findById(req.params.bookId, "objects")
+    .then(book => res.json(book.objects), err => next(err));
 });
 
-router.get('/:bookId/objects', function(req, res, next) {
-    Book.findOne({"_id":req.params.bookId},"objects").then(function(book){
-        res.json(book.objects);
-    }, function(err){
-        next(err);
-    })
+/**
+ * @method GET
+ * @param bookId
+ * @return stats array
+ */
+router.get('/:bookId/stats', (req, res, next) => {
+  Book.findById(req.params.bookId, "stats")
+    .then(book => res.json(book.stats), (err) => next(err));
 });
 
-router.get('/:bookId/stats', function(req, res, next) {
-    Book.findOne({"_id":req.params.bookId},"stats").then(function(book){
-        res.json(book.stats);
-    }, function(err){
-        next(err);
-    })
+/**
+ * @method POST
+ * @bodyParam book
+ * @return book object
+ */
+router.post('/', (req, res, next) => {
+  let book = new Book();
+  User.findById(req.payload.user._id)
+    .then(user => {
+      if (user !== undefined && user !== null) {
+        book.authorId = user._id;
+        book.draft = true;
+        book.save()
+          .then(book => res.status(201).json(book), err => next(err));
+      } else res.status(401).json({message: "Compte innexistant"});
+    }, err => next(err))
 });
 
-router.get('/:bookId/page', function(req, res, next) {
-    Book.findOne({"_id":req.params.bookId}).then(function(book){
-        Page.find({"bookId":req.params.bookId}).then(function(pages){
-            res.json(pages);
-        },function(err){
-            next(err);
-        })
-    },function(err){
-        next(err);
-    })
+/**
+ * @method PUT
+ * @param bookId
+ * @bodyParam book object
+ * @return book object
+ */
+router.put('/:bookId', (req, res, next) => {
+  if(req.body.book !== null && req.body.book !== undefined) {
+    Book.findByIdAndUpdate(req.params.bookId, req.body.book)
+      .then(draft => res.json(draft), err => next(err));
+  }
+  else res.sendStatus(400);
 });
 
-router.patch('/:bookId', function(req, res, next) {
-    Book.findOne({"_id":req.params.bookId}).then(function(book){
-        if(req.body.name) book.name = req.body.name;
-        if(req.body.tags) book.tags = req.body.tags;
-        if(req.body.synopsis) book.synopsis = req.body.synopsis;
-        if(req.body.cover) book.cover = req.body.cover;
-        if(req.body.genreId) book.genreId = req.body.genreId;
-        if(req.body.stats) book.stats = req.body.stats;
-        if(req.body.objects) book.objects = req.body.objects;
-        //if(req.body.authorId) book.authorId = req.body.authorId;
-        if(req.body.startingPageId) book.startingPageId = req.body.startingPageId;
-        if(req.body.draft === true) {
-            if(book.draft === false){
-            //Cas ou on dépublie un livre
-                Game.find({bookId:book._id}).remove().then(function(){
-                    book.draft = true;
-                    book.save().then(function(){
-                        res.json(book);
-                    },function(err){
-                        next(err);
-                    })
-                }, function(err){
-                    next(err);
-                })
-            }else{
-               book.save().then(function(){
-                    res.json(book);
-                },function(err){
-                    next(err);
-                })
-            }
-        }else if (req.body.draft === false){
-            if(book.draft === true){
-            //Cas ou on publie un livre
-                if(!book.startingPageId){
-                    res.status(400);
-                    res.send({message:"Le livre n'as pas de page de départ"});
-                }else{
-                    Game.find({bookId:book._id}).remove().then(function(){
-                        book.draft = false;
-                        book.save().then(function(){
-                            res.json(book);
-                        },function(err){
-                            next(err);
-                        })
-                    },function(err){
-                        next(err);
-                    })
-                }
-            }else{
-               book.save().then(function(){
-                    res.json(book);
-               },function(err){
-                   next(err);
-               })
-            }
-        }else{
-            book.save().then(function(){
-                res.json(book);
-            },function(err){
-                next(err);
-            })
-        }
-    },function(err){
-        next(err);
-    })
+/**
+ * @method PATCH
+ * @param bookId
+ * @bodyParam object
+ * @return objects array
+ */
+router.patch('/:bookId/objects', (req, res, next) => {
+  if(req.body.object) {
+    Book.findById(req.params.bookId)
+      .then(book => {
+        book.objects.push(req.body.object);
+        book.save()
+          .then(book => res.json(book.objects), err => next(err));
+    }, err => next(err));
+  }
+  else res.sendStatus(400);
 });
 
+/**
+ * @method PATCH
+ * @param bookId
+ * @bodyParam stat
+ * @return stats array
+ */
+router.patch('/:bookId/stats', (req, res, next) => {
+  if(req.body.stat !== undefined && req.body.stat !== null) {
+    Book.findById(req.body.bookId).then(book => {
+      book.stats.push(req.body.stat);
+      book.save()
+        .then(book => res.json(book.stats), err => next(err));
+    }, err => next(err));
+  }
+  else res.sendStatus(400);
+});
+
+/**
+ * @method PATCH
+ * @param bookId
+ * @return book object
+ */
+router.patch('/:bookId', (req, res, next) => {
+  Book.findById(req.params.bookId)
+    .then(book => {
+      if(req.body.name) book.name = req.body.name;
+      if(req.body.tags) book.tags = req.body.tags;
+      if(req.body.synopsis) book.synopsis = req.body.synopsis;
+      if(req.body.cover) book.cover = req.body.cover;
+      if(req.body.genreId) book.genreId = req.body.genreId;
+      if(req.body.page) book.pages = req.body.pages;
+      if(req.body.stats) book.stats = req.body.stats;
+      if(req.body.objects) book.objects = req.body.objects;
+      if(req.body.startingPageId) book.startingPageId = req.body.startingPageId;
+      book.save()
+        .then(book => res.json(book), err => next(err))
+    }, err => next(err));
+});
+
+/**
+ * @method DELETE
+ * @param bookId
+ */
 router.delete('/:bookId', function(req, res, next) {
-
-    Page.find({bookId:req.params.bookId}).then(function(pages){
-        async.each(pages,function(page,eachCallback){
-            Transition.find({fromPage:page._id}).remove().then(function(){
-                eachCallback();
-            },function(err){
-                next(err);
-            });
-        },function(){
-            Page.find({bookId:req.params.bookId}).remove().then(function(){
-                Book.findOne({_id:req.params.bookId}).remove().then(function(){
-                    res.sendStatus(200);
-                },function(err){
-                    next(err);
-                });
-            }, function(err){
-                next(err);
-            });
-        });
-    },function(err){
-        next(err);
-    })
+    Book.findByIdAndRemove(req.params.bookId)
+      .then(() => {
+        User.findById(req.payload.user._id)
+          .then(user => {
+            user.books.splice(user.books.indexOf(req.params.bookId), 1);
+            res.sendStatus(200);
+          },
+          err => next(err));
+    }, err => next(err));
 });
 
 module.exports = router;

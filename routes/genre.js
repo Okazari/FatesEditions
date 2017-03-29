@@ -1,28 +1,33 @@
-var express = require('express');
-var router = express.Router();
-var https = require("https");
-var Genre = require('../models/GenreModel');
+/**
+ * @description Genre endpoint
+ */
+const express = require('express');
+const router = express.Router();
+const https = require("https");
+const Genre = require('../models/GenreModel');
 
-/************GENRES**********/
-router.get('/', function(req, res, next) {
-    Genre.find().then(function(genres) {
-        res.json(genres);
-    },function(err){
-        next(err);
-    });
+/**
+ * @method GET
+ * @return genre array
+ */
+router.get('/', (req, res, next) => {
+    Genre.find().then(genres => res.json(genres), err => next(err));
 });
 
-
-router.post('/', function(req, res, next) {
-    var genre = new Genre();
-    genre.name = req.body.name;
-    genre.icon = req.body.icon;
-    genre.save(function() {
-        res.status(201);
-        res.send(genre);
-    }, function(err){
-        next(err);
-    });
+/**
+ * @method POST
+ * @return genre object
+ */
+router.post('/', (req, res, next) => {
+    if((req.body.name !== undefined && req.genre.icon !== null) ||
+    req.body.icon !== undefined && req.body.icon !== null) {
+      let genre = new Genre();
+      genre.name = req.body.name;
+      genre.icon = req.body.icon;
+      genre.save()
+        .then(genre => res.status(201).json(genre), err => next(err));
+    }
+    else res.sendStatus(400);
 });
 
 module.exports = router;

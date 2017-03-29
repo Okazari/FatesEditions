@@ -1,19 +1,19 @@
 var express = require('express');
 var router = express.Router();
-var Player = require('../models/PlayerModel');
+var User = require('../models/UserModel');
 var jwt = require('jsonwebtoken');
 var SHA512 = require("crypto-js/sha512");
 var mailjet = require ('node-mailjet')
 	.connect('5ef5f026c64d5e328dc7a113ba724e76', 'b4f9b9ec04a009f3da2167ddd0093a38');
 
 router.post('/login', function(req, res, next) {
-   Player.findOne({username:req.body.username}).then(function(player){
+   User.findOne({username:req.body.username}).then(function(player){
       if(!player || SHA512(req.body.password) != player.password){
           res.sendStatus(403);
       }else{
           var token = jwt.sign({user:player},"mysecretstory",{expiresIn:3600});
           player.password = null;
-          res.send({token:token, user:player}); 
+          res.send({token:token, user:player});
       }
    },function(err){
         next(err);
@@ -21,21 +21,21 @@ router.post('/login', function(req, res, next) {
 });
 
 router.post('/recover', function(req, res, next) {
-   Player.findOne({email:req.body.email}).then(function(player){
+   User.findOne({email:req.body.email}).then(function(player){
       if(!player){
           res.sendStatus(404);
       }else{
-        
-        var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&é(-è_çà)=";  
-        
+
+        var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&é(-è_çà)=";
+
         var newpassword = "";
-        
+
         for(var i=0; i<10; i++){
             var key = Math.floor(Math.random() * chars.length);
             newpassword += chars[key];
         }
         player.password = SHA512(newpassword);
-        
+
         player.save().then(function(){
             mailjet.post("send").request({
         		"FromEmail":"myvirtualstorybook@gmail.com",
@@ -70,8 +70,8 @@ router.post('/recover', function(req, res, next) {
         },function(err){
             next(err);
         })
-        
-        
+
+
       }
    },function(err){
         next(err);
@@ -79,10 +79,10 @@ router.post('/recover', function(req, res, next) {
 });
 
 router.post('/subscribe', function(req, res, next) {
-   Player.findOne({username:req.body.username}).then(function(player){
+   User.findOne({username:req.body.username}).then(function(player){
       if(!player){
           if(req.body.password === req.body.verifyPassword){
-             var newPlayer = new Player();
+             var newPlayer = new User();
              newPlayer.username = req.body.username;
              newPlayer.email = req.body.email;
              newPlayer.password = SHA512(req.body.password);
