@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
  * @return genre object
  */
 router.post('/', (req, res, next) => {
-    if((req.body.name !== undefined && req.genre.icon !== null) ||
+    if((req.body.name !== undefined && req.body.icon !== null) ||
     req.body.icon !== undefined && req.body.icon !== null) {
       let genre = new Genre();
       genre.name = req.body.name;
