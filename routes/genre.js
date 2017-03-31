@@ -15,6 +15,16 @@ router.get('/', (req, res, next) => {
 });
 
 /**
+ * @method GET
+ * @param genreId
+ * @return genre object
+ */
+router.get('/:genreId', (req, res, next) => {
+  Genre.findById(req.params.genreId)
+    .then(genre => res.send.json(genre), err => next(err));
+});
+
+/**
  * @method POST
  * @return genre object
  */
