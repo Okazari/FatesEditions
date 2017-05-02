@@ -56,6 +56,12 @@ class Resource {
       .then(resource => this.setResource(resource))
   }
 
+  patch(resource) {
+    return this.fetch(this.url, {method: 'PATCH', headers, body: JSON.stringify(resource)})
+      .then(this.handleResponse)
+      .catch(error => this.notifyError(error))
+  }
+
   put(resource) {
     return this.fetch(this.url, {method: 'PUT', headers, body: JSON.stringify(resource)})
       .then(this.handleResponse)
@@ -175,9 +181,10 @@ class ResourceService {
     })
   }
 
-  updateResource(resource) {
-    const resourceId = resource[this.options.name.id || 'id']
-    this.getById(resourceId).put(resource)
+  updateResource(resource, patch) {
+    const resourceId = resource[this.options.name.id || 'id'];
+    if(patch) this.getById(resourceId).patch(resource);
+    else this.getById(resourceId).put(resource);
   }
 
   deleteResource(resourceId) {

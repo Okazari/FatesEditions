@@ -62,11 +62,11 @@ const RestHOC = (Component, ResourceService) => {
     postResource(newResource) {
       ResourceService.postResource(newResource)
     }
-    
-    updateResource(updatedResource) {
-      ResourceService.updateResource(updatedResource)
+
+    updateResource(updatedResource, options) {
+      ResourceService.updateResource(updatedResource, options)
     }
-    
+
     deleteResource(resourceId) {
       ResourceService.deleteResource(resourceId)
     }
