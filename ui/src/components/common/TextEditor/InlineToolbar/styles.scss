@@ -1,0 +1,42 @@
+.toolbar {
+
+}
+
+.inlineToolbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.toolbarItem {
+  float: left;
+}
+
+.toolbarHeaders {
+  background-color: #333;
+  padding: 14px 16px;
+  border: none;
+  color: white;
+}
+
+.toolbarFileButton {
+  display: none;
+}
+
+.toolbarIconLink {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.toolbarIconLink:hover {
+  background-color: #2e6da4;
+}
+
+.toolbarFileInput {
+  display: none;
+}

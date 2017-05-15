@@ -1,1 +1,1 @@
-export default from './BookPageContainer'
+export default from './BookPage'

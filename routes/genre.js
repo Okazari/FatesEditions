@@ -21,7 +21,7 @@ router.get('/', (req, res, next) => {
  */
 router.get('/:genreId', (req, res, next) => {
   Genre.findById(req.params.genreId)
-    .then(genre => res.send.json(genre), err => next(err));
+    .then(genre => res.json(genre), err => next(err));
 });
 
 /**

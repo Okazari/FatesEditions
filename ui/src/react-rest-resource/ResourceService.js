@@ -76,8 +76,6 @@ class Resource {
   }
 }
 
-
-
 class ResourceService {
 
   constructor(url, options) {

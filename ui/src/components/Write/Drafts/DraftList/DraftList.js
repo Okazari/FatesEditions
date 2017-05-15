@@ -15,7 +15,7 @@ const DraftList = ({ drafts = [] }) => {
   ]
 
   return (
-    <Box>
+    <Box className="box-primary">
       <BoxHeader withBorder>
         <h3 className="box-title ">
           Livres publiés
