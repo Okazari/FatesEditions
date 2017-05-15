@@ -1,16 +1,17 @@
 import React from 'react'
 import { Button } from 'components/common';
+import { RowInput } from 'components/common';
 
-const StatRow = ({stat = {}}) => {
+const StatRow = ({ index, stat = {}, updateResource, deleteResource }) => {
   return (
     <tr>
-      <td><input type="text" name="cover" className="form-control" placeholder="Libellé" value={stat.name} required/></td>
-      <td><input type="text" name="cover" className="form-control" placeholder="Description" value={stat.description} required/></td>
-      <td><input type="number" name="cover" className="form-control" placeholder="Valeur initiale" value={stat.initValue} required/></td>
-      <td><input type="number" name="cover" className="form-control" placeholder="Minimum" value={stat.min} required /></td>
-      <td><input type="number" name="cover" className="form-control" placeholder="Maximum" value={stat.max} required/></td>
-      <td><input type="checkbox" checked={stat.visible}/></td>
-      <td><Button className="fa fa-close md-whiteframe-z1"/></td>
+      <td><RowInput resource={stat} resourceHandler={updateResource} domProps={{type: "text", name:"name", placeholder:"Libellé", required: true}} /></td>
+      <td><RowInput resource={stat} resourceHandler={updateResource} domProps={{type: "text", name:"description", placeholder:"Description", required: true}} /></td>
+      <td><RowInput resource={stat} resourceHandler={updateResource} domProps={{type: "number", name:"initValue", placeholder:"Valeur initiale", required: true}} /></td>
+      <td><RowInput resource={stat} resourceHandler={updateResource} domProps={{type: "number", name:"min", placeholder:"Min", required: true}} /></td>
+      <td><RowInput resource={stat} resourceHandler={updateResource} domProps={{type: "number", name:"max", placeholder:"Max", required: true}} /></td>
+      <td><RowInput resource={stat} resourceHandler={updateResource} domProps={{type: "checkbox", name:"visible", required: true}} /></td>
+      <td><Button className="fa fa-close md-whiteframe-z1" domProps={{onClick: (event) => {deleteResource(event.target.name)}, name: index}}/></td>
     </tr>
   )
 }

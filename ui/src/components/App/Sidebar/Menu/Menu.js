@@ -2,7 +2,7 @@ import React from 'react'
 import Title from './Title'
 import MenuCollapsable, { MenuItem, BookMenuItem } from './MenuCollapsable'
 import { Link } from 'react-router'
-const Menu = ({ postResource, books = [] }) => {
+const Menu = ({ postResource, drafts = [] }) => {
   const onCreateBook = () => {
     postResource({})
   }
@@ -17,8 +17,8 @@ const Menu = ({ postResource, books = [] }) => {
         <MenuItem label="Créer un livre" onClick={onCreateBook} />
         <MenuItem label="Voir mes brouillons" link="/app/write/drafts"/>
         {
-          books.map(book => {
-            return <BookMenuItem bookId={book} key={book}/>
+          drafts.map(draft => {
+            return <BookMenuItem draftId={draft} key={draft}/>
           })
         }
       </MenuCollapsable>
@@ -29,7 +29,7 @@ const Menu = ({ postResource, books = [] }) => {
       </MenuCollapsable>
       <li className="treeview">
         <Link to="/app/profile">
-          <i className="fa fa-user"></i> <span>Mon profil</span>
+          <i className="fa fa-user" /> <span>Mon profil</span>
         </Link>
       </li>
     </ul>

@@ -13,9 +13,10 @@ const Transition = require('../models/TransitionSchema');
  * @return page array
  */
 router.get('/', (req, res, next) => {
-    let filter = {};
-    if(req.query.bookId) filter.bookId = req.query.bookId;
-    Book.find(filter, "pages").then(book => res.json(book.pages), err => next(err));
+    if(req.query.bookId) {
+      Book.findById(req.query.bookId, "pages").then(book => res.json(book.pages), err => next(err));
+    }
+    else req.sendStatus(400);
 });
 
 /**
@@ -26,9 +27,8 @@ router.get('/', (req, res, next) => {
  */
 router.get('/:pageId', (req, res, next) => {
     if(req.query.bookId !== undefined && req.query.bookId !== null) {
-        Book.findById(req.params.bookId)
-          .where("pages._id").equals(req.params.pageId)
-          .then(book => res.json(book.pages.find(page => page._id === req.params.pageId)),
+        Book.findById(req.query.bookId, {pages: {$elemMatch: {_id: req.params.pageId}}})
+          .then(book => res.json(book.pages),
             err => next(err));
     }
     else res.sendStatus(400);
@@ -59,15 +59,14 @@ router.post('/', (req, res, next) => {
  * @bodyParam page object
  * @return page object
  */
-router.put('/:pageId', (res, req, next) => {
-  if ((req.query.bookId !== undefined && req.query.bookId !== null) ||
-    (req.body.pages !== undefined && req.body.pages !== null)) {
-    Book.findById(req.query.bookId)
-      .where("pages._id").equals(req.params.pageId)
+router.put('/:pageId', (req, res, next) => {
+  if (req.query.bookId !== undefined && req.query.bookId !== null) {
+    Book.findById(req.query.bookId, {pages: { $elemMatch:{_id: req.params.pageId }}})
       .then(book => {
-        book.pages = req.body.pages;
-        book.save()
-          .then(book => res.json(book), err => next(err));
+        //book.pages = req.body;
+        res.json(book)
+        // book.save()
+        //   .then(book => res.json(book), err => next(err));
       }, err => next(err));
   }
   else res.sendStatus(400);

@@ -6,15 +6,16 @@ const router = express.Router();
 const https = require("https");
 const Book = require('../models/BookModel');
 const User = require('../models/UserModel');
-const Genre = require('../models/GenreModel');
 
 /**
  * @method GET
  * @return book array
  */
 router.get('/', (req, res, next) => {
-    if(req.query.authorId) filter.authorId = req.query.authorId;
-    Book.find({draft: true})
+    var filters = {};
+    if(req.query.authorId) filters.authorId = req.query.authorId;
+    filters.draft = true
+    Book.find(filters)
       .then(books => res.json(books), err => next(err));
 });
 
@@ -26,17 +27,7 @@ router.get('/', (req, res, next) => {
 router.get('/:bookId', (req, res, next) => {
   Book.findOne({_id: req.params.bookId, draft: true},
     "name tags synopsis cover authorId genreId bookRevision")
-    .then((book) => {
-      User.findById(book.authorId)
-        .then(author => {
-          book.author = author.username;
-          Genre.findById(book.genreId)
-            .then(genre => {
-              book.genre = genre;
-              res.json(book);
-            }, err => next(err));
-        }, err => next(err))
-    }, err => next(err));
+    .then(book => res.json(book), err => next(err));
 });
 
 /**
@@ -84,8 +75,8 @@ router.post('/', (req, res, next) => {
  * @return book object
  */
 router.put('/:bookId', (req, res, next) => {
-  if(req.body.book !== null && req.body.book !== undefined) {
-    Book.findByIdAndUpdate(req.params.bookId, req.body.book)
+  if(req.body !== null && req.body !== undefined) {
+    Book.findByIdAndUpdate(req.params.bookId, req.body, {new: true})
       .then(draft => res.json(draft), err => next(err));
   }
   else res.sendStatus(400);

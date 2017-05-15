@@ -1,11 +1,12 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
 import { Loader } from 'components/common';
+import styles from './styles.scss'
 import PageGraph from './PageGraph'
 
-const BookGraph = ({book = {}}) => {
+const BookGraph = ({draft = {}}) => {
   return (
-    <div className="col-lg-6 col-sm-6 col-xs-12">
+    <div className={styles.component}>
       <Box className="box-primary">
         <BoxHeader withBorder>
           <h3 className="box-title">Graphique</h3>
@@ -15,10 +16,9 @@ const BookGraph = ({book = {}}) => {
           </div>
         </BoxHeader>
         <BoxBody>
-          <PageGraph bookId={book._id}/>
+          <PageGraph draftId={draft._id}/>
         </BoxBody>
         <BoxFooter className="align-center">
-          <Loader />
         </BoxFooter>
       </Box>
     </div>

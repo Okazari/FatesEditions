@@ -5,6 +5,11 @@
   display: flex;
   font-family: 'Roboto';
   min-height: 100vh;
+
+  form {
+    flex-direction: column;
+    flex-grow: 1;
+  }
 }
 
 .wrapper {

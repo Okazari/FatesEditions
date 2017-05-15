@@ -1,7 +1,11 @@
 import React from 'react'
 import MenuItem from '../MenuItem'
-const BookMenuItem = ({ book={} }) => {
-  return <MenuItem label={book.name} />
-}
+import { Link } from 'react-router'
+
+const BookMenuItem = ({ draft={} }) => {
+  return (
+    <MenuItem label={draft.name} link={`/app/write/book/${draft._id}`} />
+  )
+};
 
 export default BookMenuItem
