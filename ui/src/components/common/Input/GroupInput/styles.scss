@@ -1,0 +1,17 @@
+@import '~styles/colors.scss';
+@import '~styles/shadows.scss';
+
+.component {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  margin-top: 10px;
+
+  span {
+    align-self: center;
+    padding: 6px 10px;
+    border: 1px solid $grey-darken-20;
+    border-right: none;
+  }
+}

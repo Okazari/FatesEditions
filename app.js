@@ -1,18 +1,18 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var mongoose = require('mongoose');
-var uriMongo = "mongodb://"+(process.env.IP || 'localhost')+':27017/myvirtualstorybook';
+const mongoose = require('mongoose');
+let uriMongo = "mongodb://" + (process.env.IP || 'localhost') + ':27017/myvirtualstorybook';
 if(process.env["MONGODB_ADDON_URI"]){
   uriMongo = process.env["MONGODB_ADDON_URI"];
 }
 mongoose.connect(uriMongo);
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,16 +29,18 @@ app.use('/app', express.static(path.join(__dirname, 'public/build')));
 app.use('/static', express.static(path.join(__dirname, 'public/build/static')));
 
 /********IMPORT ROUTES*********/
-var portal = require('./routes/portal');
-var player = require('./routes/player');
-var book = require('./routes/book');
-var draft = require('./routes/draft');
-var genre = require('./routes/genre');
-var page = require('./routes/page');
-var transition = require('./routes/transition');
-var game = require('./routes/game');
+const portal = require('./routes/portal');
+const user = require('./routes/user');
+const author = require('./routes/author');
+const player = require('./routes/player');
+const book = require('./routes/book');
+const draft = require('./routes/draft');
+const genre = require('./routes/genre');
+const page = require('./routes/page');
+const transition = require('./routes/transition');
+const game = require('./routes/game');
 
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 app.use('/api',portal);
 
@@ -63,6 +65,8 @@ app.use(function(req, res, next){
 })
 
 /******REST ROUTES*******/
+app.use('/api/user',user);
+app.use('/api/author',author);
 app.use('/api/player',player);
 app.use('/api/book',book);
 app.use('/api/draft',draft);
@@ -101,7 +105,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
 
 module.exports = app;

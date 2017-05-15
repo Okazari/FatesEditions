@@ -1,0 +1,12 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 10px;
+
+  label {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}

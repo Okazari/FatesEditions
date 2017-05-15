@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'components/common'
 import { Link } from 'react-router'
 
-const PageRow = ({page = {}, bookId}) => {
+const PageRow = ({ page={}, bookId}) => {
   return (
     <tr>
       <td>

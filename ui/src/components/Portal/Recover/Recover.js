@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../common/style.scss'
-import { Input, Button } from 'components/common'
-import { Box, BoxHeader } from 'components/common/Box'
+import { LabelInput, Button } from 'components/common'
+import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
 
 const Recover = ( ) => {
   const title = "Nom d'utilisateur/Mot de passe oublié"
@@ -12,15 +12,19 @@ const Recover = ( ) => {
         <BoxHeader withBorder className={styles.header}>
           <h3 className="box-title">{title}</h3>
         </BoxHeader>
-        <Input
-          label="Email"
-          domProps={{
-            placeholder: "Email associé à votre compte"
-          }}
-        />
-        <Button className={styles.button}>
-          {buttonLabel}
-        </Button>
+        <BoxBody>
+          <LabelInput
+            label="Email"
+            domProps={{
+              placeholder: "Email associé à votre compte"
+            }}
+          />
+        </BoxBody>
+        <BoxFooter>
+          <Button className={styles.button}>
+            {buttonLabel}
+          </Button>
+        </BoxFooter>
       </Box>
     </div>
   )

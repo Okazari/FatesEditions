@@ -1,4 +1,5 @@
 export BookService from './BookService'
+export GenreService from './GenreService'
 export PageService from './PageService'
 export TransitionService from './TransitionService'
 export DraftService from './DraftService'
