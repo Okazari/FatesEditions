@@ -39,7 +39,6 @@
     "opn": "4.0.2",
     "postcss-loader": "0.9.1",
     "promise": "7.1.1",
-    "react-hot-loader": "^3.0.0-beta.6",
     "rimraf": "2.5.4",
     "sass-loader": "^4.0.0",
     "style-loader": "0.13.1",
@@ -49,6 +48,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "react-hot-loader": "^3.0.0-beta.6",
     "classnames": "^2.2.5",
     "d3": "^4.7.1",
     "draft-js": "^0.10.0",
