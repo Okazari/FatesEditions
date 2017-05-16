@@ -166,16 +166,22 @@ class ResourceService {
   }
 
   postResource(resource) {
-    this.fetch(this.url, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(resource)
-    })
-    .then(handleResponse)
-    .catch(error => this.notifyError(error))
-    .then(data => {
-      this.map[data.id] = new Resource(`${this.url}/${data.id}`, {...resource, id: data.id}, this.fetch)
-      Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query))
+    return new Promise((resolve, reject) => {
+      this.fetch(this.url, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(resource)
+      })
+        .then(handleResponse)
+        .catch((error) => {
+          this.notifyError(error)
+          reject(error)
+        })
+        .then((data) => {
+          this.map[data.id] = new Resource(`${this.url}/${data.id}`, {...resource, id: data.id}, this.fetch)
+          Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query))
+          resolve(data)
+        })
     })
   }
 

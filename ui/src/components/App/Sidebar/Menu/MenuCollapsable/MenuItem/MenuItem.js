@@ -21,7 +21,7 @@ const MenuItem = ({ label, link, onClick, icon = 'circle-o' }) => {
       </a>
     )
   }
-  
+
   return (
     <li onClick={onClick} className={styles.component}>
       {internalComponent}

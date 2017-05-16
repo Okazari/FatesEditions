@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
-import { Button, DataTable, Loader } from 'components/common';
+import { Button, DataTable } from 'components/common';
 import debounce from 'lodash.debounce'
 import styles from './styles.scss';
 import StatRow from './StatRow';
@@ -15,11 +15,19 @@ class BookStat extends React.Component {
     this.debounceUpdate = debounce(() => props.updateResource(this.props.draft, false), this.props.debounceTime ? this.props.debounceTime : 1000);
   }
 
+  componentDidMount() {
+    const { draft } = this.props
+    if(!!draft.stats) {
+      this.setState({ stats: draft.stats });
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    if(prevProps.draft.stats !== this.props.draft.stats) {
+    const { draft } = this.props
+    if(prevProps.draft.stats !== draft.stats) {
       this.setState({ stats: this.props.draft.stats });
     }
-  };
+  }
 
   addStat() {
     this.setState({stats: this.state.stats.concat({})});
@@ -32,7 +40,8 @@ class BookStat extends React.Component {
   }
 
   updateDraft = () => {
-    this.props.draft.stats = this.state.stats;
+    const { draft } = this.props
+    draft.stats = this.state.stats;
     this.debounceUpdate();
   }
 

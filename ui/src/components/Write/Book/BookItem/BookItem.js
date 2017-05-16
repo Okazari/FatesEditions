@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, BoxHeader, BoxBody, BoxFooter } from "components/common/Box";
-import { Button, DataTable, Loader } from "components/common";
+import { Button, DataTable } from "components/common";
 import debounce from 'lodash.debounce'
 import styles from './styles.scss'
 import ItemRow from './ItemRow';
@@ -24,9 +24,17 @@ class BookItem extends React.Component {
     this.debounceUpdate = debounce(() => props.updateResource(this.props.draft, false), this.props.debounceTime ? this.props.debounceTime : 1000);
   }
 
+  componentDidMount() {
+    const { draft } = this.props
+    if(!!draft.objects) {
+      this.setState({ items: draft.objects });
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    if(prevProps.draft.objects !== this.props.draft.objects) {
-      this.setState({ items: this.props.draft.objects });
+    const { draft } = this.props
+    if(prevProps.draft.objects !== draft.objects) {
+      this.setState({ items: draft.objects });
     }
   };
 
@@ -41,7 +49,8 @@ class BookItem extends React.Component {
   }
 
   updateDraft = () => {
-    this.props.draft.objects = this.state.items;
+    const { draft } = this.props
+    draft.objects = this.state.items;
     this.debounceUpdate();
   }
 
@@ -71,8 +80,5 @@ class BookItem extends React.Component {
       </div>  )
   }
 }
-
-/*const BookItem = ({items = []}) => {
-}*/
 
 export default BookItem

@@ -85,41 +85,6 @@ router.put('/:bookId', (req, res, next) => {
 /**
  * @method PATCH
  * @param bookId
- * @bodyParam object
- * @return objects array
- */
-router.patch('/:bookId/objects', (req, res, next) => {
-  if(req.body.object) {
-    Book.findById(req.params.bookId)
-      .then(book => {
-        book.objects.push(req.body.object);
-        book.save()
-          .then(book => res.json(book.objects), err => next(err));
-    }, err => next(err));
-  }
-  else res.sendStatus(400);
-});
-
-/**
- * @method PATCH
- * @param bookId
- * @bodyParam stat
- * @return stats array
- */
-router.patch('/:bookId/stats', (req, res, next) => {
-  if(req.body.stat !== undefined && req.body.stat !== null) {
-    Book.findById(req.body.bookId).then(book => {
-      book.stats.push(req.body.stat);
-      book.save()
-        .then(book => res.json(book.stats), err => next(err));
-    }, err => next(err));
-  }
-  else res.sendStatus(400);
-});
-
-/**
- * @method PATCH
- * @param bookId
  * @return book object
  */
 router.patch('/:bookId', (req, res, next) => {

@@ -1,6 +1,5 @@
 import React from 'react'
 import MenuItem from '../MenuItem'
-import { Link } from 'react-router'
 
 const BookMenuItem = ({ draft={} }) => {
   return (

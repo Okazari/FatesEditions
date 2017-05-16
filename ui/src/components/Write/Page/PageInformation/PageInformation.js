@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody } from 'components/common/Box';
 import { LabelInput, TextAreaInput } from 'components/common'
-import { Loader } from 'components/common'
 import styles from './styles.scss'
 
 const PageInformation = ({page, updateResource}) => {
