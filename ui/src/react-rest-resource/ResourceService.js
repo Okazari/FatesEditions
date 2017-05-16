@@ -5,10 +5,11 @@ const headers = {
 const debug = false
 
 const info = (...log) => {
-  if(debug) console.info(...log)
+  //eslint-disable-next-line
+  if (debug) console.info(...log)
 }
 
-const handleResponse = response => {
+const handleResponse = (response) => {
   if (response.status >= 400) {
     const error = { status: response.status }
     throw error
@@ -22,7 +23,8 @@ class Resource {
     this.subscribers = []
     this.url = url
     this.handleResponse = handleResponse.bind(this)
-    if(!!initialValue) {
+    //eslint-disable-next-line
+    if (!!initialValue) {
       this.value = initialValue
     } else {
       this.update()
@@ -57,20 +59,20 @@ class Resource {
   }
 
   patch(resource) {
-    return this.fetch(this.url, {method: 'PATCH', headers, body: JSON.stringify(resource)})
+    return this.fetch(this.url, { method: 'PATCH', headers, body: JSON.stringify(resource) })
       .then(this.handleResponse)
       .catch(error => this.notifyError(error))
   }
 
   put(resource) {
-    return this.fetch(this.url, {method: 'PUT', headers, body: JSON.stringify(resource)})
+    return this.fetch(this.url, { method: 'PUT', headers, body: JSON.stringify(resource) })
       .then(this.handleResponse)
       .catch(error => this.notifyError(error))
       .then(() => this.setResource(resource))
   }
 
   delete() {
-    return this.fetch(this.url, {method: 'DELETE', headers})
+    return this.fetch(this.url, { method: 'DELETE', headers })
       .then(this.handleResponse)
       .catch(error => this.notifyError(error))
   }
@@ -92,15 +94,14 @@ class ResourceService {
     const queryKey = this.getQueryParamsKey(query)
     info('Subscribing to', queryKey)
     this.checkInitObservable(queryKey, query)
-    if(!this.observableMap[queryKey].lock) {
+    if (!this.observableMap[queryKey].lock) {
       this.observableMap[queryKey].lock = true
-      this.update(query).then(data => {
+      this.update(query).then((data) => {
         this.observableMap[queryKey].lock = false
         return data
       })
       this.notify(queryKey)
-    }
-    else {
+    } else {
       const { value } = this.observableMap[queryKey]
       subscriber.next(value)
     }
@@ -111,7 +112,8 @@ class ResourceService {
     const queryKey = this.getQueryParamsKey(query)
     info('Unsubscribing to', queryKey)
     const subscriberIndex = this.observableMap[queryKey].subscribers.indexOf(subscriber)
-    this.observableMap[queryKey].subscribers = this.observableMap[queryKey].subscribers.splice(subscriberIndex + 1, 1)
+    const subscribers = this.observableMap[queryKey].subscribers
+    this.observableMap[queryKey].subscribers = subscribers.splice(subscriberIndex + 1, 1)
   }
 
   notify(queryParams) {
@@ -135,9 +137,9 @@ class ResourceService {
     }
   }
 
-  getQueryParamsKey(query = {}) {
+  getQueryParamsKey = (query = {}) => {
     return Object.keys(query).sort().reduce((previous, key) => {
-      return `${ previous }${ previous === '' ? '' : '&' }${ key }=${ query[key] }`
+      return `${previous}${previous === '' ? '' : '&'}${key}=${query[key]}`
     }, '')
   }
 
@@ -147,14 +149,14 @@ class ResourceService {
     return this.fetch(urlToCall, { headers })
     .then(this.handleResponse)
     .catch(error => this.notifyError(error))
-    .then(resources => {
+    .then((resources) => {
       info('Updating', queryParams)
       this.observableMap[queryParams].value = resources.map(
         (resource) => {
           const resourceId = resource[this.options.name.id || 'id']
-          if(!this.map[resourceId]) this.map[resourceId] = new Resource(`${this.url}/${resourceId}`, resource, this.fetch)
+          if (!this.map[resourceId]) this.map[resourceId] = new Resource(`${this.url}/${resourceId}`, resource, this.fetch)
           return resourceId
-        }
+        },
       )
       this.notify(queryParams)
     })
@@ -169,20 +171,20 @@ class ResourceService {
     this.fetch(this.url, {
       method: 'POST',
       headers,
-      body: JSON.stringify(resource)
+      body: JSON.stringify(resource),
     })
     .then(handleResponse)
     .catch(error => this.notifyError(error))
-    .then(data => {
-      this.map[data.id] = new Resource(`${this.url}/${data.id}`, {...resource, id: data.id}, this.fetch)
+    .then((data) => {
+      this.map[data.id] = new Resource(`${this.url}/${data.id}`, { ...resource, id: data.id }, this.fetch)
       Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query))
     })
   }
 
   updateResource(resource, patch) {
-    const resourceId = resource[this.options.name.id || 'id'];
-    if(patch) this.getById(resourceId).patch(resource);
-    else this.getById(resourceId).put(resource);
+    const resourceId = resource[this.options.name.id || 'id']
+    if (patch) this.getById(resourceId).patch(resource)
+    else this.getById(resourceId).put(resource)
   }
 
   deleteResource(resourceId) {
