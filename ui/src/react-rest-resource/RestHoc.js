@@ -1,10 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const getDisplayName = (c) => c.displayName || c.name || 'Component'
+const getDisplayName = c => c.displayName || c.name || 'Component'
 
 const RestHOC = (Component, ResourceService) => {
   return class extends React.Component {
     static displayName = `RestHoc(${getDisplayName(Component)})`
+    static propTypes = {
+      query: PropTypes.string,
+    }
     constructor(props) {
       super(props)
       const { query } = props
@@ -19,11 +23,11 @@ const RestHOC = (Component, ResourceService) => {
       if (resourceId) {
         const resource = ResourceService.getById(resourceId)
         this.state = {
-          resource: resource.value
+          resource: resource.value,
         }
         this.observer = {
-          next: resource => this.setState({resource}),
-          error: error => this.setState({error})
+          next: res => this.setState({ res }),
+          error: error => this.setState({ error }),
         }
         this.observable = resource
         this.subscribe()
@@ -32,7 +36,7 @@ const RestHOC = (Component, ResourceService) => {
           next: resources => this.setState({
             resources,
           }),
-          error: error => this.setState({error})
+          error: error => this.setState({ error }),
         }
         this.observable = ResourceService
         this.subscribe(query)
@@ -45,7 +49,7 @@ const RestHOC = (Component, ResourceService) => {
 
     componentWillUpdate(nextProps, nextState) {
       const { query } = nextProps
-      if (query !== this.props.query){
+      if (query !== this.props.query) {
         this.unsubscribe(this.props.query)
         this.subscribe(query)
       }
@@ -59,15 +63,15 @@ const RestHOC = (Component, ResourceService) => {
       this.observable.unsubscribe(this.observer, query)
     }
 
-    postResource(newResource) {
+    postResource = (newResource) => {
       ResourceService.postResource(newResource)
     }
 
-    updateResource(updatedResource, options) {
+    updateResource = (updatedResource, options) => {
       ResourceService.updateResource(updatedResource, options)
     }
 
-    deleteResource(resourceId) {
+    deleteResource = (resourceId) => {
       ResourceService.deleteResource(resourceId)
     }
 
@@ -78,12 +82,19 @@ const RestHOC = (Component, ResourceService) => {
         deleteResource: this.deleteResource,
         error: this.error,
       }
-      if (this.state.resource) injectedProps[ResourceService.options.name.single] = this.state.resource
-      if (this.state.resources) injectedProps[ResourceService.options.name.plural] = this.state.resources
-      return <Component
-              {...injectedProps}
-              {...this.props}
-            />
+      if (this.state.resource) {
+        injectedProps[ResourceService.options.name.single] = this.state.resource
+      }
+      if (this.state.resources) {
+        injectedProps[ResourceService.options.name.plural] = this.state.resources
+      }
+      return (
+        <Component
+          {...injectedProps}
+          {...this.props}
+        />
+
+      )
     }
   }
 }
