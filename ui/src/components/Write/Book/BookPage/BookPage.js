@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
-import { Button, DataTable, Loader } from 'components/common';
+import { Button, DataTable } from 'components/common';
 import styles from './styles.scss'
 import PageRow from './PageRow'
 
@@ -11,10 +11,12 @@ const headers = [
   { type: <Button domProps={{disabled: true}} className="fa fa-close md-whiteframe-z1"/> },
 ]
 
-const BookPage = ({draft = {}}) => {
-  const { pages = [] } = draft
+const BookPage = ({pages = [], query, postResource}) => {
   const createPage = () => {
-    //@todo
+    postResource({bookId: query, page: {}}).then(page => {
+      const { _id } = draft
+      browserHistory.push(`/app/write/book/${_id}`)
+    })
   }
 
   return (
@@ -29,7 +31,7 @@ const BookPage = ({draft = {}}) => {
         </BoxHeader>
         <BoxBody className="table-responsive no-padding">
           <DataTable className="table-hover" headers={headers}>
-            {pages.map(page => <PageRow page={page} bookId={draft._id}/>)}
+            {pages.map(page => <PageRow page={page} bookId={query}/>)}
           </DataTable>
         </BoxBody>
         <BoxFooter className={styles.centerFooter}>
@@ -39,6 +41,7 @@ const BookPage = ({draft = {}}) => {
         </BoxFooter>
       </Box>
     </div>
-  )}
+  )
+}
 
 export default BookPage

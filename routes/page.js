@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
     if(req.query.bookId) {
       Book.findById(req.query.bookId, "pages").then(book => res.json(book.pages), err => next(err));
     }
-    else req.sendStatus(400);
+    else res.sendStatus(400);
 });
 
 /**
@@ -41,9 +41,9 @@ router.get('/:pageId', (req, res, next) => {
  * @return page object
  */
 router.post('/', (req, res, next) => {
-    if ((req.query.bookId !== undefined && req.query.bookId !== null) ||
+    if ((req.body.bookId !== undefined && req.body.bookId !== null) ||
       (req.body.page !== undefined && req.body.page !== null)) {
-      Book.findById(req.query.bookId)
+      Book.findById(req.body.bookId)
         .then(book => {
           book.pages.push(req.body.page);
           book.save()

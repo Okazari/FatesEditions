@@ -7,8 +7,8 @@ import BookGraph from './BookGraph'
 import BookPage from './BookPage'
 import styles from './styles.scss'
 
-const Book = ({draft = {}, updateResource}) => {
-  return (
+const Book = ({draft, updateResource}) => {
+  return !draft ? null : (
     <Content title="Edition de livre" >
       <div className={styles.component}>
         <BookInformation draft={draft} updateResource={updateResource}/>
@@ -16,7 +16,7 @@ const Book = ({draft = {}, updateResource}) => {
         <BookItem draft={draft} updateResource={updateResource} />
         <div className={styles.row}>
           <BookGraph draft={draft}/>
-          <BookPage draft={draft} updateResource={updateResource}/>
+          <BookPage query={draft._id}/>
         </div>
       </div>
     </Content>

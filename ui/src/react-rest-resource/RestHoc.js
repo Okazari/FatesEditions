@@ -63,8 +63,8 @@ const RestHOC = (Component, ResourceService) => {
       this.observable.unsubscribe(this.observer, query)
     }
 
-    postResource = (newResource) => {
-      ResourceService.postResource(newResource)
+    postResource(newResource) {
+      return ResourceService.postResource(newResource)
     }
 
     updateResource = (updatedResource, options) => {

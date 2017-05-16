@@ -2,10 +2,15 @@ import React from 'react'
 import { Link } from 'react-router'
 import Title from './Title'
 import MenuCollapsable, { MenuItem, BookMenuItem } from './MenuCollapsable'
+import { Link } from 'react-router'
+import { browserHistory } from 'react-router'
 
 const Menu = ({ postResource, drafts = [] }) => {
   const onCreateBook = () => {
-    postResource({})
+    postResource({}).then(draft => {
+      const { _id } = draft
+      browserHistory.push(`/app/write/book/${_id}`)
+    })
   }
   return (
     <ul className="sidebar-menu">

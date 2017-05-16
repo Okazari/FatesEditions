@@ -1,6 +1,5 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
-import { Loader } from 'components/common';
 import styles from './styles.scss'
 import PageGraph from './PageGraph'
 

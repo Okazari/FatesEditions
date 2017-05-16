@@ -6,7 +6,7 @@ import GenreList from './GenreList'
 import PageList from './PageList'
 import styles from './styles.scss'
 
-const BookInformation = ({draft = {}, updateResource}) => {
+const BookInformation = ({draft, updateResource}) => {
   return (
     <div className={styles.component}>
       <Box className="box-primary">

@@ -8,8 +8,8 @@ import PageContent from './PageContent'
 import PageTransition from './PageTransition'
 
 const Page = ({page, updateResource}) => {
-    if(!page) return null
-    return (
+    return !page ? null :
+    (
      <Content title="Edition de page" >
        <div className={styles.row}>
        <PageInformation page={page} updateResource={updateResource} />
