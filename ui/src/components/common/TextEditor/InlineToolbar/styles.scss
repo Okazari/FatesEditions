@@ -1,13 +1,11 @@
-.toolbar {
-
-}
+@import '~styles/colors';
 
 .inlineToolbar {
+  background-color: $grey-darken-40;
   list-style-type: none;
   margin: 0;
-  padding: 0;
   overflow: hidden;
-  background-color: #333;
+  padding: 0;
 }
 
 .toolbarItem {
@@ -15,10 +13,10 @@
 }
 
 .toolbarHeaders {
-  background-color: #333;
+  background-color: $grey-darken-40;
+  border: 0;
+  color: $white;
   padding: 14px 16px;
-  border: none;
-  color: white;
 }
 
 .toolbarFileButton {
@@ -26,15 +24,15 @@
 }
 
 .toolbarIconLink {
+  color: $white;
   display: block;
-  color: white;
-  text-align: center;
   padding: 14px 16px;
+  text-align: center;
   text-decoration: none;
-}
 
-.toolbarIconLink:hover {
-  background-color: #2e6da4;
+  &:hover {
+    background-color: $blue;
+  }
 }
 
 .toolbarFileInput {

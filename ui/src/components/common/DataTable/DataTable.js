@@ -7,7 +7,7 @@ const DataTable = ({ children, headers, className }) => {
   return (
     <div className={styles.component}>
       <table className={`table dataTable ${className}`}>
-        <DataHeader headers={headers}/>
+        <DataHeader headers={headers} />
         <DataBody>{children}</DataBody>
       </table>
     </div>

@@ -1,16 +1,15 @@
 import React from 'react'
-import { Box, BoxHeader } from '../Box'
+import { Box, BoxHeader } from '../Box'
 import DataTable from '../DataTable'
 import BookRow from './BookRow'
 
 const BookList = ({ books = [] }) => {
-
   const headers = [
-    {type: "Titre du livre"},
-    {type: "Synopsis"},
-    {type: "Auteur"},
-    {type: "Genre"},
-    {type: "Jouer"}
+    { type: 'Titre du livre' },
+    { type: 'Synopsis' },
+    { type: 'Auteur' },
+    { type: 'Genre' },
+    { type: 'Jouer' },
   ]
 
   return (

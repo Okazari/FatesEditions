@@ -9,14 +9,14 @@ const BookRow = ({ book = {}, genre }) => {
       <td>
         {
           genre && <h4 className="label label-primary">
-            <i className="fa fa-icon" style={{marginRight: '5px'}} />
+            <i className="fa fa-icon" style={{ marginRight: '5px' }} />
             {genre.name}
           </h4>
         }
       </td>
       <td>
         <h4 className="label label-primary md-whiteframe-z1">
-          <i className="fa fa-pencil" style={{marginRight: '5px'}} />
+          <i className="fa fa-pencil" style={{ marginRight: '5px' }} />
           {book.authorName}
         </h4>
       </td>

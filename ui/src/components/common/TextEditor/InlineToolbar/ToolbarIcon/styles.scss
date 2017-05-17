@@ -1,15 +1,17 @@
+@import '~styles/colors';
+
 .toolbarIcon {
   float: left;
 }
 
 .toolbarIconLink {
+  color: $white;
   display: block;
-  color: white;
-  text-align: center;
   padding: 14px 16px;
+  text-align: center;
   text-decoration: none;
-}
 
-.toolbarIconLink:hover {
-  background-color: #2e6da4;
+  &:hover {
+    background-color: $blue;
+  }
 }
