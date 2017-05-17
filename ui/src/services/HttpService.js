@@ -1,5 +1,4 @@
-export class HttpService {
-
+export default {
   fetch(route, options = {}) {
     const surchargedOptions = {
       ...options,
@@ -11,7 +10,5 @@ export class HttpService {
 
     // Server call, return a promise
     return fetch(route, surchargedOptions)
-  }
+  },
 }
-
-export default new HttpService()
