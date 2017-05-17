@@ -1,15 +1,15 @@
 import React from 'react'
-import styles from './style.scss'
 import classnames from 'classnames'
+import styles from './style.scss'
 
 const NavbarButton = ({ children }) => {
   const className = classnames(
     'divider',
-    styles.component
+    styles.component,
   )
   return (
     <li className={className}>
-      <a>{children}<span className="sr-only"></span></a>
+      <a>{children}<span className="sr-only" /></a>
     </li>
   )
 }
