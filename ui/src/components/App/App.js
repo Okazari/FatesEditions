@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import styles from './style.scss'
 import Header from './Header'
@@ -23,10 +22,6 @@ const App = ({ children }) => {
       </div>
     </div>
   )
-}
-
-App.propTypes = {
-  children: PropTypes.node,
 }
 
 export default App
