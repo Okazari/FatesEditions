@@ -1,20 +1,20 @@
 import React from 'react'
-import styles from './style.scss'
 import classnames from 'classnames'
+import styles from './style.scss'
 
 const ToggleButton = () => {
   const className = classnames(
     'sidebar-toggle',
-    styles.component
+    styles.component,
   )
   return (
     <a id="menu-togglemenu" className={className}>
       <span className="sr-only">Menu</span>
-      <span className="icon-bar"></span>
-      <span className="icon-bar"></span>
-      <span className="icon-bar"></span>
+      <span className="icon-bar" />
+      <span className="icon-bar" />
+      <span className="icon-bar" />
     </a>
-  ) 
+  )
 }
 
 export default ToggleButton

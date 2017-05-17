@@ -62,6 +62,7 @@ module.exports = {
     'no-control-regex': 'warn',
     'no-delete-var': 'warn',
     'no-dupe-args': 'warn',
+    'no-underscore-dangle': 'off',
     'no-dupe-class-members': 'warn',
     'no-dupe-keys': 'warn',
     'no-duplicate-case': 'warn',

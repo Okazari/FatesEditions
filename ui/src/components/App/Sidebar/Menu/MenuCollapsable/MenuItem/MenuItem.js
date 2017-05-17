@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
-import styles from './style.scss'
 import { Link } from 'react-router'
+import styles from './style.scss'
 
 const MenuItem = ({ label, link, onClick, icon = 'circle-o' }) => {
   const className = classnames('fa', `fa-${icon}`)
@@ -9,19 +9,19 @@ const MenuItem = ({ label, link, onClick, icon = 'circle-o' }) => {
   if (link) {
     internalComponent = (
       <Link to={link}>
-        <i className={className}></i>
+        <i className={className} />
         {label}
       </Link>
     )
   } else {
     internalComponent = (
       <a>
-        <i className={className}></i>
+        <i className={className} />
         {label}
       </a>
     )
   }
-  
+
   return (
     <li onClick={onClick} className={styles.component}>
       {internalComponent}
