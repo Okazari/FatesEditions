@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DataHeader = ({ headers= [] }) => {
+const DataHeader = ({ headers = [] }) => {
   return (
     <thead>
       <tr>

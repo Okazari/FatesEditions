@@ -1,9 +1,9 @@
-@import '~styles/colors.scss';
-@import '~styles/shadows.scss';
+@import '~styles/colors';
+@import '~styles/shadows';
 
 .component {
   border: 1px solid $grey-darken-20;
-  width: 100%;
-  padding: 6px;
   outline-color: $light-blue;
+  padding: 6px;
+  width: 100%;
 }

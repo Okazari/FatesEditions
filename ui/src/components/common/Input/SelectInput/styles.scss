@@ -1,10 +1,10 @@
-@import '~styles/colors.scss';
-@import '~styles/shadows.scss';
+@import '~styles/colors';
+@import '~styles/shadows';
 
 .component {
+  align-items: stretch;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 
   label {
     align-self: flex-start;
@@ -12,8 +12,8 @@
 
   select {
     background: none;
-    padding: 6px;
     border: 1px solid $grey-darken-20;
     outline: $light-blue;
+    padding: 6px;
   }
 }
