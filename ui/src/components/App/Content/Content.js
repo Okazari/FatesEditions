@@ -11,22 +11,10 @@ const Content = ({ children, title, breadcrumb }) => {
         {breadcrumb}
       </section>
       <section className="content">
-       {children}
+        {children}
       </section>
     </div>
   )
 }
 
 export default Content
-
-
-
-
-
-
-
-
-
-
-
-

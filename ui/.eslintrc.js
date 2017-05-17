@@ -184,6 +184,7 @@ module.exports = {
     'react/require-render-return': 'warn',
     'react/jsx-filename-extension': 'off',
     'react/require-default-props': 'off',
+    'react/prop-types': 'off',
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/aria-role': 'warn',
