@@ -1,2 +1,4 @@
-$box-shadow-1: 1px 1px 10px 1px grey;
-$box-shadow-2: 1px 1px 10px 2px grey;
+$shadow-color: #808080;
+
+$box-shadow-1: 1px 1px 10px 1px $shadow-color;
+$box-shadow-2: 1px 1px 10px 2px $shadow-color;

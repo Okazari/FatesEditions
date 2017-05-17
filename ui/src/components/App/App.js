@@ -1,6 +1,7 @@
 import React from 'react'
-import styles from './style.scss'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import styles from './style.scss'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import Footer from './Footer'
@@ -10,7 +11,7 @@ const App = ({ children }) => {
     'skin-blue',
     'sidebar-mini',
     'sidebar-open',
-    styles.component
+    styles.component,
   )
   return (
     <div className={className}>
@@ -22,6 +23,10 @@ const App = ({ children }) => {
       </div>
     </div>
   )
+}
+
+App.propTypes = {
+  children: PropTypes.node,
 }
 
 export default App
