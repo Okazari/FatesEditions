@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from '../common/style.scss'
-import { LabelInput, Button } from 'components/common'
-import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
-import { AdviceLink } from 'components/Portal/common'
 import { browserHistory } from 'react-router'
-import { AuthService } from 'services'
+import styles from '../common/style.scss'
+import { LabelInput, Button } from '../../common'
+import { Box, BoxHeader, BoxBody, BoxFooter } from '../../common/Box'
+import { AdviceLink } from '../../Portal/common'
+import { AuthService } from '../../../services'
 
 const subscribe = (event) => {
   event.preventDefault()
@@ -22,7 +22,7 @@ const subscribe = (event) => {
     })
 }
 
-const SignUp = ( ) => {
+const SignUp = () => {
   return (
     <div className={styles.component}>
       <Box>
@@ -34,33 +34,33 @@ const SignUp = ( ) => {
             <LabelInput
               label="Nom d'utilisateur"
               domProps={{
-                placeholder: "Okazari",
+                placeholder: 'Okazari',
                 type: 'text',
-                name: 'username'
+                name: 'username',
               }}
             />
             <LabelInput
               label="Adresse mail"
               domProps={{
-                placeholder: "myvirtualstorybook@gmail.com",
+                placeholder: 'myvirtualstorybook@gmail.com',
                 type: 'email',
-                name: 'email'
+                name: 'email',
               }}
             />
             <LabelInput
               label="Mot de passe"
               domProps={{
-                placeholder: "thisisasecret",
+                placeholder: 'thisisasecret',
                 type: 'password',
-                name: 'password'
+                name: 'password',
               }}
             />
             <LabelInput
               label="Mot de passe (vérification)"
               domProps={{
-                placeholder: "thisisasecret",
+                placeholder: 'thisisasecret',
                 type: 'password',
-                name: 'verifyPassword'
+                name: 'verifyPassword',
               }}
             />
             <Button className={styles.button}>

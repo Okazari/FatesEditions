@@ -1,48 +1,54 @@
-import React from "react";
-import { Box, BoxHeader, BoxBody, BoxFooter } from "components/common/Box";
-import { Button, DataTable, Loader } from "components/common";
+import React from 'react'
 import debounce from 'lodash.debounce'
+import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
+import { Button, DataTable } from '../../../common'
 import styles from './styles.scss'
-import ItemRow from './ItemRow';
+import ItemRow from './ItemRow'
 
 // @todo refactor centerFooter
 const headers = [
-  { type: "Nom" },
-  { type: "Description" },
-  { type: "Début" },
-  { type: "Visible" },
-  { type: <Button domProps={{"disabled":true}} className="fa fa-close md-whiteframe-z1" /> }
+  { type: 'Nom' },
+  { type: 'Description' },
+  { type: 'Début' },
+  { type: 'Visible' },
+  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" /> },
 ]
 
 class BookItem extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {items: []}
+    this.state = { items: [] }
     this.addItem = this.addItem.bind(this)
     this.removeItem = this.removeItem.bind(this)
-    this.debounceUpdate = debounce(() => props.updateResource(this.props.draft, false), this.props.debounceTime ? this.props.debounceTime : 1000);
+    this.debounceUpdate = debounce(
+      () => {
+        props.updateResource(this.props.draft, false)
+      },
+      this.props.debounceTime ? this.props.debounceTime : 1000,
+    )
   }
 
   componentDidUpdate(prevProps) {
-    if(prevProps.draft.objects !== this.props.draft.objects) {
-      this.setState({ items: this.props.draft.objects });
+    if (prevProps.draft.objects !== this.props.draft.objects) {
+      //eslint-disable-next-line
+      this.setState({ items: this.props.draft.objects })
     }
-  };
+  }
 
   addItem() {
-    this.setState({items: this.state.items.concat({})});
+    this.setState({ items: this.state.items.concat({}) })
   }
 
   removeItem(index) {
-    this.state.items.splice(index, 1);
-    this.setState({items: this.state.items})
-    this.debounceUpdate();
+    this.state.items.splice(index, 1)
+    this.setState({ items: this.state.items })
+    this.debounceUpdate()
   }
 
   updateDraft = () => {
-    this.props.draft.objects = this.state.items;
-    this.debounceUpdate();
+    this.props.draft.objects = this.state.items
+    this.debounceUpdate()
   }
 
   render() {
@@ -53,26 +59,34 @@ class BookItem extends React.Component {
           <BoxHeader withBorder>
             <h3 className="box-title">Objets</h3>
             <div className="box-tools pull-right">
-              <div className="btn-group">
-              </div>
+              <div className="btn-group" />
             </div>
           </BoxHeader>
           <BoxBody className="no-padding">
             <DataTable headers={headers} className="table-hover">
-              {items.map((item, index) => <ItemRow index={index} item={item} updateResource={this.updateDraft} deleteResource={this.removeItem} />)}
+              {
+                items.map((item, index) => {
+                  return (
+                    <ItemRow
+                      index={index}
+                      item={item}
+                      updateResource={this.updateDraft}
+                      deleteResource={this.removeItem}
+                    />
+                  )
+                })
+              }
             </DataTable>
           </BoxBody>
           <BoxFooter className={styles.centerFooter}>
-            <Button domProps={{onClick:this.addItem}}>
+            <Button domProps={{ onClick: this.addItem }}>
               Ajouter un objet
             </Button>
           </BoxFooter>
         </Box>
-      </div>  )
+      </div>
+    )
   }
 }
-
-/*const BookItem = ({items = []}) => {
-}*/
 
 export default BookItem

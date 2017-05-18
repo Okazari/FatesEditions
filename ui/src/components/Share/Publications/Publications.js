@@ -1,10 +1,9 @@
 import React from 'react'
-import { Content } from 'components/App'
+import { Content } from '../../App'
 
 const Publications = () => {
   return (
-    <Content title="Mes publications" >
-    </Content>
+    <Content title="Mes publications" />
   )
 }
 

@@ -1,1 +1,1 @@
-export default from "./BookStat"
+export default from './BookStat'

@@ -1,10 +1,9 @@
 import React from 'react'
-import { Content } from 'components/App'
+import { Content } from '../App'
 
 const Profile = () => {
   return (
-    <Content title="Mon profil" >
-    </Content>
+    <Content title="Mon profil" />
   )
 }
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from '../common/style.scss'
-import { LabelInput, Button } from 'components/common'
-import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
-import { AdviceLink } from 'components/Portal/common'
 import { browserHistory } from 'react-router'
-import { AuthService } from 'services'
+import styles from '../common/style.scss'
+import { LabelInput, Button } from '../../common'
+import { Box, BoxHeader, BoxBody, BoxFooter } from '../../common/Box'
+import { AdviceLink } from '../../Portal/common'
+import { AuthService } from '../../../services'
 
 class SignIn extends React.Component {
 
@@ -22,9 +22,9 @@ class SignIn extends React.Component {
     }
     this.setState({ login: true, error: false })
     AuthService.login(credentials)
-      .then(response => {
+      .then((response) => {
         if (response.status >= 400) throw response.status
-        return  response.json()
+        return response.json()
       })
       .catch(error => this.setState({ login: false, error: true }))
       .then((data) => {
@@ -46,16 +46,16 @@ class SignIn extends React.Component {
                 label="Nom d'utilisateur"
                 domProps={{
                   placeholder: "Entrez votre nom d'utilisateur",
-                  type: "text",
-                  name: "username",
+                  type: 'text',
+                  name: 'username',
                 }}
               />
               <LabelInput
                 label="Mot de passe"
                 domProps={{
-                  placeholder: "Entrez votre mot de passe",
-                  type: "password",
-                  name: "password"
+                  placeholder: 'Entrez votre mot de passe',
+                  type: 'password',
+                  name: 'password',
                 }}
               />
               <Button className={styles.button}>
@@ -64,7 +64,7 @@ class SignIn extends React.Component {
               {
                 this.state.error &&
                 <div className={styles.messageErr}>
-                  Mauvais nom d'utilisateur ou mot de passe
+                  {"Mauvais nom d'utilisateur ou mot de passe"}
                 </div>
               }
               {

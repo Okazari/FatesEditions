@@ -1,21 +1,21 @@
 .component {
+  align-items: stretch;
   display: inline-flex;
   flex-direction: row;
-  align-items: stretch;
   width: 100%;
 
   .bookCover {
     display: flex;
     flex-direction: column;
-    width: 20%;
     padding: 0 20px;
+    width: 20%;
   }
 
   .bookInformation {
     display: flex;
     flex-direction: column;
-    width: 80%;
     padding: 0 20px;
+    width: 80%;
   }
 
   .centerFooter {
