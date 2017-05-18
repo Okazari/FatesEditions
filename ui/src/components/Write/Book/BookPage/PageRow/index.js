@@ -1,1 +1,1 @@
-export default from './PageRow'
+export default from './PageRowContainer'

@@ -12,11 +12,11 @@ const Page = ({page, updateResource}) => {
     (
      <Content title="Edition de page" >
        <div className={styles.row}>
-       <PageInformation page={page} updateResource={updateResource} />
-       {/*<PageEffect updateResource={updateResource}/>
-       <PageMusic/>
-       <PageContent page={page}/>
-       <PageTransition/>*/}
+         <PageInformation page={page} updateResource={updateResource} />
+         {/*<PageEffect updateResource={updateResource}/>
+         <PageMusic/>
+         <PageContent page={page}/>
+         <PageTransition/>*/}
       </div>
     </Content>
     )

@@ -16,7 +16,7 @@ const Book = ({draft, updateResource}) => {
         <BookItem draft={draft} updateResource={updateResource} />
         <div className={styles.row}>
           <BookGraph draft={draft}/>
-          <BookPage query={draft._id}/>
+          <BookPage query={{bookId:draft._id}}/>
         </div>
       </div>
     </Content>

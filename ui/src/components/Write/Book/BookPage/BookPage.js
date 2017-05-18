@@ -3,6 +3,7 @@ import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
 import { Button, DataTable } from 'components/common';
 import styles from './styles.scss'
 import PageRow from './PageRow'
+import { browserHistory } from "react-router";
 
 const headers = [
   { type: <Button domProps={{disabled: true}} className="fa fa-pencil md-whiteframe-z1"/> },
@@ -11,13 +12,15 @@ const headers = [
   { type: <Button domProps={{disabled: true}} className="fa fa-close md-whiteframe-z1"/> },
 ]
 
-const BookPage = ({pages = [], query, postResource}) => {
+const BookPage = ({pages = [], query, postResource, deleteResource}) => {
+
   const createPage = () => {
-    postResource({bookId: query, page: {}}).then(page => {
-      const { _id } = draft
-      browserHistory.push(`/app/write/book/${_id}`)
+    postResource({...query, page: {}}).then(page => {
+      browserHistory.push(`/app/write/book/${query.bookId}/page/${page._id}`)
     })
   }
+
+  const { bookId } = query;
 
   return (
     <div className={styles.component}>
@@ -31,7 +34,7 @@ const BookPage = ({pages = [], query, postResource}) => {
         </BoxHeader>
         <BoxBody className="table-responsive no-padding">
           <DataTable className="table-hover" headers={headers}>
-            {pages.map(page => <PageRow page={page} bookId={query}/>)}
+            {pages.map(page => <PageRow pageId={page} key={page} bookId={bookId} deleteResource={deleteResource}/>)}
           </DataTable>
         </BoxBody>
         <BoxFooter className={styles.centerFooter}>

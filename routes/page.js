@@ -45,9 +45,10 @@ router.post('/', (req, res, next) => {
       (req.body.page !== undefined && req.body.page !== null)) {
       Book.findById(req.body.bookId)
         .then(book => {
-          book.pages.push(req.body.page);
+          const page = book.pages.create(req.body.page)
+          book.pages.push(page);
           book.save()
-            .then(book => res.status(201).json(book.pages), err => next(err));
+            .then(() => res.status(201).json(page), err => next(err));
         }, err => next(err));
     }
     else res.sendStatus(400);
@@ -60,13 +61,13 @@ router.post('/', (req, res, next) => {
  * @return page object
  */
 router.put('/:pageId', (req, res, next) => {
-  if (req.query.bookId !== undefined && req.query.bookId !== null) {
-    Book.findById(req.query.bookId, {pages: { $elemMatch:{_id: req.params.pageId }}})
+  if (!!req.body) {
+    Book.findOne({"pages._id": req.params.pageId})
       .then(book => {
-        //book.pages = req.body;
+        const pageIndex = book.pages.findIndex(page => page._id.toString() === req.params.pageId);
+        book.pages[pageIndex] = req.body;
+        book.save();
         res.json(book)
-        // book.save()
-        //   .then(book => res.json(book), err => next(err));
       }, err => next(err));
   }
   else res.sendStatus(400);
@@ -103,20 +104,16 @@ router.patch('/:pageId', (req, res, next) => {
  * @queryParam bookId
  */
 router.delete('/:pageId', (req, res, next) => {
-    if (req.query.bookId !== undefined && req.query.bookId !== null) {
-      Book.findById(req.query.bookId)
-        .where("pages._id").equals(req.params.pageId)
-        .then(book => {
-          let page = book.pages.find(page => page._id === req.params.pageId);
-          book.pages.splice(book.pages.indexOf(page), 1);
-          book.save()
-            .then(() => {
-              Transition.remove({fromPage: req.params.pageId})
-                .then(() => res.sendStatus(200), err => next(err));
-            }, err => next(err));
-        });
-    }
-    else res.sendStatus(400);
+  Book.findOne({"pages._id": req.params.pageId})
+    .then(book => {
+      const pageIndex = book.pages.findIndex(page => page._id.toString() === req.params.pageId);
+      book.pages.splice(pageIndex,1);
+      book.save()
+        .then(() => {
+          Transition.remove({fromPage: req.params.pageId})
+            .then(() => res.json(book), err => next(err));
+        }, err => next(err));
+    });
 });
 
 /**
