@@ -6,7 +6,7 @@ const Portal = ({ children }) => {
     <div className={styles.component}>
       <div className={styles.wrapper}>
         <div className={styles.title}>
-          <img role="presentation" src="https://myvirtualstorybook.com/app/images/logo/logo300x300.png"/>
+          <img alt="logo" src="https://myvirtualstorybook.com/app/images/logo/logo300x300.png" />
           MyVirtualStoryBook
         </div>
         {children}

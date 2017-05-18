@@ -1,6 +1,7 @@
 import React from 'react'
-import { Content } from 'components/App'
-import { BookList } from 'components/common'
+import { Content } from '../../App'
+import { BookList } from '../../common'
+
 const Books = () => {
   return (
     <Content title="Les livres disponibles" >

@@ -1,10 +1,10 @@
-@import '~styles/colors.scss';
-@import '~styles/shadows.scss';
+@import '~styles/colors';
+@import '~styles/shadows';
 
 .component {
   margin-top: 5px;
 
-  &>label {
+  &>span {
     margin-bottom: 0;
   }
 

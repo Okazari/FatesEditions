@@ -1,11 +1,13 @@
+@import '~styles/colors';
+
 .links {
-  stroke: #000;
-  stroke-width: 3px;
   fill: none;
+  stroke: $black;
+  stroke-width: 3px;
 }
 
 .arrow {
-  fill: #000;
+  fill: $black;
 }
 
 .text {
@@ -14,7 +16,7 @@
 }
 
 .circle {
-  fill: #aaa;
-  stroke: #000;
+  fill: $grey-darken-20;
+  stroke: $black;
   stroke-width: 2px;
 }
