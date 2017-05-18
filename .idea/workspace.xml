@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="65608647-986e-424c-a381-7b44727cb488" name="Default" comment="Edit book/draft page layout done">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ui/src/components/Write/Book/BookPage/PageRow/PageRowContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="65608647-986e-424c-a381-7b44727cb488" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/PageSchema.js" afterPath="$PROJECT_DIR$/models/PageSchema.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/page.js" afterPath="$PROJECT_DIR$/routes/page.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/components/App/Sidebar/Menu/MenuCollapsable/MenuItem/BookMenuItem/BookMenuItem.js" afterPath="$PROJECT_DIR$/ui/src/components/App/Sidebar/Menu/MenuCollapsable/MenuItem/BookMenuItem/BookMenuItem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/components/Write/Book/Book.js" afterPath="$PROJECT_DIR$/ui/src/components/Write/Book/Book.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/components/Write/Book/BookPage/BookPage.js" afterPath="$PROJECT_DIR$/ui/src/components/Write/Book/BookPage/BookPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/components/Write/Book/BookPage/PageRow/PageRow.js" afterPath="$PROJECT_DIR$/ui/src/components/Write/Book/BookPage/PageRow/PageRow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/components/Write/Book/BookPage/PageRow/index.js" afterPath="$PROJECT_DIR$/ui/src/components/Write/Book/BookPage/PageRow/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/components/Write/Page/Page.js" afterPath="$PROJECT_DIR$/ui/src/components/Write/Page/Page.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/components/Write/Page/PageContainer.js" afterPath="$PROJECT_DIR$/ui/src/components/Write/Page/PageContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/src/index.js" afterPath="$PROJECT_DIR$/ui/src/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,10 +45,14 @@
       <file leaf-file-name="Menu.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/src/components/App/Sidebar/Menu/Menu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="11" column="6" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="11" selection-end-column="6" />
+            <state relative-caret-position="210">
+              <caret line="13" column="3" lean-forward="false" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
+                <marker date="1495099513853" expanded="true" signature="1389:1416" ph="&lt;MenuCollapsable/&gt;" />
+                <marker date="1495099513853" expanded="true" signature="1389:1582" ph="&lt;ul/&gt;" />
+                <marker date="1495099513853" expanded="true" signature="1423:1572" ph="&lt;li/&gt;" />
+                <marker date="1495099513853" expanded="true" signature="1457:1560" ph="&lt;Link/&gt;" />
               </folding>
             </state>
           </provider>
@@ -79,30 +68,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui/src/router.js">
+      <file leaf-file-name="page.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/page.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-              <folding>
-                <marker date="1489075009062" expanded="true" signature="937:1771" ph="&lt;Route/&gt;" />
-                <marker date="1489075009062" expanded="true" signature="937:1786" ph="&lt;Route/&gt;" />
-                <marker date="1489075009062" expanded="true" signature="937:1800" ph="&lt;Router/&gt;" />
-                <marker date="1489075009062" expanded="true" signature="937:1806" ph="{...}" />
-                <marker date="1489075009062" expanded="true" signature="947:1141" ph="&lt;Route/&gt;" />
-                <marker date="1489075009062" expanded="true" signature="1152:1435" ph="&lt;Route/&gt;" />
-                <marker date="1489075009062" expanded="true" signature="1446:1654" ph="&lt;Route/&gt;" />
-                <marker date="1489075009062" expanded="true" signature="1665:1754" ph="&lt;Route/&gt;" />
-              </folding>
+            <state relative-caret-position="655">
+              <caret line="56" column="3" lean-forward="true" selection-start-line="56" selection-start-column="3" selection-end-line="56" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="page.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/routes/page.js">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ui/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="49" column="21" lean-forward="true" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+            <state relative-caret-position="600">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Portal.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ui/src/components/Portal/Portal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -124,15 +114,15 @@
             <state relative-caret-position="1980">
               <caret line="66" column="2" lean-forward="false" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="2" />
               <folding>
-                <marker date="1495023929228" expanded="true" signature="2121:2147" ph="/** REST ROUTES ...*/" />
-                <marker date="1495023929228" expanded="true" signature="2491:2563" ph="{...}" />
-                <marker date="1495023929228" expanded="true" signature="2586:2639" ph="//..." />
-                <marker date="1495023929228" expanded="true" signature="2678:2843" ph="{...}" />
-                <marker date="1495023929228" expanded="true" signature="2720:2839" ph="{...}" />
-                <marker date="1495023929228" expanded="true" signature="2781:2833" ph="{&quot;message&quot;: err.message...}" />
-                <marker date="1495023929228" expanded="true" signature="2845:2905" ph="//..." />
-                <marker date="1495023929228" expanded="true" signature="2944:3050" ph="{...}" />
-                <marker date="1495023929228" expanded="true" signature="3001:3046" ph="{&quot;message&quot;: err.message...}" />
+                <marker date="1495099679285" expanded="true" signature="2121:2147" ph="/** REST ROUTES ...*/" />
+                <marker date="1495099679285" expanded="true" signature="2491:2563" ph="{...}" />
+                <marker date="1495099679285" expanded="true" signature="2586:2639" ph="//..." />
+                <marker date="1495099679285" expanded="true" signature="2678:2843" ph="{...}" />
+                <marker date="1495099679285" expanded="true" signature="2720:2839" ph="{...}" />
+                <marker date="1495099679285" expanded="true" signature="2781:2833" ph="{&quot;message&quot;: err.message...}" />
+                <marker date="1495099679285" expanded="true" signature="2845:2905" ph="//..." />
+                <marker date="1495099679285" expanded="true" signature="2944:3050" ph="{...}" />
+                <marker date="1495099679285" expanded="true" signature="3001:3046" ph="{&quot;message&quot;: err.message...}" />
               </folding>
             </state>
           </provider>
@@ -146,16 +136,6 @@
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Page.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui/src/components/Write/Page/Page.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="20" lean-forward="false" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -243,7 +223,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ui/src/components/common/Input/index.js" />
         <option value="$PROJECT_DIR$/ui/src/components/common/index.js" />
         <option value="$PROJECT_DIR$/ui/src/components/common/Input/RowInput/styles.scss" />
         <option value="$PROJECT_DIR$/ui/src/components/common/Input/GroupInput/styles.scss" />
@@ -294,6 +273,7 @@
         <option value="$PROJECT_DIR$/models/PageSchema.js" />
         <option value="$PROJECT_DIR$/ui/src/components/Write/Book/BookPage/BookPage.js" />
         <option value="$PROJECT_DIR$/routes/page.js" />
+        <option value="$PROJECT_DIR$/ui/src/components/Portal/Portal.js" />
       </list>
     </option>
   </component>
@@ -603,6 +583,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyVirtualStoryBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyVirtualStoryBook" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1297,8 +1303,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="npm.dev" />
-        <item index="1" class="java.lang.String" itemvalue="npm.start ui" />
+        <item index="0" class="java.lang.String" itemvalue="npm.start ui" />
+        <item index="1" class="java.lang.String" itemvalue="npm.dev" />
         <item index="2" class="java.lang.String" itemvalue="npm.startDevMongo" />
         <item index="3" class="java.lang.String" itemvalue="npm.start back" />
         <item index="4" class="java.lang.String" itemvalue="npm.build" />
@@ -1426,7 +1432,7 @@
       <workItem from="1494935053587" duration="14948000" />
       <workItem from="1495006454264" duration="36000" />
       <workItem from="1495006558216" duration="15943000" />
-      <workItem from="1495099341945" duration="5000" />
+      <workItem from="1495099341945" duration="628000" />
     </task>
     <task id="LOCAL-00001" summary="Updated backend routes, transition links refactored, added bookId filter for page">
       <created>1489595532997</created>
@@ -1526,11 +1532,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494949754949</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Page endpoint refactored">
+      <created>1495099371837</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1495099371837</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="636387000" />
+    <option name="totallyTimeSpent" value="637010000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -1565,9 +1578,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31572405" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="45" y="801" width="3112" height="531" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939714" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21997431" sideWeight="0.44188938" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34928527" sideWeight="0.4974293" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21997431" sideWeight="0.55811065" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21997431" sideWeight="0.44317096" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34928527" sideWeight="0.4974293" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21997431" sideWeight="0.55682904" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20886889" sideWeight="0.3194531" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1596,6 +1609,14 @@
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
               </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
             </State>
           </value>
         </entry>
@@ -1620,7 +1641,8 @@
     <MESSAGE value="Updated react-rest-resource" />
     <MESSAGE value="Refactored book (draft) page" />
     <MESSAGE value="fixed some bugs + book pages handler" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed some bugs + book pages handler" />
+    <MESSAGE value="Page endpoint refactored" />
+    <option name="LAST_COMMIT_MESSAGE" value="Page endpoint refactored" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1762,13 +1784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/components/Portal/Portal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/src/components/Portal/SignUp/SignUp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1868,16 +1883,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#36#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/src/components/App/Sidebar/Menu/MenuCollapsable/MenuItem/BookMenuItem/BookMenuItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1936,14 +1941,12 @@
         <state relative-caret-position="720">
           <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
-            <marker date="1489075009062" expanded="true" signature="937:1771" ph="&lt;Route/&gt;" />
-            <marker date="1489075009062" expanded="true" signature="937:1786" ph="&lt;Route/&gt;" />
-            <marker date="1489075009062" expanded="true" signature="937:1800" ph="&lt;Router/&gt;" />
-            <marker date="1489075009062" expanded="true" signature="937:1806" ph="{...}" />
-            <marker date="1489075009062" expanded="true" signature="947:1141" ph="&lt;Route/&gt;" />
-            <marker date="1489075009062" expanded="true" signature="1152:1435" ph="&lt;Route/&gt;" />
-            <marker date="1489075009062" expanded="true" signature="1446:1654" ph="&lt;Route/&gt;" />
-            <marker date="1489075009062" expanded="true" signature="1665:1754" ph="&lt;Route/&gt;" />
+            <marker date="1495099427977" expanded="true" signature="941:1775" ph="&lt;Route/&gt;" />
+            <marker date="1495099427977" expanded="true" signature="941:1790" ph="&lt;Route/&gt;" />
+            <marker date="1495099427977" expanded="true" signature="941:1804" ph="&lt;Router/&gt;" />
+            <marker date="1495099427977" expanded="true" signature="941:1810" ph="{...}" />
+            <marker date="1495099427977" expanded="true" signature="951:1145" ph="&lt;Route/&gt;" />
+            <marker date="1495099427977" expanded="true" signature="1669:1758" ph="&lt;Route/&gt;" />
           </folding>
         </state>
       </provider>
@@ -1971,15 +1974,15 @@
         <state relative-caret-position="1980">
           <caret line="66" column="2" lean-forward="false" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="2" />
           <folding>
-            <marker date="1495023929228" expanded="true" signature="2121:2147" ph="/** REST ROUTES ...*/" />
-            <marker date="1495023929228" expanded="true" signature="2491:2563" ph="{...}" />
-            <marker date="1495023929228" expanded="true" signature="2586:2639" ph="//..." />
-            <marker date="1495023929228" expanded="true" signature="2678:2843" ph="{...}" />
-            <marker date="1495023929228" expanded="true" signature="2720:2839" ph="{...}" />
-            <marker date="1495023929228" expanded="true" signature="2781:2833" ph="{&quot;message&quot;: err.message...}" />
-            <marker date="1495023929228" expanded="true" signature="2845:2905" ph="//..." />
-            <marker date="1495023929228" expanded="true" signature="2944:3050" ph="{...}" />
-            <marker date="1495023929228" expanded="true" signature="3001:3046" ph="{&quot;message&quot;: err.message...}" />
+            <marker date="1495099679285" expanded="true" signature="2121:2147" ph="/** REST ROUTES ...*/" />
+            <marker date="1495099679285" expanded="true" signature="2491:2563" ph="{...}" />
+            <marker date="1495099679285" expanded="true" signature="2586:2639" ph="//..." />
+            <marker date="1495099679285" expanded="true" signature="2678:2843" ph="{...}" />
+            <marker date="1495099679285" expanded="true" signature="2720:2839" ph="{...}" />
+            <marker date="1495099679285" expanded="true" signature="2781:2833" ph="{&quot;message&quot;: err.message...}" />
+            <marker date="1495099679285" expanded="true" signature="2845:2905" ph="//..." />
+            <marker date="1495099679285" expanded="true" signature="2944:3050" ph="{...}" />
+            <marker date="1495099679285" expanded="true" signature="3001:3046" ph="{&quot;message&quot;: err.message...}" />
           </folding>
         </state>
       </provider>
@@ -2010,10 +2013,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ui/src/components/App/Sidebar/Menu/Menu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="11" column="6" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="11" selection-end-column="6" />
+        <state relative-caret-position="210">
+          <caret line="13" column="3" lean-forward="false" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
+            <marker date="1495099513853" expanded="true" signature="1389:1416" ph="&lt;MenuCollapsable/&gt;" />
+            <marker date="1495099513853" expanded="true" signature="1389:1582" ph="&lt;ul/&gt;" />
+            <marker date="1495099513853" expanded="true" signature="1423:1572" ph="&lt;li/&gt;" />
+            <marker date="1495099513853" expanded="true" signature="1457:1560" ph="&lt;Link/&gt;" />
           </folding>
         </state>
       </provider>
@@ -2030,8 +2037,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/page.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="49" column="21" lean-forward="true" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
+        <state relative-caret-position="655">
+          <caret line="56" column="3" lean-forward="true" selection-start-line="56" selection-start-column="3" selection-end-line="56" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/src/components/Portal/Portal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
