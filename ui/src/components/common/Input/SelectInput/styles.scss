@@ -1,5 +1,4 @@
-@import '~styles/colors';
-@import '~styles/shadows';
+@import '~styles/forms';
 
 .component {
   align-items: stretch;
@@ -8,12 +7,5 @@
 
   label {
     align-self: flex-start;
-  }
-
-  select {
-    background: none;
-    border: 1px solid $grey-darken-20;
-    outline: $light-blue;
-    padding: 6px;
   }
 }

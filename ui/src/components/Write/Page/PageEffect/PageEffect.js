@@ -1,39 +1,91 @@
 import React from 'react'
-import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
-import { Button, Loader } from 'components/common'
+import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
+import { Button } from '../../../common'
+import debounce from 'lodash.debounce'
 import EffectRow from './EffectRow'
+import styles from './styles.scss'
 
-const PageEffect = ({page, updateResource}) => {
+class PageEffect extends React.Component {
 
-  const pushEffect = () => {
-    if(!page.effects) page.effects = [];
-    page.effects.push({test:"test"});
-    updateResource({_id: page._id, effects: page.effects}, {patch: true});
-  };
+  constructor(props) {
+    super(props)
+    const { page, updateResource, debounceTime } = this.props
+    this.state = {
+      effects: []
+    }
 
-  return (
-    <div className="col-lg-12 col-sm-12 col-xs-12">
-      <Box className="box-primary">
-        <BoxHeader withBorder>
-          <h3 className="box-title">Effets à l'arrivée sur la page</h3>
-          <div className="box-tools pull-right">
-            <div className="btn-group"></div>
-          </div>
-        </BoxHeader>
-        <BoxBody>
-          {page.effects ? page.effects.map(effect => <EffectRow effect={effect} bookId={page.bookId}/>) : null}
-        </BoxBody>
-        <BoxFooter>
-          <div className="col-xs-12">
-            <Button className="md-whiteframe-z1" domProps={{onClick: () => pushEffect()}}>
-              Ajouter un Effet
-            </Button>
-          </div>
-          <Loader />
-        </BoxFooter>
-      </Box>
-    </div>
-  )
+    this.debounceUpdate = debounce(
+      () => updateResource(page, false), debounceTime || 1000,
+    );
+  }
+
+  componentDidMount() {
+    const { page } = this.props
+    if(!!page.effects) {
+      this.setState({ effects: page.effects });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { page } = this.props
+    if(prevProps.page.effects !== page.effects) {
+      this.setState({ stats: page.effects });
+    }
+  }
+
+  addEffect = () => {
+    const { effects } = this.state
+    this.setState({effects: effects.concat({})});
+  }
+
+  removeEffect = (index) => {
+    const { effects } = this.state
+    effects.splice(index, 1)
+    this.setState({effects: effects})
+    this.debounceUpdate();
+  }
+
+  updatePage = () => {
+    const { page } = this.props
+    page.effects = this.state.effects;
+    this.debounceUpdate();
+  }
+
+  render() {
+    const { bookId } = this.props
+    const { effects } = this.state
+
+    return (
+      <div>
+        <Box className="box-primary">
+          <BoxHeader withBorder>
+            <h3 className="box-title">Effets à l'arrivée sur la page</h3>
+            <div className="box-tools pull-right">
+              <div className="btn-group"/>
+            </div>
+          </BoxHeader>
+          <BoxBody>
+            <div className={styles.effectRow}>
+              {effects.map((effect, index) => <EffectRow
+                effect={ effect }
+                index={ index }
+                bookId={ bookId }
+                updateResource={ this.updatePage }
+                removeEffect={ index => this.removeEffect(index) }
+              />)}
+            </div>
+          </BoxBody>
+          <BoxFooter>
+            <div className="col-xs-12">
+              <Button className="md-whiteframe-z1" domProps={{onClick: () => this.addEffect()}}>
+                Ajouter un Effet
+              </Button>
+            </div>
+          </BoxFooter>
+        </Box>
+      </div>
+    )
+  }
 }
 
 export default PageEffect

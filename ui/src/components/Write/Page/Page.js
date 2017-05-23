@@ -7,13 +7,15 @@ import PageMusic from './PageMusic'
 import PageContent from './PageContent'
 import PageTransition from './PageTransition'
 
-const Page = ({page, updateResource}) => {
+const Page = ({query, page, updateResource}) => {
+    const { bookId } = query
     return !page ? null :
     (
      <Content title="Edition de page" >
-       <div className={styles.row}>
-         <PageInformation page={page} updateResource={updateResource} />
-         {/*<PageEffect updateResource={updateResource}/>
+       <div className={ styles.row }>
+         <PageInformation page={ page } updateResource={ updateResource } />
+         <PageEffect bookId={ bookId } page={ page } updateResource={ updateResource }/>
+         {/*
          <PageMusic/>
          <PageContent page={page}/>
          <PageTransition/>*/}

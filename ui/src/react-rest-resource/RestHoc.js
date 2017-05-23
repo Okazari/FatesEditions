@@ -26,7 +26,7 @@ const RestHOC = (Component, ResourceService) => {
           resource: resource.value,
         }
         this.observer = {
-          next: res => this.setState({ res }),
+          next: resource => this.setState({ resource }),
           error: error => this.setState({ error }),
         }
         this.observable = resource

@@ -1,12 +1,11 @@
 import React from 'react'
 import styles from './styles.scss'
 
-const SelectInput = ({ injectedProps, domProps, children, label, placeholder }) => {
+const SelectInput = ({ injectedProps, domProps, children, label, placeholder, className }) => {
   return (
-    <div className={styles.component}>
+    <div className={`${styles.component} ${className}`}>
       <label htmlFor={domProps.id}>{label}</label>
       <select
-        className={styles.component}
         value={injectedProps.inputValue}
         onChange={injectedProps.updateInput}
         {...domProps}

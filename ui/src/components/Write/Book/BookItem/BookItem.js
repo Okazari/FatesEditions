@@ -19,8 +19,6 @@ class BookItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {items: []}
-    this.addItem = this.addItem.bind(this)
-    this.removeItem = this.removeItem.bind(this)
     this.debounceUpdate = debounce(() => props.updateResource(this.props.draft, false), this.props.debounceTime ? this.props.debounceTime : 1000);
   }
 
@@ -38,11 +36,11 @@ class BookItem extends React.Component {
     }
   };
 
-  addItem() {
+  addItem = () => {
     this.setState({items: this.state.items.concat({})});
   }
 
-  removeItem(index) {
+  removeItem = (index) => {
     this.state.items.splice(index, 1);
     this.setState({items: this.state.items})
     this.debounceUpdate();

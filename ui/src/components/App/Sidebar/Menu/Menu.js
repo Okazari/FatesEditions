@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 import Title from './Title'
 import MenuCollapsable, { MenuItem, BookMenuItem } from './MenuCollapsable'
 import { Link } from 'react-router'

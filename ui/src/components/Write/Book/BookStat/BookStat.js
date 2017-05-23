@@ -9,10 +9,11 @@ class BookStat extends React.Component {
 
   constructor(props) {
     super(props)
+    const { draft, updateResource, debounceTime } = this.props
     this.state = {stats: []}
-    this.addStat = this.addStat.bind(this)
-    this.removeStat = this.removeStat.bind(this)
-    this.debounceUpdate = debounce(() => props.updateResource(this.props.draft, false), this.props.debounceTime ? this.props.debounceTime : 1000);
+    this.debounceUpdate = debounce(
+      () => updateResource(draft, false), debounceTime || 1000,
+    );
   }
 
   componentDidMount() {
@@ -29,13 +30,15 @@ class BookStat extends React.Component {
     }
   }
 
-  addStat() {
-    this.setState({stats: this.state.stats.concat({})});
+  addStat = () => {
+    const { stats } = this.state
+    this.setState({stats: stats.concat({})});
   }
 
-  removeStat(index) {
-    this.state.stats.splice(index, 1);
-    this.setState({stats: this.state.stats})
+  removeStat = (index) => {
+    const { stats } = this.state
+    stats.splice(index, 1);
+    this.setState({stats: stats})
     this.debounceUpdate();
   }
 

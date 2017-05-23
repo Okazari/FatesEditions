@@ -1,45 +1,54 @@
 import React from 'react'
-import { Button } from 'components/common'
+import { SelectInput } from '../../../../common'
+import EffectInput from './EffectInput'
+import styles from './styles.scss'
 
-const PageEffect = ({bookId, effect}) => {
+class EffectRow extends React.Component {
 
-  let book = {};
-
-  fetch(`/api/book/${bookId}`).then((response) => response.json().then((data) => {
-    book = data;
-  }));
-
-  const onVariableChange = (e) => {
-    if(e.target.value === 'objects') {
-      console.log(book.objects);
-    }
-    else {
-      console.log(book.stats);
+  constructor(props) {
+    super(props)
+    this.state = {
+      type: ''
     }
   }
 
-  return (
-      <div className="row margin-bottom">
-        <div className="col-xs-3">
-          <select className="form-control" onChange={(e) => {onVariableChange(e)}}>
-            <option disabled selected>Choix de la variable</option>
-            <option value="objects">L'objet</option>
-            <option value="stats">La statistique</option>
-          </select>
-        </div>
-        <div className="col-xs-3">
-          <select className="form-control">
+  componentDidMount() {
+    const { type } = this.props.effect
+    this.setState({ type: type })
+  }
 
-          </select>
-        </div>
-        <div className="col-xs-2" >
-          <input type="number" className="form-control"  placeholder="Valeur de la condition" value={effect}/>
-        </div>
-        <div className="col-xs-1">
-          <Button className="fa fa-close md-whiteframe-z1" />
+  updateType = (effect) => {
+    const { updateResource } = this.props
+    this.setState({ type: effect.type })
+    updateResource()
+  }
+
+  render() {
+    const { book, index, effect, updateResource, removeEffect } = this.props
+    const { type } = this.state
+    return (
+      <div className={styles.component}>
+        <div>
+          <SelectInput className={styles.selectInput}
+                       resource={ effect }
+                       resourceHandler={ this.updateType }
+                       debounceTime={ 0 }
+                       domProps={{ name: 'type' }} >
+            <option disabled selected>Choix de la variable</option>
+            <option value="object">L'objet</option>
+            <option value="stat">La statistique</option>
+          </SelectInput>
+          { type !== '' ? <EffectInput book={ book }
+                                       type={ type }
+                                       effect={ effect }
+                                       index= { index }
+                                       updateResource={ updateResource }
+                                       removeEffect={ removeEffect } />
+          : null }
         </div>
       </div>
-  )
+    )
+  }
 }
 
-export default PageEffect
+export default EffectRow

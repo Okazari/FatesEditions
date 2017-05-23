@@ -1,1 +1,1 @@
-export default from './EffectRow'
+export default from './EffectRowContainer'

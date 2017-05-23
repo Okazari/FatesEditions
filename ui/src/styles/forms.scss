@@ -1,0 +1,17 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+label {
+  align-self: flex-start;
+}
+
+select {
+  background: none;
+  border: 1px solid $grey-darken-20;
+  outline: $light-blue;
+  padding: 6px;
+}
+
+textarea {
+  height: 150px;
+}

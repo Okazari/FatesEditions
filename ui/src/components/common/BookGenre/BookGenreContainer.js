@@ -1,6 +1,6 @@
-// eslint-disable-next-line
-import { RestHoc as restHoc } from 'react-rest-resource'
+//eslint-disable-next-line
 import React from 'react'
+import { RestHoc as restHoc } from 'react-rest-resource'
 import BookGenre from './BookGenre'
 import { GenreService } from '../../../services'
 
