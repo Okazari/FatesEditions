@@ -32,7 +32,7 @@ class EffectRow extends React.Component {
           <SelectInput className={styles.selectInput}
                        resource={ effect }
                        resourceHandler={ this.updateType }
-                       debounceTime={ 0 }
+                       debounceTime={ 1 }
                        domProps={{ name: 'type' }} >
             <option disabled selected>Choix de la variable</option>
             <option value="object">L'objet</option>
