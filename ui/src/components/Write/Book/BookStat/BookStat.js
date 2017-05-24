@@ -10,43 +10,44 @@ class BookStat extends React.Component {
   constructor(props) {
     super(props)
     const { draft, updateResource, debounceTime } = this.props
-    this.state = {stats: []}
+    this.state = { stats: [] }
     this.debounceUpdate = debounce(
       () => updateResource(draft, false), debounceTime || 1000,
-    );
+    )
   }
 
   componentDidMount() {
     const { draft } = this.props
-    if(!!draft.stats) {
-      this.setState({ stats: draft.stats });
+    if (draft.stats) {
+      //eslint-disable-next-line
+      this.setState({ stats: draft.stats })
     }
   }
 
   componentDidUpdate(prevProps) {
     const { draft } = this.props
-    if(prevProps.draft.stats !== draft.stats) {
+    if (prevProps.draft.stats !== draft.stats) {
       //eslint-disable-next-line
-      this.setState({ stats: this.props.draft.stats });
+      this.setState({ stats: this.props.draft.stats })
     }
   }
 
   addStat = () => {
     const { stats } = this.state
-    this.setState({ stats: stats.concat({}) });
+    this.setState({ stats: stats.concat({}) })
   }
 
   removeStat = (index) => {
     const { stats } = this.state
-    stats.splice(index, 1);
-    this.setState({ stats: stats })
-    this.debounceUpdate();
+    stats.splice(index, 1)
+    this.setState({ stats })
+    this.debounceUpdate()
   }
 
   updateDraft = () => {
     const { draft } = this.props
-    draft.stats = this.state.stats;
-    this.debounceUpdate();
+    draft.stats = this.state.stats
+    this.debounceUpdate()
   }
 
   render() {

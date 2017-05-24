@@ -18,7 +18,7 @@ class BookItem extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {items: []}
+    this.state = { items: [] }
     this.debounceUpdate = debounce(
       () => {
         props.updateResource(this.props.draft, false)
@@ -29,33 +29,34 @@ class BookItem extends React.Component {
 
   componentDidMount() {
     const { draft } = this.props
-    if(!!draft.objects) {
-      this.setState({ items: draft.objects });
+    if (draft.objects) {
+      //eslint-disable-next-line
+      this.setState({ items: draft.objects })
     }
   }
 
   componentDidUpdate(prevProps) {
     const { draft } = this.props
-    if(prevProps.draft.objects !== draft.objects) {
+    if (prevProps.draft.objects !== draft.objects) {
       //eslint-disable-next-line
-      this.setState({ items: draft.objects });
+      this.setState({ items: draft.objects })
     }
   }
 
   addItem = () => {
-    this.setState({ items: this.state.items.concat({}) });
+    this.setState({ items: this.state.items.concat({}) })
   }
 
   removeItem = (index) => {
-    this.state.items.splice(index, 1);
-    this.setState({items: this.state.items})
-    this.debounceUpdate();
+    this.state.items.splice(index, 1)
+    this.setState({ items: this.state.items })
+    this.debounceUpdate()
   }
 
   updateDraft = () => {
     const { draft } = this.props
-    draft.objects = this.state.items;
-    this.debounceUpdate();
+    draft.objects = this.state.items
+    this.debounceUpdate()
   }
 
   render() {

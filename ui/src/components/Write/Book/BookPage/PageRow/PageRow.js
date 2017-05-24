@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { Button } from '../../../../common'
 
-const PageRow = ({ page={}, bookId, deleteResource}) => {
+const PageRow = ({ page = {}, bookId, deleteResource }) => {
   return (
     <tr>
       <td>
@@ -12,7 +12,7 @@ const PageRow = ({ page={}, bookId, deleteResource}) => {
       </td>
       <td>{page.title}</td>
       <td>{page.description}</td>
-      <td><Button className="fa fa-close md-whiteframe-z1" domProps={{onClick: () => deleteResource(page._id)}}/></td>
+      <td><Button className="fa fa-close md-whiteframe-z1" domProps={{ onClick: () => deleteResource(page._id) }} /></td>
     </tr>
   )
 }

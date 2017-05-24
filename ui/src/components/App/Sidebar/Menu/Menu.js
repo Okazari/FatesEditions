@@ -1,12 +1,11 @@
 import React from 'react'
+import { Link, browserHistory } from 'react-router'
 import Title from './Title'
 import MenuCollapsable, { MenuItem, BookMenuItem } from './MenuCollapsable'
-import { Link } from 'react-router'
-import { browserHistory } from 'react-router'
 
 const Menu = ({ postResource, drafts = [] }) => {
   const onCreateBook = () => {
-    postResource({}).then(draft => {
+    postResource({}).then((draft) => {
       const { _id } = draft
       browserHistory.push(`/app/write/book/${_id}`)
     })

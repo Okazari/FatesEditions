@@ -7,9 +7,9 @@ import styles from './styles.scss'
 const EffectInput = ({ book, type, index, effect, updateResource, removeEffect }) => {
   return !book ? null : (
     <div className={styles.component}>
-      {type === "stat" ?
-        <StatInput stats={ book.stats } effect={ effect } updateResource={ updateResource } /> :
-        <ObjectInput objects={ book.objects } effect={ effect } updateResource={ updateResource } />}
+      {type === 'stat' ?
+        <StatInput stats={book.stats} effect={effect} updateResource={updateResource} /> :
+        <ObjectInput objects={book.objects} effect={effect} updateResource={updateResource} />}
       <Button className="fa fa-close md-whiteframe-z1" domProps={{ onClick: () => removeEffect(index) }} />
     </div>
   )

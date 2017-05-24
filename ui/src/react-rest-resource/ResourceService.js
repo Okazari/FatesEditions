@@ -149,7 +149,7 @@ class ResourceService {
     return this.fetch(urlToCall, { headers })
     .then(this.handleResponse)
     .catch(error => this.notifyError(error))
-    .then(resources => {
+    .then((resources) => {
       info('Updating', queryParams)
       this.observableMap[queryParams].value = resources.map(
         (resource) => {
@@ -172,7 +172,7 @@ class ResourceService {
       this.fetch(this.url, {
         method: 'POST',
         headers,
-        body: JSON.stringify(resource)
+        body: JSON.stringify(resource),
       })
         .then(handleResponse)
         .catch((error) => {
@@ -180,7 +180,7 @@ class ResourceService {
           reject(error)
         })
         .then((data) => {
-          this.map[data.id] = new Resource(`${this.url}/${data.id}`, {...resource, id: data.id}, this.fetch)
+          this.map[data.id] = new Resource(`${this.url}/${data.id}`, { ...resource, id: data.id }, this.fetch)
           Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query))
           resolve(data)
         })

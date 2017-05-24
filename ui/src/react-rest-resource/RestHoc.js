@@ -26,6 +26,7 @@ const RestHOC = (Component, ResourceService) => {
           resource: resource.value,
         }
         this.observer = {
+          //eslint-disable-next-line
           next: resource => this.setState({ resource }),
           error: error => this.setState({ error }),
         }
@@ -63,7 +64,7 @@ const RestHOC = (Component, ResourceService) => {
       this.observable.unsubscribe(this.observer, query)
     }
 
-    postResource(newResource) {
+    static postResource(newResource) {
       return ResourceService.postResource(newResource)
     }
 
