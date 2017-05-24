@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from '../common/style.scss'
-import { LabelInput, Button } from 'components/common'
-import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
+import { LabelInput, Button } from '../../common'
+import { Box, BoxHeader, BoxBody, BoxFooter } from '../../common/Box'
 
-const Recover = ( ) => {
+const Recover = () => {
   const title = "Nom d'utilisateur/Mot de passe oublié"
   const buttonLabel = "M'envoyer un email de récupération de compte"
   return (
@@ -16,7 +16,7 @@ const Recover = ( ) => {
           <LabelInput
             label="Email"
             domProps={{
-              placeholder: "Email associé à votre compte"
+              placeholder: 'Email associé à votre compte',
             }}
           />
         </BoxBody>

@@ -1,10 +1,9 @@
 import React from 'react'
-import { Content } from 'components/App'
+import { Content } from '../../App'
 
 const Book = () => {
   return (
-    <Content title="Publier un livre" >
-    </Content>
+    <Content title="Publier un livre" />
   )
 }
 

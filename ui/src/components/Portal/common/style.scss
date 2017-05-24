@@ -1,5 +1,5 @@
-@import '~styles/colors.scss';
-@import '~styles/shadows.scss';
+@import '~styles/colors';
+@import '~styles/shadows';
 
 .component {
   background-color: $white;
@@ -9,13 +9,13 @@
 
   .message {
     display: flex;
-    justify-content: center;
     font-size: 1.1em;
+    justify-content: center;
   }
 
   .messageErr {
     @extend .message;
-    color: red;
+    color: $red;
   }
 
   &>div {

@@ -1,5 +1,6 @@
-import GenreList from './GenreList'
-import { GenreService } from 'services'
+//eslint-disable-next-line
 import { RestHoc as restHoc } from 'react-rest-resource'
-export default restHoc(GenreList, GenreService)
+import GenreList from './GenreList'
+import { GenreService } from '../../../../../services'
 
+export default restHoc(GenreList, GenreService)

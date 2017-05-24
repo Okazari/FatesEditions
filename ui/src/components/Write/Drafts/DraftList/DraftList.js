@@ -1,17 +1,16 @@
 import React from 'react'
-import { Box, BoxHeader } from 'components/common/Box'
-import { DataTable } from 'components/common'
+import { Box, BoxHeader } from '../../../common/Box'
+import { DataTable } from '../../../common'
 import DraftRow from './DraftRow'
 
 const DraftList = ({ drafts = [] }) => {
-
   const headers = [
-    {type: "Titre du livre"},
-    {type: "Genre"},
-    {type: "Visibilité"},
-    {type: "Synopsis"},
-    {type: "Editer"},
-    {type: "Supprimer"}
+    { type: 'Titre du livre' },
+    { type: 'Genre' },
+    { type: 'Visibilité' },
+    { type: 'Synopsis' },
+    { type: 'Editer' },
+    { type: 'Supprimer' },
   ]
 
   return (

@@ -1,15 +1,15 @@
 import React from 'react'
-import { Box, BoxHeader, BoxBody, BoxFooter } from 'components/common/Box'
-import { Button, DataTable } from 'components/common';
+import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
+import { Button, DataTable } from '../../../common'
 import styles from './styles.scss'
 import PageRow from './PageRow'
 import { browserHistory } from "react-router";
 
 const headers = [
-  { type: <Button domProps={{disabled: true}} className="fa fa-pencil md-whiteframe-z1"/> },
-  { type: "Titre" },
-  { type: "Description" },
-  { type: <Button domProps={{disabled: true}} className="fa fa-close md-whiteframe-z1"/> },
+  { type: <Button domProps={{ disabled: true }} className="fa fa-pencil md-whiteframe-z1" /> },
+  { type: 'Titre' },
+  { type: 'Description' },
+  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" /> },
 ]
 
 const BookPage = ({pages = [], query, postResource, deleteResource}) => {
@@ -28,8 +28,7 @@ const BookPage = ({pages = [], query, postResource, deleteResource}) => {
         <BoxHeader withBorder>
           <h3 className="box-title">Pages</h3>
           <div className="box-tools pull-right">
-            <div className="btn-group">
-            </div>
+            <div className="btn-group" />
           </div>
         </BoxHeader>
         <BoxBody className="table-responsive no-padding">
@@ -38,7 +37,7 @@ const BookPage = ({pages = [], query, postResource, deleteResource}) => {
           </DataTable>
         </BoxBody>
         <BoxFooter className={styles.centerFooter}>
-          <Button domProps={{onClick: createPage}}>
+          <Button domProps={{ onClick: createPage }}>
             Ajouter une page
           </Button>
         </BoxFooter>

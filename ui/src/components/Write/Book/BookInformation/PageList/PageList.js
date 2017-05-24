@@ -1,13 +1,16 @@
 import React from 'react'
-import {SelectInput} from 'components/common'
+import { SelectInput } from '../../../../common'
 import PageOption from './PageOption'
 
-const PageList = ( { pages=[], resource, resourceHandler, defaultValue } ) => {
+const PageList = ({ pages = [], resource, resourceHandler, defaultValue }) => {
   return (
-    <SelectInput label="Page de début" placeholder="-- Aucune page selectionnée --"
-                 domProps={{name: 'startingPageId'}}
-                 resource={resource}
-                 resourceHandler={resourceHandler} >
+    <SelectInput
+      label="Page de début"
+      placeholder="-- Aucune page selectionnée --"
+      domProps={{ name: 'startingPageId' }}
+      resource={resource}
+      resourceHandler={resourceHandler}
+    >
       {pages.map(page => <PageOption pageId={page} key={page} defaultValue={defaultValue} />)}
     </SelectInput>
   )
