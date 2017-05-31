@@ -22,18 +22,17 @@ router.get('/', (req, res, next) => {
 /**
  * @method GET
  * @param pageId
- * @queryParam bookId
  * @return page object
  */
 router.get('/:pageId', (req, res, next) => {
-    Book.find({"page._id": req.params.pageId})
-      .then(book => res.json(book.pages),
+    Book.findOne({"pages._id": req.params.pageId}, {pages: {$elemMatch: {_id: req.params.pageId}}})
+      .then(book => res.json(book.pages[0]),
         err => next(err));
 });
 
 /**
  * @method POST
- * @queryParam bookId
+ * @bodyParam bookId
  * @bodyParam page object
  * @return page object
  */
