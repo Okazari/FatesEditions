@@ -8,10 +8,18 @@
   flex-wrap: nowrap;
   margin-top: 10px;
 
+  &>input{
+    border-left: none;
+  }
+
   span {
     align-self: center;
     border: 1px solid $grey-darken-20;
-    border-right: 0;
     padding: 6px 10px;
+  }
+
+  &>button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }

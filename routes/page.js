@@ -26,12 +26,9 @@ router.get('/', (req, res, next) => {
  * @return page object
  */
 router.get('/:pageId', (req, res, next) => {
-    if(req.query.bookId !== undefined && req.query.bookId !== null) {
-        Book.findById(req.query.bookId, {pages: {$elemMatch: {_id: req.params.pageId}}})
-          .then(book => res.json(book.pages),
-            err => next(err));
-    }
-    else res.sendStatus(400);
+    Book.find({"page._id": req.params.pageId})
+      .then(book => res.json(book.pages),
+        err => next(err));
 });
 
 /**
@@ -41,8 +38,7 @@ router.get('/:pageId', (req, res, next) => {
  * @return page object
  */
 router.post('/', (req, res, next) => {
-    if ((req.body.bookId !== undefined && req.body.bookId !== null) ||
-      (req.body.page !== undefined && req.body.page !== null)) {
+    if (req.body.bookId && req.body.page) {
       Book.findById(req.body.bookId)
         .then(book => {
           const page = book.pages.create(req.body.page)
@@ -79,7 +75,7 @@ router.put('/:pageId', (req, res, next) => {
  * @return page object
  */
 router.patch('/:pageId', (req, res, next) => {
-    if (req.query.bookId !== undefined && req.query.bookId !== null) {
+    if (req.query.bookId && req.query.bookId) {
       Book.findById(req.query.bookId)
         .where("pages._id").equals(req.params.pageId)
         .then(book => {
@@ -106,14 +102,19 @@ router.patch('/:pageId', (req, res, next) => {
 router.delete('/:pageId', (req, res, next) => {
   Book.findOne({"pages._id": req.params.pageId})
     .then(book => {
+      if(!book) res.sendStatus(404);
       const pageIndex = book.pages.findIndex(page => page._id.toString() === req.params.pageId);
       book.pages.splice(pageIndex,1);
+      book.pages.forEach((page, pageIndex) => {
+        page.transitions.forEach((transition, transitionIndex) => {
+          if(transition.toPage.toString() === req.params.pageId) {
+            book.pages[pageIndex].transitions.splice(transitionIndex,1)
+          }
+        })
+      });
       book.save()
-        .then(() => {
-          Transition.remove({fromPage: req.params.pageId})
-            .then(() => res.json(book), err => next(err));
-        }, err => next(err));
-    });
+        .then(() => res.json(book.pages), err => next(err));
+      }, err => next(err));
 });
 
 /**

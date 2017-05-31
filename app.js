@@ -44,7 +44,6 @@ const jwt = require('jsonwebtoken');
 
 app.use('/api',portal);
 
-/*
 app.use(function(req, res, next){
   if(!req.get('Authorization')){
     var err = new Error('Not Authorized');
@@ -64,7 +63,6 @@ app.use(function(req, res, next){
     }
   }
 })
-*/
 
 /******REST ROUTES*******/
 app.use('/api/user',user);

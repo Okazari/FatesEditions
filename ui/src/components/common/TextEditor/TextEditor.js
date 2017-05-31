@@ -1,5 +1,6 @@
 import React from 'react'
 import { AtomicBlockUtils, ContentState, Editor, EditorState, RichUtils } from 'draft-js'
+import debounce from 'lodash.debounce'
 import DraftPasteProcessor from 'draft-js/lib/DraftPasteProcessor'
 import { stateToHTML } from 'draft-js-export-html'
 import styles from './styles.scss'
@@ -11,6 +12,7 @@ const TabDepth = 4
 class TextEditor extends React.Component {
   constructor(props) {
     super(props)
+    const { resource, resourceHandler, debounceTime } = this.props
     if (props.initialContent.trim() !== "''") {
       const processedHTML = DraftPasteProcessor.processHTML(this.props.initialContent)
       const contentState = ContentState.createFromBlockArray(processedHTML)
@@ -19,30 +21,44 @@ class TextEditor extends React.Component {
     } else {
       this.state = { editorState: EditorState.createEmpty() }
     }
-    this.onChange = editorState => this.setState({ editorState })
     this.focus = () => this.editor.focus()
+    this.debounceUpdate = debounce(
+      () => resourceHandler(resource, false), debounceTime || 1000,
+    )
+  }
+
+  onChange = (editorState) => {
+    const { resource, domProps } = this.props
+    this.setState({ editorState })
+    resource[domProps.name] = stateToHTML(editorState.getCurrentContent())
+    this.debounceUpdate()
   }
 
   onInsertImage = (image) => {
-    const currentContentState = this.state.editorState.getCurrentContent()
+    const { editorState } = this.state
+    const currentContentState = editorState.getCurrentContent()
     const entityKey = currentContentState.createEntity('atomic', 'IMMUTABLE', { src: URL.createObjectURL(image) })
-    this.onChange(AtomicBlockUtils.insertAtomicBlock(this.state.editorState, entityKey, ''))
+    this.onChange(AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ''))
   }
 
   onTab = (e) => {
-    this.onChange(RichUtils.onTab(e, this.state.editorState, TabDepth))
+    const { editorState } = this.state
+    this.onChange(RichUtils.onTab(e, editorState, TabDepth))
   }
 
   toggleBlockType = (blocktype) => {
-    this.onChange(RichUtils.toggleBlockType(this.state.editorState, blocktype))
+    const { editorState } = this.state
+    this.onChange(RichUtils.toggleBlockType(editorState, blocktype))
   }
 
   toggleInlineStyle = (style) => {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, style))
+    const { editorState } = this.state
+    this.onChange(RichUtils.toggleInlineStyle(editorState, style))
   }
 
   handleKeyCommand = (command) => {
-    const newState = RichUtils.handleKeyCommand(this.state.editorState, command)
+    const { editorState } = this.state
+    const newState = RichUtils.handleKeyCommand(editorState, command)
     if (newState) this.onChange(newState)
   }
 
@@ -52,12 +68,6 @@ class TextEditor extends React.Component {
 
   triggerClick = (input) => {
     this[input].click()
-  }
-
-  saveHtml = () => {
-    const { saveHandler } = this.props
-    const html = stateToHTML(this.state.editorState.getCurrentContent())
-    saveHandler(html)
   }
 
   blockRenderer = (block) => {
@@ -71,8 +81,9 @@ class TextEditor extends React.Component {
   }
 
   render() {
+    const { className } = this.props
     return (
-      <div className={styles.TextEditorRoot}>
+      <div className={`${styles.TextEditorRoot} ${className}`}>
         <InlineToolbar
           onToggleInlineStyle={this.toggleInlineStyle}
           onToggleBlockType={this.toggleBlockType}
@@ -80,7 +91,7 @@ class TextEditor extends React.Component {
           addInput={this.addInput}
           triggerClick={this.triggerClick}
         />
-        <div className={styles.TextEditor} onClick={this.focus} onBlur={this.saveHtml}>
+        <div className={styles.TextEditor} onClick={this.focus}>
           <Editor
             ref={(editor) => { this.editor = editor }}
             blockRendererFn={this.blockRenderer}

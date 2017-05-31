@@ -1,108 +1,95 @@
 import React from 'react'
+import debounce from 'lodash.debounce'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
-import { Button, Loader } from '../../../common'
+import { Button } from '../../../common'
+import TransitionRow from './TransitionRow'
+import styles from './styles.scss'
 
-const PageTransition = ({ page }) => {
-  return (
-    <div className="col-lg-12 col-sm-12 col-xs-12">
-      <Box className="box-primary">
-        <BoxHeader withBorder>
-          <h3 className="box-title">Transitions</h3>
-        </BoxHeader>
-        <BoxBody>
-          <Box className="box-default md-whiteframe-z1 box-solid">
-            <BoxHeader withBorder>
-              <div className="input-group float-left">
-                <span>
-                  Page de destination
-                  <Button className="btn-xs md-whiteframe-z1"><i className="fa fa-pencil" />Editer la page de destination</Button>
-                  <Button className="btn-xs md-whiteframe-z1"><i className="fa fa-plus" />Créer et lier la nouvelle page</Button>
-                </span>
-                <select className="form-control">
-                  <option value="" selected>-- Vers une nouvelle page --</option>
-                </select>
-              </div>
-              <div className="box-tools pull-right">
-                <button className="btn btn-box-tool md-whiteframe-z1" ><i className="fa fa-times" /></button>
-              </div>
-            </BoxHeader>
-            <BoxBody>
-              <div className="row no-margin">
-                <textarea rows="5" name="cover" className="form-control" placeholder="Texte de la transition" required />
-              </div>
-              <div className="row no-margin margin-top">
-                <div className="margin-top input-group col-xs-12">
-                  <span>Conditions</span>
-                  <span className="margin-left">
-                    Opérateur de condition :
-                    <select>
-                      <option value="and">ET</option>
-                      <option value="or">OU</option>
-                    </select>
-                  </span>
-                  <div className="row margin-bottom">
-                    <div className="col-xs-3">
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-3">
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-3" >
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-2" >
-                      <input type="number" className="form-control" placeholder="Valeur de la condition" />
-                    </div>
-                    <div className="col-xs-1">
-                      <Button className="fa fa-close md-whiteframe-z1" />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <Button className="btn-xs md-whiteframe-z1">
-                      Ajouter une Condition
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="row no-margin margin-top">
-                <div className="input-group col-xs-12">
-                  <span>Effet</span>
-                  <div className="row margin-bottom">
-                    <div className="col-xs-3">
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-3">
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-3" >
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-2" >
-                      <input type="number" className="form-control" placeholder="Valeur de la condition" />
-                    </div>
-                    <div className="col-xs-1">
-                      <Button className="fa fa-close md-whiteframe-z1" />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <Button className="btn-xs md-whiteframe-z1">
-                      Ajouter un Effet
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </BoxBody>
-          </Box>
-        </BoxBody>
-        <BoxFooter className="align-center">
-          <Button className="md-whiteframe-z1">
-            Ajouter une transition
-          </Button>
-          <Loader />
-        </BoxFooter>
-      </Box>
-    </div>
-  )
+class PageTransition extends React.Component {
+
+  constructor(props) {
+    super(props)
+    const { page, updateResource, debounceTime } = this.props
+    this.state = {
+      transitions: [],
+    }
+
+    this.debounceUpdate = debounce(
+      () => updateResource(page, false), debounceTime || 1000,
+    )
+  }
+
+  componentDidMount() {
+    const { transitions } = this.props.page
+    //eslint-disable-next-line
+    this.setState({ transitions })
+  }
+
+  componentDidUpdate(prevProps) {
+    const { transitions } = this.props.page
+    if (prevProps.page.transitions !== transitions) {
+      //eslint-disable-next-line
+      this.setState({ transitions })
+    }
+  }
+
+  addTransition = () => {
+    const { page } = this.props
+    const { transitions } = this.state
+    this.setState({ transitions: transitions.concat({
+      fromPage: page._id,
+      conditions: [],
+      effects: [],
+    }) })
+  }
+
+  removeTransition = (index) => {
+    const { page } = this.props
+    const { transitions } = this.state
+    transitions.splice(index, 1)
+    page.transitions = transitions
+    this.setState({ transitions })
+    this.debounceUpdate()
+  }
+
+  updatePage = () => {
+    const { page } = this.props
+    const { transitions } = this.state
+    page.transitions = transitions
+    this.debounceUpdate()
+  }
+
+  render() {
+    const { bookId, page, postResource } = this.props
+    const { transitions } = this.state
+
+    return !page ? null : (
+      <div>
+        <Box className="box-primary">
+          <BoxHeader withBorder>
+            <h3 className="box-title">Transitions</h3>
+          </BoxHeader>
+          <BoxBody className={styles.transition}>
+            {transitions.map((transition, index) =>
+              <TransitionRow
+                transition={transition}
+                index={index}
+                bookId={bookId}
+                currentPageId={page._id}
+                postResource={postResource}
+                updateResource={this.updatePage}
+                removeTransition={this.removeTransition}
+              />)}
+          </BoxBody>
+          <BoxFooter className="align-center">
+            <Button className="md-whiteframe-z1" domProps={{ onClick: this.addTransition }}>
+              {'Ajouter une transition'}
+            </Button>
+          </BoxFooter>
+        </Box>
+      </div>
+    )
+  }
 }
 
 export default PageTransition

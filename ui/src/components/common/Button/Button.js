@@ -1,8 +1,9 @@
 import React from 'react'
+import styles from './styles.scss'
 
 const Button = ({ children, className = '', domProps }) => {
   return (
-    <button {...domProps} className={`btn btn-primary ${className}`} > {children} </button>
+    <button {...domProps} className={`btn btn-primary ${styles.component} ${className}`} > {children} </button>
   )
 }
 

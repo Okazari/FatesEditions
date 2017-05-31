@@ -12,7 +12,7 @@ const Book = require('../models/BookModel');
  * @return link object for D3Service
  */
 router.get('/links', (req, res, next) => {
-  if(!!req.query.bookId) {
+  if(req.query.bookId) {
     Book.findById(req.query.bookId, "pages")
       .then(book => {
         let transitionsArray = {nodes: [], links: []};
@@ -31,20 +31,6 @@ router.get('/links', (req, res, next) => {
   else {
     res.sendStatus(400);
   }
-});
-
-/**
- * @method GET
- * @param pageId
- * @return transitions array
- */
-router.get('/:pageId', (req, res, next) => {
-    if(!!req.query.bookId) {
-      Book.findById(req.query.bookId, {pages: {$elemMatch: {_id: req.params.pageId}}})
-        .select("pages.transitions")
-        .then(book => res.json(book.pages[0].transitions), err => next(err))
-    }
-    else res.sendStatus(400);
 });
 
 module.exports = router;

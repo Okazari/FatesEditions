@@ -31,7 +31,7 @@ const BookInformation = ({ draft = {}, updateResource }) => {
                 required: true,
               }}
             >
-              URL
+              <span>URL</span>
             </GroupInput>
           </div>
           <div className={styles.bookInformation}>

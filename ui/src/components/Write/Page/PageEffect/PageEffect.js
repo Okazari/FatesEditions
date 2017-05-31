@@ -49,7 +49,8 @@ class PageEffect extends React.Component {
 
   updatePage = () => {
     const { page } = this.props
-    page.effects = this.state.effects
+    const { effects } = this.state
+    page.effects = effects
     this.debounceUpdate()
   }
 

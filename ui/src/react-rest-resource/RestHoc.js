@@ -64,7 +64,8 @@ const RestHOC = (Component, ResourceService) => {
       this.observable.unsubscribe(this.observer, query)
     }
 
-    static postResource(newResource) {
+    // eslint-disable-next-line
+    postResource(newResource) {
       return ResourceService.postResource(newResource)
     }
 
