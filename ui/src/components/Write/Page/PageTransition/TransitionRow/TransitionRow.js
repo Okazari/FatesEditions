@@ -25,7 +25,7 @@ class TransitionRow extends React.Component {
   }
 
   createPage = () => {
-    const { bookId, currentPageId, postResource } = this.propsk
+    const { bookId, currentPageId, postResource } = this.props
     postResource({ bookId, page: { transitions: [{ toPage: currentPageId }] } })
       .then(page => browserHistory.push(`/app/write/book/${bookId}/page/${page._id}`))
   }

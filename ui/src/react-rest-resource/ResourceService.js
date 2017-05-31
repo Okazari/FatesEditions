@@ -195,8 +195,13 @@ class ResourceService {
 
   deleteResource(resourceId) {
     this.getById(resourceId).delete().then(() => {
-      delete this.map[resourceId]
-      this.notify()
+      Object.keys(this.observableMap).forEach((key) => {
+        const map = this.observableMap[key]
+        if (map.value.find(id => id === resourceId)) {
+          this.observableMap[key].value = map.value.filter(id => id !== resourceId)
+          this.notify(key)
+        }
+      })
     })
   }
 }
