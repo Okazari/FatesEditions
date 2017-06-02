@@ -1,8 +1,6 @@
 import React from 'react'
-import { AtomicBlockUtils, ContentState, Editor, EditorState, RichUtils } from 'draft-js'
+import { convertFromRaw, convertToRaw, Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js'
 import debounce from 'lodash.debounce'
-import DraftPasteProcessor from 'draft-js/lib/DraftPasteProcessor'
-import { stateToHTML } from 'draft-js-export-html'
 import styles from './styles.scss'
 import InlineToolbar from './InlineToolbar'
 import Image from './Image'
@@ -12,38 +10,45 @@ const TabDepth = 4
 class TextEditor extends React.Component {
   constructor(props) {
     super(props)
-    const { resource, resourceHandler, debounceTime } = this.props
-    if (props.initialContent.trim() !== "''") {
-      const processedHTML = DraftPasteProcessor.processHTML(this.props.initialContent)
-      const contentState = ContentState.createFromBlockArray(processedHTML)
+    const { debounceTime, initialContent } = this.props
+    if (initialContent) {
+      const contentState = convertFromRaw(JSON.parse(initialContent))
       this.state = { editorState: EditorState.createWithContent(contentState) }
       this.state = { editorState: EditorState.moveFocusToEnd(this.state.editorState) }
     } else {
       this.state = { editorState: EditorState.createEmpty() }
     }
     this.focus = () => this.editor.focus()
-    this.debounceUpdate = debounce(
-      () => resourceHandler(resource, false), debounceTime || 1000,
-    )
+    this.debounceUpdate = debounce(this.updateContent, debounceTime || 1000)
   }
 
   onChange = (editorState) => {
-    const { resource, domProps } = this.props
     this.setState({ editorState })
-    resource[domProps.name] = stateToHTML(editorState.getCurrentContent())
     this.debounceUpdate()
   }
 
   onInsertImage = (image) => {
     const { editorState } = this.state
-    const currentContentState = editorState.getCurrentContent()
-    const entityKey = currentContentState.createEntity('atomic', 'IMMUTABLE', { src: URL.createObjectURL(image) })
-    this.onChange(AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ''))
+    const contentState = editorState.getCurrentContent()
+    const reader = new FileReader()
+    reader.readAsDataURL(image)
+    reader.onload = () => {
+      const contentStateWithImage = contentState.createEntity('atomic', 'IMMUTABLE', { src: reader.result })
+      const entityKey = contentStateWithImage.getLastCreatedEntityKey()
+      this.onChange(AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' '), entityKey)
+    }
   }
 
   onTab = (e) => {
     const { editorState } = this.state
     this.onChange(RichUtils.onTab(e, editorState, TabDepth))
+  }
+
+  updateContent = () => {
+    const { resource, resourceHandler, domProps } = this.props
+    const { editorState } = this.state
+    resource[domProps.name] = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
+    resourceHandler(resource, false)
   }
 
   toggleBlockType = (blocktype) => {
