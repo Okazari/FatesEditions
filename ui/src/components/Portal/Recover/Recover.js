@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from '../common/style.scss'
-import { LabelInput, Button } from '../../common'
+import { Input, Button } from '../../common'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../common/Box'
 
 const Recover = () => {
@@ -13,7 +13,7 @@ const Recover = () => {
           <h3 className="box-title">{title}</h3>
         </BoxHeader>
         <BoxBody>
-          <LabelInput
+          <Input
             label="Email"
             domProps={{
               placeholder: 'Email associé à votre compte',

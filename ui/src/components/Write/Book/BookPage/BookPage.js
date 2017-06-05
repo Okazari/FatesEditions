@@ -1,7 +1,7 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
 import { Button, DataTable } from '../../../common'
+import { RouteService } from '../../../../services'
 import styles from './styles.scss'
 import PageRow from './PageRow'
 
@@ -15,7 +15,7 @@ const headers = [
 const BookPage = ({ pages = [], query, postResource, deleteResource }) => {
   const createPage = () => {
     postResource({ ...query, page: {} }).then((page) => {
-      browserHistory.push(`/app/write/book/${query.bookId}/page/${page._id}`)
+      RouteService.goTo(RouteService.routes.writebookpage(query.bookId, page._id))
     })
   }
 

@@ -1,10 +1,9 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import styles from '../common/style.scss'
-import { LabelInput, Button } from '../../common'
+import { Input, Button } from '../../common'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../common/Box'
 import { AdviceLink } from '../../Portal/common'
-import { AuthService } from '../../../services'
+import { AuthService, RouteService } from '../../../services'
 
 const subscribe = (event) => {
   event.preventDefault()
@@ -15,10 +14,10 @@ const subscribe = (event) => {
     verifyPassword: event.target.verifyPassword.value,
   }
   AuthService.subscribe(credentials)
-    .then(response => response.json)
-    .then((data) => {
-      window.localStorage.setItem('auth-token', data.token)
-      browserHistory.push('/app')
+    .then(response => response.json())
+    .then(({ token }) => {
+      AuthService.setToken(token)
+      RouteService.goTo(RouteService.routes.home())
     })
 }
 
@@ -31,7 +30,7 @@ const SignUp = () => {
         </BoxHeader>
         <BoxBody>
           <form onSubmit={subscribe}>
-            <LabelInput
+            <Input
               label="Nom d'utilisateur"
               domProps={{
                 placeholder: 'Okazari',
@@ -39,7 +38,7 @@ const SignUp = () => {
                 name: 'username',
               }}
             />
-            <LabelInput
+            <Input
               label="Adresse mail"
               domProps={{
                 placeholder: 'myvirtualstorybook@gmail.com',
@@ -47,7 +46,7 @@ const SignUp = () => {
                 name: 'email',
               }}
             />
-            <LabelInput
+            <Input
               label="Mot de passe"
               domProps={{
                 placeholder: 'thisisasecret',
@@ -55,7 +54,7 @@ const SignUp = () => {
                 name: 'password',
               }}
             />
-            <LabelInput
+            <Input
               label="Mot de passe (vérification)"
               domProps={{
                 placeholder: 'thisisasecret',
@@ -72,12 +71,12 @@ const SignUp = () => {
           <AdviceLink
             advice="Déjà inscris ?"
             label="Connecte toi !"
-            link="/portal/signin"
+            link={RouteService.routes.signin()}
           />
           <AdviceLink
             advice="Nom d'utilisateur/Mot de passe oublié ?"
             label="Aidez moi !"
-            link="/portal/recover"
+            link={RouteService.routes.recover()}
           />
         </BoxFooter>
       </Box>

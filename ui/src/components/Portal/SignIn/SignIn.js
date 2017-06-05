@@ -1,10 +1,9 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import styles from '../common/style.scss'
-import { LabelInput, Button } from '../../common'
+import { Input, Button } from '../../common'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../common/Box'
 import { AdviceLink } from '../../Portal/common'
-import { AuthService } from '../../../services'
+import { AuthService, RouteService } from '../../../services'
 
 class SignIn extends React.Component {
 
@@ -26,11 +25,11 @@ class SignIn extends React.Component {
         if (response.status >= 400) throw response.status
         return response.json()
       })
-      .catch(error => this.setState({ login: false, error: true }))
       .then(({ token }) => {
         AuthService.setToken(token)
-        browserHistory.push('/app')
+        RouteService.goTo(RouteService.routes.home())
       })
+      .catch(error => this.setState({ login: false, error: true }))
   }
 
   render() {
@@ -42,7 +41,7 @@ class SignIn extends React.Component {
           </BoxHeader>
           <BoxBody>
             <form onSubmit={this.login}>
-              <LabelInput
+              <Input
                 label="Nom d'utilisateur"
                 domProps={{
                   placeholder: "Entrez votre nom d'utilisateur",
@@ -50,7 +49,7 @@ class SignIn extends React.Component {
                   name: 'username',
                 }}
               />
-              <LabelInput
+              <Input
                 label="Mot de passe"
                 domProps={{
                   placeholder: 'Entrez votre mot de passe',
@@ -79,12 +78,12 @@ class SignIn extends React.Component {
             <AdviceLink
               advice="Pas encore de compte ?"
               label="Inscris toi !"
-              link="/portal/signup"
+              link={RouteService.routes.signup()}
             />
             <AdviceLink
               advice="Nom d'utilisateur/Mot de passe oublié ?"
               label="Aidez moi !"
-              link="/portal/recover"
+              link={RouteService.routes.recover()}
             />
           </BoxFooter>
         </Box>
