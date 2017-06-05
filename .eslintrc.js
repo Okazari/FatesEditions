@@ -49,6 +49,7 @@ module.exports = {
     'semi': [2,'never'],
     'arrow-body-style': 0,
     'array-callback-return': 'warn',
+    'linebreak-style': 'off',
     'default-case': ['warn', { commentPattern: '^no default$' }],
     'dot-location': ['warn', 'property'],
     eqeqeq: ['warn', 'allow-null'],
