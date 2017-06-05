@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
-import { Button, LabelInput, GroupInput, TextAreaInput } from '../../../common'
+import { Button, LabelInput, Input, GroupInput, TextAreaInput } from '../../../common'
 import BookCover from './BookCover'
 import GenreList from './GenreList'
 import PageList from './PageList'
@@ -35,13 +35,13 @@ const BookInformation = ({ draft = {}, updateResource }) => {
             </GroupInput>
           </div>
           <div className={styles.bookInformation}>
-            <LabelInput
+            <Input
               label="Titre"
-              resource={draft}
-              resourceHandler={updateResource}
+              debounce={500}
               domProps={{
+                onChange: name => updateResource({ ...draft, name }),
+                value: draft.name,
                 type: 'text',
-                name: 'name',
                 placeholder: 'Titre du livre',
                 required: true,
               }}
