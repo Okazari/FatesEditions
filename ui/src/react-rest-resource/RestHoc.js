@@ -54,6 +54,14 @@ const RestHOC = (Component, ResourceService) => {
         this.unsubscribe(this.props.query)
         this.subscribe(query)
       }
+      const nextResourceId = nextProps[`${ResourceService.options.name.single}Id`]
+      if (nextResourceId !== this.props[`${ResourceService.options.name.single}Id`]) {
+        this.unsubscribe()
+        const resource = ResourceService.getById(nextResourceId)
+        this.observable = resource
+        this.setState({ resource: resource.value })
+        this.subscribe()
+      }
     }
 
     subscribe(query) {
