@@ -25,8 +25,7 @@ router.get('/', (req, res, next) => {
  * @return book object
  */
 router.get('/:bookId', (req, res, next) => {
-  Book.findOne({_id: req.params.bookId, draft: true},
-    "name tags synopsis cover authorId genreId bookRevision")
+  Book.findOne({_id: req.params.bookId, draft: true})
     .then(book => res.json(book), err => next(err));
 });
 

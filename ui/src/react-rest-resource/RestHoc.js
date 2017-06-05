@@ -8,9 +8,7 @@ const getDisplayName = c => c.displayName || c.name || 'Component'
 const RestHOC = (Component, ResourceService) => {
   return class extends React.Component {
     static displayName = `RestHoc(${getDisplayName(Component)})`
-    static propTypes = {
-      query: PropTypes.string,
-    }
+
     constructor(props) {
       super(props)
       const { query } = props
