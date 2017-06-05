@@ -27,8 +27,8 @@ class SignIn extends React.Component {
         return response.json()
       })
       .catch(error => this.setState({ login: false, error: true }))
-      .then((data) => {
-        window.localStorage.setItem('auth-token', data.token)
+      .then(({ token }) => {
+        AuthService.setToken(token)
         browserHistory.push('/app')
       })
   }

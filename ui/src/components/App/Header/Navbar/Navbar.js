@@ -1,6 +1,14 @@
 import React from 'react'
+import { browserHistory } from 'react-router'
 import ToggleButton from './ToggleButton'
 import NavbarButton from './NavbarButton'
+import { AuthService } from '../../../../services'
+
+const onLogout = () => {
+  AuthService.logout().then(() => {
+    browserHistory.push('/app/portal/signin')
+  })
+}
 
 const Navbar = () => {
   return (
@@ -11,7 +19,7 @@ const Navbar = () => {
           <div className="container-fluid">
             <div className="collapse navbar-collapse" id="nav-bar-collapse">
               <ul className="nav navbar-nav">
-                <NavbarButton>Déconnexion</NavbarButton>
+                <NavbarButton domProps={{ onClick: onLogout }}>Déconnexion</NavbarButton>
               </ul>
             </div>
           </div>
