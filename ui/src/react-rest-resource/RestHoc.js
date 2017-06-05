@@ -1,4 +1,6 @@
+// eslint-disable-next-line
 import React from 'react'
+// eslint-disable-next-line
 import PropTypes from 'prop-types'
 
 const getDisplayName = c => c.displayName || c.name || 'Component'

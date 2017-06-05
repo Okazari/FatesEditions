@@ -169,16 +169,14 @@ class ResourceService {
 
   postResource(resource) {
     return this.fetch(this.url, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(resource),
-      })
-      .then(handleResponse)
-      .then((data) => {
-        this.map[data.id] = new Resource(`${this.url}/${data.id}`, { ...resource, id: data.id }, this.fetch)
-        Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query))
-        return data
-      })
+      method: 'POST',
+      headers,
+      body: JSON.stringify(resource),
+    }).then(handleResponse).then((data) => {
+      this.map[data.id] = new Resource(`${this.url}/${data.id}`, { ...resource, id: data.id }, this.fetch)
+      Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query))
+      return data
+    })
   }
 
   updateResource(resource, patch) {
