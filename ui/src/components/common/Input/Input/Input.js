@@ -8,21 +8,22 @@ class Input extends React.Component {
     super(props)
     const { domProps: { onChange, value }, debounce } = this.props
     let changeFn = (newValue) => {
-      onChange(newValue)
+      if (onChange) onChange(newValue)
       this.setState({ debouncing: false })
     }
     if (debounce) {
       changeFn = lodashDebounce(changeFn, debounce)
     }
     this.state = {
-      value,
+      uncontrolled: !value,
+      value: value || '',
       onChange: changeFn,
     }
   }
 
   componentWillUpdate(nextProps) {
-    const { value, debouncing } = this.state
-    if (value !== nextProps.domProps.value && !debouncing) {
+    const { value, debouncing, uncontrolled } = this.state
+    if (!uncontrolled && value !== nextProps.domProps.value && !debouncing) {
       this.setState({ value: nextProps.domProps.value })
     }
   }
