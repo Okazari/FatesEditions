@@ -8,9 +8,7 @@ const getDisplayName = c => c.displayName || c.name || 'Component'
 const RestHOC = (Component, ResourceService) => {
   return class extends React.Component {
     static displayName = `RestHoc(${getDisplayName(Component)})`
-    static propTypes = {
-      query: PropTypes.string,
-    }
+
     constructor(props) {
       super(props)
       const { query } = props
@@ -55,6 +53,14 @@ const RestHOC = (Component, ResourceService) => {
       if (query !== this.props.query) {
         this.unsubscribe(this.props.query)
         this.subscribe(query)
+      }
+      const nextResourceId = nextProps[`${ResourceService.options.name.single}Id`]
+      if (nextResourceId !== this.props[`${ResourceService.options.name.single}Id`]) {
+        this.unsubscribe()
+        const resource = ResourceService.getById(nextResourceId)
+        this.observable = resource
+        this.setState({ resource: resource.value })
+        this.subscribe()
       }
     }
 

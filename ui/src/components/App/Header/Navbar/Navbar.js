@@ -1,6 +1,13 @@
 import React from 'react'
 import ToggleButton from './ToggleButton'
 import NavbarButton from './NavbarButton'
+import { AuthService, RouteService } from '../../../../services'
+
+const onLogout = () => {
+  AuthService.logout().then(() => {
+    RouteService.goTo(RouteService.routes.signin())
+  })
+}
 
 const Navbar = () => {
   return (
@@ -11,7 +18,7 @@ const Navbar = () => {
           <div className="container-fluid">
             <div className="collapse navbar-collapse" id="nav-bar-collapse">
               <ul className="nav navbar-nav">
-                <NavbarButton>Déconnexion</NavbarButton>
+                <NavbarButton domProps={{ onClick: onLogout }}>Déconnexion</NavbarButton>
               </ul>
             </div>
           </div>

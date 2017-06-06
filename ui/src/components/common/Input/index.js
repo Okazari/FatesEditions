@@ -1,3 +1,4 @@
+export default from './Input'
 export InputHoc from './InputHoc'
 export RowInput from './RowInput'
 export LabelInput from './LabelInput'

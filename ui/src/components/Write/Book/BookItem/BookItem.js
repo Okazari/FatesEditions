@@ -7,11 +7,11 @@ import ItemRow from './ItemRow'
 
 // @todo refactor centerFooter
 const headers = [
-  { type: 'Nom' },
-  { type: 'Description' },
-  { type: 'Début' },
-  { type: 'Visible' },
-  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" /> },
+  { type: 'Nom', key: 'name' },
+  { type: 'Description', key: 'description' },
+  { type: 'Début', key: 'start' },
+  { type: 'Visible', key: 'visible' },
+  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
 
 class BookItem extends React.Component {
@@ -76,6 +76,7 @@ class BookItem extends React.Component {
                 items.map((item, index) => {
                   return (
                     <ItemRow
+                      key={item._id}
                       index={index}
                       item={item}
                       updateResource={this.updateDraft}

@@ -10,7 +10,7 @@ import Profile from './components/Profile'
 const AppRouter = () => {
   return (
     <Router history={browserHistory}>
-      <Route path="/">
+      <Route path="app">
         <IndexRedirect to="portal" />
         <Route path="portal" component={Portal}>
           <IndexRedirect to="signin" />
@@ -18,7 +18,7 @@ const AppRouter = () => {
           <Route path="signup" component={SignUp} />
           <Route path="recover" component={Recover} />
         </Route>
-        <Route path="app" component={App}>
+        <Route component={App}>
           <IndexRedirect to="play" />
           <Route path="play" >
             <IndexRedirect to="books" />

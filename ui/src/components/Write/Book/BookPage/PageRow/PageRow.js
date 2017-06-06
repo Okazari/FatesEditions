@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { Button } from '../../../../common'
+import { RouteService } from '../../../../../services'
 
 const PageRow = ({ page = {}, bookId, deleteResource }) => {
   return (
     <tr>
       <td>
-        <Link to={`/app/write/book/${bookId}/page/${page._id}`}>
+        <Link to={RouteService.routes.writebookpage(bookId, page._id)}>
           <Button className="fa fa-pencil md-whiteframe-z1" />
         </Link>
       </td>

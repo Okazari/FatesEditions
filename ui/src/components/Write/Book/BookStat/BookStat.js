@@ -5,6 +5,15 @@ import { Button, DataTable } from '../../../common'
 import styles from './styles.scss'
 import StatRow from './StatRow'
 
+const headers = [
+  { type: 'Nom', key: 'name' },
+  { type: 'Description', key: 'description' },
+  { type: 'Valeur initiale', key: 'initial' },
+  { type: 'Minimum', key: 'min' },
+  { type: 'Maximum', key: 'max' },
+  { type: 'Visible', classtype: '', key: 'visibility' },
+  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
+]
 class BookStat extends React.Component {
 
   constructor(props) {
@@ -51,16 +60,6 @@ class BookStat extends React.Component {
   }
 
   render() {
-    const headers = [
-      { type: 'Nom' },
-      { type: 'Description' },
-      { type: 'Valeur initiale' },
-      { type: 'Minimum' },
-      { type: 'Maximum' },
-      { type: 'Visible', classtype: '' },
-      { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" /> },
-    ]
-
     return (
       <div className={styles.component}>
         <Box className="box-primary">
@@ -75,6 +74,7 @@ class BookStat extends React.Component {
               {this.state.stats.map((stat, index) => {
                 return (
                   <StatRow
+                    key={stat._id}
                     index={index}
                     stat={stat}
                     updateResource={this.updateDraft}

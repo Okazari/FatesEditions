@@ -1,6 +1,6 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import { Button, SelectInput, TextAreaInput } from '../../../../common'
+import { RouteService } from '../../../../../services'
 import { Box, BoxHeader, BoxBody } from '../../../../common/Box'
 import TransitionCondition from './TransitionCondition'
 import TransitionEffect from './TransitionEffect'
@@ -27,12 +27,12 @@ class TransitionRow extends React.Component {
   createPage = () => {
     const { bookId, currentPageId, postResource } = this.props
     postResource({ bookId, page: { transitions: [{ toPage: currentPageId }] } })
-      .then(page => browserHistory.push(`/app/write/book/${bookId}/page/${page._id}`))
+      .then(page => RouteService.goTo(RouteService.routes.writebookpage(bookId, page._id)))
   }
 
   editPage = (pageId) => {
     const { bookId } = this.props
-    browserHistory.push(`/app/write/book/${bookId}/page/${pageId}`)
+    RouteService.goTo(RouteService.routes.writebookpage(bookId, pageId))
   }
 
   render() {
