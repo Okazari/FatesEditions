@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
-import { Button, LabelInput, Input, GroupInput, TextAreaInput } from '../../../common'
+import { Button, Input, GroupInput, TextAreaInput } from '../../../common'
 import BookCover from './BookCover'
 import GenreList from './GenreList'
 import PageList from './PageList'
@@ -22,11 +22,10 @@ const BookInformation = ({ draft = {}, updateResource }) => {
           <div className={styles.bookCover}>
             <BookCover cover={draft.cover} />
             <GroupInput
-              resource={draft}
-              resourceHandler={updateResource}
               domProps={{
                 type: 'text',
-                name: 'cover',
+                value: draft.cover,
+                onChange: cover => updateResource({ ...draft, cover }),
                 placeholder: "url de l'image de couverture",
                 required: true,
               }}
@@ -39,31 +38,37 @@ const BookInformation = ({ draft = {}, updateResource }) => {
               label="Titre"
               debounce={500}
               domProps={{
-                onChange: name => updateResource({ ...draft, name }),
                 value: draft.name,
+                onChange: name => updateResource({ ...draft, name }),
                 type: 'text',
                 placeholder: 'Titre du livre',
                 required: true,
               }}
             />
             <GenreList
-              defaultValue={draft.genreId}
-              resource={draft}
-              resourceHandler={updateResource}
-              domProps={{ name: 'genre', required: true }}
+              domProps={{
+                value: draft.genreId,
+                required: true,
+                onChange: genreId => updateResource({ ...draft, genreId }),
+              }}
             />
             <TextAreaInput
               label="Synopsis"
-              resource={draft}
-              resourceHandler={updateResource}
-              domProps={{ name: 'synopsis', placeholder: 'Synopsis du livre', required: true }}
+              debounce={500}
+              domProps={{
+                value: draft.synopsis,
+                onChange: synopsis => updateResource({ ...draft, synopsis }),
+                placeholder: 'Synopsis du livre',
+                required: true,
+              }}
             />
             <PageList
               query={{ bookId: draft._id }}
-              defaultValue={draft.startingPageId}
-              resource={draft}
-              resourceHandler={updateResource}
-              dompProps={{ name: 'startingPageId', required: true }}
+              domProps={{
+                value: draft.startingPageId,
+                required: true,
+                onChange: startingPageId => updateResource({ ...draft, startingPageId }),
+              }}
             />
           </div>
         </BoxBody>

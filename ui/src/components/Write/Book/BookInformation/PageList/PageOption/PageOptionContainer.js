@@ -1,6 +1,6 @@
-//eslint-disable-next-line
+import React from 'react'
+// eslint-disable-next-line
 import { RestHoc as restHoc } from 'react-rest-resource'
 import { PageService } from '../../../../../../services'
-import PageOption from './PageOption'
 
-export default restHoc(PageOption, PageService)
+export default restHoc(({ page = {} }) => <span>{page.title}</span>, PageService)
