@@ -8,8 +8,12 @@
   flex-wrap: nowrap;
   margin-top: 10px;
 
-  &>input{
+  input{
+    border: 1px solid $grey-darken-20;
     border-left: none;
+    outline-color: $light-blue;
+    padding: 5px;
+    width: 100%;
   }
 
   span {

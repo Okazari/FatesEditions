@@ -1,14 +1,13 @@
 import React from 'react'
-import RowInput from '../RowInput'
 import styles from './styles.scss'
 
-const GroupInput = ({ children, label, injectedProps, domProps }) => {
+const GroupInput = ({ children, label, domProps }) => {
   return (
     <div>
-      {label !== null ? <label htmlFor={domProps.id}>{label}</label> : null}
+      {label && <label htmlFor={domProps.id}>{label}</label>}
       <div className={styles.component}>
         {children}
-        <RowInput domProps={domProps} injectedProps={injectedProps} />
+        <input {...domProps} />
       </div>
     </div>
   )
