@@ -1,11 +1,16 @@
-@import '~styles/forms';
+@import '~styles/colors';
+@import '~styles/shadows';
 
 .component {
   align-items: stretch;
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 
-  label {
-    align-self: flex-start;
+  select {
+    background: none;
+    border: 1px solid $grey-darken-20;
+    outline: $light-blue;
+    padding: 6px;
   }
 }
