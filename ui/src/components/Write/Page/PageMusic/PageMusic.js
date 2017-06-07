@@ -16,10 +16,12 @@ const PageMusic = ({ page, updateResource }) => {
         <BoxBody>
           <div className={styles.component}>
             <GroupInput
-              resource={page}
-              resourceHandler={updateResource}
               label="Lien SoundCloud"
-              domProps={{ placeholder: 'Lien SoundCloud de votre musique de fond', name: 'backgroundMusic' }}
+              domProps={{
+                placeholder: 'Lien SoundCloud de votre musique de fond',
+                value: page.backgroundMusic,
+                onChange: backgroundMusic => updateResource({ ...page, backgroundMusic }),
+              }}
             >
               <Button ><i className="fa fa-close" /></Button>
             </GroupInput>

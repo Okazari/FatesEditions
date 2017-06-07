@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody } from '../../../common/Box'
-import { LabelInput, TextAreaInput } from '../../../common'
+import { Input, TextAreaInput } from '../../../common'
 import styles from './styles.scss'
 
 const PageInformation = ({ page, updateResource }) => {
@@ -11,17 +11,26 @@ const PageInformation = ({ page, updateResource }) => {
       </BoxHeader>
       <BoxBody>
         <div className={styles.component}>
-          <LabelInput
+          <Input
             label="Titre"
-            resource={page}
-            resourceHandler={updateResource}
-            domProps={{ type: 'text', name: 'title', placeholder: 'Titre', required: true }}
+            debounce={500}
+            domProps={{
+              type: 'text',
+              value: page.title,
+              onChange: title => updateResource({ ...page, title }),
+              placeholder: 'Titre',
+              required: true,
+            }}
           />
           <TextAreaInput
             label="Memo"
-            resource={page}
-            resourceHandler={updateResource}
-            domProps={{ type: 'text', name: 'description', placeholder: 'Mémo', required: true }}
+            domProps={{
+              type: 'text',
+              value: page.description,
+              onChange: description => updateResource({ ...page, description}),
+              placeholder: 'Mémo',
+              required: true,
+            }}
           />
         </div>
       </BoxBody>

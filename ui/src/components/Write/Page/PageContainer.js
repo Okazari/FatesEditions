@@ -6,6 +6,6 @@ import { PageService } from '../../../services'
 
 const ConnectedComponent = restHoc(Page, PageService)
 const Component = ({ params }) => {
-  return <ConnectedComponent query={params.bookId} pageId={params.pageId} />
+  return <ConnectedComponent bookId={params.bookId} pageId={params.pageId} key={params.pageId} />
 }
 export default Component
