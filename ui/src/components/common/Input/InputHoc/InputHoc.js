@@ -1,57 +1,50 @@
 import React from 'react'
-import debounce from 'lodash.debounce'
+import lodashDebounce from 'lodash.debounce'
 
 const getDisplayName = c => c.displayName || c.name || 'Component'
 
 const InputHoc = (WrappedInput) => {
   return class extends React.Component {
-    static displayName = `InputHoc(${getDisplayName(WrappedInput)})`
+    static displayName = `NewInputHoc(${getDisplayName(WrappedInput)})`
 
     constructor(props) {
       super(props)
-      const { resource, resourceHandler, debounceTime } = this.props
-      this.state = { inputValue: '' }
-      this.debounceUpdate = debounce(
-        () => resourceHandler(resource, false), debounceTime || 1000,
-      )
-    }
-
-    componentDidMount() {
-      const { resource, domProps } = this.props
-      if (resource) {
-        //eslint-disable-next-line
-        this.setState({ inputValue: resource[domProps.name] })
+      const { domProps: { onChange, value }, debounce } = this.props
+      let changeFn = (newValue) => {
+        if (onChange) onChange(newValue)
+        this.setState({ debouncing: false })
+      }
+      if (debounce) {
+        changeFn = lodashDebounce(changeFn, debounce)
+      }
+      this.state = {
+        uncontrolled: !value,
+        value: value || '',
+        onChange: changeFn,
       }
     }
 
-    componentDidUpdate(prevProps) {
-      const { resource, domProps } = this.props
-      if (prevProps.resource !== resource) {
-        //eslint-disable-next-line
-        this.setState({ inputValue: resource[domProps.name] })
+    componentWillUpdate(nextProps) {
+      const { value, debouncing, uncontrolled } = this.state
+      if (!uncontrolled && value !== nextProps.domProps.value && !debouncing) {
+        this.setState({ value: nextProps.domProps.value })
       }
     }
-
-    updateInput = (event) => {
-      const { resource, domProps } = this.props
-      let targetValue
-      if (domProps.type === 'checkbox') {
-        targetValue = event.target.checked
-      } else {
-        targetValue = event.target.value
-      }
-      this.setState({ inputValue: targetValue })
-      resource[domProps.name] = targetValue
-      this.debounceUpdate()
-    };
 
     render() {
-      return (
-        <WrappedInput
-          injectedProps={{ inputValue: this.state.inputValue, updateInput: this.updateInput }}
-          {...this.props}
-        />
-      )
+      const { domProps } = this.props
+      const { value, onChange } = this.state
+      const onInputChange = (e) => {
+        let eventValue
+        if (domProps.type === 'checkbox') eventValue = e.target.checked
+        else eventValue = e.target.value
+        this.setState({ debouncing: true, value: eventValue })
+        onChange(eventValue)
+      }
+      return (<WrappedInput
+        {...this.props}
+        domProps={{ ...domProps, value, onChange: onInputChange }}
+      />)
     }
   }
 }
