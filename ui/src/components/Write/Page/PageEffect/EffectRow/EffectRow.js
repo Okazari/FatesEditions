@@ -4,7 +4,6 @@ import EffectInput from './EffectInput'
 import styles from './styles.scss'
 
 const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
-
   const updateType = (type) => {
     effect.type = type
     updateResource(index, effect)
@@ -18,7 +17,7 @@ const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
           debounce={1}
           domProps={{
             value: effect.type,
-            onChange: type => updateType(type)
+            onChange: type => updateType(type),
           }}
         >
           <option disabled selected>{'Choix de la variable'}</option>

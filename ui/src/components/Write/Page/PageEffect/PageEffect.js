@@ -5,7 +5,6 @@ import EffectRow from './EffectRow'
 import styles from './styles.scss'
 
 const PageEffect = ({ bookId, page, updateResource }) => {
-
   const addEffect = () => {
     page.effects = page.effects.concat({})
     updateResource(page)
