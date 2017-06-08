@@ -5,19 +5,19 @@ import TransitionRow from './TransitionRow'
 import { BookService } from '../../../../../services'
 
 const ConnectedComponent = restHoc(TransitionRow, BookService)
-export default ({ transition,
+export default ({ bookId,
+                  pageId,
+                  transition,
                   index,
-                  bookId,
-                  currentPageId,
                   updateResource,
                   postResource,
                   removeTransition }) =>
                     <ConnectedComponent
-                      transition={transition}
-                      index={index}
                       bookId={bookId}
                       key={bookId}
-                      currentPageId={currentPageId}
+                      pageId={pageId}
+                      transition={transition}
+                      index={index}
                       updateResource={updateResource}
                       postResource={postResource}
                       removeTransition={removeTransition}

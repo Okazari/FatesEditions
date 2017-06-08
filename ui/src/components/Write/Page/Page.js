@@ -15,12 +15,12 @@ const Page = ({ bookId, page, updateResource, postResource }) => {
         <PageEffect bookId={bookId} page={page} updateResource={updateResource} />
         <PageMusic page={page} updateResource={updateResource} />
         <PageContent page={page} updateResource={updateResource} />
-        {/*<PageTransition
+        <PageTransition
           bookId={bookId}
           page={page}
           updateResource={updateResource}
           postResource={postResource}
-        />*/}
+        />
       </div>
     </Content>
   )

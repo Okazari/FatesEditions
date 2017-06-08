@@ -6,88 +6,76 @@ import TransitionCondition from './TransitionCondition'
 import TransitionEffect from './TransitionEffect'
 import styles from './styles.scss'
 
-class TransitionRow extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedPage: 'new',
-      effects: [],
-    }
+const TransitionRow = ({ book,
+                         pageId,
+                         transition,
+                         index,
+                         updateResource,
+                         postResource,
+                         removeTransition }) => {
+  const createPage = () => {
+    postResource({ bookId: book._id, page: { transitions: [{ toPage: pageId }] } })
+      .then(page => RouteService.goTo(RouteService.routes.writebookpage(book._id, page._id)))
   }
 
-  updateTransition = (transition) => {
-    const { updateResource } = this.props
-    this.setState({ selectedPage: transition.toPage })
-    if (transition.toPage !== 'new') {
-      updateResource()
-    }
+  const editPage = () => {
+    RouteService.goTo(RouteService.routes.writebookpage(book._id, transition.toPage))
   }
 
-  createPage = () => {
-    const { bookId, currentPageId, postResource } = this.props
-    postResource({ bookId, page: { transitions: [{ toPage: currentPageId }] } })
-      .then(page => RouteService.goTo(RouteService.routes.writebookpage(bookId, page._id)))
-  }
-
-  editPage = (pageId) => {
-    const { bookId } = this.props
-    RouteService.goTo(RouteService.routes.writebookpage(bookId, pageId))
-  }
-
-  render() {
-    const { book, index, transition, bookId, removeTransition } = this.props
-    const { selectedPage } = this.state
-
-    return !book ? null : (
-      <Box className="box-default md-whiteframe-z1 box-solid">
-        <BoxHeader withBorder >
-          <div className={styles.component}>
-            <div className={styles.panel}>
-              <span>Page de destination</span>
-              {selectedPage === 'new' ?
-                <Button className={styles.panelButton} domProps={{ onClick: this.createPage }}><i className="fa fa-plus" />Créer et lier la nouvelle page</Button> :
-                <Button className={styles.panelButton} domProps={{ onClick: () => this.editPage(selectedPage) }}><i className="fa fa-pencil" />Editer la page de destination</Button>
-              }
-              <Button
-                className={styles.deleteTransition}
-                domProps={{ onClick: () => removeTransition(index) }}
-              >
-                <i className="fa fa-times" />
-              </Button>
-            </div>
-            <SelectInput
-              className={styles.destPage}
-              resource={transition}
-              resourceHandler={this.updateTransition}
-              domProps={{ name: 'toPage' }}
-              debounceTime={1}
+  return !!book && (
+    <Box className="box-default md-whiteframe-z1 box-solid">
+      <BoxHeader withBorder >
+        <div className={styles.component}>
+          <div className={styles.panel}>
+            <span>Page de destination</span>
+            {transition.toPage === 'newPage' ?
+              <Button className={styles.panelButton} domProps={{ onClick: createPage }}><i className="fa fa-plus" />Créer et lier la nouvelle page</Button> :
+              <Button className={styles.panelButton} domProps={{ onClick: () => editPage() }}><i className="fa fa-pencil" />Editer la page de destination</Button>
+            }
+            <Button
+              className={styles.deleteTransition}
+              domProps={{ onClick: () => removeTransition(index) }}
             >
-              <option value="new" selected>-- Vers une nouvelle page --</option>
-              {book.pages.map(page => <option value={page._id}>{page.title}</option>)}
-            </SelectInput>
+              <i className="fa fa-times" />
+            </Button>
           </div>
-        </BoxHeader>
-        <BoxBody className={styles.body}>
-          <TextAreaInput
-            resource={transition}
-            resourceHandler={this.updateTransition}
-            domProps={{ name: 'text', placeholder: 'Texte de la transition' }}
-          />
-          <TransitionCondition
-            transition={transition}
-            updateResource={this.updateTransition}
-            bookId={bookId}
-          />
-          <TransitionEffect
-            transition={transition}
-            updateResource={this.updateTransition}
-            bookId={bookId}
-          />
-        </BoxBody>
-      </Box>
-    )
-  }
+          <SelectInput
+            className={styles.destPage}
+            debounce={1}
+            domProps={{
+              value: transition.toPage,
+              onChange: toPage => updateResource(index, { ...transition, toPage }),
+            }}
+          >
+            <option value="newPage" selected>-- Vers une nouvelle page --</option>
+            {book.pages.map(page => <option value={page._id}>{page.title}</option>)}
+          </SelectInput>
+        </div>
+      </BoxHeader>
+      <BoxBody className={styles.body}>
+        <TextAreaInput
+          debounce={500}
+          domProps={{
+            value: transition.text,
+            onChange: text => updateResource(index, { ...transition, text }),
+            placeholder: 'Texte de la transition',
+          }}
+        />
+        <TransitionCondition
+          book={book}
+          transition={transition}
+          index={index}
+          updateResource={updateResource}
+        />
+        <TransitionEffect
+          book={book}
+          transition={transition}
+          index={index}
+          updateResource={updateResource}
+        />
+      </BoxBody>
+    </Box>
+  )
 }
 
 export default TransitionRow

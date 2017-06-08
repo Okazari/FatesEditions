@@ -1,86 +1,59 @@
 import React from 'react'
 import { Button, SelectInput } from '../../../../../common'
-import EffectRow from '../../../PageEffect/EffectRow'
+import ConditionRow from './ConditionRow'
 import styles from './styles.scss'
 
-class ConditionRow extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      conditions: [],
-    }
+const TransitionCondition = ({ book, transition, index, updateResource }) => {
+  const addCondition = () => {
+    transition.conditions = transition.conditions.concat({})
+    updateResource(index, transition)
   }
 
-  componentDidMount() {
-    const { conditions } = this.props.transition
-    //eslint-disable-next-line
-    this.setState({ conditions })
+  const updateCondition = (conditionIndex, condition) => {
+    transition.conditions[conditionIndex] = condition
+    updateResource(index, transition)
   }
 
-  componentDidUpdate(prevProps) {
-    const { conditions } = this.props.transition
-    if (prevProps.transition.conditions !== conditions) {
-      //eslint-disable-next-line
-      this.setState({ conditions })
-    }
+  const removeCondition = (conditionIndex) => {
+    transition.conditions.splice(conditionIndex, 1)
+    updateResource(index, transition)
   }
 
-  addCondition = () => {
-    const { conditions } = this.state
-    this.setState({ conditions: conditions.concat({}) })
-  }
-
-  updateCondition = () => {
-    const { transition, updateResource } = this.props
-    const { conditions } = this.state
-    transition.conditions = conditions
-    updateResource(transition)
-  }
-
-  removeCondition = (index) => {
-    const { transition, updateResource } = this.props
-    const { conditions } = this.state
-    conditions.splice(index, 1)
-    transition.conditions = conditions
-    updateResource(transition)
-  }
-
-  render() {
-    const { bookId, transition, updateResource } = this.props
-    const { conditions } = this.state
-    return (
-      <div>
-        <div className={styles.conditionHeader}>
-          <span className={styles.title}>Conditions</span>
-          <span> Opérateur de condition : </span>
-          <SelectInput
-            resource={transition}
-            resourceHandler={updateResource}
-            domProps={{ name: 'conditionOperator' }}
-          >
-            <option value="and">ET</option>
-            <option value="or">OU</option>
-          </SelectInput>
-        </div>
-        <div className={styles.conditionEffect}>
-          {conditions.map((effect, index) =>
-            <EffectRow
-              effect={effect}
-              index={index}
-              bookId={bookId}
-              updateResource={this.updateCondition}
-              removeEffect={this.removeCondition}
-            />)}
-          <Button
-            className="btn-xs md-whiteframe-z1"
-            domProps={{ onClick: this.addCondition }}
-          >
-            {'Ajouter une Condition'}
-          </Button>
-        </div>
+  return (
+    <div>
+      <div className={styles.conditionHeader}>
+        <span className={styles.title}>Conditions</span>
+        <span> Opérateur de condition : </span>
+        <SelectInput
+          debounce={500}
+          domProps={{
+            value: transition.conditionOperator,
+            onChange: conditionOperator =>
+              updateResource(index, { ...transition, conditionOperator }),
+          }}
+        >
+          <option value="and">ET</option>
+          <option value="or">OU</option>
+        </SelectInput>
       </div>
-    )
-  }
+      <div className={styles.conditionEffect}>
+        {transition.conditions.map((condition, conditionIndex) =>
+          <ConditionRow
+            book={book}
+            condition={condition}
+            index={conditionIndex}
+            updateResource={updateCondition}
+            removeCondition={removeCondition}
+          />)}
+        <Button
+          className="btn-xs md-whiteframe-z1"
+          domProps={{ onClick: addCondition }}
+        >
+          {'Ajouter une Condition'}
+        </Button>
+      </div>
+    </div>
+  )
 }
 
-export default ConditionRow
+export default TransitionCondition
