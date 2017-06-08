@@ -27,7 +27,7 @@ const PageInformation = ({ page, updateResource }) => {
             domProps={{
               type: 'text',
               value: page.description,
-              onChange: description => updateResource({ ...page, description}),
+              onChange: description => updateResource({ ...page, description }),
               placeholder: 'Mémo',
               required: true,
             }}
