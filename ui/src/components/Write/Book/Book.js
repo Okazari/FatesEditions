@@ -8,7 +8,7 @@ import BookPage from './BookPage'
 import styles from './styles.scss'
 
 const Book = ({ draft, updateResource }) => {
-  return !draft ? null : (
+  return !!draft && (
     <Content title="Edition de livre" >
       <div className={styles.component}>
         <BookInformation draft={draft} updateResource={updateResource} />

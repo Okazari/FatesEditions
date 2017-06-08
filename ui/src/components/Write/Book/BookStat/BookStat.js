@@ -14,7 +14,6 @@ const headers = [
   { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
 const BookStat = ({ draft, updateResource }) => {
-
   const addStat = () => {
     draft.stats = draft.stats.concat({})
     updateResource(draft)
@@ -47,7 +46,7 @@ const BookStat = ({ draft, updateResource }) => {
                   index={index}
                   stat={stat}
                   updateResource={updateDraft}
-                  deleteResource={removeStat}
+                  removeStat={removeStat}
                 />
               )
             })}

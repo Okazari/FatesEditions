@@ -13,7 +13,6 @@ const headers = [
 ]
 
 const BookItem = ({ draft, updateResource }) => {
-
   const addObject = () => {
     draft.objects = draft.objects.concat({})
     updateResource(draft)

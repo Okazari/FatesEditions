@@ -1,8 +1,8 @@
 import React from 'react'
 import { Input, Button } from '../../../../common'
 
-const StatRow = ({ index, stat = {}, updateResource, deleteResource }) => {
-  const onDelete = e => deleteResource(e.target.id)
+const StatRow = ({ stat, index, updateResource, removeStat }) => {
+  const onDelete = e => removeStat(e.target.id)
   return (
     <tr>
       <td>
@@ -23,7 +23,7 @@ const StatRow = ({ index, stat = {}, updateResource, deleteResource }) => {
           domProps={{
             type: 'text',
             value: stat.description,
-            onChange: name => updateResource(index, { ...stat, name }),
+            onChange: description => updateResource(index, { ...stat, description }),
             placeholder: 'Description',
             required: true,
           }}
@@ -35,7 +35,7 @@ const StatRow = ({ index, stat = {}, updateResource, deleteResource }) => {
           domProps={{
             type: 'number',
             value: stat.initValue,
-            onChange: name => updateResource(index, { ...stat, name }),
+            onChange: initValue => updateResource(index, { ...stat, initValue }),
             placeholder: 'Valeur initiale',
             required: true,
           }}
@@ -47,7 +47,7 @@ const StatRow = ({ index, stat = {}, updateResource, deleteResource }) => {
           domProps={{
             type: 'number',
             value: stat.min,
-            onChange: name => updateResource(index, { ...stat, name }),
+            onChange: min => updateResource(index, { ...stat, min }),
             placeholder: 'Min',
             required: true,
           }}
@@ -59,7 +59,7 @@ const StatRow = ({ index, stat = {}, updateResource, deleteResource }) => {
           domProps={{
             type: 'number',
             value: stat.max,
-            onChange: name => updateResource(index, { ...stat, name }),
+            onChange: max => updateResource(index, { ...stat, max }),
             placeholder: 'Max',
             required: true,
           }}
@@ -72,7 +72,7 @@ const StatRow = ({ index, stat = {}, updateResource, deleteResource }) => {
             type: 'checkbox',
             value: stat.visible,
             checked: stat.visible,
-            onChange: name => updateResource(index, { ...stat, name }),
+            onChange: visible => updateResource(index, { ...stat, visible }),
             required: true,
           }}
         />
