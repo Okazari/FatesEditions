@@ -3,8 +3,10 @@ import { Button } from '../../../../../../../common'
 import ConditionObjectInput from './ConditionObjectInput'
 import ConditionStatInput from './ConditionStatInput'
 import styles from './styles.scss'
+import classnames from 'classnames'
 
 const ConditionInput = ({ book, condition, index, updateResource, removeCondition }) => {
+  const buttonClassName = classnames("fa fa-close md-whiteframe-z1", styles.removeButton)
   return (
     <div className={styles.component}>
       {condition.type === 'stat' ?
@@ -20,7 +22,7 @@ const ConditionInput = ({ book, condition, index, updateResource, removeConditio
           index={index}
           updateResource={updateResource}
         />}
-      <Button className="fa fa-close md-whiteframe-z1" domProps={{ onClick: () => removeCondition(index) }} />
+      <Button className={buttonClassName} domProps={{ onClick: () => removeCondition(index) }} />
     </div>
   )
 }

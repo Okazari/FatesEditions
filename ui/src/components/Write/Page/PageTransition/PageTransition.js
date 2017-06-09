@@ -2,7 +2,6 @@ import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
 import { Button } from '../../../common'
 import TransitionRow from './TransitionRow'
-import styles from './styles.scss'
 
 const PageTransition = ({ bookId, page, postResource, updateResource }) => {
   const addTransition = () => {
@@ -30,7 +29,7 @@ const PageTransition = ({ bookId, page, postResource, updateResource }) => {
         <BoxHeader withBorder>
           <h3 className="box-title">Transitions</h3>
         </BoxHeader>
-        <BoxBody className={styles.transition}>
+        <BoxBody>
           {page.transitions.map((transition, index) =>
             <TransitionRow
               bookId={bookId}

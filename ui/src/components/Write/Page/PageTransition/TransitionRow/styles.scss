@@ -1,7 +1,6 @@
 @import '~styles/colors';
 
 .component {
-  display: flex;
   flex-direction: column;
 }
 
@@ -32,7 +31,6 @@
       margin: 0;
     }
   }
-
 }
 
 .destPage {
@@ -44,15 +42,10 @@
   }
 }
 
-
 .body {
   flex-direction: column;
   flex: 1;
   &>div {
     margin-top: 0;
   }
-}
-
-.condition {
-
 }

@@ -6,7 +6,7 @@
 
 .selectInput {
   flex-direction: row;
-  flex: 0.32;
+  flex: calc(1/3);
   &>select {
     flex: 1;
     margin: 0 10px;
