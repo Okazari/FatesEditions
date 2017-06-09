@@ -62,13 +62,14 @@ class Resource {
     return this.fetch(this.url, { method: 'PATCH', headers, body: JSON.stringify(resource) })
       .then(this.handleResponse)
       .catch(error => this.notifyError(error))
+      .then(res => this.setResource(res))
   }
 
   put(resource) {
     return this.fetch(this.url, { method: 'PUT', headers, body: JSON.stringify(resource) })
       .then(this.handleResponse)
       .catch(error => this.notifyError(error))
-      .then(() => this.setResource(resource))
+      .then(res => this.setResource(res))
   }
 
   delete() {
