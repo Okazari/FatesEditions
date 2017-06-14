@@ -5,7 +5,6 @@ const express = require('express');
 const router = express.Router();
 const https = require("https");
 const Book = require('../models/BookModel');
-const Transition = require('../models/TransitionSchema');
 
 /**
  * @method GET
@@ -25,7 +24,7 @@ router.get('/', (req, res, next) => {
  * @return page object
  */
 router.get('/:pageId', (req, res, next) => {
-    Book.findOne({"pages._id": req.params.pageId}, {pages: {$elemMatch: {_id: req.params.pageId}}})
+    Book.findOne({"pages._id": req.params.pageId}, { pages: { $elemMatch: { _id: req.params.pageId } } })
       .then(book => res.json(book.pages[0]),
         err => next(err));
 });
@@ -57,13 +56,11 @@ router.post('/', (req, res, next) => {
  */
 router.put('/:pageId', (req, res, next) => {
   if (req.body) {
-    Book.findOne({"pages._id": req.params.pageId})
+    Book.findOneAndUpdate({"pages._id": req.params.pageId}, {$set: {'pages.$': req.body}}, {new: true})
       .then(book => {
-        const pageIndex = book.pages.findIndex(page => page._id.toString() === req.params.pageId);
-        book.pages[pageIndex] = req.body;
-        book.save();
-        res.json(book)
-      }, err => next(err));
+        const pageIndex = book.pages.findIndex(page => page._id.toString() === req.params.pageId)
+        res.json(book.pages[pageIndex])
+      }, err => next(err))
   }
   else res.sendStatus(400);
 });
@@ -73,7 +70,7 @@ router.put('/:pageId', (req, res, next) => {
  * @return page object
  */
 router.patch('/:pageId', (req, res, next) => {
-  Book.findOne({"pages._id": req.params.pageId}, {pages: {$elemMatch: {_id: req.params.pageId}}})
+  Book.findOne({"pages._id": req.params.pageId}, { pages: { $elemMatch: { _id: req.params.pageId } } })
     .then(book => {
       let page = book.pages[0];
       if(req.body.title) page.title = req.body.title;
@@ -83,8 +80,8 @@ router.patch('/:pageId', (req, res, next) => {
       if(req.body.bookId) page.bookId = req.body.bookId;
       if(req.body.effects) page.effects = req.body.effects;
       if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
-      book.save()
-        .then(book => res.json(book.pages.find(page => page._id === req.params.pageId)),
+      book.update()
+        .then(() => res.json(page),
           err => next(err));
     }, err => next(err));
 });
