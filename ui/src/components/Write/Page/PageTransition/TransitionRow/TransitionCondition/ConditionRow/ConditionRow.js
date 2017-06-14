@@ -4,6 +4,11 @@ import { SelectInput } from '../../../../../../common'
 import styles from './styles.scss'
 
 const ConditionRow = ({ book, condition, index, updateResource, removeCondition }) => {
+  const updateType = (type) => {
+    condition.type = type
+    updateResource(index, condition)
+  }
+
   return (
     <div className={styles.component}>
       <div>
@@ -12,7 +17,7 @@ const ConditionRow = ({ book, condition, index, updateResource, removeCondition 
           debounce={1}
           domProps={{
             value: condition.type,
-            onChange: type => updateResource(index, { ...condition, type }),
+            onChange: type => updateType(type),
           }}
         >
           <option value="object">{'L\'objet'}</option>

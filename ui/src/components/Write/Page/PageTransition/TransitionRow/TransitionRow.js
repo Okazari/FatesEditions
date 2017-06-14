@@ -30,7 +30,7 @@ const TransitionRow = ({ book,
             <span>Page de destination</span>
             {transition.toPage === 'newPage' ?
               <Button className={styles.panelButton} domProps={{ onClick: createPage }}><i className="fa fa-plus" />Créer et lier la nouvelle page</Button> :
-              <Button className={styles.panelButton} domProps={{ onClick: () => editPage() }}><i className="fa fa-pencil" />Editer la page de destination</Button>
+              <Button className={styles.panelButton} domProps={{ onClick: editPage }}><i className="fa fa-pencil" />Editer la page de destination</Button>
             }
             <Button
               className={styles.deleteTransition}

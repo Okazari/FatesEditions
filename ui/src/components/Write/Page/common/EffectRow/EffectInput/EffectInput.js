@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '../../../../../common'
-import ObjectInput from './ObjectInput'
-import StatInput from './StatInput'
+import { Button } from '../../../../../common/index'
+import ObjectInput from './ObjectInput/index'
+import StatInput from './StatInput/index'
 import styles from './styles.scss'
 import classnames from 'classnames'
 

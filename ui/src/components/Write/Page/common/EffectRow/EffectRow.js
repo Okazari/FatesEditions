@@ -1,6 +1,6 @@
 import React from 'react'
-import { SelectInput } from '../../../../common'
-import EffectInput from './EffectInput'
+import { SelectInput } from '../../../../common/index'
+import EffectInput from './EffectInput/index'
 import styles from './styles.scss'
 
 const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
@@ -24,7 +24,7 @@ const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
           <option value="object">{'L\'objet'}</option>
           <option value="stat">{'La statistique'}</option>
         </SelectInput>
-        { effect.type !== '' ?
+        { effect.type ?
           <EffectInput
             book={book}
             type={effect.type}

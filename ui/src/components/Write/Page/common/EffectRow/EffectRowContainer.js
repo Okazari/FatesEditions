@@ -2,7 +2,7 @@
 import { RestHoc as restHoc } from 'react-rest-resource'
 import React from 'react'
 import EffectRow from './EffectRow'
-import { BookService } from '../../../../../services'
+import { BookService } from '../../../../../services/index'
 
 const ConnectedComponent = restHoc(EffectRow, BookService)
 export default ({ bookId, effect, index, updateResource, removeEffect }) => <ConnectedComponent

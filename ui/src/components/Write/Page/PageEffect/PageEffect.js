@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
 import { Button } from '../../../common'
-import EffectRow from './EffectRow'
+import EffectRow from '../common/EffectRow'
 import styles from './styles.scss'
 
 const PageEffect = ({ bookId, page, updateResource }) => {

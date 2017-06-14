@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '../../../../../common'
-import EffectRow from '../../../PageEffect/EffectRow'
+import EffectRow from '../../../common/EffectRow'
 import styles from './styles.scss'
 
 const TransitionEffect = ({ book, transition, index, updateResource }) => {
