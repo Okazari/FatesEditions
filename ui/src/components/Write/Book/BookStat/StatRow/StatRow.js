@@ -4,33 +4,34 @@ import { Input, Button } from '../../../../common'
 class StatRow extends React.Component {
   constructor(props) {
     super(props)
-    const {stat} = this.props
-    this.state = {stat}
+    const { stat } = this.props
+    this.state = { stat }
   }
 
   componentWillUpdate(nextProps) {
-    const {stat} = this.props
+    const { stat } = this.props
     if (stat !== nextProps.stat) {
-      this.setState({stat: nextProps.stat})
+      this.setState({ stat: nextProps.stat })
     }
   }
 
-  updateStat = (value) => {
-    const {index, updateResource} = this.props
-    const {stat} = this.state
-    const newStat = {...stat, ...value}
-    updateResource(index, newStat)
-    this.setState({stat: newStat})
-  }
 
-  onDelete = e => {
+  onDelete = (e) => {
     const { removeStat } = this.props
     removeStat(e.target.id)
   }
 
+  updateStat = (value) => {
+    const { index, updateResource } = this.props
+    const { stat } = this.state
+    const newStat = { ...stat, ...value }
+    updateResource(index, newStat)
+    this.setState({ stat: newStat })
+  }
+
   render() {
-    const {stat} = this.state
-    const {index} = this.props
+    const { stat } = this.state
+    const { index } = this.props
     return (
       <tr>
         <td>
@@ -39,7 +40,7 @@ class StatRow extends React.Component {
             domProps={{
               type: 'text',
               value: stat.name,
-              onChange: name => this.updateStat({name}),
+              onChange: name => this.updateStat({ name }),
               placeholder: 'Libellé',
               required: true,
             }}
@@ -51,7 +52,7 @@ class StatRow extends React.Component {
             domProps={{
               type: 'text',
               value: stat.description,
-              onChange: description => this.updateStat({description}),
+              onChange: description => this.updateStat({ description }),
               placeholder: 'Description',
               required: true,
             }}
@@ -63,7 +64,7 @@ class StatRow extends React.Component {
             domProps={{
               type: 'number',
               value: stat.initValue,
-              onChange: initValue => this.updateStat({initValue}),
+              onChange: initValue => this.updateStat({ initValue }),
               placeholder: 'Valeur initiale',
               required: true,
             }}
@@ -75,7 +76,7 @@ class StatRow extends React.Component {
             domProps={{
               type: 'number',
               value: stat.min,
-              onChange: min => this.updateStat({min}),
+              onChange: min => this.updateStat({ min }),
               placeholder: 'Min',
               required: true,
             }}
@@ -87,7 +88,7 @@ class StatRow extends React.Component {
             domProps={{
               type: 'number',
               value: stat.max,
-              onChange: max => this.updateStat({max}),
+              onChange: max => this.updateStat({ max }),
               placeholder: 'Max',
               required: true,
             }}
@@ -100,7 +101,7 @@ class StatRow extends React.Component {
               type: 'checkbox',
               value: stat.visible,
               checked: stat.visible,
-              onChange: visible => this.updateStat({visible}),
+              onChange: visible => this.updateStat({ visible }),
               required: true,
             }}
           />

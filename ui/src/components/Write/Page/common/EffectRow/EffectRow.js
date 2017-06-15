@@ -1,6 +1,6 @@
 import React from 'react'
-import { SelectInput } from '../../../../common/index'
-import EffectInput from './EffectInput/index'
+import { SelectInput } from '../../../../common'
+import EffectInput from './EffectInput'
 import styles from './styles.scss'
 
 const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {

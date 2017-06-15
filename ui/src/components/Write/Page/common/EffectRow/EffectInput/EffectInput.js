@@ -1,12 +1,12 @@
 import React from 'react'
-import { Button } from '../../../../../common/index'
-import ObjectInput from './ObjectInput/index'
-import StatInput from './StatInput/index'
-import styles from './styles.scss'
 import classnames from 'classnames'
+import { Button } from '../../../../../common'
+import ObjectInput from './ObjectInput'
+import StatInput from './StatInput'
+import styles from './styles.scss'
 
 const EffectInput = ({ book, type, index, effect, updateResource, removeEffect }) => {
-  const buttonClassName = classnames("fa fa-close md-whiteframe-z1", styles.removeButton)
+  const buttonClassName = classnames('fa fa-close md-whiteframe-z1', styles.removeButton)
   return !book ? null : (
     <div className={styles.component}>
       {type === 'stat' ?

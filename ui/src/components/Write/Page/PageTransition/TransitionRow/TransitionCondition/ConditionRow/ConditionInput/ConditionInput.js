@@ -1,12 +1,12 @@
 import React from 'react'
+import classnames from 'classnames'
 import { Button } from '../../../../../../../common'
 import ConditionObjectInput from './ConditionObjectInput'
 import ConditionStatInput from './ConditionStatInput'
 import styles from './styles.scss'
-import classnames from 'classnames'
 
 const ConditionInput = ({ book, condition, index, updateResource, removeCondition }) => {
-  const buttonClassName = classnames("fa fa-close md-whiteframe-z1", styles.removeButton)
+  const buttonClassName = classnames('fa fa-close md-whiteframe-z1', styles.removeButton)
   return (
     <div className={styles.component}>
       {condition.type === 'stat' ?

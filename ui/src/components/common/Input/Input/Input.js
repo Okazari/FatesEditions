@@ -1,6 +1,6 @@
 import React from 'react'
-import styles from './styles.scss'
 import classnames from 'classnames'
+import styles from './styles.scss'
 
 const Input = ({ domProps, label, className }) => {
   const finalClassName = classnames(styles.component, className)

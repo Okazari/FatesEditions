@@ -5,28 +5,28 @@ import styles from './styles.scss'
 class ConditionStatInput extends React.Component {
   constructor(props) {
     super(props)
-    const {condition} = this.state
-    this.state = {condition}
+    const { condition } = this.state
+    this.state = { condition }
   }
 
   componentWillUpdate(nextProps) {
-    const {condition} = this.props
+    const { condition } = this.props
     if (condition !== nextProps.condition) {
-      this.setState({condition: nextProps.condition})
+      this.setState({ condition: nextProps.condition })
     }
   }
 
   updateCondition = (value) => {
-    const {index, updateResource} = this.props
-    const {condition} = this.state
-    const newCondition = {...condition, ...value}
+    const { index, updateResource } = this.props
+    const { condition } = this.state
+    const newCondition = { ...condition, ...value }
     updateResource(index, newCondition)
-    this.setState({condition: newCondition})
+    this.setState({ condition: newCondition })
   }
 
   render() {
-    const {stats} = this.props
-    const {condition} = this.state
+    const { stats } = this.props
+    const { condition } = this.state
     return (
       <div className={styles.component}>
         <SelectInput
@@ -34,7 +34,7 @@ class ConditionStatInput extends React.Component {
           className={styles.selectInput}
           domProps={{
             value: condition.subject,
-            onChange: subject => this.updateCondition({subject}),
+            onChange: subject => this.updateCondition({ subject }),
           }}
         >
           {stats.map(stat => <option value={stat._id}>{stat.name}</option>)}
@@ -44,7 +44,7 @@ class ConditionStatInput extends React.Component {
           debounce={500}
           domProps={{
             value: condition.operator,
-            onChange: operator => this.updateCondition({operator}),
+            onChange: operator => this.updateCondition({ operator }),
           }}
         >
           <option value="equal">est égale à</option>
@@ -60,7 +60,7 @@ class ConditionStatInput extends React.Component {
           domProps={{
             type: 'number',
             value: condition.value,
-            onChange: value => this.updateCondition({value}),
+            onChange: value => this.updateCondition({ value }),
             placeholder: 'Valeur de la condition',
           }}
         />

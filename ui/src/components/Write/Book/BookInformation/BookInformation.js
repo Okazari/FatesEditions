@@ -14,7 +14,7 @@ class BookInformation extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    const {draft} = this.props
+    const { draft } = this.props
     if (draft !== nextProps.draft) {
       this.setState({ draft: nextProps.draft })
     }

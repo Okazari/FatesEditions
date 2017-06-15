@@ -3,23 +3,23 @@ import { Box, BoxHeader, BoxBody } from '../../../common/Box'
 import { Input, TextAreaInput } from '../../../common'
 import styles from './styles.scss'
 
-class PageInformation extends React.Component { //({ page, updateResource }) => {
+class PageInformation extends React.Component {
   constructor(props) {
     super(props)
-    const {page} = this.props
-    this.state = { page}
+    const { page } = this.props
+    this.state = { page }
   }
 
   componentWillUpdate(nextProps) {
-    const {page} = this.props
+    const { page } = this.props
     if (page !== nextProps.page) {
       this.setState({ page: nextProps.page })
     }
   }
 
   updatePage = (value) => {
-    const {updateResource} = this.props
-    const {page} = this.state
+    const { updateResource } = this.props
+    const { page } = this.state
     const newPage = { ...page, ...value }
     updateResource(newPage)
     this.setState({ page: newPage })

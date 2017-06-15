@@ -1,32 +1,32 @@
 import React from 'react'
-import { SelectInput } from '../../../../../../common/index'
+import { SelectInput } from '../../../../../../common'
 import styles from './styles.scss'
 
 class ObjectInput extends React.Component {
   constructor(props) {
     super(props)
-    const {effect} = this.props
+    const { effect } = this.props
     this.state = { effect }
   }
 
   componentWillUpdate(nextProps) {
-    const {effect} = this.props
+    const { effect } = this.props
     if (effect !== nextProps.effect) {
       this.setState({ effect: nextProps.effect })
     }
   }
 
   updateEffect = (value) => {
-    const {index, updateResource} = this.props
-    const {effect} = this.state
+    const { index, updateResource } = this.props
+    const { effect } = this.state
     const newEffect = { ...effect, ...value }
     updateResource(index, newEffect)
     this.setState({ effect: newEffect })
   }
 
   render() {
-    const {objects} = this.props
-    const {effect} = this.state
+    const { objects } = this.props
+    const { effect } = this.state
     return (
       <div className={styles.component}>
         <SelectInput

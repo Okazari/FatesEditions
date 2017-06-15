@@ -9,10 +9,16 @@ class ItemRow extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    const {item} = this.props
+    const { item } = this.props
     if (item !== nextProps.item) {
       this.setState({ item: nextProps.item })
     }
+  }
+
+
+  onDelete = (e) => {
+    const { deleteResource } = this.props
+    deleteResource(e.target.id)
   }
 
   updateItem = (value) => {
@@ -21,11 +27,6 @@ class ItemRow extends React.Component {
     const newItem = { ...item, ...value }
     updateResource(index, newItem)
     this.setState({ item: newItem })
-  }
-
-  onDelete = (e) => {
-    const { deleteResource } = this.props
-    deleteResource(e.target.id)
   }
 
   render() {

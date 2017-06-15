@@ -1,6 +1,6 @@
 import React from 'react'
-import styles from './styles.scss'
 import classnames from 'classnames'
+import styles from './styles.scss'
 
 const Button = ({ children, className, domProps }) => {
   const finalClassName = classnames('btn btn-primary', styles.component, className)

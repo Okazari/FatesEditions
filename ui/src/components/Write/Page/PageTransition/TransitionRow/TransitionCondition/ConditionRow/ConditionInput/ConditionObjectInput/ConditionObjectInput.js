@@ -5,28 +5,28 @@ import styles from './styles.scss'
 class ConditionObjectInput extends React.Component {
   constructor(props) {
     super(props)
-    const {condition} = this.props
-    this.state = {condition}
+    const { condition } = this.props
+    this.state = { condition }
   }
 
   componentWillUpdate(nextProps) {
-    const {condition} = this.props
+    const { condition } = this.props
     if (condition !== nextProps.condition) {
-      this.setState({condition: nextProps.condition})
+      this.setState({ condition: nextProps.condition })
     }
   }
 
   updateCondition = (value) => {
-    const {index, updateResource} = this.props
-    const {condition} = this.state
-    const newCondition = {...condition, ...value}
+    const { index, updateResource } = this.props
+    const { condition } = this.state
+    const newCondition = { ...condition, ...value }
     updateResource(index, newCondition)
-    this.setState({condition: newCondition})
+    this.setState({ condition: newCondition })
   }
 
   render() {
-    const {objects} = this.props
-    const {condition} = this.state
+    const { objects } = this.props
+    const { condition } = this.state
     return (
       <div className={styles.component}>
         <SelectInput
@@ -34,7 +34,7 @@ class ConditionObjectInput extends React.Component {
           className={styles.selectInput}
           domProps={{
             value: condition.subject,
-            onChange: subject => updateResource(index, { ...condition, subject }),
+            onChange: subject => updateResource({ subject }),
           }}
         >
           {objects.map(object => <option value={object._id}>{object.name}</option>)}
@@ -44,7 +44,7 @@ class ConditionObjectInput extends React.Component {
           debounce={500}
           domProps={{
             value: condition.value,
-            onChange: value => updateResource(index, { ...condition, value }),
+            onChange: value => updateResource({ value }),
           }}
         >
           <option value="doNotOwn">{'n\'est pas possédé'}</option>
