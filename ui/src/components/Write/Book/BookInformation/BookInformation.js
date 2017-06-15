@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
 import { Button, Input, GroupInput, TextAreaInput } from '../../../common'
+import Game from '../../../Game'
 import BookCover from './BookCover'
 import GenreList from './GenreList'
 import PageList from './PageList'
@@ -10,11 +11,11 @@ class BookInformation extends React.Component {
   constructor(props) {
     super(props)
     const { draft } = this.props
-    this.state = { draft }
+    this.state = { draft, tryingDraft: false }
   }
 
   componentWillUpdate(nextProps) {
-    const {draft} = this.props
+    const { draft } = this.props
     if (draft !== nextProps.draft) {
       this.setState({ draft: nextProps.draft })
     }
@@ -28,8 +29,16 @@ class BookInformation extends React.Component {
     this.setState({ draft: newDraft })
   }
 
+  tryDraft = () => {
+    this.setState({ tryingDraft: true })
+  }
+
+  stopTryDraft = () => {
+    this.setState({ tryingDraft: false })
+  }
+
   render() {
-    const { draft } = this.state
+    const { draft, tryingDraft } = this.state
     return (
       <div className={styles.component}>
         <Box className="box-primary">
@@ -96,7 +105,8 @@ class BookInformation extends React.Component {
             </div>
           </BoxBody>
           <BoxFooter className={styles.centerFooter}>
-            <Button>Essayer mon brouillon</Button>
+            <Button domProps={{ onClick: this.tryDraft }}>Essayer mon brouillon</Button>
+            { tryingDraft && <Game book={draft} onClose={this.stopTryDraft} /> }
           </BoxFooter>
         </Box>
       </div>
