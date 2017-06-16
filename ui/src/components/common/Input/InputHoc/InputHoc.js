@@ -9,19 +9,21 @@ const InputHoc = (WrappedInput) => {
 
     constructor(props) {
       super(props)
-      const { domProps: { onChange, value }, debounce } = this.props
-      let changeFn = (newValue) => {
-        if (onChange) onChange(newValue)
-        this.setState({ debouncing: false })
-      }
+      const { domProps: { value }, debounce } = this.props
       if (debounce) {
-        changeFn = lodashDebounce(changeFn, debounce)
+        this.changeFn = lodashDebounce(this.changeFn, debounce)
       }
       this.state = {
         uncontrolled: !value,
         value: value || '',
-        onChange: changeFn,
+        onChange: this.changeFn,
       }
+    }
+
+    changeFn = (newValue) => {
+      const { domProps: { onChange } } = this.props
+      if (onChange) onChange(newValue)
+      this.setState({ debouncing: false })
     }
 
     componentWillUpdate(nextProps) {
