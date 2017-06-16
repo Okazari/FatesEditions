@@ -102,6 +102,7 @@ module.exports = {
     'no-obj-calls': 'warn',
     'no-octal': 'warn',
     'no-octal-escape': 'warn',
+    'no-param-reassign': ['warn', { props: false }],
     'no-redeclare': 'warn',
     'no-regex-spaces': 'warn',
     'no-restricted-syntax': [
