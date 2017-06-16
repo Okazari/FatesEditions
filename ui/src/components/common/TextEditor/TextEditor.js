@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 import { convertFromRaw, convertToRaw, Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js'
 import debounce from 'lodash.debounce'
 import styles from './styles.scss'
@@ -87,8 +88,9 @@ class TextEditor extends React.Component {
 
   render() {
     const { className } = this.props
+    const textEditorClassName = classnames(className, styles.TextEditorRoot)
     return (
-      <div className={`${styles.TextEditorRoot} ${className}`}>
+      <div className={textEditorClassName}>
         <InlineToolbar
           onToggleInlineStyle={this.toggleInlineStyle}
           onToggleBlockType={this.toggleBlockType}

@@ -4,7 +4,7 @@ import { TextEditor } from '../../../common'
 import styles from './styles.scss'
 
 const PageContent = ({ page, updateResource }) => {
-  return page === null ? null : (
+  return page && (
     <div>
       <Box className="box-primary">
         <BoxHeader withBorder>
