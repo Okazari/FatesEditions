@@ -1,0 +1,63 @@
+@import '~styles/colors';
+
+@keyframes slidein {
+  0% { left: 50vw; width: 0 }
+  100% { left: 0; width: 100vw }
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1;  }
+}
+
+$openbook: .75s;
+$fadein: .5s;
+
+.wrapper {
+  position: fixed;
+  background-image: url('http://www.rpgbooster.com/wp-content/uploads/2014/02/Map-South-East-Domarion.jpg');
+  background-position: center;
+  height: 100vh;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  animation: slidein $openbook;
+
+  .rightSide {
+    display: flex;
+    justify-content: flex-end;
+    height: 100vh;
+  }
+
+  .content {
+    color: transparentize($white, .1);
+    width: 50%;
+    background-color: transparentize($black, .1);
+    box-shadow: -10px 0 2px 5px transparentize($black, .1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+
+    .close {
+      opacity: 0;
+      position: absolute;
+      right: 40px;
+      cursor: pointer;
+      animation: fadein $fadein;
+      animation-fill-mode: forwards;
+      animation-delay: $openbook;
+      top: 10px;
+    }
+
+    .mainText {
+      opacity: 0;
+      max-width: 80%;
+      animation: fadein $fadein;
+      animation-fill-mode: forwards;
+      animation-delay: $openbook;
+      text-align: justify;
+    }
+  }
+}
