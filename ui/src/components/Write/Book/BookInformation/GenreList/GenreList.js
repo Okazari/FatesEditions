@@ -11,7 +11,7 @@ const GenreList = ({ genres = [], domProps }) => {
       domProps={domProps}
     >
       {genres.map(genre =>
-        <option value={genre}>
+        <option value={genre} key={genre}>
           <GenreOption genreId={genre} key={genre} />
         </option>)}
     </SelectInput>

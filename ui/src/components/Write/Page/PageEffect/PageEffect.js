@@ -33,6 +33,7 @@ const PageEffect = ({ bookId, page, updateResource }) => {
           <div className={styles.effectRow}>
             {page.effects.map((effect, index) =>
               <EffectRow
+                key={effect._id}
                 effect={effect}
                 index={index}
                 bookId={bookId}

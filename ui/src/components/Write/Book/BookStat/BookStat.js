@@ -43,6 +43,7 @@ const BookStat = ({ draft, updateResource }) => {
             {draft.stats.map((stat, index) => {
               return (
                 <StatRow
+                  key={stat._id}
                   index={index}
                   stat={stat}
                   updateResource={updateDraft}

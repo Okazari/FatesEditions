@@ -24,8 +24,9 @@ const TransitionEffect = ({ book, transition, index, updateResource }) => {
       <span>Effets</span>
       {transition.effects.map((effect, effectIndex) =>
         <EffectRow
-          effect={effectIndex}
-          index={index}
+          key={effect._id}
+          effect={effect}
+          index={effectIndex}
           bookId={book._id}
           updateResource={updateEffect}
           removeEffect={removeEffect}

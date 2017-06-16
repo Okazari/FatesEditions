@@ -43,6 +43,7 @@ const BookItem = ({ draft, updateResource }) => {
               draft.objects.map((item, index) => {
                 return (
                   <ItemRow
+                    key={item._id}
                     index={index}
                     item={item}
                     updateResource={updateDraft}

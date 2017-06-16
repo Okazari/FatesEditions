@@ -32,6 +32,7 @@ const PageTransition = ({ bookId, page, postResource, updateResource }) => {
         <BoxBody>
           {page.transitions.map((transition, index) =>
             <TransitionRow
+              key={transition._id}
               bookId={bookId}
               pageId={page._id}
               transition={transition}

@@ -14,7 +14,7 @@ const TransitionRow = ({ book,
                          postResource,
                          removeTransition }) => {
   const createPage = () => {
-    postResource({ bookId: book._id, page: { transitions: [{ toPage: pageId }] } })
+    postResource({ bookId: book._id, page: { transitions: [{ fromPage: pageId }] } })
       .then(page => RouteService.goTo(RouteService.routes.writebookpage(book._id, page._id)))
   }
 
@@ -47,8 +47,8 @@ const TransitionRow = ({ book,
               onChange: toPage => updateResource(index, { ...transition, toPage }),
             }}
           >
-            <option value="newPage" selected>-- Vers une nouvelle page --</option>
-            {book.pages.map(page => <option value={page._id}>{page.title}</option>)}
+            <option value="newPage">-- Vers une nouvelle page --</option>
+            {book.pages.map(page => <option value={page._id} key={page._id}>{page.title}</option>)}
           </SelectInput>
         </div>
       </BoxHeader>

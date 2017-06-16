@@ -39,6 +39,7 @@ const TransitionCondition = ({ book, transition, index, updateResource }) => {
       <div className={styles.conditionEffect}>
         {transition.conditions.map((condition, conditionIndex) =>
           <ConditionRow
+            key={condition._id}
             book={book}
             condition={condition}
             index={conditionIndex}

@@ -10,7 +10,10 @@ const PageList = ({ pages = [], domProps }) => {
       placeholder="-- Aucune page selectionnée --"
       domProps={domProps}
     >
-      {pages.map(page => <option value={page}><PageOption pageId={page} key={page} /></option>)}
+      {pages.map(page =>
+        <option value={page} key={page}>
+          <PageOption pageId={page} key={page} />
+        </option>)}
     </SelectInput>
   )
 }
