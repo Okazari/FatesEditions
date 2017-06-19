@@ -1,2 +1,2 @@
-export ResourceService from './ResourceService'
-export RestHoc from './RestHoc'
+export { default as ResourceService } from './ResourceService'
+export { default as RestHoc } from './RestHoc'

@@ -3,15 +3,14 @@ import { Box, BoxHeader } from '../Box'
 import DataTable from '../DataTable'
 import BookRow from './BookRow'
 
+const headers = [
+  { type: 'Titre du livre', key: 'title' },
+  { type: 'Synopsis', key: 'synopsis' },
+  { type: 'Auteur', key: 'author' },
+  { type: 'Genre', key: 'genre' },
+  { type: 'Jouer', key: 'play' },
+]
 const BookList = ({ books = [] }) => {
-  const headers = [
-    { type: 'Titre du livre' },
-    { type: 'Synopsis' },
-    { type: 'Auteur' },
-    { type: 'Genre' },
-    { type: 'Jouer' },
-  ]
-
   return (
     <Box>
       <BoxHeader withBorder>

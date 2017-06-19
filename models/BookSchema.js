@@ -13,7 +13,7 @@ module.exports = new Schema({
   genreId: Schema.Types.ObjectId,
   draft: Boolean,
   startingPageId: Schema.Types.ObjectId,
-  bookRevision: String,
+  revision: {type: Number, default: 0 },
   pages: [Page],
   stats: [Stat],
   objects: [Object]

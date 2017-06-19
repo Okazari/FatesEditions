@@ -1,104 +1,51 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
-import { Button, Loader } from '../../../common'
+import { Button } from '../../../common'
+import TransitionRow from './TransitionRow'
 
-const PageTransition = ({ page }) => {
-  return (
-    <div className="col-lg-12 col-sm-12 col-xs-12">
+const PageTransition = ({ bookId, page, postResource, updateResource }) => {
+  const addTransition = () => {
+    page.transitions = page.transitions.concat({
+      fromPage: page._id,
+      conditions: [],
+      effects: [],
+    })
+    updateResource(page)
+  }
+
+  const removeTransition = (index) => {
+    page.transitions.splice(index, 1)
+    updateResource(page)
+  }
+
+  const updatePage = (index, transition) => {
+    page.transitions[index] = transition
+    updateResource(page)
+  }
+
+  return page && (
+    <div>
       <Box className="box-primary">
         <BoxHeader withBorder>
           <h3 className="box-title">Transitions</h3>
         </BoxHeader>
         <BoxBody>
-          <Box className="box-default md-whiteframe-z1 box-solid">
-            <BoxHeader withBorder>
-              <div className="input-group float-left">
-                <span>
-                  Page de destination
-                  <Button className="btn-xs md-whiteframe-z1"><i className="fa fa-pencil" />Editer la page de destination</Button>
-                  <Button className="btn-xs md-whiteframe-z1"><i className="fa fa-plus" />Créer et lier la nouvelle page</Button>
-                </span>
-                <select className="form-control">
-                  <option value="" selected>-- Vers une nouvelle page --</option>
-                </select>
-              </div>
-              <div className="box-tools pull-right">
-                <button className="btn btn-box-tool md-whiteframe-z1" ><i className="fa fa-times" /></button>
-              </div>
-            </BoxHeader>
-            <BoxBody>
-              <div className="row no-margin">
-                <textarea rows="5" name="cover" className="form-control" placeholder="Texte de la transition" required />
-              </div>
-              <div className="row no-margin margin-top">
-                <div className="margin-top input-group col-xs-12">
-                  <span>Conditions</span>
-                  <span className="margin-left">
-                    Opérateur de condition :
-                    <select>
-                      <option value="and">ET</option>
-                      <option value="or">OU</option>
-                    </select>
-                  </span>
-                  <div className="row margin-bottom">
-                    <div className="col-xs-3">
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-3">
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-3" >
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-2" >
-                      <input type="number" className="form-control" placeholder="Valeur de la condition" />
-                    </div>
-                    <div className="col-xs-1">
-                      <Button className="fa fa-close md-whiteframe-z1" />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <Button className="btn-xs md-whiteframe-z1">
-                      Ajouter une Condition
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="row no-margin margin-top">
-                <div className="input-group col-xs-12">
-                  <span>Effet</span>
-                  <div className="row margin-bottom">
-                    <div className="col-xs-3">
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-3">
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-3" >
-                      <select className="form-control" />
-                    </div>
-                    <div className="col-xs-2" >
-                      <input type="number" className="form-control" placeholder="Valeur de la condition" />
-                    </div>
-                    <div className="col-xs-1">
-                      <Button className="fa fa-close md-whiteframe-z1" />
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <Button className="btn-xs md-whiteframe-z1">
-                      Ajouter un Effet
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </BoxBody>
-          </Box>
+          {page.transitions.map((transition, index) =>
+            <TransitionRow
+              key={transition._id}
+              bookId={bookId}
+              pageId={page._id}
+              transition={transition}
+              index={index}
+              postResource={postResource}
+              updateResource={updatePage}
+              removeTransition={removeTransition}
+            />)}
         </BoxBody>
         <BoxFooter className="align-center">
-          <Button className="md-whiteframe-z1">
-            Ajouter une transition
+          <Button className="md-whiteframe-z1" domProps={{ onClick: addTransition }}>
+            {'Ajouter une transition'}
           </Button>
-          <Loader />
         </BoxFooter>
       </Box>
     </div>

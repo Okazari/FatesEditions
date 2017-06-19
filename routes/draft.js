@@ -25,8 +25,7 @@ router.get('/', (req, res, next) => {
  * @return book object
  */
 router.get('/:bookId', (req, res, next) => {
-  Book.findOne({_id: req.params.bookId, draft: true},
-    "name tags synopsis cover authorId genreId bookRevision")
+  Book.findOne({_id: req.params.bookId, draft: true})
     .then(book => res.json(book), err => next(err));
 });
 
@@ -78,41 +77,6 @@ router.put('/:bookId', (req, res, next) => {
   if(req.body !== null && req.body !== undefined) {
     Book.findByIdAndUpdate(req.params.bookId, req.body, {new: true})
       .then(draft => res.json(draft), err => next(err));
-  }
-  else res.sendStatus(400);
-});
-
-/**
- * @method PATCH
- * @param bookId
- * @bodyParam object
- * @return objects array
- */
-router.patch('/:bookId/objects', (req, res, next) => {
-  if(req.body.object) {
-    Book.findById(req.params.bookId)
-      .then(book => {
-        book.objects.push(req.body.object);
-        book.save()
-          .then(book => res.json(book.objects), err => next(err));
-    }, err => next(err));
-  }
-  else res.sendStatus(400);
-});
-
-/**
- * @method PATCH
- * @param bookId
- * @bodyParam stat
- * @return stats array
- */
-router.patch('/:bookId/stats', (req, res, next) => {
-  if(req.body.stat !== undefined && req.body.stat !== null) {
-    Book.findById(req.body.bookId).then(book => {
-      book.stats.push(req.body.stat);
-      book.save()
-        .then(book => res.json(book.stats), err => next(err));
-    }, err => next(err));
   }
   else res.sendStatus(400);
 });

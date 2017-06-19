@@ -1,7 +1,7 @@
 import React from 'react'
-import { AtomicBlockUtils, ContentState, Editor, EditorState, RichUtils } from 'draft-js'
-import DraftPasteProcessor from 'draft-js/lib/DraftPasteProcessor'
-import { stateToHTML } from 'draft-js-export-html'
+import classnames from 'classnames'
+import { convertFromRaw, convertToRaw, Editor, EditorState, RichUtils, AtomicBlockUtils } from 'draft-js'
+import debounce from 'lodash.debounce'
 import styles from './styles.scss'
 import InlineToolbar from './InlineToolbar'
 import Image from './Image'
@@ -11,38 +11,60 @@ const TabDepth = 4
 class TextEditor extends React.Component {
   constructor(props) {
     super(props)
-    if (props.initialContent.trim() !== "''") {
-      const processedHTML = DraftPasteProcessor.processHTML(this.props.initialContent)
-      const contentState = ContentState.createFromBlockArray(processedHTML)
+    const { debounceTime, initialContent } = this.props
+    if (initialContent) {
+      const contentState = convertFromRaw(JSON.parse(initialContent))
       this.state = { editorState: EditorState.createWithContent(contentState) }
       this.state = { editorState: EditorState.moveFocusToEnd(this.state.editorState) }
     } else {
       this.state = { editorState: EditorState.createEmpty() }
     }
-    this.onChange = editorState => this.setState({ editorState })
     this.focus = () => this.editor.focus()
+    this.debounceUpdate = debounce(this.updateContent, debounceTime || 1000)
+  }
+
+  onChange = (editorState) => {
+    this.setState({ editorState })
+    this.debounceUpdate()
   }
 
   onInsertImage = (image) => {
-    const currentContentState = this.state.editorState.getCurrentContent()
-    const entityKey = currentContentState.createEntity('atomic', 'IMMUTABLE', { src: URL.createObjectURL(image) })
-    this.onChange(AtomicBlockUtils.insertAtomicBlock(this.state.editorState, entityKey, ''))
+    const { editorState } = this.state
+    const contentState = editorState.getCurrentContent()
+    const reader = new FileReader()
+    reader.readAsDataURL(image)
+    reader.onload = () => {
+      const contentStateWithImage = contentState.createEntity('atomic', 'IMMUTABLE', { src: reader.result })
+      const entityKey = contentStateWithImage.getLastCreatedEntityKey()
+      this.onChange(AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' '), entityKey)
+    }
   }
 
   onTab = (e) => {
-    this.onChange(RichUtils.onTab(e, this.state.editorState, TabDepth))
+    const { editorState } = this.state
+    this.onChange(RichUtils.onTab(e, editorState, TabDepth))
+  }
+
+  updateContent = () => {
+    const { resource, resourceHandler, domProps } = this.props
+    const { editorState } = this.state
+    resource[domProps.name] = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
+    resourceHandler(resource, false)
   }
 
   toggleBlockType = (blocktype) => {
-    this.onChange(RichUtils.toggleBlockType(this.state.editorState, blocktype))
+    const { editorState } = this.state
+    this.onChange(RichUtils.toggleBlockType(editorState, blocktype))
   }
 
   toggleInlineStyle = (style) => {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, style))
+    const { editorState } = this.state
+    this.onChange(RichUtils.toggleInlineStyle(editorState, style))
   }
 
   handleKeyCommand = (command) => {
-    const newState = RichUtils.handleKeyCommand(this.state.editorState, command)
+    const { editorState } = this.state
+    const newState = RichUtils.handleKeyCommand(editorState, command)
     if (newState) this.onChange(newState)
   }
 
@@ -52,12 +74,6 @@ class TextEditor extends React.Component {
 
   triggerClick = (input) => {
     this[input].click()
-  }
-
-  saveHtml = () => {
-    const { saveHandler } = this.props
-    const html = stateToHTML(this.state.editorState.getCurrentContent())
-    saveHandler(html)
   }
 
   blockRenderer = (block) => {
@@ -71,8 +87,10 @@ class TextEditor extends React.Component {
   }
 
   render() {
+    const { className } = this.props
+    const textEditorClassName = classnames(className, styles.TextEditorRoot)
     return (
-      <div className={styles.TextEditorRoot}>
+      <div className={textEditorClassName}>
         <InlineToolbar
           onToggleInlineStyle={this.toggleInlineStyle}
           onToggleBlockType={this.toggleBlockType}
@@ -80,7 +98,7 @@ class TextEditor extends React.Component {
           addInput={this.addInput}
           triggerClick={this.triggerClick}
         />
-        <div className={styles.TextEditor} onClick={this.focus} onBlur={this.saveHtml}>
+        <div className={styles.TextEditor} onClick={this.focus}>
           <Editor
             ref={(editor) => { this.editor = editor }}
             blockRendererFn={this.blockRenderer}

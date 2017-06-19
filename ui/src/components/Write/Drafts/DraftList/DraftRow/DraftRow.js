@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { BookGenre, Button } from '../../../../common'
+import { RouteService } from '../../../../../services'
 
 const DraftRow = ({ draft = {}, deleteResource }) => {
   const onDelete = () => deleteResource(draft._id)
@@ -22,7 +23,7 @@ const DraftRow = ({ draft = {}, deleteResource }) => {
         {draft.synopsis}
       </td>
       <td>
-        <Link to={`/app/write/book/${draft._id}`}>
+        <Link to={RouteService.routes.writebook(draft._id)}>
           <Button className="md-whiteframe-z1">Editer</Button>
         </Link>
       </td>

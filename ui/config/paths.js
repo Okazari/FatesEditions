@@ -23,11 +23,11 @@ function resolveApp(relativePath) {
 }
 // after eject: we're in ./config/
 module.exports = {
-  appBuild: resolveApp('../public/build'),
+  appBuild: resolveApp('../public/app'),
   appHtml: resolveApp('index.html'),
   appFavicon: resolveApp('favicon.ico'),
-  appPackageJson: resolveApp('package.json'),
+  appPackageJson: resolveApp('../package.json'),
   appSrc: resolveApp('src'),
-  appNodeModules: resolveApp('node_modules'),
-  ownNodeModules: resolveApp('node_modules')
+  appNodeModules: resolveApp('../node_modules'),
+  ownNodeModules: resolveApp('../node_modules')
 };

@@ -1,92 +1,67 @@
 import React from 'react'
-import debounce from 'lodash.debounce'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
 import { Button, DataTable } from '../../../common'
 import styles from './styles.scss'
 import ItemRow from './ItemRow'
 
-// @todo refactor centerFooter
 const headers = [
-  { type: 'Nom' },
-  { type: 'Description' },
-  { type: 'Début' },
-  { type: 'Visible' },
-  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" /> },
+  { type: 'Nom', key: 'name' },
+  { type: 'Description', key: 'description' },
+  { type: 'Début', key: 'start' },
+  { type: 'Visible', key: 'visible' },
+  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
 
-class BookItem extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = { items: [] }
-    this.addItem = this.addItem.bind(this)
-    this.removeItem = this.removeItem.bind(this)
-    this.debounceUpdate = debounce(
-      () => {
-        props.updateResource(this.props.draft, false)
-      },
-      this.props.debounceTime ? this.props.debounceTime : 1000,
-    )
+const BookItem = ({ draft, updateResource }) => {
+  const addObject = () => {
+    draft.objects = draft.objects.concat({})
+    updateResource(draft)
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.draft.objects !== this.props.draft.objects) {
-      //eslint-disable-next-line
-      this.setState({ items: this.props.draft.objects })
-    }
+  const removeObject = (index) => {
+    draft.objects.splice(index, 1)
+    updateResource(draft)
   }
 
-  addItem() {
-    this.setState({ items: this.state.items.concat({}) })
+  const updateDraft = (index, item) => {
+    draft.objects[index] = item
+    updateResource(draft)
   }
 
-  removeItem(index) {
-    this.state.items.splice(index, 1)
-    this.setState({ items: this.state.items })
-    this.debounceUpdate()
-  }
-
-  updateDraft = () => {
-    this.props.draft.objects = this.state.items
-    this.debounceUpdate()
-  }
-
-  render() {
-    const { items } = this.state
-    return (
-      <div className={styles.component}>
-        <Box className="box-primary">
-          <BoxHeader withBorder>
-            <h3 className="box-title">Objets</h3>
-            <div className="box-tools pull-right">
-              <div className="btn-group" />
-            </div>
-          </BoxHeader>
-          <BoxBody className="no-padding">
-            <DataTable headers={headers} className="table-hover">
-              {
-                items.map((item, index) => {
-                  return (
-                    <ItemRow
-                      index={index}
-                      item={item}
-                      updateResource={this.updateDraft}
-                      deleteResource={this.removeItem}
-                    />
-                  )
-                })
-              }
-            </DataTable>
-          </BoxBody>
-          <BoxFooter className={styles.centerFooter}>
-            <Button domProps={{ onClick: this.addItem }}>
-              Ajouter un objet
-            </Button>
-          </BoxFooter>
-        </Box>
-      </div>
-    )
-  }
+  return (
+    <div className={styles.component}>
+      <Box className="box-primary">
+        <BoxHeader withBorder>
+          <h3 className="box-title">Objets</h3>
+          <div className="box-tools pull-right">
+            <div className="btn-group" />
+          </div>
+        </BoxHeader>
+        <BoxBody className="no-padding">
+          <DataTable headers={headers} className="table-hover">
+            {
+              draft.objects.map((item, index) => {
+                return (
+                  <ItemRow
+                    key={item._id}
+                    index={index}
+                    item={item}
+                    updateResource={updateDraft}
+                    deleteResource={removeObject}
+                  />
+                )
+              })
+            }
+          </DataTable>
+        </BoxBody>
+        <BoxFooter className={styles.centerFooter}>
+          <Button domProps={{ onClick: addObject }}>
+            Ajouter un objet
+          </Button>
+        </BoxFooter>
+      </Box>
+    </div>
+  )
 }
 
 export default BookItem

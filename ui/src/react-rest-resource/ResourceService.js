@@ -62,13 +62,14 @@ class Resource {
     return this.fetch(this.url, { method: 'PATCH', headers, body: JSON.stringify(resource) })
       .then(this.handleResponse)
       .catch(error => this.notifyError(error))
+      .then(res => this.setResource(res))
   }
 
   put(resource) {
     return this.fetch(this.url, { method: 'PUT', headers, body: JSON.stringify(resource) })
       .then(this.handleResponse)
       .catch(error => this.notifyError(error))
-      .then(() => this.setResource(resource))
+      .then(res => this.setResource(res))
   }
 
   delete() {
@@ -81,7 +82,7 @@ class Resource {
 class ResourceService {
 
   constructor(url, options) {
-    this.fetch = options.proxy ? options.proxy : fetch
+    this.fetch = options.proxy ? options.proxy : fetch.bind(window)
     this.options = options
     this.url = url
     this.handleResponse = handleResponse.bind(this)
@@ -148,7 +149,7 @@ class ResourceService {
     const urlToCall = `${this.url}${queryParams ? '?' : ''}${queryParams}`
     return this.fetch(urlToCall, { headers })
     .then(this.handleResponse)
-    .catch(error => this.notifyError(error))
+    .catch(error => this.notifyError(queryParams, error))
     .then((resources) => {
       info('Updating', queryParams)
       this.observableMap[queryParams].value = resources.map(
@@ -168,16 +169,14 @@ class ResourceService {
   }
 
   postResource(resource) {
-    this.fetch(this.url, {
+    return this.fetch(this.url, {
       method: 'POST',
       headers,
       body: JSON.stringify(resource),
-    })
-    .then(handleResponse)
-    .catch(error => this.notifyError(error))
-    .then((data) => {
+    }).then(handleResponse).then((data) => {
       this.map[data.id] = new Resource(`${this.url}/${data.id}`, { ...resource, id: data.id }, this.fetch)
       Object.keys(this.observableMap).forEach(key => this.update(this.observableMap[key].query))
+      return data
     })
   }
 
@@ -189,8 +188,13 @@ class ResourceService {
 
   deleteResource(resourceId) {
     this.getById(resourceId).delete().then(() => {
-      delete this.map[resourceId]
-      this.notify()
+      Object.keys(this.observableMap).forEach((key) => {
+        const map = this.observableMap[key]
+        if (map.value.find(id => id === resourceId)) {
+          this.observableMap[key].value = map.value.filter(id => id !== resourceId)
+          this.notify(key)
+        }
+      })
     })
   }
 }

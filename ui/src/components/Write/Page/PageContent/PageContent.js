@@ -1,11 +1,11 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
-import { Loader, TextEditor } from '../../../common'
+import { TextEditor } from '../../../common'
+import styles from './styles.scss'
 
-// @todo
-const PageContent = ({ page }) => {
-  return (
-    <div className="col-lg-12 col-sm-12 col-xs-12">
+const PageContent = ({ page, updateResource }) => {
+  return page && (
+    <div>
       <Box className="box-primary">
         <BoxHeader withBorder>
           <h3 className="box-title">Contenu</h3>
@@ -14,11 +14,15 @@ const PageContent = ({ page }) => {
           </div>
         </BoxHeader>
         <BoxBody>
-          <TextEditor initialContent={''} saveHandler={() => {}} />
+          <TextEditor
+            className={styles.component}
+            initialContent={page.text || ''}
+            resource={page}
+            resourceHandler={updateResource}
+            domProps={{ name: 'text' }}
+          />
         </BoxBody>
-        <BoxFooter>
-          <Loader />
-        </BoxFooter>
+        <BoxFooter />
       </Box>
     </div>
   )

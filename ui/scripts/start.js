@@ -129,7 +129,7 @@ function openBrowser(port) {
       execSync(
         'osascript ' +
         path.resolve(__dirname, './utils/chrome.applescript') +
-        ' http://localhost:' + port + '/'
+        ' http://localhost:' + port + '/app'
       );
       return;
     } catch (err) {
@@ -138,7 +138,7 @@ function openBrowser(port) {
   }
   // Fallback to opn
   // (It will always open new tab)
-  opn('http://localhost:' + port + '/');
+  opn('http://localhost:' + port + '/app');
 }
 
 function runDevServer(port) {

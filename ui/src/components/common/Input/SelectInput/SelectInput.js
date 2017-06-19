@@ -1,16 +1,13 @@
 import React from 'react'
+import classnames from 'classnames'
 import styles from './styles.scss'
 
-const SelectInput = ({ injectedProps, domProps, children, label, placeholder }) => {
+const SelectInput = ({ domProps, children, label, placeholder, className }) => {
+  const finalClassName = classnames(styles.component, className)
   return (
-    <div className={styles.component}>
-      <label htmlFor={domProps.id}>{label}</label>
-      <select
-        className={styles.component}
-        value={injectedProps.inputValue}
-        onChange={injectedProps.updateInput}
-        {...domProps}
-      >
+    <div className={finalClassName} >
+      {label && <label htmlFor={domProps.id}>{label}</label>}
+      <select {...domProps}>
         {placeholder ? <option value="" disabled>{placeholder}</option> : ''}
         {children}
       </select>

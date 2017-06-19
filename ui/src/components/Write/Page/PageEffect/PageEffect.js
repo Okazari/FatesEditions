@@ -1,39 +1,53 @@
 import React from 'react'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
-import { Button, Loader } from '../../../common'
-import EffectRow from './EffectRow'
+import { Button } from '../../../common'
+import EffectRow from '../common/EffectRow'
+import styles from './styles.scss'
 
-const PageEffect = ({ page, updateResource }) => {
-  const pushEffect = () => {
-    //eslint-disable-next-line
-    if (!page.effects) page.effects = []
-    page.effects.push({ test: 'test' })
-    updateResource({ _id: page._id, effects: page.effects }, { patch: true })
+const PageEffect = ({ bookId, page, updateResource }) => {
+  const addEffect = () => {
+    page.effects = page.effects.concat({})
+    updateResource(page)
+  }
+
+  const removeEffect = (index) => {
+    page.effects.splice(index, 1)
+    updateResource(page)
+  }
+
+  const updatePage = (index, effect) => {
+    page.effects[index] = effect
+    updateResource(page)
   }
 
   return (
-    <div className="col-lg-12 col-sm-12 col-xs-12">
+    <div>
       <Box className="box-primary">
         <BoxHeader withBorder>
-          <h3 className="box-title">{"Effets à l'arrivée sur la page"}</h3>
+          <h3 className="box-title">{'Effets à l\'arrivée sur la page'}</h3>
           <div className="box-tools pull-right">
             <div className="btn-group" />
           </div>
         </BoxHeader>
         <BoxBody>
-          {
-            page.effects && page.effects.map((effect) => {
-              return <EffectRow effect={effect} bookId={page.bookId} />
-            })
-          }
+          <div className={styles.effectRow}>
+            {page.effects.map((effect, index) =>
+              <EffectRow
+                key={effect._id}
+                effect={effect}
+                index={index}
+                bookId={bookId}
+                updateResource={updatePage}
+                removeEffect={indexEffect => removeEffect(indexEffect)}
+              />)}
+          </div>
         </BoxBody>
         <BoxFooter>
           <div className="col-xs-12">
-            <Button className="md-whiteframe-z1" domProps={{ onClick: () => pushEffect() }}>
-              Ajouter un Effet
+            <Button className="md-whiteframe-z1" domProps={{ onClick: () => addEffect() }} >
+              {'Ajouter un Effet'}
             </Button>
           </div>
-          <Loader />
         </BoxFooter>
       </Box>
     </div>

@@ -5,10 +5,7 @@
   align-items: stretch;
   display: flex;
   flex-direction: column;
-
-  label {
-    align-self: flex-start;
-  }
+  margin-bottom: 10px;
 
   select {
     background: none;

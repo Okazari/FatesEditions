@@ -1,88 +1,66 @@
 import React from 'react'
-import debounce from 'lodash.debounce'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
 import { Button, DataTable } from '../../../common'
 import styles from './styles.scss'
 import StatRow from './StatRow'
 
-class BookStat extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = { stats: [] }
-    this.addStat = this.addStat.bind(this)
-    this.removeStat = this.removeStat.bind(this)
-    this.debounceUpdate = debounce(
-      () => props.updateResource(this.props.draft, false),
-      this.props.debounceTime ? this.props.debounceTime : 1000,
-    )
+const headers = [
+  { type: 'Nom', key: 'name' },
+  { type: 'Description', key: 'description' },
+  { type: 'Valeur initiale', key: 'initial' },
+  { type: 'Minimum', key: 'min' },
+  { type: 'Maximum', key: 'max' },
+  { type: 'Visible', classtype: '', key: 'visibility' },
+  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
+]
+const BookStat = ({ draft, updateResource }) => {
+  const addStat = () => {
+    draft.stats = draft.stats.concat({})
+    updateResource(draft)
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.draft.stats !== this.props.draft.stats) {
-      //eslint-disable-next-line
-      this.setState({ stats: this.props.draft.stats })
-    }
+  const removeStat = (index) => {
+    draft.stats.splice(index, 1)
+    updateResource(draft)
   }
 
-  addStat() {
-    this.setState({ stats: this.state.stats.concat({}) })
+  const updateDraft = (index, stat) => {
+    draft.stats[index] = stat
+    updateResource(draft)
   }
 
-  removeStat(index) {
-    this.state.stats.splice(index, 1)
-    this.setState({ stats: this.state.stats })
-    this.debounceUpdate()
-  }
-
-  updateDraft = () => {
-    this.props.draft.stats = this.state.stats
-    this.debounceUpdate()
-  }
-
-  render() {
-    const headers = [
-      { type: 'Nom' },
-      { type: 'Description' },
-      { type: 'Valeur initiale' },
-      { type: 'Minimum' },
-      { type: 'Maximum' },
-      { type: 'Visible', classtype: '' },
-      { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" /> },
-    ]
-
-    return (
-      <div className={styles.component}>
-        <Box className="box-primary">
-          <BoxHeader withBorder>
-            <h3 className="box-title">Caractéristiques</h3>
-            <div className="box-tools pull-right">
-              <div className="btn-group" />
-            </div>
-          </BoxHeader>
-          <BoxBody className="no-padding">
-            <DataTable headers={headers} className="table-hover">
-              {this.state.stats.map((stat, index) => {
-                return (
-                  <StatRow
-                    index={index}
-                    stat={stat}
-                    updateResource={this.updateDraft}
-                    deleteResource={this.removeStat}
-                  />
-                )
-              })}
-            </DataTable>
-          </BoxBody>
-          <BoxFooter className={styles.centerFooter}>
-            <Button domProps={{ onClick: this.addStat }}>
-              Ajouter une caractéristique
-            </Button>
-          </BoxFooter>
-        </Box>
-      </div>
-    )
-  }
+  return (
+    <div className={styles.component}>
+      <Box className="box-primary">
+        <BoxHeader withBorder>
+          <h3 className="box-title">Caractéristiques</h3>
+          <div className="box-tools pull-right">
+            <div className="btn-group" />
+          </div>
+        </BoxHeader>
+        <BoxBody className="no-padding">
+          <DataTable headers={headers} className="table-hover">
+            {draft.stats.map((stat, index) => {
+              return (
+                <StatRow
+                  key={stat._id}
+                  index={index}
+                  stat={stat}
+                  updateResource={updateDraft}
+                  removeStat={removeStat}
+                />
+              )
+            })}
+          </DataTable>
+        </BoxBody>
+        <BoxFooter className={styles.centerFooter}>
+          <Button domProps={{ onClick: addStat }}>
+            Ajouter une caractéristique
+          </Button>
+        </BoxFooter>
+      </Box>
+    </div>
+  )
 }
 
 export default BookStat

@@ -3,16 +3,16 @@ import { Box, BoxHeader } from '../../../common/Box'
 import { DataTable } from '../../../common'
 import DraftRow from './DraftRow'
 
-const DraftList = ({ drafts = [] }) => {
-  const headers = [
-    { type: 'Titre du livre' },
-    { type: 'Genre' },
-    { type: 'Visibilité' },
-    { type: 'Synopsis' },
-    { type: 'Editer' },
-    { type: 'Supprimer' },
-  ]
+const headers = [
+  { type: 'Titre du livre', key: 'title' },
+  { type: 'Genre', key: 'genre' },
+  { type: 'Visibilité', key: 'visibility' },
+  { type: 'Synopsis', key: 'synopsis' },
+  { type: 'Editer', key: 'edit' },
+  { type: 'Supprimer', key: 'delete' },
+]
 
+const DraftList = ({ drafts = [] }) => {
   return (
     <Box className="box-primary">
       <BoxHeader withBorder>
