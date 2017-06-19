@@ -1,23 +1,19 @@
 import React from 'react'
+import BookGenre from '../../BookGenre'
 
-const BookRow = ({ book = {}, genre }) => {
+const BookRow = ({ book = {} }) => {
   return (
     <tr>
       <td>
         {book.name}
       </td>
       <td>
-        {
-          genre && <h4 className="label label-primary">
-            <i className="fa fa-icon" style={{ marginRight: '5px' }} />
-            {genre.name}
-          </h4>
-        }
+        <BookGenre genre={book.genreId} />
       </td>
       <td>
         <h4 className="label label-primary md-whiteframe-z1">
           <i className="fa fa-pencil" style={{ marginRight: '5px' }} />
-          {book.authorName}
+          {book.authorId}
         </h4>
       </td>
       <td>

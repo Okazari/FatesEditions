@@ -5,9 +5,9 @@ import BookRow from './BookRow'
 
 const headers = [
   { type: 'Titre du livre', key: 'title' },
-  { type: 'Synopsis', key: 'synopsis' },
-  { type: 'Auteur', key: 'author' },
   { type: 'Genre', key: 'genre' },
+  { type: 'Auteur', key: 'author' },
+  { type: 'Synopsis', key: 'synopsis' },
   { type: 'Jouer', key: 'play' },
 ]
 const BookList = ({ books = [] }) => {

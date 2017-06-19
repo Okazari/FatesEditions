@@ -4,11 +4,7 @@ import { BookGenre } from '../../../../common'
 import Button from '../../../../common/Button'
 import { RouteService } from '../../../../../services'
 
-const PublicationRow = ({ book = {}, updateResource }) => {
-  const updateToDraft = () => {
-    book.draft = true
-    updateResource(book)
-  }
+const PublicationRow = ({ book = {}, showModal }) => {
   return (
     <tr>
       <td>
@@ -34,7 +30,7 @@ const PublicationRow = ({ book = {}, updateResource }) => {
         </Link>
       </td>
       <td>
-        <Button className="btn btn-primary md-whiteframe-z1" domProps={{ onClick: updateToDraft }}>
+        <Button className="btn btn-primary md-whiteframe-z1" domProps={{ onClick: () => showModal(book) }}>
           Passer en brouillon
         </Button>
       </td>
