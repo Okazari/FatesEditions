@@ -13,7 +13,7 @@ const headers = [
   { type: 'Visible', classtype: '', key: 'visibility' },
   { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
-const BookStat = ({ draft, updateResource }) => {
+const BookStat = ({ draft, updateResource, disabled }) => {
   const addStat = () => {
     draft.stats = draft.stats.concat({})
     updateResource(draft)
@@ -46,6 +46,7 @@ const BookStat = ({ draft, updateResource }) => {
                   key={stat._id}
                   index={index}
                   stat={stat}
+                  disabled={disabled}
                   updateResource={updateDraft}
                   removeStat={removeStat}
                 />
@@ -54,7 +55,7 @@ const BookStat = ({ draft, updateResource }) => {
           </DataTable>
         </BoxBody>
         <BoxFooter className={styles.centerFooter}>
-          <Button domProps={{ onClick: addStat }}>
+          <Button domProps={{ onClick: addStat, disabled }}>
             Ajouter une caractéristique
           </Button>
         </BoxFooter>

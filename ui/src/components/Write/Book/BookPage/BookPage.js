@@ -12,7 +12,7 @@ const headers = [
   { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
 
-const BookPage = ({ pages = [], query, postResource, deleteResource }) => {
+const BookPage = ({ pages = [], query, disabled, postResource, deleteResource }) => {
   const createPage = () => {
     postResource({ ...query, page: {} }).then((page) => {
       RouteService.goTo(RouteService.routes.writebookpage(query.bookId, page._id))
@@ -36,13 +36,14 @@ const BookPage = ({ pages = [], query, postResource, deleteResource }) => {
               <PageRow
                 pageId={page}
                 key={page}
+                disabled={disabled}
                 bookId={bookId}
                 deleteResource={deleteResource}
               />)}
           </DataTable>
         </BoxBody>
         <BoxFooter className={styles.centerFooter}>
-          <Button domProps={{ onClick: createPage }}>
+          <Button domProps={{ onClick: createPage, disabled }}>
             Ajouter une page
           </Button>
         </BoxFooter>

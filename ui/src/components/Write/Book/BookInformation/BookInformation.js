@@ -6,7 +6,7 @@ import GenreList from './GenreList'
 import PageList from './PageList'
 import styles from './styles.scss'
 
-const BookInformation = ({ draft = {}, updateResource }) => {
+const BookInformation = ({ draft = {}, updateResource, disabled }) => {
   return (
     <div className={styles.component}>
       <Box className="box-primary">
@@ -27,6 +27,7 @@ const BookInformation = ({ draft = {}, updateResource }) => {
                 value: draft.cover,
                 onChange: cover => updateResource({ ...draft, cover }),
                 placeholder: "url de l'image de couverture",
+                disabled,
                 required: true,
               }}
             >
@@ -42,6 +43,7 @@ const BookInformation = ({ draft = {}, updateResource }) => {
                 onChange: name => updateResource({ ...draft, name }),
                 type: 'text',
                 placeholder: 'Titre du livre',
+                disabled,
                 required: true,
               }}
             />

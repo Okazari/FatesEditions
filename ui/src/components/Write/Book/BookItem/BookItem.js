@@ -12,7 +12,7 @@ const headers = [
   { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
 
-const BookItem = ({ draft, updateResource }) => {
+const BookItem = ({ draft, updateResource, disabled }) => {
   const addObject = () => {
     draft.objects = draft.objects.concat({})
     updateResource(draft)
@@ -46,6 +46,7 @@ const BookItem = ({ draft, updateResource }) => {
                     key={item._id}
                     index={index}
                     item={item}
+                    disabled={disabled}
                     updateResource={updateDraft}
                     deleteResource={removeObject}
                   />
@@ -55,7 +56,7 @@ const BookItem = ({ draft, updateResource }) => {
           </DataTable>
         </BoxBody>
         <BoxFooter className={styles.centerFooter}>
-          <Button domProps={{ onClick: addObject }}>
+          <Button domProps={{ onClick: addObject, disabled }}>
             Ajouter un objet
           </Button>
         </BoxFooter>

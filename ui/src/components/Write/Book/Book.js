@@ -11,12 +11,12 @@ const Book = ({ draft, updateResource }) => {
   return !!draft && (
     <Content title="Edition de livre" >
       <div className={styles.component}>
-        <BookInformation draft={draft} updateResource={updateResource} />
-        <BookStat draft={draft} updateResource={updateResource} />
-        <BookItem draft={draft} updateResource={updateResource} />
+        <BookInformation draft={draft} updateResource={updateResource} disabled={!draft.draft} />
+        <BookStat draft={draft} updateResource={updateResource} disabled={!draft.draft} />
+        <BookItem draft={draft} updateResource={updateResource} disabled={!draft.draft} />
         <div className={styles.row}>
           <BookGraph draft={draft} />
-          <BookPage query={{ bookId: draft._id }} />
+          <BookPage query={{ bookId: draft._id }} disabled={!draft.draft} />
         </div>
       </div>
     </Content>

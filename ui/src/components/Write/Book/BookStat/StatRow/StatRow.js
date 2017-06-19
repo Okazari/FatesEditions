@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input, Button } from '../../../../common'
 
-const StatRow = ({ stat, index, updateResource, removeStat }) => {
+const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
   const onDelete = e => removeStat(e.target.id)
   return (
     <tr>
@@ -13,6 +13,7 @@ const StatRow = ({ stat, index, updateResource, removeStat }) => {
             value: stat.name,
             onChange: name => updateResource(index, { ...stat, name }),
             placeholder: 'Libellé',
+            disabled,
             required: true,
           }}
         />
@@ -25,6 +26,7 @@ const StatRow = ({ stat, index, updateResource, removeStat }) => {
             value: stat.description,
             onChange: description => updateResource(index, { ...stat, description }),
             placeholder: 'Description',
+            disabled,
             required: true,
           }}
         />
@@ -37,6 +39,7 @@ const StatRow = ({ stat, index, updateResource, removeStat }) => {
             value: stat.initValue,
             onChange: initValue => updateResource(index, { ...stat, initValue }),
             placeholder: 'Valeur initiale',
+            disabled,
             required: true,
           }}
         />
@@ -49,6 +52,7 @@ const StatRow = ({ stat, index, updateResource, removeStat }) => {
             value: stat.min,
             onChange: min => updateResource(index, { ...stat, min }),
             placeholder: 'Min',
+            disabled,
             required: true,
           }}
         />
@@ -61,6 +65,7 @@ const StatRow = ({ stat, index, updateResource, removeStat }) => {
             value: stat.max,
             onChange: max => updateResource(index, { ...stat, max }),
             placeholder: 'Max',
+            disabled,
             required: true,
           }}
         />
@@ -73,12 +78,16 @@ const StatRow = ({ stat, index, updateResource, removeStat }) => {
             value: stat.visible,
             checked: stat.visible,
             onChange: visible => updateResource(index, { ...stat, visible }),
+            disabled,
             required: true,
           }}
         />
       </td>
       <td>
-        <Button className="fa fa-close md-whiteframe-z1" domProps={{ onClick: onDelete, id: index }} />
+        <Button
+          className="fa fa-close md-whiteframe-z1"
+          domProps={{ onClick: onDelete, id: index, disabled }}
+        />
       </td>
     </tr>
   )
