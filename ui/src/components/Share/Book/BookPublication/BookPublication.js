@@ -8,6 +8,7 @@ class DraftPublication extends React.Component {
     super(props)
     this.state = {
       percentage: 0,
+      error: false,
     }
   }
 
@@ -19,20 +20,30 @@ class DraftPublication extends React.Component {
     if (percentage < 100) this.setState({ percentage: percentage + 20 })
     else {
       clearInterval(this.interval)
-      draft.draft = false
-      updateResource(draft)
+      if (!draft.startingPageId) this.setState({ error: true })
+      else {
+        draft.draft = false
+        updateResource(draft)
+      }
     }
   }
 
   render() {
     const { draft } = this.props
-    const { percentage } = this.state
+    const { percentage, error } = this.state
+    let progressBarStyle = ''
+
+    if (error) progressBarStyle = 'progress-bar-danger'
+    else if (percentage >= 100) progressBarStyle = 'progress-bar-success'
+    else progressBarStyle = 'progress-bar-primary'
+
     const boxClassName = classnames(styles.component, 'box-primary')
     const progressbarClassName = classnames(
       styles.progressbar,
       'progress-bar progress-bar-striped',
-      percentage >= 100 ? 'progress-bar-success' : 'progress-bar-primary',
+      progressBarStyle,
     )
+
     return !!draft && (
       <Box className={boxClassName}>
         <BoxHeader withBorder>
@@ -47,6 +58,16 @@ class DraftPublication extends React.Component {
               <span className="sr-only">{percentage}%</span>
             </div>
           </div>
+          { error ?
+            <Box className="box-danger box-solid md-whiteframe-z1">
+              <BoxHeader>
+                Format de livre incorrect
+              </BoxHeader>
+              <BoxBody>
+                {'Votre livre ne peux pas être publié en l\'état. Actuellement la seule raison est d\'avoir oublié de définir une page de début à votre livre. Si ce n\'est pas le cas merci de contacter l\'administrateur.'}
+              </BoxBody>
+            </Box>
+          : null }
         </BoxBody>
       </Box>
     )

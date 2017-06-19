@@ -14,8 +14,8 @@ const headers = [
 
 const PublicationList = ({ books = [] }) => {
   return (
-    <Box>
-      <BoxHeader className="box-primary" withBorder>
+    <Box className="box-primary">
+      <BoxHeader withBorder>
         <h4>Liste Complète</h4>
       </BoxHeader>
       <BoxBody>
