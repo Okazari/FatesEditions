@@ -26,6 +26,16 @@
     animation-fill-mode: both;
   }
 
+  .modalFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    button {
+      margin-right: 10px;
+    }
+  }
+
   @keyframes fadeInDown {
     0% {
       opacity: 0;

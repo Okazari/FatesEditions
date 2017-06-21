@@ -29,6 +29,13 @@ class PublicationList extends React.Component {
     this.setState({ modal: { open: true, data } })
   }
 
+  bookToDraft = (book) => {
+    const { updateResource } = this.props
+    book.draft = true
+    updateResource(book)
+    this.setState({ modal: { open: false } })
+  }
+
   render() {
     const { books } = this.props
     const { modal } = this.state
@@ -46,18 +53,27 @@ class PublicationList extends React.Component {
             />)}
           </DataTable>
         </BoxBody>
-        { modal.open ?
-          <Modal
-            title="Demande de confirmation"
-            text={`Êtes vous sur de vouloir repasser ce livre en brouillon, cela supprimera toutes les parties en cours sur ce livre : ${modal.data.name} ?`}
-            buttons={
-              <div>
-                <Button className="btn-success">Oui</Button>
-                <Button className="btn-danger">Non</Button>
-              </div>
-            }
-          />
-        : null }
+        <Modal
+          title="Demande de confirmation"
+          text={`Êtes vous sur de vouloir repasser ce livre en brouillon, cela supprimera toutes les parties en cours sur ce livre : ${modal.data ? modal.data.name : null} ?`}
+          open={modal.open}
+          buttons={
+            <div>
+              <Button
+                className="btn-success"
+                domProps={{ onClick: () => this.bookToDraft(modal.data) }}
+              >
+                Oui
+              </Button>
+              <Button
+                className="btn-danger"
+                domProps={{ onClick: () => this.setState({ modal: { open: false } }) }}
+              >
+                Non
+              </Button>
+            </div>
+          }
+        />
       </Box>
     )
   }
