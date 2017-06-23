@@ -1,15 +1,8 @@
 import React from 'react'
 import { Box, BoxHeader } from '../Box'
-import DataTable from '../DataTable'
-import BookRow from './BookRow'
+import Book from './Book'
+import styles from './styles.scss'
 
-const headers = [
-  { type: 'Titre du livre', key: 'title' },
-  { type: 'Genre', key: 'genre' },
-  { type: 'Auteur', key: 'author' },
-  { type: 'Synopsis', key: 'synopsis' },
-  { type: 'Jouer', key: 'play' },
-]
 const BookList = ({ books = [] }) => {
   return (
     <Box>
@@ -18,9 +11,9 @@ const BookList = ({ books = [] }) => {
           Livres publiés
         </h3>
       </BoxHeader>
-      <DataTable headers={headers} className="table-bordered table-hover table-striped">
-        {books.map(book => <BookRow bookId={book} key={book} />)}
-      </DataTable>
+      <div className={styles.component}>
+        {books.map(book => <Book bookId={book} key={book} />)}
+      </div>
     </Box>
   )
 }

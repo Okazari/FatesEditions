@@ -1,10 +1,12 @@
 import React from 'react'
+import styles from './styles.scss'
 
 const BookGenres = ({ genre = {} }) => {
   return (
-    <h4 className="label label-primary">
-      <i className={`fa fa-icon fa-${genre.icon}`} style={{ marginRight: '5px' }} />{genre.name}
-    </h4>
+    <div>
+      <i className={`fa fa-icon fa-${genre.icon}`} />
+      <span className={styles.genreName}>{genre.name}</span>
+    </div>
   )
 }
 
