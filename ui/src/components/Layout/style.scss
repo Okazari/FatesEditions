@@ -1,0 +1,8 @@
+@import '~styles/colors';
+@import '~styles/sizes';
+
+.component {
+  height: 100vh;
+  background-color: $primary-color;
+  display: flex;
+}

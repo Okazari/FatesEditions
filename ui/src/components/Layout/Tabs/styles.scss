@@ -1,0 +1,14 @@
+@import '~styles/colors';
+
+.component {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  min-width: 40%;
+  justify-content: center;
+  padding-top: 60px;
+  border-bottom: solid 1px $decorator-color;
+}

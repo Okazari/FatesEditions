@@ -1,6 +1,7 @@
 import React from 'react'
 import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-router'
 import App from './components/App'
+import Books from './components/Books'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import { PlayBooks, PlayGames } from './components/Play'
 import Game from './components/Game'
@@ -11,6 +12,7 @@ import Profile from './components/Profile'
 const AppRouter = () => {
   return (
     <Router history={browserHistory}>
+      <Route path="books" component={Books} />
       <Route path="app">
         <IndexRedirect to="portal" />
         <Route path="portal" component={Portal}>
