@@ -1,10 +1,11 @@
 @import '~styles/colors';
 @import '~styles/sizes';
+@import '~styles/animations';
 
 .component {
   margin: 0px 20px;
   color: $font-color;
-  width: $tabSize;
+  width: $tab-size;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,7 +15,7 @@
 
   &:hover {
     .tracker {
-      transition: width 315ms;
+      transition: width $standard-duration;
       width: 100%;
     }
   }
@@ -28,6 +29,6 @@
 }
 
 .selected {
-  transition: width 315ms;
+  transition: width $standard-duration;
   width: 100%;
 }

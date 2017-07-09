@@ -1,16 +1,21 @@
 @import '~styles/colors';
-@import '~styles/shadows';
+@import '~styles/sizes';
+@import '~styles/mixins';
 
 .component {
+  @include scrollbar();
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  height: $tab-content-size;
   flex-wrap: wrap;
+  overflow: auto;
 }
 
 .book {
   display: flex;
   justify-content: center;
-  width: 300px;
+  align-items: center;
+  width: 200px;
   margin: 20px;
   height: 300px;
 }

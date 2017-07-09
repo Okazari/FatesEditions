@@ -1,3 +1,4 @@
-$toolbarSize: 100px;
-$contentSize: calc(100% - #{$toolbarSize});
-$tabSize: 150px;
+$toolbar-size: 100px;
+$content-size: calc(100% - #{$toolbar-size});
+$tab-size: 100px;
+$tab-content-size: calc(100vh - #{$tab-size});

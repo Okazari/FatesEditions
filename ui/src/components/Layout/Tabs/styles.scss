@@ -1,14 +1,16 @@
 @import '~styles/colors';
+@import '~styles/sizes';
 
 .component {
   display: flex;
   justify-content: center;
+  height: $tab-size;
 }
 
 .wrapper {
   display: flex;
   min-width: 40%;
   justify-content: center;
-  padding-top: 60px;
+  align-items: flex-end;
   border-bottom: solid 1px $decorator-color;
 }
