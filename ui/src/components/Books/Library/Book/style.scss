@@ -1,0 +1,45 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.component {
+  position: relative;
+  top: 20px;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 2px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: top 315ms, opacity 315ms;
+  &:hover {
+    .coverImage {
+      transform: scale(1.1);
+    }
+  }
+  &.displayed {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.cover {
+  height: 100%;
+  overflow: hidden;
+  box-shadow: $box-shadow-1;
+}
+
+.coverImage {
+  transition: transform 315ms;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.content {
+  position: relative;
+  background-color: $transparent-black;
+  color: $transparent-white;
+  bottom: 75px;
+  padding: 10px;
+}

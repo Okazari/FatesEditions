@@ -1,5 +1,6 @@
 import React from 'react'
-// import styles from './style.scss'
+import styles from './style.scss'
+import Book from './Book'
 
 class Library extends React.Component {
 
@@ -9,8 +10,23 @@ class Library extends React.Component {
   }
 
   render() {
+    const { drafts } = this.props
+
+    // TODO Replace with loader
+    if (!drafts) return null
     return (
-      <div> Library </div>
+      <div className={styles.component}>
+        {
+          drafts.map((book, index) => (
+            <div
+              key={book}
+              className={styles.book}
+            >
+              <Book showDelay={100 * (index + 1)} draftId={book} />
+            </div>
+          ))
+        }
+      </div>
     )
   }
 }
