@@ -20,7 +20,7 @@ class Book extends React.Component {
 
   render() {
     const { draft } = this.props
-    const { over, expanded, displayed } = this.state
+    const { expanded, displayed } = this.state
     // TODO Replace with loader
     if (!draft) return null
     const coverStyle = {
