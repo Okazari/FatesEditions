@@ -4,7 +4,7 @@ import App from './components/App'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import { PlayBooks, PlayGames } from './components/Play'
 import Game from './components/Game'
-import { ShareBook, SharePublications, ShareEditBook } from './components/Share'
+import { ShareBook, SharePublications } from './components/Share'
 import { WriteBook, WriteDrafts, WritePage } from './components/Write'
 import Profile from './components/Profile'
 
@@ -19,7 +19,7 @@ const AppRouter = () => {
           <Route path="signup" component={SignUp} />
           <Route path="recover" component={Recover} />
         </Route>
-        <Route component={Game} path="game/:gameId" />
+        <Route component={Game} path="game/:id" />
         <Route component={App}>
           <IndexRedirect to="play" />
           <Route path="play" >
@@ -37,7 +37,6 @@ const AppRouter = () => {
             <IndexRedirect to="book" />
             <Route path="book" component={ShareBook} />
             <Route path="publications" component={SharePublications} />
-            <Route path="edit/:bookId" component={ShareEditBook} />
           </Route>
           <Route path="profile" >
             <IndexRoute component={Profile} />

@@ -35,8 +35,8 @@ router.get('/:bookId', (req, res, next) => {
  * @return book object
  */
 router.put('/:bookId', (req, res, next) => {
-  if(req.body !== null && req.body !== undefined) {
-    Book.findByIdAndUpdate(req.params.bookId, req.body)
+  if(req.body.book !== null && req.body.book !== undefined) {
+    Book.findByIdAndUpdate(req.params.bookId, req.body.book)
       .then(book => res.json(book), err => next(err));
   }
   else res.sendStatus(400);

@@ -1,4 +1,3 @@
-export AuthorService from './AuthorService'
 export BookService from './BookService'
 export GenreService from './GenreService'
 export PageService from './PageService'

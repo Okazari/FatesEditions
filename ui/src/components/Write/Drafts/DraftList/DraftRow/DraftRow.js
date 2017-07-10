@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Button } from '../../../../common'
-import { BookGenre } from '../../../../common/Book'
+import { BookGenre, Button } from '../../../../common'
 import { RouteService } from '../../../../../services'
 
 const DraftRow = ({ draft = {}, deleteResource }) => {
@@ -12,9 +11,7 @@ const DraftRow = ({ draft = {}, deleteResource }) => {
         {draft.name}
       </td>
       <td>
-        <h4 className="label label-primary">
-          <BookGenre genre={draft.genreId} />
-        </h4>
+        <BookGenre genre={draft.genreId} />
       </td>
       <td>
         <h4 className="label label-danger md-whiteframe-z1">
