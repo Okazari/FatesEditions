@@ -12,23 +12,23 @@ const headers = [
   { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
 
-const BookItem = ({ draft, updateResource, disabled }) => {
+const BookItem = ({ book, updateResource, disabled }) => {
   const addObject = () => {
-    draft.objects = draft.objects.concat({})
-    updateResource(draft)
+    book.objects = book.objects.concat({})
+    updateResource(book)
   }
 
   const removeObject = (index) => {
-    draft.objects.splice(index, 1)
-    updateResource(draft)
+    book.objects.splice(index, 1)
+    updateResource(book)
   }
 
   const updateDraft = (index, item) => {
-    draft.objects[index] = item
-    updateResource(draft)
+    book.objects[index] = item
+    updateResource(book)
   }
 
-  return (
+  return !!book && (
     <div className={styles.component}>
       <Box className="box-primary">
         <BoxHeader withBorder>
@@ -40,7 +40,7 @@ const BookItem = ({ draft, updateResource, disabled }) => {
         <BoxBody className="no-padding">
           <DataTable headers={headers} className="table-hover">
             {
-              draft.objects.map((item, index) => {
+              book.objects.map((item, index) => {
                 return (
                   <ItemRow
                     key={item._id}

@@ -3,7 +3,7 @@ import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
 import styles from './styles.scss'
 import PageGraph from './PageGraph'
 
-const BookGraph = ({ draft = {} }) => {
+const BookGraph = ({ book = {} }) => {
   return (
     <div className={styles.component}>
       <Box className="box-primary">
@@ -14,7 +14,7 @@ const BookGraph = ({ draft = {} }) => {
           </div>
         </BoxHeader>
         <BoxBody>
-          <PageGraph draftId={draft._id} />
+          <PageGraph draftId={book._id} />
         </BoxBody>
         <BoxFooter className="align-center" />
       </Box>

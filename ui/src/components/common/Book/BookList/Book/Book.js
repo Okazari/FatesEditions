@@ -1,7 +1,8 @@
 import React from 'react'
 import BookGenre from '../../BookGenre'
 import BookAuthor from '../../BookAuthor'
-import Button from '../../Button'
+import Button from '../../../Button'
+import RouteService from '../../../../../services/RouteService'
 import styles from './styles.scss'
 
 class Book extends React.Component {
@@ -15,6 +16,11 @@ class Book extends React.Component {
   toggleDetails = () => {
     const { showDetails } = this.state
     this.setState({ showDetails: !showDetails })
+  }
+
+  startGame = (book) => {
+    const { startGame } = this.props
+    startGame(book).then(game => RouteService.goTo(`/app/game/${game._id}`))
   }
 
   render() {
@@ -37,7 +43,7 @@ class Book extends React.Component {
             <p><BookAuthor author={book.authorId} /></p>
           </div>
           <div className={styles.buttons}>
-            <span><i className={'fa fa-gamepad'} /></span>
+            <span onClick={() => this.startGame(book)}><i className={'fa fa-gamepad'} /></span>
             <span onClick={this.toggleDetails}><i className={'fa fa-info'} /></span>
           </div>
         </div>
@@ -64,6 +70,7 @@ class Book extends React.Component {
                 <div className={styles.tags}>
                   { book.tags && book.tags.map(tag => <span className="label label-primary">{tag}</span>) }
                 </div>
+
                 <Button className={styles.playBtn}>
                   <i className="fa fa-gamepad" /> Jouer
                 </Button>

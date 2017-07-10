@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { BookGenre } from '../../../../common'
+import { BookGenre } from '../../../../common/Book'
 import Button from '../../../../common/Button'
 import { RouteService } from '../../../../../services'
 
-const PublicationRow = ({ book = {}, showModal }) => {
-  return (
+const PublicationRow = ({ book, showModal }) => {
+  return !!book && (
     <tr>
       <td>
         {book.name}
       </td>
       <td>
-        <BookGenre genre={book.genreId} />
+        <h4 className="label label-primary"><BookGenre genre={book.genreId} /></h4>
       </td>
       <td>
         <h4 className="label label-success md-whiteframe-z1">
@@ -23,7 +23,7 @@ const PublicationRow = ({ book = {}, showModal }) => {
         {book.synopsis}
       </td>
       <td>
-        <Link to={RouteService.routes.writebook(book._id)}>
+        <Link to={RouteService.routes.editbook(book._id)}>
           <Button className="btn-primary md-whiteframe-z1">
             Editer
           </Button>

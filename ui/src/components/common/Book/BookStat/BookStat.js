@@ -13,23 +13,23 @@ const headers = [
   { type: 'Visible', classtype: '', key: 'visibility' },
   { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
-const BookStat = ({ draft, updateResource, disabled }) => {
+const BookStat = ({ book, updateResource, disabled }) => {
   const addStat = () => {
-    draft.stats = draft.stats.concat({})
-    updateResource(draft)
+    book.stats = book.stats.concat({})
+    updateResource(book)
   }
 
   const removeStat = (index) => {
-    draft.stats.splice(index, 1)
-    updateResource(draft)
+    book.stats.splice(index, 1)
+    updateResource(book)
   }
 
   const updateDraft = (index, stat) => {
-    draft.stats[index] = stat
-    updateResource(draft)
+    book.stats[index] = stat
+    updateResource(book)
   }
 
-  return (
+  return !!book && (
     <div className={styles.component}>
       <Box className="box-primary">
         <BoxHeader withBorder>
@@ -40,7 +40,7 @@ const BookStat = ({ draft, updateResource, disabled }) => {
         </BoxHeader>
         <BoxBody className="no-padding">
           <DataTable headers={headers} className="table-hover">
-            {draft.stats.map((stat, index) => {
+            {book.stats.map((stat, index) => {
               return (
                 <StatRow
                   key={stat._id}

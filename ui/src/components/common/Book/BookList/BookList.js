@@ -1,9 +1,9 @@
 import React from 'react'
-import { Box, BoxHeader } from '../Box'
+import { Box, BoxHeader } from '../../Box'
 import Book from './Book'
 import styles from './styles.scss'
 
-const BookList = ({ books = [] }) => {
+const BookList = ({ books = [], startGame }) => {
   return (
     <Box>
       <BoxHeader withBorder>
@@ -12,7 +12,7 @@ const BookList = ({ books = [] }) => {
         </h3>
       </BoxHeader>
       <div className={styles.component}>
-        {books.map(book => <Book bookId={book} key={book} />)}
+        {books.map(book => <Book bookId={book} key={book} startGame={startGame} />)}
       </div>
     </Box>
   )
