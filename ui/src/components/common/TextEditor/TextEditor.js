@@ -41,7 +41,6 @@ class TextEditor extends React.Component {
   }
 
   onTab = (e) => {
-    e.preventDefault()
     const { editorState } = this.state
     this.onChange(RichUtils.onTab(e, editorState, TabDepth))
   }
