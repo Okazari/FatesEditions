@@ -8,7 +8,8 @@ const GameSchema   = new Schema({
     bookId: Schema.Types.ObjectId,
     book: Book,
     bookStatus: String,
-    stats : Schema.Types.Mixed
+    stats : Schema.Types.Mixed,
+    gameTree: [Schema.Types.Mixed],
 });
 
 module.exports = mongoose.model('Game', GameSchema);

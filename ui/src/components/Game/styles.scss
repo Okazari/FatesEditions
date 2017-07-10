@@ -15,6 +15,7 @@ $fadein: .5s;
 
 .wrapper {
   position: fixed;
+  display: flex;
   background-image: url('http://www.rpgbooster.com/wp-content/uploads/2014/02/Map-South-East-Domarion.jpg');
   background-position: center;
   height: 100vh;
@@ -26,13 +27,19 @@ $fadein: .5s;
 
   .rightSide {
     display: flex;
-    justify-content: flex-end;
+    flex: 50%;
+    height: 100vh;
+  }
+
+  .leftSide {
+    display: flex;
+    flex: 50%;
     height: 100vh;
   }
 
   .content {
     color: transparentize($white, .1);
-    width: 50%;
+    width: 100%;
     background-color: transparentize($black, .1);
     box-shadow: -10px 0 2px 5px transparentize($black, .1);
     display: flex;
@@ -53,7 +60,7 @@ $fadein: .5s;
 
     .mainText {
       opacity: 0;
-      max-width: 80%;
+      max-width: 70%;
       animation: fadein $fadein;
       animation-fill-mode: forwards;
       animation-delay: $openbook;
