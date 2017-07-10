@@ -6,3 +6,4 @@ bower_components
 public/build
 mongo
 npm-debug.log
+/.idea/
