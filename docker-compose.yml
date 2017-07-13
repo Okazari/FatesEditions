@@ -1,6 +1,0 @@
-mongo:
-  image: mongo:3.2.6
-  volumes:
-    - ./mongo:/data/db
-  ports:
-    - 27017:27017
