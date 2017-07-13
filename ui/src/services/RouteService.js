@@ -23,6 +23,10 @@ class RouteService {
     browserHistory.push(route)
   }
 
+  redirect401 = () => {
+    browserHistory.push(this.routes.signin())
+  }
+
 }
 
 export default new RouteService()

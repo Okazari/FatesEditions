@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './style.scss'
-import Book from './Book'
+import Book from '../common/Book'
 
 class Library extends React.Component {
 
@@ -16,19 +16,21 @@ class Library extends React.Component {
     if (!drafts) return null
     return (
       <div className={styles.component}>
-        {
-          drafts.map((book, index) => {
-            const delay = 50 * ((index % nbColumns) + Math.floor(index / nbColumns) + 1)
-            return (
-              <div
-                key={book}
-                className={styles.book}
-              >
-                <Book showDelay={delay} draftId={book} />
-              </div>
-            )
-          })
-        }
+        <div className={styles.list}>
+          {
+            drafts.map((book, index) => {
+              const delay = 50 * ((index % nbColumns) + Math.floor(index / nbColumns) + 1)
+              return (
+                <div
+                  key={book}
+                  className={styles.book}
+                >
+                  <Book showDelay={delay} draftId={book} />
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
     )
   }

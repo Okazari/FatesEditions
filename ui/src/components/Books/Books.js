@@ -2,11 +2,11 @@ import React from 'react'
 // import styles from './style.scss'
 import { Layout, Content, Toolbar, Tabs } from '../Layout'
 import Library from './Library'
+import News from './News'
 
-const tabNews = { label: 'Nouveautés', Component: () => <div>NEWS</div> }
+const tabNews = { label: 'Nouveautés', Component: News }
 const tabLibrary = { label: 'Bibliothèques', Component: Library }
-const tabCommunity = { label: 'Communautés', Component: () => <div>Community</div> }
-const tabList = [tabNews, tabLibrary, tabCommunity]
+const tabList = [tabNews, tabLibrary]
 
 class Books extends React.Component {
 
@@ -14,7 +14,7 @@ class Books extends React.Component {
     super(props)
     this.state = {
       tabs: tabList,
-      selectedTab: tabLibrary,
+      selectedTab: tabNews,
     }
   }
 

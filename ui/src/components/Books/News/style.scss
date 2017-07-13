@@ -1,0 +1,42 @@
+@import '~styles/colors';
+@import '~styles/sizes';
+@import '~styles/mixins';
+
+.component {
+  @include scrollbar();
+  height: $tab-content-size;
+  overflow: auto;
+}
+
+.showdown {
+  margin: 0 20px;
+  height: 400px;
+  padding: 20px 0;
+  border-bottom: solid 1px $decorator-color;
+}
+
+.showdownPreview {
+  width: 100%;
+  @media (min-width: 1170px) {
+    width: 440px;
+  }
+  @media (min-width: 1400px) {
+    width: 680px;
+  }
+  height: 100%;
+}
+
+.list {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  margin: 20px;
+  height: 300px;
+}

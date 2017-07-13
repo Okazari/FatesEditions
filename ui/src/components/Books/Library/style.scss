@@ -4,11 +4,14 @@
 
 .component {
   @include scrollbar();
+  height: $tab-content-size;
+  overflow: auto;
+}
+
+.list {
+  flex-wrap: wrap;
   display: flex;
   justify-content: flex-start;
-  height: $tab-content-size;
-  flex-wrap: wrap;
-  overflow: auto;
 }
 
 .book {
