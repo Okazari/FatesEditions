@@ -1,21 +1,23 @@
 import React from 'react'
 import { Content } from '../../App'
-import BookInformation from './BookInformation'
-import BookStat from './BookStat'
-import BookItem from './BookItem'
-import BookGraph from './BookGraph'
-import BookPage from './BookPage'
+import {
+  BookInformation,
+  BookStat,
+  BookItem,
+  BookGraph,
+  BookPage,
+} from '../../common/Book'
 import styles from './styles.scss'
 
 const Book = ({ draft, updateResource }) => {
   return !!draft && (
     <Content title="Edition de livre" >
       <div className={styles.component}>
-        <BookInformation draft={draft} updateResource={updateResource} />
-        <BookStat draft={draft} updateResource={updateResource} />
-        <BookItem draft={draft} updateResource={updateResource} />
+        <BookInformation book={draft} updateResource={updateResource} />
+        <BookStat book={draft} updateResource={updateResource} />
+        <BookItem book={draft} updateResource={updateResource} />
         <div className={styles.row}>
-          <BookGraph draft={draft} />
+          <BookGraph book={draft} />
           <BookPage query={{ bookId: draft._id }} />
         </div>
       </div>

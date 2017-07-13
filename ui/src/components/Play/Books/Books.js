@@ -1,6 +1,6 @@
 import React from 'react'
 import { Content } from '../../App'
-import { BookList } from '../../common'
+import { BookList } from '../../common/Book'
 
 const Books = () => {
   return (

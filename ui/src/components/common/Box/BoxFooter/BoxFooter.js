@@ -1,10 +1,9 @@
 import React from 'react'
+import classnames from 'classnames'
 
 const BoxFooter = ({ children, className }) => {
-  let classes = 'box-footer'
-  if (className) classes += ` ${className}`
   return (
-    <div className={classes}>
+    <div className={classnames('box-footer', className)}>
       {children}
     </div>
   )
