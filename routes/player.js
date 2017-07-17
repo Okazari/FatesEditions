@@ -1,19 +1,20 @@
 /**
  * @description Player (view) endpoint
  */
-const express = require('express');
-const router = express.Router();
-const Player = require('../models/UserModel');
+const express = require('express')
+const Player = require('../models/UserModel')
+
+const router = express.Router()
 
 /**
  * @method GET
  * @return user array username, games (ids)
  */
 router.get('/', (req, res, next) => {
-  Player.find({},"username games")
-    .where("games.length").gt(0)
-    .then(players => res.json(players), err => next(err));
-});
+  Player.find({}, 'username games')
+    .where('games.length').gt(0)
+    .then(players => res.json(players), err => next(err))
+})
 
 /**
  * @method GET
@@ -21,9 +22,9 @@ router.get('/', (req, res, next) => {
  * @return user object username, games (ids)
  */
 router.get('/:playerId', (req, res, next) => {
-  Player.findById(req.params.playerId,'username games')
-    .then(player => res.json(player), err => next(err));
-});
+  Player.findById(req.params.playerId, 'username games')
+    .then(player => res.json(player), err => next(err))
+})
 
 /**
  * @method PUT
@@ -32,16 +33,17 @@ router.get('/:playerId', (req, res, next) => {
  * @return player games array
  */
 router.put('/:playerId', (req, res, next) => {
-  if(req.body.games !== undefined && req.body.games !== null) {
+  if (req.body.games !== undefined && req.body.games !== null) {
     Player.findById(req.params.playerId)
-      .then(player => {
-        player.games = req.body.games;
+      .then((player) => {
+        player.games = req.body.games
         player.save()
-          .then(player => res.json(player.games), err => next(err));
-      }, err => next(err));
+          .then(p => res.json(p.games), err => next(err))
+      }, err => next(err))
+  } else {
+    res.sendStatus(400)
   }
-  else res.sendStatus(400);
-});
+})
 
 /**
  * @method PATCH
@@ -51,11 +53,13 @@ router.put('/:playerId', (req, res, next) => {
  */
 router.patch('/:playerId', (req, res, next) => {
   Player.findById(req.params.playerId)
-    .then(player => {
-      if(req.body.gameId) player.games.push(req.body.gameId);
+    .then((player) => {
+      if (req.body.gameId) {
+        player.games.push(req.body.gameId)
+      }
       player.save()
-        .then(player => res.status(201).json(req.body.gameId), err => next(err));
+        .then(() => res.status(201).json(req.body.gameId), err => next(err))
     }, err => next(err))
-});
+})
 
-module.exports = router;
+module.exports = router

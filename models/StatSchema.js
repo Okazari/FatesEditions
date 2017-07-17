@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema } = require('mongoose')
 
 module.exports = new Schema({
   description: String,
@@ -7,5 +6,5 @@ module.exports = new Schema({
   max: Number,
   min: Number,
   name: String,
-  visible: { type: Boolean, default: true }
-});
+  visible: { type: Boolean, default: true },
+})

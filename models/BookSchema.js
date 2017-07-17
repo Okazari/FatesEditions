@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const Page = require('./PageSchema');
-const Stat = require('./StatSchema');
-const Object = require('./ObjectSchema');
+const { Schema } = require('mongoose')
+const Page = require('./PageSchema')
+const Stat = require('./StatSchema')
+const Object = require('./ObjectSchema')
 
-module.exports = new Schema({
+const Book = new Schema({
   name: String,
   tags: [String],
   synopsis: String,
@@ -13,8 +12,20 @@ module.exports = new Schema({
   genreId: Schema.Types.ObjectId,
   draft: Boolean,
   startingPageId: Schema.Types.ObjectId,
-  revision: {type: Number, default: 0 },
+  revision: { type: Number, default: 0 },
   pages: [Page],
   stats: [Stat],
-  objects: [Object]
-});
+  objects: [Object],
+})
+
+Book.pre('init', (next) => {
+  this.creationDate = Date.now()
+  next()
+})
+
+Book.pre('save', (next) => {
+  this.lastModificationDate = Date.now()
+  next()
+})
+
+module.exports = Book
