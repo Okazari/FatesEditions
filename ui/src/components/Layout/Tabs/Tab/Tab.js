@@ -1,16 +1,19 @@
 import React from 'react'
 import classnames from 'classnames/bind'
+import { Link } from 'react-router'
 import styles from './styles.scss'
 
 const cx = classnames.bind(styles)
 
-const Tab = ({ label, domProps, selected }) => {
+const Tab = ({ label, link, selected }) => {
   const selectedClass = cx(styles.tracker, {
     selected,
   })
   return (
-    <div {...domProps} className={styles.component}>
-      {label}
+    <div className={styles.component}>
+      <Link to={link}>
+        {label}
+      </Link>
       <div className={selectedClass} />
     </div>
   )

@@ -10,8 +10,9 @@ const Showdown = ({ draft }) => {
       <div className={styles.preview}>
         <Book draftId={draft._id} />
       </div>
-      <div>
+      <div className={styles.synopsis}>
         {draft.synopsis}
+        <div className={styles.ellipsis} />
       </div>
     </div>
   )

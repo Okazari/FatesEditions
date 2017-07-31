@@ -3,20 +3,24 @@ import { browserHistory } from 'react-router'
 class RouteService {
 
   routes = {
-    profile: () => '/app/profile',
-    signin: () => '/app/portal/signin',
-    signup: () => '/app/portal/signup',
-    recover: () => '/app/portal/recover',
-    home: () => '/app/play',
-    playbook: () => '/app/play/books',
-    playgames: () => '/app/play/games',
-    playgame: id => `/app/game/${id}`,
-    sharebook: () => '/app/share/book',
-    sharepublications: () => '/app/share/publications',
-    editbook: id => `/app/share/edit/${id}`,
-    writebook: id => `/app/write/book/${id}`,
-    writebookpage: (bookId, pageId) => `/app/write/book/${bookId}/page/${pageId}`,
-    writedrafts: () => '/app/write/drafts',
+    profile: () => '/old/profile',
+    signin: () => '/old/portal/signin',
+    signup: () => '/old/portal/signup',
+    recover: () => '/old/portal/recover',
+    home: () => '/old/play',
+    playbook: () => '/old/play/books',
+    playgames: () => '/old/play/games',
+    playgame: id => `/old/game/${id}`,
+    sharebook: () => '/old/share/book',
+    sharepublications: () => '/old/share/publications',
+    editbook: id => `/old/share/edit/${id}`,
+    writebook: id => `/old/write/book/${id}`,
+    writebookpage: (bookId, pageId) => `/old/write/book/${bookId}/page/${pageId}`,
+    writedrafts: () => '/old/write/drafts',
+    books: () => '/app/books',
+    booksnews: () => '/app/books/news',
+    bookslibrary: () => '/app/books/library',
+    write: () => '/app/write',
   }
 
   goTo = (route) => {

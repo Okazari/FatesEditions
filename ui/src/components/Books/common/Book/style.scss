@@ -42,6 +42,11 @@
   position: relative;
   background-color: $transparent-black;
   color: $transparent-white;
-  bottom: 75px;
+  bottom: 70px;
   padding: 10px;
+}
+
+.bookName {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

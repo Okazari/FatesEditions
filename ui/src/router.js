@@ -1,19 +1,33 @@
 import React from 'react'
 import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-router'
-import App from './components/App'
-import Books from './components/Books'
+
+// NEW LAYOUT
+import Books, { Library, News } from './components/Books'
+import Write from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
-import { PlayBooks, PlayGames } from './components/Play'
 import Game from './components/Game'
-import { ShareBook, SharePublications, ShareEditBook } from './components/Share'
-import { WriteBook, WriteDrafts, WritePage } from './components/Write'
-import Profile from './components/Profile'
+
+// OLD LAYOUT
+import App from './components/Old/App'
+import { PlayBooks, PlayGames } from './components/Old/Play'
+import { ShareBook, SharePublications, ShareEditBook } from './components/Old/Share'
+import { WriteBook, WriteDrafts, WritePage } from './components/Old/Write'
+import Profile from './components/Old/Profile'
 
 const AppRouter = () => {
   return (
     <Router history={browserHistory}>
-      <Route path="books" component={Books} />
       <Route path="app">
+        <Route path="books" component={Books}>
+          <IndexRedirect to="news" />
+          <Route path="news" component={News} />
+          <Route path="library" component={Library} />
+        </Route>
+        <Route path="write" component={Write}>
+          <Route path="news" component={News} />
+        </Route>
+      </Route>
+      <Route path="old">
         <IndexRedirect to="portal" />
         <Route path="portal" component={Portal}>
           <IndexRedirect to="signin" />

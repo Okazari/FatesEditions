@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './style.scss'
-import logo from './logo.svg'
+import logo from '../common/logo.svg'
 
 const Portal = ({ children }) => {
   return (

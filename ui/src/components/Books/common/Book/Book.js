@@ -38,7 +38,7 @@ class Book extends React.Component {
         <div className={styles.cover}>
           <div className={styles.coverImage} style={coverStyle} />
           <div className={styles.content}>
-            {draft.name}
+            <div className={styles.bookName}>{draft.name}</div>
             <Author authorId={draft.authorId} />
           </div>
         </div>

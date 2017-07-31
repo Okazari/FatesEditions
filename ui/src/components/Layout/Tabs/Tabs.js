@@ -10,10 +10,10 @@ const Tabs = ({ tabs, onSelect, selectedTab }) => {
           tabs.map((tab) => {
             return (
               <Tab
-                selected={tab === selectedTab}
+                selected={tab.link === selectedTab}
                 key={tab.label}
                 label={tab.label}
-                domProps={{ onClick: e => onSelect(tab, e.target) }}
+                link={tab.link}
               />
             )
           })
