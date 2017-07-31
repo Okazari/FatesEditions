@@ -3,7 +3,7 @@ import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-
 
 // NEW LAYOUT
 import Books, { Library, News } from './components/Books'
-import Write from './components/Write'
+import Write, { Drafts } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import Game from './components/Game'
 
@@ -18,13 +18,17 @@ const AppRouter = () => {
   return (
     <Router history={browserHistory}>
       <Route path="app">
+        <IndexRedirect to="books" />
         <Route path="books" component={Books}>
           <IndexRedirect to="news" />
           <Route path="news" component={News} />
           <Route path="library" component={Library} />
         </Route>
         <Route path="write" component={Write}>
-          <Route path="news" component={News} />
+          <IndexRedirect to="drafts" />
+          <Route path="drafts" component={Drafts} />
+          <Route path="publications" component={Drafts} />
+          <Route path="publish" component={Drafts} />
         </Route>
       </Route>
       <Route path="old">

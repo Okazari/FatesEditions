@@ -5,35 +5,19 @@ import { RouteService } from '../../services'
 
 const tabNews = { label: 'Nouveautés', link: RouteService.routes.booksnews() }
 const tabLibrary = { label: 'Bibliothèques', link: RouteService.routes.bookslibrary() }
-const tabList = [tabNews, tabLibrary]
+const tabs = [tabNews, tabLibrary]
 
-class Books extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      tabs: tabList,
-      selectedTab: tabNews,
-    }
-  }
-
-  selectTab = (tab) => {
-    this.setState({ selectedTab: tab })
-  }
-
-  render() {
-    const { tabs } = this.state
-    const { location, children } = this.props
-    return (
-      <Layout>
-        <Content>
-          <Tabs tabs={tabs} selectedTab={location.pathname} onSelect={this.selectTab} />
-          {children}
-        </Content>
-        <Toolbar />
-      </Layout>
-    )
-  }
+const Books = ({ location, children }) => {
+  return (
+    <Layout>
+      <Content>
+        <Tabs tabs={tabs} selectedTab={location.pathname} />
+        {children}
+      </Content>
+      <Toolbar />
+    </Layout>
+  )
 }
+
 
 export default Books

@@ -12,12 +12,12 @@
 
 .preview {
   flex-grow: 1;
-  min-width: 100%;
+  width: 100%;
   @media (min-width: 1170px) {
-    min-width: 440px;
+    width: 440px;
   }
   @media (min-width: 1400px) {
-    min-width: 680px;
+    width: 680px;
   }
   height: 100%;
 }

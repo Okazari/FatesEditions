@@ -19,12 +19,12 @@ class Book extends React.Component {
   }
 
   render() {
-    const { draft } = this.props
+    const { book } = this.props
     const { expanded, displayed } = this.state
     // TODO Replace with loader
-    if (!draft) return null
+    if (!book) return null
     const coverStyle = {
-      backgroundImage: `url(${draft.cover})`,
+      backgroundImage: `url(${book.cover})`,
     }
     const classes = cx(styles.component, {
       expanded,
@@ -38,8 +38,8 @@ class Book extends React.Component {
         <div className={styles.cover}>
           <div className={styles.coverImage} style={coverStyle} />
           <div className={styles.content}>
-            <div className={styles.bookName}>{draft.name}</div>
-            <Author authorId={draft.authorId} />
+            <div className={styles.bookName}>{book.name}</div>
+            <Author authorId={book.authorId} />
           </div>
         </div>
       </div>

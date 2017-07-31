@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from './style.scss'
-import Book from '../common/Book'
-import Showdown from './Showdown'
+import Draft from '../common/Draft'
 
-class News extends React.Component {
+class Drafts extends React.Component {
 
   constructor(props) {
     super(props)
@@ -11,26 +10,22 @@ class News extends React.Component {
   }
 
   render() {
-    const { books } = this.props
+    const { drafts } = this.props
     const nbColumns = document && Math.floor((document.body.clientWidth - 200) / 240)
     // TODO Replace with loader
-    if (!books) return null
-    const booksCopy = [...books]
-    const firstBook = booksCopy.shift()
+    if (!drafts) return null
     return (
       <div className={styles.component}>
-        <Showdown bookId={firstBook} />
         <div className={styles.list}>
           {
-            booksCopy.map((book, index) => {
+            drafts.map((draft, index) => {
               const delay = 50 * ((index % nbColumns) + Math.floor(index / nbColumns) + 1)
               return (
                 <div
-                  key={book}
+                  key={draft}
                   className={styles.book}
                 >
-                  <span />
-                  <Book showDelay={delay} bookId={book} />
+                  <Draft showDelay={delay} draftId={draft} />
                 </div>
               )
             })
@@ -41,4 +36,4 @@ class News extends React.Component {
   }
 }
 
-export default News
+export default Drafts

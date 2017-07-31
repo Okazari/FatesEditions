@@ -2,18 +2,21 @@ import React from 'react'
 import styles from './style.scss'
 import Book from '../../common/Book'
 
-const Showdown = ({ draft }) => {
+const Showdown = ({ book }) => {
     // TODO Replace with loader
-  if (!draft) return null
+  if (!book) return null
   return (
     <div className={styles.component}>
       <div className={styles.preview}>
-        <Book draftId={draft._id} />
+        <Book bookId={book._id} />
       </div>
-      <div className={styles.synopsis}>
-        {draft.synopsis}
-        <div className={styles.ellipsis} />
-      </div>
+      {
+        book.synopsis &&
+        <div className={styles.synopsis}>
+          {book.synopsis}
+          <div className={styles.ellipsis} />
+        </div>
+      }
     </div>
   )
 }

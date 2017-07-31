@@ -10,22 +10,22 @@ class Library extends React.Component {
   }
 
   render() {
-    const { drafts } = this.props
+    const { books } = this.props
     const nbColumns = document && Math.floor((document.body.clientWidth - 200) / 240)
     // TODO Replace with loader
-    if (!drafts) return null
+    if (!books) return null
     return (
       <div className={styles.component}>
         <div className={styles.list}>
           {
-            drafts.map((book, index) => {
+            books.map((book, index) => {
               const delay = 50 * ((index % nbColumns) + Math.floor(index / nbColumns) + 1)
               return (
                 <div
                   key={book}
                   className={styles.book}
                 >
-                  <Book showDelay={delay} draftId={book} />
+                  <Book showDelay={delay} bookId={book} />
                 </div>
               )
             })
