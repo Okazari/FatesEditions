@@ -34,24 +34,23 @@ router.get('/:gameId', (req, res, next) => {
  * @return game object
  */
 router.post('/', (req, res, next) => {
-    if((req.params.playerId !== undefined && req.params.playerId !== null) ||
-      (req.params.currentPageId !== undefined && req.params.currentPageId !== null) ||
-      (req.params.bookId !== undefined && req.params.bookId !== null)) {
-      let game = new Game();
-      game.playerId = req.body.playerId;
-      game.currentPageId = req.body.currentPageId;
-      game.bookId = req.body.bookId;
-
-      Book.findById(req.body.bookId)
-        .then(book => {
-          game.book = book;
-          game.stats = {};
-          book.stats.map(stat => game.stats[stat._id] = stat.initValue);
+    if(req.body) {
+      let game = new Game()
+      User.findById(req.payload.user._id)
+        .then(user => {
+          game.book = req.body.book
+          game.stats = req.body.stats
+          game.playerId = user._id
+          game.currentPageId = req.body.book.startingPageId
+          game.bookStatus = 'up-to-date'
+          game.path = {}
           game.save()
-            .then(() => res.status(201).json(game), err => next(err));
-        }, err => next(err));
-      }
-      else res.sendStatus(400);
+            .then(game => res.status(201).json(game), err => next(err))
+        }, err => next(err))
+    }
+    else {
+      res.status(400)
+    }
 });
 
 /**
@@ -60,8 +59,8 @@ router.post('/', (req, res, next) => {
  * @return game object
  */
 router.put('/:gameId', (req, res, next) => {
-  if(req.body.game !== null && req.body.game !== undefined) {
-    Game.findByIdAndUpdate(req.params.gameId, req.body.game)
+  if(req.body) {
+    Game.findByIdAndUpdate(req.params.gameId, req.body, {new: true})
       .then(game => res.json(game), err => next(err));
   }
   else res.sendStatus(400);
