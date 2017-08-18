@@ -25,32 +25,30 @@ const TransitionRow = ({ book,
   return !!book && (
     <Box className="box-default md-whiteframe-z1 box-solid">
       <BoxHeader withBorder >
-        <div className={styles.component}>
-          <div className={styles.panel}>
-            <span>Page de destination</span>
-            {transition.toPage === 'newPage' ?
-              <Button className={styles.panelButton} domProps={{ onClick: createPage }}><i className="fa fa-plus" />Créer et lier la nouvelle page</Button> :
-              <Button className={styles.panelButton} domProps={{ onClick: editPage }}><i className="fa fa-pencil" />Editer la page de destination</Button>
-            }
-            <Button
-              className={styles.deleteTransition}
-              domProps={{ onClick: () => removeTransition(index) }}
-            >
-              <i className="fa fa-times" />
-            </Button>
-          </div>
-          <SelectInput
-            className={styles.destPage}
-            debounce={1}
-            domProps={{
-              value: transition.toPage,
-              onChange: toPage => updateResource(index, { ...transition, toPage }),
-            }}
+        <div className={styles.panel}>
+          <span>Page de destination</span>
+          {transition.toPage === 'newPage' ?
+            <Button className={styles.panelButton} domProps={{ onClick: createPage }}><i className="fa fa-plus" />Créer et lier la nouvelle page</Button> :
+            <Button className={styles.panelButton} domProps={{ onClick: editPage }}><i className="fa fa-pencil" />Editer la page de destination</Button>
+          }
+          <Button
+            className={styles.deleteTransition}
+            domProps={{ onClick: () => removeTransition(index) }}
           >
-            <option value="newPage">-- Vers une nouvelle page --</option>
-            {book.pages.map(page => <option value={page._id} key={page._id}>{page.title}</option>)}
-          </SelectInput>
+            <i className="fa fa-times" />
+          </Button>
         </div>
+        <SelectInput
+          className={styles.destPage}
+          debounce={1}
+          domProps={{
+            value: transition.toPage,
+            onChange: toPage => updateResource(index, { ...transition, toPage }),
+          }}
+        >
+          <option value="newPage">-- Vers une nouvelle page --</option>
+          {book.pages.map(page => <option value={page._id} key={page._id}>{page.title}</option>)}
+        </SelectInput>
       </BoxHeader>
       <BoxBody className={styles.body}>
         <TextAreaInput
