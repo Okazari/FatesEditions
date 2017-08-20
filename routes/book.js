@@ -1,11 +1,11 @@
 /**
  * @description Book enpoint
  */
-const express = require('express');
-const router = express.Router();
-const https = require("https");
-const Book = require('../models/BookModel');
-const Game = require('../models/GameModel');
+const express = require('express')
+const Book = require('../models/BookModel')
+const Game = require('../models/GameModel')
+
+const router = express.Router()
 
 /**
  * @method GET
@@ -13,11 +13,16 @@ const Game = require('../models/GameModel');
  * @return array of books
  */
 router.get('/', (req, res, next) => {
-    let filter = {};
-    filter.draft = false;
-    if(req.query.authorId) filter.authorId = req.query.authorId;
-    Book.find(filter).then(books => res.json(books), err => next(err));
-});
+  const filter = { draft: false }
+  if (req.query.authorId) {
+    filter.authorId = req.query.authorId
+  }
+  let query = Book.find(filter)
+  if (req.query.sort) {
+    query = query.sort(req.query.sort)
+  }
+  return query.then(books => res.json(books), err => next(err))
+})
 
 /**
  * @method GET
@@ -26,8 +31,8 @@ router.get('/', (req, res, next) => {
  */
 router.get('/:bookId', (req, res, next) => {
   Book.findById(req.params.bookId)
-    .then(book => res.json(book), err => next(err));
-});
+    .then(book => res.json(book), err => next(err))
+})
 
 /**
  * @method PUT
@@ -35,12 +40,13 @@ router.get('/:bookId', (req, res, next) => {
  * @return book object
  */
 router.put('/:bookId', (req, res, next) => {
-  if(req.body !== null && req.body !== undefined) {
+  if (req.body !== null && req.body !== undefined) {
     Book.findByIdAndUpdate(req.params.bookId, req.body)
-      .then(book => res.json(book), err => next(err));
+      .then(book => res.json(book), err => next(err))
+  } else {
+    res.sendStatus(400)
   }
-  else res.sendStatus(400);
-});
+})
 
 /**
  * @method PATCH
@@ -49,19 +55,19 @@ router.put('/:bookId', (req, res, next) => {
  */
 router.patch('/:bookId', (req, res, next) => {
   Book.findById(req.params.bookId)
-    .then(book => {
-      book.draft = false;
-      book.revision = parseInt(book.revision) + 1;
+    .then((book) => {
+      book.draft = false
+      book.revision = parseInt(book.revision) + 1
       book.save()
         .then(() => {
-          Game.find({bookId: book._id})
-            .then(games => {
-              games.map(game => game.bookStatus = "updated");
-              res.status(200).json(book);
-            }, err => next(err));
+          Game.find({ bookId: book._id })
+            .then((games) => {
+              games.map(game => game.bookStatus = 'updated')
+              res.status(200).json(book)
+            }, err => next(err))
         }, err => next(err))
-    }, err => next(err));
-});
+    }, err => next(err))
+})
 
 /**
  * @method DELETE
@@ -70,16 +76,16 @@ router.patch('/:bookId', (req, res, next) => {
 router.delete('/:bookId', (req, res, next) => {
   Book.findById(req.params.bookId)
     .then((book) => {
-      book.draft = true;
+      book.draft = true
       book.save()
         .then(
           () => {
-            Game.find({bookId: req.params.bookId})
+            Game.find({ bookId: req.params.bookId })
               .then(
-                games => games.map(game => game.bookStatus = "removed"),
-                err => next(err));
-          }, err => next(err));
-    }, err => next(err));
-});
+                games => games.map(game => game.bookStatus = 'removed'),
+                err => next(err))
+          }, err => next(err))
+    }, err => next(err))
+})
 
-module.exports = router;
+module.exports = router
