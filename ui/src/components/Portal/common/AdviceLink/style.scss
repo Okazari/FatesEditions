@@ -1,0 +1,14 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.component {
+  margin-top: 5px;
+
+  &>span {
+    margin-bottom: 0;
+  }
+
+  &>a {
+    margin-left: 5px;
+  }
+}

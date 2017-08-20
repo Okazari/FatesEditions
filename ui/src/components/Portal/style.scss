@@ -1,0 +1,33 @@
+@import '~styles/colors';
+
+.component {
+  background-color: $blue-grey;
+  display: flex;
+  font-family: 'Roboto';
+  min-height: 100vh;
+
+  form {
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}
+
+.wrapper {
+  margin: 15vh auto;
+  width: 500px;
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 500px;
+
+    &>img {
+      margin: auto;
+      max-height: 150px;
+      max-width: 150px;
+    }
+  }
+}

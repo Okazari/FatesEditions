@@ -1,16 +1,15 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+const mongoose = require('mongoose')
+const Book = require('./BookSchema')
 
-var GameSchema   = new Schema({
-    playerId: String,
-    currentPageId: String,
-    bookId: String,
-    book : {
-            synopsis : String,
-            name : String
-        },
-    objects : [String],
-    stats : Schema.Types.Mixed
-});
+const { Schema } = mongoose
 
-module.exports = mongoose.model('Game', GameSchema);
+const GameSchema = new Schema({
+  playerId: Schema.Types.ObjectId,
+  currentPageId: Schema.Types.ObjectId,
+  bookId: Schema.Types.ObjectId,
+  book: Book,
+  bookStatus: String,
+  stats: Schema.Types.Mixed,
+})
+
+module.exports = mongoose.model('Game', GameSchema)

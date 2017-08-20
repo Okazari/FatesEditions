@@ -1,84 +1,99 @@
-var express = require('express');
-var router = express.Router();
-var https = require("https");
-var Game = require('../models/GameModel');
-var Book = require('../models/BookModel');
+/**
+ * @description Game endpoint
+ */
+const express = require('express')
+const Game = require('../models/GameModel')
+const Book = require('../models/BookModel')
+const User = require('../models/UserModel')
 
-/************CHAMPIONS**********/
-router.get('/', function(req, res, next) {
-    var filter = {};
-    
-    if(req.query.playerId) filter.playerId = req.query.playerId;
-    
-    Game.find(filter).then(function(games) {
-        res.json(games);
-    },function(err){
-        next(err);
-    });
-});
+const router = express.Router()
 
-router.get('/:gameId', function(req, res, next) {
-    Game.findOne({_id:req.params.gameId}).then(function(game) {
-        res.json(game);
-    },function(err){
-        next(err)
-    });
-});
+/**
+ * @method GET
+ * @queryParam playerId
+ * @return games array
+ */
+router.get('/', (req, res, next) => {
+  const filter = {}
+  if (req.query.playerId) {
+    filter.playerId = req.query.playerId
+  }
+  Game.find(filter)
+    .then(games => res.json(games), err => next(err))
+})
 
-router.post('/', function(req, res, next) {
-    
-    var game = new Game();
-    
-    game.playerId = req.body.playerId;
-    game.currentPageId = req.body.currentPageId;
-    game.bookId = req.body.bookId;
-    
-    Book.findOne({_id:req.body.bookId}).then(function(book){
-        game.book = {
-            synopsis : book.synopsis,
-            name : book.name,
-        }
-        game.stats = {};
-        book.stats.forEach(function(stat){
-           game.stats[stat._id] = stat.initValue;
-        });
-        book.objects.forEach(function(object){
-            if(object.atStart){
-                game.objects.push(object._id);
-            }
-        })
-        game.save().then(function() {
-            res.json(game);
-        },function(err){
-            next(err);
-        });
-    },function(err){
-        next(err);
-    })
-});
+/**
+ * @method GET
+ * @param gameId
+ * @return game object
+ */
+router.get('/:gameId', (req, res, next) => {
+  Game.findById(req.params.gameId)
+    .then(game => res.json(game), err => next(err))
+})
 
-router.delete('/:gameId', function(req, res, next) {
-    Game.findOne({_id:req.params.gameId}).remove().then(function(){
-        res.status(201);
-        res.send("deleted");
-    },function(err){
-        next(err);
-    });
-});
+/**
+ * @method POST
+ * @return game object
+ */
+router.post('/', (req, res, next) => {
+  if ((req.params.playerId !== undefined && req.params.playerId !== null) ||
+    (req.params.currentPageId !== undefined && req.params.currentPageId !== null) ||
+    (req.params.bookId !== undefined && req.params.bookId !== null)) {
+    const game = new Game()
+    game.playerId = req.body.playerId
+    game.currentPageId = req.body.currentPageId
+    game.bookId = req.body.bookId
 
-router.patch('/:gameId', function(req, res, next) {
-    Game.findOne({_id:req.params.gameId}).then(function(game){
-        game.currentPageId = req.body.currentPageId;
-        game.objects = req.body.objects;
-        game.stats = req.body.stats;
-        game.save().then(function(){
-            res.send(game);
-        },function(err){
-            next(err);
-        });
-    },function(err) {
-        next(err);
-    });
-});
+    Book.findById(req.body.bookId)
+      .then((book) => {
+        game.book = book
+        game.stats = {}
+        book.stats.map(stat => game.stats[stat._id] = stat.initValue)
+        game.save()
+          .then(() => res.status(201).json(game), err => next(err))
+      }, err => next(err))
+  } else {
+    res.sendStatus(400)
+  }
+})
 
-module.exports = router;
+/**
+ * @method PUT
+ * @bodyParam game
+ * @return game object
+ */
+router.put('/:gameId', (req, res, next) => {
+  if (req.body.game !== null && req.body.game !== undefined) {
+    Game.findByIdAndUpdate(req.params.gameId, req.body.game)
+      .then(game => res.json(game), err => next(err))
+  } else {
+    res.sendStatus(400)
+  }
+})
+
+/**
+ * @method PATCH
+ * @param gameId
+ * @return game object
+ */
+router.patch('/:gameId', (req, res, next) => {
+  Game.findById(req.params.gameId)
+    .then((game) => {
+      if (req.body.currentPageId) game.currentPageId = req.body.currentPageId
+      if (req.body.stats) game.stats = req.body.stats
+      game.save()
+        .then(g => res.json(g), err => next(err))
+    }, err => next(err))
+})
+
+/**
+ * @method DELETE
+ * @param gameId
+ */
+router.delete('/:gameId', (req, res, next) => {
+  Game.findByIdAndRemove(req.params.gameId)
+    .then(() => res.send('deleted'), err => next(err))
+})
+
+module.exports = router

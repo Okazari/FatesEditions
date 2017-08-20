@@ -1,63 +1,65 @@
-var express = require('express');
-var router = express.Router();
-var https = require("https");
-var Player = require('../models/PlayerModel');
+/**
+ * @description Player (view) endpoint
+ */
+const express = require('express')
+const Player = require('../models/UserModel')
 
-/************Players**********/
-router.get('/', function(req, res, next) {
-    Player.find({},"username email").then(function(players) {
-        res.json(players);
-    },function(err){
-        next(err);
-    });
-}); 
+const router = express.Router()
 
-router.get('/:playerId', function(req, res, next) {
-    Player.findOne({_id:req.params.playerId},'username email').then(function(player) {
-        res.json(player);
-    },function(err){
-        next(err);
-    });
-}); 
-
-router.patch('/:playerId',function(req,res,next){
-    Player.findOne({_id:req.params.playerId}).then(function(player){
-        var hadError = false;
-        if(req.body.passwords){
-            if(req.body.passwords.confirmation === req.body.passwords.new && req.body.passwords.old == player.password){
-                player.password = req.body.passwords.new;
-            }else{
-                hadError = true;
-                if(req.body.passwords.confirmation !== req.body.passwords.new){
-                    res.status(400).send({message:'Les mots de passe ne correspondent pas, Réessayez'});
-                }else{
-                    res.status(403).send({message:'Mauvais mot de passe, Réessayez'});
-                }
-            }
-        }
-        if(!hadError){
-            player.save().then(function(){
-                res.sendStatus(200);   
-            },function(err){
-                next(err)  
-            })
-        }
-    },function(err){
-        next(err)
-    })
+/**
+ * @method GET
+ * @return user array username, games (ids)
+ */
+router.get('/', (req, res, next) => {
+  Player.find({}, 'username games')
+    .where('games.length').gt(0)
+    .then(players => res.json(players), err => next(err))
 })
 
-router.post('/', function(req, res, next) {
-    
-    var player = new Player();
-    
-    player.username = req.body.username;
-    player.password = req.body.password;
-    player.save().then(function() {
-        res.json(player);
-    },function(err){
-        next(err);
-    });
-}); 
+/**
+ * @method GET
+ * @param playerId
+ * @return user object username, games (ids)
+ */
+router.get('/:playerId', (req, res, next) => {
+  Player.findById(req.params.playerId, 'username games')
+    .then(player => res.json(player), err => next(err))
+})
 
-module.exports = router;
+/**
+ * @method PUT
+ * @param playerId
+ * @bodyParam games array
+ * @return player games array
+ */
+router.put('/:playerId', (req, res, next) => {
+  if (req.body.games !== undefined && req.body.games !== null) {
+    Player.findById(req.params.playerId)
+      .then((player) => {
+        player.games = req.body.games
+        player.save()
+          .then(p => res.json(p.games), err => next(err))
+      }, err => next(err))
+  } else {
+    res.sendStatus(400)
+  }
+})
+
+/**
+ * @method PATCH
+ * @param playerId
+ * @bodyParam gameId
+ * @return game object
+ */
+router.patch('/:playerId', (req, res, next) => {
+  Player.findById(req.params.playerId)
+    .then((player) => {
+      if (req.body.gameId) {
+        player.games.push(req.body.gameId)
+      }
+      player.save()
+        .then(() => res.status(201).json(req.body.gameId), err => next(err))
+    }, err => next(err))
+})
+
+module.exports = router

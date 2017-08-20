@@ -1,0 +1,16 @@
+.component {
+  a {
+    &.logo {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+
+      .logoHeader {
+        margin-right: 10px;
+        margin-top: -7px;
+        max-height: 30px;
+      }
+    }
+  }
+}

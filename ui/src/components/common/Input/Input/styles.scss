@@ -1,0 +1,16 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.component {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-bottom: 10px;
+
+  .input {
+    border: 1px solid $grey-darken-20;
+    outline-color: $light-blue;
+    padding: 6px;
+    width: 100%;
+  }
+}

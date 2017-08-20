@@ -1,83 +1,114 @@
-var express = require('express');
-var router = express.Router();
-var https = require("https");
-var Page = require('../models/PageModel');
-var Transition = require('../models/TransitionModel');
+/**
+ * @description Page (view) endpoint
+ */
+const express = require('express')
+const Book = require('../models/BookModel')
 
-/************PAGES**********/
-router.get('/', function(req, res, next) {
-    Page.find().then(function(pages) {
-        res.json(pages);
-    },function(err){
-        next(err);
-    });
-});
+const router = express.Router()
 
-router.get('/:pageId', function(req, res, next) {
-    if(req.params.pageId !== "undefined"){
-        Page.findOne({_id:req.params.pageId}).then(function(page) {
-            res.json(page);
-        },function(err){
-            next(err);
-        });
-    }else{
-        res.sendStatus(404);
-    }
-    
-});
+/**
+ * @method GET
+ * @queryParam bookId
+ * @return page array
+ */
+router.get('/', (req, res, next) => {
+  if (req.query.bookId) {
+    Book.findById(req.query.bookId, 'pages')
+      .then(book => res.json(book.pages), err => next(err))
+  } else {
+    res.sendStatus(400)
+  }
+})
 
-router.post('/', function(req, res, next) {
-    var page = new Page();
-    page.bookId = req.body.bookId;
-    page.save().then(function() {
-        res.json(page);
-    },function(err){
-        next(err);
-    });
-});
+/**
+ * @method GET
+ * @param pageId
+ * @return page object
+ */
+router.get('/:pageId', (req, res, next) => {
+  Book.findOne({ 'pages._id': req.params.pageId }, { pages: { $elemMatch: { _id: req.params.pageId } } })
+    .then(book => res.json(book.pages[0]), err => next(err))
+})
 
+/**
+ * @method POST
+ * @bodyParam bookId
+ * @bodyParam page object
+ * @return page object
+ */
+router.post('/', (req, res, next) => {
+  if (req.body.bookId && req.body.page) {
+    Book.findById(req.body.bookId)
+      .then((book) => {
+        const page = book.pages.create(req.body.page)
+        book.pages.push(page)
+        book.save()
+          .then(() => res.status(201).json(page), err => next(err))
+      }, err => next(err))
+  } else {
+    res.sendStatus(400)
+  }
+})
 
-router.patch('/:pageId', function(req, res, next) {
-    Page.findOne({"_id":req.params.pageId}).then(function(page){
-        if(req.body.title) page.title = req.body.title;
-        if(req.body.text) page.text = req.body.text;
-        if(req.body.description) page.description = req.body.description;
-        if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
-        if(req.body.bookId) page.bookId = req.body.bookId;
-        if(req.body.effects) page.effects = req.body.effects;
-        if(req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic;
-        page.save().then(function(){
-            res.json(page);
-        },function(err){
-            next(err);
+/**
+ * @method PUT
+ * @queryParam bookId
+ * @bodyParam page object
+ * @return page object
+ */
+router.put('/:pageId', (req, res, next) => {
+  if (req.body) {
+    Book.findOneAndUpdate({ 'pages._id': req.params.pageId }, { $set: { 'pages.$': req.body } }, { new: true })
+      .then((book) => {
+        const pageIndex = book.pages.findIndex(page => page._id.toString() === req.params.pageId)
+        res.json(book.pages[pageIndex])
+      }, err => next(err))
+  } else {
+    res.sendStatus(400)
+  }
+})
+
+/**
+ * @method PATCH
+ * @return page object
+ */
+router.patch('/:pageId', (req, res, next) => {
+  Book.findOne({ 'pages._id': req.params.pageId }, { pages: { $elemMatch: { _id: req.params.pageId } } })
+    .then((book) => {
+      const page = book.pages[0]
+      if (req.body.title) page.title = req.body.title
+      if (req.body.text) page.text = req.body.text
+      if (req.body.description) page.description = req.body.description
+      if (req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic
+      if (req.body.bookId) page.bookId = req.body.bookId
+      if (req.body.effects) page.effects = req.body.effects
+      if (req.body.backgroundMusic) page.backgroundMusic = req.body.backgroundMusic
+      book.update()
+        .then(() => res.json(page), err => next(err))
+    }, err => next(err))
+})
+
+/**
+ * @method DELETE
+ */
+router.delete('/:pageId', (req, res, next) => {
+  Book.findOne({ 'pages._id': req.params.pageId })
+    .then((book) => {
+      if (!book) {
+        res.sendStatus(404)
+      }
+      const pageIndex = book.pages.findIndex(page => page._id.toString() === req.params.pageId)
+      book.pages.splice(pageIndex, 1)
+      book.pages.forEach((page, index) => {
+        page.transitions.forEach((transition, transitionIndex) => {
+          if (transition.toPage.toString() === req.params.pageId) {
+            book.pages[index].transitions.splice(transitionIndex, 1)
+          }
         })
-    },function(err){
-        next(err);
-    })
-});
+      })
+      book.save()
+        .then(() => res.json(book.pages), err => next(err))
+    }, err => next(err))
+})
 
-router.delete('/:pageId', function(req, res, next) {
-    Transition.remove({fromPage:req.params.pageId}).then(function(){
-        Page.remove({_id:req.params.pageId}).then(function(){
-            res.send(200);
-        },function(err){
-            next(err);
-        })
-    },function(err){
-        next(err);
-    });
-});
-
-router.get('/:pageId/transition', function(req, res, next) {
-    Page.findOne({"_id":req.params.pageId}).then(function(page){
-        Transition.find({"fromPage":req.params.pageId}).then(function(transitions){
-            res.json(transitions);
-        },function(err){
-            next(err);
-        })
-    },function(err){
-        next(err);
-    })
-});
-
-module.exports = router;
+module.exports = router
