@@ -14,7 +14,6 @@ class RouteService {
     sharebook: () => '/old/share/book',
     sharepublications: () => '/old/share/publications',
     editbook: id => `/old/share/edit/${id}`,
-    writebook: id => `/old/write/book/${id}`,
     writebookpage: (bookId, pageId) => `/old/write/book/${bookId}/page/${pageId}`,
     // writedrafts: () => '/old/write/drafts',
     books: () => '/app/books',
@@ -22,6 +21,7 @@ class RouteService {
     bookslibrary: () => '/app/books/library',
     write: () => '/app/write',
     writedrafts: () => '/app/write/drafts',
+    writebook: id => `/app/write/drafts/${id}`,
   }
 
   goTo = (route) => {

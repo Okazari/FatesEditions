@@ -1,12 +1,17 @@
 import React from 'react'
 import styles from './style.scss'
 import Draft from '../common/Draft'
+import { RouteService } from '../../../services'
 
 class Drafts extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {}
+  }
+
+  onClick = (draftId) => {
+    RouteService.goTo(RouteService.routes.writebook(draftId))
   }
 
   render() {
@@ -25,7 +30,7 @@ class Drafts extends React.Component {
                   key={draft}
                   className={styles.book}
                 >
-                  <Draft showDelay={delay} draftId={draft} />
+                  <Draft showDelay={delay} draftId={draft} onClick={() => this.onClick(draft)} />
                 </div>
               )
             })

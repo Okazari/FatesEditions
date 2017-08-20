@@ -19,7 +19,7 @@ class Book extends React.Component {
   }
 
   render() {
-    const { book } = this.props
+    const { book, onClick } = this.props
     const { expanded, displayed } = this.state
     // TODO Replace with loader
     if (!book) return null
@@ -35,7 +35,7 @@ class Book extends React.Component {
         onClick={this.toggleExpand}
         className={classes}
       >
-        <div className={styles.cover}>
+        <div className={styles.cover} onClick={onClick}>
           <div className={styles.coverImage} style={coverStyle} />
           <div className={styles.content}>
             <div className={styles.bookName}>{book.name}</div>

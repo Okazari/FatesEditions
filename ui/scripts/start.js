@@ -64,12 +64,12 @@ function setupCompiler(port) {
   compiler = webpack(config, handleCompile);
 
   compiler.plugin('invalid', function() {
-    clearConsole();
+    //clearConsole();
     console.log('Compiling...');
   });
 
   compiler.plugin('done', function(stats) {
-    clearConsole();
+    //clearConsole();
     var hasErrors = stats.hasErrors();
     var hasWarnings = stats.hasWarnings();
     if (!hasErrors && !hasWarnings) {
