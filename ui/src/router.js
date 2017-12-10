@@ -3,7 +3,8 @@ import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-
 
 // NEW LAYOUT
 import Books, { Library, News } from './components/Books'
-import Write, { Drafts, Draft } from './components/Write'
+import MyBooks, { Drafts } from './components/MyBooks'
+import Write, { Draft } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import Game from './components/Game'
 
@@ -24,12 +25,15 @@ const AppRouter = () => {
           <Route path="news" component={News} />
           <Route path="library" component={Library} />
         </Route>
-        <Route path="write" component={Write}>
+        <Route path="write" component={MyBooks}>
           <IndexRedirect to="drafts" />
           <Route path="drafts" component={Drafts} />
-          <Route path="drafts/:draftId" component={Draft} />
           <Route path="publications" component={Drafts} />
           <Route path="publish" component={Drafts} />
+        </Route>
+        <Route path="write" component={Write}>
+          <IndexRedirect to="drafts" />
+          <Route path="drafts/:draftId" component={Draft} />
         </Route>
       </Route>
       <Route path="old">

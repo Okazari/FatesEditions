@@ -10,11 +10,11 @@ const tabs = [tabNews, tabLibrary]
 const Books = ({ location, children }) => {
   return (
     <Layout>
+      <Toolbar />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         {children}
       </Content>
-      <Toolbar />
     </Layout>
   )
 }

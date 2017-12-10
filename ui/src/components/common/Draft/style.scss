@@ -1,0 +1,52 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+@import '~styles/animations';
+
+.component {
+  opacity: 0;
+  width: 60%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transform: rotateZ(360deg);
+  transition: width $standard-duration, height $standard-duration, opacity $standard-duration;
+  &:hover {
+    .coverImage {
+      transform: scale(1.1);
+    }
+  }
+  &.displayed {
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.cover {
+  height: 100%;
+  overflow: hidden;
+  box-shadow: $box-shadow-1;
+}
+
+.coverImage {
+  transition: transform $standard-duration;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.content {
+  position: relative;
+  background-color: $transparent-black;
+  color: $transparent-white;
+  bottom: 70px;
+  padding: 10px;
+}
+
+.bookName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
