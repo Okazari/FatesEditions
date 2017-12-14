@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/app/bower_components', express.static(path.join(__dirname, 'public/angularApp/bower_components')));
 app.use('/app', express.static(path.join(__dirname, 'public/angularApp')));
 
 /********IMPORT ROUTES*********/
