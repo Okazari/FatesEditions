@@ -25,7 +25,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'public')));
-app.use('/app/bower_components', express.static(path.join(__dirname, 'public/angularApp/bower_components')));
 app.use('/app', express.static(path.join(__dirname, 'public/angularApp')));
 
 /********IMPORT ROUTES*********/
@@ -41,25 +40,25 @@ var jwt = require('jsonwebtoken');
 
 app.use('/api',portal);
 
-// app.use(function(req, res, next){
-//   if(!req.get('Authorization')){
-//     var err = new Error('Not Authorized');
-//     err.status = 401;
-//     next(err);
-//   }else{
-//     try{
-//       var payload = jwt.verify(req.get('Authorization'),'mysecretstory');
-//       req.payload = payload;
-//       var token = jwt.sign({user:payload.user},"mysecretstory",{expiresIn:3600});
-//       console.log(payload.user.username+' '+payload.exp);
-//       res.set('Auth-token', token);
-//       next();
-//     }catch(err){
-//       err.status = 401;
-//       next(err);
-//     }
-//   }
-// })
+app.use(function(req, res, next){
+  if(!req.get('Authorization')){
+    var err = new Error('Not Authorized');
+    err.status = 401;
+    next(err);
+  }else{
+    try{
+      var payload = jwt.verify(req.get('Authorization'),'mysecretstory');
+      req.payload = payload;
+      var token = jwt.sign({user:payload.user},"mysecretstory",{expiresIn:3600});
+      console.log(payload.user.username+' '+payload.exp);
+      res.set('Auth-token', token);
+      next();
+    }catch(err){
+      err.status = 401;
+      next(err);
+    }
+  }
+})
 
 /******REST ROUTES*******/
 app.use('/api/player',player);
