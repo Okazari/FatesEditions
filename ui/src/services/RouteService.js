@@ -22,6 +22,10 @@ class RouteService {
     write: () => '/app/write',
     writedrafts: () => '/app/write/drafts',
     writebook: id => `/app/write/drafts/${id}`,
+    writebookgeneral: id => `/app/write/drafts/${id}/general`,
+    writebookstats: id => `/app/write/drafts/${id}/stats`,
+    writebookobjects: id => `/app/write/drafts/${id}/objects`,
+    writebookpages: id => `/app/write/drafts/${id}/pages`,
   }
 
   goTo = (route) => {

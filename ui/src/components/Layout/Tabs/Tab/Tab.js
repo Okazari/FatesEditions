@@ -10,12 +10,10 @@ const Tab = ({ label, link, selected }) => {
     selected,
   })
   return (
-    <div className={styles.component}>
-      <Link to={link}>
-        {label}
-      </Link>
+    <Link to={link} className={styles.component}>
+      {label}
       <div className={selectedClass} />
-    </div>
+    </Link>
   )
 }
 

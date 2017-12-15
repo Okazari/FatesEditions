@@ -4,7 +4,7 @@ import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-
 // NEW LAYOUT
 import Books, { Library, News } from './components/Books'
 import MyBooks, { Drafts } from './components/MyBooks'
-import Write, { Draft } from './components/Write'
+import Write, { DraftGeneral, DraftObjects } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import Game from './components/Game'
 
@@ -33,7 +33,10 @@ const AppRouter = () => {
         </Route>
         <Route path="write" component={Write}>
           <IndexRedirect to="drafts" />
-          <Route path="drafts/:draftId" component={Draft} />
+          <Route path="drafts/:draftId/general" component={DraftGeneral} />
+          <Route path="drafts/:draftId/stats" component={DraftGeneral} />
+          <Route path="drafts/:draftId/objects" component={DraftObjects} />
+          <Route path="drafts/:draftId/pages" component={DraftGeneral} />
         </Route>
       </Route>
       <Route path="old">

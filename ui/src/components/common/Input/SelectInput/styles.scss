@@ -9,8 +9,14 @@
 
   select {
     background: none;
-    border: 1px solid $grey-darken-20;
-    outline: $light-blue;
+    border: 0;
+    background-color: $primary-color-light-1;
+    border-radius: 3px;
+    border-bottom: dashed 1px $black;
+    outline: transparent;
     padding: 6px;
+    &:focus{
+      border-bottom: solid 1px $black;
+    }
   }
 }

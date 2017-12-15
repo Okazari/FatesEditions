@@ -1,0 +1,9 @@
+.component {
+  display: flex;
+  width: 100%;
+
+  table {
+    align-items: stretch;
+    flex-direction: row;
+  }
+}

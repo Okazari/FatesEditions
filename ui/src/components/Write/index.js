@@ -1,2 +1,3 @@
 export default from './Write'
-export Draft from './Draft'
+export DraftGeneral from './DraftGeneral'
+export DraftObjects from './DraftObjects'

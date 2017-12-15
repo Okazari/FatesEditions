@@ -8,12 +8,17 @@
   flex-wrap: nowrap;
   margin-top: 10px;
 
-  input{
-    border: 1px solid $grey-darken-20;
-    border-left: none;
-    outline-color: $light-blue;
-    padding: 5px;
+  input {
+    border: none;
+    outline-color: transparent;
+    background-color: $primary-color-light-1;
+    border-radius: 3px;
+    border-bottom: dashed 1px $black;
+    padding: 6px;
     width: 100%;
+    &:focus{
+      border-bottom: solid 1px $black;
+    }
   }
 
   span {

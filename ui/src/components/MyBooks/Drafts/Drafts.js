@@ -11,7 +11,7 @@ class Drafts extends React.Component {
   }
 
   onClick = (draftId) => {
-    RouteService.goTo(RouteService.routes.writebook(draftId))
+    RouteService.goTo(RouteService.routes.writebookgeneral(draftId))
   }
 
   render() {

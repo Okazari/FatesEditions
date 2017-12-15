@@ -4,7 +4,7 @@
 
 .component {
   margin: 0px 20px;
-  color: $font-color;
+  color: $font-color !important;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -12,11 +12,8 @@
   text-transform: uppercase;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
 
-  &>a {
-    text-decoration: none;
-    color: $font-color;
-  }
 
   &:hover {
     .tracker {

@@ -1,21 +1,15 @@
 .component {
   align-items: stretch;
   display: inline-flex;
-  flex-direction: column;
   width: 100%;
+  padding: 20px;
 
   .bookCover {
     display: flex;
     flex-direction: column;
     padding: 0 20px;
-    width: 20%;
-    min-width: 200px;
-    min-height: 300px;
-  }
-
-  .input {
-    background-color: tomato;
-    width: 50%;
+    width: 350px;
+    min-height: 400px;
   }
 
   .bookInformation {

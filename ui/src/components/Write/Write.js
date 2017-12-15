@@ -1,21 +1,13 @@
 import React from 'react'
-// import styles from './style.scss'
 import { Layout, Content, Toolbar, Tabs } from '../Layout'
 import { RouteService } from '../../services'
 
-// <DraftStat book={draft} updateResource={updateResource} />
-// <DraftItem book={draft} updateResource={updateResource} />
-// <DraftGraph book={draft} />
-// <DraftPage query={{ bookId: draft._id }} />
-
-const tabInfos = { label: 'Général', link: RouteService.routes.writedrafts() }
-const tabStats = { label: 'Statistiques', link: RouteService.routes.writedrafts() }
-const tabItems = { label: 'Objets et compétences', link: RouteService.routes.writedrafts() }
-const tabPages = { label: 'Pages', link: RouteService.routes.writedrafts() }
-const tabs = [tabInfos, tabStats, tabItems, tabPages]
-
-
-const MyBooks = ({ location, children }) => {
+const MyBooks = ({ location, children, params }) => {
+  const tabInfos = { label: 'Général', link: RouteService.routes.writebookgeneral(params.draftId) }
+  const tabStats = { label: 'Statistiques', link: RouteService.routes.writebookstats(params.draftId) }
+  const tabItems = { label: 'Objets et compétences', link: RouteService.routes.writebookobjects(params.draftId) }
+  const tabPages = { label: 'Pages', link: RouteService.routes.writebookpages(params.draftId) }
+  const tabs = [tabInfos, tabStats, tabItems, tabPages]
   return (
     <Layout>
       <Toolbar />

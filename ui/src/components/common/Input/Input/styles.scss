@@ -7,10 +7,16 @@
   flex-grow: 1;
   margin-bottom: 10px;
 
-  .input {
+  input {
     border: none;
-    outline-color: none;
+    outline-color: transparent;
+    background-color: $primary-color-light-1;
+    border-radius: 3px;
+    border-bottom: dashed 1px $black;
     padding: 6px;
     width: 100%;
+    &:focus{
+      border-bottom: solid 1px $black;
+    }
   }
 }
