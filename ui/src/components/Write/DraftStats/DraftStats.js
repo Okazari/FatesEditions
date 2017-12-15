@@ -13,7 +13,7 @@ const headers = [
   { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
 ]
 
-const DraftObjects = ({ draft, updateResource, disabled = false }) => {
+const DraftStats = ({ draft, updateResource, disabled = false }) => {
   const addStat = () => {
     draft.stats = draft.stats.concat({})
     updateResource(draft)
@@ -54,4 +54,4 @@ const DraftObjects = ({ draft, updateResource, disabled = false }) => {
   )
 }
 
-export default DraftObjects
+export default DraftStats

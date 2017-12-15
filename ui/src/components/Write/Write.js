@@ -5,7 +5,7 @@ import { RouteService } from '../../services'
 const MyBooks = ({ location, children, params }) => {
   const tabInfos = { label: 'Général', link: RouteService.routes.writebookgeneral(params.draftId) }
   const tabStats = { label: 'Statistiques', link: RouteService.routes.writebookstats(params.draftId) }
-  const tabItems = { label: 'Objets et compétences', link: RouteService.routes.writebookobjects(params.draftId) }
+  const tabItems = { label: 'Objets et compétences', link: RouteService.routes.writebookitems(params.draftId) }
   const tabPages = { label: 'Pages', link: RouteService.routes.writebookpages(params.draftId) }
   const tabs = [tabInfos, tabStats, tabItems, tabPages]
   return (

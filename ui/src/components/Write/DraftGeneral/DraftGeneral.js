@@ -14,18 +14,6 @@ const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
       <div className={styles.component}>
         <div className={styles.bookCover}>
           <Book book={draft} />
-          <GroupInput
-            domProps={{
-              type: 'text',
-              value: draft.cover,
-              onChange: cover => updateResource({ ...draft, cover }),
-              placeholder: "url de l'image de couverture",
-              disabled,
-              required: true,
-            }}
-          >
-            <span>URL</span>
-          </GroupInput>
         </div>
         <div className={styles.bookInformation}>
           <Input
@@ -37,6 +25,19 @@ const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
               onChange: name => updateResource({ ...draft, name }),
               type: 'text',
               placeholder: 'Titre du livre',
+              disabled,
+              required: true,
+            }}
+          />
+          <Input
+            label="Url de l'image"
+            debounce={500}
+            className={styles.input}
+            domProps={{
+              value: draft.cover,
+              onChange: cover => updateResource({ ...draft, cover }),
+              type: 'text',
+              placeholder: "url de l'image de couverture",
               disabled,
               required: true,
             }}

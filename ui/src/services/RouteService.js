@@ -24,7 +24,7 @@ class RouteService {
     writebook: id => `/app/write/drafts/${id}`,
     writebookgeneral: id => `/app/write/drafts/${id}/general`,
     writebookstats: id => `/app/write/drafts/${id}/stats`,
-    writebookobjects: id => `/app/write/drafts/${id}/objects`,
+    writebookitems: id => `/app/write/drafts/${id}/items`,
     writebookpages: id => `/app/write/drafts/${id}/pages`,
   }
 
