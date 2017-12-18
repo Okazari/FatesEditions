@@ -9,8 +9,12 @@ class Book extends React.Component {
 
   constructor(props) {
     super(props)
+    const { showDelay, onShow } = props
     this.state = { over: false, displayed: false }
-    setTimeout(() => this.setState({ displayed: true }), props.showDelay)
+    setTimeout(() => {
+      this.setState({ displayed: true })
+      onShow && onShow()
+    }, showDelay)
   }
 
   toggleExpand = () => {
@@ -38,7 +42,7 @@ class Book extends React.Component {
         <div className={styles.cover} onClick={onClick}>
           <div className={styles.coverImage} style={coverStyle} />
           <div className={styles.content}>
-            <div className={styles.bookName}>{book.name}</div>
+            <div className={styles.bookName}>{book.name || 'Livre sans titre'}</div>
             <Author authorId={book.authorId} />
           </div>
         </div>

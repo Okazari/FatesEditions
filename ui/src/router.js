@@ -33,10 +33,13 @@ const AppRouter = () => {
         </Route>
         <Route path="write" component={Write}>
           <IndexRedirect to="drafts" />
-          <Route path="drafts/:draftId/general" component={DraftGeneral} />
-          <Route path="drafts/:draftId/stats" component={DraftStats} />
-          <Route path="drafts/:draftId/items" component={DraftItems} />
-          <Route path="drafts/:draftId/pages" component={DraftGeneral} />
+          <Route path="drafts/:draftId">
+            <IndexRedirect to="general" />
+            <Route path="general" component={DraftGeneral} />
+            <Route path="stats" component={DraftStats} />
+            <Route path="items" component={DraftItems} />
+            <Route path="pages" component={DraftGeneral} />
+          </Route>
         </Route>
       </Route>
       <Route path="old">
