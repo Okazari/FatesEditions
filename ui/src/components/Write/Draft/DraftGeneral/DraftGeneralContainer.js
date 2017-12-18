@@ -1,10 +1,10 @@
 //eslint-disable-next-line
 import { RestHoc as restHoc } from 'react-rest-resource'
 import React from 'react'
-import DraftItems from './DraftItems'
-import { DraftService } from '../../../services'
+import { DraftService } from 'services'
+import DraftGeneral from './DraftGeneral'
 
-const ConnectedComponent = restHoc(DraftItems, DraftService)
+const ConnectedComponent = restHoc(DraftGeneral, DraftService)
 const Component = ({ params }) => {
   return <ConnectedComponent draftId={params.draftId} />
 }

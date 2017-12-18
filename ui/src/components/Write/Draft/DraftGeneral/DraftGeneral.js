@@ -1,13 +1,9 @@
 import React from 'react'
-import { Button, Input, GroupInput, Book, TextAreaInput } from '../../common'
+import { Button, Input, Book, TextAreaInput } from 'components/common'
 import GenreList from './GenreList'
 import PageList from './PageList'
 import styles from './styles.scss'
 
-// <DraftStat book={draft} updateResource={updateResource} />
-// <DraftItem book={draft} updateResource={updateResource} />
-// <DraftGraph book={draft} />
-// <DraftPage query={{ bookId: draft._id }} />
 const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
   return !!draft && (
     <div>

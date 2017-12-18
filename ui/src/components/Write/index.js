@@ -1,4 +1,9 @@
-export default from './Write'
-export DraftGeneral from './DraftGeneral'
-export DraftItems from './DraftItems'
-export DraftStats from './DraftStats'
+export default from './Draft'
+export {
+  DraftGeneral,
+  DraftItems,
+  DraftStats,
+  DraftPages,
+} from './Draft'
+
+export WritePage from './Page'

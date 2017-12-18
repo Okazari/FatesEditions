@@ -1,8 +1,8 @@
 import React from 'react'
-import { Layout, Content, Toolbar, Tabs } from '../Layout'
-import { RouteService } from '../../services'
+import { Layout, Content, Toolbar, Tabs } from 'components/Layout'
+import { RouteService } from 'services'
 
-const MyBooks = ({ location, children, params }) => {
+const WriteDraft = ({ location, children, params }) => {
   const tabInfos = { label: 'Général', link: RouteService.routes.writebookgeneral(params.draftId) }
   const tabStats = { label: 'Statistiques', link: RouteService.routes.writebookstats(params.draftId) }
   const tabItems = { label: 'Objets et compétences', link: RouteService.routes.writebookitems(params.draftId) }
@@ -19,4 +19,4 @@ const MyBooks = ({ location, children, params }) => {
   )
 }
 
-export default MyBooks
+export default WriteDraft

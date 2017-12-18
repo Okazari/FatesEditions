@@ -20,7 +20,6 @@ const Drafts = ({ drafts, postResource, deleteResource }) => {
     deleteResource(id)
   }
   const nbColumns = document && Math.floor((document.body.clientWidth - 200) / 240)
-  console.log(nbColumns)
   // TODO Replace with loader
   if (!drafts) return null
   return (
@@ -40,7 +39,7 @@ const Drafts = ({ drafts, postResource, deleteResource }) => {
               >
                 <div className={styles.delete}>
                   <Icon
-                    icon="clear"
+                    icon="delete_forever"
                     domProps={{
                       className: styles.action,
                       onClick: () => onDeleteDraft(draft),

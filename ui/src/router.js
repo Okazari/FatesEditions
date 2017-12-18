@@ -4,7 +4,7 @@ import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-
 // NEW LAYOUT
 import Books, { Library, News } from './components/Books'
 import MyBooks, { Drafts } from './components/MyBooks'
-import Write, { DraftGeneral, DraftItems, DraftStats } from './components/Write'
+import WriteDraft, { WritePage, DraftGeneral, DraftItems, DraftStats, DraftPages } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import Game from './components/Game'
 
@@ -12,7 +12,7 @@ import Game from './components/Game'
 import App from './components/Old/App'
 import { PlayBooks, PlayGames } from './components/Old/Play'
 import { ShareBook, SharePublications, ShareEditBook } from './components/Old/Share'
-import { WriteBook, WriteDrafts, WritePage } from './components/Old/Write'
+import { WriteBook, WriteDrafts, WritePage as OldWritePage } from './components/Old/Write'
 import Profile from './components/Old/Profile'
 
 const AppRouter = () => {
@@ -31,15 +31,18 @@ const AppRouter = () => {
           <Route path="publications" component={Drafts} />
           <Route path="publish" component={Drafts} />
         </Route>
-        <Route path="write" component={Write}>
-          <IndexRedirect to="drafts" />
-          <Route path="drafts/:draftId">
-            <IndexRedirect to="general" />
-            <Route path="general" component={DraftGeneral} />
-            <Route path="stats" component={DraftStats} />
-            <Route path="items" component={DraftItems} />
-            <Route path="pages" component={DraftGeneral} />
-          </Route>
+        <Route path="write/drafts/:draftId" component={WriteDraft}>
+          <IndexRedirect to="general" />
+          <Route path="general" component={DraftGeneral} />
+          <Route path="stats" component={DraftStats} />
+          <Route path="items" component={DraftItems} />
+          <Route path="pages" component={DraftPages} />
+        </Route>
+        <Route path="write/drafts/:draftId/page/:pageId" component={WritePage}>
+          <IndexRedirect to="general" />
+          <Route path="general" component={() => (<div> Coucou </div>)} />
+          <Route path="content" component={() => (<div> Coucou </div>)} />
+          <Route path="transitions" component={() => (<div> Coucou </div>)} />
         </Route>
       </Route>
       <Route path="old">
@@ -62,7 +65,7 @@ const AppRouter = () => {
             <IndexRedirect to="drafts" />
             <Route path="drafts" component={WriteDrafts} />
             <Route path="book/:bookId" component={WriteBook} />
-            <Route path="book/:bookId/page/:pageId" component={WritePage} />
+            <Route path="book/:bookId/page/:pageId" component={OldWritePage} />
           </Route>
           <Route path="share" >
             <IndexRedirect to="book" />

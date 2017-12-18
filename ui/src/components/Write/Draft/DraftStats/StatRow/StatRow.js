@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button } from '../../../common'
+import { Input, Button } from 'components/common'
 
 const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
   const onDelete = e => removeStat(e.target.id)

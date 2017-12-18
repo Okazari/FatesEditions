@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input } from '../../../common'
+import { Button, Input } from 'components/common'
 
 const ItemRow = ({ index, item = {}, disabled, updateResource, deleteResource }) => {
   const onDelete = e => deleteResource(e.target.id)

@@ -13,7 +13,7 @@ class Book extends React.Component {
     this.state = { over: false, displayed: false }
     setTimeout(() => {
       this.setState({ displayed: true })
-      onShow && onShow()
+      if (onShow) onShow()
     }, showDelay)
   }
 

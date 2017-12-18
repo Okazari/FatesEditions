@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectInput } from '../../../common'
+import { SelectInput } from 'components/common'
 import PageOption from './PageOption'
 
 const PageList = ({ pages = [], domProps }) => {

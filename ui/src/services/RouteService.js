@@ -13,7 +13,6 @@ class RouteService {
     sharebook: () => '/old/share/book',
     sharepublications: () => '/old/share/publications',
     editbook: id => `/old/share/edit/${id}`,
-    writebookpage: (bookId, pageId) => `/old/write/book/${bookId}/page/${pageId}`,
     // writedrafts: () => '/old/write/drafts',
     home: () => '/app/books',
     books: () => '/app/books',
@@ -26,6 +25,10 @@ class RouteService {
     writebookstats: id => `/app/write/drafts/${id}/stats`,
     writebookitems: id => `/app/write/drafts/${id}/items`,
     writebookpages: id => `/app/write/drafts/${id}/pages`,
+    writebookpage: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}`,
+    writebookpagegeneral: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/general`,
+    writebookpagecontent: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/content`,
+    writebookpagetransitions: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/transitions`,
   }
 
   goTo = (route) => {

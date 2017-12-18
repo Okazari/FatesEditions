@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, DataTable } from '../../common'
+import { Button, DataTable } from 'components/common'
 import StatRow from './StatRow'
 import styles from './styles.scss'
 
