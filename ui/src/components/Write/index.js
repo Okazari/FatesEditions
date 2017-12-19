@@ -7,3 +7,6 @@ export {
 } from './Draft'
 
 export WritePage from './Page'
+export {
+  PageGeneral,
+} from './Page'

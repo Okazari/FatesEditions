@@ -1,0 +1,16 @@
+.component {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  .effectRow {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .effectTitle {
+    font-weight: bold;
+  }
+
+}
