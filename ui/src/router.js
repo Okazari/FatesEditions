@@ -12,6 +12,7 @@ import WriteDraft, {
   WritePage,
   PageGeneral,
   PageContent,
+  PageTransition,
 } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import Game from './components/Game'
@@ -50,7 +51,7 @@ const AppRouter = () => {
           <IndexRedirect to="general" />
           <Route path="general" component={PageGeneral} />
           <Route path="content" component={PageContent} />
-          <Route path="transitions" component={() => (<div> Coucou </div>)} />
+          <Route path="transitions" component={PageTransition} />
         </Route>
       </Route>
       <Route path="old">

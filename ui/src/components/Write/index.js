@@ -10,4 +10,5 @@ export WritePage from './Page'
 export {
   PageGeneral,
   PageContent,
+  PageTransition,
 } from './Page'

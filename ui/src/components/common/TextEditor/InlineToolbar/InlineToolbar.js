@@ -36,7 +36,13 @@ const InlineToolbar = ({
             className={styles.toolbarHeaders}
             onChange={e => onToggleBlockType(e.target.value)}
           >
-            {Headers.map(header => <option value={header.style}>{header.label}</option>)}
+            {
+              Headers.map(header => (
+                <option key={header.key} value={header.style}>
+                  {header.label}
+                </option>
+              ))
+            }
           </select>
         </li>
         { InlineStyles.map(style => <ToolbarIcon

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Content, Toolbar, Tabs } from 'components/Layout'
+import { Layout, Content, Toolbar, Tabs, TabContent } from 'components/Layout'
 import { RouteService } from 'services'
 
 const WriteDraft = ({ location, children, params }) => {
@@ -13,7 +13,9 @@ const WriteDraft = ({ location, children, params }) => {
       <Toolbar />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
-        {children}
+        <TabContent>
+          {children}
+        </TabContent>
       </Content>
     </Layout>
   )

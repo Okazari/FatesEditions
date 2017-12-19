@@ -3,12 +3,6 @@
 @import '~styles/sizes';
 @import '~styles/mixins';
 
-.component {
-  @include scrollbar();
-  height: $tab-content-size;
-  overflow: auto;
-}
-
 .list {
   flex-wrap: wrap;
   display: flex;

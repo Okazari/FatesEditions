@@ -1,6 +1,6 @@
 import React from 'react'
 // import styles from './style.scss'
-import { Layout, Content, Toolbar, Tabs } from '../Layout'
+import { Layout, Content, Toolbar, Tabs, TabContent } from '../Layout'
 import { RouteService } from '../../services'
 
 const tabDrafts = { label: 'Mes brouillons', link: RouteService.routes.writedrafts() }
@@ -13,7 +13,9 @@ const MyBooks = ({ location, children }) => {
       <Toolbar />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
-        {children}
+        <TabContent>
+          {children}
+        </TabContent>
       </Content>
     </Layout>
   )

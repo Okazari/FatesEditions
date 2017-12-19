@@ -1,0 +1,8 @@
+@import '~styles/mixins';
+@import '~styles/sizes';
+
+.component {
+  @include scrollbar();
+  height: $tab-content-size;
+  overflow: auto;
+}

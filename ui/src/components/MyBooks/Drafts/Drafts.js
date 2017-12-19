@@ -23,35 +23,33 @@ const Drafts = ({ drafts, postResource, deleteResource }) => {
   // TODO Replace with loader
   if (!drafts) return null
   return (
-    <div className={styles.component}>
-      <div className={styles.list}>
-        <div onClick={onCreateDraft} className={classnames(styles.book, styles.newBook)}>
-          <Icon icon="add" />
-        </div>
-        {
-          drafts.map((draft, index) => {
-            const usedIndex = index + 1
-            const delay = 100 * ((usedIndex % nbColumns) + Math.floor(usedIndex / nbColumns))
-            return (
-              <div
-                key={draft}
-                className={styles.book}
-              >
-                <div className={styles.delete}>
-                  <Icon
-                    icon="delete_forever"
-                    domProps={{
-                      className: styles.action,
-                      onClick: () => onDeleteDraft(draft),
-                    }}
-                  />
-                </div>
-                <Draft showDelay={delay} draftId={draft} onClick={() => editDraft(draft)} />
-              </div>
-            )
-          })
-        }
+    <div className={styles.list}>
+      <div onClick={onCreateDraft} className={classnames(styles.book, styles.newBook)}>
+        <Icon icon="add" />
       </div>
+      {
+        drafts.map((draft, index) => {
+          const usedIndex = index + 1
+          const delay = 100 * ((usedIndex % nbColumns) + Math.floor(usedIndex / nbColumns))
+          return (
+            <div
+              key={draft}
+              className={styles.book}
+            >
+              <div className={styles.delete}>
+                <Icon
+                  icon="delete_forever"
+                  domProps={{
+                    className: styles.action,
+                    onClick: () => onDeleteDraft(draft),
+                  }}
+                />
+              </div>
+              <Draft showDelay={delay} draftId={draft} onClick={() => editDraft(draft)} />
+            </div>
+          )
+        })
+      }
     </div>
   )
 }
