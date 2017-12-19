@@ -3,11 +3,12 @@ import { Layout, Content, Toolbar, Tabs, TabContent } from 'components/Layout'
 import { RouteService } from 'services'
 
 const WriteDraft = ({ location, children, params }) => {
+  const tabPrevious = { label: 'Retour aux brouillons', link: RouteService.routes.writedrafts() }
   const tabInfos = { label: 'Général', link: RouteService.routes.writebookgeneral(params.draftId) }
   const tabStats = { label: 'Statistiques', link: RouteService.routes.writebookstats(params.draftId) }
   const tabItems = { label: 'Objets et compétences', link: RouteService.routes.writebookitems(params.draftId) }
   const tabPages = { label: 'Pages', link: RouteService.routes.writebookpages(params.draftId) }
-  const tabs = [tabInfos, tabStats, tabItems, tabPages]
+  const tabs = [tabPrevious, tabInfos, tabStats, tabItems, tabPages]
   return (
     <Layout>
       <Toolbar />
