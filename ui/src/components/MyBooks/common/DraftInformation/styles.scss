@@ -1,0 +1,26 @@
+  .component {
+  align-items: stretch;
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
+
+  .bookCover {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    width: 20%;
+    min-width: 300px;
+  }
+
+  .bookInformation {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    width: 80%;
+  }
+
+  .centerFooter {
+    display: flex;
+    justify-content: center;
+  }
+}

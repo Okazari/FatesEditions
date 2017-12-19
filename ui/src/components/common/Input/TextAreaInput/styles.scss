@@ -1,3 +1,6 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
 .component {
   display: flex;
   flex-direction: column;
@@ -5,5 +8,15 @@
 
   textarea {
     height: 150px;
+    outline-color: transparent;
+    background-color: transparent;
+    border: 0;
+    background-color: $primary-color-light-1;
+    border-radius: 3px;
+    resize: none;
+    border-bottom: dashed 1px $black;
+    &:focus{
+      border-bottom: solid 1px $black;
+    }
   }
 }

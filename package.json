@@ -10,7 +10,7 @@
     "dev": "concurrently -p name -n \"MONGO,BACK,FRONT\" \"npm run startDevMongo\" \"npm run startDevBack\" \"npm run startDevFront\" ",
     "startDevBack": "nodemon ./bin/www",
     "startDevFront": "cd ./ui/ && node scripts/start.js",
-    "startDevMongo": "docker run --rm -v \"$(pwd)/mongo\":/data/db -p 27017:27017 mongo:3",
+    "startDevMongo": "docker-compose up -d",
     "postinstall": "npm run build"
   },
   "devDependencies": {
@@ -85,6 +85,7 @@
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-hot-loader": "^3.0.0-beta.6",
-    "react-router": "^3.0.0"
+    "react-router": "^3.0.0",
+    "react-transition-group": "^2.0.2"
   }
 }

@@ -1,1 +1,1 @@
-export default from './PageContainer'
+export default from './WritePage'

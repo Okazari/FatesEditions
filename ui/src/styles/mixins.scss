@@ -1,0 +1,17 @@
+@import '~styles/colors';
+
+@mixin scrollbar() {
+  $size: 2px;
+  $foreground-color: $decorator-color;
+  $background-color: $white;
+
+  &::-webkit-scrollbar {
+      width:  $size;
+      height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: $foreground-color;
+  }
+}

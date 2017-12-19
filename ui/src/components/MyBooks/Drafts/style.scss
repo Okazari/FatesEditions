@@ -1,0 +1,60 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+@import '~styles/sizes';
+@import '~styles/mixins';
+
+.component {
+  @include scrollbar();
+  height: $tab-content-size;
+  overflow: auto;
+}
+
+.list {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.newBook {
+  box-shadow: $box-shadow-1;
+  font-size: 45px;
+  cursor: pointer;
+  transition: transform ease-in 100ms;
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+.delete {
+  position: relative;
+  height: 0;
+  width: 100%;
+  .action {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    z-index: 100;
+    margin: 5px;
+    padding: 5px;
+    font-size: 2em;
+    box-shadow: $box-shadow-1;
+    border-radius: 20px;
+    background-color: $primary-color;
+    transition: background-color ease-in 100ms;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(255,255,255);
+    }
+  }
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  margin: 20px;
+  height: 300px;
+}

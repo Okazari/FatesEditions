@@ -5,5 +5,14 @@
   table {
     align-items: stretch;
     flex-direction: row;
+    tr {
+      background-color: transparent !important;
+    }
+    th {
+      border: none !important;
+    }
+    td {
+      border: none !important;
+    }
   }
 }

@@ -3,24 +3,40 @@ import { browserHistory } from 'react-router'
 class RouteService {
 
   routes = {
-    profile: () => '/app/profile',
-    signin: () => '/app/portal/signin',
-    signup: () => '/app/portal/signup',
-    recover: () => '/app/portal/recover',
-    home: () => '/app/play',
-    playbook: () => '/app/play/books',
-    playgames: () => '/app/play/games',
-    playgame: id => `/app/game/${id}`,
-    sharebook: () => '/app/share/book',
-    sharepublications: () => '/app/share/publications',
-    editbook: id => `/app/share/edit/${id}`,
-    writebook: id => `/app/write/book/${id}`,
-    writebookpage: (bookId, pageId) => `/app/write/book/${bookId}/page/${pageId}`,
+    profile: () => '/old/profile',
+    signin: () => '/old/portal/signin',
+    signup: () => '/old/portal/signup',
+    recover: () => '/old/portal/recover',
+    playbook: () => '/old/play/books',
+    playgames: () => '/old/play/games',
+    playgame: id => `/old/game/${id}`,
+    sharebook: () => '/old/share/book',
+    sharepublications: () => '/old/share/publications',
+    editbook: id => `/old/share/edit/${id}`,
+    // writedrafts: () => '/old/write/drafts',
+    home: () => '/app/books',
+    books: () => '/app/books',
+    booksnews: () => '/app/books/news',
+    bookslibrary: () => '/app/books/library',
+    write: () => '/app/write',
     writedrafts: () => '/app/write/drafts',
+    writebook: id => `/app/write/drafts/${id}`,
+    writebookgeneral: id => `/app/write/drafts/${id}/general`,
+    writebookstats: id => `/app/write/drafts/${id}/stats`,
+    writebookitems: id => `/app/write/drafts/${id}/items`,
+    writebookpages: id => `/app/write/drafts/${id}/pages`,
+    writebookpage: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}`,
+    writebookpagegeneral: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/general`,
+    writebookpagecontent: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/content`,
+    writebookpagetransitions: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/transitions`,
   }
 
   goTo = (route) => {
     browserHistory.push(route)
+  }
+
+  redirect401 = () => {
+    browserHistory.push(this.routes.signin())
   }
 
 }

@@ -7,7 +7,7 @@ const Input = ({ domProps, label, className }) => {
   return (
     <div className={finalClassName}>
       {label && <label htmlFor={domProps.id}>{label}</label>}
-      <input {...domProps} className={styles.input} />
+      <input {...domProps} />
     </div>
   )
 }
