@@ -20,8 +20,8 @@ const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
             onChange: type => updateType(type),
           }}
         >
-          <option disabled selected>{'Choix de la variable'}</option>
-          <option value="object">{'L\'objet'}</option>
+          <option disabled value="">{"Source de l'effet"}</option>
+          <option value="object">{"L'objet"}</option>
           <option value="stat">{'La statistique'}</option>
         </SelectInput>
         { effect.type ?

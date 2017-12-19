@@ -9,4 +9,5 @@ export {
 export WritePage from './Page'
 export {
   PageGeneral,
+  PageContent,
 } from './Page'

@@ -13,7 +13,7 @@ const StatInput = ({ stats, effect, index, updateResource }) => {
           onChange: subject => updateResource(index, { ...effect, subject }),
         }}
       >
-        {stats.map(stat => <option value={stat._id}>{stat.name}</option>)}
+        {stats.map(stat => <option key={stat._id} value={stat._id}>{stat.name}</option>)}
       </SelectInput>
       <SelectInput
         className={styles.selectInput}

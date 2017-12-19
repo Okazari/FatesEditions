@@ -13,7 +13,7 @@ const ObjectInput = ({ objects, effect, index, updateResource }) => {
           onChange: subject => updateResource(index, { ...effect, subject }),
         }}
       >
-        {objects.map(object => <option value={object._id}>{object.name}</option>)}
+        {objects.map(object => <option key={object._id} value={object._id}>{object.name}</option>)}
       </SelectInput>
       <SelectInput
         className={styles.selectInput}

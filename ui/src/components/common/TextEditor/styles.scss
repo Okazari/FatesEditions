@@ -1,0 +1,16 @@
+@import '~styles/colors';
+
+.TextEditorRoot {
+  border: 1px solid $grey;
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+}
+
+.TextEditor {
+  background: $white;
+  height: 100%;
+  border-top: 1px solid $grey;
+  cursor: text;
+  font-size: 16px;
+  padding: 15px;
+}

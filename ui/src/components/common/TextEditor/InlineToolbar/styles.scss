@@ -1,0 +1,40 @@
+@import '~styles/colors';
+
+.inlineToolbar {
+  background-color: $grey-darken-40;
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.toolbarItem {
+  float: left;
+}
+
+.toolbarHeaders {
+  background-color: $grey-darken-40;
+  border: 0;
+  color: $white;
+  padding: 14px 16px;
+}
+
+.toolbarFileButton {
+  display: none;
+}
+
+.toolbarIconLink {
+  color: $white;
+  display: block;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $blue;
+  }
+}
+
+.toolbarFileInput {
+  display: none;
+}

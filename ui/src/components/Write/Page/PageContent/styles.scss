@@ -1,0 +1,9 @@
+@import '~styles/sizes';
+
+.component {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+  height: $tab-content-size;
+}

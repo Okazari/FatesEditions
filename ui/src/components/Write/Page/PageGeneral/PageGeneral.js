@@ -58,16 +58,17 @@ const PageGeneral = ({ page, bookId, updateResource }) => {
       </div>
       <div className={styles.effectRow}>
         {
-          page.effects.map((effect, index) =>
-            <EffectRow
-              key={effect._id}
+          page.effects.map((effect, index) => {
+            const key = index
+            return (<EffectRow
+              key={key}
               effect={effect}
               index={index}
               bookId={bookId}
               updateResource={updatePage}
               removeEffect={indexEffect => removeEffect(indexEffect)}
-            />,
-          )
+            />)
+          })
         }
       </div>
       <Button className="md-whiteframe-z1" domProps={{ onClick: () => addEffect() }} >
