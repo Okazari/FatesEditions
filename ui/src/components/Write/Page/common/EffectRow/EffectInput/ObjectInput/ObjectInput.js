@@ -26,6 +26,7 @@ const ObjectInput = ({ objects, effect, index, updateResource }) => {
         <option value="add">est ajouté</option>
         <option value="remove">est retiré</option>
       </SelectInput>
+      <div className={styles.selectInput} />
     </div>
   )
 }

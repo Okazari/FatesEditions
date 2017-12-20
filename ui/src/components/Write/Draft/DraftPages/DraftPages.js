@@ -1,14 +1,14 @@
 import React from 'react'
 import { RouteService } from 'services'
-import { Button, DataTable } from 'components/common'
+import { Button, ButtonIcon, DataTable } from 'components/common'
 import PageRow from './PageRow'
 import styles from './styles.scss'
 
 const headers = [
-  { type: <Button domProps={{ disabled: true }} className="fa fa-pencil md-whiteframe-z1" />, key: 'edit' },
+  { type: <ButtonIcon domProps={{ disabled: true }} icon="mode_edit" />, key: 'edit' },
   { type: 'Titre', key: 'title' },
   { type: 'Description', key: 'description' },
-  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
+  { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete' },
 ]
 
 const DraftPages = ({ pages = [], query, disabled, postResource, deleteResource }) => {

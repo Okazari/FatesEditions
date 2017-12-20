@@ -8,9 +8,10 @@
   margin-bottom: 10px;
 
   select {
+    cursor: pointer;
     background: none;
     border: 0;
-    background-color: $primary-color-light-1;
+    background-color: $background-color-light-2;
     border-radius: 3px;
     border-bottom: dashed 1px $black;
     outline: transparent;

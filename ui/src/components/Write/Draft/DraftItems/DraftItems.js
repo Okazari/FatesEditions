@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, DataTable } from 'components/common'
+import { Button, ButtonIcon, DataTable } from 'components/common'
 import ItemRow from './ItemRow'
 import styles from './styles.scss'
 
@@ -8,7 +8,7 @@ const headers = [
   { type: 'Description', key: 'description' },
   { type: 'Début', key: 'start' },
   { type: 'Visible', key: 'visible' },
-  { type: <Button domProps={{ disabled: true }} className="fa fa-close md-whiteframe-z1" />, key: 'delete' },
+  { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete' },
 ]
 
 const DraftItems = ({ draft, updateResource, disabled = false }) => {

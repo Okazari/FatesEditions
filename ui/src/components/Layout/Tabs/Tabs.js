@@ -10,7 +10,7 @@ const Tabs = ({ tabs, onSelect, selectedTab }) => {
           tabs.map((tab) => {
             return (
               <Tab
-                selected={tab.link === selectedTab}
+                selected={tab.link === selectedTab || `${tab.link}/` === selectedTab}
                 key={tab.label}
                 label={tab.label}
                 link={tab.link}

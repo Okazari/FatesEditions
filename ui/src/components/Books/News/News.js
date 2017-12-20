@@ -12,7 +12,7 @@ class News extends React.Component {
 
   render() {
     const { books } = this.props
-    const nbColumns = document && Math.floor((document.body.clientWidth - 200) / 240)
+    const nbColumns = document && Math.floor((document.body.clientWidth - 100) / 240)
     // TODO Replace with loader
     if (!books) return null
     const booksCopy = [...books]
@@ -23,7 +23,7 @@ class News extends React.Component {
         <div className={styles.list}>
           {
             booksCopy.map((book, index) => {
-              const delay = 50 * ((index % nbColumns) + Math.floor(index / nbColumns) + 1)
+              const delay = 100 * ((index % nbColumns) + Math.floor(index / nbColumns) + 1)
               return (
                 <div
                   key={book}

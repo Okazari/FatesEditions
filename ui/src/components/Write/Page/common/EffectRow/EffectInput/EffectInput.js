@@ -1,28 +1,35 @@
 import React from 'react'
 import classnames from 'classnames'
-import { Button } from 'components/common'
+import { ButtonIcon } from 'components/common'
 import ObjectInput from './ObjectInput'
 import StatInput from './StatInput'
 import styles from './styles.scss'
 
 const EffectInput = ({ book, type, index, effect, updateResource, removeEffect }) => {
-  const buttonClassName = classnames('fa fa-close md-whiteframe-z1', styles.removeButton)
-  return !book ? null : (
-    <div className={styles.component}>
-      {type === 'stat' ?
-        <StatInput
+  const renderInput = () => {
+    switch (type) {
+      case 'stat':
+        return (<StatInput
           stats={book.stats}
           effect={effect}
           index={index}
           updateResource={updateResource}
-        /> :
-        <ObjectInput
+        />)
+      case 'object':
+        return (<ObjectInput
           objects={book.objects}
           effect={effect}
           index={index}
           updateResource={updateResource}
-        />}
-      <Button className={buttonClassName} domProps={{ onClick: () => removeEffect(index) }} />
+        />)
+      default:
+        return <div style={{ flex: 1 }} />
+    }
+  }
+  return !book ? null : (
+    <div className={styles.component}>
+      {renderInput()}
+      <ButtonIcon icon="delete" domProps={{ onClick: () => removeEffect(index) }} />
     </div>
   )
 }

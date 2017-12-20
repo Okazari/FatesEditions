@@ -8,8 +8,8 @@ const Toolbar = () => {
   return (
     <div className={styles.component}>
       <img className={styles.logo} alt="logo" src={logo} />
-      <Link to={RouteService.routes.books()} icon="B" />
-      <Link to={RouteService.routes.write()} icon="E" />
+      <Link to={RouteService.routes.books()} icon="import_contacts" />
+      <Link to={RouteService.routes.write()} icon="mode_edit" />
     </div>
   )
 }

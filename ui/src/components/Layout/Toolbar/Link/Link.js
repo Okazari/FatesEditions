@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router'
+import { Icon } from 'components/common'
 import styles from './style.scss'
 
 const Link = ({ to, icon }) => {
   return (
     <div className={styles.link}>
       <RouterLink to={to}>
-        <div className={styles.fakeIcon}>{icon}</div>
+        <Icon domProps={{ className: styles.icon }} icon={icon} />
       </RouterLink>
     </div>
   )

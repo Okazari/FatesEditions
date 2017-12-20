@@ -6,9 +6,9 @@
 
 .selectInput {
   flex-direction: row;
-  flex: calc(1/3);
+  flex: 1;
+  margin: 0 10px;
   &>select {
     flex: 1;
-    margin: 0 10px;
   }
 }

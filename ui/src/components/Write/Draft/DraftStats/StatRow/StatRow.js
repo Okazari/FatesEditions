@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button } from 'components/common'
+import { Input, ButtonIcon } from 'components/common'
 
 const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
   const onDelete = e => removeStat(e.target.id)
@@ -84,8 +84,8 @@ const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
         />
       </td>
       <td>
-        <Button
-          className="fa fa-close md-whiteframe-z1"
+        <ButtonIcon
+          icon="delete"
           domProps={{ onClick: onDelete, id: index, disabled }}
         />
       </td>

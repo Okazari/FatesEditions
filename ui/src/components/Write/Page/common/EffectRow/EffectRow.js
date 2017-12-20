@@ -24,16 +24,14 @@ const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
           <option value="object">{"L'objet"}</option>
           <option value="stat">{'La statistique'}</option>
         </SelectInput>
-        { effect.type ?
-          <EffectInput
-            book={book}
-            type={effect.type}
-            effect={effect}
-            index={index}
-            updateResource={updateResource}
-            removeEffect={removeEffect}
-          />
-        : null }
+        <EffectInput
+          book={book}
+          type={effect.type}
+          effect={effect}
+          index={index}
+          updateResource={updateResource}
+          removeEffect={removeEffect}
+        />
       </div>
     </div>
   )

@@ -1,15 +1,13 @@
-@import '~styles/sizes';
 @import '~styles/colors';
 
 .component {
+  border: 0;
+  width: 40px;
+  height: 40px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: $toolbar-size;
+  color: $primary-color;
   background-color: $background-color-light-2;
-}
-
-.logo {
-  margin: 20px 0;
-  height: 70px;
+  border-radius: 5px;
 }

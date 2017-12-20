@@ -6,6 +6,7 @@ export Input, {
   TextAreaInput,
 } from './Input'
 export Button from './Button'
+export ButtonIcon from './ButtonIcon'
 export DataTable from './DataTable'
 // export Modal from './Modal'
 // export Loader from './Loader'
