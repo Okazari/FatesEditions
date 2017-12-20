@@ -1,12 +1,17 @@
 import React from 'react'
+import classnames from 'classnames'
+import styles from './styles.scss'
 
 const DataHeader = ({ headers = [] }) => {
   return (
-    <thead>
-      <tr>
-        { headers.map(header => <th rowSpan="1" key={header.key} className={header.className}>{header.type}</th>) }
-      </tr>
-    </thead>
+    <div className={styles.component}>
+      {
+        headers.map((header) => {
+          const className = classnames(styles.headerEntry, header.className)
+          return <div key={header.key} className={className}>{header.type}</div>
+        })
+      }
+    </div>
   )
 }
 

@@ -4,4 +4,12 @@
   flex-direction: column;
   width: 100%;
   padding: 20px;
+
+  .large {
+    flex: 2;
+  }
+
+  .small {
+    max-width: 60px;
+  }
 }

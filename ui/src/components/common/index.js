@@ -7,7 +7,7 @@ export Input, {
 } from './Input'
 export Button from './Button'
 export ButtonIcon from './ButtonIcon'
-export DataTable from './DataTable'
+export DataTable, { DataRow } from './DataTable'
 // export Modal from './Modal'
 // export Loader from './Loader'
 export TextEditor from './TextEditor'

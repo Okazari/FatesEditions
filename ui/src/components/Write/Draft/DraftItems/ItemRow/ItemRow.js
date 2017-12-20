@@ -1,11 +1,12 @@
 import React from 'react'
-import { ButtonIcon, Input } from 'components/common'
+import { ButtonIcon, Input, DataRow } from 'components/common'
+import styles from '../styles.scss'
 
 const ItemRow = ({ index, item = {}, disabled, updateResource, deleteResource }) => {
   const onDelete = e => deleteResource(e.target.id)
   return (
-    <tr>
-      <td>
+    <DataRow>
+      <div>
         <Input
           debounce={500}
           domProps={{
@@ -17,8 +18,8 @@ const ItemRow = ({ index, item = {}, disabled, updateResource, deleteResource })
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div className={styles.large}>
         <Input
           debounce={500}
           domProps={{
@@ -30,8 +31,8 @@ const ItemRow = ({ index, item = {}, disabled, updateResource, deleteResource })
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div className={styles.small}>
         <Input
           debounce={500}
           domProps={{
@@ -44,8 +45,8 @@ const ItemRow = ({ index, item = {}, disabled, updateResource, deleteResource })
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div className={styles.small}>
         <Input
           debounce={500}
           domProps={{
@@ -58,14 +59,14 @@ const ItemRow = ({ index, item = {}, disabled, updateResource, deleteResource })
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div className={styles.small}>
         <ButtonIcon
           icon="delete"
           domProps={{ onClick: onDelete, id: index, disabled }}
         />
-      </td>
-    </tr>
+      </div>
+    </DataRow>
 
   )
 }

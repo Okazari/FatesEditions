@@ -5,10 +5,10 @@ import PageRow from './PageRow'
 import styles from './styles.scss'
 
 const headers = [
-  { type: <ButtonIcon domProps={{ disabled: true }} icon="mode_edit" />, key: 'edit' },
+  { type: <ButtonIcon domProps={{ disabled: true }} icon="mode_edit" />, key: 'edit', className: styles.small },
   { type: 'Titre', key: 'title' },
-  { type: 'Description', key: 'description' },
-  { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete' },
+  { type: 'Mémo', key: 'description', className: styles.large },
+  { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
 const DraftPages = ({ pages = [], query, disabled, postResource, deleteResource }) => {

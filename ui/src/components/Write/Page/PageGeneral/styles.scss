@@ -4,6 +4,10 @@
   flex-direction: column;
   padding: 20px;
 
+  > div {
+    margin-bottom: 10px;
+  }
+
   .effectRow {
     display: flex;
     flex-direction: column;

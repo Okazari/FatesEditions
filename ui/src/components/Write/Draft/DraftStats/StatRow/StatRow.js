@@ -1,11 +1,12 @@
 import React from 'react'
-import { Input, ButtonIcon } from 'components/common'
+import { Input, ButtonIcon, DataRow } from 'components/common'
+import styles from '../styles.scss'
 
 const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
   const onDelete = e => removeStat(e.target.id)
   return (
-    <tr>
-      <td>
+    <DataRow>
+      <div>
         <Input
           debounce={500}
           domProps={{
@@ -17,8 +18,8 @@ const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div className={styles.large}>
         <Input
           debounce={500}
           domProps={{
@@ -30,8 +31,8 @@ const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div>
         <Input
           debounce={500}
           domProps={{
@@ -43,8 +44,8 @@ const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div>
         <Input
           debounce={500}
           domProps={{
@@ -56,8 +57,8 @@ const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div>
         <Input
           debounce={500}
           domProps={{
@@ -69,8 +70,8 @@ const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div className={styles.small}>
         <Input
           debounce={500}
           domProps={{
@@ -82,14 +83,14 @@ const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
             required: true,
           }}
         />
-      </td>
-      <td>
+      </div>
+      <div className={styles.small}>
         <ButtonIcon
           icon="delete"
           domProps={{ onClick: onDelete, id: index, disabled }}
         />
-      </td>
-    </tr>
+      </div>
+    </DataRow>
   )
 }
 

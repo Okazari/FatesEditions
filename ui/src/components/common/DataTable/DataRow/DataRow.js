@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles.scss'
 
-const DataBody = ({ children }) => {
+const DataRow = ({ children }) => {
   return (
     <div className={styles.component}>
       {children}
@@ -9,4 +9,4 @@ const DataBody = ({ children }) => {
   )
 }
 
-export default DataBody
+export default DataRow

@@ -5,10 +5,10 @@ import styles from './styles.scss'
 
 const headers = [
   { type: 'Nom', key: 'name' },
-  { type: 'Description', key: 'description' },
-  { type: 'Début', key: 'start' },
-  { type: 'Visible', key: 'visible' },
-  { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete' },
+  { type: 'Description', key: 'description', className: styles.large },
+  { type: 'Début', key: 'start', className: styles.small },
+  { type: 'Visible', key: 'visible', className: styles.small },
+  { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
 const DraftItems = ({ draft, updateResource, disabled = false }) => {

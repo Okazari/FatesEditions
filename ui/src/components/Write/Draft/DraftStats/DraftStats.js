@@ -5,12 +5,12 @@ import styles from './styles.scss'
 
 const headers = [
   { type: 'Nom', key: 'name' },
-  { type: 'Description', key: 'description' },
+  { type: 'Description', key: 'description', className: styles.large },
   { type: 'Valeur initiale', key: 'initial' },
   { type: 'Minimum', key: 'min' },
   { type: 'Maximum', key: 'max' },
-  { type: 'Visible', classtype: '', key: 'visibility' },
-  { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete' },
+  { type: 'Visible', classtype: '', key: 'visibility', className: styles.small },
+  { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
 const DraftStats = ({ draft, updateResource, disabled = false }) => {

@@ -1,28 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { ButtonIcon } from 'components/common'
+import { ButtonIcon, DataRow } from 'components/common'
 import { RouteService } from 'services'
-
+import styles from '../styles.scss'
 const PageRow = ({ page = {}, bookId, disabled, deleteResource }) => {
   return (
-    <tr>
-      <td>
+    <DataRow>
+      <div className={styles.small}>
         <Link to={RouteService.routes.writebookpage(bookId, page._id)}>
           <ButtonIcon
             icon="mode_edit"
             domProps={{ disabled }}
           />
         </Link>
-      </td>
-      <td>{page.title}</td>
-      <td>{page.description}</td>
-      <td>
+      </div>
+      <div>{page.title}</div>
+      <div className={styles.large}>{page.description}</div>
+      <div className={styles.small}>
         <ButtonIcon
           icon="delete"
           domProps={{ onClick: () => deleteResource(page._id), disabled }}
         />
-      </td>
-    </tr>
+      </div>
+    </DataRow>
   )
 }
 
