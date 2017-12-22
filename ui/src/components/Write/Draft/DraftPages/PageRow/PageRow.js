@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { ButtonIcon, DataRow } from 'components/common'
 import { RouteService } from 'services'
 import styles from '../styles.scss'
+
 const PageRow = ({ page = {}, bookId, disabled, deleteResource }) => {
   return (
     <DataRow>

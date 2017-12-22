@@ -1,5 +1,4 @@
 import React from 'react'
-import classnames from 'classnames'
 import { ButtonIcon } from 'components/common'
 import ObjectInput from './ObjectInput'
 import StatInput from './StatInput'

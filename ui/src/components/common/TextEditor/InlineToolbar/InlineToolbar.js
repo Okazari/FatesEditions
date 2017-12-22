@@ -3,15 +3,15 @@ import { ButtonIcon, SelectInput } from 'components/common'
 import styles from './styles.scss'
 
 const InlineStyles = [
-  { icon: 'fa fa-bold', style: 'BOLD', key: 'bold', icon: 'format_bold' },
-  { icon: 'fa fa-italic', style: 'ITALIC', key: 'italic', icon: 'format_italic' },
-  { icon: 'fa fa-underline', style: 'UNDERLINE', key: 'underline', icon: 'format_underline' },
+  { style: 'BOLD', key: 'bold', icon: 'format_bold' },
+  { style: 'ITALIC', key: 'italic', icon: 'format_italic' },
+  { style: 'UNDERLINE', key: 'underline', icon: 'format_underline' },
 ]
 
 const BlockTypes = [
-  { icon: 'fa fa-list-ul', style: 'unordered-list-item', key: 'ul-list', icon: 'format_list_bulleted' },
-  { icon: 'fa fa-list-ol', style: 'ordered-list-item', key: 'ol-list', icon: 'format_list_numbered' },
-  { icon: 'fa fa-quote-right', style: 'blockquote', key: 'blockquote', icon: 'format_quote' },
+  { style: 'unordered-list-item', key: 'ul-list', icon: 'format_list_bulleted' },
+  { style: 'ordered-list-item', key: 'ol-list', icon: 'format_list_numbered' },
+  { style: 'blockquote', key: 'blockquote', icon: 'format_quote' },
 ]
 
 const Headers = [
