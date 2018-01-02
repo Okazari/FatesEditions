@@ -1,9 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
+import { ButtonIcon, Icon } from 'components/common'
+import { RouteService } from 'services'
 import styles from './style.scss'
 import Draft from '../../common/Draft'
-import { Icon } from '../../common'
-import { RouteService } from '../../../services'
 
 const editDraft = (draftId) => {
   RouteService.goTo(RouteService.routes.writebook(draftId))
@@ -37,10 +37,10 @@ const Drafts = ({ drafts, postResource, deleteResource }) => {
               className={styles.book}
             >
               <div className={styles.delete}>
-                <Icon
+                <ButtonIcon
                   icon="delete_forever"
+                  className={styles.action}
                   domProps={{
-                    className: styles.action,
                     onClick: () => onDeleteDraft(draft),
                   }}
                 />

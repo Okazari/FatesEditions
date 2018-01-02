@@ -30,15 +30,11 @@
     right: 0;
     z-index: 100;
     margin: 5px;
-    padding: 5px;
-    font-size: 2em;
     box-shadow: $box-shadow-1;
-    border-radius: 20px;
-    background-color: $background-color;
-    transition: background-color ease-in 100ms;
+    transition: box-shadow ease-in 100ms;
     cursor: pointer;
     &:hover {
-      background-color: rgb(255,255,255);
+      box-shadow: $box-shadow-2;
     }
   }
 }
