@@ -10,6 +10,7 @@ const GameSchema = new Schema({
   book: Book,
   bookStatus: String,
   stats: Schema.Types.Mixed,
+  tree: [{ Type: Schema.Types.Mixed, default: [] }],
 })
 
 module.exports = mongoose.model('Game', GameSchema)

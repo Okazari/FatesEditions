@@ -78,7 +78,8 @@ router.post('/', (req, res, next) => {
  * @return book object
  */
 router.put('/:bookId', (req, res, next) => {
-  if (req.body !== null && req.body !== undefined) {
+  if (req.body) {
+    delete req.body.pages
     Book.findByIdAndUpdate(req.params.bookId, req.body, { new: true })
       .then(draft => res.json(draft), err => next(err))
   } else {

@@ -27,7 +27,7 @@ const PageTransition = ({ bookId, page, postResource, updateResource }) => {
   return (
     <div className={styles.component}>
       {
-        page.transitions.map((transition, index) =>
+        page.transitions && page.transitions.map((transition, index) =>
           <TransitionRow
             key={transition._id}
             bookId={bookId}

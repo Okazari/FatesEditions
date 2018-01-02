@@ -1,8 +1,22 @@
 import React from 'react'
 import { Button, Input, Book, TextAreaInput } from 'components/common'
+import { GameService, RouteService } from 'services'
 import GenreList from './GenreList'
 import PageList from './PageList'
 import styles from './styles.scss'
+
+const startGame = (book) => {
+  const stats = book.stats.reduce((acc, stat) => {
+    return {
+      ...acc,
+      [stat._id]: stat.initValue,
+    }
+  }, {})
+  GameService.postResource({ book, currentPageId: book.startingPageId, stats }).then((game) => {
+    RouteService.goTo(RouteService.routes.playgame(game._id))
+  })
+}
+
 
 const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
   return !!draft && (
@@ -63,7 +77,7 @@ const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
               onChange: startingPageId => updateResource({ ...draft, startingPageId }),
             }}
           />
-          <Button domProps={{ onClick: () => {} }}>Essayer mon brouillon</Button>
+        <Button domProps={{ onClick: () => { startGame(draft) } }}>Essayer mon brouillon</Button>
         </div>
       </div>
     </div>

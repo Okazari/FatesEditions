@@ -34,6 +34,7 @@ const AppRouter = () => {
           <Route path="news" component={News} />
           <Route path="library" component={Library} />
         </Route>
+        <Route path="play/:gameId" component={Game} />
         <Route path="write" component={MyBooks}>
           <IndexRedirect to="drafts" />
           <Route path="drafts" component={Drafts} />

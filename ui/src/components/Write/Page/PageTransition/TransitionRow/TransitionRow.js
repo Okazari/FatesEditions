@@ -6,13 +6,15 @@ import TransitionCondition from './TransitionCondition'
 import TransitionEffect from './TransitionEffect'
 import styles from './styles.scss'
 
-const TransitionRow = ({ book,
-                         pageId,
-                         transition,
-                         index,
-                         updateResource,
-                         postResource,
-                         removeTransition }) => {
+const TransitionRow = ({
+  book,
+  pageId,
+  transition,
+  index,
+  updateResource,
+  postResource,
+  removeTransition
+}) => {
   const createPage = () => {
     postResource({ bookId: book._id, page: { transitions: [{ fromPage: pageId }] } })
       .then(page => RouteService.goTo(RouteService.routes.writebookpage(book._id, page._id)))

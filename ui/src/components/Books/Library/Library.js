@@ -25,7 +25,7 @@ class Library extends React.Component {
                   key={book}
                   className={styles.book}
                 >
-                  <Book showDelay={delay} bookId={book} />
+                  <Book showDelay={delay} bookId={book} onClick={startGame} />
                 </div>
               )
             })

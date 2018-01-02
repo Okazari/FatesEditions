@@ -58,7 +58,7 @@ const PageGeneral = ({ page, bookId, updateResource }) => {
       </div>
       <div className={styles.effectRow}>
         {
-          page.effects.map((effect, index) => {
+          page.effects && page.effects.map((effect, index) => {
             const key = index
             return (<EffectRow
               key={key}

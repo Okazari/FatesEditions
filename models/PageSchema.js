@@ -8,5 +8,5 @@ module.exports = new Schema({
   description: String,
   backgroundMusic: String,
   transitions: [Transition],
-  effects: { type: [Schema.Types.Mixed], default: {} },
+  effects: [Schema.Types.Mixed],
 }, { minimize: false })
