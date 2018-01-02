@@ -1,0 +1,38 @@
+@import '~styles/shadows';
+@import '~styles/colors';
+
+.component {
+  flex-direction: column;
+  margin: 20px;
+  .bookInformations {
+    display: flex;
+  }
+}
+
+.body {
+  display: flex;
+  .publish {
+    flex-grow: 4;
+  }
+  .bookPreview {
+    margin: 20px;
+  }
+}
+
+.alertMessage {
+  padding: 10px 20px 20px 20px;
+  box-shadow: $box-shadow-1;
+  background-color: rgba(255,255,0,.2);
+  margin-bottom: 10px;
+}
+
+.alertTitle {
+  font-weight: 600;
+}
+
+.emphasis {
+  font-weight: 600;
+  color: $primary-color;
+  margin-left: 5px;
+  margin-right: 5px;
+}

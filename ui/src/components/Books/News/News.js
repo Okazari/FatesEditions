@@ -1,6 +1,6 @@
 import React from 'react'
+import Book from 'components/common/Book'
 import styles from './style.scss'
-import Book from '../common/Book'
 import Showdown from './Showdown'
 
 class News extends React.Component {

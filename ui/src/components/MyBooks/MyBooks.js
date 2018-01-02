@@ -1,10 +1,11 @@
 import React from 'react'
-// import styles from './style.scss'
 import { Layout, Content, Toolbar, Tabs, TabContent } from '../Layout'
 import { RouteService } from '../../services'
 
 const tabDrafts = { label: 'Mes brouillons', link: RouteService.routes.writedrafts() }
-const tabs = [tabDrafts]
+const tabBooks = { label: 'Mes livres publiés', link: RouteService.routes.writepublications() }
+const tabPublish = { label: 'Publier un livre', link: RouteService.routes.writepublish() }
+const tabs = [tabDrafts, tabBooks, tabPublish]
 
 
 const MyBooks = ({ location, children }) => {

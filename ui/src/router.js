@@ -3,7 +3,7 @@ import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-
 
 // NEW LAYOUT
 import Books, { Library, News } from './components/Books'
-import MyBooks, { Drafts } from './components/MyBooks'
+import MyBooks, { Drafts, Publications, Publish } from './components/MyBooks'
 import WriteDraft, {
   DraftGeneral,
   DraftItems,
@@ -37,8 +37,8 @@ const AppRouter = () => {
         <Route path="write" component={MyBooks}>
           <IndexRedirect to="drafts" />
           <Route path="drafts" component={Drafts} />
-          <Route path="publications" component={Drafts} />
-          <Route path="publish" component={Drafts} />
+          <Route path="publications" component={Publications} />
+          <Route path="publish" component={Publish} />
         </Route>
         <Route path="write/drafts/:draftId" component={WriteDraft}>
           <IndexRedirect to="general" />

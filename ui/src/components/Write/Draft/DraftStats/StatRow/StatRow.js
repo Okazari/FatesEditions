@@ -3,7 +3,7 @@ import { Input, ButtonIcon, DataRow } from 'components/common'
 import styles from '../styles.scss'
 
 const StatRow = ({ stat, index, disabled, updateResource, removeStat }) => {
-  const onDelete = e => removeStat(e.target.id)
+  const onDelete = () => removeStat(index)
   return (
     <DataRow>
       <div>
