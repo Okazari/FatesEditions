@@ -7,6 +7,7 @@ const rewrite = require('express-urlrewrite')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const graphqlHTTP = require('express-graphql')
 
 let uriMongo = `mongodb://${process.env.IP || 'localhost'}:27017/myvirtualstorybook`
 if (process.env.MONGODB_ADDON_URI) {
@@ -46,6 +47,12 @@ const game = require('./routes/game')
 const jwt = require('jsonwebtoken')
 
 app.use('/api', portal)
+
+const schema = require('./graphql/RootSchema')
+app.use('/graphql', graphqlHTTP({
+  schema,
+  graphiql: true,
+}))
 
 app.use((req, res, next) => {
   if (!req.get('Authorization')) {
