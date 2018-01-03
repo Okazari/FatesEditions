@@ -16,6 +16,8 @@ const Book = new Schema({
   pages: [Page],
   stats: [Stat],
   objects: [Object],
+  creationDate: Date,
+  lastModificationDate: Date,
 })
 
 Book.pre('init', (next) => {
