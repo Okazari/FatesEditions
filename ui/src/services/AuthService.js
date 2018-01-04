@@ -1,4 +1,13 @@
 class AuthService {
+
+  getConnectedUserId = () => {
+    if (this.connectedUserId) return this.connectedUserId
+    const [, payload] = this.getToken().split('.')
+    const { user: { _id } } = JSON.parse(atob(payload))
+    this.connectedUserId = _id
+    return _id
+  }
+
   login = (credentials) => {
     return fetch('/api/login', {
       method: 'POST',
@@ -24,7 +33,7 @@ class AuthService {
   }
 
   getToken = () => {
-    window.localStorage.getItem('auth-token')
+    return window.localStorage.getItem('auth-token')
   }
 
   removeToken = () => {
