@@ -5,13 +5,19 @@ import { AuthService } from 'services'
 import Drafts from './Drafts'
 
 const query = gql`
-  query ConnectedUserBook($author: ID!) {
+  fragment toto on Root {
     book(author: $author){
-      ...drafts_book
+      id
+      name
+      cover
+      authorId
     }
   }
 
-  ${Drafts.getFragments('drafts')}
+  query ConnectedUserBook($author: ID!) {
+    ...toto
+    __typename
+  }
 `
 
 
