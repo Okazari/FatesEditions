@@ -1,15 +1,15 @@
 import React from 'react'
 import classnames from 'classnames'
-import { ButtonIcon, Icon } from 'components/common'
+import { ButtonIcon, Icon, Book } from 'components/common'
 import { RouteService } from 'services'
 import styles from './style.scss'
-import Draft from '../../common/Draft'
 
 const editDraft = (draftId) => {
   RouteService.goTo(RouteService.routes.writebook(draftId))
 }
 
-const Drafts = ({ drafts, postResource, deleteResource }) => {
+const Drafts = ({ data: { book }, postResource, deleteResource }) => {
+  const drafts = book
   const onCreateDraft = () => {
     postResource({}).then((draft) => {
       const { _id } = draft
@@ -33,7 +33,7 @@ const Drafts = ({ drafts, postResource, deleteResource }) => {
           const delay = 100 * ((usedIndex % nbColumns) + Math.floor(usedIndex / nbColumns))
           return (
             <div
-              key={draft}
+              key={draft.id}
               className={styles.book}
             >
               <div className={styles.delete}>
@@ -41,11 +41,11 @@ const Drafts = ({ drafts, postResource, deleteResource }) => {
                   icon="delete_forever"
                   className={styles.action}
                   domProps={{
-                    onClick: () => onDeleteDraft(draft),
+                    onClick: () => onDeleteDraft(draft.id),
                   }}
                 />
               </div>
-              <Draft showDelay={delay} draftId={draft} onClick={() => editDraft(draft)} />
+              <Book showDelay={delay} book={draft} onClick={() => editDraft(draft)} />
             </div>
           )
         })

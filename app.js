@@ -49,7 +49,7 @@ const jwt = require('jsonwebtoken')
 app.use('/api', portal)
 
 const schema = require('./graphql/RootSchema')
-app.use('/graphql', graphqlHTTP({
+app.use('/api/graphql', graphqlHTTP({
   schema,
   graphiql: true,
 }))
@@ -63,8 +63,10 @@ app.use((req, res, next) => {
     try {
       const payload = jwt.verify(req.get('Authorization'), 'mysecretstory')
       req.payload = payload
-      const token = jwt.sign({ user: payload.user }, 'mysecretstory', { expiresIn: 3600 })
-      console.log(`${payload.user.username} ${payload.exp}`)
+      const { user } = payload
+      user.password = null
+      const token = jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+      console.log(`${payload.user.username} ${payload.user._id} ${payload.exp}`)
       res.set('Auth-token', token)
       next()
     } catch (err) {

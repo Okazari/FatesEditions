@@ -13,8 +13,8 @@ router.post('/login', (req, res, next) => {
         res.sendStatus(403)
       } else {
         // TODO Exporter le secret dans la config
-        const token = jwt.sign({ user: player }, 'mysecretstory', { expiresIn: 3600 })
         player.password = null
+        const token = jwt.sign({ user: player }, 'mysecretstory', { expiresIn: 3600 })
         res.send({ token, user: player })
       }
     }, err => next(err))

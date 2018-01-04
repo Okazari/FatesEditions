@@ -77,15 +77,18 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "apollo-client-preset": "^1.0.5",
     "classnames": "^2.2.5",
     "d3": "^4.7.1",
     "draft-js": "^0.10.0",
+    "graphql-tag": "^2.6.1",
     "lodash.debounce": "^4.0.8",
     "material-design-icons": "^3.0.1",
     "normalize": "^0.3.1",
     "normalize.css": "^4.2.0",
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
+    "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-router": "^3.0.0",

@@ -77,7 +77,7 @@ const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
               onChange: startingPageId => updateResource({ ...draft, startingPageId }),
             }}
           />
-        <Button domProps={{ onClick: () => { startGame(draft) } }}>Essayer mon brouillon</Button>
+          <Button domProps={{ onClick: () => { startGame(draft) } }}>Essayer mon brouillon</Button>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ const TransitionRow = ({
   index,
   updateResource,
   postResource,
-  removeTransition
+  removeTransition,
 }) => {
   const createPage = () => {
     postResource({ bookId: book._id, page: { transitions: [{ fromPage: pageId }] } })
