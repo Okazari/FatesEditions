@@ -6,7 +6,7 @@ const book = require('./BookType.js')
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
-    name: 'RootQueryType',
+    name: 'Root',
     fields: {
       book: book.resolve,
     }

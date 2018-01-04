@@ -11,7 +11,7 @@ const TransitionType = require('./TransitionType')
 const EffectType = require('./EffectType')
 
 const type = new GraphQLObjectType({
-  name: 'page',
+  name: 'Page',
   fields: () => ({
     id: {
       type: GraphQLID,

@@ -7,6 +7,17 @@ const cx = classnames.bind(styles)
 
 class Book extends React.Component {
 
+  static getFragments = name => `
+    fragment ${name}_book on Book {
+      name
+      cover
+      pages {
+        id
+      }
+      authorId
+    }
+  `
+
   constructor(props) {
     super(props)
     const { showDelay, onShow } = props

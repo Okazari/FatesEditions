@@ -8,7 +8,7 @@ const {
 } = require('graphql/type')
 
 const type = new GraphQLObjectType({
-  name: 'stat',
+  name: 'Stat',
   fields: () => ({
     id: {
       type: GraphQLID,

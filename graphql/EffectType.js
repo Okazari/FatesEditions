@@ -8,7 +8,7 @@ const {
 } = require('graphql/type')
 
 const type = new GraphQLObjectType({
-  name: 'effect',
+  name: 'Effect',
   fields: () => ({
     operator: {
       type: GraphQLString,

@@ -45,7 +45,7 @@ const Drafts = ({ data: { book }, postResource, deleteResource }) => {
                   }}
                 />
               </div>
-              <Book showDelay={delay} book={draft} onClick={() => editDraft(draft)} />
+              <Book showDelay={delay} book={draft} onClick={() => editDraft(draft.id)} />
             </div>
           )
         })
@@ -53,5 +53,14 @@ const Drafts = ({ data: { book }, postResource, deleteResource }) => {
     </div>
   )
 }
+
+Drafts.getFragments = name => `
+  fragment ${name}_book on Book {
+    id
+    ...commmonBook_book
+  }
+
+  ${Book.getFragments('commmonBook')}
+`
 
 export default Drafts
