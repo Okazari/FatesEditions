@@ -14,7 +14,7 @@ const ObjectType = require('./ObjectType')
 const PageType = require('./PageType')
 
 const type = new GraphQLObjectType({
-  name: 'book',
+  name: 'Book',
   description: 'A book',
   fields: () => ({
     id: {
@@ -66,12 +66,6 @@ const type = new GraphQLObjectType({
   })
 })
 
-
-// const Book = new Schema({
-//   pages: [Page],
-// })
-
-
 const resolve = {
   type: new GraphQLList(type),
   args: {
@@ -85,12 +79,13 @@ const resolve = {
     }
   },
   resolve: (root, args, source, fieldASTs) => {
+    console.log(fieldASTs)
     const { id, author } = args
-    const projections = getProjection(fieldASTs)
+    // const projections = getProjection(fieldASTs)
     const filters = {}
     if (id) filters._id = id
     if (author) filters.authorId = author
-    return Book.find(filters, projections)
+    return Book.find(filters)
   }
 }
 

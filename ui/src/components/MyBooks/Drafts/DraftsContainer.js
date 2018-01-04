@@ -6,13 +6,12 @@ import Drafts from './Drafts'
 
 const query = gql`
   query ConnectedUserBook($author: ID!) {
-    book (author: $author) {
-      id
-      authorId
-      cover
-      name
+    book(author: $author){
+      ...drafts_book
     }
   }
+
+  ${Drafts.getFragments('drafts')}
 `
 
 
