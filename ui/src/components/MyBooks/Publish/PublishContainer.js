@@ -2,7 +2,7 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AuthService } from 'services'
-import Drafts from './Drafts'
+import Publish from './Publish'
 
 const query = gql`
   query ConnectedUserBook($author: ID!) {
@@ -26,4 +26,4 @@ export default graphql(query, {
     ...rest,
     drafts: book,
   }),
-})(Drafts)
+})(Publish)

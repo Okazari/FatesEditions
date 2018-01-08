@@ -1,6 +1,29 @@
 //eslint-disable-next-line
-import { RestHoc as restHoc } from 'react-rest-resource'
-import { BookService } from 'services'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+import { AuthService } from 'services'
 import Publications from './Publications'
 
-export default restHoc(Publications, BookService)
+const query = gql`
+  query ConnectedUserBook($author: ID!) {
+    book(author: $author, draft: false) {
+      id
+      name
+      cover
+      authorId
+    }
+  }
+`
+
+
+export default graphql(query, {
+  options: () => ({
+    variables: {
+      author: AuthService.getConnectedUserId(),
+    },
+  }),
+  props: ({ data: { book }, ...rest }) => ({
+    ...rest,
+    books: book,
+  }),
+})(Publications)

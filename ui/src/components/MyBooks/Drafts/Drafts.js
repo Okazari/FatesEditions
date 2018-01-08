@@ -8,8 +8,7 @@ const editDraft = (draftId) => {
   RouteService.goTo(RouteService.routes.writebook(draftId))
 }
 
-const Drafts = ({ data: { book }, postResource, deleteResource }) => {
-  const drafts = book
+const Drafts = ({ drafts, postResource, deleteResource }) => {
   const onCreateDraft = () => {
     postResource({}).then((draft) => {
       const { _id } = draft
@@ -53,14 +52,5 @@ const Drafts = ({ data: { book }, postResource, deleteResource }) => {
     </div>
   )
 }
-
-Drafts.getFragments = name => `
-  fragment ${name}_book on Book {
-    id
-    ...commmonBook_book
-  }
-
-  ${Book.getFragments('commmonBook')}
-`
 
 export default Drafts

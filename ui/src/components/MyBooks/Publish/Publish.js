@@ -21,6 +21,8 @@ class Publish extends React.Component {
 
   render() {
     const { draftId } = this.state
+    const { drafts } = this.props
+    const draft = drafts && drafts.find(d => d.id === draftId)
     return (
       <div className={styles.component}>
         <div className={styles.alertMessage}>
@@ -39,15 +41,15 @@ class Publish extends React.Component {
             à moins de le repasser en brouillon
           </div>
         </div>
-        <DraftList updateDraft={this.updateDraft} />
+        <DraftList drafts={drafts} updateDraft={this.updateDraft} />
         {
-          draftId && (
+          draft && (
             <div className={styles.body} >
               <div className={styles.bookPreview}>
-                <Book draftId={draftId} />
+                <Book book={draft} />
               </div>
               <div className={styles.publish}>
-                <BookPublication draftId={draftId} key={`publ${draftId}`} />
+                <BookPublication draft={draft} key={`publ${draft.id}`} />
               </div>
             </div>
           )

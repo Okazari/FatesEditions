@@ -76,16 +76,20 @@ const resolve = {
     author: {
       name: 'author',
       type: GraphQLID,
+    },
+    draft: {
+      name: 'draft',
+      type: GraphQLBoolean,
     }
   },
   resolve: (root, args, source, fieldASTs) => {
-    console.log(fieldASTs)
-    const { id, author } = args
-    // const projections = getProjection(fieldASTs)
+    const { id, author, draft } = args
+    const projections = getProjection(fieldASTs)
     const filters = {}
     if (id) filters._id = id
     if (author) filters.authorId = author
-    return Book.find(filters)
+    if (typeof draft === 'boolean') filters.draft = draft
+    return Book.find(filters, projections)
   }
 }
 

@@ -13,7 +13,7 @@ const DraftList = ({ drafts = [], updateDraft }) => {
       label={'Brouillon que vous souhaitez publier'}
       placeholder={'-- Choisissez un brouillon à publier --'}
     >
-      {drafts.map(draft => <DraftOption draftId={draft} key={draft} />)}
+      {drafts.map(draft => <DraftOption draft={draft} key={draft.id} />)}
     </SelectInput>
   )
 }

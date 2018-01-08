@@ -1,1 +1,1 @@
-export default from './DraftOptionContainer'
+export default from './DraftOption'
