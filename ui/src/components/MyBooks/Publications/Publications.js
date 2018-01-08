@@ -13,10 +13,10 @@ const Publications = ({ books, postResource, deleteResource }) => {
           const delay = 100 * ((index % nbColumns) + Math.floor(index / nbColumns))
           return (
             <div
-              key={book}
+              key={book.id}
               className={styles.book}
             >
-              <Book showDelay={delay} bookId={book} />
+              <Book showDelay={delay} book={book} />
             </div>
           )
         })

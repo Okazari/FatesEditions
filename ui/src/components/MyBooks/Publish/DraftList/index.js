@@ -1,1 +1,1 @@
-export default from './DraftListContainer'
+export default from './DraftList'

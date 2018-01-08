@@ -1,1 +1,1 @@
-export default from './Publish'
+export default from './PublishContainer'
