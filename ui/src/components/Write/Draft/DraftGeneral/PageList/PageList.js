@@ -1,6 +1,5 @@
 import React from 'react'
 import { SelectInput } from 'components/common'
-import PageOption from './PageOption'
 
 const PageList = ({ pages = [], domProps }) => {
   return (
@@ -10,10 +9,13 @@ const PageList = ({ pages = [], domProps }) => {
       placeholder="-- Aucune page selectionnée --"
       domProps={domProps}
     >
-      {pages.map(page =>
-        <option value={page} key={page}>
-          <PageOption pageId={page} key={page} />
-        </option>)}
+      {
+        pages.map(page =>
+          <option value={page.id} key={page.id}>
+            {page.title}
+          </option>,
+        )
+      }
     </SelectInput>
   )
 }

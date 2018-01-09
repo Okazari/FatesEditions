@@ -18,7 +18,7 @@ const startGame = (book) => {
 }
 
 
-const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
+const DraftGeneral = ({ draft, genres, updateResource, disabled = false }) => {
   return !!draft && (
     <div>
       <div className={styles.component}>
@@ -53,6 +53,7 @@ const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
             }}
           />
           <GenreList
+            genres={genres}
             domProps={{
               value: draft.genreId,
               required: true,
@@ -70,7 +71,7 @@ const DraftGeneral = ({ draft, updateResource, disabled = false }) => {
             }}
           />
           <PageList
-            query={{ bookId: draft._id }}
+            pages={draft.pages}
             domProps={{
               value: draft.startingPageId,
               required: true,

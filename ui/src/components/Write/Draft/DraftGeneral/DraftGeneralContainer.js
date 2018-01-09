@@ -1,11 +1,39 @@
 //eslint-disable-next-line
-import { RestHoc as restHoc } from 'react-rest-resource'
-import React from 'react'
-import { DraftService } from 'services'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 import DraftGeneral from './DraftGeneral'
 
-const ConnectedComponent = restHoc(DraftGeneral, DraftService)
-const Component = ({ params }) => {
-  return <ConnectedComponent draftId={params.draftId} />
-}
-export default Component
+const query = gql`
+  query BookById ($id: ID!) {
+    book(id: $id) {
+      id
+      name
+      cover
+      authorId
+      genreId
+      synopsis
+      startingPageId
+      pages {
+        id
+        title
+      }
+      stats {
+        id
+        initValue
+      }
+    }
+  }
+`
+
+
+export default graphql(query, {
+  options: ({ params }) => ({
+    variables: {
+      id: params.draftId,
+    },
+  }),
+  props: ({ data: { book }, ...rest }) => ({
+    ...rest,
+    draft: book && book[0],
+  }),
+})(DraftGeneral)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { RouteService } from 'services'
+// import { RouteService } from 'services'
 import { Button, ButtonIcon, DataTable } from 'components/common'
 import PageRow from './PageRow'
 import styles from './styles.scss'
@@ -11,11 +11,17 @@ const headers = [
   { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
-const DraftPages = ({ pages = [], query, disabled, postResource, deleteResource }) => {
+const DraftPages = ({
+  pages = [],
+  params: { draftId },
+  disabled,
+  postResource,
+  deleteResource,
+}) => {
   const createPage = () => {
-    postResource({ ...query, page: {} }).then((page) => {
-      RouteService.goTo(RouteService.routes.writebookpage(query.bookId, page._id))
-    })
+    // postResource({ ...query, page: {} }).then((page) => {
+    //   RouteService.goTo(RouteService.routes.writebookpage(draftId, page._id))
+    // })
   }
 
   return (
@@ -24,10 +30,10 @@ const DraftPages = ({ pages = [], query, disabled, postResource, deleteResource 
         {
           pages.map(page =>
             <PageRow
-              pageId={page}
-              key={page}
+              page={page}
+              key={page.id}
               disabled={disabled}
-              bookId={query.bookId}
+              bookId={draftId}
               deleteResource={deleteResource}
             />,
           )
@@ -38,7 +44,6 @@ const DraftPages = ({ pages = [], query, disabled, postResource, deleteResource 
       </Button>
     </div>
   )
-  // <DraftPage query={{ bookId: draft._id }} />
 }
 
 export default DraftPages

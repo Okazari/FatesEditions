@@ -32,18 +32,16 @@ const DraftItems = ({ draft, updateResource, disabled = false }) => {
       <div className={styles.component}>
         <DataTable headers={headers} className="table-hover">
           {
-            draft.objects.map((item, index) => {
-              return (
-                <ItemRow
-                  key={item._id}
-                  index={index}
-                  item={item}
-                  disabled={disabled}
-                  updateResource={updateDraft}
-                  deleteResource={removeObject}
-                />
-              )
-            })
+            draft.objects.map((item, index) => (
+              <ItemRow
+                key={item.id}
+                index={index}
+                item={item}
+                disabled={disabled}
+                updateResource={updateDraft}
+                deleteResource={removeObject}
+              />
+            ))
           }
         </DataTable>
         <Button domProps={{ onClick: addObject, disabled }}>
