@@ -1,7 +1,6 @@
 //eslint-disable-next-line
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { AuthService } from 'services'
 import Library from './Library'
 
 const query = gql`

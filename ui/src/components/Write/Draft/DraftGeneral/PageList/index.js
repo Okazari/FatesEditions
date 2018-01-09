@@ -1,1 +1,1 @@
-export default from './PageListContainer'
+export default from './PageList'

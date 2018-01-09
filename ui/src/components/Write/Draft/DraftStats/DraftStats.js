@@ -33,18 +33,18 @@ const DraftStats = ({ draft, updateResource, disabled = false }) => {
     <div>
       <div className={styles.component}>
         <DataTable headers={headers} className="table-hover">
-          {draft.stats.map((stat, index) => {
-            return (
+          {
+            draft.stats.map((stat, index) => (
               <StatRow
-                key={stat._id}
+                key={stat.id}
                 index={index}
                 stat={stat}
                 disabled={disabled}
                 updateResource={updateDraft}
                 removeStat={removeStat}
               />
-            )
-          })}
+            ))
+          }
         </DataTable>
         <Button domProps={{ onClick: addStat, disabled }}>
           Ajouter une caractéristique
