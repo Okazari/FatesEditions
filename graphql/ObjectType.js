@@ -10,6 +10,9 @@ const {
 const type = new GraphQLObjectType({
   name: 'Object',
   fields: () => ({
+    id: {
+      type: GraphQLID,
+    },
     name: {
       type: GraphQLString,
     },
