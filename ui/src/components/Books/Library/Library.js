@@ -10,7 +10,7 @@ class Library extends React.Component {
   }
 
   render() {
-    const { books } = this.props
+    const { books, startGame } = this.props
     const nbColumns = document && Math.floor((document.body.clientWidth - 100) / 240)
     // TODO Replace with loader
     if (!books) return null
@@ -22,10 +22,10 @@ class Library extends React.Component {
               const delay = 100 * ((index % nbColumns) + Math.floor(index / nbColumns) + 1)
               return (
                 <div
-                  key={book}
+                  key={book.id}
                   className={styles.book}
                 >
-                  <Book showDelay={delay} bookId={book} onClick={startGame} />
+                  <Book showDelay={delay} book={book} onClick={startGame} />
                 </div>
               )
             })

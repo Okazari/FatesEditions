@@ -5,8 +5,8 @@ import { AuthService } from 'services'
 import Drafts from './Drafts'
 
 const query = gql`
-  query ConnectedUserBook($author: ID!) {
-    book(author: $author, draft: true) {
+  query ConnectedUserBook ($author: ID!) {
+    book(draft: true, author: $author) {
       id
       name
       cover
