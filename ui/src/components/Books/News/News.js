@@ -19,18 +19,18 @@ class News extends React.Component {
     const firstBook = booksCopy.shift()
     return (
       <div className={styles.component}>
-        <Showdown bookId={firstBook} />
+        <Showdown book={firstBook} />
         <div className={styles.list}>
           {
             booksCopy.map((book, index) => {
               const delay = 100 * ((index % nbColumns) + Math.floor(index / nbColumns) + 1)
               return (
                 <div
-                  key={book}
+                  key={book.id}
                   className={styles.book}
                 >
                   <span />
-                  <Book showDelay={delay} bookId={book} />
+                  <Book showDelay={delay} book={book} />
                 </div>
               )
             })
