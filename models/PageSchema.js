@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose')
 const Transition = require('./TransitionSchema')
+const Effect = require('./EffectSchema')
 
 module.exports = new Schema({
   _id: { type: Schema.Types.ObjectId, index: true, auto: true },
@@ -8,5 +9,5 @@ module.exports = new Schema({
   description: String,
   backgroundMusic: String,
   transitions: [Transition],
-  effects: [Schema.Types.Mixed],
+  effects: [Effect],
 }, { minimize: false })

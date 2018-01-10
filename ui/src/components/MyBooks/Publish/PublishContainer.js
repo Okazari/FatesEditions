@@ -6,7 +6,7 @@ import Publish from './Publish'
 
 const query = gql`
   query ConnectedUserBook($author: ID!) {
-    book(author: $author, draft: true) {
+    books(author: $author, draft: true) {
       id
       name
       cover
@@ -22,8 +22,8 @@ export default graphql(query, {
       author: AuthService.getConnectedUserId(),
     },
   }),
-  props: ({ data: { book }, ...rest }) => ({
+  props: ({ data: { books }, ...rest }) => ({
     ...rest,
-    drafts: book,
+    drafts: books,
   }),
 })(Publish)

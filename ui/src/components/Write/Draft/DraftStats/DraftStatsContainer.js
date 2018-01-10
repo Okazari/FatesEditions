@@ -26,6 +26,6 @@ export default graphql(query, {
   }),
   props: ({ data: { book }, ...rest }) => ({
     ...rest,
-    draft: book && book[0],
+    draft: book,
   }),
 })(DraftStats)

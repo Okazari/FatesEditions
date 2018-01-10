@@ -5,7 +5,7 @@ import News from './News'
 
 const query = gql`
   query {
-    book(draft: false) {
+    books(draft: false) {
       id
       name
       cover
@@ -16,8 +16,8 @@ const query = gql`
 
 
 export default graphql(query, {
-  props: ({ data: { book }, ...rest }) => ({
+  props: ({ data: { books }, ...rest }) => ({
     ...rest,
-    books: book,
+    books,
   }),
 })(News)
