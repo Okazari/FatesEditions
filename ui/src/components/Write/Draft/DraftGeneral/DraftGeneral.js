@@ -18,7 +18,15 @@ const startGame = (book) => {
 }
 
 
-const DraftGeneral = ({ draft, genres, updateResource, disabled = false }) => {
+// static PropTypes = {
+//   draft: {
+//     NameInput.PopTypes.name,
+//     cover: String,
+//     description,
+//     startingPageId,
+//   }
+// }
+const DraftGeneral = ({ draft, genres, updateBook, disabled = false }) => {
   return !!draft && (
     <div>
       <div className={styles.component}>
@@ -32,7 +40,7 @@ const DraftGeneral = ({ draft, genres, updateResource, disabled = false }) => {
             className={styles.input}
             domProps={{
               value: draft.name,
-              onChange: name => updateResource({ ...draft, name }),
+              onChange: name => updateBook({ name }),
               type: 'text',
               placeholder: 'Titre du livre',
               disabled,
@@ -45,7 +53,7 @@ const DraftGeneral = ({ draft, genres, updateResource, disabled = false }) => {
             className={styles.input}
             domProps={{
               value: draft.cover,
-              onChange: cover => updateResource({ ...draft, cover }),
+              onChange: cover => updateBook({ cover }),
               type: 'text',
               placeholder: "url de l'image de couverture",
               disabled,
@@ -57,7 +65,7 @@ const DraftGeneral = ({ draft, genres, updateResource, disabled = false }) => {
             domProps={{
               value: draft.genreId,
               required: true,
-              onChange: genreId => updateResource({ ...draft, genreId }),
+              onChange: genreId => updateBook({ genreId }),
             }}
           />
           <TextAreaInput
@@ -65,7 +73,7 @@ const DraftGeneral = ({ draft, genres, updateResource, disabled = false }) => {
             debounce={500}
             domProps={{
               value: draft.synopsis,
-              onChange: synopsis => updateResource({ ...draft, synopsis }),
+              onChange: synopsis => updateBook({ synopsis }),
               placeholder: 'Synopsis du livre',
               required: true,
             }}
@@ -75,7 +83,7 @@ const DraftGeneral = ({ draft, genres, updateResource, disabled = false }) => {
             domProps={{
               value: draft.startingPageId,
               required: true,
-              onChange: startingPageId => updateResource({ ...draft, startingPageId }),
+              onChange: startingPageId => updateBook({ startingPageId }),
             }}
           />
           <Button domProps={{ onClick: () => { startGame(draft) } }}>Essayer mon brouillon</Button>

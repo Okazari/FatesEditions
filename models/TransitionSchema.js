@@ -1,10 +1,11 @@
 const { Schema } = require('mongoose')
+const Effect = require('./EffectSchema')
 
 module.exports = new Schema({
   fromPage: Schema.Types.ObjectId,
   toPage: Schema.Types.ObjectId,
   text: String,
-  conditions: { type: [Schema.Types.Mixed], default: {} },
+  conditions: { type: [Effect], default: {} },
   conditionOperator: String,
-  effects: [Schema.Types.Mixed],
+  effects: [Effect],
 }, { minimize: false })
