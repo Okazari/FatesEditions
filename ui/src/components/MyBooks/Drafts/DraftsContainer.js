@@ -1,8 +1,12 @@
 //eslint-disable-next-line
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AuthService } from 'services'
 import Drafts from './Drafts'
+
+const authorVariables = {
+  author: AuthService.getConnectedUserId(),
+}
 
 const query = gql`
   query ConnectedUserBook ($author: ID!) {
@@ -15,15 +19,57 @@ const query = gql`
   }
 `
 
-
-export default graphql(query, {
+const queryOptions = {
   options: () => ({
-    variables: {
-      author: AuthService.getConnectedUserId(),
+    variables: authorVariables,
+  }),
+  props: ({ data: { books } }) => ({
+    books,
+  }),
+}
+
+const createBookMutation = gql`
+  mutation CreateBook ($author: ID!) {
+    createBook(author: $author) {
+      id
+      name
+      cover
+      authorId
+    }
+  }
+`
+
+const createBookOptions = {
+  options: () => ({
+    variables: authorVariables,
+    update: (proxy, { data: { createBook } }) => {
+      const data = proxy.readQuery({ query, variables: authorVariables })
+      data.books.push(createBook)
+      proxy.writeQuery({ query, variables: authorVariables, data })
     },
   }),
-  props: ({ data: { books }, ...rest }) => ({
-    ...rest,
-    drafts: books,
+  name: 'createBook',
+}
+
+const deleteBookMutation = gql`
+  mutation DeleteBook ($id: ID!) {
+    deleteBook(id: $id)
+  }
+`
+
+const deleteBookOptions = {
+  options: () => ({
+    update: (proxy, { data: { deleteBook } }) => {
+      const data = proxy.readQuery({ query, variables: authorVariables })
+      data.books = data.books.filter(book => book.id !== deleteBook)
+      proxy.writeQuery({ query, variables: authorVariables, data })
+    },
   }),
-})(Drafts)
+  name: 'deleteBook',
+}
+
+export default compose(
+  graphql(query, queryOptions),
+  graphql(createBookMutation, createBookOptions),
+  graphql(deleteBookMutation, deleteBookOptions),
+)(Drafts)

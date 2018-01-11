@@ -2,6 +2,24 @@ const { makeExecutableSchema } = require('graphql-tools')
 const Book = require('../models/BookModel')
 const { getProjection } = require('./Helpers')
 
+const bookType = `
+  id: ID
+  name: String
+  tags: [String]
+  synopsis: String
+  cover: String
+  startingPageId: ID
+  genreId: ID
+  authorId: ID
+  draft: Boolean
+  creationDate: String
+  lastModificationDate: String
+  revision: Int
+  stats: [Stat]
+  objects: [Object]
+  pages: [Page]
+`
+
 const typeDefs = `
   type Query {
     books(author: ID, draft: Boolean): [Book]
@@ -9,21 +27,11 @@ const typeDefs = `
   }
 
   type Book {
-    id: ID
-    name: String
-    tags: [String]
-    synopsis: String
-    cover: String
-    startingPageId: ID
-    genreId: ID
-    authorId: ID
-    draft: Boolean
-    creationDate: String
-    lastModificationDate: String
-    revision: Int
-    stats: [Stat]
-    objects: [Object]
-    pages: [Page]
+    ${bookType}
+  }
+
+  type BookInput {
+    ${bookType}
   }
 
   type Stat {
@@ -71,6 +79,11 @@ const typeDefs = `
     effects: [Effect]
     conditions: [Effect]
   }
+
+  type Mutation {
+    createBook(author: ID!): Book
+    deleteBook(id: ID!): ID
+  }
 `
 
 const resolvers = {
@@ -89,6 +102,19 @@ const resolvers = {
       if (author) filters.authorId = author
       if (typeof draft === 'boolean') filters.draft = draft
       return Book.find(filters, projections)
+    }
+  },
+  Mutation: {
+    createBook: (obj, args = {}, context, info) => {
+      const book = new Book()
+      const { author } = args
+      book.authorId = author
+      book.draft = true
+      return book.save()
+    },
+    deleteBook: (obj, args = {}, context, info) => {
+      const { id } = args
+      return Book.findByIdAndRemove(id).then(book => book._id)
     }
   }
 }
