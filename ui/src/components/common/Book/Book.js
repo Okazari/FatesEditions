@@ -6,7 +6,6 @@ import Author from './Author'
 const cx = classnames.bind(styles)
 
 class Book extends React.Component {
-
   constructor(props) {
     super(props)
     const { showDelay, onShow } = props
