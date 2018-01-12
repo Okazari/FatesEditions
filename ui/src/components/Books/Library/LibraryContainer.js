@@ -16,8 +16,10 @@ const query = gql`
 
 
 export default graphql(query, {
-  props: ({ data: { books }, ...rest }) => ({
-    ...rest,
+  options: {
+    pollInterval: 60 * 1000,
+  },
+  props: ({ data: { books } }) => ({
     books,
   }),
 })(Library)
