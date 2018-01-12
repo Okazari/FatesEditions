@@ -15,9 +15,6 @@ const bookType = `
   creationDate: String
   lastModificationDate: String
   revision: Int
-  stats: [Stat]
-  objects: [Object]
-  pages: [Page]
 `
 
 const typeDefs = `
@@ -28,9 +25,12 @@ const typeDefs = `
 
   type Book {
     ${bookType}
+    stats: [Stat]
+    objects: [Object]
+    pages: [Page]
   }
 
-  type BookInput {
+  input BookInput {
     ${bookType}
   }
 
@@ -83,6 +83,7 @@ const typeDefs = `
   type Mutation {
     createBook(author: ID!): Book
     deleteBook(id: ID!): ID
+    updateBook(book: BookInput!): Book
   }
 `
 
@@ -112,10 +113,8 @@ const resolvers = {
       book.draft = true
       return book.save()
     },
-    deleteBook: (obj, args = {}, context, info) => {
-      const { id } = args
-      return Book.findByIdAndRemove(id).then(book => book._id)
-    }
+    deleteBook: (obj, { id }) => Book.findByIdAndRemove(id).then(book => book._id),
+    updateBook: (obj, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true }),
   }
 }
 

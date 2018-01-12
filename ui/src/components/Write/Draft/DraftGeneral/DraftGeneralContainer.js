@@ -38,63 +38,25 @@ const queryOptions = {
   }),
 }
 
-// const mutation = gql`
-//   mutation updateBook($book: Book!) {
-//     book (id: $book) {
-//       id
-//     }
-//   }
-// `
-//
-// const mutationOptions = {}
+const mutation = gql`
+  mutation updateBook($book: BookInput!) {
+    updateBook(book: $book) {
+      id
+      name
+      cover
+      authorId
+      genreId
+      synopsis
+      startingPageId
+    }
+  }
+`
 
-export default graphql(query, queryOptions)(DraftGeneral)
+const mutationOptions = {
+  name: 'updateBook',
+}
 
-// import { ApolloService } from 'services'
-
-// ApolloService = queryTypes = {
-//   book: {
-//     name,
-//     cover,
-//   }
-// }
-//
-// mapper = (propTypes) => {
-//   queryTypespropTyps
-// }
-//
-// graphqlQueryBuilder(mapper)(DraftGeneral)
-
-// client.getFragment(id, fragment)
-//
-// const query = gql
-// const resource = {
-//   type: 'Book',
-//   root: 'book',
-//   fields:['cover', 'id', 'description', 'name']
-//   queryOptions: {
-//     fetchPolicy: 'network-only'
-//   }
-// }
-//
-// graphqlResource(id, resourceOptions)
-//
-// const query = gql`
-//   query identity($id: ID!) {
-//     ${resource.type} {
-//       ${fields.map()}
-//     }
-//   }
-// `
-//
-// const fragment = gql`
-//   fragment toto on ${resource.type} {
-//     ${fields.map()}
-//   }
-// `
-// const data = client.getFragment(id, fragment)
-// if(data){
-//   client.setQuery(query, data)
-// }
-//
-// graphql(query, queryOptions)(Component)
+export default compose(
+  graphql(query, queryOptions),
+  graphql(mutation, mutationOptions),
+)(DraftGeneral)
