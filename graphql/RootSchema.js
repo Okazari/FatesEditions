@@ -1,9 +1,10 @@
 const { makeExecutableSchema } = require('graphql-tools')
 const Book = require('../models/BookModel')
+const Page = require('../models/PageModel')
+const Stat = require('../models/StatModel')
 const { getProjection } = require('./Helpers')
 
 const bookType = `
-  id: ID
   name: String
   tags: [String]
   synopsis: String
@@ -17,6 +18,15 @@ const bookType = `
   revision: Int
 `
 
+const statType = `
+  name: String
+  description: String
+  initValue: Int
+  max: Int
+  min: Int
+  visible: Boolean
+`
+
 const typeDefs = `
   type Query {
     books(author: ID, draft: Boolean): [Book]
@@ -24,6 +34,7 @@ const typeDefs = `
   }
 
   type Book {
+    id: ID
     ${bookType}
     stats: [Stat]
     objects: [Object]
@@ -31,17 +42,19 @@ const typeDefs = `
   }
 
   input BookInput {
+    id: ID!
     ${bookType}
+    stats: [StatInput]
   }
 
   type Stat {
     id: ID
-    name: String
-    description: String
-    initValue: Int
-    max: Int
-    min: Int
-    visible: Boolean
+    ${statType}
+  }
+
+  input StatInput {
+    id: ID!
+    ${statType}
   }
 
   type Object {
@@ -84,6 +97,12 @@ const typeDefs = `
     createBook(author: ID!): Book
     deleteBook(id: ID!): ID
     updateBook(book: BookInput!): Book
+
+    createPage(book: BookInput!): Book
+
+    createStat(bookId: ID!): Book
+    deleteStat(bookId: ID!, statId: ID!): Book
+    updateStat(bookId: ID!, stat: StatInput!): Book
   }
 `
 
@@ -106,15 +125,46 @@ const resolvers = {
     }
   },
   Mutation: {
-    createBook: (obj, args = {}, context, info) => {
+    createBook: (_, { author }) => {
       const book = new Book()
-      const { author } = args
       book.authorId = author
       book.draft = true
       return book.save()
     },
-    deleteBook: (obj, { id }) => Book.findByIdAndRemove(id).then(book => book._id),
-    updateBook: (obj, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true }),
+    deleteBook: (_, { id }) => Book.findByIdAndRemove(id).then(book => book._id),
+    updateBook: (_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true }),
+
+    createPage: (_, { bookId }) => {
+      const page = new Page()
+      return Book.findById(bookId).then(book => {
+        book.pages.push(page)
+        return book.save()
+      })
+    },
+
+    createStat: (_, { bookId }) => {
+      const stat = new Stat()
+      return Book.findById(bookId).then(book => {
+        book.stats.push(stat)
+        return book.save()
+      })
+    },
+    deleteStat: (_, { bookId, statId }) => {
+      const stat = new Stat()
+      return Book.findById(bookId).then(book => {
+        book.stats = book.stats.filter(s => s.id !== statId)
+        return book.save()
+      })
+    },
+    updateStat: (_, { bookId, stat }) => {
+      return Book.findById(bookId).then(book => {
+        const index = book.stats.findIndex(s => s.id === stat.id)
+        console.log(book.stats[index], stat)
+        Object.assign(book.stats[index], stat)
+        console.log(book.stats[index], stat)
+        return book.save()
+      })
+    }
   }
 }
 
