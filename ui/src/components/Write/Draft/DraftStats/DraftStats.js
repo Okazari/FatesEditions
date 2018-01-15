@@ -13,40 +13,29 @@ const headers = [
   { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
-const DraftStats = ({ draft, updateResource, disabled = false }) => {
-  const addStat = () => {
-    draft.stats = draft.stats.concat({})
-    updateResource(draft)
-  }
+const DraftStats = ({ book, updateStat, addStat, removeStat, disabled = false }) => {
+  const doAddStat = () => addStat({ variables: { bookId: book.id } })
+  const doRemoveStat = stat => removeStat({ variables: { bookId: book.id, statId: stat.id } })
+  const doUpdateStat = stat => updateStat({ variables: { bookId: book.id, stat } })
 
-  const removeStat = (index) => {
-    draft.stats.splice(index, 1)
-    updateResource(draft)
-  }
-
-  const updateDraft = (index, stat) => {
-    draft.stats[index] = stat
-    updateResource(draft)
-  }
-
-  return !!draft && (
+  return !!book && (
     <div>
       <div className={styles.component}>
         <DataTable headers={headers} className="table-hover">
           {
-            draft.stats.map((stat, index) => (
+            book.stats.map((stat, index) => (
               <StatRow
                 key={stat.id}
                 index={index}
                 stat={stat}
                 disabled={disabled}
-                updateResource={updateDraft}
-                removeStat={removeStat}
+                updateStat={doUpdateStat}
+                removeStat={doRemoveStat}
               />
             ))
           }
         </DataTable>
-        <Button domProps={{ onClick: addStat, disabled }}>
+        <Button domProps={{ onClick: doAddStat, disabled }}>
           Ajouter une caractéristique
         </Button>
       </div>
