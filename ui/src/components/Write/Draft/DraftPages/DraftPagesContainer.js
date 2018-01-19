@@ -1,30 +1,13 @@
-//eslint-disable-next-line
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import DraftPages from './DraftPages'
+import connect from '../common/CRUDConnector'
 
-const query = gql`
-  query BookById ($id: ID!) {
-    book(id: $id) {
-      id
-      pages {
-        id
-        title
-        description
-      }
-    }
+const core = `
+  id
+  pages {
+    id
+    title
+    description
   }
 `
 
-
-export default graphql(query, {
-  options: ({ params }) => ({
-    variables: {
-      id: params.draftId,
-    },
-  }),
-  props: ({ data: { book }, ...rest }) => ({
-    ...rest,
-    pages: book && book.pages,
-  }),
-})(DraftPages)
+export default connect('Page', core)(DraftPages)

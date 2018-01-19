@@ -11,40 +11,30 @@ const headers = [
   { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
-const DraftItems = ({ draft, updateResource, disabled = false }) => {
-  const addObject = () => {
-    draft.objects = draft.objects.concat({})
-    updateResource(draft)
-  }
+const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = false }) => {
+  const doAddObject = () => addObject({ variables: { bookId: book.id } })
+  const doRemoveObject = object =>
+    removeObject({ variables: { bookId: book.id, objectId: object.id } })
+  const doUpdateObject = object => updateObject({ variables: { bookId: book.id, object } })
 
-  const removeObject = (index) => {
-    draft.objects.splice(index, 1)
-    updateResource(draft)
-  }
-
-  const updateDraft = (index, item) => {
-    draft.objects[index] = item
-    updateResource(draft)
-  }
-
-  return !!draft && (
+  return !!book && (
     <div>
       <div className={styles.component}>
         <DataTable headers={headers} className="table-hover">
           {
-            draft.objects.map((item, index) => (
+            book.objects.map((item, index) => (
               <ItemRow
                 key={item.id}
                 index={index}
                 item={item}
                 disabled={disabled}
-                updateResource={updateDraft}
-                deleteResource={removeObject}
+                updateObject={doUpdateObject}
+                deleteObject={doRemoveObject}
               />
             ))
           }
         </DataTable>
-        <Button domProps={{ onClick: addObject, disabled }}>
+        <Button domProps={{ onClick: doAddObject, disabled }}>
           Ajouter un objet
         </Button>
       </div>
