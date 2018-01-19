@@ -2,6 +2,7 @@ const { makeExecutableSchema } = require('graphql-tools')
 const Book = require('../models/BookModel')
 const Page = require('../models/PageModel')
 const Stat = require('../models/StatModel')
+const ObjectModel = require('../models/ObjectModel')
 const { getProjection } = require('./Helpers')
 
 const bookType = `
@@ -27,6 +28,20 @@ const statType = `
   visible: Boolean
 `
 
+const objectType = `
+  name: String
+  description: String
+  atStart: Boolean
+  visible: Boolean
+`
+
+const pageType = `
+  title: String
+  text: String
+  description: String
+  backgroundMusic: String
+`
+
 const typeDefs = `
   type Query {
     books(author: ID, draft: Boolean): [Book]
@@ -44,7 +59,6 @@ const typeDefs = `
   input BookInput {
     id: ID!
     ${bookType}
-    stats: [StatInput]
   }
 
   type Stat {
@@ -59,20 +73,24 @@ const typeDefs = `
 
   type Object {
     id: ID
-    name: String
-    description: String
-    atStart: Boolean
-    visible: Boolean
+    ${objectType}
+  }
+
+  input ObjectInput {
+    id: ID!
+    ${objectType}
   }
 
   type Page {
     id: ID
-    title: String
-    text: String
-    description: String
-    backgroundMusic: String
+    ${pageType}
     effects: [Effect]
     transitions: [Transition]
+  }
+
+  input PageInput {
+    id: ID!
+    ${pageType}
   }
 
   type Effect {
@@ -95,16 +113,44 @@ const typeDefs = `
 
   type Mutation {
     createBook(author: ID!): Book
-    deleteBook(id: ID!): ID
     updateBook(book: BookInput!): Book
+    deleteBook(id: ID!): ID
 
-    createPage(book: BookInput!): Book
+    createPage(bookId: ID!): Book
+    updatePage(bookId: ID!, page: PageInput!): Book
+    deletePage(bookId: ID!, pageId: ID!): Book
 
     createStat(bookId: ID!): Book
-    deleteStat(bookId: ID!, statId: ID!): Book
     updateStat(bookId: ID!, stat: StatInput!): Book
+    deleteStat(bookId: ID!, statId: ID!): Book
+
+    createObject(bookId: ID!): Book
+    updateObject(bookId: ID!, object: ObjectInput!): Book
+    deleteObject(bookId: ID!, objectId: ID!): Book
   }
 `
+
+const createBookSubRessource = (key, bookId, ressource) => {
+  return Book.findById(bookId).then(book => {
+    book[key].push(ressource)
+    return book.save()
+  })
+}
+
+const updateBookSubRessource = (key, bookId, ressource) => {
+  return Book.findById(bookId).then(book => {
+    const index = book[key].findIndex(r => r.id === ressource.id)
+    Object.assign(book[key][index], ressource)
+    return book.save()
+  })
+}
+
+const deleteBookSubRessource = (key, bookId, ressourceId) => {
+  return Book.findById(bookId).then(book => {
+    book[key] = book[key].filter(r => r.id !== ressourceId)
+    return book.save()
+  })
+}
 
 const resolvers = {
   Query: {
@@ -128,43 +174,22 @@ const resolvers = {
     createBook: (_, { author }) => {
       const book = new Book()
       book.authorId = author
-      book.draft = true
       return book.save()
     },
-    deleteBook: (_, { id }) => Book.findByIdAndRemove(id).then(book => book._id),
     updateBook: (_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true }),
+    deleteBook: (_, { id }) => Book.findByIdAndRemove(id).then(book => book._id),
 
-    createPage: (_, { bookId }) => {
-      const page = new Page()
-      return Book.findById(bookId).then(book => {
-        book.pages.push(page)
-        return book.save()
-      })
-    },
+    createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
+    updateStat: (_, { bookId, stat }) => updateBookSubRessource('stats', bookId, stat),
+    deleteStat: (_, { bookId, statId }) => deleteBookSubRessource('stats', bookId, statId),
 
-    createStat: (_, { bookId }) => {
-      const stat = new Stat()
-      return Book.findById(bookId).then(book => {
-        book.stats.push(stat)
-        return book.save()
-      })
-    },
-    deleteStat: (_, { bookId, statId }) => {
-      const stat = new Stat()
-      return Book.findById(bookId).then(book => {
-        book.stats = book.stats.filter(s => s.id !== statId)
-        return book.save()
-      })
-    },
-    updateStat: (_, { bookId, stat }) => {
-      return Book.findById(bookId).then(book => {
-        const index = book.stats.findIndex(s => s.id === stat.id)
-        console.log(book.stats[index], stat)
-        Object.assign(book.stats[index], stat)
-        console.log(book.stats[index], stat)
-        return book.save()
-      })
-    }
+    createPage: (_, { bookId }) => createBookSubRessource('pages', bookId, new Page()),
+    updatePage: (_, { bookId, page }) => updateBookSubRessource('pages', bookId, page),
+    deletePage: (_, { bookId, pageId }) => deleteBookSubRessource('pages', bookId, pageId),
+
+    createObject: (_, { bookId }) => createBookSubRessource('objects', bookId, new ObjectModel()),
+    updateObject: (_, { bookId, object }) => updateBookSubRessource('objects', bookId, object),
+    deleteObject: (_, { bookId, objectId }) => deleteBookSubRessource('objects', bookId, objectId),
   }
 }
 

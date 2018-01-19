@@ -4,7 +4,8 @@ import { ButtonIcon, DataRow } from 'components/common'
 import { RouteService } from 'services'
 import styles from '../styles.scss'
 
-const PageRow = ({ page = {}, bookId, disabled, deleteResource }) => {
+const PageRow = ({ page = {}, bookId, disabled, removePage }) => {
+  const deletePage = () => removePage(page)
   return (
     <DataRow>
       <div className={styles.small}>
@@ -15,12 +16,12 @@ const PageRow = ({ page = {}, bookId, disabled, deleteResource }) => {
           />
         </Link>
       </div>
-      <div>{page.title}</div>
-      <div className={styles.large}>{page.description}</div>
+      <div>{page.title || 'Page sans titre'}</div>
+      <div className={styles.large}>{page.description || 'Pas de description'}</div>
       <div className={styles.small}>
         <ButtonIcon
           icon="delete"
-          domProps={{ onClick: () => deleteResource(page.id), disabled }}
+          domProps={{ onClick: deletePage }}
         />
       </div>
     </DataRow>

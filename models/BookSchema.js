@@ -10,7 +10,7 @@ const Book = new Schema({
   cover: String,
   authorId: Schema.Types.ObjectId,
   genreId: Schema.Types.ObjectId,
-  draft: Boolean,
+  draft: { type: Boolean, default: true },
   startingPageId: Schema.Types.ObjectId,
   revision: { type: Number, default: 0 },
   pages: [Page],

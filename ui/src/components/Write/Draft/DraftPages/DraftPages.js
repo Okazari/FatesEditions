@@ -11,35 +11,25 @@ const headers = [
   { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
-const DraftPages = ({
-  pages = [],
-  params: { draftId },
-  disabled,
-  postResource,
-  deleteResource,
-}) => {
-  const createPage = () => {
-    // postResource({ ...query, page: {} }).then((page) => {
-    //   RouteService.goTo(RouteService.routes.writebookpage(draftId, page._id))
-    // })
-  }
+const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage }) => {
+  const doAddPage = () => addPage({ variables: { bookId: book.id } })
+  const doRemovePage = page => removePage({ variables: { bookId: book.id, pageId: page.id } })
 
   return (
     <div className={styles.component}>
       <DataTable className="table-hover" headers={headers}>
         {
-          pages.map(page =>
+          book.pages.map(page =>
             <PageRow
               page={page}
               key={page.id}
               disabled={disabled}
-              bookId={draftId}
-              deleteResource={deleteResource}
+              removePage={doRemovePage}
             />,
           )
         }
       </DataTable>
-      <Button domProps={{ onClick: createPage, disabled }}>
+      <Button domProps={{ onClick: doAddPage, disabled }}>
         Ajouter une page
       </Button>
     </div>
