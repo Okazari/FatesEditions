@@ -3,22 +3,29 @@ import { Input, TextAreaInput, Button } from 'components/common'
 import styles from './styles.scss'
 import EffectRow from '../common/EffectRow'
 
-const PageGeneral = ({ page, bookId, updateResource }) => {
+const PageGeneral = ({ page, params: { draftId }, updatePage }) => {
   if (!page) return <div />
+  const bookId = draftId
+
+  const doUpdatePage = updatedPage => updatePage({
+    variables: {
+      page: { id: page.id, ...updatedPage },
+      bookId: draftId,
+    },
+  })
 
   const addEffect = () => {
-    page.effects = page.effects.concat({})
-    updateResource(page)
+    doUpdatePage({ effects: page.effects.concat({}) })
   }
 
   const removeEffect = (index) => {
     page.effects.splice(index, 1)
-    updateResource(page)
+    doUpdatePage({ effects: page.effects })
   }
 
-  const updatePage = (index, effect) => {
+  const updateEffects = (index, effect) => {
     page.effects[index] = effect
-    updateResource(page)
+    doUpdatePage({ effects: page.effects })
   }
 
   return (
@@ -29,7 +36,7 @@ const PageGeneral = ({ page, bookId, updateResource }) => {
         domProps={{
           type: 'text',
           value: page.title,
-          onChange: title => updateResource({ ...page, title }),
+          onChange: title => doUpdatePage({ title }),
           placeholder: 'Titre',
           required: true,
         }}
@@ -40,17 +47,18 @@ const PageGeneral = ({ page, bookId, updateResource }) => {
         domProps={{
           type: 'text',
           value: page.description,
-          onChange: description => updateResource({ ...page, description }),
+          onChange: description => doUpdatePage({ description }),
           placeholder: 'Mémo',
           required: true,
         }}
       />
       <Input
         label="Lien SoundCloud"
+        debounce={500}
         domProps={{
           placeholder: 'Lien SoundCloud de votre musique de fond',
           value: page.backgroundMusic,
-          onChange: backgroundMusic => updateResource({ ...page, backgroundMusic }),
+          onChange: backgroundMusic => doUpdatePage({ backgroundMusic }),
         }}
       />
       <div className={styles.effectTitle}>
@@ -65,13 +73,13 @@ const PageGeneral = ({ page, bookId, updateResource }) => {
               effect={effect}
               index={index}
               bookId={bookId}
-              updateResource={updatePage}
+              updateResource={updateEffects}
               removeEffect={indexEffect => removeEffect(indexEffect)}
             />)
           })
         }
       </div>
-      <Button className="md-whiteframe-z1" domProps={{ onClick: () => addEffect() }} >
+      <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
         {'Ajouter un Effet'}
       </Button>
     </div>
