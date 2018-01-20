@@ -43,11 +43,6 @@ const pageType = `
 `
 
 const typeDefs = `
-  type Query {
-    books(author: ID, draft: Boolean): [Book]
-    book(id: ID): Book
-  }
-
   type Book {
     id: ID
     ${bookType}
@@ -111,13 +106,19 @@ const typeDefs = `
     conditions: [Effect]
   }
 
+  type Query {
+    books(author: ID, draft: Boolean): [Book]
+    book(id: ID!): Book
+    page(bookId: ID!, pageId: ID!): Page
+  }
+
   type Mutation {
     createBook(author: ID!): Book
     updateBook(book: BookInput!): Book
     deleteBook(id: ID!): ID
 
     createPage(bookId: ID!): Book
-    updatePage(bookId: ID!, page: PageInput!): Book
+    updatePage(bookId: ID!, page: PageInput!): Page
     deletePage(bookId: ID!, pageId: ID!): Book
 
     createStat(bookId: ID!): Book
@@ -168,7 +169,8 @@ const resolvers = {
       if (author) filters.authorId = author
       if (typeof draft === 'boolean') filters.draft = draft
       return Book.find(filters, projections)
-    }
+    },
+    page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
   },
   Mutation: {
     createBook: (_, { author }) => {
@@ -184,7 +186,7 @@ const resolvers = {
     deleteStat: (_, { bookId, statId }) => deleteBookSubRessource('stats', bookId, statId),
 
     createPage: (_, { bookId }) => createBookSubRessource('pages', bookId, new Page()),
-    updatePage: (_, { bookId, page }) => updateBookSubRessource('pages', bookId, page),
+    updatePage: (_, { bookId, page }) => updateBookSubRessource('pages', bookId, page).then(b => b.pages.id(page.id)),
     deletePage: (_, { bookId, pageId }) => deleteBookSubRessource('pages', bookId, pageId),
 
     createObject: (_, { bookId }) => createBookSubRessource('objects', bookId, new ObjectModel()),
