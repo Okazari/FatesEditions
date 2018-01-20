@@ -23,6 +23,7 @@ const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage }) => 
             <PageRow
               page={page}
               key={page.id}
+              bookId={book.id}
               disabled={disabled}
               removePage={doRemovePage}
             />,

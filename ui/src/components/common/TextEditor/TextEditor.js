@@ -20,12 +20,12 @@ class TextEditor extends React.Component {
       this.state = { editorState: EditorState.createEmpty() }
     }
     this.focus = () => this.editor.focus()
-    this.debounceUpdate = debounce(this.updateContent, debounceTime || 1000)
+    this.debouncedUpdate = debounce(this.updateContent, debounceTime || 1000)
   }
 
   onChange = (editorState) => {
     this.setState({ editorState })
-    this.debounceUpdate()
+    this.debouncedUpdate()
   }
 
   onInsertImage = (image) => {
@@ -47,10 +47,9 @@ class TextEditor extends React.Component {
   }
 
   updateContent = () => {
-    const { resource, resourceHandler, domProps } = this.props
+    const { onChange } = this.props
     const { editorState } = this.state
-    resource[domProps.name] = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
-    resourceHandler(resource, false)
+    onChange(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
   }
 
   toggleBlockType = (blocktype) => {
