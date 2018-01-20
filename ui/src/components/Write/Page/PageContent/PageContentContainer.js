@@ -16,7 +16,7 @@ const query = gql`
 `
 
 const queryOptions = {
-  options: ({ params: { draftId, pageId }}) => ({
+  options: ({ params: { draftId, pageId } }) => ({
     variables: {
       bookId: draftId,
       pageId,
