@@ -3,10 +3,9 @@ import { SelectInput } from 'components/common'
 import EffectInput from './EffectInput'
 import styles from './styles.scss'
 
-const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
-  const updateType = (type) => {
-    effect.type = type
-    updateResource(index, effect)
+const EffectRow = ({ book, effect, index, updateEffect, removeEffect }) => {
+  const doUpdateEffect = (changes) => {
+    updateEffect({ id: effect.id, ...changes })
   }
 
   return !!book && (
@@ -17,7 +16,7 @@ const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
           debounce={1}
           domProps={{
             value: effect.type,
-            onChange: type => updateType(type),
+            onChange: type => doUpdateEffect({ type, value: '', operator: '', subject: '' }),
           }}
         >
           <option disabled value="">{"Source de l'effet"}</option>
@@ -29,8 +28,8 @@ const EffectRow = ({ book, effect, index, updateResource, removeEffect }) => {
           type={effect.type}
           effect={effect}
           index={index}
-          updateResource={updateResource}
-          removeEffect={removeEffect}
+          updateEffect={doUpdateEffect}
+          removeEffect={() => removeEffect(effect.id)}
         />
       </div>
     </div>

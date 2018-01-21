@@ -3,30 +3,47 @@ import { Input, TextAreaInput, Button } from 'components/common'
 import styles from './styles.scss'
 import EffectRow from '../common/EffectRow'
 
-const PageGeneral = ({ page, params: { draftId }, updatePage }) => {
+const PageGeneral = ({
+  page,
+  book,
+  params: { draftId, pageId },
+  updateEffect,
+  addEffect,
+  removeEffect,
+  updatePage,
+}) => {
   if (!page) return <div />
   const bookId = draftId
 
   const doUpdatePage = updatedPage => updatePage({
     variables: {
       page: { id: page.id, ...updatedPage },
-      bookId: draftId,
+      bookId,
     },
   })
 
-  const addEffect = () => {
-    doUpdatePage({ effects: page.effects.concat({}) })
-  }
+  const doAddEffect = () => addEffect({
+    variables: {
+      bookId,
+      pageId,
+    },
+  })
 
-  const removeEffect = (index) => {
-    page.effects.splice(index, 1)
-    doUpdatePage({ effects: page.effects })
-  }
+  const doRemoveEffect = effectId => removeEffect({
+    variables: {
+      bookId,
+      pageId,
+      effectId,
+    },
+  })
 
-  const updateEffects = (index, effect) => {
-    page.effects[index] = effect
-    doUpdatePage({ effects: page.effects })
-  }
+  const doUpdateEffect = effect => updateEffect({
+    variables: {
+      bookId,
+      pageId,
+      effect,
+    },
+  })
 
   return (
     <div className={styles.component}>
@@ -72,14 +89,14 @@ const PageGeneral = ({ page, params: { draftId }, updatePage }) => {
               key={key}
               effect={effect}
               index={index}
-              bookId={bookId}
-              updateResource={updateEffects}
-              removeEffect={indexEffect => removeEffect(indexEffect)}
+              book={book}
+              updateEffect={doUpdateEffect}
+              removeEffect={effectId => doRemoveEffect(effectId)}
             />)
           })
         }
       </div>
-      <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
+      <Button className="md-whiteframe-z1" domProps={{ onClick: doAddEffect }} >
         {'Ajouter un Effet'}
       </Button>
     </div>

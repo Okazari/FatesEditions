@@ -1,5 +1,5 @@
-import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
+import { graphql, compose } from 'react-apollo'
 import PageGeneral from './PageGeneral'
 
 const core = `
@@ -21,6 +21,17 @@ const query = gql`
     page(bookId: $bookId, pageId: $pageId) {
       ${core}
     }
+    book(id: $bookId) {
+      id
+      stats {
+        id
+        name
+      }
+      objects {
+        id
+        name
+      }
+    }
   }
 `
 
@@ -31,12 +42,13 @@ const queryOptions = {
       pageId,
     },
   }),
-  props: ({ data: { page } }) => ({
+  props: ({ data: { page, book } }) => ({
     page,
+    book,
   }),
 }
 
-const mutation = gql`
+const updatePage = gql`
   mutation updatePage($bookId: ID!, $page: PageInput!) {
     updatePage(bookId: $bookId, page: $page) {
       ${core}
@@ -44,11 +56,50 @@ const mutation = gql`
   }
 `
 
-const mutationOptions = {
+const updatePageOptions = {
   name: 'updatePage',
 }
 
+const addMutation = gql`
+  mutation addEffect($bookId: ID!, $pageId: ID!) {
+    createPageEffect(bookId: $bookId, pageId: $pageId) {
+      ${core}
+    }
+  }
+`
+
+const addMutationOptions = {
+  name: 'addEffect',
+}
+
+const removeMutation = gql`
+  mutation removeEffect($bookId: ID!, $pageId: ID!, $effectId: ID!) {
+    deletePageEffect(bookId: $bookId, pageId: $pageId, effectId: $effectId) {
+      ${core}
+    }
+  }
+`
+
+const removeMutationOptions = {
+  name: 'removeEffect',
+}
+
+const updateMutation = gql`
+  mutation updateEffect($bookId: ID!, $pageId: ID!, $effect: EffectInput!) {
+    updatePageEffect(bookId: $bookId, pageId: $pageId, effect: $effect) {
+      ${core}
+    }
+  }
+`
+
+const updateMutationOptions = {
+  name: 'updateEffect',
+}
+
 export default compose(
+  graphql(updatePage, updatePageOptions),
   graphql(query, queryOptions),
-  graphql(mutation, mutationOptions),
+  graphql(addMutation, addMutationOptions),
+  graphql(removeMutation, removeMutationOptions),
+  graphql(updateMutation, updateMutationOptions),
 )(PageGeneral)
