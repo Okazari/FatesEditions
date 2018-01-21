@@ -2,6 +2,7 @@ const { makeExecutableSchema } = require('graphql-tools')
 const Book = require('../models/BookModel')
 const Page = require('../models/PageModel')
 const Stat = require('../models/StatModel')
+const Effect = require('../models/EffectModel')
 const ObjectModel = require('../models/ObjectModel')
 const { getProjection } = require('./Helpers')
 
@@ -40,6 +41,13 @@ const pageType = `
   text: String
   description: String
   backgroundMusic: String
+`
+
+const effectType = `
+  operator: String
+  subject: String
+  value: String
+  type: String
 `
 
 const typeDefs = `
@@ -90,10 +98,12 @@ const typeDefs = `
 
   type Effect {
     id: ID
-    operator: String
-    subject: String
-    value: String
-    type: String
+    ${effectType}
+  }
+
+  input EffectInput {
+    id: ID!
+    ${effectType}
   }
 
   type Transition {
@@ -120,6 +130,10 @@ const typeDefs = `
     createPage(bookId: ID!): Book
     updatePage(bookId: ID!, page: PageInput!): Page
     deletePage(bookId: ID!, pageId: ID!): Book
+
+    createPageEffect(bookId: ID!, pageId: ID!): Page
+    updatePageEffect(bookId: ID!, pageId: ID!, effect: EffectInput!): Page
+    deletePageEffect(bookId: ID!, pageId: ID!, effectId: ID!): Page
 
     createStat(bookId: ID!): Book
     updateStat(bookId: ID!, stat: StatInput!): Book
@@ -150,6 +164,28 @@ const deleteBookSubRessource = (key, bookId, ressourceId) => {
   return Book.findById(bookId).then(book => {
     book[key] = book[key].filter(r => r.id !== ressourceId)
     return book.save()
+  })
+}
+
+const createBookPageSubRessource = (key, bookId, pageId, ressource) => {
+  return Book.findById(bookId).then(book => {
+    book.pages.id(pageId)[key].push(ressource)
+    return book.save().then(b => b.pages.id(pageId))
+  })
+}
+
+const updateBookPageSubRessource = (key, bookId, pageId, ressource) => {
+  return Book.findById(bookId).then(book => {
+    const index = book.pages.id(pageId)[key].findIndex(r => r.id === ressource.id)
+    Object.assign(book.pages.id(pageId)[key][index], ressource)
+    return book.save().then(b => console.log(b) || b.pages.id(pageId))
+  })
+}
+
+const deleteBookPageSubRessource = (key, bookId, pageId, ressourceId) => {
+  return Book.findById(bookId).then(book => {
+    book.pages.id(pageId)[key] = book.pages.id(pageId)[key].filter(r => r.id !== ressourceId)
+    return book.save().then(b => b.pages.id(pageId))
   })
 }
 
@@ -188,6 +224,10 @@ const resolvers = {
     createPage: (_, { bookId }) => createBookSubRessource('pages', bookId, new Page()),
     updatePage: (_, { bookId, page }) => updateBookSubRessource('pages', bookId, page).then(b => b.pages.id(page.id)),
     deletePage: (_, { bookId, pageId }) => deleteBookSubRessource('pages', bookId, pageId),
+
+    createPageEffect: (_, { bookId, pageId }) => createBookPageSubRessource('effects', bookId, pageId, new Effect()),
+    updatePageEffect: (_, { bookId, pageId, effect }) => updateBookPageSubRessource('effects', bookId, pageId, effect),
+    deletePageEffect: (_, { bookId, pageId, effectId }) => deleteBookPageSubRessource('effects', bookId, pageId, effectId),
 
     createObject: (_, { bookId }) => createBookSubRessource('objects', bookId, new ObjectModel()),
     updateObject: (_, { bookId, object }) => updateBookSubRessource('objects', bookId, object),
