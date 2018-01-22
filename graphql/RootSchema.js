@@ -3,6 +3,7 @@ const Book = require('../models/BookModel')
 const Page = require('../models/PageModel')
 const Stat = require('../models/StatModel')
 const Effect = require('../models/EffectModel')
+const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
 const { getProjection } = require('./Helpers')
 
@@ -135,6 +136,9 @@ const typeDefs = `
     updatePageEffect(bookId: ID!, pageId: ID!, effect: EffectInput!): Page
     deletePageEffect(bookId: ID!, pageId: ID!, effectId: ID!): Page
 
+    createPageTransition(bookId: ID!, pageId: ID!): Page
+    deletePageTransition(bookId: ID!, pageId: ID!, transitionId: ID!): Page
+
     createStat(bookId: ID!): Book
     updateStat(bookId: ID!, stat: StatInput!): Book
     deleteStat(bookId: ID!, statId: ID!): Book
@@ -210,8 +214,9 @@ const resolvers = {
   },
   Mutation: {
     createBook: (_, { author }) => {
-      const book = new Book()
-      book.authorId = author
+      const book = new Book({
+        authorId: author,
+      })
       return book.save()
     },
     updateBook: (_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true }),
@@ -228,6 +233,9 @@ const resolvers = {
     createPageEffect: (_, { bookId, pageId }) => createBookPageSubRessource('effects', bookId, pageId, new Effect()),
     updatePageEffect: (_, { bookId, pageId, effect }) => updateBookPageSubRessource('effects', bookId, pageId, effect),
     deletePageEffect: (_, { bookId, pageId, effectId }) => deleteBookPageSubRessource('effects', bookId, pageId, effectId),
+
+    createPageTransition: (_, { bookId, pageId }) => createBookPageSubRessource('transitions', bookId, pageId, new Transition({ fromPage: pageId })),
+    deletePageTransition: (_, { bookId, pageId, transitionId }) => deleteBookPageSubRessource('transitions', bookId, pageId, transitionId),
 
     createObject: (_, { bookId }) => createBookSubRessource('objects', bookId, new ObjectModel()),
     updateObject: (_, { bookId, object }) => updateBookSubRessource('objects', bookId, object),

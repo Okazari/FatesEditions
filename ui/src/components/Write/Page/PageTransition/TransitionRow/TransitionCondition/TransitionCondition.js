@@ -37,15 +37,18 @@ const TransitionCondition = ({ book, transition, index, updateResource }) => {
         </SelectInput>
       </div>
       <div className={styles.conditionEffect}>
-        {transition.conditions.map((condition, conditionIndex) =>
-          <ConditionRow
-            key={condition._id}
-            book={book}
-            condition={condition}
-            index={conditionIndex}
-            updateResource={updateCondition}
-            removeCondition={removeCondition}
-          />)}
+        {
+          transition.conditions.map((condition, conditionIndex) =>
+            <ConditionRow
+              key={condition._id}
+              book={book}
+              condition={condition}
+              index={conditionIndex}
+              updateResource={updateCondition}
+              removeCondition={removeCondition}
+            />,
+          )
+        }
         <Button
           className="btn-xs md-whiteframe-z1"
           domProps={{ onClick: addCondition }}

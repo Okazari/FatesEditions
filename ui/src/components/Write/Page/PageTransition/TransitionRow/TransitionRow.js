@@ -15,13 +15,14 @@ const TransitionRow = ({
   postResource,
   removeTransition,
 }) => {
+  const doRemoveTransition = () => removeTransition(transition.id)
   const createPage = () => {
-    postResource({ bookId: book._id, page: { transitions: [{ fromPage: pageId }] } })
-      .then(page => RouteService.goTo(RouteService.routes.writebookpage(book._id, page._id)))
+    postResource({ bookId: book.id, page: { transitions: [{ fromPage: pageId }] } })
+      .then(page => RouteService.goTo(RouteService.routes.writebookpage(book.id, page.id)))
   }
 
   const editPage = () => {
-    RouteService.goTo(RouteService.routes.writebookpage(book._id, transition.toPage))
+    RouteService.goTo(RouteService.routes.writebookpage(book.id, transition.toPage))
   }
 
   return !!book && (
@@ -30,13 +31,14 @@ const TransitionRow = ({
         <div className={styles.component}>
           <div className={styles.panel}>
             <span>Page de destination</span>
-            {transition.toPage === 'newPage' ?
-              <Button className={styles.panelButton} domProps={{ onClick: createPage }}><i className="fa fa-plus" />Créer et lier la nouvelle page</Button> :
-              <Button className={styles.panelButton} domProps={{ onClick: editPage }}><i className="fa fa-pencil" />Editer la page de destination</Button>
+            {
+              transition.toPage === 'newPage' ?
+                <Button className={styles.panelButton} domProps={{ onClick: createPage }}><i className="fa fa-plus" />Créer et lier la nouvelle page</Button> :
+                <Button className={styles.panelButton} domProps={{ onClick: editPage }}><i className="fa fa-pencil" />Editer la page de destination</Button>
             }
             <Button
               className={styles.deleteTransition}
-              domProps={{ onClick: () => removeTransition(index) }}
+              domProps={{ onClick: doRemoveTransition }}
             >
               <i className="fa fa-times" />
             </Button>
@@ -50,7 +52,7 @@ const TransitionRow = ({
             }}
           >
             <option value="newPage">-- Vers une nouvelle page --</option>
-            {book.pages.map(page => <option value={page._id} key={page._id}>{page.title}</option>)}
+            {book.pages.map(page => <option value={page.id} key={page.id}>{page.title}</option>)}
           </SelectInput>
         </div>
       </BoxHeader>

@@ -3,44 +3,39 @@ import { Button } from 'components/common'
 import TransitionRow from './TransitionRow'
 import styles from './styles.scss'
 
-const PageTransition = ({ bookId, page, postResource, updateResource }) => {
+const PageTransition = ({ book, page, addTransition, removeTransition }) => {
   if (!page) return null
-  const addTransition = () => {
-    page.transitions = page.transitions.concat({
-      fromPage: page._id,
-      conditions: [],
-      effects: [],
-    })
-    updateResource(page)
-  }
 
-  const removeTransition = (index) => {
-    page.transitions.splice(index, 1)
-    updateResource(page)
-  }
+  const doAddTransition = () => addTransition({
+    variables: {
+      bookId: book.id,
+      pageId: page.id,
+    },
+  })
 
-  const updatePage = (index, transition) => {
-    page.transitions[index] = transition
-    updateResource(page)
-  }
+  const doRemoveTransition = transitionId => removeTransition({
+    variables: {
+      bookId: book.id,
+      pageId: page.id,
+      transitionId,
+    },
+  })
 
   return (
     <div className={styles.component}>
       {
         page.transitions && page.transitions.map((transition, index) =>
           <TransitionRow
-            key={transition._id}
-            bookId={bookId}
-            pageId={page._id}
+            key={transition.id}
+            book={book}
+            pageId={page.id}
             transition={transition}
+            removeTransition={doRemoveTransition}
             index={index}
-            postResource={postResource}
-            updateResource={updatePage}
-            removeTransition={removeTransition}
           />,
         )
       }
-      <Button className="md-whiteframe-z1" domProps={{ onClick: addTransition }}>
+      <Button className="md-whiteframe-z1" domProps={{ onClick: doAddTransition }}>
         {'Ajouter une transition'}
       </Button>
     </div>
