@@ -17,20 +17,12 @@ const startGame = (book) => {
   })
 }
 
-const DraftGeneral = ({ draft, genres, updateBook, disabled = false }) => {
-  const doUpdateBook = book => updateBook({
-    variables: {
-      book: {
-        id: draft.id,
-        ...book,
-      },
-    },
-  })
-  return !!draft && (
+const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
+  return !!book && (
     <div>
       <div className={styles.component}>
         <div className={styles.bookCover}>
-          <Book book={draft} />
+          <Book book={book} />
         </div>
         <div className={styles.bookInformation}>
           <Input
@@ -38,8 +30,8 @@ const DraftGeneral = ({ draft, genres, updateBook, disabled = false }) => {
             debounce={500}
             className={styles.input}
             domProps={{
-              value: draft.name,
-              onChange: name => doUpdateBook({ name }),
+              value: book.name,
+              onChange: name => updateBook({ name }),
               type: 'text',
               placeholder: 'Titre du livre',
               disabled,
@@ -51,8 +43,8 @@ const DraftGeneral = ({ draft, genres, updateBook, disabled = false }) => {
             debounce={500}
             className={styles.input}
             domProps={{
-              value: draft.cover,
-              onChange: cover => doUpdateBook({ cover }),
+              value: book.cover,
+              onChange: cover => updateBook({ cover }),
               type: 'text',
               placeholder: "url de l'image de couverture",
               disabled,
@@ -62,30 +54,30 @@ const DraftGeneral = ({ draft, genres, updateBook, disabled = false }) => {
           <GenreList
             genres={genres}
             domProps={{
-              value: draft.genreId,
+              value: book.genreId,
               required: true,
-              onChange: genreId => doUpdateBook({ genreId }),
+              onChange: genreId => updateBook({ genreId }),
             }}
           />
           <TextAreaInput
             label="Synopsis"
             debounce={500}
             domProps={{
-              value: draft.synopsis,
-              onChange: synopsis => doUpdateBook({ synopsis }),
+              value: book.synopsis,
+              onChange: synopsis => updateBook({ synopsis }),
               placeholder: 'Synopsis du livre',
               required: true,
             }}
           />
           <PageList
-            pages={draft.pages}
+            pages={book.pages}
             domProps={{
-              value: draft.startingPageId,
+              value: book.startingPageId,
               required: true,
-              onChange: startingPageId => doUpdateBook({ startingPageId }),
+              onChange: startingPageId => updateBook({ startingPageId }),
             }}
           />
-          <Button domProps={{ onClick: () => { startGame(draft) } }}>Essayer mon brouillon</Button>
+          <Button domProps={{ onClick: () => { startGame(book) } }}>Essayer mon brouillon</Button>
         </div>
       </div>
     </div>

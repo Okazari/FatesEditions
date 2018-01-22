@@ -1,4 +1,4 @@
-//eslint-disable-next-line
+import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AuthService } from 'services'
@@ -68,8 +68,14 @@ const deleteBookOptions = {
   name: 'deleteBook',
 }
 
+const DraftContainer = ({ createBook, deleteBook, ...rest }) => {
+  const _createBook = () => createBook()
+  const _deleteBook = id => deleteBook({ variables: { id } })
+  return <Drafts {...rest} createBook={_createBook} deleteBook={_deleteBook} />
+}
+
 export default compose(
   graphql(query, queryOptions),
   graphql(createBookMutation, createBookOptions),
   graphql(deleteBookMutation, deleteBookOptions),
-)(Drafts)
+)(DraftContainer)

@@ -15,6 +15,8 @@ const query = gql`
   }
 `
 
+// TODO: Add Publish mutation
+
 
 export default graphql(query, {
   options: () => ({

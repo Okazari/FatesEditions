@@ -1,4 +1,4 @@
-//eslint-disable-next-line
+import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import DraftGeneral from './DraftGeneral'
@@ -34,7 +34,7 @@ const queryOptions = {
   }),
   props: ({ data: { book }, ...rest }) => ({
     ...rest,
-    draft: book,
+    book,
   }),
 }
 
@@ -56,7 +56,20 @@ const mutationOptions = {
   name: 'updateBook',
 }
 
+const DraftGeneralContainer = (props) => {
+  const { updateBook, book } = props
+  const _updateBook = updatedBook => updateBook({
+    variables: {
+      book: {
+        id: book.id,
+        ...updatedBook,
+      },
+    },
+  })
+  return <DraftGeneral {...props} updateBook={_updateBook} />
+}
+
 export default compose(
   graphql(query, queryOptions),
   graphql(mutation, mutationOptions),
-)(DraftGeneral)
+)(DraftGeneralContainer)
