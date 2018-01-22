@@ -1,1 +1,1 @@
-export default from './TransitionRowContainer'
+export default from './TransitionRow'

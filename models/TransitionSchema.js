@@ -5,7 +5,7 @@ module.exports = new Schema({
   fromPage: Schema.Types.ObjectId,
   toPage: Schema.Types.ObjectId,
   text: String,
-  conditions: { type: [Effect], default: {} },
-  conditionOperator: String,
-  effects: [Effect],
+  conditions: { type: [Effect], default: [] },
+  conditionOperator: { type: String, default: 'and' },
+  effects: { type:[Effect], default: [] },
 }, { minimize: false })
