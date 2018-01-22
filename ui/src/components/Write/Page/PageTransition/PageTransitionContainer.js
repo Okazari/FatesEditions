@@ -1,3 +1,4 @@
+import React from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import PageTransition from './PageTransition'
@@ -85,8 +86,33 @@ const removeMutationOptions = {
   name: 'removeTransition',
 }
 
+const PageTransitionContainer = (props) => {
+  const { book, page, addTransition, removeTransition } = props
+  const _addTransition = () => addTransition({
+    variables: {
+      bookId: book.id,
+      pageId: page.id,
+    },
+  })
+
+  const _removeTransition = transitionId => removeTransition({
+    variables: {
+      bookId: book.id,
+      pageId: page.id,
+      transitionId,
+    },
+  })
+  return (
+    <PageTransition
+      {...props}
+      addTransition={_addTransition}
+      removeTransition={_removeTransition}
+    />
+  )
+}
+
 export default compose(
   graphql(query, queryOptions),
   graphql(addMutation, addMutationOptions),
   graphql(removeMutation, removeMutationOptions),
-)(PageTransition)
+)(PageTransitionContainer)

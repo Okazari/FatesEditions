@@ -1,3 +1,4 @@
+import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import PageContent from './PageContent'
@@ -39,7 +40,18 @@ const mutationOptions = {
   name: 'updatePage',
 }
 
+const PageContentContainer = (props) => {
+  const { params: { draftId }, page, updatePage } = props
+  const _updatePage = text => updatePage({
+    variables: {
+      page: { id: page.id, text },
+      bookId: draftId,
+    },
+  })
+  return <PageContent {...props} updatePage={_updatePage} />
+}
+
 export default compose(
   graphql(query, queryOptions),
   graphql(mutation, mutationOptions),
-)(PageContent)
+)(PageContentContainer)

@@ -14,10 +14,6 @@ const headers = [
 ]
 
 const DraftStats = ({ book, updateStat, addStat, removeStat, disabled = false }) => {
-  const doAddStat = () => addStat({ variables: { bookId: book.id } })
-  const doRemoveStat = stat => removeStat({ variables: { bookId: book.id, statId: stat.id } })
-  const doUpdateStat = stat => updateStat({ variables: { bookId: book.id, stat } })
-
   return !!book && (
     <div>
       <div className={styles.component}>
@@ -29,13 +25,13 @@ const DraftStats = ({ book, updateStat, addStat, removeStat, disabled = false })
                 index={index}
                 stat={stat}
                 disabled={disabled}
-                updateStat={doUpdateStat}
-                removeStat={doRemoveStat}
+                updateStat={updateStat}
+                removeStat={removeStat}
               />
             ))
           }
         </DataTable>
-        <Button domProps={{ onClick: doAddStat, disabled }}>
+        <Button domProps={{ onClick: addStat, disabled }}>
           Ajouter une caractéristique
         </Button>
       </div>

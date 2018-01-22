@@ -6,44 +6,12 @@ import EffectRow from '../common/EffectRow'
 const PageGeneral = ({
   page,
   book,
-  params: { draftId, pageId },
   updateEffect,
   addEffect,
   removeEffect,
   updatePage,
 }) => {
   if (!page) return <div />
-  const bookId = draftId
-
-  const doUpdatePage = updatedPage => updatePage({
-    variables: {
-      page: { id: page.id, ...updatedPage },
-      bookId,
-    },
-  })
-
-  const doAddEffect = () => addEffect({
-    variables: {
-      bookId,
-      pageId,
-    },
-  })
-
-  const doRemoveEffect = effectId => removeEffect({
-    variables: {
-      bookId,
-      pageId,
-      effectId,
-    },
-  })
-
-  const doUpdateEffect = effect => updateEffect({
-    variables: {
-      bookId,
-      pageId,
-      effect,
-    },
-  })
 
   return (
     <div className={styles.component}>
@@ -53,7 +21,7 @@ const PageGeneral = ({
         domProps={{
           type: 'text',
           value: page.title,
-          onChange: title => doUpdatePage({ title }),
+          onChange: title => updatePage({ title }),
           placeholder: 'Titre',
           required: true,
         }}
@@ -64,7 +32,7 @@ const PageGeneral = ({
         domProps={{
           type: 'text',
           value: page.description,
-          onChange: description => doUpdatePage({ description }),
+          onChange: description => updatePage({ description }),
           placeholder: 'Mémo',
           required: true,
         }}
@@ -75,7 +43,7 @@ const PageGeneral = ({
         domProps={{
           placeholder: 'Lien SoundCloud de votre musique de fond',
           value: page.backgroundMusic,
-          onChange: backgroundMusic => doUpdatePage({ backgroundMusic }),
+          onChange: backgroundMusic => updatePage({ backgroundMusic }),
         }}
       />
       <div className={styles.effectTitle}>
@@ -90,13 +58,13 @@ const PageGeneral = ({
               effect={effect}
               index={index}
               book={book}
-              updateEffect={doUpdateEffect}
-              removeEffect={effectId => doRemoveEffect(effectId)}
+              updateEffect={updateEffect}
+              removeEffect={effectId => removeEffect(effectId)}
             />)
           })
         }
       </div>
-      <Button className="md-whiteframe-z1" domProps={{ onClick: doAddEffect }} >
+      <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
         {'Ajouter un Effet'}
       </Button>
     </div>

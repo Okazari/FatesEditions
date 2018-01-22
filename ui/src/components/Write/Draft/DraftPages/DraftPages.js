@@ -12,9 +12,6 @@ const headers = [
 ]
 
 const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage }) => {
-  const doAddPage = () => addPage({ variables: { bookId: book.id } })
-  const doRemovePage = page => removePage({ variables: { bookId: book.id, pageId: page.id } })
-
   return (
     <div className={styles.component}>
       <DataTable className="table-hover" headers={headers}>
@@ -25,12 +22,12 @@ const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage }) => 
               key={page.id}
               bookId={book.id}
               disabled={disabled}
-              removePage={doRemovePage}
+              removePage={removePage}
             />,
           )
         }
       </DataTable>
-      <Button domProps={{ onClick: doAddPage, disabled }}>
+      <Button domProps={{ onClick: addPage, disabled }}>
         Ajouter une page
       </Button>
     </div>

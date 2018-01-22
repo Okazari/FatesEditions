@@ -1,3 +1,4 @@
+import React from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import PageGeneral from './PageGeneral'
@@ -48,7 +49,7 @@ const queryOptions = {
   }),
 }
 
-const updatePage = gql`
+const updatePageMutation = gql`
   mutation updatePage($bookId: ID!, $page: PageInput!) {
     updatePage(bookId: $bookId, page: $page) {
       ${core}
@@ -56,7 +57,7 @@ const updatePage = gql`
   }
 `
 
-const updatePageOptions = {
+const updatePageMutationOptions = {
   name: 'updatePage',
 }
 
@@ -96,10 +97,51 @@ const updateMutationOptions = {
   name: 'updateEffect',
 }
 
+const PageGeneralContainer = (props) => {
+  const { book = {}, page = {}, updatePage, addEffect, removeEffect, updateEffect } = props
+  const bookId = book.id
+  const pageId = page.id
+  const _updatePage = updatedPage => updatePage({
+    variables: {
+      page: { id: pageId, ...updatedPage },
+      bookId,
+    },
+  })
+  const _addEffect = () => addEffect({
+    variables: {
+      bookId,
+      pageId,
+    },
+  })
+  const _removeEffect = effectId => removeEffect({
+    variables: {
+      bookId,
+      pageId,
+      effectId,
+    },
+  })
+  const _updateEffect = effect => updateEffect({
+    variables: {
+      bookId,
+      pageId,
+      effect,
+    },
+  })
+  return (
+    <PageGeneral
+      {...props}
+      updatePage={_updatePage}
+      updateEffect={_updateEffect}
+      addEffect={_addEffect}
+      removeEffect={_removeEffect}
+    />
+  )
+}
+
 export default compose(
-  graphql(updatePage, updatePageOptions),
+  graphql(updatePageMutation, updatePageMutationOptions),
   graphql(query, queryOptions),
   graphql(addMutation, addMutationOptions),
   graphql(removeMutation, removeMutationOptions),
   graphql(updateMutation, updateMutationOptions),
-)(PageGeneral)
+)(PageGeneralContainer)

@@ -12,11 +12,6 @@ const headers = [
 ]
 
 const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = false }) => {
-  const doAddObject = () => addObject({ variables: { bookId: book.id } })
-  const doRemoveObject = object =>
-    removeObject({ variables: { bookId: book.id, objectId: object.id } })
-  const doUpdateObject = object => updateObject({ variables: { bookId: book.id, object } })
-
   return !!book && (
     <div>
       <div className={styles.component}>
@@ -28,13 +23,13 @@ const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = fa
                 index={index}
                 item={item}
                 disabled={disabled}
-                updateObject={doUpdateObject}
-                deleteObject={doRemoveObject}
+                updateObject={updateObject}
+                deleteObject={removeObject}
               />
             ))
           }
         </DataTable>
-        <Button domProps={{ onClick: doAddObject, disabled }}>
+        <Button domProps={{ onClick: addObject, disabled }}>
           Ajouter un objet
         </Button>
       </div>
