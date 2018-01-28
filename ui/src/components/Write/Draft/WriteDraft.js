@@ -2,7 +2,8 @@ import React from 'react'
 import { Layout, Content, Toolbar, Tabs, TabContent } from 'components/Layout'
 import { RouteService } from 'services'
 
-const WriteDraft = ({ location, children, params }) => {
+const WriteDraft = ({ location, children, params, loading }) => {
+  if (loading) return <div>Loading</div>
   const tabPrevious = { label: 'Retour aux brouillons', link: RouteService.routes.writedrafts() }
   const tabInfos = { label: 'Général', link: RouteService.routes.writebookgeneral(params.draftId) }
   const tabStats = { label: 'Statistiques', link: RouteService.routes.writebookstats(params.draftId) }
