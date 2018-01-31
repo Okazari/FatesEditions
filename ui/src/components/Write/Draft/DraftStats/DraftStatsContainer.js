@@ -1,19 +1,79 @@
 import React from 'react'
+import { graphql, compose } from 'react-apollo'
+import gql from 'graphql-tag'
 import DraftStats from './DraftStats'
-import connect from '../common/CRUDConnector'
+
+const coreStat = `
+  id
+  name
+  description
+  visible
+  initValue
+  min
+  max
+`
 
 const core = `
   id
   stats {
-    id
-    name
-    description
-    visible
-    initValue
-    min
-    max
+    ${coreStat}
   }
 `
+
+const query = gql`
+  query BookById ($id: ID!) {
+    book(id: $id) {
+      ${core}
+    }
+  }
+`
+
+const queryOptions = {
+  options: ({ params }) => ({
+    variables: {
+      id: params.draftId,
+    },
+  }),
+  props: ({ data: { book } }) => ({
+    book,
+  }),
+}
+
+const addMutation = gql`
+  mutation addStat($bookId: ID!) {
+    createStat(bookId: $bookId) {
+      ${core}
+    }
+  }
+`
+
+const addMutationOptions = {
+  name: 'addStat',
+}
+
+const removeMutation = gql`
+  mutation removeStat($bookId: ID!, $statId: ID!) {
+    deleteStat(bookId: $bookId, statId: $statId) {
+      ${core}
+    }
+  }
+`
+
+const removeMutationOptions = {
+  name: 'removeStat',
+}
+
+const updateMutation = gql`
+  mutation updateStat($bookId: ID!, $stat: StatInput!) {
+    updateStat(bookId: $bookId, stat: $stat) {
+      ${coreStat}
+    }
+  }
+`
+
+const updateMutationOptions = {
+  name: 'updateStat',
+}
 
 const DraftStatsContainer = (props) => {
   const { book, addStat, removeStat, updateStat } = props
@@ -30,4 +90,9 @@ const DraftStatsContainer = (props) => {
   )
 }
 
-export default connect('Stat', core)(DraftStatsContainer)
+export default compose(
+  graphql(query, queryOptions),
+  graphql(addMutation, addMutationOptions),
+  graphql(removeMutation, removeMutationOptions),
+  graphql(updateMutation, updateMutationOptions),
+)(DraftStatsContainer)

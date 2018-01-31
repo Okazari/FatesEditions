@@ -3,24 +3,28 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import PageGeneral from './PageGeneral'
 
-const core = `
+const coreEffect = `
+  id
+  operator
+  subject
+  value
+  type
+`
+
+const corePage = `
   id
   title
   description
   backgroundMusic
-  effects {
-    id
-    operator
-    subject
-    value
-    type
-  }
 `
 
 const query = gql`
   query PageByID ($bookId: ID!, $pageId: ID!) {
     page(bookId: $bookId, pageId: $pageId) {
-      ${core}
+      ${corePage}
+      effects {
+        ${coreEffect}
+      }
     }
     book(id: $bookId) {
       id
@@ -52,7 +56,7 @@ const queryOptions = {
 const updatePageMutation = gql`
   mutation updatePage($bookId: ID!, $page: PageInput!) {
     updatePage(bookId: $bookId, page: $page) {
-      ${core}
+      ${corePage}
     }
   }
 `
@@ -64,7 +68,10 @@ const updatePageMutationOptions = {
 const addMutation = gql`
   mutation addEffect($bookId: ID!, $pageId: ID!) {
     createPageEffect(bookId: $bookId, pageId: $pageId) {
-      ${core}
+      id
+      effects {
+        ${coreEffect}
+      }
     }
   }
 `
@@ -76,7 +83,10 @@ const addMutationOptions = {
 const removeMutation = gql`
   mutation removeEffect($bookId: ID!, $pageId: ID!, $effectId: ID!) {
     deletePageEffect(bookId: $bookId, pageId: $pageId, effectId: $effectId) {
-      ${core}
+      id
+      effects {
+        ${coreEffect}
+      }
     }
   }
 `
@@ -88,7 +98,7 @@ const removeMutationOptions = {
 const updateMutation = gql`
   mutation updateEffect($bookId: ID!, $pageId: ID!, $effect: EffectInput!) {
     updatePageEffect(bookId: $bookId, pageId: $pageId, effect: $effect) {
-      ${core}
+      ${coreEffect}
     }
   }
 `

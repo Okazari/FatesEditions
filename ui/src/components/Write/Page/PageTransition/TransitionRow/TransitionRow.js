@@ -11,8 +11,12 @@ const TransitionRow = ({
   pageId,
   transition,
   index,
+  addEffect,
+  removeEffect,
+  addCondition,
+  removeCondition,
+  updateTransition,
   updateResource,
-  postResource,
   removeTransition,
 }) => {
   const doRemoveTransition = () => removeTransition(transition.id)
@@ -48,7 +52,7 @@ const TransitionRow = ({
             debounce={1}
             domProps={{
               value: transition.toPage,
-              onChange: toPage => updateResource(index, { ...transition, toPage }),
+              onChange: toPage => updateTransition({ toPage }),
             }}
           >
             <option value="newPage">-- Vers une nouvelle page --</option>
@@ -61,7 +65,7 @@ const TransitionRow = ({
           debounce={500}
           domProps={{
             value: transition.text,
-            onChange: text => updateResource(index, { ...transition, text }),
+            onChange: text => updateTransition({ text }),
             placeholder: 'Texte de la transition',
           }}
         />
