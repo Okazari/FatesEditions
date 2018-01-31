@@ -2,6 +2,7 @@ const { makeExecutableSchema } = require('graphql-tools')
 const Book = require('../models/BookModel')
 const Page = require('../models/PageModel')
 const Stat = require('../models/StatModel')
+const User = require('../models/UserModel')
 const Effect = require('../models/EffectModel')
 const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
@@ -14,7 +15,6 @@ const bookType = `
   cover: String
   startingPageId: ID
   genreId: ID
-  authorId: ID
   draft: Boolean
   creationDate: String
   lastModificationDate: String
@@ -62,9 +62,15 @@ const typeDefs = `
   type Book {
     id: ID
     ${bookType}
+    author: User
     stats: [Stat]
     objects: [Object]
     pages: [Page]
+  }
+
+  type User {
+    id: ID
+    username: String
   }
 
   input BookInput {
@@ -238,6 +244,7 @@ const resolvers = {
   Query: {
     book: (obj, args = {}, context, info) => {
       const projections = getProjection(info)
+      if (projections.author) projections.authorId = true
       const { id } = args
       const filters = {}
       if (id) filters._id = id
@@ -245,6 +252,7 @@ const resolvers = {
     },
     books: (obj, args = {}, context, info) => {
       const projections = getProjection(info)
+      if (projections.author) projections.authorId = true
       const { author, draft } = args
       const filters = {}
       if (author) filters.authorId = author
@@ -252,6 +260,11 @@ const resolvers = {
       return Book.find(filters, projections)
     },
     page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
+  },
+  Book: {
+    author: (book) => {
+      return User.findById(book.authorId)
+    }
   },
   Mutation: {
     createBook: (_, { author }) => {

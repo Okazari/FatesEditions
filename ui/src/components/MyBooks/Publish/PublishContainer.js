@@ -10,7 +10,6 @@ const query = gql`
       id
       name
       cover
-      authorId
     }
   }
 `

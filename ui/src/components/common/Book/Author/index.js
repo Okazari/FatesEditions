@@ -1,1 +1,1 @@
-export default from './AuthorContainer'
+export default from './Author'

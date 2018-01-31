@@ -21,8 +21,8 @@ const TransitionRow = ({
 }) => {
   const doRemoveTransition = () => removeTransition(transition.id)
   const createPage = () => {
-    postResource({ bookId: book.id, page: { transitions: [{ fromPage: pageId }] } })
-      .then(page => RouteService.goTo(RouteService.routes.writebookpage(book.id, page.id)))
+    // postResource({ bookId: book.id, page: { transitions: [{ fromPage: pageId }] } })
+    //   .then(page => RouteService.goTo(RouteService.routes.writebookpage(book.id, page.id)))
   }
 
   const editPage = () => {

@@ -2,7 +2,9 @@ class AuthService {
 
   getConnectedUserId = () => {
     if (this.connectedUserId) return this.connectedUserId
-    const [, payload] = this.getToken().split('.')
+    const token = this.getToken()
+    if (!token) return ''
+    const [, payload] = token.split('.')
     const { user: { _id } } = JSON.parse(atob(payload))
     this.connectedUserId = _id
     return _id
