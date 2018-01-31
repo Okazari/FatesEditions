@@ -42,7 +42,7 @@ class Book extends React.Component {
           <div className={styles.coverImage} style={coverStyle} />
           <div className={styles.content}>
             <div className={styles.bookName}>{book.name || 'Livre sans titre'}</div>
-            <Author authorId={book.authorId} />
+            <Author author={book.author} />
           </div>
         </div>
       </div>

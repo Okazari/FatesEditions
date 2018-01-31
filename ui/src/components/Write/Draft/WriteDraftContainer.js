@@ -8,7 +8,10 @@ const query = gql`
       id
       name
       cover
-      authorId
+      author {
+        id
+        username
+      }
       genreId
       synopsis
       startingPageId

@@ -8,13 +8,20 @@ const authorVariables = {
   author: AuthService.getConnectedUserId(),
 }
 
+const core = `
+  id
+  name
+  cover
+  author {
+    id
+    username
+  }
+`
+
 const query = gql`
   query ConnectedUserBook ($author: ID!) {
     books(draft: true, author: $author) {
-      id
-      name
-      cover
-      authorId
+      ${core}
     }
   }
 `
@@ -31,10 +38,7 @@ const queryOptions = {
 const createBookMutation = gql`
   mutation CreateBook ($author: ID!) {
     createBook(author: $author) {
-      id
-      name
-      cover
-      authorId
+      ${core}
     }
   }
 `
