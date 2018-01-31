@@ -9,6 +9,7 @@ const core = `
     id
     toPage
     conditionOperator
+    text
     conditions {
       id
       operator

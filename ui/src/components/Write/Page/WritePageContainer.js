@@ -21,6 +21,7 @@ const query = gql`
         id
         toPage
         conditionOperator
+        text
         conditions {
           id
           operator

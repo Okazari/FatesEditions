@@ -122,6 +122,7 @@ const typeDefs = `
   }
 
   input TransitionInput {
+    id: ID!
     ${transitionType}
   }
 
@@ -141,28 +142,28 @@ const typeDefs = `
     deletePage(bookId: ID!, pageId: ID!): Book
 
     createPageEffect(bookId: ID!, pageId: ID!): Page
-    updatePageEffect(bookId: ID!, pageId: ID!, effect: EffectInput!): Page
+    updatePageEffect(bookId: ID!, pageId: ID!, effect: EffectInput!): Effect
     deletePageEffect(bookId: ID!, pageId: ID!, effectId: ID!): Page
 
     createPageTransition(bookId: ID!, pageId: ID!): Page
-    updatePageTransition(bookId: ID!, pageId: ID!, transition: TransitionInput!): Page
+    updatePageTransition(bookId: ID!, pageId: ID!, transition: TransitionInput!): Transition
     deletePageTransition(bookId: ID!, pageId: ID!, transitionId: ID!): Page
 
     createStat(bookId: ID!): Book
-    updateStat(bookId: ID!, stat: StatInput!): Book
+    updateStat(bookId: ID!, stat: StatInput!): Stat
     deleteStat(bookId: ID!, statId: ID!): Book
 
     createObject(bookId: ID!): Book
-    updateObject(bookId: ID!, object: ObjectInput!): Book
+    updateObject(bookId: ID!, object: ObjectInput!): Object
     deleteObject(bookId: ID!, objectId: ID!): Book
 
-    createPageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!): Page,
-    updatePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effect: EffectInput!): Page
-    deletePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effectId: ID!): Page
+    createPageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
+    updatePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effect: EffectInput!): Transition
+    deletePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effectId: ID!): Transition
 
-    createPageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!): Page,
-    updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Page
-    deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Page
+    createPageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
+    updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Transition
+    deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
 
   }
 `
@@ -178,7 +179,7 @@ const updateBookSubRessource = (key, bookId, ressource) => {
   return Book.findById(bookId).then(book => {
     const index = book[key].findIndex(r => r.id === ressource.id)
     Object.assign(book[key][index], ressource)
-    return book.save()
+    return book.save().then(b => b[key].id(ressource.id))
   })
 }
 
@@ -200,7 +201,7 @@ const updateBookPageSubRessource = (key, bookId, pageId, ressource) => {
   return Book.findById(bookId).then(book => {
     const index = book.pages.id(pageId)[key].findIndex(r => r.id === ressource.id)
     Object.assign(book.pages.id(pageId)[key][index], ressource)
-    return book.save().then(b => b.pages.id(pageId))
+    return book.save().then(b => b.pages.id(pageId)).then(p => p[key].id(ressource.id))
   })
 }
 
@@ -214,7 +215,7 @@ const deleteBookPageSubRessource = (key, bookId, pageId, ressourceId) => {
 const createBookPageTransitionSubRessource = (key, bookId, pageId, transitionId, ressource) => {
   return Book.findById(bookId).then(book => {
     book.pages.id(pageId).transitions.id(transitionId)[key].push(ressource)
-    return book.save().then(b => b.pages.id(pageId))
+    return book.save().then(b => b.pages.id(pageId)).then(p => p.transitions.id(transitionId))
   })
 }
 
@@ -222,14 +223,14 @@ const updateBookPageTransitionSubRessource = (key, bookId, pageId, transitionId,
   return Book.findById(bookId).then(book => {
     const index = book.pages.id(pageId).transitions.id(transitionId)[key].findIndex(r => r.id === ressource.id)
     Object.assign(book.pages.id(pageId).transitions.id(transitionId)[key][index], ressource)
-    return book.save().then(b => b.pages.id(pageId))
+    return book.save().then(b => b.pages.id(pageId)).then(p => p.transitions.id(transitionId))
   })
 }
 
 const deleteBookPageTransitionSubRessource = (key, bookId, pageId, transitionId, ressourceId) => {
   return Book.findById(bookId).then(book => {
     book.pages.id(pageId).transitions.id(transitionId)[key] = book.pages.id(pageId).transitions.id(transitionId)[key].filter(r => r.id !== ressourceId)
-    return book.save().then(b => b.pages.id(pageId))
+    return book.save().then(b => b.pages.id(pageId)).then(p => p.transitions.id(transitionId))
   })
 }
 
@@ -279,7 +280,7 @@ const resolvers = {
     updateStat: (_, { bookId, stat }) => updateBookSubRessource('stats', bookId, stat),
 
     //Pages
-    updatePage: (_, { bookId, page }) => updateBookSubRessource('pages', bookId, page).then(b => b.pages.id(page.id)),
+    updatePage: (_, { bookId, page }) => updateBookSubRessource('pages', bookId, page),
     createPageEffect: (_, { bookId, pageId }) => createBookPageSubRessource('effects', bookId, pageId, new Effect()),
     deletePageEffect: (_, { bookId, pageId, effectId }) => deleteBookPageSubRessource('effects', bookId, pageId, effectId),
 
@@ -290,13 +291,13 @@ const resolvers = {
 
     //Transition
     updatePageTransition: (_, { bookId, pageId, transition }) => updateBookPageSubRessource('transitions', bookId, pageId, transition),
-    updatePageTransitionEffect: (_, { bookId, pageId, transitionId, effect }) => updateBookPageTransitionSubRessource('effects', bookId, pageId, effect),
     createPageTransitionCondition: (_, { bookId, pageId, transitionId }) => createBookPageTransitionSubRessource('conditions', bookId, pageId, new Effect()),
     deletePageTransitionCondition: (_, { bookId, pageId, transitionId, conditionId }) => deleteBookPageTransitionSubRessource('conditions', bookId, pageId, condition),
+    updatePageTransitionCondition: (_, { bookId, pageId, transitionId, condition }) => updateBookPageTransitionSubRessource('conditions', bookId, pageId, condition),
 
     createPageTransitionEffect: (_, { bookId, pageId, transitionId }) => createBookPageTransitionSubRessource('effects', bookId, pageId, new Effect()),
     deletePageTransitionEffect: (_, { bookId, pageId, transitionId, effectId }) => deleteBookPageTransitionSubRessource('effects', bookId, pageId, effect),
-    updatePageTransitionCondition: (_, { bookId, pageId, transitionId, condition }) => updateBookPageTransitionSubRessource('conditions', bookId, pageId, condition),
+    updatePageTransitionEffect: (_, { bookId, pageId, transitionId, effect }) => updateBookPageTransitionSubRessource('effects', bookId, pageId, effect),
   }
 }
 

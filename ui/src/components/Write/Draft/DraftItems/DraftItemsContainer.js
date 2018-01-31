@@ -1,17 +1,78 @@
 import React from 'react'
+import { graphql, compose } from 'react-apollo'
+import gql from 'graphql-tag'
 import DraftItems from './DraftItems'
-import connect from '../common/CRUDConnector'
+
+const coreObject = `
+  id
+  name
+  description
+  atStart
+  visible
+`
 
 const core = `
   id
   objects {
-    id
-    name
-    description
-    atStart
-    visible
+    ${coreObject}
   }
 `
+
+const query = gql`
+  query BookById ($id: ID!) {
+    book(id: $id) {
+      ${core}
+    }
+  }
+`
+
+const queryOptions = {
+  options: ({ params }) => ({
+    variables: {
+      id: params.draftId,
+    },
+  }),
+  props: ({ data: { book } }) => ({
+    book,
+  }),
+}
+
+const addMutation = gql`
+  mutation addObject($bookId: ID!) {
+    createObject(bookId: $bookId) {
+      ${core}
+    }
+  }
+`
+
+const addMutationOptions = {
+  name: 'addObject',
+}
+
+const removeMutation = gql`
+  mutation removeObject($bookId: ID!, $objectId: ID!) {
+    deleteObject(bookId: $bookId, objectId: $objectId) {
+      ${core}
+    }
+  }
+`
+
+const removeMutationOptions = {
+  name: 'removeObject',
+}
+
+const updateMutation = gql`
+  mutation updateObject($bookId: ID!, $object: ObjectInput!) {
+    updateObject(bookId: $bookId, object: $object) {
+      ${coreObject}
+    }
+  }
+`
+
+const updateMutationOptions = {
+  name: 'updateObject',
+}
+
 const DraftItemsContainer = (props) => {
   const { book, addObject, removeObject, updateObject } = props
   const _addObject = () => addObject({ variables: { bookId: book.id } })
@@ -30,4 +91,9 @@ const DraftItemsContainer = (props) => {
 }
 
 
-export default connect('Object', core)(DraftItemsContainer)
+export default compose(
+  graphql(query, queryOptions),
+  graphql(addMutation, addMutationOptions),
+  graphql(removeMutation, removeMutationOptions),
+  graphql(updateMutation, updateMutationOptions),
+)(DraftItemsContainer)
