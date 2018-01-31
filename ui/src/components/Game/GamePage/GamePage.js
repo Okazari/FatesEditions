@@ -12,7 +12,7 @@ const GamePage = ({ page = {}, hoverTransition, outTransition, changePage }) => 
     return null
   }
 
-  console.log(page.transitions)
+  // console.log(page.transitions)
 
   return (
     <div>

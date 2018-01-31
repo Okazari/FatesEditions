@@ -4,9 +4,11 @@ import { AppContainer } from 'react-hot-loader'
 import AppRouter from './router'
 
 ReactDOM.render(
-  <AppContainer>
-    <AppRouter />
-  </AppContainer>,
+  (
+    <AppContainer>
+      <AppRouter />
+    </AppContainer>
+  ),
   document.getElementById('root'),
 )
 
