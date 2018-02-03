@@ -3,19 +3,16 @@ import { Button, SelectInput } from 'components/common'
 import ConditionRow from './ConditionRow'
 import styles from './styles.scss'
 
-const TransitionCondition = ({ book, transition, index, updateResource }) => {
-  const addCondition = () => {
-    transition.conditions = transition.conditions.concat({})
-    updateResource(index, transition)
-  }
-
+const TransitionCondition = ({
+  book,
+  transition,
+  index,
+  addCondition,
+  removeCondition,
+  updateResource,
+}) => {
   const updateCondition = (conditionIndex, condition) => {
     transition.conditions[conditionIndex] = condition
-    updateResource(index, transition)
-  }
-
-  const removeCondition = (conditionIndex) => {
-    transition.conditions.splice(conditionIndex, 1)
     updateResource(index, transition)
   }
 
@@ -40,7 +37,7 @@ const TransitionCondition = ({ book, transition, index, updateResource }) => {
         {
           transition.conditions.map((condition, conditionIndex) =>
             <ConditionRow
-              key={condition._id}
+              key={condition.id}
               book={book}
               condition={condition}
               index={conditionIndex}

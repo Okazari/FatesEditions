@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, SelectInput, TextAreaInput } from 'components/common'
+import { Button, Icon, ButtonIcon, SelectInput, TextAreaInput } from 'components/common'
 import { RouteService } from 'services'
 import { Box, BoxHeader, BoxBody } from 'components/common/Box'
 import TransitionCondition from './TransitionCondition'
@@ -29,6 +29,34 @@ const TransitionRow = ({
     RouteService.goTo(RouteService.routes.writebookpage(book.id, transition.toPage))
   }
 
+
+  const linkButton = (
+    <Button
+      className={styles.panelButton}
+      domProps={{ onClick: createPage }}
+    >
+      <Icon className="fa fa-plus" />
+      Créer et lier la nouvelle page
+    </Button>
+  )
+
+  const goButton = (
+    <Button
+      className={styles.panelButton}
+      domProps={{ onClick: editPage }}
+    >
+      <i className="fa fa-pencil" />
+      Editer la page de destination
+    </Button>
+  )
+
+  const renderButton = () => {
+    if (transition.toPage === 'newPage') {
+      return linkButton
+    }
+    return goButton
+  }
+
   return !!book && (
     <Box className="box-default md-whiteframe-z1 box-solid">
       <BoxHeader withBorder >
@@ -36,23 +64,22 @@ const TransitionRow = ({
           <div className={styles.panel}>
             <span>Page de destination</span>
             {
-              transition.toPage === 'newPage' ?
-                <Button className={styles.panelButton} domProps={{ onClick: createPage }}><i className="fa fa-plus" />Créer et lier la nouvelle page</Button> :
-                <Button className={styles.panelButton} domProps={{ onClick: editPage }}><i className="fa fa-pencil" />Editer la page de destination</Button>
+              renderButton()
             }
-            <Button
+            <ButtonIcon
               className={styles.deleteTransition}
+              icon="delete"
               domProps={{ onClick: doRemoveTransition }}
-            >
-              <i className="fa fa-times" />
-            </Button>
+            />
           </div>
           <SelectInput
             className={styles.destPage}
             debounce={1}
             domProps={{
               value: transition.toPage,
-              onChange: toPage => updateTransition({ toPage }),
+              onChange: toPage => updateTransition({
+                toPage: toPage !== 'newPage' ? toPage : null,
+              }),
             }}
           >
             <option value="newPage">-- Vers une nouvelle page --</option>
@@ -71,12 +98,13 @@ const TransitionRow = ({
         />
         <TransitionCondition
           book={book}
+          pageId={pageId}
           transition={transition}
           index={index}
-          updateResource={updateResource}
         />
         <TransitionEffect
           book={book}
+          pageId={pageId}
           transition={transition}
           index={index}
           updateResource={updateResource}

@@ -12,6 +12,7 @@
 .selectInput {
   flex: 1;
   flex-direction: row;
+  margin: 0;
   &>select {
     flex: 1;
     margin-right: 10px;

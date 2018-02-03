@@ -8,7 +8,6 @@ const ConditionRow = ({ book, condition, index, updateResource, removeCondition 
     condition.type = type
     updateResource(index, condition)
   }
-
   return (
     <div className={styles.component}>
       <div>
@@ -20,19 +19,18 @@ const ConditionRow = ({ book, condition, index, updateResource, removeCondition 
             onChange: type => updateType(type),
           }}
         >
-          <option value="object">{'L\'objet'}</option>
-          <option value="stat">{'La statistique'}</option>
+          <option disabled value="">{"Source de l'effet"}</option>
+          <option value="object">{"L'objet"}</option>
+          <option value="stat">La statistique</option>
         </SelectInput>
-        { condition.type !== '' ?
-          <ConditionInput
-            book={book}
-            type={condition.type}
-            condition={condition}
-            index={index}
-            updateResource={updateResource}
-            removeCondition={removeCondition}
-          />
-          : null }
+        <ConditionInput
+          book={book}
+          type={condition.type}
+          condition={condition}
+          index={index}
+          updateResource={updateResource}
+          removeCondition={removeCondition}
+        />
       </div>
     </div>
   )
