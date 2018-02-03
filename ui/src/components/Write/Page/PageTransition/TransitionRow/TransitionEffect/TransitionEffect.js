@@ -3,19 +3,16 @@ import { Button } from 'components/common'
 import EffectRow from '../../../common/EffectRow'
 import styles from './styles.scss'
 
-const TransitionEffect = ({ book, transition, index, updateResource }) => {
-  const addEffect = () => {
-    transition.effects = transition.effects.concat({})
-    updateResource(index, transition)
-  }
-
+const TransitionEffect = ({
+  book,
+  transition,
+  index,
+  addEffect,
+  removeEffect,
+  updateResource,
+}) => {
   const updateEffect = (effectIndex, effect) => {
     transition.effects[effectIndex] = effect
-    updateResource(index, transition)
-  }
-
-  const removeEffect = (effectIndex) => {
-    transition.effects.splice(effectIndex, 1)
     updateResource(index, transition)
   }
 
@@ -24,10 +21,10 @@ const TransitionEffect = ({ book, transition, index, updateResource }) => {
       <span>Effets</span>
       {transition.effects.map((effect, effectIndex) =>
         <EffectRow
-          key={effect._id}
+          key={effect.id}
           effect={effect}
           index={effectIndex}
-          bookId={book._id}
+          book={book}
           updateResource={updateEffect}
           removeEffect={removeEffect}
         />)}

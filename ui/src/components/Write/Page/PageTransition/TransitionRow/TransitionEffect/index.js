@@ -1,1 +1,1 @@
-export default from './TransitionEffect'
+export default from './TransitionEffectContainer'
