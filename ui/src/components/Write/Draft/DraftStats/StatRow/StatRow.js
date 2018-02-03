@@ -73,7 +73,6 @@ const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
       </div>
       <div className={styles.small}>
         <Input
-          debounce={500}
           domProps={{
             type: 'checkbox',
             value: stat.visible,

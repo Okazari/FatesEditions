@@ -34,7 +34,6 @@ const ItemRow = ({ index, item = {}, disabled, updateObject, deleteObject }) => 
       </div>
       <div className={styles.small}>
         <Input
-          debounce={500}
           domProps={{
             type: 'checkbox',
             value: item.atStart,
@@ -48,7 +47,6 @@ const ItemRow = ({ index, item = {}, disabled, updateObject, deleteObject }) => 
       </div>
       <div className={styles.small}>
         <Input
-          debounce={500}
           domProps={{
             type: 'checkbox',
             value: item.visible,

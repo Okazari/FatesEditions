@@ -50,8 +50,10 @@ const TransitionCondition = ({ book, transition, index, updateResource }) => {
           )
         }
         <Button
-          className="btn-xs md-whiteframe-z1"
-          domProps={{ onClick: addCondition }}
+          className={styles.button}
+          domProps={{
+            onClick: addCondition,
+          }}
         >
           {'Ajouter une Condition'}
         </Button>

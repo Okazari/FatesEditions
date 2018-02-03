@@ -33,7 +33,6 @@ const TransitionEffect = ({ book, transition, index, updateResource }) => {
         />)}
       <div className={styles.centerButton}>
         <Button
-          className="btn-xs md-whiteframe-z1"
           domProps={{ onClick: addEffect }}
         >
           {'Ajouter un effet'}
