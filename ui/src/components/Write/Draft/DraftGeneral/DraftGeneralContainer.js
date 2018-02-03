@@ -47,7 +47,6 @@ const mutation = gql`
       id
       name
       cover
-      authorId
       genreId
       synopsis
       startingPageId

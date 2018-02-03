@@ -14,8 +14,8 @@ const InputHoc = (WrappedInput) => {
         this.changeFn = lodashDebounce(this.changeFn, debounce)
       }
       this.state = {
-        uncontrolled: !value,
-        value: value || '',
+        uncontrolled: value === null || value === undefined,
+        value: !(value === null || value === undefined) ? value : '',
         onChange: this.changeFn,
       }
     }
