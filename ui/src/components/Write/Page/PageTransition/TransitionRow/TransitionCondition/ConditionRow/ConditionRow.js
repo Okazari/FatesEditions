@@ -3,20 +3,21 @@ import { SelectInput } from 'components/common'
 import ConditionInput from './ConditionInput'
 import styles from './styles.scss'
 
-const ConditionRow = ({ book, condition, index, updateResource, removeCondition }) => {
-  const updateType = (type) => {
-    condition.type = type
-    updateResource(index, condition)
-  }
+const ConditionRow = ({ book, condition, index, updateCondition, removeCondition }) => {
+  const _updateCondition = _condition => updateCondition({ id: condition.id, ..._condition })
   return (
     <div className={styles.component}>
       <div>
         <SelectInput
           className={styles.selectInput}
-          debounce={1}
           domProps={{
             value: condition.type,
-            onChange: type => updateType(type),
+            onChange: type => _updateCondition({
+              type,
+              operator: null,
+              value: null,
+              subject: null,
+            }),
           }}
         >
           <option disabled value="">{"Source de l'effet"}</option>
@@ -28,7 +29,7 @@ const ConditionRow = ({ book, condition, index, updateResource, removeCondition 
           type={condition.type}
           condition={condition}
           index={index}
-          updateResource={updateResource}
+          updateCondition={_updateCondition}
           removeCondition={removeCondition}
         />
       </div>

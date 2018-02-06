@@ -1,12 +1,10 @@
 import React from 'react'
-import classnames from 'classnames'
 import { ButtonIcon } from 'components/common'
 import ConditionObjectInput from './ConditionObjectInput'
 import ConditionStatInput from './ConditionStatInput'
 import styles from './styles.scss'
 
-const ConditionInput = ({ book, condition, index, updateResource, removeCondition }) => {
-  const buttonClassName = classnames('fa fa-close md-whiteframe-z1', styles.removeButton)
+const ConditionInput = ({ book, condition, index, updateCondition, removeCondition }) => {
   const renderInput = () => {
     switch (condition.type) {
       case 'stat':
@@ -14,14 +12,14 @@ const ConditionInput = ({ book, condition, index, updateResource, removeConditio
           stats={book.stats}
           condition={condition}
           index={index}
-          updateResource={updateResource}
+          updateCondition={updateCondition}
         />)
       case 'object':
         return (<ConditionObjectInput
           objects={book.objects}
           condition={condition}
           index={index}
-          updateResource={updateResource}
+          updateCondition={updateCondition}
         />)
       default:
         return <div style={{ flex: 1 }} />
