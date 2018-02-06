@@ -6,7 +6,6 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
   return (
     <div className={styles.component}>
       <SelectInput
-        debounce={500}
         className={styles.selectInput}
         domProps={{
           value: condition.subject,
@@ -27,7 +26,6 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
       </SelectInput>
       <SelectInput
         className={styles.selectInput}
-        debounce={500}
         domProps={{
           value: condition.value,
           onChange: value => updateCondition({ value }),
@@ -37,6 +35,7 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
         <option value="doNotOwn">{"n'est pas possédé"}</option>
         <option value="own">est possédé</option>
       </SelectInput>
+      <div className={styles.selectInput} />
     </div>
   )
 }

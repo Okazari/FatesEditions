@@ -164,11 +164,11 @@ const typeDefs = `
     deleteObject(bookId: ID!, objectId: ID!): Book
 
     createPageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
-    updatePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effect: EffectInput!): Transition
+    updatePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effect: EffectInput!): Effect
     deletePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effectId: ID!): Transition
 
     createPageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
-    updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Transition
+    updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Effect
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
 
   }
@@ -220,7 +220,6 @@ const deleteBookPageSubRessource = (key, bookId, pageId, ressourceId) => {
 
 const createBookPageTransitionSubRessource = (key, bookId, pageId, transitionId, ressource) => {
   return Book.findById(bookId).then(book => {
-    console.log(transitionId, book.pages.id(pageId), book.pages.id(pageId).transitions.id(transitionId))
     book.pages.id(pageId).transitions.id(transitionId)[key].push(ressource)
     return book.save().then(b => b.pages.id(pageId)).then(p => p.transitions.id(transitionId))
   })
@@ -230,7 +229,7 @@ const updateBookPageTransitionSubRessource = (key, bookId, pageId, transitionId,
   return Book.findById(bookId).then(book => {
     const index = book.pages.id(pageId).transitions.id(transitionId)[key].findIndex(r => r.id === ressource.id)
     Object.assign(book.pages.id(pageId).transitions.id(transitionId)[key][index], ressource)
-    return book.save().then(b => b.pages.id(pageId)).then(p => p.transitions.id(transitionId))
+    return book.save().then(b => b.pages.id(pageId)).then(p => p.transitions.id(transitionId)).then(t => t[key].id(ressource.id))
   })
 }
 

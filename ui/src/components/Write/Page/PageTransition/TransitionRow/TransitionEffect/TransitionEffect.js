@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'components/common'
-import EffectRow from '../../../common/EffectRow'
+import EffectRow from './EffectRow'
 import styles from './styles.scss'
 
 const TransitionEffect = ({
@@ -9,13 +9,8 @@ const TransitionEffect = ({
   index,
   addEffect,
   removeEffect,
-  updateResource,
+  pageId,
 }) => {
-  const updateEffect = (effectIndex, effect) => {
-    transition.effects[effectIndex] = effect
-    updateResource(index, transition)
-  }
-
   return (
     <div className={styles.component}>
       <span>Effets</span>
@@ -25,7 +20,8 @@ const TransitionEffect = ({
           effect={effect}
           index={effectIndex}
           book={book}
-          updateResource={updateEffect}
+          pageId={pageId}
+          transitionId={transition.id}
           removeEffect={removeEffect}
         />)}
       <div className={styles.centerButton}>

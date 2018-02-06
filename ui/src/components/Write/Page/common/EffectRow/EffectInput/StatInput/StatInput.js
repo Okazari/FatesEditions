@@ -6,7 +6,6 @@ const StatInput = ({ stats, effect, index, updateEffect }) => {
   return (
     <div className={styles.component}>
       <SelectInput
-        debounce={500}
         className={styles.selectInput}
         domProps={{
           value: effect.subject,
@@ -18,7 +17,6 @@ const StatInput = ({ stats, effect, index, updateEffect }) => {
       </SelectInput>
       <SelectInput
         className={styles.selectInput}
-        debounce={500}
         domProps={{
           value: effect.operator,
           onChange: operator => updateEffect({ operator }),

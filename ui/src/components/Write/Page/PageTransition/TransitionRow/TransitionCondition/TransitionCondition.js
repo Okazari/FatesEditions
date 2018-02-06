@@ -6,6 +6,7 @@ import styles from './styles.scss'
 const TransitionCondition = ({
   book,
   transition,
+  pageId,
   index,
   addCondition,
   removeCondition,
@@ -39,6 +40,8 @@ const TransitionCondition = ({
             <ConditionRow
               key={condition.id}
               book={book}
+              pageId={pageId}
+              transitionId={transition.id}
               condition={condition}
               index={conditionIndex}
               updateResource={updateCondition}
