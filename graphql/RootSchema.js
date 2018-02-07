@@ -139,9 +139,12 @@ const typeDefs = `
   }
 
   type Mutation {
+
     createBook(author: ID!): Book
     updateBook(book: BookInput!): Book
     deleteBook(id: ID!): ID
+    publishBook(id: ID!): Book
+    unpublishBook(id: ID!): Book
 
     createPage(bookId: ID!): Book
     createPageReturnPage(bookId: ID!): Page
@@ -277,6 +280,8 @@ const resolvers = {
     // Book
     updateBook: (_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true }),
     deleteBook: (_, { id }) => Book.findByIdAndRemove(id).then(book => book._id),
+    publishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }),
+    unpublishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }),
 
     createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
     deleteStat: (_, { bookId, statId }) => deleteBookSubRessource('stats', bookId, statId),
