@@ -144,6 +144,7 @@ const typeDefs = `
     deleteBook(id: ID!): ID
 
     createPage(bookId: ID!): Book
+    createPageReturnPage(bookId: ID!): Page
     updatePage(bookId: ID!, page: PageInput!): Page
     deletePage(bookId: ID!, pageId: ID!): Book
 
@@ -280,6 +281,10 @@ const resolvers = {
     createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
     deleteStat: (_, { bookId, statId }) => deleteBookSubRessource('stats', bookId, statId),
 
+    createPageReturnPage:  (_, { bookId }) => {
+      const page = new Page()
+      return createBookSubRessource('pages', bookId, page).then(() => page)
+    },
     createPage: (_, { bookId }) => createBookSubRessource('pages', bookId, new Page()),
     deletePage: (_, { bookId, pageId }) => deleteBookSubRessource('pages', bookId, pageId),
 

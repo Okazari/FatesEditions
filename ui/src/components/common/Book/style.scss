@@ -40,11 +40,17 @@
 
 .content {
   position: relative;
-  background-color: $transparent-black;
+  bottom: 300px;
+  height: 300px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.contentTitle {
+  width: 200px;
   color: $transparent-white;
-  bottom: 70px;
+  background-color: $transparent-black;
   padding: 10px;
-  min-height: 70px;
 }
 
 .bookName {
