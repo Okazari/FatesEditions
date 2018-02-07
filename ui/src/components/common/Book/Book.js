@@ -41,8 +41,12 @@ class Book extends React.Component {
         <div className={styles.cover} onClick={() => onClick && onClick(book)}>
           <div className={styles.coverImage} style={coverStyle} />
           <div className={styles.content}>
-            <div className={styles.bookName}>{book.name || 'Livre sans titre'}</div>
-            <Author author={book.author} />
+            <div className={styles.contentTitle}>
+              <div className={styles.bookName}>
+                {book.name || 'Livre sans titre'}
+              </div>
+              <Author author={book.author} />
+            </div>
           </div>
         </div>
       </div>
