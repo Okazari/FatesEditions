@@ -178,6 +178,28 @@ const typeDefs = `
   }
 `
 
+const easier = (ressource, save) => {
+  const newSave = () => save().then(() => ressource)
+  return {
+    ressource,
+    save: newSave,
+    set: newValues => easier(Object.assign(ressource, newValues), save),
+    selectOne: (key, id) => easier(ressource[key].id(id), save),
+    addOne: (key, newOne) => {
+      ressource[key].push(newOne)
+      return easier(ressource, save)
+    },
+    deleteOne: (key, id) => {
+      ressource[key] = ressource[key].filter(r => r.id !== id)
+      return easier(ressource, save)
+    },
+  }
+}
+
+const findBookById = (bookId) => {
+  return Book.findById(bookId).then(book => easier(book, () => book.save()))
+}
+
 const createBookSubRessource = (key, bookId, ressource) => {
   return Book.findById(bookId).then(book => {
     book[key].push(ressource)
@@ -283,7 +305,10 @@ const resolvers = {
     publishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }),
     unpublishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }),
 
-    createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
+    // createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
+    createStat: (_, { bookId }) => findBookById(bookId).then(book => {
+      return book.addOne('stats', new Stat()).save()
+    }),
     deleteStat: (_, { bookId, statId }) => deleteBookSubRessource('stats', bookId, statId),
 
     createPageReturnPage:  (_, { bookId }) => {
@@ -304,13 +329,22 @@ const resolvers = {
 
     //Pages
     updatePage: (_, { bookId, page }) => updateBookSubRessource('pages', bookId, page),
-    createPageEffect: (_, { bookId, pageId }) => createBookPageSubRessource('effects', bookId, pageId, new Effect()),
-    deletePageEffect: (_, { bookId, pageId, effectId }) => deleteBookPageSubRessource('effects', bookId, pageId, effectId),
+    // createPageEffect: (_, { bookId, pageId }) => createBookPageSubRessource('effects', bookId, pageId, new Effect()),
+    createPageEffect: (_, { bookId, pageId }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId).addOne('effects', new Effect()).save()
+    }),
+    // deletePageEffect: (_, { bookId, pageId, effectId }) => deleteBookPageSubRessource('effects', bookId, pageId, effectId),
+    deletePageEffect: (_, { bookId, pageId, effectId }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId).deleteOne('effects', effectId).save()
+    }),
+    // updatePageEffect: (_, { bookId, pageId, effect }) => updateBookPageSubRessource('effects', bookId, pageId, effect),
+    updatePageEffect: (_, { bookId, pageId, effect }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId).selectOne('effects', effect.id).set(effect).save()
+    }),
 
     createPageTransition: (_, { bookId, pageId }) => createBookPageSubRessource('transitions', bookId, pageId, new Transition({ fromPage: pageId })),
     deletePageTransition: (_, { bookId, pageId, transitionId }) => deleteBookPageSubRessource('transitions', bookId, pageId, transitionId),
 
-    updatePageEffect: (_, { bookId, pageId, effect }) => updateBookPageSubRessource('effects', bookId, pageId, effect),
 
     //Transition
     updatePageTransition: (_, { bookId, pageId, transition }) => updateBookPageSubRessource('transitions', bookId, pageId, transition),
