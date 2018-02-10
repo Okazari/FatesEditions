@@ -8,9 +8,11 @@
     "lint": "eslint ui/src/**/*.js",
     "eslint": "eslint --fix",
     "dev": "concurrently -p name -n \"MONGO,BACK,FRONT\" \"npm run startDevMongo\" \"npm run startDevBack\" \"npm run startDevFront\" ",
+    "devWindows": "concurrently -p name -n \"MONGO,BACK,FRONT\" \"npm run startDevWindowsMongo\" \"npm run startDevBack\" \"npm run startDevFront\" ",
     "startDevBack": "nodemon ./bin/www",
     "startDevFront": "cd ./ui/ && node scripts/start.js",
     "startDevMongo": "docker-compose up -d",
+    "startDevWindowsMongo": "docker run --rm -p 27017:27017 mongo:3.2.6",
     "postinstall": "npm run build"
   },
   "devDependencies": {
@@ -91,6 +93,7 @@
     "normalize.css": "^4.2.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.0.0-beta.6",
