@@ -40,10 +40,10 @@ $fadein: .5s;
   .content {
     color: transparentize($white, .1);
     width: 100%;
-    background-color: transparentize($black, .1);
-    box-shadow: -10px 0 2px 5px transparentize($black, .1);
+    padding: 50px;
+    background-color: transparentize($black, .15);
     display: flex;
-    align-items: center;
+    text-align: justify;
     justify-content: center;
     font-size: 1.5em;
     overflow-y: scroll;

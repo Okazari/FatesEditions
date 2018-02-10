@@ -1,9 +1,38 @@
-//eslint-disable-next-line
-import { RestHoc as restHoc } from 'react-rest-resource'
 import React from 'react'
-import { GameService } from 'services'
 import Game from './Game'
+import bookJSON from '../book'
 
-const ConnectedComponent = restHoc(Game, GameService)
+const createGame = (book) => {
+  return {
+    currentPageId: '5a7f12efe330ea247cf6431e',
+    book,
+    bookStatus: 'up-to-date',
+    stats: book.stats.reduce((acc, stat) => {
+      return {
+        ...acc,
+        [stat.id]: {
+          name: stat.name,
+          value: stat.initValue,
+        },
+      }
+    }, {}),
+    objects: book.objects.reduce((acc, object) => {
+      return {
+        ...acc,
+        [object.id]: {
+          name: object.name,
+          possessed: object.atStart,
+        },
+      }
+    }, {}),
+    tree: [],
+  }
+}
 
-export default ({ params }) => <ConnectedComponent gameId={params.gameId} key={params.gameId} />
+export default ({ params }) => (
+  <Game
+    gameId={params.gameId}
+    key={params.gameId}
+    game={createGame(bookJSON.book)}
+  />
+)
