@@ -1,4 +1,4 @@
-MyVisualStoryBook 
+MyVisualStoryBook
 =================
 
 MyVisualStoryBook est une application web de création d'histoires interactives.
