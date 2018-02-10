@@ -9,6 +9,7 @@ const query = gql`
       id
       name
       cover
+      synopsis
       author {
         id
         username

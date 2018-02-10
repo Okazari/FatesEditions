@@ -28,7 +28,6 @@ const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
           <Input
             label="Titre"
             debounce={500}
-            className={styles.input}
             domProps={{
               value: book.name,
               onChange: name => updateBook({ name }),
@@ -41,7 +40,6 @@ const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
           <Input
             label="Url de l'image"
             debounce={500}
-            className={styles.input}
             domProps={{
               value: book.cover,
               onChange: cover => updateBook({ cover }),
