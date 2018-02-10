@@ -4,9 +4,22 @@
 .component {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
   width: $toolbar-size;
   background-color: $background-color-light-2;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
 }
 
 .logo {

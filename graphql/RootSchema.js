@@ -7,6 +7,7 @@ const Effect = require('../models/EffectModel')
 const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
 const { getProjection } = require('./Helpers')
+const SHA512 = require('crypto-js/sha512')
 
 const bookType = `
   name: String
@@ -178,8 +179,10 @@ const typeDefs = `
     updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Effect
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
 
+    updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
 `
+// updatePassword(userId: ID!): User
 
 const easier = (ressource, save) => {
   const newSave = () => save().then(() => ressource)
@@ -369,6 +372,27 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     }),
+    updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {
+      const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''
+      const passwordMatch = newPassword !== confirmation
+
+      if (paramsNotEmpty && passwordMatch) {
+        throw new Error('Error')
+        return null
+      }
+
+      return User.findOneAndUpdate(
+        { _id: userId, password: SHA512(oldPassword).toString()},
+        { password: SHA512(newPassword).toString() },
+      ).then(user => {
+        if (!user) {
+          throw new Error('Error3')
+          return null
+        }
+        delete user.password
+        return user
+      })
+    },
   }
 }
 

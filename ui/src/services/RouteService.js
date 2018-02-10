@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 class RouteService {
 
   routes = {
-    profile: () => '/old/profile',
+    oldprofile: () => '/old/profile',
     signin: () => '/old/portal/signin',
     signup: () => '/old/portal/signup',
     recover: () => '/old/portal/recover',
@@ -32,6 +32,8 @@ class RouteService {
     writebookpagegeneral: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/general`,
     writebookpagecontent: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/content`,
     writebookpagetransitions: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/transitions`,
+    profile: () => '/app/profile',
+    profilepassword: () => '/app/profile/password',
   }
 
   goTo = (route) => {
