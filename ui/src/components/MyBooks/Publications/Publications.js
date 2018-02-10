@@ -1,8 +1,9 @@
 import React from 'react'
-import Book from 'components/common/Book'
+import { Book, ButtonIcon } from 'components/common'
 import styles from './style.scss'
 
-const Publications = ({ books, postResource, deleteResource }) => {
+const Publications = ({ author = {}, unpublishBook }) => {
+  const books = author.publications
   const nbColumns = document && Math.floor((document.body.clientWidth - 100) / 240)
   // TODO Replace with loader
   if (!books) return null
@@ -16,6 +17,15 @@ const Publications = ({ books, postResource, deleteResource }) => {
               key={book.id}
               className={styles.book}
             >
+              <div className={styles.delete}>
+                <ButtonIcon
+                  icon="delete_forever"
+                  className={styles.action}
+                  domProps={{
+                    onClick: () => unpublishBook(book.id),
+                  }}
+                />
+              </div>
               <Book showDelay={delay} book={book} />
             </div>
           )

@@ -8,7 +8,8 @@ const editDraft = (draftId) => {
   RouteService.goTo(RouteService.routes.writebook(draftId))
 }
 
-const Drafts = ({ books, createBook, deleteBook }) => {
+const Drafts = ({ author = {}, createBook, deleteBook }) => {
+  const books = author.drafts
   const nbColumns = document && Math.floor((document.body.clientWidth - 100) / 240)
   // TODO Replace with loader
   if (!books) return null

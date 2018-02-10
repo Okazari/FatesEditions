@@ -13,18 +13,21 @@ class DraftPublication extends React.Component {
   }
 
   onPublish = () => {
-    const { draft, updateResource } = this.props
-    if (!draft.startingPageId) this.setState({ error: true })
-    else {
-      updateResource({ ...draft, draft: false })
-    }
     this.interval = setInterval(this.updateProgressbar, 200)
   }
 
   updateProgressbar = () => {
+    const { draft, onPublishBook } = this.props
     const { percentage } = this.state
-    if (percentage < 100) this.setState({ percentage: percentage + 20 })
-    else clearInterval(this.interval)
+    if (percentage < 100) {
+      this.setState({ percentage: percentage + 20 })
+    } else {
+      clearInterval(this.interval)
+      if (!draft.startingPageId) this.setState({ error: true })
+      else {
+        onPublishBook(draft.id)
+      }
+    }
   }
 
   render() {
