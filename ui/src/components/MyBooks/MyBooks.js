@@ -9,14 +9,13 @@ const tabs = [tabDrafts, tabBooks, tabPublish]
 
 
 const MyBooks = ({ location, children, loading }) => {
-  if (loading) return <div>Loading</div>
   return (
     <Layout>
       <Toolbar />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         <TabContent>
-          {children}
+          {!loading && children}
         </TabContent>
       </Content>
     </Layout>

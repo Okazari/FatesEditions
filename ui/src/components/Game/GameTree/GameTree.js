@@ -47,9 +47,9 @@ class GameTree extends React.Component {
     // console.log(pageId)
     const { game: { book, path } } = this.props
     const nextLevel = level + 1
-    const page = book.pages.find(bookPage => bookPage._id === pageId)
+    const page = book.pages.find(bookPage => bookPage.id === pageId)
     const node = {
-      id: page._id,
+      id: page.id,
       name: page.title,
       nodes: [],
       posX,

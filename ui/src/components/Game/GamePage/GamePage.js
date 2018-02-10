@@ -12,8 +12,6 @@ const GamePage = ({ page = {}, hoverTransition, outTransition, changePage }) => 
     return null
   }
 
-  // console.log(page.transitions)
-
   return (
     <div>
       <Editor
@@ -24,7 +22,7 @@ const GamePage = ({ page = {}, hoverTransition, outTransition, changePage }) => 
       <div className={styles.gameTransitions}>
         {
           page.transitions.map(transition => <GameTransition
-            key={transition._id}
+            key={transition.id}
             transition={transition}
             hoverTransition={hoverTransition}
             outTransition={outTransition}

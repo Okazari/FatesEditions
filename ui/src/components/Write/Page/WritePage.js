@@ -3,7 +3,6 @@ import { Layout, Content, Toolbar, Tabs, TabContent } from 'components/Layout'
 import { RouteService } from 'services'
 
 const WritePage = ({ location, loading, children, params }) => {
-  if (loading) return <div>Loading</div>
   const tabPrevious = { label: 'Retour au livre', link: RouteService.routes.writebookpages(params.draftId) }
   const tabInfos = { label: 'Général', link: RouteService.routes.writebookpagegeneral(params.draftId, params.pageId) }
   const tabContent = { label: 'Contenu', link: RouteService.routes.writebookpagecontent(params.draftId, params.pageId) }
@@ -15,7 +14,7 @@ const WritePage = ({ location, loading, children, params }) => {
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         <TabContent>
-          {children}
+          {!loading && children}
         </TabContent>
       </Content>
     </Layout>
