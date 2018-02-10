@@ -1,30 +1,70 @@
 //eslint-disable-next-line
-import { graphql } from 'react-apollo'
+import React from 'react'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AuthService } from 'services'
 import Publish from './Publish'
 
 const query = gql`
-  query ConnectedUserBook($author: ID!) {
-    books(author: $author, draft: true) {
+  query AuthorById ($id: ID!) {
+    author(id: $id) {
       id
-      name
-      cover
+      drafts {
+        id
+        name
+        startingPageId
+        cover
+        author {
+          id
+          username
+        }
+      }
     }
   }
 `
 
-// TODO: Add Publish mutation
-
-
-export default graphql(query, {
-  options: () => ({
+const queryOptions = {
+  options: ({ params: { draftId, pageId } }) => ({
     variables: {
-      author: AuthService.getConnectedUserId(),
+      id: AuthService.getConnectedUserId(),
     },
   }),
-  props: ({ data: { books }, ...rest }) => ({
-    ...rest,
-    drafts: books,
+  props: ({ data: { loading, author } }) => ({
+    author,
   }),
-})(Publish)
+}
+
+const mutation = gql`
+  mutation publishBook($id: ID!) {
+    publishBook(id: $id) {
+      id
+      publications {
+        id
+      }
+      drafts {
+        id
+      }
+    }
+  }
+`
+
+const mutationOptions = {
+  name: 'publishBook',
+}
+
+const PublishContainer = (props) => {
+  const { publishBook } = props
+  const _publishBook = id => publishBook({
+    variables: {
+      id,
+    },
+  })
+  return (
+    <Publish {...props} publishBook={_publishBook} />
+  )
+}
+
+export default compose(
+  graphql(query, queryOptions),
+  graphql(mutation, mutationOptions),
+)(PublishContainer)

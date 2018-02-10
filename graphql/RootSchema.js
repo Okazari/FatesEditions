@@ -71,6 +71,8 @@ const typeDefs = `
   type User {
     id: ID
     username: String
+    publications: [Book]
+    drafts: [Book]
   }
 
   input BookInput {
@@ -135,16 +137,17 @@ const typeDefs = `
   type Query {
     books(author: ID, draft: Boolean): [Book]
     book(id: ID!): Book
+    author(id: ID!): User
     page(bookId: ID!, pageId: ID!): Page
   }
 
   type Mutation {
 
-    createBook(author: ID!): Book
+    createBook(author: ID!): User
     updateBook(book: BookInput!): Book
-    deleteBook(id: ID!): ID
-    publishBook(id: ID!): Book
-    unpublishBook(id: ID!): Book
+    deleteBook(id: ID!): User
+    publishBook(id: ID!): User
+    unpublishBook(id: ID!): User
 
     createPage(bookId: ID!): Book
     createPageReturnPage(bookId: ID!): Page
@@ -203,22 +206,19 @@ const findBookById = (bookId) => {
 const resolvers = {
   Query: {
     book: (obj, args = {}, context, info) => {
-      const projections = getProjection(info)
-      if (projections.author) projections.authorId = true
       const { id } = args
       const filters = {}
       if (id) filters._id = id
-      return Book.findOne(filters, projections)
+      return Book.findOne(filters)
     },
     books: (obj, args = {}, context, info) => {
-      const projections = getProjection(info)
-      if (projections.author) projections.authorId = true
       const { author, draft } = args
       const filters = {}
       if (author) filters.authorId = author
       if (typeof draft === 'boolean') filters.draft = draft
-      return Book.find(filters, projections)
+      return Book.find(filters)
     },
+    author: (obj, { id }, context, info) => User.findById(id),
     page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
   },
   Book: {
@@ -226,18 +226,26 @@ const resolvers = {
       return User.findById(book.authorId)
     }
   },
+  User: {
+    drafts: (user) => {
+      return Book.find({ authorId: user.id, draft: true })
+    },
+    publications: (user) => {
+      return Book.find({ authorId: user.id, draft: false })
+    },
+  },
   Mutation: {
     createBook: (_, { author }) => {
       const book = new Book({
         authorId: author,
       })
-      return book.save()
+      return book.save().then(book => ({ id: book.authorId }))
     },
     // Book
     updateBook: (_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true }),
-    deleteBook: (_, { id }) => Book.findByIdAndRemove(id).then(book => book._id),
-    publishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }),
-    unpublishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }),
+    deleteBook: (_, { id }) => Book.findByIdAndRemove(id).then(book => ({ id: book.authorId })),
+    publishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }).then(book => ({ id: book.authorId })),
+    unpublishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }).then(book => ({ id: book.authorId })),
 
     // createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
     createStat: (_, { bookId }) => findBookById(bookId).then(book => {

@@ -10,28 +10,33 @@ const authorVariables = {
 
 const core = `
   id
-  name
-  cover
-  author {
+  drafts {
     id
-    username
+    name
+    cover
+    author {
+      id
+      username
+    }
   }
 `
 
 const query = gql`
-  query ConnectedUserBook ($author: ID!) {
-    books(draft: true, author: $author) {
+  query AuthorById ($id: ID!) {
+    author(id: $id) {
       ${core}
     }
   }
 `
 
 const queryOptions = {
-  options: () => ({
-    variables: authorVariables,
+  options: ({ params: { draftId, pageId } }) => ({
+    variables: {
+      id: AuthService.getConnectedUserId(),
+    },
   }),
-  props: ({ data: { books } }) => ({
-    books,
+  props: ({ data: { loading, author } }) => ({
+    author,
   }),
 }
 
@@ -57,7 +62,9 @@ const createBookOptions = {
 
 const deleteBookMutation = gql`
   mutation DeleteBook ($id: ID!) {
-    deleteBook(id: $id)
+    deleteBook(id: $id) {
+      ${core}
+    }
   }
 `
 

@@ -1,32 +1,73 @@
-//eslint-disable-next-line
-import { graphql } from 'react-apollo'
+import React from 'react'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AuthService } from 'services'
 import Publications from './Publications'
 
 const query = gql`
-  query ConnectedUserBook($author: ID!) {
-    books(author: $author, draft: false) {
+  query AuthorById ($id: ID!) {
+    author(id: $id) {
       id
-      name
-      cover
-      author {
+      publications {
         id
-        username
+        name
+        cover
+        author {
+          id
+          username
+        }
       }
     }
   }
 `
 
-
-export default graphql(query, {
-  options: () => ({
+const queryOptions = {
+  options: ({ params: { draftId, pageId } }) => ({
     variables: {
-      author: AuthService.getConnectedUserId(),
+      id: AuthService.getConnectedUserId(),
     },
   }),
-  props: ({ data: { books }, ...rest }) => ({
-    ...rest,
-    books,
+  props: ({ data: { loading, author } }) => ({
+    author,
   }),
-})(Publications)
+}
+
+const mutation = gql`
+  mutation unpublishBook($id: ID!) {
+    unpublishBook(id: $id) {
+      id
+      publications {
+        id
+      }
+      drafts {
+        id
+      }
+    }
+  }
+`
+
+const mutationOptions = {
+  name: 'unpublishBook',
+  update: (proxy, { data: { unpublishBook } }) => {
+    const data = proxy.readQuery({ query })
+    data.books = data.books.filter(b => b.id !== unpublishBook.id)
+    proxy.writeQuery({ query, data })
+  },
+}
+
+const PublicationsContainer = (props) => {
+  const { unpublishBook } = props
+  const _unpublishBook = id => unpublishBook({
+    variables: {
+      id,
+    },
+  })
+  return (
+    <Publications {...props} unpublishBook={_unpublishBook} />
+  )
+}
+
+export default compose(
+  graphql(query, queryOptions),
+  graphql(mutation, mutationOptions),
+)(PublicationsContainer)

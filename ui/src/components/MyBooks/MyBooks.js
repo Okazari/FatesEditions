@@ -8,7 +8,8 @@ const tabPublish = { label: 'Publier un livre', link: RouteService.routes.writep
 const tabs = [tabDrafts, tabBooks, tabPublish]
 
 
-const MyBooks = ({ location, children }) => {
+const MyBooks = ({ location, children, loading }) => {
+  if (loading) return <div>Loading</div>
   return (
     <Layout>
       <Toolbar />
