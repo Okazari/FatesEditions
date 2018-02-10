@@ -1,0 +1,155 @@
+{
+  "book": {
+    "id": "5a7f0471d9e2be89383ad6bd",
+    "name": "Deux mille deux cent vingt deux",
+    "synopsis": "Votre aventure se passe à l'an 2222, un peu plus de 200 ans après 'l'apocalypse'. Les zones habitables se font de plus en plus rare et la nature à repris ses droits à beaucoup d'endroits.\nN'est pas héros qui veut en 2222.",
+    "startingPageId": "5a7f04fbd9e2be89383ad6be",
+    "stats": [
+      {
+        "id": "5a7f0a83e53c8213d861c2f1",
+        "name": "Adresse",
+        "initValue": 5,
+        "max": null,
+        "min": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f1298e330ea247cf64313",
+        "name": "Vigueur",
+        "initValue": 5,
+        "max": null,
+        "min": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12a7e330ea247cf64314",
+        "name": "Ingéniosité",
+        "initValue": 5,
+        "max": null,
+        "min": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12b9e330ea247cf64315",
+        "name": "Points à répartir",
+        "initValue": null,
+        "max": null,
+        "min": null,
+        "visible": true
+      }
+    ],
+    "objects": [
+      {
+        "id": "5a7f0a8be53c8213d861c2f2",
+        "name": "Bâton de cornac",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f0a8fe53c8213d861c2f3",
+        "name": "Lance-flammes",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12d3e330ea247cf64316",
+        "name": "Gants de moto",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12d5e330ea247cf64317",
+        "name": "Blouse blanche",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12d8e330ea247cf64318",
+        "name": "Médicaments",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12dbe330ea247cf64319",
+        "name": "Chaîne en fer",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12dee330ea247cf6431a",
+        "name": "Scalpel",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12e2e330ea247cf6431b",
+        "name": "Astuce : Emplacement d'échelle",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12e4e330ea247cf6431c",
+        "name": "Tenue militaire",
+        "atStart": null,
+        "visible": true
+      },
+      {
+        "id": "5a7f12e7e330ea247cf6431d",
+        "name": "Pince coupante",
+        "atStart": null,
+        "visible": true
+      }
+    ],
+    "pages": [
+      {
+        "id": "5a7f12efe330ea247cf6431e",
+        "title": "Règles de jeu - Caractéristiques",
+        "effects": [],
+        "backgroundMusic": null,
+        "transitions": [
+          {
+            "id": "5a7f1322e330ea247cf64320",
+            "fromPage": "5a7f12efe330ea247cf6431e",
+            "toPage": "5a7f1328e330ea247cf64321",
+            "text": "Passer au choix de caractéristiques",
+            "conditionOperator": "and",
+            "effects": [],
+            "conditions": []
+          }
+        ]
+      },
+      {
+        "id": "5a7f1328e330ea247cf64321",
+        "title": "Choix des caractéristiques",
+        "effects": [],
+        "backgroundMusic": null,
+        "transitions": [
+          {
+            "id": "5a7f133ae330ea247cf64322",
+            "fromPage": "5a7f1328e330ea247cf64321",
+            "toPage": "5a7f12efe330ea247cf6431e",
+            "text": "Aie je me suis trompé. Je veux recommencer depuis le début.",
+            "conditionOperator": "and",
+            "effects": [],
+            "conditions": [
+              {
+                "id": "5a7f137ce330ea247cf64323",
+                "operator": null,
+                "subject": null,
+                "value": null,
+                "type": null
+              },
+              {
+                "id": "5a7f138ee330ea247cf64324",
+                "operator": null,
+                "subject": null,
+                "value": null,
+                "type": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
