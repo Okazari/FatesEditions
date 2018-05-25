@@ -13,8 +13,6 @@ const Password = () => {
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
           onChange: () => {},
-          // disabled,
-          // required: true,
         }}
       />
       <Input
@@ -25,8 +23,6 @@ const Password = () => {
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
           onChange: () => {},
-          // disabled,
-          // required: true,
         }}
       />
       <Input
@@ -37,8 +33,6 @@ const Password = () => {
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
           onChange: () => {},
-          // disabled,
-          // required: true,
         }}
       />
     </div>
