@@ -7,6 +7,9 @@
   align-items: center;
   width: $toolbar-size;
   background-color: $background-color-light-2;
+  :last-child {
+    margin-top: auto;
+  }
 }
 
 .logo {

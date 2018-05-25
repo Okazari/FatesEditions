@@ -1,0 +1,8 @@
+@import '~styles/colors';
+@import '~styles/sizes';
+@import '~styles/mixins';
+
+.component {
+  flex-direction: column;
+  margin: 20px;
+}

@@ -20,13 +20,14 @@ import WriteDraft, {
 } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import Game from './components/Game'
+import Profile, { Password } from './components/Profile'
 
 // OLD LAYOUT
 import App from './components/Old/App'
 import { PlayBooks, PlayGames } from './components/Old/Play'
 import { ShareBook, SharePublications, ShareEditBook } from './components/Old/Share'
 import { WriteBook, WriteDrafts, WritePage as OldWritePage } from './components/Old/Write'
-import Profile from './components/Old/Profile'
+import { Profile as OldProfile } from './components/Old/Profile'
 
 
 const AppRouter = () => {
@@ -60,6 +61,10 @@ const AppRouter = () => {
             <Route path="content" component={PageContent} />
             <Route path="transitions" component={PageTransition} />
           </Route>
+          <Route path="profile" component={Profile}>
+            <IndexRedirect to="password" />
+            <Route path="password" component={Password} />
+          </Route>
         </Route>
         <Route path="old">
           <IndexRedirect to="portal" />
@@ -90,7 +95,7 @@ const AppRouter = () => {
               <Route path="edit/:bookId" component={ShareEditBook} />
             </Route>
             <Route path="profile" >
-              <IndexRoute component={Profile} />
+              <IndexRoute component={OldProfile} />
             </Route>
           </Route>
         </Route>

@@ -10,7 +10,7 @@ const Toolbar = () => {
       <img className={styles.logo} alt="logo" src={logo} />
       <Link to={RouteService.routes.books()} icon="import_contacts" />
       <Link to={RouteService.routes.write()} icon="mode_edit" />
-      <Link icon="account_circle" />
+      <Link to={RouteService.routes.profile()} icon="account_circle" />
     </div>
   )
 }
