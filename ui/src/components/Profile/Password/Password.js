@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './style.scss'
 import Input from '../../common/Input'
+import Button from '../../common/Button'
 
 const Password = () => {
   return (
@@ -35,6 +36,7 @@ const Password = () => {
           onChange: () => {},
         }}
       />
+      <Button>Changer de mot de passe</Button>
     </div>
   )
 }

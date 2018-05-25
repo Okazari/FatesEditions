@@ -3,6 +3,8 @@
 @import '~styles/mixins';
 
 .component {
+  display: flex;
   flex-direction: column;
+  align-items: stretch;
   margin: 20px;
 }
