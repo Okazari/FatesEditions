@@ -5,7 +5,6 @@ import Password from './Password'
 
 const query = gql`
   query {
-
   }
 `
 

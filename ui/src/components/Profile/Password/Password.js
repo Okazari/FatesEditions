@@ -9,7 +9,6 @@ const Password = () => {
       <Input
         label="Ancien mot de passe"
         debounce={500}
-        className={styles.input}
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
@@ -19,7 +18,6 @@ const Password = () => {
       <Input
         label="Nouveau mot de passe"
         debounce={500}
-        className={styles.input}
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
@@ -29,7 +27,6 @@ const Password = () => {
       <Input
         label="Confirmation"
         debounce={500}
-        className={styles.input}
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
