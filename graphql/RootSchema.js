@@ -180,6 +180,7 @@ const typeDefs = `
 
   }
 `
+// updatePassword(userId: ID!): User
 
 const easier = (ressource, save) => {
   const newSave = () => save().then(() => ressource)
@@ -369,6 +370,7 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     }),
+    // updatePassword: (_, { userId }) => {},
   }
 }
 

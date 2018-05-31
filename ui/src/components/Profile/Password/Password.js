@@ -3,7 +3,7 @@ import styles from './style.scss'
 import Input from '../../common/Input'
 import Button from '../../common/Button'
 
-const Password = () => {
+const Password = ({ updatePassword }) => {
   return (
     <div className={styles.component}>
       <Input
@@ -13,7 +13,7 @@ const Password = () => {
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
-          onChange: () => {},
+          // onChange: () => {},
         }}
       />
       <Input
@@ -23,7 +23,7 @@ const Password = () => {
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
-          onChange: () => {},
+          // onChange: () => {},
         }}
       />
       <Input
@@ -33,10 +33,14 @@ const Password = () => {
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
-          onChange: () => {},
+          // onChange: () => {},
         }}
       />
-      <Button>Changer de mot de passe</Button>
+      <Button domProps={{
+        onClick: updatePassword,
+      }}>
+        Changer de mot de passe
+      </Button>
     </div>
   )
 }
