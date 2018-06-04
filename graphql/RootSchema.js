@@ -7,6 +7,7 @@ const Effect = require('../models/EffectModel')
 const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
 const { getProjection } = require('./Helpers')
+const SHA512 = require('crypto-js/sha512')
 
 const bookType = `
   name: String
@@ -204,6 +205,10 @@ const findBookById = (bookId) => {
   return Book.findById(bookId).then(book => easier(book, () => book.save()))
 }
 
+const findUserById = userId => {
+  return User.findById(userId).then(user => easier(user, () => user.save()))
+}
+
 const resolvers = {
   Query: {
     book: (obj, args = {}, context, info) => {
@@ -370,9 +375,27 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     }),
-    // TODO: Refactor Destructuration
     updatePassword: (_, { userId, oldPassword, newPassword, confirmation }) => {
-      console.log('userId', userId, 'old', oldPassword)
+      User.findById(userId)
+        .then(user => {
+          checkDataIsNotEmpty = oldPassword !== '' && newPassword !== '' && confirmation !== ''
+          console.log(newPassword !== '')
+          checkOldPassword = SHA512(oldPassword) == user.password
+          checkConfirmation = newPassword == confirmation
+          result = !user ? "L'utilisateur n'a pas été trouvé" : (
+            !checkDataIsNotEmpty ? 'Un champs de mot de passe est vide' : (
+              !checkOldPassword ? "L'ancien mot de passe est érroné" : (
+                !checkConfirmation ? "Les mots de passes ne correspondent pas" : (
+                  // user.set('password', newPassword).save()
+                  'ITWORKS'
+                )
+              )
+            )
+          );
+
+          console.log('finalResponse :', result)
+          return result;
+        })
     },
   }
 }

@@ -4,15 +4,16 @@ import Input from '../../common/Input'
 import Button from '../../common/Button'
 
 const Password = ({ updatePassword }) => {
+  // TODO: display form Error newPass != confirmation
   return (
     <form
       className={styles.component}
       onSubmit={(e) => {
         e.preventDefault()
         updatePassword({
-          oldPassword: e.target[0].value,
-          newPassword: e.target[1].value,
-          confirmation: e.target[3].value,
+          oldPassword: e.target.old.value,
+          newPassword: e.target.new.value,
+          confirmation: e.target.confirmation.value,
         })
       }}
     >
@@ -22,6 +23,7 @@ const Password = ({ updatePassword }) => {
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
+          name: 'old',
         }}
       />
       <Input
@@ -30,6 +32,7 @@ const Password = ({ updatePassword }) => {
         domProps={{
           type: 'text',
           placeholder: 'Votre nouveau mot de passe',
+          name: 'new',
         }}
       />
       <Input
@@ -37,6 +40,7 @@ const Password = ({ updatePassword }) => {
         debounce={500}
         domProps={{
           placeholder: 'Confirmation',
+          name: 'confirmation',
         }}
       />
       <Button>
