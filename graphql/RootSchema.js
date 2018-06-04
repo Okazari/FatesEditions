@@ -379,7 +379,6 @@ const resolvers = {
       User.findById(userId)
         .then(user => {
           checkDataIsNotEmpty = oldPassword !== '' && newPassword !== '' && confirmation !== ''
-          console.log(newPassword !== '')
           checkOldPassword = SHA512(oldPassword) == user.password
           checkConfirmation = newPassword == confirmation
           result = !user ? "L'utilisateur n'a pas été trouvé" : (
