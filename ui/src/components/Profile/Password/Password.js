@@ -9,7 +9,6 @@ const Password = ({ updatePassword }) => {
       <Input
         label="Ancien mot de passe"
         debounce={500}
-        className={styles.input}
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
@@ -19,7 +18,6 @@ const Password = ({ updatePassword }) => {
       <Input
         label="Nouveau mot de passe"
         debounce={500}
-        className={styles.input}
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
@@ -29,16 +27,17 @@ const Password = ({ updatePassword }) => {
       <Input
         label="Confirmation"
         debounce={500}
-        className={styles.input}
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
           // onChange: () => {},
         }}
       />
-      <Button domProps={{
-        onClick: updatePassword,
-      }}>
+      <Button
+        domProps={{
+          onClick: updatePassword,
+        }}
+      >
         Changer de mot de passe
       </Button>
     </div>
