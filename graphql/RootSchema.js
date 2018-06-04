@@ -134,13 +134,6 @@ const typeDefs = `
     ${transitionType}
   }
 
-  input UpdatePasswordInput {
-    userId: ID!
-    oldPassword: String
-    newPassword: String
-    confirmation: String
-  }
-
   type Query {
     books(author: ID, draft: Boolean): [Book]
     book(id: ID!): Book
@@ -185,7 +178,7 @@ const typeDefs = `
     updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Effect
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
     
-    updatePassword(data: UpdatePasswordInput!): User
+    updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
 `
 
@@ -377,8 +370,9 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     }),
-    updatePassword: (_, { data }) => {
-      console.log(data)
+    // TODO: Refactor Destructuration
+    updatePassword: (_, { userId, oldPassword, newPassword, confirmation }) => {
+      console.log('userId', userId, 'old', oldPassword)
     },
   }
 }

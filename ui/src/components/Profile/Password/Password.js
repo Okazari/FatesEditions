@@ -5,14 +5,23 @@ import Button from '../../common/Button'
 
 const Password = ({ updatePassword }) => {
   return (
-    <div className={styles.component}>
+    <form
+      className={styles.component}
+      onSubmit={(e) => {
+        e.preventDefault()
+        updatePassword({
+          oldPassword: e.target[0].value,
+          newPassword: e.target[1].value,
+          confirmation: e.target[3].value,
+        })
+      }}
+    >
       <Input
         label="Ancien mot de passe"
         debounce={500}
         domProps={{
           type: 'text',
           placeholder: 'Votre ancien mot de passe',
-          // onChange: () => {},
         }}
       />
       <Input
@@ -20,27 +29,20 @@ const Password = ({ updatePassword }) => {
         debounce={500}
         domProps={{
           type: 'text',
-          placeholder: 'Votre ancien mot de passe',
-          // onChange: () => {},
+          placeholder: 'Votre nouveau mot de passe',
         }}
       />
       <Input
         label="Confirmation"
         debounce={500}
         domProps={{
-          type: 'text',
-          placeholder: 'Votre ancien mot de passe',
-          // onChange: () => {},
+          placeholder: 'Confirmation',
         }}
       />
-      <Button
-        domProps={{
-          onClick: updatePassword,
-        }}
-      >
+      <Button>
         Changer de mot de passe
       </Button>
-    </div>
+    </form>
   )
 }
 export default Password

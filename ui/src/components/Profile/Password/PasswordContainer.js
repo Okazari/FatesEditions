@@ -6,8 +6,18 @@ import Password from './Password'
 import AuthService from '../../../services/AuthService'
 
 const mutation = gql`
-  mutation updatePassword($data: UpdatePasswordInput!) {
-    updatePassword(data: $data) {
+  mutation updatePassword(
+      $userId: ID!,
+      $oldPassword: String!,
+      $newPassword: String!,
+      $confirmation: String!
+  ) {
+    updatePassword(
+      userId: $userId,
+      oldPassword: $oldPassword,
+      newPassword: $newPassword,
+      confirmation: $confirmation
+    ) {
       id
     }
   }
@@ -18,12 +28,10 @@ const mutationOptions = {
 
 const PasswordContainer = (props) => {
   const { updatePassword } = props
-  const _updatePassword = passwordData => updatePassword({
+  const _updatePassword = passwordsData => updatePassword({
     variables: {
-      data: {
-        userId: AuthService.getConnectedUserId(),
-        ...passwordData,
-      },
+      userId: AuthService.getConnectedUserId(),
+      ...passwordsData,
     },
   })
   return <Password {...props} updatePassword={_updatePassword} />
