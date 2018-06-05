@@ -375,26 +375,35 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     }),
-    updatePassword: (_, { userId, oldPassword, newPassword, confirmation }) => {
-      User.findById(userId)
-        .then(user => {
-          checkDataIsNotEmpty = oldPassword !== '' && newPassword !== '' && confirmation !== ''
-          checkOldPassword = SHA512(oldPassword) == user.password
-          checkConfirmation = newPassword == confirmation
-          result = !user ? "L'utilisateur n'a pas été trouvé" : (
-            !checkDataIsNotEmpty ? 'Un champs de mot de passe est vide' : (
-              !checkOldPassword ? "L'ancien mot de passe est érroné" : (
-                !checkConfirmation ? "Les mots de passes ne correspondent pas" : (
-                  // user.set('password', newPassword).save()
-                  'ITWORKS'
-                )
-              )
-            )
-          );
+    updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {
+      // TODO: Refactor properly to avoid double call and verbosity
+      if (oldPassword === '' || newPassword === '' || confirmation === '') { 
+        throw new Error('Error1')
+        return null
+      }
+      if (newPassword !== confirmation) {
+        throw new Error('Error2')
+        return null
+      }
 
-          console.log('finalResponse :', result)
-          return result;
-        })
+      user = await User.findById(userId, () => {})
+      console.log(user)
+      if (!user) {
+        throw new Error('Error3')
+        return null
+      }
+
+      if (user.password !== SHA512(oldPassword).toString()){
+        throw new Error('Error4')
+        return null
+      }
+
+      User.findOneAndUpdate(
+        { _id: userId, password: SHA512(oldPassword).toString()},
+        { password: SHA512(newPassword).toString() },
+        {},
+        (err, user) => console.log(err)
+      )
     },
   }
 }

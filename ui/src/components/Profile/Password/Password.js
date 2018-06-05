@@ -3,7 +3,7 @@ import styles from './style.scss'
 import Input from '../../common/Input'
 import Button from '../../common/Button'
 
-const Password = ({ updatePassword }) => {
+const Password = ({ updatePassword, state }) => {
   // TODO: display form Error newPass != confirmation
   return (
     <form
@@ -43,6 +43,11 @@ const Password = ({ updatePassword }) => {
           name: 'confirmation',
         }}
       />
+      { !!state.error &&
+        <div className={styles.error} >
+          Oups, l'ancien mot de passe est incorrect ou bien les deux nouveaux mots de passe ne correspondent pas !
+        </div>
+      }
       <Button>
         Changer de mot de passe
       </Button>
