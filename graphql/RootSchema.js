@@ -376,34 +376,25 @@ const resolvers = {
                  .save()
     }),
     updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {
-      // TODO: Refactor properly to avoid double call and verbosity
-      if (oldPassword === '' || newPassword === '' || confirmation === '') { 
-        throw new Error('Error1')
-        return null
-      }
-      if (newPassword !== confirmation) {
-        throw new Error('Error2')
-        return null
-      }
-
-      user = await User.findById(userId, () => {})
-      console.log(user)
-      if (!user) {
-        throw new Error('Error3')
+      const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''
+      const passwordMatch = newPassword !== confirmation
+      
+      if (paramsNotEmpty && passwordMatch) { 
+        throw new Error('Error')
         return null
       }
 
-      if (user.password !== SHA512(oldPassword).toString()){
-        throw new Error('Error4')
-        return null
-      }
-
-      User.findOneAndUpdate(
+      return User.findOneAndUpdate(
         { _id: userId, password: SHA512(oldPassword).toString()},
         { password: SHA512(newPassword).toString() },
-        {},
-        (err, user) => console.log(err)
-      )
+      ).then(user => {
+        if (!user) {
+          throw new Error('Error3')
+          return null
+        }
+        delete user.password
+        return user
+      })
     },
   }
 }

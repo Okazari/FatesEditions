@@ -4,7 +4,8 @@ import Input from '../../common/Input'
 import Button from '../../common/Button'
 
 const Password = ({ updatePassword, state }) => {
-  // TODO: display form Error newPass != confirmation
+  const errorText = 'Oups, l\'ancien mot de passe est incorrect ou bien les deux nouveaux mots de passe ne correspondent pas !'
+  
   return (
     <form
       className={styles.component}
@@ -44,8 +45,8 @@ const Password = ({ updatePassword, state }) => {
         }}
       />
       { !!state.error &&
-        <div className={styles.error} >
-          Oups, l'ancien mot de passe est incorrect ou bien les deux nouveaux mots de passe ne correspondent pas !
+        <div className={styles.error}>
+          {errorText}
         </div>
       }
       <Button>
