@@ -1,10 +1,10 @@
 import React from 'react'
+import Link from 'components/common/Link'
 import styles from './style.scss'
-import logo from '../../common/logo.svg'
-import Link from './Link'
-import { RouteService } from '../../../services'
+import logo from '../../../common/logo.svg'
+import { RouteService } from '../../../../services'
 
-const Toolbar = () => {
+const AppToolbar = () => {
   return (
     <div className={styles.component}>
       <div className={styles.top}>
@@ -19,4 +19,4 @@ const Toolbar = () => {
   )
 }
 
-export default Toolbar
+export default AppToolbar

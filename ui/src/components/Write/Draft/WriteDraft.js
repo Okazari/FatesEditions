@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Content, Toolbar, Tabs, TabContent } from 'components/Layout'
+import { Layout, Content, AppToolbar, Tabs, TabContent } from 'components/Layout'
 import { RouteService } from 'services'
 
 const WriteDraft = ({ location, children, params, loading }) => {
@@ -11,7 +11,7 @@ const WriteDraft = ({ location, children, params, loading }) => {
   const tabs = [tabPrevious, tabInfos, tabStats, tabItems, tabPages]
   return (
     <Layout>
-      <Toolbar />
+      <AppToolbar />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         <TabContent>
