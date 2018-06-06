@@ -1,4 +1,5 @@
 @import '~styles/colors';
+@import '~styles/sizes';
 
 @keyframes slidein {
   0% { left: 50vw; width: 0 }
@@ -16,13 +17,13 @@ $fadein: .5s;
 .wrapper {
   position: fixed;
   display: flex;
-  background-image: url('http://www.rpgbooster.com/wp-content/uploads/2014/02/Map-South-East-Domarion.jpg');
+  background-image: url('https://static.wixstatic.com/media/ed3f4a_be98fafaf91c456fb59d21214c7c5c0d.jpg/v1/fill/w_977,h_794,al_c,q_85,usm_0.66_1.00_0.01/ed3f4a_be98fafaf91c456fb59d21214c7c5c0d.jpg');
   background-position: center;
+  background-size: cover;
   height: 100vh;
   z-index: 1050;
-  left: 0;
   top: 0;
-  width: 100vw;
+  width: $content-size;
   animation: slidein $openbook;
 
   .rightSide {
@@ -41,31 +42,31 @@ $fadein: .5s;
     color: transparentize($white, .1);
     width: 100%;
     padding: 50px;
-    background-color: transparentize($black, .15);
+    background-color: transparentize($black, .12);
     display: flex;
     text-align: justify;
     justify-content: center;
     font-size: 1.5em;
     overflow-y: scroll;
 
-    .close {
-      opacity: 0;
-      position: absolute;
-      right: 40px;
-      cursor: pointer;
-      animation: fadein $fadein;
-      animation-fill-mode: forwards;
-      animation-delay: $openbook;
-      top: 10px;
-    }
+    // .close {
+    //   opacity: 0;
+    //   position: absolute;
+    //   right: 40px;
+    //   cursor: pointer;
+    //   animation: fadein $fadein;
+    //   animation-fill-mode: forwards;
+    //   animation-delay: $openbook;
+    //   top: 10px;
+    // }
 
-    .mainText {
-      opacity: 0;
-      max-width: 70%;
-      animation: fadein $fadein;
-      animation-fill-mode: forwards;
-      animation-delay: $openbook;
-      text-align: justify;
-    }
+    // .mainText {
+    //   opacity: 0;
+    //   max-width: 70%;
+    //   animation: fadein $fadein;
+    //   animation-fill-mode: forwards;
+    //   animation-delay: $openbook;
+    //   text-align: justify;
+    // }
   }
 }

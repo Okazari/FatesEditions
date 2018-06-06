@@ -1,1 +1,2 @@
-export default from './AppToolbar'
+export AppToolbar from './AppToolbar'
+export GameToolbar from './GameToolbar'

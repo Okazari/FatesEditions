@@ -1,0 +1,29 @@
+@import '~styles/sizes';
+@import '~styles/colors';
+
+.component {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: $toolbar-size;
+  background-color: $dark-transparent-black;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.logo {
+  margin: 20px 0;
+  height: 70px;
+  fill: $white;
+}

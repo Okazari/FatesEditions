@@ -1,4 +1,5 @@
 import React from 'react'
+import { Layout, Content, GameToolbar } from 'components/Layout'
 import styles from './styles.scss'
 import GamePage from './GamePage'
 // import GameTree from './GameTree'
@@ -36,19 +37,21 @@ class Game extends React.Component {
     const { game, onClose, updateResource } = this.props
     const { currentPageId, hoverNode } = this.state
     return !!currentPageId && (
-      <div className={styles.wrapper}>
-        <div className={styles.content}>
-          <div className={styles.close} onClick={onClose}>
-            x
+      <Layout>
+        <GameToolbar />
+        <Content>
+          <div className={styles.wrapper}>
+            <div className={styles.content}>
+              <GamePage
+                page={game.book.pages.find(page => page.id === currentPageId)}
+                hoverTransition={this.hoverTransition}
+                outTransition={this.outTransition}
+                changePage={this.changePage}
+              />
+            </div>
           </div>
-          <GamePage
-            page={game.book.pages.find(page => page.id === currentPageId)}
-            hoverTransition={this.hoverTransition}
-            outTransition={this.outTransition}
-            changePage={this.changePage}
-          />
-        </div>
-      </div>
+        </Content>
+      </Layout>
     )
   }
 }
