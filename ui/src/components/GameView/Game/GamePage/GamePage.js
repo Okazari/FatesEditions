@@ -13,7 +13,7 @@ const GamePage = ({ page = {}, hoverTransition, outTransition, changePage }) => 
   }
 
   return (
-    <div>
+    <div className={styles.component} >
       <Editor
         editorState={EditorState.createWithContent(pageContent)}
         blockRendererFn={blockRenderer}
