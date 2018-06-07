@@ -1,6 +1,6 @@
 import React from 'react'
+import bookJSON from 'components/book'
 import Game from './Game'
-import bookJSON from '../book'
 
 const createGame = (book) => {
   return {
