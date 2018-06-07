@@ -4,12 +4,12 @@ import Game from './Game'
 
 const GameView = (props) => {
   return (
-      <Layout>
-        <GameToolbar />
-        <Content>
-          <Game {...props} />
-        </Content>
-      </Layout>
+    <Layout>
+      <GameToolbar />
+      <Content>
+        <Game {...props} />
+      </Content>
+    </Layout>
   )
 }
 

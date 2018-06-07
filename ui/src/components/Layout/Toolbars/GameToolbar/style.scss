@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: $toolbar-size;
-  background-color: $dark-transparent-black;
+  background-color: $dark-background-color-1;
 }
 
 .top {
@@ -25,5 +25,9 @@
 .logo {
   margin: 20px 0;
   height: 70px;
-  fill: $white;
+}
+
+.darkButton {
+  background-color: $dark-background-color-2;
+  color: $dark-primary-color;
 }

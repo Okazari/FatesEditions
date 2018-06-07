@@ -1,7 +1,13 @@
+@import '~styles/colors';
+
 .transitionButton {
   display: flex;
-  background-color: transparent;
+  background-color: $dark-background-color-1;
   padding: 10px 30px;
   margin-top: 20px;
   width: 100%;
+
+  &:last-of-type {
+    margin-bottom: 20px;
+  }
 }

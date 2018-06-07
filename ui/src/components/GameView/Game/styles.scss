@@ -1,48 +1,48 @@
 @import '~styles/colors';
 @import '~styles/sizes';
 
-@keyframes slidein {
-  0% { left: 50vw; width: 0 }
-  100% { left: 0; width: 100vw }
-}
+// @keyframes slidein {
+//   0% { left: 50vw; width: 0 }
+//   100% { left: 0; width: 100vw }
+// }
 
-@keyframes fadein {
-  0% { opacity: 0; }
-  100% { opacity: 1;  }
-}
+// @keyframes fadein {
+//   0% { opacity: 0; }
+//   100% { opacity: 1;  }
+// }
 
-$openbook: .75s;
-$fadein: .5s;
+// $openbook: .75s;
+// $fadein: .5s;
 
 .wrapper {
   position: fixed;
   display: flex;
-  background-image: url('https://static.wixstatic.com/media/ed3f4a_be98fafaf91c456fb59d21214c7c5c0d.jpg/v1/fill/w_977,h_794,al_c,q_85,usm_0.66_1.00_0.01/ed3f4a_be98fafaf91c456fb59d21214c7c5c0d.jpg');
-  background-position: center;
-  background-size: cover;
+  // background-image: url('https://static.wixstatic.com/media/ed3f4a_be98fafaf91c456fb59d21214c7c5c0d.jpg/v1/fill/w_977,h_794,al_c,q_85,usm_0.66_1.00_0.01/ed3f4a_be98fafaf91c456fb59d21214c7c5c0d.jpg');
+  // background-position: center;
+  // background-size: cover;
   height: 100vh;
   z-index: 1050;
   top: 0;
   width: $content-size;
-  animation: slidein $openbook;
+  // animation: slidein $openbook;
 
-  .rightSide {
-    display: flex;
-    flex: 50%;
-    height: 100vh;
-  }
+  // .rightSide {
+  //   display: flex;
+  //   flex: 50%;
+  //   height: 100vh;
+  // }
 
-  .leftSide {
-    display: flex;
-    flex: 50%;
-    height: 100vh;
-  }
+  // .leftSide {
+  //   display: flex;
+  //   flex: 50%;
+  //   height: 100vh;
+  // }
 
   .content {
-    color: transparentize($white, .1);
+    color: $dark-font-color;
     width: 100%;
     padding: 50px;
-    background-color: transparentize($black, .12);
+    background-color: $dark-background-color-2;
     display: flex;
     text-align: justify;
     justify-content: center;
