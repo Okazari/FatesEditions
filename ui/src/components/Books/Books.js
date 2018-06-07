@@ -19,5 +19,4 @@ const Books = ({ location, children }) => {
   )
 }
 
-
 export default Books
