@@ -1,11 +1,11 @@
 import React from 'react'
-import { Layout, Content, GameToolbar } from 'components/Layout'
+import { Layout, Content, TrialToolbar } from 'components/Layout'
 import Game from 'components/Game'
 
-const GameView = (props) => {
+const TrialView = (props) => {
   return (
     <Layout>
-      <GameToolbar />
+      <TrialToolbar />
       <Content>
         <Game {...props} />
       </Content>
@@ -13,4 +13,4 @@ const GameView = (props) => {
   )
 }
 
-export default GameView
+export default TrialView

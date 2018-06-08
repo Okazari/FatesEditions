@@ -12,6 +12,7 @@ const headers = [
 ]
 
 const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = false }) => {
+  console.log(book)
   return !!book && (
     <div>
       <div className={styles.component}>

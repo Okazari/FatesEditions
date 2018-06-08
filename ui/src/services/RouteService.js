@@ -19,6 +19,7 @@ class RouteService {
     booksnews: () => '/app/books/news',
     bookslibrary: () => '/app/books/library',
     playgame: id => `/app/play/${id}`,
+    trialgame: id => `/app/trial/${id}`,
     write: () => '/app/write',
     writedrafts: () => '/app/write/drafts',
     writepublications: () => '/app/write/publications',

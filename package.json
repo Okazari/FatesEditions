@@ -58,6 +58,7 @@
     "fs-extra": "0.30.0",
     "graphql": "^0.12.3",
     "graphql-tools": "^2.18.0",
+    "graphql-type-json": "^0.2.1",
     "gzip-size": "3.0.0",
     "html-webpack-plugin": "2.22.0",
     "jade": "~1.11.0",

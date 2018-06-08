@@ -13,7 +13,7 @@ const startGame = (book) => {
     }
   }, {})
   GameService.postResource({ book, currentPageId: book.startingPageId, stats }).then((game) => {
-    RouteService.goTo(RouteService.routes.playgame(game._id))
+    RouteService.goTo(RouteService.routes.trialgame(game._id))
   })
 }
 

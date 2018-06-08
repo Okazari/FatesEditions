@@ -20,6 +20,7 @@ import WriteDraft, {
 } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
 import GameView from './components/GameView'
+import TrialView from './components/TrialView'
 import Profile, { Password } from './components/Profile'
 
 // OLD LAYOUT
@@ -42,6 +43,7 @@ const AppRouter = () => {
             <Route path="library" component={Library} />
           </Route>
           <Route path="play/:gameId" component={GameView} />
+          <Route path="trial/:bookId" component={TrialView} />
           <Route path="write" component={MyBooks}>
             <IndexRedirect to="drafts" />
             <Route path="drafts" component={Drafts} />

@@ -1,4 +1,5 @@
 const { makeExecutableSchema } = require('graphql-tools')
+const GraphQLJSON = require('graphql-type-json')
 const Book = require('../models/BookModel')
 const Page = require('../models/PageModel')
 const Stat = require('../models/StatModel')
@@ -6,6 +7,7 @@ const User = require('../models/UserModel')
 const Effect = require('../models/EffectModel')
 const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
+const Game = require('../models/GameModel.js')
 const { getProjection } = require('./Helpers')
 const SHA512 = require('crypto-js/sha512')
 
@@ -59,7 +61,14 @@ const transitionType = `
   conditionOperator: String
 `
 
+const gameType = `
+  currentPageId : ID
+  playerId : ID
+`
+
 const typeDefs = `
+  scalar MAP
+
   type Book {
     id: ID
     ${bookType}
@@ -135,15 +144,31 @@ const typeDefs = `
     ${transitionType}
   }
 
+  type Game {
+    id: ID
+    ${gameType}
+    book: Book
+    stats: MAP
+    objects: [ID]
+  }
+
+  input GameInput {
+    id: ID!
+    ${gameType}
+    book: BookInput
+    stats: MAP
+    objects: [ID]
+  }
+
   type Query {
     books(author: ID, draft: Boolean): [Book]
     book(id: ID!): Book
     author(id: ID!): User
     page(bookId: ID!, pageId: ID!): Page
+    tryGame(bookId: ID!, playerId: ID!) : Game
   }
 
   type Mutation {
-
     createBook(author: ID!): User
     updateBook(book: BookInput!): Book
     deleteBook(id: ID!): User
@@ -179,6 +204,8 @@ const typeDefs = `
     updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Effect
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
     
+    createGame(bookId: ID!, playerId: ID!) : Game
+    
     updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
 `
@@ -210,6 +237,7 @@ const findUserById = userId => {
 }
 
 const resolvers = {
+  MAP: GraphQLJSON,
   Query: {
     book: (obj, args = {}, context, info) => {
       const { id } = args
@@ -226,6 +254,31 @@ const resolvers = {
     },
     author: (obj, { id }, context, info) => User.findById(id),
     page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
+    
+    tryGame: (_, { bookId, playerId }) => {
+      return Book.findById(bookId)
+        .then(book => {
+          const stats = book.stats.reduce((acc, stat) => {
+            return {
+              ...acc,
+              [stat._id]: stat.initialValue,
+            }
+          }, {})
+
+          const objects = book.objects.reduce((acc, object) => {
+            if (object.atStart) return [...acc, object]
+            return acc
+          }, [])
+
+          return new Game({
+            currentPageId: book.startingPageId,
+            playerId,
+            book,
+            stats,
+            objects,
+          })
+        })
+    },
   },
   Book: {
     author: (book) => {
@@ -375,6 +428,19 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     }),
+
+    createGame: (_, { bookId, playerId }) => {
+      // TODO: implement this :D
+      // const game = new Game({
+      //   playerId,
+      //   currentPageId,
+      //   bookId: book._id,
+      //   book,
+      //   bookStatus:'up-to-date',
+      //   stats,
+      // }).then(game => game)
+    },
+
     updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''
       const passwordMatch = newPassword !== confirmation
@@ -389,7 +455,7 @@ const resolvers = {
         { password: SHA512(newPassword).toString() },
       ).then(user => {
         if (!user) {
-          throw new Error('Error3')
+          throw new Error('Error')
           return null
         }
         delete user.password
