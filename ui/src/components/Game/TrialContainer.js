@@ -1,40 +1,85 @@
 import React from 'react'
-import bookJSON from 'components/book'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+import AuthService from 'services/AuthService'
 import Game from './Game'
 
-// TODO: Query Trial(bookId) : Game
-
-const createGame = (book) => {
-  return {
-    currentPageId: '5a7f12efe330ea247cf6431e',
-    book,
-    bookStatus: 'up-to-date',
-    stats: book.stats.reduce((acc, stat) => {
-      return {
-        ...acc,
-        [stat.id]: {
-          name: stat.name,
-          value: stat.initValue,
-        },
+const query = gql`
+  query tryGame($bookId: ID!, $playerId: ID!) {
+    tryGame(bookId: $bookId, playerId: $playerId) {
+      id
+      currentPageId
+      playerId
+      book {
+        name
+        tags
+        synopsis
+        cover
+        startingPageId
+        genreId
+        draft
+        creationDate
+        lastModificationDate
+        revision
+        author {
+          username
+        }
+        pages {
+          id
+          title
+          description
+          text
+          effects {
+            operator
+            subject
+            value
+            type
+          }
+          transitions {
+            fromPage
+            toPage
+            text
+            conditionOperator
+            effects {
+              operator
+              subject
+              value
+              type
+            }
+            conditions {
+              operator
+              subject
+              value
+              type
+            }
+          }
+        }
       }
-    }, {}),
-    objects: book.objects.reduce((acc, object) => {
-      return {
-        ...acc,
-        [object.id]: {
-          name: object.name,
-          possessed: object.atStart,
-        },
-      }
-    }, {}),
-    tree: [],
+      stats
+      objects
+    }
   }
+`
+// TODO: Add loading and error returns
+const TrialContainer = ({ params }) => {
+  return (
+    <Query
+      query={query}
+      variables={{
+        bookId: params.bookId,
+        playerId: AuthService.getConnectedUserId(),
+      }}
+    >
+      {
+        ({ loading, error, data }) => {
+          if (loading) return null
+          if (error) return null
+          const game = data.tryGame
+          return <Game gameId={game.id} key={game.id} game={game} />
+        }
+      }
+    </Query>
+  )
 }
 
-export default ({ params }) => (
-  <Game
-    gameId={params.gameId}
-    key={params.gameId}
-    game={createGame(bookJSON.book)}
-  />
-)
+export default TrialContainer

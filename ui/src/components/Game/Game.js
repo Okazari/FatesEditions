@@ -12,6 +12,7 @@ class Game extends React.Component {
     }
   }
 
+  // TODO: Refactor to shouldComponent Update
   componentWillUpdate(nextProps) {
     const { currentPageId } = this.state
     if (nextProps.game && currentPageId === null) {

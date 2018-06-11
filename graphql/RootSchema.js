@@ -232,8 +232,8 @@ const findBookById = (bookId) => {
   return Book.findById(bookId).then(book => easier(book, () => book.save()))
 }
 
-const findUserById = userId => {
-  return User.findById(userId).then(user => easier(user, () => user.save()))
+const findTransitionkById = (transitionId) => {
+  return Transition.findById(transitionId).then(transition => easier(transition, () => transition.save()))
 }
 
 const resolvers = {
@@ -255,30 +255,28 @@ const resolvers = {
     author: (obj, { id }, context, info) => User.findById(id),
     page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
     
-    tryGame: (_, { bookId, playerId }) => {
-      return Book.findById(bookId)
-        .then(book => {
-          const stats = book.stats.reduce((acc, stat) => {
-            return {
-              ...acc,
-              [stat._id]: stat.initialValue,
-            }
-          }, {})
+    tryGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => {
+      const stats = book.stats.reduce((acc, stat) => {
+        return {
+          ...acc,
+          [stat._id]: stat.initValue,
+        }
+      }, {})
+      
+      const objects = book.objects.reduce((acc, object) => {
+        // console.log(object.atStart)
+        if (object.atStart) return [...acc, object._id]
+        return acc
+      }, [])
 
-          const objects = book.objects.reduce((acc, object) => {
-            if (object.atStart) return [...acc, object]
-            return acc
-          }, [])
-
-          return new Game({
-            currentPageId: book.startingPageId,
-            playerId,
-            book,
-            stats,
-            objects,
-          })
-        })
-    },
+      return new Game({
+        currentPageId: book.startingPageId || book.pages[0].id,
+        playerId,
+        book,
+        stats,
+        objects,
+      })
+    }),
   },
   Book: {
     author: (book) => {
@@ -337,6 +335,14 @@ const resolvers = {
                  .save()
     }),
     deletePage: (_, { bookId, pageId }) => findBookById(bookId).then(book => {
+      book.ressource.pages.forEach((page, index) => {
+        page.transitions.forEach((transition, transitionIndex) => {
+          if (transition.toPage.toString() === pageId) {
+            book.ressource.pages[index].transitions.splice(transitionIndex, 1)
+          }
+        })
+      })
+
       return book.deleteOne('pages', pageId)
                  .save()
     }),
@@ -430,7 +436,7 @@ const resolvers = {
     }),
 
     createGame: (_, { bookId, playerId }) => {
-      // TODO: implement this :D
+      // TODO: implement this (same as tryGame Query, but saving in Database)
       // const game = new Game({
       //   playerId,
       //   currentPageId,

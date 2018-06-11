@@ -1,1 +1,1 @@
-export default from './GameContainer'
+export default from './TrialContainer'

@@ -5,17 +5,19 @@ import GenreList from './GenreList'
 import PageList from './PageList'
 import styles from './styles.scss'
 
-const startGame = (book) => {
-  const stats = book.stats.reduce((acc, stat) => {
-    return {
-      ...acc,
-      [stat._id]: stat.initValue,
-    }
-  }, {})
-  GameService.postResource({ book, currentPageId: book.startingPageId, stats }).then((game) => {
-    RouteService.goTo(RouteService.routes.trialgame(game._id))
-  })
-}
+// const tryGame = (book) => {
+//   const stats = book.stats.reduce((acc, stat) => {
+//     return {
+//       ...acc,
+//       [stat._id]: stat.initValue,
+//     }
+//   }, {})
+//   GameService.postResource({ book, currentPageId: book.startingPageId, stats }).then((game) => {
+//     RouteService.goTo(RouteService.routes.trialgame(game._id))
+//   })
+// }
+
+const tryGame = book => RouteService.goTo(RouteService.routes.trialgame(book.id))
 
 const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
   return !!book && (
@@ -75,7 +77,7 @@ const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
               onChange: startingPageId => updateBook({ startingPageId }),
             }}
           />
-          <Button domProps={{ onClick: () => { startGame(book) } }}>Essayer mon brouillon</Button>
+          <Button domProps={{ onClick: () => { tryGame(book) } }}>Essayer mon brouillon</Button>
         </div>
       </div>
     </div>
