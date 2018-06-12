@@ -1,8 +1,10 @@
 import React from 'react'
 import { SelectInput } from 'components/common'
+import EffectService from 'services/EffectService'
 import styles from './styles.scss'
 
 const ConditionObjectInput = ({ objects, condition, index, updateCondition }) => {
+  const effectService = EffectService.condition.object
   return (
     <div className={styles.component}>
       <SelectInput
@@ -32,8 +34,14 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
         }}
       >
         <option disabled value="">Choisir un opérateur</option>
-        <option value="doNotOwn">{"n'est pas possédé"}</option>
-        <option value="own">est possédé</option>
+        {
+          Object.entries(effectService).map((keyValue) => {
+            if (typeof keyValue[1] === 'object') {
+              return <option value={keyValue[1].value}>{keyValue[1].label}</option>
+            }
+            return null
+          })
+        }
       </SelectInput>
       <div className={styles.selectInput} />
     </div>

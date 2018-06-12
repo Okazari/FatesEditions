@@ -1,21 +1,9 @@
 import React from 'react'
 import { Button, Input, Book, TextAreaInput } from 'components/common'
-import { GameService, RouteService } from 'services'
+import { RouteService } from 'services'
 import GenreList from './GenreList'
 import PageList from './PageList'
 import styles from './styles.scss'
-
-// const tryGame = (book) => {
-//   const stats = book.stats.reduce((acc, stat) => {
-//     return {
-//       ...acc,
-//       [stat._id]: stat.initValue,
-//     }
-//   }, {})
-//   GameService.postResource({ book, currentPageId: book.startingPageId, stats }).then((game) => {
-//     RouteService.goTo(RouteService.routes.trialgame(game._id))
-//   })
-// }
 
 const tryGame = book => RouteService.goTo(RouteService.routes.trialgame(book.id))
 

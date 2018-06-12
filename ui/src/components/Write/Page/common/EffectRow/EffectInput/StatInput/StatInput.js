@@ -1,8 +1,11 @@
 import React from 'react'
 import { Input, SelectInput } from 'components/common'
+import EffectService from 'services/EffectService'
 import styles from './styles.scss'
 
 const StatInput = ({ stats, effect, index, updateEffect }) => {
+  const effectService = EffectService.effect.stat
+
   return (
     <div className={styles.component}>
       <SelectInput
@@ -23,11 +26,14 @@ const StatInput = ({ stats, effect, index, updateEffect }) => {
         }}
       >
         <option disabled value="">Choisir un operateur</option>
-        <option value="aff">Prends la valeur de</option>
-        <option value="dec">diminue de</option>
-        <option value="div">est divisé par</option>
-        <option value="inc">augmente de</option>
-        <option value="mul">est multiplié par</option>
+        {
+          Object.entries(effectService).map((keyValue) => {
+            if (typeof keyValue[1] === 'object') {
+              return <option value={keyValue[1].value}>{keyValue[1].label}</option>
+            }
+            return null
+          })
+        }
       </SelectInput>
       <Input
         className={styles.input}

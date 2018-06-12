@@ -1,8 +1,10 @@
 import React from 'react'
 import { Input, SelectInput } from 'components/common'
+import EffectService from 'services/EffectService'
 import styles from './styles.scss'
 
 const ConditionStatInput = ({ stats, condition, index, updateCondition }) => {
+  const effectService = EffectService.condition.stat
   return (
     <div className={styles.component}>
       <SelectInput
@@ -23,12 +25,14 @@ const ConditionStatInput = ({ stats, condition, index, updateCondition }) => {
         }}
       >
         <option disabled value="">Choisir un opérateur</option>
-        <option value="equal">est égale à</option>
-        <option value="less">est inférieur</option>
-        <option value="lessOrEqual">est inférieur ou égale à</option>
-        <option value="more">est supérieur à</option>
-        <option value="moreOrEqual">est supérieur ou égale à</option>
-        <option value="notEqual">est différent de</option>
+        {
+          Object.entries(effectService).map((keyValue) => {
+            if (typeof keyValue[1] === 'object') {
+              return <option value={keyValue[1].value}>{keyValue[1].label}</option>
+            }
+            return null
+          })
+        }
       </SelectInput>
       <Input
         className={styles.input}

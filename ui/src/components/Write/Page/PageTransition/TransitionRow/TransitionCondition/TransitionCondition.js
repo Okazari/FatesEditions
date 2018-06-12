@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, SelectInput } from 'components/common'
+import EffectService from 'services/EffectService'
 import ConditionRow from './ConditionRow'
 import styles from './styles.scss'
 
@@ -17,6 +18,8 @@ const TransitionCondition = ({
     updateResource(index, transition)
   }
 
+  const effectService = EffectService.conditionOperator
+
   return (
     <div>
       <div className={styles.conditionHeader}>
@@ -30,8 +33,14 @@ const TransitionCondition = ({
               updateResource(index, { ...transition, conditionOperator }),
           }}
         >
-          <option value="and">ET</option>
-          <option value="or">OU</option>
+          {
+            Object.entries(effectService).map((keyValue) => {
+              if (typeof keyValue[1] === 'object') {
+                return <option value={keyValue[1].value}>{keyValue[1].label}</option>
+              }
+              return null
+            })
+          }
         </SelectInput>
       </div>
       <div className={styles.conditionEffect}>
