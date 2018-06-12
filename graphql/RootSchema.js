@@ -335,14 +335,14 @@ const resolvers = {
                  .save()
     }),
     deletePage: (_, { bookId, pageId }) => findBookById(bookId).then(book => {
-      book.ressource.pages.forEach((page, index) => {
-        page.transitions.forEach((transition, transitionIndex) => {
-          if (transition.toPage.toString() === pageId) {
-            book.ressource.pages[index].transitions.splice(transitionIndex, 1)
+
+      book.ressource.pages.map((page, index, array) => {
+        page.transitions.map((transition, transitionIndex, transitionArray) => {
+          if (transition.toPage && transition.toPage.toString() === pageId) {
+            transitionArray.splice(transitionIndex, 1)
           }
         })
       })
-
       return book.deleteOne('pages', pageId)
                  .save()
     }),
