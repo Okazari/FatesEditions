@@ -5,7 +5,7 @@ import Game from 'components/Game'
 const TrialView = (props) => {
   return (
     <Layout>
-      <TrialToolbar />
+      <TrialToolbar {...props} />
       <Content>
         <Game {...props} />
       </Content>

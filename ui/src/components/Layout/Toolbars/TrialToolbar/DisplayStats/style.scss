@@ -1,0 +1,12 @@
+@import '~styles/colors';
+
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $dark-primary-color;
+  font-size: 1.2em;
+  &>div {
+    text-align: center;
+  }
+}

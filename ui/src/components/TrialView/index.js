@@ -1,1 +1,1 @@
-export default from './TrialView'
+export default from './TrialViewContainer'

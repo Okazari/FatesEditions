@@ -2,7 +2,7 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import AuthService from 'services/AuthService'
-import Game from './Game'
+import TrialView from './TrialView'
 
 const query = gql`
   query tryGame($bookId: ID!, $playerId: ID!) {
@@ -21,6 +21,22 @@ const query = gql`
         creationDate
         lastModificationDate
         revision
+        stats {
+          id
+          name
+          description
+          initValue
+          max
+          min
+          visible
+        }
+        objects {
+          id
+          name
+          description
+          atStart
+          visible
+        }
         author {
           username
         }
@@ -61,7 +77,7 @@ const query = gql`
   }
 `
 // TODO: Add loading and error returns
-const TrialContainer = ({ params }) => {
+const TrialViewContainer = ({ params }) => {
   return (
     <Query
       query={query}
@@ -75,11 +91,11 @@ const TrialContainer = ({ params }) => {
           if (loading) return null
           if (error) return null
           const game = data.tryGame
-          return <Game gameId={game.id} key={game.id} game={game} />
+          return <TrialView gameId={game.id} key={game.id} game={game} />
         }
       }
     </Query>
   )
 }
 
-export default TrialContainer
+export default TrialViewContainer

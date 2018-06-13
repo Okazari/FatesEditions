@@ -1,6 +1,6 @@
 import React from 'react'
 import bookJSON from 'components/book'
-import Game from './Game'
+import GameView from './GameView'
 
 const createGame = (book) => {
   return {
@@ -30,7 +30,7 @@ const createGame = (book) => {
 }
 
 export default ({ params }) => (
-  <Game
+  <GameView
     gameId={params.gameId}
     key={params.gameId}
     game={createGame(bookJSON.book)}

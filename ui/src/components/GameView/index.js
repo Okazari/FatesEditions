@@ -1,1 +1,1 @@
-export default from './GameView'
+export default from './GameViewContainer'
