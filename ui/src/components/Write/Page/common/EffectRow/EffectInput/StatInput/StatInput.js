@@ -29,7 +29,7 @@ const StatInput = ({ stats, effect, index, updateEffect }) => {
         {
           Object.entries(effectService).map((keyValue) => {
             if (typeof keyValue[1] === 'object') {
-              return <option value={keyValue[1].value}>{keyValue[1].label}</option>
+              return <option key={keyValue[0]} value={keyValue[0]}>{keyValue[1].label}</option>
             }
             return null
           })

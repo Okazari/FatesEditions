@@ -2,7 +2,6 @@ class EffectService {
   effect = {
     object: {
       label: 'L\'objet',
-      value: 'object',
       add: {
         label: 'est ajouté',
         exec: (value, modifier) => {},
@@ -14,7 +13,6 @@ class EffectService {
     },
     stat: {
       label: 'La statistique',
-      value: 'stat',
       inc: {
         label: 'augmente de',
         value: 'inc',
@@ -47,7 +45,6 @@ class EffectService {
     label: 'Condition',
     object: {
       label: 'L\'objet',
-      value: 'object',
       own: {
         label: 'est possédé',
         exec: () => {},
@@ -59,7 +56,6 @@ class EffectService {
     },
     stat: {
       label: 'La statistique',
-      value: 'stat',
       equal: {
         label: 'est égal à',
         exec: (initValue, conditionValue) => initValue === conditionValue,
@@ -90,12 +86,10 @@ class EffectService {
   conditionOperator = {
     and: {
       label: 'ET',
-      value: 'and',
       exec: () => {},
     },
     or: {
       label: 'OU',
-      value: 'or',
       exec: () => {},
     },
   }

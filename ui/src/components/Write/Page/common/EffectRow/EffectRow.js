@@ -24,13 +24,13 @@ const EffectRow = ({ book, effect, index, updateEffect, removeEffect }) => {
         >
           <option disabled value="">Source de l&apos;effet</option>
           {
-            Object.entries(effectService).map((keyValue) => {
-              if (typeof keyValue[1] === 'object') {
-                return <option value={keyValue[1].value}>{keyValue[1].label}</option>
-              }
-              return null
-            })
-          }
+          Object.entries(effectService).map((keyValue) => {
+            if (typeof keyValue[1] === 'object') {
+              return <option key={keyValue[0]} value={keyValue[0]}>{keyValue[1].label}</option>
+            }
+            return null
+          })
+        }
         </SelectInput>
         <EffectInput
           book={book}

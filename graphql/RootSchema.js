@@ -8,7 +8,6 @@ const Effect = require('../models/EffectModel')
 const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
 const Game = require('../models/GameModel.js')
-const { getProjection } = require('./Helpers')
 const SHA512 = require('crypto-js/sha512')
 
 const bookType = `
@@ -230,10 +229,6 @@ const easier = (ressource, save) => {
 
 const findBookById = (bookId) => {
   return Book.findById(bookId).then(book => easier(book, () => book.save()))
-}
-
-const findTransitionkById = (transitionId) => {
-  return Transition.findById(transitionId).then(transition => easier(transition, () => transition.save()))
 }
 
 const resolvers = {
