@@ -8,7 +8,7 @@ const DisplayStats = ({ game }) => {
         Object.entries(game.stats).map((stat) => {
           const name = game.book.stats.find(current => current.id === stat[0]).name
           return (
-            <div>
+            <div key={stat[0]}>
               <div className={styles.name}>{name}</div>
               <div>{stat[1]}</div>
             </div>

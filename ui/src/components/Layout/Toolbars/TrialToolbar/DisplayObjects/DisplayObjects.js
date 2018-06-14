@@ -8,7 +8,7 @@ const DisplayObjects = ({ game }) => {
       {
         game.objects.map((objectId) => {
           const name = game.book.objects.find(current => current.id === objectId).name
-          return <div className={styles.item}>{name}</div>
+          return <div key={objectId} className={styles.item}>{name}</div>
         })
       }
     </div>

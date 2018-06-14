@@ -52,17 +52,20 @@ const query = gql`
             type
           }
           transitions {
+            id
             fromPage
             toPage
             text
             conditionOperator
             effects {
+              id
               operator
               subject
               value
               type
             }
             conditions {
+              id
               operator
               subject
               value
@@ -91,6 +94,7 @@ const TrialViewContainer = ({ params }) => {
           if (loading) return null
           if (error) return null
           const game = data.tryGame
+          console.log(game)
           return <TrialView gameId={game.id} key={game.id} game={game} />
         }
       }
@@ -98,4 +102,5 @@ const TrialViewContainer = ({ params }) => {
   )
 }
 
+// Create Store and populate it with data from graphQL response
 export default TrialViewContainer
