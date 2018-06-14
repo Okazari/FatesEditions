@@ -7,11 +7,6 @@ const stat = (state = {}, { type, id, value }) => {
         ...state,
         [id]: value,
       })
-    case 'MODIFY_STAT':
-      //TODO: find and modify the stat
-      let newState = {...state}
-      delete newState[id]
-      return newState
     default:
       return state;
   }

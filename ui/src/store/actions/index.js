@@ -1,5 +1,5 @@
 export const addStat = ({ id, value }) => ({
-  type: 'ADD_STAT',
+  type: 'STAT',
   id,
   value,
 })
