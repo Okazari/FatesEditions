@@ -331,10 +331,10 @@ const resolvers = {
     }),
     deletePage: (_, { bookId, pageId }) => findBookById(bookId).then(book => {
 
-      book.ressource.pages.map((page, index, array) => {
-        page.transitions.map((transition, transitionIndex, transitionArray) => {
-          if (transition.toPage && transition.toPage.toString() === pageId) {
-            transitionArray.splice(transitionIndex, 1)
+      book.ressource.pages.forEach(page => {
+        page.transitions.forEach(transition => {
+          if (transition.toPage && transition.toPage === pageId) {
+            transition.toPage = undefined
           }
         })
       })
