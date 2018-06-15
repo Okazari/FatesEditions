@@ -15,7 +15,7 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
           onChange: subject => updateCondition({ subject }),
         }}
       >
-        <option disabled value="">Choisir un objet</option>
+        <option disabled value="">Choisir un objet</option>key
         {
           objects.map(object => (
             <option
@@ -37,7 +37,7 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
         <option disabled value="">Choisir un opérateur</option>
         {
           Object.entries(objectConditions).map(([key, conditionModel]) => {
-            if (typeof condition === 'object') {
+            if (typeof conditionModel === 'object') {
               return <option key={key} value={key}>{conditionModel.label}</option>
             }
             return null

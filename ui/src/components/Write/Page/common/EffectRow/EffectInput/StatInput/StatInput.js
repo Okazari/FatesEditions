@@ -29,7 +29,7 @@ const StatInput = ({ stats, effect, index, updateEffect }) => {
         {
           Object.entries(statEffect).map(([key, effectModel]) => {
             if (typeof effectModel === 'object') {
-              return <option key={key} value={key}>{key.label}</option>
+              return <option key={key} value={key}>{effectModel.label}</option>
             }
             return null
           })
