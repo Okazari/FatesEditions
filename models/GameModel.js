@@ -10,6 +10,7 @@ const GameSchema = new Schema({
   book: Book,
   bookStatus: String,
   stats: Schema.Types.Mixed,
+  objects: Schema.Types.Mixed,
   tree: [{ Type: Schema.Types.Mixed, default: [] }],
 })
 

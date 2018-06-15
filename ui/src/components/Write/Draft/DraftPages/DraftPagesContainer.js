@@ -3,23 +3,15 @@ import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import DraftPages from './DraftPages'
 
-const corePage = `
-  id
-  title
-  description
-`
-
-const core = `
-  id
-  pages {
-    ${corePage}
-  }
-`
-
 const query = gql`
   query BookById ($id: ID!) {
     book(id: $id) {
-      ${core}
+      id
+      pages {
+        id
+        title
+        description
+      }
     }
   }
 `
@@ -38,7 +30,12 @@ const queryOptions = {
 const addMutation = gql`
   mutation addPage($bookId: ID!) {
     createPage(bookId: $bookId) {
-      ${core}
+      id
+      pages {
+        id
+        title
+        description
+      }
     }
   }
 `
@@ -50,7 +47,15 @@ const addMutationOptions = {
 const removeMutation = gql`
   mutation removePage($bookId: ID!, $pageId: ID!) {
     deletePage(bookId: $bookId, pageId: $pageId) {
-      ${core}
+      id
+      pages {
+        id
+        title
+        transitions {
+          toPage
+        }
+        description
+      }
     }
   }
 `

@@ -1,7 +1,10 @@
 import React from 'react'
 import { SelectInput } from 'components/common'
+import EffectService from 'services/EffectService'
 import ConditionInput from './ConditionInput'
 import styles from './styles.scss'
+
+const conditionType = EffectService.condition
 
 const ConditionRow = ({ book, condition, index, updateCondition, removeCondition }) => {
   const _updateCondition = _condition => updateCondition({ id: condition.id, ..._condition })
@@ -21,8 +24,14 @@ const ConditionRow = ({ book, condition, index, updateCondition, removeCondition
           }}
         >
           <option disabled value="">{"Source de l'effet"}</option>
-          <option value="object">{"L'objet"}</option>
-          <option value="stat">La statistique</option>
+          {
+            Object.entries(conditionType).map(([key, conditionModel]) => {
+              if (typeof conditionModel === 'object') {
+                return <option key={key} value={key}>{conditionModel.label}</option>
+              }
+              return null
+            })
+          }
         </SelectInput>
         <ConditionInput
           book={book}

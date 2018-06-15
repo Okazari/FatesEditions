@@ -8,6 +8,6 @@ module.exports = new Schema({
   text: String,
   description: String,
   backgroundMusic: String,
-  transitions: [Transition],
+  transitions: {type:[Transition], default: []},
   effects: [Effect],
 }, { minimize: false })
