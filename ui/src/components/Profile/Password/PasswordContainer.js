@@ -23,39 +23,20 @@ const mutation = gql`
   }
 `
 
-const PasswordContainer = () => {
-  return (
-    <Mutation mutation={mutation}>
-      {
-        (updatePassword, state) => {
-          const _updatePassword = passwordsData => updatePassword({
-            variables: {
-              userId: AuthService.getConnectedUserId(),
-              ...passwordsData,
-            },
-          })
-          return <Password updatePassword={_updatePassword} state={state} />
-        }
+const PasswordContainer = () => (
+  <Mutation mutation={mutation}>
+    {
+      (updatePassword, state) => {
+        const _updatePassword = passwordsData => updatePassword({
+          variables: {
+            userId: AuthService.getConnectedUserId(),
+            ...passwordsData,
+          },
+        })
+        return <Password updatePassword={_updatePassword} state={state} />
       }
-    </Mutation>
-  )
-}
+    }
+  </Mutation>
+)
 
 export default PasswordContainer
-// const mutationOptions = {
-//   name: 'updatePassword',
-// }
-
-// const PasswordContainer = (props) => {
-//   let error
-//   const { updatePassword } = props
-//   const _updatePassword = passwordsData => updatePassword({
-//     variables: {
-//       userId: AuthService.getConnectedUserId(),
-//       ...passwordsData,
-//     },
-//   })
-//   return <Password {...props} updatePassword={_updatePassword} error={error} />
-// }
-
-// export default graphql(mutation, mutationOptions)(PasswordContainer)

@@ -1,6 +1,9 @@
 import React from 'react'
 import { SelectInput } from 'components/common'
+import EffectService from 'services/EffectService'
 import styles from './styles.scss'
+
+const objectEffect = EffectService.effect.object
 
 const ObjectInput = ({ objects, effect, index, updateEffect }) => {
   return (
@@ -23,8 +26,14 @@ const ObjectInput = ({ objects, effect, index, updateEffect }) => {
         }}
       >
         <option disabled value="">Choisir un operateur</option>
-        <option value="add">est ajouté</option>
-        <option value="remove">est retiré</option>
+        {
+          Object.entries(objectEffect).map(([key, effectModel]) => {
+            if (typeof effectModel === 'object') {
+              return <option key={key} value={key}>{effectModel.label}</option>
+            }
+            return null
+          })
+        }
       </SelectInput>
       <div className={styles.selectInput} />
     </div>

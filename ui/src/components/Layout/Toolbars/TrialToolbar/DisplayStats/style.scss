@@ -1,0 +1,17 @@
+@import '~styles/colors';
+
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $dark-primary-color;
+  font-size: 1.1em;
+  &>div {
+    text-align: center;
+    padding-bottom: 10px;
+  }
+}
+
+.name {
+  font-weight: bold;
+}

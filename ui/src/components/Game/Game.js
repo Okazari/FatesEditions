@@ -12,6 +12,7 @@ class Game extends React.Component {
     }
   }
 
+  // TODO: Refactor to shouldComponent Update
   componentWillUpdate(nextProps) {
     const { currentPageId } = this.state
     if (nextProps.game && currentPageId === null) {
@@ -38,9 +39,6 @@ class Game extends React.Component {
     return !!currentPageId && (
       <div className={styles.wrapper}>
         <div className={styles.content}>
-          <div className={styles.close} onClick={onClose}>
-            x
-          </div>
           <GamePage
             page={game.book.pages.find(page => page.id === currentPageId)}
             hoverTransition={this.hoverTransition}
