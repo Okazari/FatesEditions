@@ -5,12 +5,8 @@
   justify-content: space-between;
   background-color: $dark-background-color-1;
   padding: 10px 30px;
-  margin-top: 20px;
+  margin: 10px 0;
   width: 100%;
-
-  &:last-of-type {
-    margin-bottom: 30px;
-  }
 }
 
 .disabled {
