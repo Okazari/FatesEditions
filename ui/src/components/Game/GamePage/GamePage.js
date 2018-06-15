@@ -21,7 +21,7 @@ const GamePage = ({ page = {}, hoverTransition, outTransition, changePage }) => 
       />
       <div className={styles.gameTransitions}>
         {
-          page.transitions.map(transition => <GameTransition
+          !!page.transitions && page.transitions.map(transition => <GameTransition
             key={transition.id}
             transition={transition}
             hoverTransition={hoverTransition}

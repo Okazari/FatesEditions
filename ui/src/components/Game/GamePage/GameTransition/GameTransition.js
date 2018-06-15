@@ -4,16 +4,10 @@ import Button from 'components/common/Button'
 import styles from './styles.scss'
 
 const GameTransition = ({ transition, hoverTransition, outTransition, changePage }) => {
-  let onClick = () => changePage(transition.toPage)
-  let className = styles.transitionButton
-  let errorMessage
-
-  // change onClick and Style
-  if (transition.toPage === null) {
-    onClick = () => {}
-    className = classnames(styles.transitionButton, styles.disabled)
-    errorMessage = <div>Page de destination manquante</div>
-  }
+  const onClick = () => transition.toPage && changePage(transition.toPage)
+  const className = classnames(styles.transitionButton, { 
+    [styles.disabled]: transition.toPage === null
+  })
 
   return (
     <Button
@@ -25,7 +19,7 @@ const GameTransition = ({ transition, hoverTransition, outTransition, changePage
       className={className}
     >
       {transition.text}
-      {errorMessage}
+      {!transition.toPage && <div>Page de destination manquante</div>}
     </Button>
   )
 }
