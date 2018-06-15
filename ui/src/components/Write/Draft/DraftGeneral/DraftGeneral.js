@@ -65,7 +65,7 @@ const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
               onChange: startingPageId => updateBook({ startingPageId }),
             }}
           />
-          <Button domProps={{ onClick: () => { tryGame(book) } }}>Essayer mon brouillon</Button>
+          <Button domProps={{ onClick: () => tryGame(book) }}>Essayer mon brouillon</Button>
         </div>
       </div>
     </div>

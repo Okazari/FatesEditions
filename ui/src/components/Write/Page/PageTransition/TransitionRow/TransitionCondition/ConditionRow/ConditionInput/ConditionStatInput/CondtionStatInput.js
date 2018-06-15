@@ -3,8 +3,9 @@ import { Input, SelectInput } from 'components/common'
 import EffectService from 'services/EffectService'
 import styles from './styles.scss'
 
+const statConditions = EffectService.condition.stat
+
 const ConditionStatInput = ({ stats, condition, index, updateCondition }) => {
-  const effectService = EffectService.condition.stat
   return (
     <div className={styles.component}>
       <SelectInput
@@ -26,9 +27,9 @@ const ConditionStatInput = ({ stats, condition, index, updateCondition }) => {
       >
         <option disabled value="">Choisir un opérateur</option>
         {
-          Object.entries(effectService).map((keyValue) => {
-            if (typeof keyValue[1] === 'object') {
-              return <option key={keyValue[0]} value={keyValue[0]}>{keyValue[1].label}</option>
+          Object.entries(statConditions).map(([key, statModel]) => {
+            if (typeof statModel === 'object') {
+              return <option key={key} value={key}>{statModel.label}</option>
             }
             return null
           })

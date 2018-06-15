@@ -5,12 +5,12 @@ const DisplayStats = ({ game }) => {
   return (
     <div className={styles.component}>
       {
-        Object.entries(game.stats).map((stat) => {
-          const name = game.book.stats.find(current => current.id === stat[0]).name
+        Object.entries(game.stats).map(([key, value]) => {
+          const name = game.book.stats.find(current => current.id === key).name
           return (
-            <div key={stat[0]}>
+            <div key={key}>
               <div className={styles.name}>{name}</div>
-              <div>{stat[1]}</div>
+              <div>{value}</div>
             </div>
           )
         })

@@ -4,12 +4,13 @@ import EffectService from 'services/EffectService'
 import EffectInput from './EffectInput'
 import styles from './styles.scss'
 
+const effectType = EffectService.effect
+
 const EffectRow = ({ book, effect, index, updateEffect, removeEffect }) => {
   const doUpdateEffect = (changes) => {
     updateEffect({ id: effect.id, ...changes })
   }
 
-  const effectService = EffectService.effect
 
   return !!book && (
     <div className={styles.component}>
@@ -24,9 +25,9 @@ const EffectRow = ({ book, effect, index, updateEffect, removeEffect }) => {
         >
           <option disabled value="">Source de l&apos;effet</option>
           {
-          Object.entries(effectService).map((keyValue) => {
-            if (typeof keyValue[1] === 'object') {
-              return <option key={keyValue[0]} value={keyValue[0]}>{keyValue[1].label}</option>
+          Object.entries(effectType).map(([key, effectModel]) => {
+            if (typeof effectModel === 'object') {
+              return <option key={key} value={key}>{effectModel.label}</option>
             }
             return null
           })

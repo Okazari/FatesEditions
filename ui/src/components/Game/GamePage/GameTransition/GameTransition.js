@@ -5,8 +5,8 @@ import styles from './styles.scss'
 
 const GameTransition = ({ transition, hoverTransition, outTransition, changePage }) => {
   const onClick = () => transition.toPage && changePage(transition.toPage)
-  const className = classnames(styles.transitionButton, { 
-    [styles.disabled]: transition.toPage === null
+  const className = classnames(styles.transitionButton, {
+    [styles.disabled]: transition.toPage === null,
   })
 
   return (

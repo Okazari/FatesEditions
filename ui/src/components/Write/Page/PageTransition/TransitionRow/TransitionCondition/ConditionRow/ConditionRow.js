@@ -4,9 +4,10 @@ import EffectService from 'services/EffectService'
 import ConditionInput from './ConditionInput'
 import styles from './styles.scss'
 
+const conditionType = EffectService.condition
+
 const ConditionRow = ({ book, condition, index, updateCondition, removeCondition }) => {
   const _updateCondition = _condition => updateCondition({ id: condition.id, ..._condition })
-  const effectService = EffectService.condition
   return (
     <div className={styles.component}>
       <div>
@@ -24,9 +25,9 @@ const ConditionRow = ({ book, condition, index, updateCondition, removeCondition
         >
           <option disabled value="">{"Source de l'effet"}</option>
           {
-            Object.entries(effectService).map((keyValue) => {
-              if (typeof keyValue[1] === 'object') {
-                return <option key={keyValue[0]} value={keyValue[0]}>{keyValue[1].label}</option>
+            Object.entries(conditionType).map(([key, conditionModel]) => {
+              if (typeof conditionModel === 'object') {
+                return <option key={key} value={key}>{conditionModel.label}</option>
               }
               return null
             })

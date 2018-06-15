@@ -4,6 +4,8 @@ import EffectService from 'services/EffectService'
 import ConditionRow from './ConditionRow'
 import styles from './styles.scss'
 
+const operatorConditions = EffectService.conditionOperator
+
 const TransitionCondition = ({
   book,
   transition,
@@ -18,7 +20,6 @@ const TransitionCondition = ({
     updateResource(index, transition)
   }
 
-  const effectService = EffectService.conditionOperator
 
   return (
     <div>
@@ -34,9 +35,9 @@ const TransitionCondition = ({
           }}
         >
           {
-            Object.entries(effectService).map((keyValue) => {
-              if (typeof keyValue[1] === 'object') {
-                return <option key={keyValue[0]} value={keyValue[0]}>{keyValue[1].label}</option>
+            Object.entries(operatorConditions).map(([key, operatorModel]) => {
+              if (typeof operatorModel === 'object') {
+                return <option key={key} value={key}>{operatorModel.label}</option>
               }
               return null
             })
