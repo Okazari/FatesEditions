@@ -58,6 +58,7 @@
     "fs-extra": "0.30.0",
     "graphql": "^0.12.3",
     "graphql-tools": "^2.18.0",
+    "graphql-type-json": "^0.2.1",
     "gzip-size": "3.0.0",
     "html-webpack-plugin": "2.22.0",
     "jade": "~1.11.0",
@@ -91,13 +92,16 @@
     "material-design-icons": "^3.0.1",
     "normalize": "^0.3.1",
     "normalize.css": "^4.2.0",
+    "normalizr": "^3.2.4",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.0.0-beta.6",
+    "react-redux": "^5.0.7",
     "react-router": "^3.0.0",
-    "react-transition-group": "^2.0.2"
+    "react-transition-group": "^2.0.2",
+    "redux": "^4.0.0"
   }
 }

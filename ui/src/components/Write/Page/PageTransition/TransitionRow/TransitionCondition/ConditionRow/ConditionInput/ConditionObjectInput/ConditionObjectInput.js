@@ -1,6 +1,9 @@
 import React from 'react'
 import { SelectInput } from 'components/common'
+import EffectService from 'services/EffectService'
 import styles from './styles.scss'
+
+const objectConditions = EffectService.condition.object
 
 const ConditionObjectInput = ({ objects, condition, index, updateCondition }) => {
   return (
@@ -12,7 +15,7 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
           onChange: subject => updateCondition({ subject }),
         }}
       >
-        <option disabled value="">Choisir un objet</option>
+        <option disabled value="">Choisir un objet</option>key
         {
           objects.map(object => (
             <option
@@ -32,8 +35,14 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
         }}
       >
         <option disabled value="">Choisir un opérateur</option>
-        <option value="doNotOwn">{"n'est pas possédé"}</option>
-        <option value="own">est possédé</option>
+        {
+          Object.entries(objectConditions).map(([key, conditionModel]) => {
+            if (typeof conditionModel === 'object') {
+              return <option key={key} value={key}>{conditionModel.label}</option>
+            }
+            return null
+          })
+        }
       </SelectInput>
       <div className={styles.selectInput} />
     </div>

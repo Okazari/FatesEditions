@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Content, Toolbar, Tabs, TabContent } from '../Layout'
+import { Layout, Content, AppToolbar, Tabs, TabContent } from '../Layout'
 import { RouteService } from '../../services'
 
 const tabDrafts = { label: 'Mes brouillons', link: RouteService.routes.writedrafts() }
@@ -11,7 +11,7 @@ const tabs = [tabDrafts, tabBooks, tabPublish]
 const MyBooks = ({ location, children, loading }) => {
   return (
     <Layout>
-      <Toolbar />
+      <AppToolbar />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         <TabContent>

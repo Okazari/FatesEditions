@@ -1,6 +1,6 @@
 import React from 'react'
 // import styles from './style.scss'
-import { Layout, Content, Toolbar, Tabs } from '../Layout'
+import { Layout, Content, AppToolbar, Tabs } from '../Layout'
 import { RouteService } from '../../services'
 
 const tabNews = { label: 'Nouveautés', link: RouteService.routes.booksnews() }
@@ -10,7 +10,7 @@ const tabs = [tabNews, tabLibrary]
 const Books = ({ location, children }) => {
   return (
     <Layout>
-      <Toolbar />
+      <AppToolbar />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         {children}
@@ -18,6 +18,5 @@ const Books = ({ location, children }) => {
     </Layout>
   )
 }
-
 
 export default Books
