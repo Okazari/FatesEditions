@@ -106,10 +106,10 @@ const TrialViewContainer = ({ params }) => {
 
 // TODO: Create Store and populate it with data from graphQL response (TDD!)
 const NormalizeAndStoreData = (props) => {
-  console.log('graphqlResponse : ', props.game)
+  // console.log('graphqlResponse : ', props.game)
 
   const result = normalize(props.game.book, schemas.book)
-  console.log('normalizedBook : ', result)
+  // console.log('normalizedBook : ', result)
 
   return (
     <TrialView {...props} />
