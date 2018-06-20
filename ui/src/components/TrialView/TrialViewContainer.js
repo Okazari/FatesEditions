@@ -13,6 +13,7 @@ const query = gql`
       currentPageId
       playerId
       book {
+        id
         name
         tags
         synopsis
