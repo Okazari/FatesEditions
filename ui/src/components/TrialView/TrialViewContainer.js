@@ -1,10 +1,8 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { normalize } from 'normalizr'
 import AuthService from 'services/AuthService'
-import * as schemas from 'store/schema'
-import TrialView from './TrialView'
+import TrialViewReduxContainer from './TrialViewReduxContainer'
 
 const query = gql`
   query tryGame($bookId: ID!, $playerId: ID!) {
@@ -98,22 +96,10 @@ const TrialViewContainer = ({ params }) => {
           if (loading) return null
           if (error) return null
           const game = data.tryGame
-          return <NormalizeAndStoreData gameId={game.id} key={game.id} game={game} />
+          return <TrialViewReduxContainer gameId={game.id} key={game.id} game={game} />
         }
       }
     </Query>
-  )
-}
-
-// TODO: Create Store and populate it with data from graphQL response (TDD!)
-const NormalizeAndStoreData = (props) => {
-  // console.log('graphqlResponse : ', props.game)
-
-  const result = normalize(props.game.book, schemas.book)
-  // console.log('normalizedBook : ', result)
-
-  return (
-    <TrialView {...props} />
   )
 }
 
