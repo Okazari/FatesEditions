@@ -26,7 +26,6 @@ const GamePage = ({ page = {}, hoverTransition, outTransition }) => {
             transitionId={transitionId}
             hoverTransition={hoverTransition}
             outTransition={outTransition}
-            // changePage={changePage}
           />)
         }
       </div>

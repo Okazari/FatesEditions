@@ -58,11 +58,11 @@ class EffectService {
       label: 'La statistique',
       equal: {
         label: 'est égal à',
-        exec: (initValue, conditionValue) => initValue === conditionValue,
+        exec: (initValue, conditionValue) => initValue == conditionValue,
       },
       notEqual: {
         label: 'est différent de',
-        exec: (initValue, conditionValue) => initValue !== conditionValue,
+        exec: (initValue, conditionValue) => initValue != conditionValue,
       },
       more: {
         label: 'est supérieur à',
