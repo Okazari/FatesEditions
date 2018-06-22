@@ -1,1 +1,1 @@
-export default from './DisplayObjects'
+export default from './DisplayObjectsContainer'
