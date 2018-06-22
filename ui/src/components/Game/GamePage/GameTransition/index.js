@@ -1,1 +1,1 @@
-export default from './GameTransition'
+export default from './GameTransitionContainer'

@@ -25,3 +25,4 @@ const GameTransition = ({ transition, hoverTransition, outTransition, changePage
 }
 
 export default GameTransition
+

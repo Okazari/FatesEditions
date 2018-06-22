@@ -9,9 +9,9 @@ const StoreData = (props) => {
   const normalizedBook = normalize(props.game.book, schemas.book)
   const newGameState = { ...props.game }
   delete newGameState.book
-  props.dispatch(actions.initBook(normalizedBook))
+  props.dispatch(actions.initBook(normalizedBook.entities))
   props.dispatch(actions.changeGameState(newGameState))
-  return <TrialView {...props} />
+  return <TrialView />
 }
 
 export default connect()(StoreData)

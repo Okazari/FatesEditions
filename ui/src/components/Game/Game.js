@@ -3,22 +3,23 @@ import styles from './styles.scss'
 import GamePage from './GamePage'
 // import GameTree from './GameTree'
 
+// TODO: Refactor this Statefull comp to a Recompose HOC Structure
 class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentPageId: props.game.currentPageId,
+      // currentPageId: props.currentPageId,
       hoverNode: null,
     }
   }
 
   // TODO: Refactor to shouldComponent Update
-  componentWillUpdate(nextProps) {
-    const { currentPageId } = this.state
-    if (nextProps.game && currentPageId === null) {
-      this.setState({ currentPageId: nextProps.game.currentPageId })
-    }
-  }
+  // componentWillUpdate(nextProps) {
+  //   const { currentPageId } = this.state
+  //   if (nextProps.currentPageId && currentPageId === null) {
+  //     this.setState({ currentPageId: nextProps.currentPageId })
+  //   }
+  // }
 
   hoverTransition = (hoverNode) => {
     this.setState({ hoverNode })
@@ -28,22 +29,21 @@ class Game extends React.Component {
     this.setState({ hoverNode: null })
   }
 
-  changePage = (currentPageId) => {
-    const { game } = this.props
-    this.setState({ currentPageId })
-  }
+  // changePage = (currentPageId) => {
+  //   const { game } = this.props
+  //   this.setState({ currentPageId })
+  // }
 
   render() {
-    const { game, onClose, updateResource } = this.props
-    const { currentPageId, hoverNode } = this.state
-    return !!currentPageId && (
+    const { hoverNode } = this.state
+    return (
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <GamePage
-            page={game.book.pages.find(page => page.id === currentPageId)}
+            // page={game.book.entities.page[currentPageId]}
             hoverTransition={this.hoverTransition}
             outTransition={this.outTransition}
-            changePage={this.changePage}
+            // changePage={this.changePage}
           />
         </div>
       </div>
