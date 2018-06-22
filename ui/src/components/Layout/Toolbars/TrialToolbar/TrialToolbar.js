@@ -12,7 +12,7 @@ const TrialToolbar = () => {
     <div className={styles.component}>
       <div className={styles.top}>
         <img className={styles.logo} alt="logo" src={logoWhite} />
-        {/* <DisplayStats game={game} /> */}
+        <DisplayStats />
         <DisplayObjects />
       </div>
       <div className={styles.bottom}>

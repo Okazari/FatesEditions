@@ -1,19 +1,12 @@
 import React from 'react'
 import styles from './style.scss'
+import Stats from './Stats'
 
-const DisplayStats = ({ game }) => {
+const DisplayStats = ({ stats }) => {
   return (
     <div className={styles.component}>
       {
-        Object.entries(game.stats).map(([key, value]) => {
-          const name = game.book.stats.find(current => current.id === key).name
-          return (
-            <div key={key}>
-              <div className={styles.name}>{name}</div>
-              <div>{value}</div>
-            </div>
-          )
-        })
+        Object.entries(stats).map(([id, value]) => <Stats key={id} id={id} value={value} />)
       }
     </div>
   )

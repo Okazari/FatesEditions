@@ -1,10 +1,6 @@
-export const changeGameState = ({ currentPageId, id, objects, stats, playerId }) => ({
+export const changeGameState = state => ({
   type: 'GAME_STATE',
-  currentPageId,
-  id,
-  objects,
-  stats,
-  playerId,
+  ...state,
 })
 
 export const initBook = normalizedBook => ({

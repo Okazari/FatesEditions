@@ -1,1 +1,1 @@
-export default from './DisplayStats'
+export default from './DisplayStatsContainer'
