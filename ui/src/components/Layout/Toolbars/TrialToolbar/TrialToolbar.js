@@ -7,13 +7,13 @@ import styles from './style.scss'
 import logoWhite from '../../../common/logo_white.svg'
 // import { RouteService } from '../../../../services'
 
-const TrialToolbar = ({ game }) => {
+const TrialToolbar = () => {
   return (
     <div className={styles.component}>
       <div className={styles.top}>
         <img className={styles.logo} alt="logo" src={logoWhite} />
-        {/* <DisplayStats game={game} />
-        <DisplayObjects game={game} /> */}
+        {/* <DisplayStats game={game} /> */}
+        <DisplayObjects />
       </div>
       <div className={styles.bottom}>
         {/* TODO: Externalize this button */}
