@@ -231,6 +231,14 @@ const findBookById = (bookId) => {
   return Book.findById(bookId).then(book => easier(book, () => book.save()))
 }
 
+class UnauthorizedError extends Error {
+  constructor(message) {
+    super(message)
+    this.code = 401
+    this.message = message || 'Not authorized'
+  }
+}
+
 const resolvers = {
   MAP: GraphQLJSON,
   Query: {
@@ -241,6 +249,7 @@ const resolvers = {
       return Book.findOne(filters)
     },
     books: (obj, args = {}, context, info) => {
+      if(!context.user) throw new UnauthorizedError()
       const { author, draft } = args
       const filters = {}
       if (author) filters.authorId = author

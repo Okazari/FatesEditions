@@ -84,6 +84,7 @@
   },
   "dependencies": {
     "apollo-client-preset": "^1.0.5",
+    "apollo-link-error": "^1.1.0",
     "classnames": "^2.2.5",
     "d3": "^4.7.1",
     "draft-js": "^0.10.0",

@@ -48,34 +48,38 @@ const jwt = require('jsonwebtoken')
 
 app.use('/api', portal)
 
-
 app.use((req, res, next) => {
-  if (!req.get('Authorization')) {
-    const err = new Error('Not Authorized')
-    err.status = 401
-    next(err)
-  } else {
-    try {
-      const payload = jwt.verify(req.get('Authorization'), 'mysecretstory')
-      req.payload = payload
-      const { user } = payload
-      user.password = null
-      const token = jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
-      console.log(`${payload.user.username} ${payload.user._id} ${payload.exp}`)
-      res.set('Auth-token', token)
-      next()
-    } catch (err) {
-      err.status = 401
-      next(err)
+  try {
+    const payload = jwt.verify(req.get('Authorization'), 'mysecretstory')
+    req.payload = payload
+    const { user } = payload
+    user.password = null
+    const token = jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+    console.log(`${payload.user.username} ${payload.user._id} ${payload.exp}`)
+    res.set('Auth-token', token)
+    req.locals = {
+      user,
     }
+    next()
+  } catch (err) {
+    next()
   }
 })
 
 const schema = require('./graphql/RootSchema')
-app.use('/api/graphql', graphqlHTTP({
+app.use('/api/graphql', graphqlHTTP(req => ({
   schema,
   graphiql: true,
-}))
+  context: req.locals,
+  formatError(err) {
+    return {
+      message: err.message,
+      code: err.originalError && err.originalError.code,   // <--
+      locations: err.locations,
+      path: err.path
+    };
+  }
+})))
 
 /** ****REST ROUTES*******/
 app.use('/api/user', user)

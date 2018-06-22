@@ -11,12 +11,6 @@ export default {
     if (token) surchargedOptions.headers.Authorization = token
 
     // Server call, return a promise
-    return fetch(route, surchargedOptions).then((response) => {
-      if (response.status === 401) {
-        RouteService.redirect401()
-        return Promise.reject(401)
-      }
-      return response
-    })
+    return fetch(route, surchargedOptions)
   },
 }
