@@ -48,11 +48,6 @@ const jwt = require('jsonwebtoken')
 
 app.use('/api', portal)
 
-const schema = require('./graphql/RootSchema')
-app.use('/api/graphql', graphqlHTTP({
-  schema,
-  graphiql: true,
-}))
 
 app.use((req, res, next) => {
   if (!req.get('Authorization')) {
@@ -75,6 +70,12 @@ app.use((req, res, next) => {
     }
   }
 })
+
+const schema = require('./graphql/RootSchema')
+app.use('/api/graphql', graphqlHTTP({
+  schema,
+  graphiql: true,
+}))
 
 /** ****REST ROUTES*******/
 app.use('/api/user', user)
