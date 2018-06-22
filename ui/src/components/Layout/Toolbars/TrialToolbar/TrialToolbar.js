@@ -12,8 +12,8 @@ const TrialToolbar = ({ game }) => {
     <div className={styles.component}>
       <div className={styles.top}>
         <img className={styles.logo} alt="logo" src={logoWhite} />
-        <DisplayStats game={game} />
-        <DisplayObjects game={game} />
+        {/* <DisplayStats game={game} />
+        <DisplayObjects game={game} /> */}
       </div>
       <div className={styles.bottom}>
         {/* TODO: Externalize this button */}

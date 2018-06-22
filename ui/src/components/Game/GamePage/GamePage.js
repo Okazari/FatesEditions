@@ -4,7 +4,7 @@ import Image from 'components/common/TextEditor/Image'
 import GameTransition from './GameTransition'
 import styles from './styles.scss'
 
-const GamePage = ({ page = {}, hoverTransition, outTransition, changePage }) => {
+const GamePage = ({ page = {}, hoverTransition, outTransition }) => {
   const pageContent = page.text ? convertFromRaw(JSON.parse(page.text)) : ContentState.createFromText('')
 
   const blockRenderer = (block) => {
@@ -21,12 +21,12 @@ const GamePage = ({ page = {}, hoverTransition, outTransition, changePage }) => 
       />
       <div className={styles.gameTransitions}>
         {
-          !!page.transitions && page.transitions.map(transition => <GameTransition
-            key={transition.id}
-            transition={transition}
+          !!page.transitions && page.transitions.map(transitionId => <GameTransition
+            key={transitionId}
+            transitionId={transitionId}
             hoverTransition={hoverTransition}
             outTransition={outTransition}
-            changePage={changePage}
+            // changePage={changePage}
           />)
         }
       </div>
