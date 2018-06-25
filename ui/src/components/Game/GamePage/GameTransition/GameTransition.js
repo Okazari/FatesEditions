@@ -32,7 +32,7 @@ const GameTransition = ({
     incompleteCondition = true
     return defaultBool
   }
-  
+
   const visible = transition.conditionOperator === 'and'
     ? transition.conditions.reduce(
       (acc, condition) => acc && evaluateCondition(condition),
