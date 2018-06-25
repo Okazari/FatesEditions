@@ -15,7 +15,7 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
           onChange: subject => updateCondition({ subject }),
         }}
       >
-        <option disabled value="">Choisir un objet</option>key
+        <option disabled value="">Choisir un objet</option>
         {
           objects.map(object => (
             <option
@@ -30,8 +30,8 @@ const ConditionObjectInput = ({ objects, condition, index, updateCondition }) =>
       <SelectInput
         className={styles.selectInput}
         domProps={{
-          value: condition.value,
-          onChange: value => updateCondition({ value }),
+          value: condition.operator,
+          onChange: operator => updateCondition({ operator }),
         }}
       >
         <option disabled value="">Choisir un opérateur</option>

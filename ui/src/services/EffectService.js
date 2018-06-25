@@ -47,22 +47,22 @@ class EffectService {
       label: 'L\'objet',
       own: {
         label: 'est possédé',
-        exec: () => {},
+        exec: (objectId, objectsArray) => objectsArray.includes(objectId),
       },
       doNotOwn: {
         label: 'n\'est pas possédé',
-        exec: () => {},
+        exec: (objectId, objectsArray) => !objectsArray.includes(objectId),
       },
     },
     stat: {
       label: 'La statistique',
       equal: {
         label: 'est égal à',
-        exec: (initValue, conditionValue) => initValue == conditionValue,
+        exec: (initValue, conditionValue) => initValue === conditionValue,
       },
       notEqual: {
         label: 'est différent de',
-        exec: (initValue, conditionValue) => initValue != conditionValue,
+        exec: (initValue, conditionValue) => initValue !== conditionValue,
       },
       more: {
         label: 'est supérieur à',

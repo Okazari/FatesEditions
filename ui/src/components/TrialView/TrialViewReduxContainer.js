@@ -9,7 +9,6 @@ const StoreData = (props) => {
   const normalizedBook = normalize(props.game.book, schemas.book)
   const newGameState = { ...props.game }
   delete newGameState.book
-  console.log(newGameState)
   props.dispatch(actions.initBook(normalizedBook.entities))
   props.dispatch(actions.changeGameState(newGameState))
   return <TrialView />

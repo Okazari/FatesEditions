@@ -5,9 +5,9 @@ import GameTransition from './GameTransition'
 const mapStateToProps = ({ game }, { transitionId }) => {
   const transition = game.book.transition[transitionId]
   return {
-    transition: { 
+    transition: {
       ...transition,
-      conditions: transition.conditions.map(id  => game.book.condition[id])
+      conditions: transition.conditions.map(id => game.book.condition[id]),
     },
     stats: game.stats,
     objects: game.objects,
