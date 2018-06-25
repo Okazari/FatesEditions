@@ -6,7 +6,6 @@ import styles from './styles.scss'
 const TransitionEffect = ({
   book,
   transition,
-  index,
   addEffect,
   removeEffect,
   pageId,

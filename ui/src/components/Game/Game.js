@@ -8,18 +8,9 @@ class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      // currentPageId: props.currentPageId,
       hoverNode: null,
     }
   }
-
-  // TODO: Refactor to shouldComponent Update
-  // componentWillUpdate(nextProps) {
-  //   const { currentPageId } = this.state
-  //   if (nextProps.currentPageId && currentPageId === null) {
-  //     this.setState({ currentPageId: nextProps.currentPageId })
-  //   }
-  // }
 
   hoverTransition = (hoverNode) => {
     this.setState({ hoverNode })
@@ -29,21 +20,13 @@ class Game extends React.Component {
     this.setState({ hoverNode: null })
   }
 
-  // changePage = (currentPageId) => {
-  //   const { game } = this.props
-  //   this.setState({ currentPageId })
-  // }
-
   render() {
-    const { hoverNode } = this.state
     return (
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <GamePage
-            // page={game.book.entities.page[currentPageId]}
             hoverTransition={this.hoverTransition}
             outTransition={this.outTransition}
-            // changePage={this.changePage}
           />
         </div>
       </div>

@@ -8,6 +8,7 @@ const mapStateToProps = ({ game }, { transitionId }) => {
     transition: {
       ...transition,
       conditions: transition.conditions.map(id => game.book.condition[id]),
+      effects: transition.effects.map(id => game.book.effect[id]),
     },
     stats: game.stats,
     objects: game.objects,
@@ -15,7 +16,7 @@ const mapStateToProps = ({ game }, { transitionId }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  changePage: currentPageId => dispatch(changeGameState({ currentPageId })),
+  changeGameState: newGameState => dispatch(changeGameState(newGameState)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameTransition)

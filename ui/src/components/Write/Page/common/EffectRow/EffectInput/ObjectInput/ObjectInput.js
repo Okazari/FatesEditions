@@ -22,7 +22,7 @@ const ObjectInput = ({ objects, effect, index, updateEffect }) => {
         className={styles.selectInput}
         domProps={{
           value: effect.value,
-          onChange: value => updateEffect({ value }),
+          onChange: operator => updateEffect({ operator }),
         }}
       >
         <option disabled value="">Choisir un operateur</option>
