@@ -10,7 +10,7 @@ const GameTransition = ({
   objects,
   hoverTransition,
   outTransition,
-  changePage,
+  changeGameState,
 }) => {
   let incompleteCondition = false
   const defaultBool = transition.conditionOperator === 'and'
@@ -45,7 +45,25 @@ const GameTransition = ({
 
   if (!visible) return null
 
-  const onClick = () => transition.toPage && changePage(transition.toPage)
+  const _changePage = (currentPageId) => {
+    let newStats = { ...stats }
+    let newObjects = [...objects]
+    transition.effects.forEach(({ type, subject, operator, value }) => {
+      if (type == 'stat') {
+       newStats = {
+          ...newStats,
+          [subject]: EffectService.effect[type][operator].exec(stats[subject], value),
+        }
+      }
+      if (type == 'object') {
+       newObjects = EffectService.effect[type][operator].exec(subject, newObjects)
+      }      
+    })
+    changeGameState({ currentPageId, stats: newStats, objects: newObjects })
+  }
+
+
+  const onClick = () => transition.toPage && _changePage(transition.toPage)
   const className = classnames(styles.component, {
     [styles.disabled]: transition.toPage === null,
     [styles.disabled]: incompleteCondition,

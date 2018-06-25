@@ -1,14 +1,16 @@
+/* eslint-disable */
+
 class EffectService {
   effect = {
     object: {
       label: 'L\'objet',
       add: {
         label: 'est ajouté',
-        exec: (value, modifier) => {},
+        exec: (objectId, objectArray) => [ ...objectArray, objectId ],
       },
       remove: {
         label: 'est retiré',
-        exec: () => {},
+        exec: (objectId, objectArray) => objectArray.filter(id => id != objectId),
       },
     },
     stat: {
@@ -16,27 +18,27 @@ class EffectService {
       inc: {
         label: 'augmente de',
         value: 'inc',
-        exec: (value, modifier) => value + modifier,
+        exec: (value, modifier) => parseFloat(value) + parseFloat(modifier),
       },
       dec: {
         label: 'diminue de',
         value: 'dec',
-        exec: (value, modifier) => value - modifier,
+        exec: (value, modifier) => parseFloat(value) - parseFloat(modifier),
       },
       mul: {
         label: 'est multiplié par',
         value: 'mul',
-        exec: (value, modifier) => value * modifier,
+        exec: (value, modifier) => parseFloat(value) * parseFloat(modifier),
       },
       div: {
         label: 'est divisé par',
         value: 'div',
-        exec: (value, modifier) => value / modifier,
+        exec: (value, modifier) => parseFloat(value) / parseFloat(modifier),
       },
       aff: {
         label: 'est remplacé par',
         value: 'aff',
-        exec: (value, modifier) => modifier,
+        exec: (value, modifier) => parseFloat(modifier),
       },
     },
   }
@@ -58,27 +60,27 @@ class EffectService {
       label: 'La statistique',
       equal: {
         label: 'est égal à',
-        exec: (initValue, conditionValue) => initValue == conditionValue,
+        exec: (initValue, conditionValue) => parseFloat(initValue) === parseFloat(conditionValue),
       },
       notEqual: {
         label: 'est différent de',
-        exec: (initValue, conditionValue) => initValue != conditionValue,
+        exec: (initValue, conditionValue) => parseFloat(initValue) !== parseFloat(conditionValue),
       },
       more: {
         label: 'est supérieur à',
-        exec: (initValue, conditionValue) => initValue > conditionValue,
+        exec: (initValue, conditionValue) => parseFloat(initValue) > parseFloat(conditionValue),
       },
       less: {
         label: 'est inférieur à',
-        exec: (initValue, conditionValue) => initValue < conditionValue,
+        exec: (initValue, conditionValue) => parseFloat(initValue) < parseFloat(conditionValue),
       },
       moreOrEqual: {
         label: 'est supérieur ou égale à',
-        exec: (initValue, conditionValue) => initValue >= conditionValue,
+        exec: (initValue, conditionValue) => parseFloat(initValue) >= parseFloat(conditionValue),
       },
       lessOrEqual: {
         label: 'est inférieur ou égale à',
-        exec: (initValue, conditionValue) => initValue <= conditionValue,
+        exec: (initValue, conditionValue) => iparseFloat(initValue) <= parseFloat(conditionValue),
       },
     },
   }
