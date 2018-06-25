@@ -95,6 +95,7 @@ const TransitionRow = ({
           pageId={pageId}
           transition={transition}
           index={index}
+          updateTransition={updateTransition}
         />
         <TransitionEffect
           book={book}

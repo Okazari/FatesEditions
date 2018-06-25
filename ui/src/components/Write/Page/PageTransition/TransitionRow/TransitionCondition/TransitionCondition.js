@@ -10,17 +10,10 @@ const TransitionCondition = ({
   book,
   transition,
   pageId,
-  index,
   addCondition,
   removeCondition,
-  updateResource,
+  updateTransition,
 }) => {
-  const updateCondition = (conditionIndex, condition) => {
-    transition.conditions[conditionIndex] = condition
-    updateResource(index, transition)
-  }
-  console.log(updateResource)
-
   return (
     <div>
       <div className={styles.conditionHeader}>
@@ -31,7 +24,7 @@ const TransitionCondition = ({
           domProps={{
             value: transition.conditionOperator,
             onChange: conditionOperator =>
-              updateResource(index, { ...transition, conditionOperator }),
+              updateTransition({ conditionOperator }),
           }}
         >
           {
@@ -54,7 +47,6 @@ const TransitionCondition = ({
               transitionId={transition.id}
               condition={condition}
               index={conditionIndex}
-              updateResource={updateCondition}
               removeCondition={removeCondition}
             />,
           )
