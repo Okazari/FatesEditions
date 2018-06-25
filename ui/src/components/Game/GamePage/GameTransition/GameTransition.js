@@ -4,31 +4,51 @@ import EffectService from 'services/EffectService'
 import Button from 'components/common/Button'
 import styles from './styles.scss'
 
-// const isHidden = EffectService.condition[transition.conditions.type][transition.conditions.operator].exec(stats[transition.conditions.subject], transition.conditions.value)
-
-const GameTransition = ({ transition, stats, objects, hoverTransition, outTransition, changePage }) => {
-
-  console.log(transition.conditionOperator)
-  
-  const singleStatCondition = ({ type, operator, subject, value }) => {
-      // TODO: Add error displaying
-    if (!type || !operator || !subject || !value ) return true
-    return EffectService.condition[type][operator].exec(stats[subject], value)
+const GameTransition = ({
+  transition,
+  stats,
+  objects,
+  hoverTransition,
+  outTransition,
+  changePage,
+}) => {
+  let incompleteCondition = false
+  const defaultBool = transition.conditionOperator === 'and'
+  const evaluateCondition = ({ type, operator, subject, value }) => {
+    if (!type || !operator || !subject) {
+      incompleteCondition = true
+      return defaultBool
+    }
+    if (type === 'stat') {
+      if (!value) {
+        incompleteCondition = true
+        return defaultBool
+      }
+      return EffectService.condition[type][operator].exec(stats[subject], value)
+    }
+    if (type === 'object') {
+      return EffectService.condition[type][operator].exec(subject, objects)
+    }
+    incompleteCondition = true
+    return defaultBool
   }
   
-  const notHidden = transition.conditionOperator == 'and' ?
-    transition.conditions.reduce((acc, condition) => acc && singleStatCondition(condition), true) : 
-    transition.conditions.reduce((acc, condition) => acc || singleStatCondition(condition), false)
+  const visible = transition.conditionOperator === 'and'
+    ? transition.conditions.reduce(
+      (acc, condition) => acc && evaluateCondition(condition),
+      defaultBool,
+    )
+    : transition.conditions.reduce(
+      (acc, condition) => acc || evaluateCondition(condition),
+      defaultBool,
+    )
 
-  if (!notHidden) return null
-
-
-
+  if (!visible) return null
 
   const onClick = () => transition.toPage && changePage(transition.toPage)
-  const className = classnames(styles.transitionButton, {
+  const className = classnames(styles.component, {
     [styles.disabled]: transition.toPage === null,
-    // [styles.hidden]: 
+    [styles.disabled]: incompleteCondition,
   })
 
   return (
@@ -42,6 +62,7 @@ const GameTransition = ({ transition, stats, objects, hoverTransition, outTransi
     >
       {transition.text}
       {!transition.toPage && <div>Page de destination manquante</div>}
+      {!!incompleteCondition && <div>Condition incomplète</div>}
     </Button>
   )
 }

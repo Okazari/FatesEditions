@@ -19,7 +19,7 @@ const TransitionCondition = ({
     transition.conditions[conditionIndex] = condition
     updateResource(index, transition)
   }
-
+  console.log(updateResource)
 
   return (
     <div>
