@@ -8,6 +8,7 @@ const GameTransition = ({
   transition,
   stats,
   objects,
+  pageEffects,
   hoverTransition,
   outTransition,
   changeGameState,
@@ -48,20 +49,22 @@ const GameTransition = ({
   const _changePage = (currentPageId) => {
     let newStats = { ...stats }
     let newObjects = [...objects]
-    transition.effects.forEach(({ type, subject, operator, value }) => {
-      if (type == 'stat') {
-       newStats = {
+
+    const applyEffect = ({ type, subject, operator, value }) => {
+      if (type === 'stat') {
+        newStats = {
           ...newStats,
           [subject]: EffectService.effect[type][operator].exec(stats[subject], value),
         }
       }
-      if (type == 'object') {
-       newObjects = EffectService.effect[type][operator].exec(subject, newObjects)
-      }      
-    })
+      if (type === 'object') {
+        newObjects = EffectService.effect[type][operator].exec(subject, newObjects)
+      }
+    }
+    transition.effects.forEach(applyEffect)
+    pageEffects.forEach(applyEffect)
     changeGameState({ currentPageId, stats: newStats, objects: newObjects })
   }
-
 
   const onClick = () => transition.toPage && _changePage(transition.toPage)
   const className = classnames(styles.component, {
