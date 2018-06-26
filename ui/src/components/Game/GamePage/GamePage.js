@@ -11,7 +11,6 @@ const GamePage = ({ page = {}, hoverTransition, outTransition }) => {
     if (block.getType() === 'atomic') return { component: Image, editable: false }
     return null
   }
-
   return (
     <div className={styles.component} >
       <Editor

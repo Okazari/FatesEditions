@@ -48,6 +48,7 @@ const query = gql`
           description
           text
           effects {
+            id
             operator
             subject
             value
