@@ -13,6 +13,7 @@ const GameTransition = ({
   outTransition,
   changeGameState,
 }) => {
+// Check if Visible from Conditions
   let incompleteCondition = false
   const defaultBool = transition.conditionOperator === 'and'
   const evaluateCondition = ({ type, operator, subject, value }) => {
@@ -45,7 +46,9 @@ const GameTransition = ({
     )
 
   if (!visible) return null
+  // End
 
+  // Apply all Effect on Transition
   const _changePage = (currentPageId) => {
     let newStats = { ...stats }
     let newObjects = [...objects]
@@ -65,11 +68,12 @@ const GameTransition = ({
     pageEffects.forEach(applyEffect)
     changeGameState({ currentPageId, stats: newStats, objects: newObjects })
   }
+  // End
 
   const onClick = () => transition.toPage && _changePage(transition.toPage)
   const className = classnames(styles.component, {
-    [styles.disabled]: transition.toPage === null,
-    [styles.disabled]: incompleteCondition,
+    [styles.disabled]: transition.toPage === null || incompleteCondition,
+    // [styles.disabled]: incompleteCondition,
   })
 
   return (
