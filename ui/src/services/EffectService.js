@@ -18,27 +18,27 @@ class EffectService {
       inc: {
         label: 'augmente de',
         value: 'inc',
-        exec: (value, modifier) => parseFloat(value) + parseFloat(modifier),
+        exec: (value, modifier) => Math.round(parseFloat(value) + parseFloat(modifier)),
       },
       dec: {
         label: 'diminue de',
         value: 'dec',
-        exec: (value, modifier) => parseFloat(value) - parseFloat(modifier),
+        exec: (value, modifier) => Math.round(parseFloat(value) - parseFloat(modifier)),
       },
       mul: {
         label: 'est multiplié par',
         value: 'mul',
-        exec: (value, modifier) => parseFloat(value) * parseFloat(modifier),
+        exec: (value, modifier) => Math.round(parseFloat(value) * parseFloat(modifier)),
       },
       div: {
         label: 'est divisé par',
         value: 'div',
-        exec: (value, modifier) => parseFloat(value) / parseFloat(modifier),
+        exec: (value, modifier) => Math.round(parseFloat(value) / parseFloat(modifier)),
       },
       aff: {
         label: 'est remplacé par',
         value: 'aff',
-        exec: (value, modifier) => parseFloat(modifier),
+        exec: (value, modifier) => Math.round(parseFloat(modifier)),
       },
     },
   }
@@ -60,7 +60,7 @@ class EffectService {
       label: 'La statistique',
       equal: {
         label: 'est égal à',
-        exec: (initValue, conditionValue) => parseFloat(initValue) === parseFloat(conditionValue),
+        exec: (initValue, conditionValue) =>  parseFloat(initValue) === parseFloat(conditionValue),
       },
       notEqual: {
         label: 'est différent de',
