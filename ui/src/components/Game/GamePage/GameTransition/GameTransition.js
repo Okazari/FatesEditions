@@ -6,15 +6,12 @@ import styles from './styles.scss'
 
 const GameTransition = ({
   transition,
-  pageEffects,
+  effects,
   hoverTransition,
   outTransition,
 }) => {
   const { isVisible, incompleteCondition } = GameService.checkTransitionVisibility(transition)
   if (!isVisible) return null
-
-  // move this to his HOC
-  const effects = [...transition.effects, ...pageEffects]
 
   const onClick = () =>
     transition.toPage && GameService.changePageAndApplyEffects(transition.toPage, effects)

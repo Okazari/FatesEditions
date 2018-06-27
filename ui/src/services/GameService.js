@@ -51,7 +51,7 @@ class GameService {
       if (type === 'stat') {
         newStats = {
           ...newStats,
-          [subject]: EffectService.effect[type][operator].exec(stats[subject], value),
+          [subject]: EffectService.effect[type][operator].exec(newStats[subject], value),
         }
       }
       if (type === 'object') {
@@ -63,7 +63,7 @@ class GameService {
   }
 }
 
-export default new GameService()
+export default GameService
 
 // ** Old **
 // import { ResourceService } from 'react-rest-resource'
