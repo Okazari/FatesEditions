@@ -4,7 +4,7 @@ import GameTransition from './GameTransition'
 
 const mapStateToProps = ({ game }, { transitionId }) => {
   const transition = game.book.transition[transitionId]
-  const pageEffects = transition.toPage 
+  const pageEffects = transition.toPage
     ? game.book.page[transition.toPage].effects
     : []
   return {
