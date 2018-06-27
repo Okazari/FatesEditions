@@ -6,7 +6,7 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'services'
 
 // Redux
-import configureStore from 'redux/store'
+import store from 'redux/store'
 import { Provider } from 'react-redux'
 
 // NEW LAYOUT
@@ -33,8 +33,6 @@ import { PlayBooks, PlayGames } from './components/Old/Play'
 import { ShareBook, SharePublications, ShareEditBook } from './components/Old/Share'
 import { WriteBook, WriteDrafts, WritePage as OldWritePage } from './components/Old/Write'
 import { Profile as OldProfile } from './components/Old/Profile'
-
-const store = configureStore()
 
 const AppRouter = () => {
   return (
