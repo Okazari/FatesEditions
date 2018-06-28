@@ -83,25 +83,23 @@ const query = gql`
   }
 `
 // TODO: Add loading and error returns
-const TrialViewContainer = ({ params }) => {
-  return (
-    <Query
-      query={query}
-      variables={{
-        bookId: params.bookId,
-        playerId: AuthService.getConnectedUserId(),
-      }}
-    >
-      {
-        ({ loading, error, data }) => {
-          if (loading) return null
-          if (error) return null
-          const game = data.tryGame
-          return <TrialViewReduxContainer gameId={game.id} key={game.id} game={game} />
-        }
+const TrialViewContainer = ({ params }) => (
+  <Query
+    query={query}
+    variables={{
+      bookId: params.bookId,
+      playerId: AuthService.getConnectedUserId(),
+    }}
+  >
+    {
+      ({ loading, error, data }) => {
+        if (loading) return null
+        if (error) return null
+        const game = data.tryGame
+        return <TrialViewReduxContainer key={game.id} game={game} />
       }
-    </Query>
-  )
-}
+    }
+  </Query>
+)
 
 export default TrialViewContainer

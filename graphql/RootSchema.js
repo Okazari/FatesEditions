@@ -428,17 +428,29 @@ const resolvers = {
                  .save()
     }),
 
-    createGame: (_, { bookId, playerId }) => {
-      // TODO: implement this (same as tryGame Query, but saving in Database)
-      // const game = new Game({
-      //   playerId,
-      //   currentPageId,
-      //   bookId: book._id,
-      //   book,
-      //   bookStatus:'up-to-date',
-      //   stats,
-      // }).then(game => game)
-    },
+    // TODO: implement this (same as tryGame Query, but saving in Database)
+    createGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => {
+      const stats = book.stats.reduce((acc, stat) => {
+        return {
+          ...acc,
+          [stat._id]: stat.initValue,
+        }
+      }, {})
+
+      const objects = book.objects.reduce((acc, object) => {
+        // console.log(object.atStart)
+        if (object.atStart) return [...acc, object._id]
+        return acc
+      }, [])
+
+      return new Game({
+        currentPageId: book.startingPageId || book.pages[0].id,
+        playerId,
+        book,
+        stats,
+        objects,
+      }).save()
+    }),
 
     updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''
