@@ -158,13 +158,14 @@ const typeDefs = `
     stats: MAP
     objects: [ID]
   }
-
+  
   type Query {
     books(author: ID, draft: Boolean): [Book]
     book(id: ID!): Book
     author(id: ID!): User
     page(bookId: ID!, pageId: ID!): Page
     tryGame(bookId: ID!, playerId: ID!) : Game
+    getGame(gameId: ID, playerId: ID!) : Game
   }
 
   type Mutation {
@@ -178,38 +179,41 @@ const typeDefs = `
     createPageReturnPage(bookId: ID!): Page
     updatePage(bookId: ID!, page: PageInput!): Page
     deletePage(bookId: ID!, pageId: ID!): Book
-
+    
     createPageEffect(bookId: ID!, pageId: ID!): Page
     updatePageEffect(bookId: ID!, pageId: ID!, effect: EffectInput!): Effect
     deletePageEffect(bookId: ID!, pageId: ID!, effectId: ID!): Page
-
+    
     createPageTransition(bookId: ID!, pageId: ID!): Page
     updatePageTransition(bookId: ID!, pageId: ID!, transition: TransitionInput!): Transition
     deletePageTransition(bookId: ID!, pageId: ID!, transitionId: ID!): Page
-
+    
     createStat(bookId: ID!): Book
     updateStat(bookId: ID!, stat: StatInput!): Stat
     deleteStat(bookId: ID!, statId: ID!): Book
-
+    
     createObject(bookId: ID!): Book
     updateObject(bookId: ID!, object: ObjectInput!): Object
     deleteObject(bookId: ID!, objectId: ID!): Book
-
+    
     createPageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
     updatePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effect: EffectInput!): Effect
     deletePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effectId: ID!): Transition
-
+    
     createPageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
     updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Effect
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
-
+    
     createGame(bookId: ID!, playerId: ID!) : Game
+    updateGame(gameId: ID, playerId: ID!) : Game
+    deleteGame(gameId: ID, playerId: ID!) : Game
+    
     updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
-`
-const easier = (ressource, save) => {
-  const newSave = () => save().then(() => ressource)
-  return {
+  `
+  const easier = (ressource, save) => {
+    const newSave = () => save().then(() => ressource)
+    return {
     ressource,
     save: newSave,
     set: newValues => easier(Object.assign(ressource, newValues), save),
@@ -247,7 +251,7 @@ const resolvers = {
     },
     author: (obj, { id }, context, info) => User.findById(id),
     page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
-
+    
     tryGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => {
       const stats = book.stats.reduce((acc, stat) => {
         return {
@@ -255,9 +259,8 @@ const resolvers = {
           [stat._id]: stat.initValue,
         }
       }, {})
-
+      
       const objects = book.objects.reduce((acc, object) => {
-        // console.log(object.atStart)
         if (object.atStart) return [...acc, object._id]
         return acc
       }, [])
@@ -270,6 +273,7 @@ const resolvers = {
         objects,
       })
     }),
+    getGame: (_, { gameId, playerId }) => Game.findById(gameId),
   },
   Book: {
     author: (book) => {
@@ -427,8 +431,6 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     }),
-
-    // TODO: implement this (same as tryGame Query, but saving in Database)
     createGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => {
       const stats = book.stats.reduce((acc, stat) => {
         return {
@@ -438,7 +440,6 @@ const resolvers = {
       }, {})
 
       const objects = book.objects.reduce((acc, object) => {
-        // console.log(object.atStart)
         if (object.atStart) return [...acc, object._id]
         return acc
       }, [])
@@ -451,6 +452,9 @@ const resolvers = {
         objects,
       }).save()
     }),
+
+    updateGame: (_, { gameId, playerId }) => ({ updateGame: "updateGame", gameId, playerId }),
+    deleteGame: (_, { gameId, playerId }) => ({ deleteGame: "deleteGame", gameId, playerId }),
 
     updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''

@@ -7,7 +7,7 @@ const cx = classnames.bind(styles)
 
 class Book extends React.Component {
   constructor(props) {
-    console.log(props)
+    // console.log(props)
     super(props)
     const { showDelay, onShow } = props
     this.state = { over: false, displayed: false }

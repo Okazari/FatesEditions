@@ -1,12 +1,12 @@
 import React from 'react'
-import { Mutation } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AuthService } from 'services'
 import GameViewReduxContainer from './GameViewReduxContainer'
 
-const mutation = gql`
-mutation createGame($bookId: ID!, $playerId: ID!) {
-  createGame(bookId: $bookId, playerId: $playerId) {
+const query = gql`
+query getGame($gameId: ID!, $playerId: ID!) {
+  getGame(gameId: $gameId, playerId: $playerId) {
     id
     currentPageId
     playerId
@@ -82,25 +82,57 @@ mutation createGame($bookId: ID!, $playerId: ID!) {
   }
 }
 `
+
+const mutation = gql`
+mutation updateGame($bookId: ID!, $playerId: ID!) {
+  updateGame(bookId: $bookId, playerId: $playerId) {
+    id
+    currentPageId
+    stats
+    objects
+  }
+}
+`
+
 // TODO: Add loading and error returns
-const GameViewContainer = ({ params }) => (
-  <Mutation
-    mutation={mutation}
-    variables={{
-      bookId: params.bookId,
-      playerId: AuthService.getConnectedUserId(),
-    }}
-  >
-    {
-      ({ loading, error, data }) => {
-        if (loading) return null
-        if (error) return null
-        const game = data.createGame
-        return <GameViewReduxContainer key={game.id} game={game} />
+const GameViewContainer = ({ params }) => {
+  return (
+    <Query
+      query={query}
+      variables={{
+        gameId: params.gameId,
+        playerId: AuthService.getConnectedUserId(),
+      }}
+    >
+      {
+        ({ loading, error, data }) => {
+          if (loading) return null
+          if (error) return null
+          console.log('data at Query level', data)
+          const game = data.getGame
+          return (
+            <Mutation
+              mutation={mutation}
+              variables={{
+                gameId: params.gameId,
+                playerId: AuthService.getConnectedUserId(),
+              }}
+            >
+              {
+                (updateGame) => {
+                  console.log('data at Mutation level', data)
+                  if (loading) return null
+                  if (error) return null
+                  return <GameViewReduxContainer key={game.id} game={game} />
+                }
+              }
+            </Mutation>
+          )
+        }
       }
-    }
-  </Mutation>
-)
+    </Query>
+  )
+}
 
 export default GameViewContainer
 

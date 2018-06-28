@@ -1,6 +1,8 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 import { ToolbarButton } from 'components/common/ToolbarLink'
+import DisplayStats from '../common/DisplayStats'
+import DisplayObjects from '../common/DisplayObjects'
 import styles from './style.scss'
 import logoWhite from '../../../common/logo_white.svg'
 // import { RouteService } from '../../../../services'
@@ -10,14 +12,8 @@ const GameToolbar = (props) => {
     <div className={styles.component}>
       <div className={styles.top}>
         <img className={styles.logo} alt="logo" src={logoWhite} />
-        <ToolbarButton
-          icon="bookmark"
-          domProps={{ className: styles.darkButton }}
-        />
-        <ToolbarButton
-          icon="timeline"
-          domProps={{ className: styles.darkButton }}
-        />
+        <DisplayStats />
+        <DisplayObjects />
       </div>
       <div className={styles.bottom}>
         <div onClick={browserHistory.goBack}>
