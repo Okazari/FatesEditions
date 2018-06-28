@@ -1,5 +1,5 @@
 import React from 'react'
-import Book from 'components/common/Book'
+import BookContainer from '../common/BookContainer'
 import styles from './style.scss'
 
 const Library = ({ books }) => {
@@ -17,7 +17,7 @@ const Library = ({ books }) => {
                 key={book.id}
                 className={styles.book}
               >
-                <Book showDelay={delay} book={book} onClick={() => {}} />
+                <BookContainer showDelay={delay} book={book} />
               </div>
             )
           })

@@ -1,5 +1,5 @@
 import React from 'react'
-import Book from 'components/common/Book'
+import BookContainer from '../../common/BookContainer'
 import styles from './style.scss'
 
 const Showdown = ({ book }) => {
@@ -8,7 +8,7 @@ const Showdown = ({ book }) => {
   return (
     <div className={styles.component}>
       <div className={styles.preview}>
-        <Book book={book} />
+        <BookContainer book={book} />
       </div>
       {
         book.synopsis &&
