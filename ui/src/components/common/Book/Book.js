@@ -7,6 +7,7 @@ const cx = classnames.bind(styles)
 
 class Book extends React.Component {
   constructor(props) {
+    console.log(props)
     super(props)
     const { showDelay, onShow } = props
     this.state = { over: false, displayed: false }
@@ -38,7 +39,7 @@ class Book extends React.Component {
         onClick={this.toggleExpand}
         className={classes}
       >
-        <div className={styles.cover} onClick={() => onClick && onClick(book)}>
+        <div className={styles.cover} onClick={() => onClick && onClick(book.id)}>
           <div className={styles.coverImage} style={coverStyle} />
           <div className={styles.content}>
             <div className={styles.contentTitle}>

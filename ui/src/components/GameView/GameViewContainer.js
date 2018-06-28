@@ -1,38 +1,106 @@
 import React from 'react'
-import bookJSON from 'components/book'
-import GameView from './GameView'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
+import { AuthService } from 'services'
+import GameViewReduxContainer from './GameViewReduxContainer'
 
-const createGame = (book) => {
-  return {
-    currentPageId: '5a7f12efe330ea247cf6431e',
-    book,
-    bookStatus: 'up-to-date',
-    stats: book.stats.reduce((acc, stat) => {
-      return {
-        ...acc,
-        [stat.id]: {
-          name: stat.name,
-          value: stat.initValue,
-        },
+const mutation = gql`
+mutation createGame($bookId: ID!, $playerId: ID!) {
+  createGame(bookId: $bookId, playerId: $playerId) {
+    id
+    currentPageId
+    playerId
+    book {
+      id
+      name
+      tags
+      synopsis
+      cover
+      startingPageId
+      genreId
+      draft
+      creationDate
+      lastModificationDate
+      revision
+      stats {
+        id
+        name
+        description
+        initValue
+        max
+        min
+        visible
       }
-    }, {}),
-    objects: book.objects.reduce((acc, object) => {
-      return {
-        ...acc,
-        [object.id]: {
-          name: object.name,
-          possessed: object.atStart,
-        },
+      objects {
+        id
+        name
+        description
+        atStart
+        visible
       }
-    }, {}),
-    tree: [],
+      author {
+        id
+        username
+      }
+      pages {
+        id
+        title
+        description
+        text
+        effects {
+          id
+          operator
+          subject
+          value
+          type
+        }
+        transitions {
+          id
+          fromPage
+          toPage
+          text
+          conditionOperator
+          effects {
+            id
+            operator
+            subject
+            value
+            type
+          }
+          conditions {
+            id
+            operator
+            subject
+            value
+            type
+          }
+        }
+      }
+    }
+    stats
+    objects
   }
 }
-
-export default ({ params }) => (
-  <GameView
-    gameId={params.gameId}
-    key={params.gameId}
-    game={createGame(bookJSON.book)}
-  />
+`
+// TODO: Add loading and error returns
+const GameViewContainer = ({ params }) => (
+  <Mutation
+    mutation={mutation}
+    variables={{
+      bookId: params.bookId,
+      playerId: AuthService.getConnectedUserId(),
+    }}
+  >
+    {
+      ({ loading, error, data }) => {
+        if (loading) return null
+        if (error) return null
+        const game = data.createGame
+        return <GameViewReduxContainer key={game.id} game={game} />
+      }
+    }
+  </Mutation>
 )
+
+export default GameViewContainer
+
