@@ -4,8 +4,8 @@
 
 .component {
   opacity: 0;
-  width: 60%;
-  height: 60%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 2px;
@@ -19,8 +19,6 @@
     }
   }
   &.displayed {
-    width: 200px;
-    height: 300px;
     opacity: 1;
   }
 }
@@ -47,7 +45,7 @@
 }
 
 .contentTitle {
-  width: 200px;
+  width: 100%;
   color: $transparent-white;
   background-color: $transparent-black;
   padding: 10px;
