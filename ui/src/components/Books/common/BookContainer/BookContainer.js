@@ -14,7 +14,7 @@ mutation createGame($bookId: ID!, $playerId: ID!) {
 
 // TODO: add loading and error returns
 const BookContainer = (props) => {
-  const { book } = props
+  const { book } = props
   return (
     <Mutation
       mutation={mutation}

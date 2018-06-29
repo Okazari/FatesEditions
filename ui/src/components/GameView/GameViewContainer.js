@@ -108,7 +108,6 @@ const GameViewContainer = ({ params }) => {
         ({ loading, error, data }) => {
           if (loading) return null
           if (error) return null
-          console.log('data at Query level', data)
           const game = data.getGame
           return (
             <Mutation
@@ -120,7 +119,6 @@ const GameViewContainer = ({ params }) => {
             >
               {
                 (updateGame) => {
-                  console.log('data at Mutation level', data)
                   if (loading) return null
                   if (error) return null
                   return <GameViewReduxContainer key={game.id} game={game} />

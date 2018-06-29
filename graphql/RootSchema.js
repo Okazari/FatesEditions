@@ -253,6 +253,7 @@ const resolvers = {
     page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
     
     tryGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => {
+      console.log('tryGame : ', book.stats)
       const stats = book.stats.reduce((acc, stat) => {
         return {
           ...acc,
@@ -432,6 +433,7 @@ const resolvers = {
                  .save()
     }),
     createGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => {
+      console.log('createGame : ', book.stats)
       const stats = book.stats.reduce((acc, stat) => {
         return {
           ...acc,
