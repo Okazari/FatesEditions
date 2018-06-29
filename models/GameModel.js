@@ -14,7 +14,7 @@ const GameSchema = new Schema({
   bookId: Schema.Types.ObjectId,
   book: Book,
   bookStatus: String,
-  stats: GameStats,
+  stats: Schema.Types.Mixed,
   objects: Schema.Types.Mixed,
   tree: [{ Type: Schema.Types.Mixed, default: [] }],
 }, { toJSON: { retainKeyOrder: true }})
