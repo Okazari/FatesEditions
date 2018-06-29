@@ -23,7 +23,7 @@ const queryOptions = {
   },
   props: ({ data: { books } }) => ({
     books,
-  })
+  }),
 }
 
 export default graphql(query, queryOptions)(Library)

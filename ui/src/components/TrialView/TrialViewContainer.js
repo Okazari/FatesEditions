@@ -90,6 +90,7 @@ const TrialViewContainer = ({ params }) => (
       bookId: params.bookId,
       playerId: AuthService.getConnectedUserId(),
     }}
+    fetchPolicy={'network-only'}
   >
     {
       ({ loading, error, data }) => {
