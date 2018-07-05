@@ -7,8 +7,6 @@ import styles from './styles.scss'
 const GameTransition = ({
   transition,
   effects,
-  hoverTransition,
-  outTransition,
 }) => {
   const { isVisible, incompleteCondition } = GameService.checkTransitionVisibility(transition)
   if (!isVisible) return null
@@ -22,8 +20,6 @@ const GameTransition = ({
   return (
     <Button
       domProps={{
-        onMouseOver: () => hoverTransition(transition.toPage),
-        onMouseOut: () => outTransition(),
         onClick,
       }}
       className={className}
