@@ -4,41 +4,37 @@ import { changeGameState } from 'redux/actions'
 import EffectService from 'services/EffectService'
 
 const GameService = {
-  checkTransitionVisibility: ({ conditionOperator, conditions }) => {
-    const { game: { stats, objects } } = store.getState()
-
-    let incompleteCondition = false
-    const defaultBool = conditionOperator === 'and'
-
-    const evaluateCondition = ({ type, operator, subject, value }) => {
-      if (!type || !operator || !subject) {
-        throw new Error("Condition incomplète")
-      }
-      if (type === 'stat') {
-        if (!value) {
-          throw new Error("Condition incomplète")
-        }
-        return EffectService.condition[type][operator].exec(stats[subject], value)
-      }
-      if (type === 'object') {
-        return EffectService.condition[type][operator].exec(subject, objects)
-      }
-      throw new Error("Condition incomplète")
-    }
-
-    const isVisible = conditionOperator === 'and'
-    ? conditions.reduce(
-      (acc, condition) => acc && evaluateCondition(condition),
-      defaultBool,
-    )
-    : conditions.reduce(
-      (acc, condition) => acc || evaluateCondition(condition),
-      defaultBool,
-    )
-    return isVisible
+  checkTransitionVisibility(transition, game) {
+    const { conditionOperator, conditions } = transition
+    const { sumConditions, defaultBool } = EffectService.conditionOperator[conditionOperator]
+    return conditions.reduce((acc, condition) => sumConditions(acc, this.evaluateCondition(condition, game)),
+      defaultBool
+    )    
+  },
+  
+  throwIncompleteConditionError() {
+    throw new Error("Condition incomplète")
   },
 
-  changePageAndApplyEffects: (currentPageId, effects) => {
+  evaluateCondition(condition, game) {
+    const { type, operator, subject, value } = condition
+    const { stats, objects } = game
+    if (!type || !operator || !subject) {
+      this.throwIncompleteConditionError()
+    }
+    if (type === 'stat') {
+      if (!value) {
+        this.throwIncompleteConditionError()
+      }
+      return EffectService.condition[type][operator].exec(stats[subject], value)
+    }
+    if (type === 'object') {
+      return EffectService.condition[type][operator].exec(subject, objects)
+    }
+    this.throwIncompleteConditionError()
+  },
+
+  changePageAndApplyEffects(currentPageId, effects) {
     const { game: { stats, objects } } = store.getState()
     let newStats = { ...stats }
     let newObjects = [...objects]
@@ -57,7 +53,6 @@ const GameService = {
     effects.forEach(applyEffect)
     store.dispatch(changeGameState({ currentPageId, stats: newStats, objects: newObjects }))
   },
-
 }
 
 export default GameService
