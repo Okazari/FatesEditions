@@ -1,5 +1,5 @@
 import React from 'react'
-import BookContainer from '../common/BookContainer'
+import PlayableBook from '../common/PlayableBook'
 import styles from './style.scss'
 import Showdown from './Showdown'
 
@@ -30,7 +30,7 @@ class News extends React.Component {
                   className={styles.book}
                 >
                   <span />
-                  <BookContainer showDelay={delay} book={book} />
+                  <PlayableBook showDelay={delay} book={book} />
                 </div>
               )
             })

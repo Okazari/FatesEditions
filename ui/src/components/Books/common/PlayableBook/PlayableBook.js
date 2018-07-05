@@ -13,7 +13,7 @@ mutation createGame($bookId: ID!, $playerId: ID!) {
 `
 
 // TODO: add loading and error returns
-const BookContainer = (props) => {
+const PlayableBook = (props) => {
   const { book } = props
   return (
     <Mutation
@@ -36,4 +36,4 @@ const BookContainer = (props) => {
   )
 }
 
-export default BookContainer
+export default PlayableBook
