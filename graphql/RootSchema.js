@@ -233,6 +233,28 @@ const findBookById = (bookId) => {
   return Book.findById(bookId).then(book => easier(book, () => book.save()))
 }
 
+generateGame = (book, playerId) => {
+  const stats = book.stats.reduce((acc, stat) => {
+    return {
+      ...acc,
+      [stat._id]: stat.initValue,
+    }
+  }, {})
+
+  const objects = book.objects.reduce((acc, object) => {
+    if (object.atStart) return [...acc, object._id]
+    return acc
+  }, [])
+
+  return {
+    currentPageId: book.startingPageId || book.pages[0].id,
+    playerId,
+    book,
+    stats,
+    objects,
+  }
+} 
+
 const resolvers = {
   MAP: GraphQLJSON,
   Query: {
@@ -252,27 +274,7 @@ const resolvers = {
     author: (obj, { id }, context, info) => User.findById(id),
     page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
     
-    tryGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => {
-      const stats = book.stats.reduce((acc, stat) => {
-        return {
-          ...acc,
-          [stat._id]: stat.initValue,
-        }
-      }, {})
-      
-      const objects = book.objects.reduce((acc, object) => {
-        if (object.atStart) return [...acc, object._id]
-        return acc
-      }, [])
-
-      return new Game({
-        currentPageId: book.startingPageId || book.pages[0].id,
-        playerId,
-        book,
-        stats,
-        objects,
-      })
-    }),
+    tryGame: (_, { bookId, playerId }) => Book.findById(bookId).then(generateGame),
     game: (_, { gameId, playerId }) => Game.findById(gameId),
   },
   Book: {
@@ -431,28 +433,7 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     }),
-    createGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => {
-      const stats = book.stats.reduce((acc, stat) => {
-        return {
-          ...acc,
-          [stat._id]: stat.initValue,
-        }
-      }, {})
-
-      const objects = book.objects.reduce((acc, object) => {
-        if (object.atStart) return [...acc, object._id]
-        return acc
-      }, [])
-
-      return new Game({
-        currentPageId: book.startingPageId || book.pages[0].id,
-        playerId,
-        book,
-        stats,
-        objects,
-      }).save()
-    }),
-
+    createGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => generateGame(book, playerId)).then(game => new Game(game).save()),
     updateGame: (_, { gameId, playerId }) => ({ updateGame: "updateGame", gameId, playerId }),
     deleteGame: (_, { gameId, playerId }) => ({ deleteGame: "deleteGame", gameId, playerId }),
 
