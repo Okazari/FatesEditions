@@ -3,8 +3,8 @@ import store from 'redux/store'
 import { changeGameState } from 'redux/actions'
 import EffectService from 'services/EffectService'
 
-class GameService {
-  static checkTransitionVisibility({ conditionOperator, conditions }) {
+const GameService = {
+  checkTransitionVisibility: ({ conditionOperator, conditions }) => {
     const { game: { stats, objects } } = store.getState()
 
     let incompleteCondition = false
@@ -12,21 +12,18 @@ class GameService {
 
     const evaluateCondition = ({ type, operator, subject, value }) => {
       if (!type || !operator || !subject) {
-        incompleteCondition = true
-        return defaultBool
+        throw new Error("Condition incomplète")
       }
       if (type === 'stat') {
         if (!value) {
-          incompleteCondition = true
-          return defaultBool
+          throw new Error("Condition incomplète")
         }
         return EffectService.condition[type][operator].exec(stats[subject], value)
       }
       if (type === 'object') {
         return EffectService.condition[type][operator].exec(subject, objects)
       }
-      incompleteCondition = true
-      return defaultBool
+      throw new Error("Condition incomplète")
     }
 
     const isVisible = conditionOperator === 'and'
@@ -38,11 +35,10 @@ class GameService {
       (acc, condition) => acc || evaluateCondition(condition),
       defaultBool,
     )
+    return isVisible
+  },
 
-    return { isVisible, incompleteCondition }
-  }
-
-  static changePageAndApplyEffects(currentPageId, effects) {
+  changePageAndApplyEffects: (currentPageId, effects) => {
     const { game: { stats, objects } } = store.getState()
     let newStats = { ...stats }
     let newObjects = [...objects]
@@ -60,22 +56,8 @@ class GameService {
     }
     effects.forEach(applyEffect)
     store.dispatch(changeGameState({ currentPageId, stats: newStats, objects: newObjects }))
-  }
+  },
+
 }
 
 export default GameService
-
-// ** Old **
-// import { ResourceService } from 'react-rest-resource'
-// import HttpService from './HttpService'
-
-// export default new ResourceService('/api/game',
-//   {
-//     name: {
-//       single: 'game',
-//       plural: 'games',
-//       id: '_id',
-//     },
-//     proxy: HttpService.fetch,
-//   },
-// )

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeGameState } from 'redux/actions'
+import { GameService } from 'services'
 import GameTransition from './GameTransition'
 
 const mapStateToProps = ({ game }, { transitionId }) => {
@@ -7,19 +7,23 @@ const mapStateToProps = ({ game }, { transitionId }) => {
   const mappedTransition = {
     ...transition,
     conditions: transition.conditions.map(id => game.book.condition[id]),
-    effects: transition.effects.map(id => game.book.effect[id]),
   }
-  const pageEffects = transition.toPage
-    ? game.book.page[transition.toPage].effects
-    : []
+  const text = transition.text
+ 
+  let visible = true
+  let errors = []
+  try {
+    visible = GameService.checkTransitionVisibility(mappedTransition)
+  } catch(error) {
+    errors.push(error)
+  }
+
   return {
-    transition: mappedTransition,
-    effects: [...mappedTransition.effects, ...pageEffects.map(id => game.book.effect[id])],
+    transitionId,
+    visible,
+    errors,
+    text,
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  changeGameState: newGameState => dispatch(changeGameState(newGameState)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(GameTransition)
+export default connect(mapStateToProps)(GameTransition)
