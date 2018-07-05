@@ -88,11 +88,13 @@ class EffectService {
   conditionOperator = {
     and: {
       label: 'ET',
-      exec: () => {},
+      defaultBool: true,
+      sumConditions: (a, b) => a && b,
     },
     or: {
       label: 'OU',
-      exec: () => {},
+      defaultBool: false,
+      sumConditions: (a, b) => a || b,
     },
   }
 }

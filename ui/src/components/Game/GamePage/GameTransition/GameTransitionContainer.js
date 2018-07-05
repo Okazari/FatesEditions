@@ -16,7 +16,7 @@ const mapStateToProps = ({ game }, { transitionId }) => {
     errors.push(new Error("Page de destination manquante"))
   }
   try {
-    visible = GameService.checkTransitionVisibility(mappedTransition)
+    visible = GameService.checkTransitionVisibility(mappedTransition, game)
   } catch(error) {
     errors.push(error)
   }
