@@ -6,7 +6,7 @@ import GameViewReduxContainer from './GameViewReduxContainer'
 
 const query = gql`
 query getGame($gameId: ID!, $playerId: ID!) {
-  getGame(gameId: $gameId, playerId: $playerId) {
+  game(gameId: $gameId, playerId: $playerId) {
     id
     currentPageId
     playerId
@@ -108,7 +108,7 @@ const GameViewContainer = ({ params }) => {
         ({ loading, error, data }) => {
           if (loading) return null
           if (error) return null
-          const game = data.getGame
+          const game = data.game
           return (
             <Mutation
               mutation={mutation}

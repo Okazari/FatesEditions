@@ -165,7 +165,7 @@ const typeDefs = `
     author(id: ID!): User
     page(bookId: ID!, pageId: ID!): Page
     tryGame(bookId: ID!, playerId: ID!) : Game
-    getGame(gameId: ID, playerId: ID!) : Game
+    game(gameId: ID, playerId: ID!) : Game
   }
 
   type Mutation {
@@ -273,7 +273,7 @@ const resolvers = {
         objects,
       })
     }),
-    getGame: (_, { gameId, playerId }) => Game.findById(gameId),
+    game: (_, { gameId, playerId }) => Game.findById(gameId),
   },
   Book: {
     author: (book) => {
