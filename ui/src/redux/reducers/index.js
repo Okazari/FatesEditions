@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux'
 
-const game = (state = {}, { type, ...rest }) => {
-  switch (type) {
+const game = (state = {}, action) => {
+  switch (action.type) {
     case 'INIT_BOOK':
       return ({
         ...state,
         book: {
-          ...rest,
+          ...action.normalizedBook,
         },
       })
     case 'SET_GAME':
       return ({
         ...state,
-        ...rest,
+        ...action.newGame,
       })
     default:
       return state
