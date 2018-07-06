@@ -6,7 +6,7 @@ const DisplayStats = ({ stats }) => {
   return (
     <div className={styles.component}>
       {
-        Object.entries(stats).map(([id, value]) => <Stats key={id} id={id} value={value} />)
+        Object.entries(stats).sort().map(([id, value]) => <Stats key={id} id={id} value={value} />)
       }
     </div>
   )
