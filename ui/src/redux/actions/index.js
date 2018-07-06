@@ -1,5 +1,5 @@
-export const changeGameState = state => ({
-  type: 'GAME_STATE',
+export const setGame = state => ({
+  type: 'SET_GAME',
   ...state,
 })
 

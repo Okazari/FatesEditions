@@ -9,7 +9,7 @@ const game = (state = {}, { type, ...rest }) => {
           ...rest,
         },
       })
-    case 'GAME_STATE':
+    case 'SET_GAME':
       return ({
         ...state,
         ...rest,
