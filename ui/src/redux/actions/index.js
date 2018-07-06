@@ -1,9 +1,9 @@
-export const setGame = state => ({
+export const setGame = newGame => ({
   type: 'SET_GAME',
-  ...state,
+  newGame,
 })
 
 export const initBook = normalizedBook => ({
   type: 'INIT_BOOK',
-  ...normalizedBook,
+  normalizedBook,
 })
