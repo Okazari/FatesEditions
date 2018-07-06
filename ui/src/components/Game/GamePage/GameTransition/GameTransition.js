@@ -1,23 +1,23 @@
 import React from 'react'
 import classnames from 'classnames'
-import GameService from 'services/GameService'
 import Button from 'components/common/Button'
 import styles from './styles.scss'
 
 const GameTransition = ({
   visible,
-  errors,
-  transitionId,
+  updateGame,
+  setGame,
   text,
+  errors,
 }) => {
   const className = classnames(styles.component, {
     [styles.disabled]: errors.length > 0,
   })
-  if (!visible) return null 
+  if (!visible) return null
   return (
-    <Button 
+    <Button
       domProps={{
-        onClick: () => !!transition.toPage && GameService.changePageAndApplyEffects(transitionId),
+        onClick: () => setGame(updateGame()),
       }}
       className={className}
     >

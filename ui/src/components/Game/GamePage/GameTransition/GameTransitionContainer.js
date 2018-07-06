@@ -1,4 +1,6 @@
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { setGame } from 'redux/actions'
 import { GameService } from 'services'
 import GameTransition from './GameTransition'
 
@@ -10,23 +12,31 @@ const mapStateToProps = ({ game }, { transitionId }) => {
   }
   const text = transition.text
   let visible = true
-  let errors = []
+  const errors = []
 
-  if (!transition.toPage){
-    errors.push(new Error("Page de destination manquante"))
+  if (!transition.toPage) {
+    errors.push(new Error('Page de destination manquante'))
   }
   try {
-    visible = GameService.checkTransitionVisibility(mappedTransition, game)
-  } catch(error) {
+    visible = GameService.checkTransitionVisibility(game, mappedTransition)
+  } catch (error) {
     errors.push(error)
   }
 
+  const updateGame = () => GameService.changePageAndApplyEffects(game, transitionId)
+
   return {
-    transitionId,
     visible,
-    errors,
     text,
+    updateGame,
+    errors,
   }
 }
 
-export default connect(mapStateToProps)(GameTransition)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setGame: bindActionCreators(setGame, dispatch),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameTransition)
