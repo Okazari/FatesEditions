@@ -63,6 +63,8 @@ const transitionType = `
 const gameType = `
   currentPageId : ID
   playerId : ID
+  creationDate : String
+  lastModificationDate : String
 `
 
 const typeDefs = `
@@ -165,6 +167,7 @@ const typeDefs = `
     author(id: ID!): User
     page(bookId: ID!, pageId: ID!): Page
     tryGame(bookId: ID!, playerId: ID!) : Game
+    games(playerId: ID!) : [Game]
     game(gameId: ID, playerId: ID!) : Game
   }
 
@@ -275,6 +278,7 @@ const resolvers = {
     page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
     
     tryGame: (_, { bookId, playerId }) => Book.findById(bookId).then(generateGame),
+    games: (_, { playerId }) => Game.find({ playerId }),
     game: (_, { gameId, playerId }) => Game.findById(gameId),
   },
   Book: {
