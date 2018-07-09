@@ -23,8 +23,8 @@ import WriteDraft, {
   PageTransition,
 } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
-import GameView from './components/GameView'
-import TrialView from './components/TrialView'
+import GameView from './components/Views/GameView'
+import TrialView from './components/Views/TrialView'
 import Profile, { Password } from './components/Profile'
 
 // OLD LAYOUT

@@ -1,10 +1,10 @@
 import React from 'react'
+import Game from 'components/Views/GameView'
 import { Box, BoxHeader, BoxBody, BoxFooter } from '../../../common/Box'
 import { Button, Input, GroupInput, TextAreaInput } from '../../../common'
 import BookCover from './BookCover'
 import GenreList from './GenreList'
 import PageList from './PageList'
-import Game from '../../../../GameView'
 import styles from './styles.scss'
 
 class BookInformation extends React.Component {
