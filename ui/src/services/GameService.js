@@ -62,28 +62,33 @@ const applyEffect = (game, effect) => {
   throw new Error('effect.type not valid')
 }
 
-const getDestination = (game, transitionId) => {
-  return game.book.transition[transitionId].toPage
-}
+const getDestination = (game, transitionId) => game.book.transition[transitionId].toPage
+const changePage = (game, transitionId) => ({
+  ...game,
+  currentPageId: getDestination(game, transitionId),
+}) 
 
 const applyEffects = (game, effects) =>
   effects.reduce((updatedGame, effect) => applyEffect(updatedGame, effect), game)
 
-const changePageAndApplyEffects = (game, transitionId) => {
-  const transitionEffects = game.book.transition[transitionId].effects.map(
-    id => game.book.effect[id],
-  )
-  const currentPageId = getDestination(game, transitionId)
-  const pageEffects = game.book.page[currentPageId].effects.map(id => game.book.effect[id])
-  let newGame
-  newGame = applyEffects(game, transitionEffects)
-  newGame = applyEffects(game, pageEffects)
+const getTransitionEffects = (game, transitionId) => game.book.transition[transitionId].effects.map(id => game.book.effect[id])
+const applyTransitionEffects = (game, transitionId) => applyEffects(game, getTransitionEffects(game, transitionId))
 
-  return {
-    ...newGame,
-    currentPageId,
-  }
-}
+const getPageEffects = (game, pageId) => game.book.page[pageId].effects.map(id => game.book.effect[id])
+const applyPageEffects = (game, pageId) => applyEffects(game, getPageEffects(game, pageId))
+
+const easier = (game) => ({
+  get: () => game,
+  applyTransitionEffects: transitionId => easier(applyTransitionEffects(game, transitionId)),
+  changePage: transitionId => easier(changePage(game, transitionId)),
+  applyDestinationPageEffects: () => easier(applyPageEffects(game, game.currentPageId)),
+})
+
+const changePageAndApplyEffects = (game, transitionId) => easier(game)
+  .applyTransitionEffects(transitionId)
+  .changePage(transitionId)
+  .applyDestinationPageEffects()
+  .get()
 
 export default {
   checkTransitionVisibility,
