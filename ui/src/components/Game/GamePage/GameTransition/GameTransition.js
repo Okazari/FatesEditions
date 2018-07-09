@@ -22,7 +22,13 @@ const GameTransition = ({
       className={className}
     >
       {text}
-      {errors.map(error => <div className={styles.error}>{error.message}</div>)}
+      {
+        errors.map(error => <div
+          className={styles.error}
+          key={
+            `${error.message}${error.columnNumber}-${error.lineNumber}`
+          }
+        >{error.message}</div>)}
     </Button>
   )
 }
