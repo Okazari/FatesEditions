@@ -14,11 +14,9 @@ const mapStateToProps = ({ game }, { transitionId }) => {
   let visible = true
   const errors = []
 
-  if (!transition.toPage) {
-    errors.push(new Error('Page de destination manquante'))
-  }
   try {
     visible = GameService.checkTransitionVisibility(game, mappedTransition)
+    GameService.checkEffects(game, transitionId)
   } catch (error) {
     errors.push(error)
   }
