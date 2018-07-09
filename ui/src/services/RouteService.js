@@ -18,6 +18,8 @@ class RouteService {
     books: () => '/app/books',
     booksnews: () => '/app/books/news',
     bookslibrary: () => '/app/books/library',
+    continue: () => '/app/continue',
+    continuelist: () => '/app/continue/list',
     playgame: gameId => `/app/play/${gameId}`,
     trialgame: bookId => `/app/trial/${bookId}`,
     write: () => '/app/write',

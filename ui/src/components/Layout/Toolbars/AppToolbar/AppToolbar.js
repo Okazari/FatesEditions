@@ -11,6 +11,7 @@ const AppToolbar = () => {
         <img className={styles.logo} alt="logo" src={logo} />
         <ToolbarLink to={RouteService.routes.books()} icon="import_contacts" />
         <ToolbarLink to={RouteService.routes.write()} icon="mode_edit" />
+        <ToolbarLink to={RouteService.routes.continue()} icon="play_arrow" />
       </div>
       <div className={styles.bottom}>
         <ToolbarLink to={RouteService.routes.profile()} icon="account_circle" />

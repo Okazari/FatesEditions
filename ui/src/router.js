@@ -23,8 +23,8 @@ import WriteDraft, {
   PageTransition,
 } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
-import GameView from './components/Views/GameView'
-import TrialView from './components/Views/TrialView'
+import { Continue, GamesList } from './components/Continue'
+import { GameView, TrialView } from './components/Views'
 import Profile, { Password } from './components/Profile'
 
 // OLD LAYOUT
@@ -45,6 +45,10 @@ const AppRouter = () => {
               <IndexRedirect to="news" />
               <Route path="news" component={News} />
               <Route path="library" component={Library} />
+            </Route>
+            <Route path="continue" component={Continue}>
+              <IndexRedirect to="list" />
+              <Route path="list" component={GamesList}/>
             </Route>
             <Route path="play/:gameId" component={GameView} />
             <Route path="trial/:bookId" component={TrialView} />
