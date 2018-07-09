@@ -62,20 +62,20 @@ const applyEffect = (game, effect) => {
   throw new Error('effect.type not valid')
 }
 
-const getDestination = (game, transitionId) => game.book.transition[transitionId].toPage
-const changePage = (game, transitionId) => ({
-  ...game,
-  currentPageId: getDestination(game, transitionId),
-}) 
-
 const applyEffects = (game, effects) =>
   effects.reduce((updatedGame, effect) => applyEffect(updatedGame, effect), game)
-
+  
 const getTransitionEffects = (game, transitionId) => game.book.transition[transitionId].effects.map(id => game.book.effect[id])
 const applyTransitionEffects = (game, transitionId) => applyEffects(game, getTransitionEffects(game, transitionId))
 
 const getPageEffects = (game, pageId) => game.book.page[pageId].effects.map(id => game.book.effect[id])
 const applyPageEffects = (game, pageId) => applyEffects(game, getPageEffects(game, pageId))
+  
+const getDestination = (game, transitionId) => game.book.transition[transitionId].toPage
+const changePage = (game, transitionId) => ({
+  ...game,
+  currentPageId: getDestination(game, transitionId),
+})
 
 const easier = (game) => ({
   get: () => game,
