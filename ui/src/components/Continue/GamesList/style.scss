@@ -6,6 +6,7 @@
   @include scrollbar();
   height: $tab-content-size;
   overflow: auto;
+  text-align: center;
 }
 
 .list {

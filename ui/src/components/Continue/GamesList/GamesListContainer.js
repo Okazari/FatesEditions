@@ -9,10 +9,16 @@ const query = gql`
     games(playerId: $playerId){
       id
       playerId
+      currentPageId
+      lastModificationDate
       book {
         id
         name
         cover
+        pages {
+          id
+          title
+        }
         author {
           id
           username
@@ -22,12 +28,14 @@ const query = gql`
   }
 `
 
+// TODO: Add loader and error display
 const GamesListContainer = () => (
   <Query 
     query={query}
     variables={{
       playerId: AuthService.getConnectedUserId(),
     }}
+    fetchPolicy={'network-only'}
   >
   {
     ({ loading, error, data }) => {
