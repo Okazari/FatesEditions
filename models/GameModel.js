@@ -12,17 +12,13 @@ const GameSchema = new Schema({
   stats: Schema.Types.Mixed,
   objects: Schema.Types.Mixed,
   tree: [{ Type: Schema.Types.Mixed, default: [] }],
-  creationDate: Date,
-  lastModificationDate: Date,
+  creationDate: {type: Date, default: Date.now},
+  lastModificationDate: {type: Date, default: Date.now},
 })
 
-GameSchema.pre('init', (next) => {
-  this.creationDate = Date.now()
-  next()
-})
 
-GameSchema.pre('save', (next) => {
-  this.lastModificationDate = Date.now()
+GameSchema.pre('findOneAndUpdate', function(next) {
+  this._update.lastModificationDate = Date.now()
   next()
 })
 

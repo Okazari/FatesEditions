@@ -16,17 +16,12 @@ const Book = new Schema({
   pages: [Page],
   stats: [Stat],
   objects: [Object],
-  creationDate: Date,
-  lastModificationDate: Date,
+  creationDate: { type: Date, default: Date.now },
+  lastModificationDate: { type: Date, default: Date.now },
 })
 
-Book.pre('init', (next) => {
-  this.creationDate = Date.now()
-  next()
-})
-
-Book.pre('save', (next) => {
-  this.lastModificationDate = Date.now()
+Book.pre('findOneAndUpdate', function(next) {
+  this._update.lastModificationDate = Date.now()
   next()
 })
 
