@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames/bind'
 import styles from './style.scss'
-import Author from './Author'
+import Infos from './Infos'
 
 const cx = classnames.bind(styles)
 
@@ -22,7 +22,7 @@ class Book extends React.Component {
   }
 
   render() {
-    const { book, onClick } = this.props
+    const { book, onClick, infos } = this.props
     const { expanded, displayed } = this.state
     // TODO Replace with loader
     if (!book) return null
@@ -45,7 +45,7 @@ class Book extends React.Component {
               <div className={styles.bookName}>
                 {book.name || 'Livre sans titre'}
               </div>
-              <Author author={book.author} />
+              <Infos infos={infos || book.author.username} />
             </div>
           </div>
         </div>
