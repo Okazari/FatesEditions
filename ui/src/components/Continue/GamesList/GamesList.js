@@ -9,6 +9,9 @@ const GamesList = ({ gamesList }) => {
   if (!gamesList) return null
   return (
     <div className={styles.component}>
+    {
+      gamesList.length === 0 ? <div>Aucune partie en cours</div> : null
+    }
       <div className={styles.list}>
         {
           gamesList.map((game, index) => {
