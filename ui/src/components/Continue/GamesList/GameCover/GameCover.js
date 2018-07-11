@@ -1,11 +1,14 @@
 import React from 'react'
-import Book from 'components/common/Book'
+import { RouteService } from 'services'
+import { Book, ButtonIcon } from 'components/common'
 
-const GameCover = ({ game, delay }) => {
+const GameCover = ({ game, delay, deleteGame }) => {
   const title = game.book.pages.find(page => game.currentPageId === page.id).title
   const date = new Date(game.lastModificationDate).toLocaleString()
   const infos = [title, date]
-  return <Book showDelay={delay} book={game.book} infos={infos} />
+  const onClick = () => RouteService.goTo(RouteService.routes.playgame(game.id))
+  const onDelete = () => deleteGame()
+  return <Book showDelay={delay} book={game.book} infos={infos} onClick={onClick} onDelete={onDelete}/>
 }
 
 export default GameCover

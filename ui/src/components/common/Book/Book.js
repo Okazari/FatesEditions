@@ -1,5 +1,6 @@
 import React from 'react'
 import classnames from 'classnames/bind'
+import { ButtonIcon } from 'components/common'
 import styles from './style.scss'
 import Infos from './Infos'
 
@@ -22,7 +23,7 @@ class Book extends React.Component {
   }
 
   render() {
-    const { book, onClick, infos } = this.props
+    const { book, onClick, infos, onDelete } = this.props
     const { expanded, displayed } = this.state
     // TODO Replace with loader
     if (!book) return null
@@ -38,6 +39,17 @@ class Book extends React.Component {
         onClick={this.toggleExpand}
         className={classes}
       >
+        { !!onDelete &&
+          <div className={styles.delete}>
+            <ButtonIcon
+              icon="close"
+              className={styles.action}
+              domProps={{
+                onClick: () => onDelete(book.id),
+              }}
+            />
+          </div>
+        }
         <div className={styles.cover} onClick={() => onClick && onClick(book.id)}>
           <div className={styles.coverImage} style={coverStyle} />
           <div className={styles.content}>
@@ -45,7 +57,7 @@ class Book extends React.Component {
               <div className={styles.bookName}>
                 {book.name || 'Livre sans titre'}
               </div>
-              <Infos infos={infos || book.author.username} />
+              <Infos infos={infos || [book.author.username]} />
             </div>
           </div>
         </div>
