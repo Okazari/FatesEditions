@@ -6,6 +6,7 @@ import styles from './styles.scss'
 const GameTransition = ({
   visible,
   updateGame,
+  saveGame,
   setGame,
   text,
   errors,
@@ -17,7 +18,7 @@ const GameTransition = ({
   return (
     <Button
       domProps={{
-        onClick: () => setGame(updateGame()),
+        onClick: () => saveGame(setGame(updateGame())),
       }}
       className={className}
     >

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 const game = (state = {}, action) => {
   switch (action.type) {
-    case 'INIT_BOOK':
+    case 'SET_BOOK':
       return ({
         ...state,
         book: {
