@@ -1,27 +1,30 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AuthService } from 'services'
 import GamesList from './GamesList'
 
-const query = gql`
-  query games($playerId: ID!){
-    games(playerId: $playerId){
+export const query = gql`
+  query getGames($playerId: ID!){
+    author(id: $playerId){
       id
-      playerId
-      currentPageId
-      lastModificationDate
-      book {
+      games {
         id
-        name
-        cover
-        pages {
+        playerId
+        currentPageId
+        lastModificationDate
+        book {
           id
-          title
-        }
-        author {
-          id
-          username
+          name
+          cover
+          pages {
+            id
+            title
+          }
+          author {
+            id
+            username
+          }
         }
       }
     }
@@ -39,10 +42,9 @@ const GamesListContainer = () => (
   >
   {
     ({ loading, error, data }) => {
-      console.log('data in GamesListContainer : ', data)
       if (loading) return null
       if (error) return null
-      return <GamesList gamesList={data.games} />
+      return <GamesList gamesList={data.author.games} />
     } 
   }
   </Query>

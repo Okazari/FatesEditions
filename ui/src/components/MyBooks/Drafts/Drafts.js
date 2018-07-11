@@ -27,16 +27,7 @@ const Drafts = ({ author = {}, createBook, deleteBook }) => {
               key={book.id}
               className={styles.book}
             >
-              <div className={styles.delete}>
-                <ButtonIcon
-                  icon="delete_forever"
-                  className={styles.action}
-                  domProps={{
-                    onClick: () => deleteBook(book.id),
-                  }}
-                />
-              </div>
-              <Book showDelay={delay} book={book} onClick={() => editDraft(book.id)} />
+              <Book showDelay={delay} book={book} onClick={() => editDraft(book.id)} onDelete={() => deleteBook(book.id)} />
             </div>
           )
         })

@@ -84,6 +84,7 @@ const typeDefs = `
     username: String
     publications: [Book]
     drafts: [Book]
+    games: [Game]
   }
 
   input BookInput {
@@ -209,7 +210,7 @@ const typeDefs = `
     
     createGame(bookId: ID!, playerId: ID!) : Game
     updateGame(gameId: ID, playerId: ID!) : Game
-    deleteGame(gameId: ID, playerId: ID!) : Game
+    deleteGame(gameId: ID, playerId: ID!) : User
     
     updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
@@ -293,6 +294,9 @@ const resolvers = {
     publications: (user) => {
       return Book.find({ authorId: user.id, draft: false })
     },
+    games: (user) => {
+      return Game.find({ playerId: user.id })
+    }
   },
   Mutation: {
     createBook: (_, { author }) => {
@@ -439,7 +443,7 @@ const resolvers = {
     }),
     createGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => generateGame(book, playerId)).then(game => new Game(game).save()),
     updateGame: (_, { gameId, playerId }) => ({ updateGame: "updateGame", gameId, playerId }),
-    deleteGame: (_, { gameId, playerId }) => ({ deleteGame: "deleteGame", gameId, playerId }),
+    deleteGame: (_, { gameId, playerId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId })),
 
     updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''

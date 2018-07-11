@@ -48,11 +48,6 @@ const mutation = gql`
 
 const mutationOptions = {
   name: 'unpublishBook',
-  update: (proxy, { data: { unpublishBook } }) => {
-    const data = proxy.readQuery({ query })
-    data.books = data.books.filter(b => b.id !== unpublishBook.id)
-    proxy.writeQuery({ query, data })
-  },
 }
 
 const PublicationsContainer = (props) => {
