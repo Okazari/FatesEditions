@@ -10,15 +10,27 @@
   border-bottom: solid 1px $decorator-color;
 }
 
+// .preview {
+//   width: 100%;
+//   @media (min-width: 1170px) {
+//     width: 440px;
+//   }
+//   @media (min-width: 1400px) {
+//     width: 680px;
+//   }
+//   height: 100%;
+// }
+
 .preview {
-  width: 100%;
+  flex-basis: 200px;
+  flex-shrink: 0;
+  height: 100%;  
   @media (min-width: 1170px) {
-    width: 440px;
+    flex-basis: 440px;
   }
-  @media (min-width: 1400px) {
-    width: 680px;
+  @media (min-width: 1560px) {
+    flex-basis: 680px;
   }
-  height: 100%;
 }
 
 .synopsis {
