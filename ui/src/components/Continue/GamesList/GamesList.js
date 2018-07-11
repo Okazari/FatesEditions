@@ -10,7 +10,7 @@ const GamesList = ({ gamesList }) => {
   return (
     <div className={styles.component}>
     {
-      gamesList.length === 0 ? <div>Aucune partie en cours</div> : null
+      gamesList.length === 0 ? <div className={styles.message}>Aucune partie en cours</div> : null
     }
       <div className={styles.list}>
         {

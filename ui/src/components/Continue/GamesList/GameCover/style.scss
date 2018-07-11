@@ -1,0 +1,22 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.delete {
+  position: relative;
+  height: 0;
+  width: 100%;
+  .action {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    z-index: 100;
+    margin: 5px;
+    box-shadow: $box-shadow-1;
+    transition: box-shadow ease-in 100ms;
+    cursor: pointer;
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
+  }
+}

@@ -1,1 +1,1 @@
-export default from './GameCover'
+export default from './GameCoverContainer'

@@ -17,16 +17,7 @@ const Publications = ({ author = {}, unpublishBook }) => {
               key={book.id}
               className={styles.book}
             >
-              <div className={styles.delete}>
-                <ButtonIcon
-                  icon="delete_forever"
-                  className={styles.action}
-                  domProps={{
-                    onClick: () => unpublishBook(book.id),
-                  }}
-                />
-              </div>
-              <Book showDelay={delay} book={book} />
+              <Book showDelay={delay} book={book} onDelete={() => unpublishBook(book.id)} />
             </div>
           )
         })

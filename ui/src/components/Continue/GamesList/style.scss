@@ -6,6 +6,9 @@
   @include scrollbar();
   height: $tab-content-size;
   overflow: auto;
+}
+
+.message {
   text-align: center;
 }
 
