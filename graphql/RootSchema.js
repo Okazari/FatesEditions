@@ -209,7 +209,7 @@ const typeDefs = `
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
     
     createGame(bookId: ID!, playerId: ID!) : Game
-    updateGame(gameId: ID, playerId: ID!) : Game
+    updateGame(game: GameInput!, playerId: ID!) : Game
     deleteGame(gameId: ID, playerId: ID!) : User
     
     updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
@@ -442,7 +442,7 @@ const resolvers = {
                  .save()
     }),
     createGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => generateGame(book, playerId)).then(game => new Game(game).save()),
-    updateGame: (_, { gameId, playerId }) => ({ updateGame: "updateGame", gameId, playerId }),
+    updateGame: (_, { game, playerId }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game),
     deleteGame: (_, { gameId, playerId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId })),
 
     updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {

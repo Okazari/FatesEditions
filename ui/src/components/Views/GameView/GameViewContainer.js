@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query, Mutation } from 'react-apollo'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AuthService } from 'services'
 import GameViewReduxContainer from './GameViewReduxContainer'
@@ -83,17 +83,6 @@ query getGame($gameId: ID!, $playerId: ID!) {
 }
 `
 
-const mutation = gql`
-mutation updateGame($bookId: ID!, $playerId: ID!) {
-  updateGame(bookId: $bookId, playerId: $playerId) {
-    id
-    currentPageId
-    stats
-    objects
-  }
-}
-`
-
 // TODO: Add loading and error returns
 const GameViewContainer = ({ params }) => {
   return (
@@ -109,23 +98,7 @@ const GameViewContainer = ({ params }) => {
           if (loading) return null
           if (error) return null
           const game = data.game
-          return (
-            <Mutation
-              mutation={mutation}
-              variables={{
-                gameId: params.gameId,
-                playerId: AuthService.getConnectedUserId(),
-              }}
-            >
-              {
-                (updateGame) => {
-                  if (loading) return null
-                  if (error) return null
-                  return <GameViewReduxContainer key={game.id} game={game} />
-                }
-              }
-            </Mutation>
-          )
+          return <GameViewReduxContainer key={game.id} game={game} />
         }
       }
     </Query>
@@ -133,4 +106,3 @@ const GameViewContainer = ({ params }) => {
 }
 
 export default GameViewContainer
-
