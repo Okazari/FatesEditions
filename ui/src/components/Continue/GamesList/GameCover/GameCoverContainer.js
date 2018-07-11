@@ -17,20 +17,20 @@ const mutation = gql`
 
 // TODO: Add loader and error display
 const GameCoverMutation = props => (
-  <Mutation 
+  <Mutation
     mutation={mutation}
     variables={{
       gameId: props.game.id,
       playerId: AuthService.getConnectedUserId(),
     }}
   >
-  {
-    (deleteGame, { loading, error }) => {
-      if (loading) return null
-      if (error) return null
-      return <GameCover {...props} deleteGame={deleteGame} />
-    } 
-  }
+    {
+      (deleteGame, { loading, error }) => {
+        if (loading) return null
+        if (error) return null
+        return <GameCover {...props} deleteGame={deleteGame} />
+      }
+    }
   </Mutation>
 )
 

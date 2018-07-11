@@ -48,7 +48,7 @@ const AppRouter = () => {
             </Route>
             <Route path="continue" component={Continue}>
               <IndexRedirect to="list" />
-              <Route path="list" component={GamesList}/>
+              <Route path="list" component={GamesList} />
             </Route>
             <Route path="play/:gameId" component={GameView} />
             <Route path="trial/:bookId" component={TrialView} />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Book, ButtonIcon } from 'components/common'
+import { Book } from 'components/common'
 import styles from './style.scss'
 
 const Publications = ({ author = {}, unpublishBook }) => {
