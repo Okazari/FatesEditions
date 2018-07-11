@@ -14,7 +14,7 @@ export const page = new schema.Entity('page', {
   transitions: [transition],
 })
 export const tag = new schema.Entity('tag')
-export const book = new schema.Entity('book', {
+export const bookSchema = new schema.Entity('book', {
   author,
   objects: [object],
   stats: [stat],

@@ -1,7 +1,9 @@
-import { bindActionCreators } from 'redux'
+import React from 'react'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
 import { connect } from 'react-redux'
 import { setGame } from 'redux/actions'
-import { GameService } from 'services'
+import { GameService, AuthService } from 'services'
 import GameTransition from './GameTransition'
 
 const mapStateToProps = ({ game }, { transitionId }) => {
@@ -33,8 +35,47 @@ const mapStateToProps = ({ game }, { transitionId }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setGame: bindActionCreators(setGame, dispatch),
+    setGame: (game) => {
+      delete game.book
+      delete game.__typename
+      dispatch(setGame(game))
+      return game
+    },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameTransition)
+const mutation = gql`
+mutation saveGame($game: GameInput!, $playerId: ID!) {
+  updateGame(game: $game, playerId: $playerId) {
+    id
+    currentPageId
+    stats
+    objects
+  }
+}
+`
+
+const GameTransitionContainer = props => (
+  <Mutation
+    mutation={mutation}
+  >
+    {
+      (saveGame, { loading, error }) => {
+        const _saveGame = game => saveGame({ variables: {
+          game,
+          playerId: AuthService.getConnectedUserId(),
+        } })
+        if (loading) return null
+        if (error) return null
+        return (
+          <GameTransition
+            {...props}
+            saveGame={_saveGame}
+          />
+        )
+      }
+    }
+  </Mutation>
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameTransitionContainer)
