@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { ButtonIcon, Icon, Book } from 'components/common'
+import { Icon, Book } from 'components/common'
 import { RouteService } from 'services'
 import styles from './style.scss'
 
@@ -27,7 +27,12 @@ const Drafts = ({ author = {}, createBook, deleteBook }) => {
               key={book.id}
               className={styles.book}
             >
-              <Book showDelay={delay} book={book} onClick={() => editDraft(book.id)} onDelete={() => deleteBook(book.id)} />
+              <Book
+                showDelay={delay}
+                book={book}
+                onClick={() => editDraft(book.id)}
+                onDelete={() => deleteBook(book.id)}
+              />
             </div>
           )
         })
