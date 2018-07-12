@@ -2,11 +2,10 @@
 import { ApolloClient } from 'apollo-client'
 import { concat } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
-import { onError } from "apollo-link-error";
+import { onError } from 'apollo-link-error'
 import RouteService from './RouteService'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import HttpService from './HttpService'
-
 
 const errorMiddleware = onError(({ response, graphQLErrors, networkError }) => {
   if (graphQLErrors) {
