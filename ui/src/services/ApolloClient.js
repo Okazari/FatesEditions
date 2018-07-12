@@ -17,7 +17,10 @@ const errorMiddleware = onError(({ response, graphQLErrors, networkError }) => {
 });
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: '/api/graphql' }),
+  link: concat(errorMiddleware, new HttpLink({
+    uri: '/api/graphql',
+    fetch: HttpService.fetch,
+  })),
   cache: new InMemoryCache(),
 })
 
