@@ -257,7 +257,15 @@ generateGame = (book, playerId) => {
     stats,
     objects,
   }
-} 
+}
+
+class UnauthorizedError extends Error {
+  constructor(message) {
+    super(message)
+    this.code = 401
+    this.message = message || 'Not authorized'
+  }
+}
 
 const isAuth = resolver => (obj, args = {}, context, info) => {
   if(!context.user) throw new UnauthorizedError()
