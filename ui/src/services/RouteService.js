@@ -44,9 +44,8 @@ class RouteService {
   }
 
   redirect401 = () => {
-    browserHistory.push(this.routes.signin())
+    browserHistory.replace(this.routes.signin())
   }
-
 }
 
 export default new RouteService()
