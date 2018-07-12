@@ -68,10 +68,20 @@ app.use((req, res, next) => {
 })
 
 const schema = require('./graphql/RootSchema')
-app.use('/api/graphql', graphqlHTTP({
+app.use('/api/graphql', graphqlHTTP(req => ({
   schema,
   graphiql: true,
-}))
+  context: req.locals,
+  formatError(err) {
+    return {
+      message: err.message,
+      code: err.originalError && err.originalError.code,   // <--
+      locations: err.locations,
+      path: err.path
+    };
+  }
+})))
+
 
 /** ****REST ROUTES*******/
 app.use('/api/user', user)
