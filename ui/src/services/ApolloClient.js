@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
+import { concat } from 'apollo-link'
 import { onError } from 'apollo-link-error'
 import RouteService from './RouteService'
 import { InMemoryCache } from 'apollo-cache-inmemory'

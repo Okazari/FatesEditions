@@ -268,8 +268,9 @@ class UnauthorizedError extends Error {
 }
 
 const isAuth = resolver => (obj, args = {}, context, info) => {
+  
   if(!context.user) throw new UnauthorizedError()
-  resolver(obj, args = {}, context, info)
+  return resolver(obj, args = {}, context, info)
 }
 
 const resolvers = {
