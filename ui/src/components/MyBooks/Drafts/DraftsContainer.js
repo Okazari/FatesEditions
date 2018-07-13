@@ -4,10 +4,6 @@ import gql from 'graphql-tag'
 import { AuthService } from 'services'
 import Drafts from './Drafts'
 
-const authorVariables = {
-  author: AuthService.getConnectedUserId(),
-}
-
 const core = `
   id
   drafts {
