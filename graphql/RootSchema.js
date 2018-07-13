@@ -165,15 +165,15 @@ const typeDefs = `
   type Query {
     books(author: ID, draft: Boolean): [Book]
     book(id: ID!): Book
-    author(id: ID!): User
+    author: User
     page(bookId: ID!, pageId: ID!): Page
-    tryGame(bookId: ID!, playerId: ID!) : Game
-    games(playerId: ID!) : [Game]
-    game(gameId: ID, playerId: ID!) : Game
+    tryGame(bookId: ID!): Game
+    games: [Game]
+    game(gameId: ID!): Game
   }
 
   type Mutation {
-    createBook(author: ID!): User
+    createBook: User
     updateBook(book: BookInput!): Book
     deleteBook(id: ID!): User
     publishBook(id: ID!): User
@@ -208,11 +208,11 @@ const typeDefs = `
     updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Effect
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
     
-    createGame(bookId: ID!, playerId: ID!) : Game
-    updateGame(game: GameInput!, playerId: ID!) : Game
-    deleteGame(gameId: ID, playerId: ID!) : User
+    createGame(bookId: ID!): Game
+    updateGame(game: GameInput!): Game
+    deleteGame(gameId: ID!): User
     
-    updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
+    updatePassword(oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
   `
   const easier = (ressource, save) => {
@@ -268,9 +268,9 @@ class UnauthorizedError extends Error {
 }
 
 const isAuth = resolver => (obj, args = {}, context, info) => {
-  
+  console.log(context.user)
   if(!context.user) throw new UnauthorizedError()
-  return resolver(obj, args = {}, context, info)
+  return resolver(obj, args, context, info)
 }
 
 const resolvers = {
@@ -289,12 +289,12 @@ const resolvers = {
       if (typeof draft === 'boolean') filters.draft = draft
       return Book.find(filters)
     },
-    author: isAuth((obj, { id }, context, info) => User.findById(id)),
+    author: isAuth((obj, args, context, info) => User.findById(context.user._id)),
     page: isAuth((obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId))),
     
-    tryGame: isAuth((_, { bookId, playerId }) => Book.findById(bookId).then(generateGame)),
-    games: isAuth((_, { playerId }) => Game.find({ playerId })),
-    game: isAuth((_, { gameId, playerId }) => Game.findById(gameId)),
+    tryGame: isAuth((_, { bookId }) => Book.findById(bookId).then(generateGame)),
+    games: isAuth((_, {}, context) => Game.find({ playerId: context.user.id })),
+    game: isAuth((_, { gameId }) => Game.findById(gameId)),
   },
   Book: {
     author: (book) => {
@@ -313,9 +313,9 @@ const resolvers = {
     }),
   },
   Mutation: {
-    createBook: isAuth((_, { author }) => {
+    createBook: isAuth((_, {}, context) => {
       const book = new Book({
-        authorId: author,
+        authorId: context.user._id,
       })
       return book.save().then(book => ({ id: book.authorId }))
     }),
@@ -453,26 +453,25 @@ const resolvers = {
                  .deleteOne('effects', effectId)
                  .save()
     })),
-    createGame: isAuth((_, { bookId, playerId }) => Book.findById(bookId).then(book => generateGame(book, playerId)).then(game => new Game(game).save())),
-    updateGame: isAuth((_, { game, playerId }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game)),
-    deleteGame: isAuth((_, { gameId, playerId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId }))),
+    createGame: isAuth((_, { bookId}, context) => Book.findById(bookId)
+      .then(book => generateGame(book, context.user._id))
+      .then(game => new Game(game).save())),
+    updateGame: isAuth((_, { game }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game)),
+    deleteGame: isAuth((_, { gameId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId }))),
 
-    updatePassword: isAuth((_, { userId, oldPassword, newPassword, confirmation }) => {
+    updatePassword: isAuth((_, { oldPassword, newPassword, confirmation }, context) => {
+      console.log('context.user in updatePassword : ', context.user)
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''
       const passwordMatch = newPassword !== confirmation
-
       if (paramsNotEmpty && passwordMatch) {
-        throw new Error('Error')
-        return null
+        throw new Error('Password Error')
       }
-
       return User.findOneAndUpdate(
-        { _id: userId, password: SHA512(oldPassword).toString()},
+        { id: context.user.id, password: SHA512(oldPassword).toString()},
         { password: SHA512(newPassword).toString() },
       ).then(user => {
         if (!user) {
-          throw new Error('Error')
-          return null
+          throw new Error('Password Error')
         }
         delete user.password
         return user

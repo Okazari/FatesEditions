@@ -53,7 +53,6 @@ app.use((req, res, next) => {
     const payload = jwt.verify(req.get('Authorization'), 'mysecretstory')
     req.payload = payload
     const { user } = payload
-    console.log('user : ', user)
     user.password = null
     const token = jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
     console.log(`${payload.user.username} ${payload.user._id} ${payload.exp}`)

@@ -22,41 +22,29 @@ const core = `
 `
 
 const query = gql`
-  query AuthorById ($id: ID!) {
-    author(id: $id) {
+  query Author {
+    author {
       ${core}
     }
   }
 `
 
 const queryOptions = {
-  options: ({ params: { draftId, pageId } }) => ({
-    variables: {
-      id: AuthService.getConnectedUserId(),
-    },
-  }),
   props: ({ data: { loading, author } }) => ({
     author,
+    loading,
   }),
 }
 
 const createBookMutation = gql`
-  mutation CreateBook ($author: ID!) {
-    createBook(author: $author) {
+  mutation CreateBook {
+    createBook {
       ${core}
     }
   }
 `
 
 const createBookOptions = {
-  options: () => ({
-    variables: authorVariables,
-    update: (proxy, { data: { createBook } }) => {
-      const data = proxy.readQuery({ query, variables: authorVariables })
-      data.books.push(createBook)
-      proxy.writeQuery({ query, variables: authorVariables, data })
-    },
-  }),
   name: 'createBook',
 }
 
@@ -69,13 +57,6 @@ const deleteBookMutation = gql`
 `
 
 const deleteBookOptions = {
-  options: () => ({
-    update: (proxy, { data: { deleteBook } }) => {
-      const data = proxy.readQuery({ query, variables: authorVariables })
-      data.books = data.books.filter(book => book.id !== deleteBook)
-      proxy.writeQuery({ query, variables: authorVariables, data })
-    },
-  }),
   name: 'deleteBook',
 }
 

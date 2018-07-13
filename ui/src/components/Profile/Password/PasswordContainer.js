@@ -7,13 +7,11 @@ import Password from './Password'
 
 const mutation = gql`
   mutation updatePassword(
-      $userId: ID!,
       $oldPassword: String!,
       $newPassword: String!,
       $confirmation: String!
   ) {
     updatePassword(
-      userId: $userId,
       oldPassword: $oldPassword,
       newPassword: $newPassword,
       confirmation: $confirmation
@@ -29,7 +27,6 @@ const PasswordContainer = () => (
       (updatePassword, state) => {
         const _updatePassword = passwordsData => updatePassword({
           variables: {
-            userId: AuthService.getConnectedUserId(),
             ...passwordsData,
           },
         })

@@ -1,12 +1,11 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
-import { AuthService } from 'services'
 import Publications from './Publications'
 
 const query = gql`
-  query AuthorById ($id: ID!) {
-    author(id: $id) {
+  query Author {
+    author {
       id
       publications {
         id
@@ -22,11 +21,6 @@ const query = gql`
 `
 
 const queryOptions = {
-  options: ({ params: { draftId, pageId } }) => ({
-    variables: {
-      id: AuthService.getConnectedUserId(),
-    },
-  }),
   props: ({ data: { loading, author } }) => ({
     author,
   }),

@@ -6,8 +6,8 @@ import { AuthService } from 'services'
 import Publish from './Publish'
 
 const query = gql`
-  query AuthorById ($id: ID!) {
-    author(id: $id) {
+  query Author {
+    author {
       id
       drafts {
         id
@@ -24,11 +24,6 @@ const query = gql`
 `
 
 const queryOptions = {
-  options: ({ params: { draftId, pageId } }) => ({
-    variables: {
-      id: AuthService.getConnectedUserId(),
-    },
-  }),
   props: ({ data: { loading, author } }) => ({
     author,
   }),

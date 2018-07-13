@@ -8,8 +8,12 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import HttpService from './HttpService'
 
 const errorMiddleware = onError(({ response, graphQLErrors, networkError }) => {
+  console.log('graphQLErrors: ', graphQLErrors)
   if (graphQLErrors) {
-    const unauthorized = !!graphQLErrors.filter(({ code }) => code === 401)
+    console.log('filter code ?', graphQLErrors.find(({ code }) => code === 401))  
+    const unauthorized = !!graphQLErrors.find(({ code }) => code === 401)
+
+    console.log('unauthorized in errorMiddleware : ', unauthorized)
     if(unauthorized) {
       RouteService.redirect401()
       response.errors = null

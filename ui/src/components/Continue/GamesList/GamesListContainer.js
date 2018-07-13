@@ -5,8 +5,8 @@ import { AuthService } from 'services'
 import GamesList from './GamesList'
 
 export const query = gql`
-  query getGames($playerId: ID!){
-    author(id: $playerId){
+  query getGames {
+    author {
       id
       games {
         id
@@ -35,9 +35,6 @@ export const query = gql`
 const GamesListContainer = () => (
   <Query
     query={query}
-    variables={{
-      playerId: AuthService.getConnectedUserId(),
-    }}
     fetchPolicy={'network-only'}
   >
     {
