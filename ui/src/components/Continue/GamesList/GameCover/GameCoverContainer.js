@@ -5,8 +5,8 @@ import { AuthService } from 'services'
 import GameCover from './GameCover'
 
 const mutation = gql`
-  mutation deleteGame($gameId: ID, $playerId: ID!){
-    deleteGame(gameId: $gameId, playerId: $playerId){
+  mutation deleteGame($gameId: ID!){
+    deleteGame(gameId: $gameId){
       id
       games {
         id
@@ -16,12 +16,11 @@ const mutation = gql`
 `
 
 // TODO: Add loader and error display
-const GameCoverMutation = props => (
+const GameCoverContainer = props => (
   <Mutation
     mutation={mutation}
     variables={{
       gameId: props.game.id,
-      playerId: AuthService.getConnectedUserId(),
     }}
   >
     {
@@ -34,5 +33,5 @@ const GameCoverMutation = props => (
   </Mutation>
 )
 
-export default GameCoverMutation
+export default GameCoverContainer
 

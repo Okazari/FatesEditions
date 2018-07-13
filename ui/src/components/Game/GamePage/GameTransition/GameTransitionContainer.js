@@ -45,8 +45,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mutation = gql`
-mutation saveGame($game: GameInput!, $playerId: ID!) {
-  updateGame(game: $game, playerId: $playerId) {
+mutation saveGame($game: GameInput!) {
+  updateGame(game: $game) {
     id
     currentPageId
     stats
