@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout, Content, TrialToolbar } from 'components/Layout'
-import Game from 'components/Game'
+import Game from 'components/Views/Game'
 
 const TrialView = (props) => {
   return (

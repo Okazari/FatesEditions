@@ -1,7 +1,7 @@
 import React from 'react'
+import Input from 'components/common/Input'
+import Button from 'components/common/Button'
 import styles from './style.scss'
-import Input from '../../common/Input'
-import Button from '../../common/Button'
 
 const Password = ({ updatePassword, state }) => {
   const errorText = 'Oups, l\'ancien mot de passe est incorrect ou bien les deux nouveaux mots de passe ne correspondent pas !'

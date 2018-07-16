@@ -1,6 +1,6 @@
 import React from 'react'
-import { Layout, Content, AppToolbar, Tabs, TabContent } from '../Layout'
-import { RouteService } from '../../services'
+import { Layout, Content, AppToolbar, Tabs, TabContent } from 'components/Layout'
+import { RouteService } from 'services'
 
 const tabDrafts = { label: 'Mes brouillons', link: RouteService.routes.writedrafts() }
 const tabBooks = { label: 'Mes livres publiés', link: RouteService.routes.writepublications() }
