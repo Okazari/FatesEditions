@@ -44,7 +44,6 @@ class GameTree extends React.Component {
   }
 
   generateTreeNode = (posX, posY, level, pageId, targetPageId, subTree = true) => {
-    // console.log(pageId)
     const { game: { book, path } } = this.props
     const nextLevel = level + 1
     const page = book.pages.find(bookPage => bookPage.id === pageId)

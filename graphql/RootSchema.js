@@ -268,7 +268,6 @@ class UnauthorizedError extends Error {
 }
 
 const isAuth = resolver => (obj, args = {}, context, info) => {
-  console.log(context.user)
   if(!context.user) throw new UnauthorizedError()
   return resolver(obj, args, context, info)
 }
@@ -460,7 +459,6 @@ const resolvers = {
     deleteGame: isAuth((_, { gameId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId }))),
 
     updatePassword: isAuth((_, { oldPassword, newPassword, confirmation }, context) => {
-      console.log('context.user in updatePassword : ', context.user)
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''
       const passwordMatch = newPassword !== confirmation
       if (paramsNotEmpty && passwordMatch) {
