@@ -19,7 +19,7 @@ const GameTileContainer = props => (
   <Mutation
     mutation={mutation}
     variables={{
-      gameId: props.game.id,
+      gameId: props.content.id,
     }}
   >
     {

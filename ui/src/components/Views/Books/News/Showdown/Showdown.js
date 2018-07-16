@@ -8,7 +8,7 @@ const Showdown = ({ book }) => {
   return (
     <div className={styles.component}>
       <div className={styles.preview}>
-        <PlayableBook book={book} />
+        <PlayableBook content={book} />
       </div>
       {
         book.synopsis &&

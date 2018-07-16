@@ -1,7 +1,8 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import GamesList from './GamesList'
+import BookGrid from 'components/common/BookGrid'
+import GameTile from './GameTile'
 
 export const query = gql`
   query getGames {
@@ -40,7 +41,7 @@ const GamesListContainer = () => (
       ({ loading, error, data }) => {
         if (loading) return null
         if (error) return null
-        return <GamesList gamesList={data.author.games} />
+        return <BookGrid tilesList={data.author.games} TileComponent={GameTile} />
       }
     }
   </Query>

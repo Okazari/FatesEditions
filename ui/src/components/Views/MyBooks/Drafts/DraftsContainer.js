@@ -1,7 +1,10 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
-import Drafts from './Drafts'
+import classnames from 'classnames'
+import { RouteService } from 'services'
+import { BookGrid, Icon, Book } from 'components/common'
+import styles from './style.scss'
 
 const core = `
   id
@@ -58,10 +61,36 @@ const deleteBookOptions = {
   name: 'deleteBook',
 }
 
-const DraftContainer = ({ createBook, deleteBook, ...rest }) => {
+const editDraft = (draftId) => {
+  RouteService.goTo(RouteService.routes.writebook(draftId))
+}
+
+const BookTile = ({ delay, content, onDelete }) => (<Book
+  showDelay={delay}
+  book={content}
+  onClick={() => editDraft(content.id)}
+  onDelete={() => onDelete(content.id)}
+/>)
+
+const DraftContainer = ({ createBook, deleteBook, author = {} }) => {
+  const books = author.drafts
   const _createBook = () => createBook()
   const _deleteBook = id => deleteBook({ variables: { id } })
-  return <Drafts {...rest} createBook={_createBook} deleteBook={_deleteBook} />
+  return (
+    <BookGrid
+      tilesList={books}
+      FirstComponent={
+        () => <div
+          onClick={_createBook}
+          className={classnames(styles.book, styles.newBook)}
+        >
+          <Icon icon="library_add" />
+        </div>
+      }
+      TileComponent={BookTile}
+      onDelete={_deleteBook}
+    />
+  )
 }
 
 export default compose(

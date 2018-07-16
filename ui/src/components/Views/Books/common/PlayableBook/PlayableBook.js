@@ -14,7 +14,7 @@ mutation createGame($bookId: ID!) {
 
 // TODO: add loading and error returns
 const PlayableBook = (props) => {
-  const { book } = props
+  const book = props.content
   return (
     <Mutation
       mutation={mutation}
@@ -28,7 +28,7 @@ const PlayableBook = (props) => {
             .then(({ data }) => RouteService.goTo(RouteService.routes.playgame(data.createGame.id)))
           if (loading) return null
           if (error) return null
-          return <Book {...props} onClick={bookId => _createGame(bookId)} />
+          return <Book {...props} book={book} onClick={bookId => _createGame(bookId)} />
         }
       }
     </Mutation>

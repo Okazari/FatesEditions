@@ -1,6 +1,9 @@
-import { graphql } from 'react-apollo'
+import React from 'react'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import Library from './Library'
+import BookGrid from 'components/common/BookGrid'
+import PlayableBook from '../common/PlayableBook'
+// import Library from './Library'
 
 const query = gql`
   query {
@@ -16,14 +19,18 @@ const query = gql`
   }
 `
 
-const queryOptions = {
-  options: {
-    pollInterval: 60 * 1000,
-    fetchPolicy: 'cache-and-network',
-  },
-  props: ({ data: { books } }) => ({
-    books,
-  }),
+const LibraryContainer = () => {
+  return (
+    <Query
+      query={query}
+      pollInterval={60 * 1000}
+      fetchPolicy={'cache-and-network'}
+    >
+      {
+        ({ data: { books } }) => <BookGrid tilesList={books} TileComponent={PlayableBook} />
+      }
+    </Query>
+  )
 }
 
-export default graphql(query, queryOptions)(Library)
+export default LibraryContainer

@@ -1,7 +1,9 @@
-//eslint-disable-next-line
-import { graphql } from 'react-apollo'
+import React from 'react'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import News from './News'
+import BookGrid from 'components/common/BookGrid'
+import PlayableBook from '../common/PlayableBook'
+import Showdown from './Showdown'
 
 const query = gql`
   query {
@@ -18,13 +20,28 @@ const query = gql`
   }
 `
 
+const NewsContainer = () => {
+  return (
+    <Query
+      query={query}
+      pollInterval={60 * 1000}
+      fetchPolicy={'cache-and-network'}
+    >
+      {
+        ({ data: { books } }) => {
+          if (!books) return null
+          const booksCopy = [...books]
+          const firstBook = booksCopy.shift()
+          return (
+            <div>
+              <Showdown book={firstBook} />
+              <BookGrid tilesList={booksCopy} TileComponent={PlayableBook} />
+            </div>
+          )
+        }
+      }
+    </Query>
+  )
+}
 
-export default graphql(query, {
-  options: {
-    pollInterval: 60 * 1000,
-    fetchPolicy: 'cache-and-network',
-  },
-  props: ({ data: { books } }) => ({
-    books,
-  }),
-})(News)
+export default NewsContainer
