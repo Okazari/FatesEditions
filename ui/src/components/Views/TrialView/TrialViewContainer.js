@@ -88,7 +88,7 @@ const TrialViewContainer = ({ params }) => (
     variables={{
       bookId: params.bookId,
     }}
-    fetchPolicy={'network-only'}
+    fetchPolicy={'cache-and-network'}
   >
     {
       ({ loading, error, data }) => {

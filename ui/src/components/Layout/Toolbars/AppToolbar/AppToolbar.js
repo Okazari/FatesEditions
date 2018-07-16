@@ -1,5 +1,5 @@
 import React from 'react'
-import ToolbarLink from 'components/common/ToolbarLink'
+import ToolbarLink, { ToolbarButton } from 'components/common/ToolbarLink'
 import styles from './style.scss'
 import logo from '../../../common/logo.svg'
 import { RouteService } from '../../../../services'
@@ -15,6 +15,14 @@ const AppToolbar = () => {
       </div>
       <div className={styles.bottom}>
         <ToolbarLink to={RouteService.routes.profile()} icon="account_circle" />
+        <div 
+          onClick={() => {
+            localStorage.removeItem('auth-token')
+            RouteService.goTo(RouteService.routes.signin())
+          }}
+        >
+        <ToolbarButton icon="exit_to_app" />
+        </div>
       </div>
     </div>
   )

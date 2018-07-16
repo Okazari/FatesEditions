@@ -22,6 +22,7 @@ const query = gql`
 export default graphql(query, {
   options: {
     pollInterval: 60 * 1000,
+    fetchPolicy: 'cache-and-network',
   },
   props: ({ data: { books } }) => ({
     books,

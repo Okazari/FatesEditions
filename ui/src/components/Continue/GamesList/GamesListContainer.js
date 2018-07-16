@@ -35,7 +35,7 @@ export const query = gql`
 const GamesListContainer = () => (
   <Query
     query={query}
-    fetchPolicy={'network-only'}
+    fetchPolicy={'cache-and-network'}
   >
     {
       ({ loading, error, data }) => {

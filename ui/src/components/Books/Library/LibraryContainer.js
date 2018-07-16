@@ -19,6 +19,7 @@ const query = gql`
 const queryOptions = {
   options: {
     pollInterval: 60 * 1000,
+    fetchPolicy: 'cache-and-network',
   },
   props: ({ data: { books } }) => ({
     books,
