@@ -23,7 +23,7 @@ import WriteDraft, {
   PageTransition,
 } from './components/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
-import { Continue, GamesList } from './components/Continue'
+import { MyGames, GamesList } from './components/MyGames'
 import { GameView, TrialView } from './components/Views'
 import Profile, { Password } from './components/Profile'
 
@@ -46,7 +46,7 @@ const AppRouter = () => {
               <Route path="news" component={News} />
               <Route path="library" component={Library} />
             </Route>
-            <Route path="continue" component={Continue}>
+            <Route path="mygames" component={MyGames}>
               <IndexRedirect to="list" />
               <Route path="list" component={GamesList} />
             </Route>

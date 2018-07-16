@@ -18,7 +18,7 @@ const AppToolbar = () => {
         />
         <ToolbarLink to={RouteService.routes.books()} icon="import_contacts" />
         <ToolbarLink to={RouteService.routes.write()} icon="mode_edit" />
-        <ToolbarLink to={RouteService.routes.continue()} icon="play_arrow" />
+        <ToolbarLink to={RouteService.routes.mygames()} icon="play_arrow" />
       </div>
       { isLoggedIn
         ? (

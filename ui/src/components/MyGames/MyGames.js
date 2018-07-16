@@ -3,10 +3,10 @@ import { Layout, Content, AppToolbar, Tabs } from 'components/Layout'
 import { RouteService } from 'services'
 
 
-const tabGames = { label: 'Parties en cours', link: RouteService.routes.continuelist() }
+const tabGames = { label: 'Parties en cours', link: RouteService.routes.mygameslist() }
 const tabs = [tabGames]
 
-const Continue = ({ location, children }) => (
+const MyGames = ({ location, children }) => (
   <Layout>
     <AppToolbar />
     <Content>
@@ -16,4 +16,4 @@ const Continue = ({ location, children }) => (
   </Layout>
 )
 
-export default Continue
+export default MyGames
