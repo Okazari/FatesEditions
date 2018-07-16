@@ -28,7 +28,7 @@ const PlayableBook = (props) => {
             .then(({ data }) => RouteService.goTo(RouteService.routes.playgame(data.createGame.id)))
           if (loading) return null
           if (error) return null
-          return <Book {...props} onClick={() => _createGame(book.id)} />
+          return <Book {...props} onClick={bookId => _createGame(bookId)} />
         }
       }
     </Mutation>
