@@ -21,7 +21,7 @@ const AppToolbar = () => {
             RouteService.goTo(RouteService.routes.signin())
           }}
         >
-        <ToolbarButton icon="exit_to_app" />
+        <ToolbarButton icon="power_settings_new" />
         </div>
       </div>
     </div>
