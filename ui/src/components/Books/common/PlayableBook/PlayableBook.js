@@ -1,7 +1,7 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { AuthService, RouteService } from 'services'
+import { RouteService } from 'services'
 import Book from 'components/common/Book'
 
 const mutation = gql`

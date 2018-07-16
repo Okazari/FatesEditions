@@ -2,7 +2,6 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
-import { AuthService } from 'services'
 import Publish from './Publish'
 
 const query = gql`

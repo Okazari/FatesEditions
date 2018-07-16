@@ -1,7 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { AuthService } from 'services'
 import GameCover from './GameCover'
 
 const mutation = gql`

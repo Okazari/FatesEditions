@@ -11,7 +11,7 @@ const AppToolbar = () => {
     <div className={styles.component}>
       <div className={styles.top}>
         <img
-          onClick={() => RouteService.goTo(RouteService.routes.home())} 
+          onClick={() => RouteService.goTo(RouteService.routes.home())}
           className={styles.logo}
           alt="logo"
           src={logo}
@@ -20,7 +20,7 @@ const AppToolbar = () => {
         <ToolbarLink to={RouteService.routes.write()} icon="mode_edit" />
         <ToolbarLink to={RouteService.routes.continue()} icon="play_arrow" />
       </div>
-        { !!isLoggedIn
+      { isLoggedIn
         ? (
           <div className={styles.bottom}>
             <ToolbarLink to={RouteService.routes.profile()} icon="account_circle" />
@@ -39,7 +39,7 @@ const AppToolbar = () => {
             <ToolbarLink to={RouteService.routes.signin()} icon="power_settings_new" />
           </div>
           )
-        }
+      }
     </div>
   )
 }

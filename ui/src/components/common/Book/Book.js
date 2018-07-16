@@ -20,7 +20,7 @@ class Book extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.timeOut)
   }
- 
+
   // toggleExpand = () => {
   //   const { expanded } = this.state
   //   this.setState(() => ({ expanded: !expanded }))
