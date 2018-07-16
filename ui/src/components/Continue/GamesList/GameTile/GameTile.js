@@ -2,7 +2,7 @@ import React from 'react'
 import { RouteService } from 'services'
 import { Book } from 'components/common'
 
-const GameCover = ({ game, delay, deleteGame }) => {
+const GameTile = ({ game, delay, deleteGame }) => {
   const title = game.book.pages.find(page => game.currentPageId === page.id).title
   const date = new Date(game.lastModificationDate).toLocaleString()
   const infos = [title, date]
@@ -17,4 +17,4 @@ const GameCover = ({ game, delay, deleteGame }) => {
   />)
 }
 
-export default GameCover
+export default GameTile

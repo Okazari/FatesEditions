@@ -2,7 +2,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import AuthService from 'services/AuthService'
 import Password from './Password'
 
 const mutation = gql`

@@ -1,5 +1,5 @@
 import React from 'react'
-import GameCover from './GameCover'
+import GameTile from './GameTile'
 import styles from './style.scss'
 
 const GamesList = ({ gamesList }) => {
@@ -20,7 +20,7 @@ const GamesList = ({ gamesList }) => {
                 key={game.id}
                 className={styles.book}
               >
-                <GameCover game={game} delay={delay} />
+                <GameTile game={game} delay={delay} />
               </div>
             )
           })
