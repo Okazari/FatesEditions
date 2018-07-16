@@ -26,6 +26,9 @@ const query = gql`
 `
 
 const queryOptions = {
+  options: {
+    fetchPolicy: 'cache-and-network',
+  },
   props: ({ data: { loading, author } }) => ({
     author,
     loading,

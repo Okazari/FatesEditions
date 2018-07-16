@@ -10,7 +10,12 @@ const AppToolbar = () => {
   return (
     <div className={styles.component}>
       <div className={styles.top}>
-        <img className={styles.logo} alt="logo" src={logo} />
+        <img
+          onClick={() => RouteService.goTo(RouteService.routes.home())} 
+          className={styles.logo}
+          alt="logo"
+          src={logo}
+        />
         <ToolbarLink to={RouteService.routes.books()} icon="import_contacts" />
         <ToolbarLink to={RouteService.routes.write()} icon="mode_edit" />
         <ToolbarLink to={RouteService.routes.continue()} icon="play_arrow" />
