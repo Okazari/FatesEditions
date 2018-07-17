@@ -25,7 +25,7 @@ const NewsContainer = () => {
     <Query
       query={query}
       pollInterval={60 * 1000}
-      fetchPolicy={'cache-and-network'}
+      fetchPolicy={'network-only'}
     >
       {
         ({ data: { books } }) => {
@@ -33,10 +33,11 @@ const NewsContainer = () => {
           const booksCopy = [...books]
           const firstBook = booksCopy.shift()
           return (
-            <div>
-              <Showdown book={firstBook} />
-              <BookGrid tilesList={booksCopy} TileComponent={PlayableBook} />
-            </div>
+            <BookGrid
+              FirstRowComponent={() => <Showdown book={firstBook} />}
+              tilesList={booksCopy}
+              TileComponent={PlayableBook}
+            />
           )
         }
       }

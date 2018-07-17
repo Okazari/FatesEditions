@@ -65,8 +65,8 @@ const editDraft = (draftId) => {
   RouteService.goTo(RouteService.routes.writebook(draftId))
 }
 
-const BookTile = ({ delay, content, onDelete }) => (<Book
-  showDelay={delay}
+const BookTile = ({ showDelay, content, onDelete }) => (<Book
+  showDelay={showDelay}
   book={content}
   onClick={() => editDraft(content.id)}
   onDelete={() => onDelete(content.id)}
@@ -79,7 +79,7 @@ const DraftContainer = ({ createBook, deleteBook, author = {} }) => {
   return (
     <BookGrid
       tilesList={books}
-      FirstComponent={
+      FirstTileComponent={
         () => <div
           onClick={_createBook}
           className={classnames(styles.book, styles.newBook)}
