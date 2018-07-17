@@ -464,8 +464,11 @@ const resolvers = {
       if (paramsNotEmpty && passwordMatch) {
         throw new Error('Password Error')
       }
+      console.log('context.user in updatePassword : ', context.user)
+      console.log('context.user._id in updatePassword : ', context.user._id)
+      console.log('SHA512(oldPassword) : ', SHA512(oldPassword).toString())
       return User.findOneAndUpdate(
-        { id: context.user.id, password: SHA512(oldPassword).toString()},
+        { _id: context.user._id, password: SHA512(oldPassword).toString()},
         { password: SHA512(newPassword).toString() },
       ).then(user => {
         if (!user) {

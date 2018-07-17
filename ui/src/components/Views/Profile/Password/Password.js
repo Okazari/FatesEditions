@@ -48,8 +48,16 @@ const Password = ({ updatePassword, state }) => {
           {errorText}
         </div>
       }
+      { !!state.data &&
+        <div className={styles.sucess}>
+          {'Changement de mot de passe effectué'}
+        </div>
+      }
       <Button>
-        Changer de mot de passe
+        { !state.loading
+          ? 'Changer de mot de passe'
+          : 'Chargement'
+        }
       </Button>
     </form>
   )
