@@ -10,8 +10,8 @@ import store from 'redux/store'
 import { Provider } from 'react-redux'
 
 // NEW LAYOUT
-import Books, { Library, News } from './components/Books'
-import MyBooks, { Drafts, Publications, Publish } from './components/MyBooks'
+import Books, { Library, News } from './components/Views/Books'
+import MyBooks, { Drafts, Publications, Publish } from './components/Views/MyBooks'
 import WriteDraft, {
   DraftGeneral,
   DraftItems,
@@ -21,11 +21,11 @@ import WriteDraft, {
   PageGeneral,
   PageContent,
   PageTransition,
-} from './components/Write'
+} from './components/Views/Write'
 import Portal, { SignIn, SignUp, Recover } from './components/Portal'
-import { Continue, GamesList } from './components/Continue'
+import { MyGames, GamesList } from './components/Views/MyGames'
 import { GameView, TrialView } from './components/Views'
-import Profile, { Password } from './components/Profile'
+import Profile, { Password } from './components/Views/Profile'
 
 // OLD LAYOUT
 import App from './components/Old/App'
@@ -46,7 +46,7 @@ const AppRouter = () => {
               <Route path="news" component={News} />
               <Route path="library" component={Library} />
             </Route>
-            <Route path="continue" component={Continue}>
+            <Route path="mygames" component={MyGames}>
               <IndexRedirect to="list" />
               <Route path="list" component={GamesList} />
             </Route>

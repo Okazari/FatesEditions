@@ -1,12 +1,11 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { AuthService } from 'services'
 import GameViewReduxContainer from './GameViewReduxContainer'
 
 const query = gql`
-query getGame($gameId: ID!, $playerId: ID!) {
-  game(gameId: $gameId, playerId: $playerId) {
+query getGame($gameId: ID!) {
+  game(gameId: $gameId) {
     id
     currentPageId
     playerId
@@ -90,7 +89,6 @@ const GameViewContainer = ({ params }) => {
       query={query}
       variables={{
         gameId: params.gameId,
-        playerId: AuthService.getConnectedUserId(),
       }}
     >
       {

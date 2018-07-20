@@ -18,8 +18,8 @@ class RouteService {
     books: () => '/app/books',
     booksnews: () => '/app/books/news',
     bookslibrary: () => '/app/books/library',
-    continue: () => '/app/continue',
-    continuelist: () => '/app/continue/list',
+    mygames: () => '/app/mygames',
+    mygameslist: () => '/app/mygames/list',
     playgame: gameId => `/app/play/${gameId}`,
     trialgame: bookId => `/app/trial/${bookId}`,
     write: () => '/app/write',
@@ -44,9 +44,8 @@ class RouteService {
   }
 
   redirect401 = () => {
-    browserHistory.push(this.routes.signin())
+    browserHistory.replace(this.routes.signin())
   }
-
 }
 
 export default new RouteService()

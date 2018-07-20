@@ -165,15 +165,15 @@ const typeDefs = `
   type Query {
     books(author: ID, draft: Boolean): [Book]
     book(id: ID!): Book
-    author(id: ID!): User
+    author: User
     page(bookId: ID!, pageId: ID!): Page
-    tryGame(bookId: ID!, playerId: ID!) : Game
-    games(playerId: ID!) : [Game]
-    game(gameId: ID, playerId: ID!) : Game
+    tryGame(bookId: ID!): Game
+    games: [Game]
+    game(gameId: ID!): Game
   }
 
   type Mutation {
-    createBook(author: ID!): User
+    createBook: User
     updateBook(book: BookInput!): Book
     deleteBook(id: ID!): User
     publishBook(id: ID!): User
@@ -208,11 +208,11 @@ const typeDefs = `
     updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Effect
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
     
-    createGame(bookId: ID!, playerId: ID!) : Game
-    updateGame(game: GameInput!, playerId: ID!) : Game
-    deleteGame(gameId: ID, playerId: ID!) : User
+    createGame(bookId: ID!): Game
+    updateGame(game: GameInput!): Game
+    deleteGame(gameId: ID!): User
     
-    updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
+    updatePassword(oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
   `
   const easier = (ressource, save) => {
@@ -257,17 +257,30 @@ generateGame = (book, playerId) => {
     stats,
     objects,
   }
-} 
+}
+
+class UnauthorizedError extends Error {
+  constructor(message) {
+    super(message)
+    this.code = 401
+    this.message = message || 'Not authorized'
+  }
+}
+
+const isAuth = resolver => (obj, args = {}, context, info) => {
+  if(!context.user) throw new UnauthorizedError()
+  return resolver(obj, args, context, info)
+}
 
 const resolvers = {
   MAP: GraphQLJSON,
   Query: {
-    book: (obj, args = {}, context, info) => {
+    book: isAuth((obj, args = {}, context, info) => {
       const { id } = args
       const filters = {}
       if (id) filters._id = id
       return Book.findOne(filters)
-    },
+    }),
     books: (obj, args = {}, context, info) => {
       const { author, draft } = args
       const filters = {}
@@ -275,12 +288,12 @@ const resolvers = {
       if (typeof draft === 'boolean') filters.draft = draft
       return Book.find(filters)
     },
-    author: (obj, { id }, context, info) => User.findById(id),
-    page: (obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId)),
+    author: isAuth((obj, args, context, info) => User.findById(context.user._id)),
+    page: isAuth((obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId))),
     
-    tryGame: (_, { bookId, playerId }) => Book.findById(bookId).then(generateGame),
-    games: (_, { playerId }) => Game.find({ playerId }),
-    game: (_, { gameId, playerId }) => Game.findById(gameId),
+    tryGame: isAuth((_, { bookId }) => Book.findById(bookId).then(generateGame)),
+    games: isAuth((_, {}, context) => Game.find({ playerId: context.user.id })),
+    game: isAuth((_, { gameId }) => Game.findById(gameId)),
   },
   Book: {
     author: (book) => {
@@ -288,61 +301,60 @@ const resolvers = {
     }
   },
   User: {
-    drafts: (user) => {
+    drafts: isAuth((user) => {
       return Book.find({ authorId: user.id, draft: true })
-    },
-    publications: (user) => {
+    }),
+    publications: isAuth((user) => {
       return Book.find({ authorId: user.id, draft: false })
-    },
-    games: (user) => {
+    }),
+    games: isAuth((user) => {
       return Game.find({ playerId: user.id })
-    }
+    }),
   },
   Mutation: {
-    createBook: (_, { author }) => {
+    createBook: isAuth((_, {}, context) => {
       const book = new Book({
-        authorId: author,
+        authorId: context.user._id,
       })
       return book.save().then(book => ({ id: book.authorId }))
-    },
+    }),
     // Book
-    updateBook: (_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true }),
-    deleteBook: (_, { id }) => Book.findByIdAndRemove(id).then(book => ({ id: book.authorId })),
-    publishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }).then(book => ({ id: book.authorId })),
-    unpublishBook: (_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }).then(book => ({ id: book.authorId })),
+    updateBook: isAuth((_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true })),
+    deleteBook: isAuth((_, { id }) => Book.findByIdAndRemove(id).then(book => ({ id: book.authorId }))),
+    publishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }).then(book => ({ id: book.authorId }))),
+    unpublishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }).then(book => ({ id: book.authorId }))),
 
     // createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
-    createStat: (_, { bookId }) => findBookById(bookId).then(book => {
+    createStat: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
       return book.addOne('stats', new Stat())
                  .save()
-    }),
-    updateStat: (_, { bookId, stat }) => findBookById(bookId).then(book => {
+    })),
+    updateStat: isAuth((_, { bookId, stat }) => findBookById(bookId).then(book => {
       return book.selectOne('stats', stat.id)
                  .set(stat)
                  .save()
-    }),
-    deleteStat: (_, { bookId, statId }) => findBookById(bookId).then(book => {
+    })),
+    deleteStat: isAuth((_, { bookId, statId }) => findBookById(bookId).then(book => {
       return book.deleteOne('stats', statId)
                  .save()
-    }),
+    })),
 
-    createPageReturnPage: (_, { bookId }) => findBookById(bookId).then(book => {
+    createPageReturnPage: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
       const page = new Page()
       return book.addOne('pages', page)
                  .save()
                  .then(() => page)
-    }),
-    createPage: (_, { bookId }) => findBookById(bookId).then(book => {
+    })),
+    createPage: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
       return book.addOne('pages', new Page())
                  .save()
-    }),
-    updatePage: (_, { bookId, page }) => findBookById(bookId).then(book => {
+    })),
+    updatePage: isAuth((_, { bookId, page }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', page.id)
                  .set(page)
                  .save()
-    }),
-    deletePage: (_, { bookId, pageId }) => findBookById(bookId).then(book => {
-
+    })),
+    deletePage: isAuth((_, { bookId, pageId }) => findBookById(bookId).then(book => {
       book.ressource.pages.forEach(page => {
         page.transitions.forEach(transition => {
           if (transition.toPage && transition.toPage === pageId) {
@@ -352,120 +364,120 @@ const resolvers = {
       })
       return book.deleteOne('pages', pageId)
                  .save()
-    }),
+    })),
 
-    createObject: (_, { bookId }) => findBookById(bookId).then(book => {
+    createObject: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
       return book.addOne('objects', new ObjectModel())
                  .save()
-    }),
-    updateObject: (_, { bookId, object }) => findBookById(bookId).then(book => {
+    })),
+    updateObject: isAuth((_, { bookId, object }) => findBookById(bookId).then(book => {
       return book.selectOne('objects', object.id)
                  .set(object)
                  .save()
-    }),
-    deleteObject: (_, { bookId, objectId }) => findBookById(bookId).then(book => {
+    })),
+    deleteObject: isAuth((_, { bookId, objectId }) => findBookById(bookId).then(book => {
       return book.deleteOne('objects', objectId)
                  .save()
-    }),
+    })),
 
-    createPageEffect: (_, { bookId, pageId }) => findBookById(bookId).then(book => {
+    createPageEffect: isAuth((_, { bookId, pageId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .addOne('effects', new Effect())
                  .save()
-    }),
-    updatePageEffect: (_, { bookId, pageId, effect }) => findBookById(bookId).then(book => {
+    })),
+    updatePageEffect: isAuth((_, { bookId, pageId, effect }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('effects', effect.id)
                  .set(effect)
                  .save()
-    }),
-    deletePageEffect: (_, { bookId, pageId, effectId }) => findBookById(bookId).then(book => {
+    })),
+    deletePageEffect: isAuth((_, { bookId, pageId, effectId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .deleteOne('effects', effectId)
                  .save()
-    }),
+    })),
 
-    createPageTransition: (_, { bookId, pageId }) => findBookById(bookId).then(book => {
+    createPageTransition: isAuth((_, { bookId, pageId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .addOne('transitions', new Transition({ fromPage: pageId }))
                  .save()
-    }),
-    updatePageTransition: (_, { bookId, pageId, transition }) => findBookById(bookId).then(book => {
+    })),
+    updatePageTransition: isAuth((_, { bookId, pageId, transition }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transition.id)
                  .set(transition)
                  .save()
-    }),
-    deletePageTransition: (_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
+    })),
+    deletePageTransition: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .deleteOne('transitions', transitionId)
                  .save()
-    }),
+    })),
 
-    createPageTransitionCondition: (_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
+    createPageTransitionCondition: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
                  .addOne('conditions', new Effect())
                  .save()
-    }),
-    updatePageTransitionCondition: (_, { bookId, pageId, transitionId, condition }) => findBookById(bookId).then(book => {
+    })),
+    updatePageTransitionCondition: isAuth((_, { bookId, pageId, transitionId, condition }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
                  .selectOne('conditions', condition.id)
                  .set(condition)
                  .save()
-    }),
-    deletePageTransitionCondition: (_, { bookId, pageId, transitionId, conditionId }) => findBookById(bookId).then(book => {
+    })),
+    deletePageTransitionCondition: isAuth((_, { bookId, pageId, transitionId, conditionId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
                  .deleteOne('conditions', conditionId)
                  .save()
-    }),
-
-    createPageTransitionEffect: (_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
+    })),
+    createPageTransitionEffect: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
                  .addOne('effects', new Effect())
                  .save()
-    }),
-    updatePageTransitionEffect: (_, { bookId, pageId, transitionId, effect }) => findBookById(bookId).then(book => {
+    })),
+    updatePageTransitionEffect: isAuth((_, { bookId, pageId, transitionId, effect }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
                  .selectOne('effects', effect.id)
                  .set(effect)
                  .save()
-    }),
-    deletePageTransitionEffect: (_, { bookId, pageId, transitionId, effectId }) => findBookById(bookId).then(book => {
+    })),
+    deletePageTransitionEffect: isAuth((_, { bookId, pageId, transitionId, effectId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
                  .deleteOne('effects', effectId)
                  .save()
-    }),
-    createGame: (_, { bookId, playerId }) => Book.findById(bookId).then(book => generateGame(book, playerId)).then(game => new Game(game).save()),
-    updateGame: (_, { game, playerId }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game),
-    deleteGame: (_, { gameId, playerId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId })),
+    })),
+    createGame: isAuth((_, { bookId}, context) => Book.findById(bookId)
+      .then(book => generateGame(book, context.user._id))
+      .then(game => new Game(game).save())),
+    updateGame: isAuth((_, { game }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game)),
+    deleteGame: isAuth((_, { gameId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId }))),
 
-    updatePassword: async (_, { userId, oldPassword, newPassword, confirmation }) => {
+    updatePassword: isAuth((_, { oldPassword, newPassword, confirmation }, context) => {
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''
       const passwordMatch = newPassword !== confirmation
-
       if (paramsNotEmpty && passwordMatch) {
-        throw new Error('Error')
-        return null
+        throw new Error('Password Error')
       }
-
+      console.log('context.user in updatePassword : ', context.user)
+      console.log('context.user._id in updatePassword : ', context.user._id)
+      console.log('SHA512(oldPassword) : ', SHA512(oldPassword).toString())
       return User.findOneAndUpdate(
-        { _id: userId, password: SHA512(oldPassword).toString()},
+        { _id: context.user._id, password: SHA512(oldPassword).toString()},
         { password: SHA512(newPassword).toString() },
       ).then(user => {
         if (!user) {
-          throw new Error('Error')
-          return null
+          throw new Error('Password Error')
         }
         delete user.password
         return user
       })
-    },
+    }),
   }
 }
 

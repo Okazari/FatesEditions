@@ -1,12 +1,11 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import AuthService from 'services/AuthService'
 import TrialViewReduxContainer from './TrialViewReduxContainer'
 
 const query = gql`
-  query tryGame($bookId: ID!, $playerId: ID!) {
-    tryGame(bookId: $bookId, playerId: $playerId) {
+  query tryGame($bookId: ID!) {
+    tryGame(bookId: $bookId) {
       id
       currentPageId
       playerId
@@ -88,9 +87,8 @@ const TrialViewContainer = ({ params }) => (
     query={query}
     variables={{
       bookId: params.bookId,
-      playerId: AuthService.getConnectedUserId(),
     }}
-    fetchPolicy={'network-only'}
+    fetchPolicy={'cache-and-network'}
   >
     {
       ({ loading, error, data }) => {

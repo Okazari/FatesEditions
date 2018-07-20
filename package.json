@@ -83,7 +83,11 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "apollo-cache-inmemory": "^1.2.5",
     "apollo-client-preset": "^1.0.5",
+    "apollo-link": "^1.2.2",
+    "apollo-link-error": "^1.1.0",
+    "apollo-link-http": "^1.5.4",
     "classnames": "^2.2.5",
     "d3": "^4.7.1",
     "draft-js": "^0.10.0",

@@ -11,16 +11,20 @@ class Book extends React.Component {
     super(props)
     const { showDelay, onShow } = props
     this.state = { over: false, displayed: false }
-    setTimeout(() => {
+    this.timeOut = setTimeout(() => {
       this.setState({ displayed: true })
       if (onShow) onShow()
     }, showDelay)
   }
 
-  toggleExpand = () => {
-    const { expanded } = this.state
-    this.setState({ expanded: !expanded })
+  componentWillUnmount() {
+    clearTimeout(this.timeOut)
   }
+
+  // toggleExpand = () => {
+  //   const { expanded } = this.state
+  //   this.setState(() => ({ expanded: !expanded }))
+  // }
 
   render() {
     const { book, onClick, infos, onDelete } = this.props
@@ -36,7 +40,7 @@ class Book extends React.Component {
     })
     return (
       <div
-        onClick={this.toggleExpand}
+        // onClick={this.toggleExpand}
         className={classes}
       >
         { !!onDelete &&
