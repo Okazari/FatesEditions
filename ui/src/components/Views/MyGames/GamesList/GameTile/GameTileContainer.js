@@ -1,6 +1,7 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import Loader from 'components/common/Loader'
 import GameTile from './GameTile'
 
 const mutation = gql`
@@ -14,7 +15,7 @@ const mutation = gql`
   }
 `
 
-// TODO: Add loader and error display
+// TODO: Add error display
 const GameTileContainer = props => (
   <Mutation
     mutation={mutation}
@@ -24,7 +25,7 @@ const GameTileContainer = props => (
   >
     {
       (deleteGame, { loading, error }) => {
-        if (loading) return null
+        if (loading) return <Loader />
         if (error) return null
         return <GameTile {...props} deleteGame={deleteGame} />
       }

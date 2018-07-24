@@ -1,10 +1,10 @@
 import React from 'react'
+import Loader from 'components/common/Loader'
 import PlayableBook from '../../common/PlayableBook'
 import styles from './style.scss'
 
 const Showdown = ({ book }) => {
-    // TODO Replace with loader
-  if (!book) return null
+  if (!book) return <Loader />
   return (
     <div className={styles.component}>
       <div className={styles.preview}>
