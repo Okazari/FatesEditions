@@ -9,23 +9,28 @@
   font-weight: bold;
 }
 
+.hover {
+
+}
+
 .description {
-  padding: 0.3em 1em;
+  padding: 1em 1.5em;
   position: absolute;
   background-color: $dark-background-color-3;
   font-size: 1.1em;
   top: 0;
-  left: 105%;
+  left: 110%;
   opacity: 0;
   transition: 0.3s;
   z-index: 99999;
   border-radius: 4px;
+  min-width: 600%;
 }
 
 .description::before {
   content: '';
   position: absolute;
-  top: 50%;
+  top: 30px;
   left: -10px;
   width: 0;
   height: 0;
@@ -35,6 +40,6 @@
   transform: translate(0, -50%);
 }
 
-.component:hover > .description {
+.hover:hover ~ .description {
   opacity: 1;
 }

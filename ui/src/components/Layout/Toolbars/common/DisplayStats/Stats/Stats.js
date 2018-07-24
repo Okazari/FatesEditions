@@ -5,8 +5,10 @@ const Stats = ({ stat, value }) => {
   const { name, description } = stat
   return (
     <div className={styles.component}>
-      <div className={styles.name}>{name}</div>
-      <div>{value}</div>
+      <div className={styles.hover}>
+        <div className={styles.name}>{name}</div>
+        <div>{value}</div>
+      </div>
       { !!description &&
         <div className={styles.description}>{description}</div>
       }
