@@ -3,7 +3,7 @@ import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { connect } from 'react-redux'
 import { setGame } from 'redux/actions'
-import { GameService, AuthService } from 'services'
+import { GameService } from 'services'
 import GameTransition from './GameTransition'
 
 const mapStateToProps = ({ game }, { transitionId }) => {
