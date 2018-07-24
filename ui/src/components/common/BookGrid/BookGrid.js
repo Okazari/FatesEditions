@@ -14,9 +14,6 @@ const BookGrid = ({
   return (
     <div className={styles.component}>
       <div className={styles.list}>
-        { !!FirstRowComponent &&
-          <FirstRowComponent />
-        }
         { !!FirstTileComponent &&
           <FirstTileComponent />
         }

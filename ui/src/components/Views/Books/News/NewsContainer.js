@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import BookGrid from 'components/common/BookGrid'
 import PlayableBook from '../common/PlayableBook'
 import Showdown from './Showdown'
+import styles from './style.scss'
 
 const query = gql`
   query {
@@ -33,11 +34,13 @@ const NewsContainer = () => {
           const booksCopy = [...books]
           const firstBook = booksCopy.shift()
           return (
-            <BookGrid
-              FirstRowComponent={() => <Showdown book={firstBook} />}
-              tilesList={booksCopy}
-              TileComponent={PlayableBook}
-            />
+            <div className={styles.component}>
+              <Showdown book={firstBook} />
+              <BookGrid
+                tilesList={booksCopy}
+                TileComponent={PlayableBook}
+              />
+            </div>
           )
         }
       }
