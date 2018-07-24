@@ -80,7 +80,7 @@ class EffectService {
       },
       lessOrEqual: {
         label: 'est inférieur ou égale à',
-        exec: (initValue, conditionValue) => iparseFloat(initValue) <= parseFloat(conditionValue),
+        exec: (initValue, conditionValue) => parseFloat(initValue) <= parseFloat(conditionValue),
       },
     },
   }
