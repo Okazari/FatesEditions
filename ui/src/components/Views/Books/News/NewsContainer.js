@@ -7,6 +7,16 @@ import Showdown from './Showdown'
 
 const query = gql`
   query {
+    showdown {
+      id
+      name
+      cover
+      synopsis
+      author {
+        id
+        username
+      }
+    }
     books(draft: false) {
       id
       name
@@ -28,17 +38,21 @@ const NewsContainer = () => {
       fetchPolicy={'network-only'}
     >
       {
-        ({ data: { books } }) => {
+        ({ data }) => {
+          const { books, showdown } = data
           if (!books) return null
-          const booksCopy = [...books]
-          const firstBook = booksCopy.shift()
+          const booksCopy = books.filter(book => book.id !== showdown.id)
           return (
             <div>
-              <Showdown book={firstBook} />
-              <BookGrid
-                tilesList={booksCopy}
-                TileComponent={PlayableBook}
-              />
+              { !!showdown &&
+                <Showdown book={showdown} />
+              }
+              { !!books &&
+                <BookGrid
+                  tilesList={booksCopy}
+                  TileComponent={PlayableBook}
+                />
+              }
             </div>
           )
         }

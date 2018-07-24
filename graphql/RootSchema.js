@@ -164,6 +164,7 @@ const typeDefs = `
   
   type Query {
     books(author: ID, draft: Boolean): [Book]
+    showdown: Book
     book(id: ID!): Book
     author: User
     page(bookId: ID!, pageId: ID!): Page
@@ -281,6 +282,9 @@ const resolvers = {
       if (id) filters._id = id
       return Book.findOne(filters)
     }),
+    showdown: (obj, args = {}, context, info) => {
+      return Book.findOne({name: 'Deux mille deux cent vingt deux'})
+    },
     books: (obj, args = {}, context, info) => {
       const { author, draft } = args
       const filters = {}
