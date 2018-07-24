@@ -1,9 +1,0 @@
-@import '~styles/colors';
-@import '~styles/sizes';
-@import '~styles/mixins';
-
-.component {
-  @include scrollbar();
-  height: $tab-content-size;
-  overflow: auto;
-}

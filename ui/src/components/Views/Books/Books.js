@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Content, AppToolbar, Tabs } from 'components/Layout'
+import { Layout, Content, AppToolbar, Tabs, TabContent } from 'components/Layout'
 import { RouteService } from 'services'
 
 const tabNews = { label: 'Nouveautés', link: RouteService.routes.booksnews() }
@@ -11,7 +11,9 @@ const Books = ({ location, children }) => (
     <AppToolbar />
     <Content>
       <Tabs tabs={tabs} selectedTab={location.pathname} />
-      {children}
+      <TabContent>
+        {children}
+      </TabContent>
     </Content>
   </Layout>
 )
