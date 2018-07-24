@@ -11,7 +11,7 @@ const tabs = [tabDrafts, tabBooks, tabPublish]
 const MyBooks = ({ location, children, loading }) => {
   return (
     <Layout>
-      <AppToolbar />
+      <AppToolbar location={location.pathname} />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         <TabContent>

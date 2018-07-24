@@ -8,7 +8,7 @@ const tabs = [tabNews, tabLibrary]
 
 const Books = ({ location, children }) => (
   <Layout>
-    <AppToolbar />
+    <AppToolbar location={location.pathname} />
     <Content>
       <Tabs tabs={tabs} selectedTab={location.pathname} />
       <TabContent>

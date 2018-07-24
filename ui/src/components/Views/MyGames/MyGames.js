@@ -7,7 +7,7 @@ const tabs = [tabGames]
 
 const MyGames = ({ location, children }) => (
   <Layout>
-    <AppToolbar />
+    <AppToolbar location={location.pathname} />
     <Content>
       <Tabs tabs={tabs} selectedTab={location.pathname} />
       <TabContent>
