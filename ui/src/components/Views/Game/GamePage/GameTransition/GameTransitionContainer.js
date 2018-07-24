@@ -65,11 +65,11 @@ const GameTransitionContainer = props => (
           game,
         } })
         if (loading) return null
-        if (error) return null
+        // if (error) return null
         return (
           <GameTransition
             {...props}
-            saveGame={_saveGame}
+            onClick={_saveGame}
           />
         )
       }

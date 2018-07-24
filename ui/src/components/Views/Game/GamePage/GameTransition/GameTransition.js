@@ -8,6 +8,7 @@ const GameTransition = ({
   updateGame,
   saveGame,
   setGame,
+  // onClick,
   text,
   errors,
 }) => {
@@ -19,6 +20,7 @@ const GameTransition = ({
     <Button
       domProps={{
         onClick: () => saveGame(setGame(updateGame())),
+        // onClick,
       }}
       className={className}
     >
