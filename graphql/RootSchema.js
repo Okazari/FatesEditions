@@ -286,7 +286,7 @@ const resolvers = {
       const filters = {}
       if (author) filters.authorId = author
       if (typeof draft === 'boolean') filters.draft = draft
-      return Book.find(filters)
+      return Book.find(filters).sort({ lastModificationDate: -1 })
     },
     author: isAuth((obj, args, context, info) => User.findById(context.user._id)),
     page: isAuth((obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId))),
@@ -302,13 +302,13 @@ const resolvers = {
   },
   User: {
     drafts: isAuth((user) => {
-      return Book.find({ authorId: user.id, draft: true })
+      return Book.find({ authorId: user.id, draft: true }).sort({ lastModificationDate: -1 })
     }),
     publications: isAuth((user) => {
-      return Book.find({ authorId: user.id, draft: false })
+      return Book.find({ authorId: user.id, draft: false }).sort({ lastModificationDate: -1 })
     }),
     games: isAuth((user) => {
-      return Game.find({ playerId: user.id })
+      return Game.find({ playerId: user.id }).sort({ lastModificationDate: -1 })
     }),
   },
   Mutation: {
