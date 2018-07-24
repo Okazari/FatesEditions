@@ -2,11 +2,14 @@ import React from 'react'
 import styles from './style.scss'
 
 const Stats = ({ stat, value }) => {
+  const { name, description } = stat
   return (
     <div className={styles.component}>
-      <div className={styles.name}>{stat.name}</div>
+      <div className={styles.name}>{name}</div>
       <div>{value}</div>
-      <div className={styles.description}>{stat.description}</div>
+      { !!description &&
+        <div className={styles.description}>{description}</div>
+      }
     </div>
   )
 }
