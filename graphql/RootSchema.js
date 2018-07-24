@@ -318,13 +318,11 @@ const resolvers = {
       })
       return book.save().then(book => ({ id: book.authorId }))
     }),
-    // Book
     updateBook: isAuth((_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true })),
     deleteBook: isAuth((_, { id }) => Book.findByIdAndRemove(id).then(book => ({ id: book.authorId }))),
     publishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }).then(book => ({ id: book.authorId }))),
     unpublishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }).then(book => ({ id: book.authorId }))),
 
-    // createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
     createStat: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
       return book.addOne('stats', new Stat())
                  .save()

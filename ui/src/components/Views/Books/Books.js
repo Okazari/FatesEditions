@@ -1,5 +1,4 @@
 import React from 'react'
-// import styles from './style.scss'
 import { Layout, Content, AppToolbar, Tabs } from 'components/Layout'
 import { RouteService } from 'services'
 

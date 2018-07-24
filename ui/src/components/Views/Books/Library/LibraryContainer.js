@@ -3,7 +3,6 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import BookGrid from 'components/common/BookGrid'
 import PlayableBook from '../common/PlayableBook'
-// import Library from './Library'
 
 const query = gql`
   query {

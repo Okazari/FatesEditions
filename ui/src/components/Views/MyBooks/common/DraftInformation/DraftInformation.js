@@ -4,7 +4,6 @@ import { Button, Input, GroupInput, TextAreaInput } from '../../../common'
 import Book from '../../../common/Book'
 import GenreList from './GenreList'
 import PageList from './PageList'
-// import Game from '../../../../Game'
 import styles from './styles.scss'
 
 class DraftInformation extends React.Component {
@@ -101,6 +100,5 @@ class DraftInformation extends React.Component {
     )
   }
 }
-// { tryingDraft && <Game book={book} onClose={this.stopTryDraft} /> }
 
 export default DraftInformation

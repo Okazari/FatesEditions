@@ -21,11 +21,6 @@ class Book extends React.Component {
     clearTimeout(this.timeOut)
   }
 
-  // toggleExpand = () => {
-  //   const { expanded } = this.state
-  //   this.setState(() => ({ expanded: !expanded }))
-  // }
-
   render() {
     const { book, onClick, infos, onDelete } = this.props
     const { expanded, displayed } = this.state
@@ -40,7 +35,6 @@ class Book extends React.Component {
     })
     return (
       <div
-        // onClick={this.toggleExpand}
         className={classes}
       >
         { !!onDelete &&

@@ -5,7 +5,6 @@ import DisplayStats from '../common/DisplayStats'
 import DisplayObjects from '../common/DisplayObjects'
 import styles from './style.scss'
 import logoWhite from '../../../common/logo_white.svg'
-// import { RouteService } from '../../../../services'
 
 const TrialToolbar = () => {
   return (
