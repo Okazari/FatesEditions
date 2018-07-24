@@ -63,7 +63,6 @@ const GameTransitionContainer = props => (
       (saveGame, { loading, error }) => {
         const _saveGame = game => saveGame({ variables: {
           game,
-          playerId: AuthService.getConnectedUserId(),
         } })
         if (loading) return null
         if (error) return null
