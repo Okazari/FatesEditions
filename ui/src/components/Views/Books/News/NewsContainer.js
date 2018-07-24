@@ -2,6 +2,7 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import BookGrid from 'components/common/BookGrid'
+import Loader from 'components/common/Loader'
 import PlayableBook from '../common/PlayableBook'
 import Showdown from './Showdown'
 
@@ -40,7 +41,7 @@ const NewsContainer = () => {
       {
         ({ data }) => {
           const { books, showdown } = data
-          if (!books) return null
+          if (!books) return <Loader />
           const booksCopy = books.filter(book => book.id !== showdown.id)
           return (
             <div>
