@@ -7,6 +7,12 @@ import styles from './styles.scss'
 const GamePage = ({ page = {} }) => {
   const pageContent = page.text ? convertFromRaw(JSON.parse(page.text)) : ContentState.createFromText('')
 
+  // const blocksFromHTML = convertFromHTML(page.text);
+  // const pageContent = ContentState.createFromBlockArray(
+  //   blocksFromHTML.contentBlocks,
+  //   blocksFromHTML.entityMap
+  // );
+
   const blockRenderer = (block) => {
     if (block.getType() === 'atomic') return { component: Image, editable: false }
     return null

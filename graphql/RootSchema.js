@@ -214,10 +214,10 @@ const typeDefs = `
     
     updatePassword(userId: ID!, oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
-  `
-  const easier = (ressource, save) => {
-    const newSave = () => save().then(() => ressource)
-    return {
+`
+const easier = (ressource, save) => {
+  const newSave = () => save().then(() => ressource)
+  return {
     ressource,
     save: newSave,
     set: newValues => easier(Object.assign(ressource, newValues), save),
