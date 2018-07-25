@@ -32,8 +32,10 @@
 .coverImage {
   transition: transform $standard-duration;
   height: 100%;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
+  background-color: black;
 }
 
 .content {
