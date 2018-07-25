@@ -1,1 +1,1 @@
-export default from './Showdown'
+export default from './ShowdownContainer'
