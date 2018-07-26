@@ -27,7 +27,8 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use('/', express.static(path.join(__dirname, 'public')))
+// app.use('/', express.static(path.join(__dirname, 'public')))
+app.use('/images', express.static(path.join(__dirname, 'public/images')))
 app.use(rewrite('/app/*', '/app'))
 app.use('/app', express.static(path.join(__dirname, 'public/app')))
 app.use('/static', express.static(path.join(__dirname, 'public/app/static')))
@@ -97,6 +98,7 @@ app.use('/api/game', game)
 app.use((req, res, next) => {
   const err = new Error('Not Found')
   err.status = 404
+  res.redirect('/app')
   next(err)
 })
 
