@@ -5,9 +5,10 @@ import styles from './styles.scss'
 
 const GameTransition = ({
   visible,
-  updateGame,
-  saveGame,
-  setGame,
+  // updateGame,
+  // saveGame,
+  // setGame,
+  onClick,
   text,
   errors,
 }) => {
@@ -18,7 +19,8 @@ const GameTransition = ({
   return (
     <Button
       domProps={{
-        onClick: () => saveGame(setGame(updateGame())),
+        // onClick: () => saveGame(setGame(updateGame())),
+        onClick,
       }}
       className={className}
     >

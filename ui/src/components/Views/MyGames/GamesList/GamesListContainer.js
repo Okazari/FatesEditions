@@ -2,6 +2,7 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import BookGrid from 'components/common/BookGrid'
+import Loader from 'components/common/Loader'
 import GameTile from './GameTile'
 
 export const query = gql`
@@ -31,7 +32,7 @@ export const query = gql`
   }
 `
 
-// TODO: Add loader and error display
+// TODO: Add error display
 const GamesListContainer = () => (
   <Query
     query={query}
@@ -39,7 +40,7 @@ const GamesListContainer = () => (
   >
     {
       ({ loading, error, data }) => {
-        if (loading) return null
+        if (loading) return <Loader />
         if (error) return null
         return <BookGrid tilesList={data.author.games} TileComponent={GameTile} />
       }

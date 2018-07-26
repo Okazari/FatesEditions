@@ -3,7 +3,7 @@ import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { connect } from 'react-redux'
 import { setGame } from 'redux/actions'
-import { GameService, AuthService } from 'services'
+import { GameService } from 'services'
 import GameTransition from './GameTransition'
 
 const mapStateToProps = ({ game }, { transitionId }) => {
@@ -23,24 +23,12 @@ const mapStateToProps = ({ game }, { transitionId }) => {
     errors.push(error)
   }
 
-  const updateGame = () => GameService.changePageAndApplyEffects(game, transitionId)
-
   return {
     visible,
     text,
-    updateGame,
+    game,
+    transitionId,
     errors,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setGame: (game) => {
-      delete game.book
-      delete game.__typename
-      dispatch(setGame(game))
-      return game
-    },
   }
 }
 
@@ -55,27 +43,37 @@ mutation saveGame($game: GameInput!) {
 }
 `
 
-const GameTransitionContainer = props => (
-  <Mutation
-    mutation={mutation}
-  >
-    {
-      (saveGame, { loading, error }) => {
-        const _saveGame = game => saveGame({ variables: {
-          game,
-          playerId: AuthService.getConnectedUserId(),
-        } })
-        if (loading) return null
-        if (error) return null
-        return (
-          <GameTransition
-            {...props}
-            saveGame={_saveGame}
-          />
-        )
+const GameTransitionContainer = (props) => {
+  const { game, transitionId, dispatch } = props
+  return (
+    <Mutation
+      mutation={mutation}
+    >
+      {
+        (saveGame, { loading, error }) => {
+          const updateGame = () => GameService.changePageAndApplyEffects(game, transitionId)
+          const _saveGame = gameToSave => saveGame({ variables: {
+            game: gameToSave,
+          } })
+          const onClick = () => {
+            const updatedGame = updateGame()
+            delete updatedGame.book
+            delete updatedGame.__typename
+            dispatch(setGame(updatedGame))
+            _saveGame(updatedGame)
+          }
+          if (loading) return null
+          // if (error) return null
+          return (
+            <GameTransition
+              {...props}
+              onClick={onClick}
+            />
+          )
+        }
       }
-    }
-  </Mutation>
-)
+    </Mutation>
+  )
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameTransitionContainer)
+export default connect(mapStateToProps)(GameTransitionContainer)

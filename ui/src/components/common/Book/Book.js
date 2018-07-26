@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames/bind'
 import { ButtonIcon } from 'components/common'
+import Loader from 'components/common/Loader'
 import styles from './style.scss'
 import Infos from './Infos'
 
@@ -21,16 +22,10 @@ class Book extends React.Component {
     clearTimeout(this.timeOut)
   }
 
-  // toggleExpand = () => {
-  //   const { expanded } = this.state
-  //   this.setState(() => ({ expanded: !expanded }))
-  // }
-
   render() {
     const { book, onClick, infos, onDelete } = this.props
     const { expanded, displayed } = this.state
-    // TODO Replace with loader
-    if (!book) return null
+    if (!book) return <Loader />
     const coverStyle = {
       backgroundImage: `url(${book.cover})`,
     }
@@ -40,7 +35,6 @@ class Book extends React.Component {
     })
     return (
       <div
-        // onClick={this.toggleExpand}
         className={classes}
       >
         { !!onDelete &&

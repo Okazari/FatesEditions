@@ -1,5 +1,4 @@
 import React from 'react'
-// import { RouteService } from 'services'
 import { Button, ButtonIcon, DataTable } from 'components/common'
 import PageRow from './PageRow'
 import styles from './styles.scss'

@@ -1,9 +1,9 @@
 import React from 'react'
+import Loader from 'components/common/Loader'
 import styles from './styles.scss'
 
 const Infos = ({ infos }) => {
-  // TODO Replace with loader
-  if (!infos) return null
+  if (!infos) return <Loader />
   return (
     <div className={styles.component}>
       {

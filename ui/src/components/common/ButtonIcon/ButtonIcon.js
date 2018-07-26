@@ -8,7 +8,7 @@ const ButtonIcon = ({ icon, subLabel, className, domProps }) => {
   const finalClassName = classnames(styles.component, className)
   return (
     <Button domProps={domProps} className={finalClassName} >
-      <Icon icon={icon} />
+      <Icon className={styles.icon} icon={icon} />
       {subLabel}
     </Button>
   )

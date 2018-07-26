@@ -3,9 +3,9 @@
 @import '~styles/mixins';
 
 .component {
-  @include scrollbar();
-  height: $tab-content-size;
-  overflow: auto;
+  // @include scrollbar();
+  // height: $tab-content-size;
+  // overflow: auto;
 }
 
 .message {

@@ -22,9 +22,15 @@
   }
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
 .synopsis {
   font-size: 1.2em;
-  padding: 0 40px;
   margin: 10px 0;
   text-align: justify;
   overflow: hidden;

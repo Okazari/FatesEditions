@@ -1,33 +1,34 @@
-MyVisualStoryBook
+Fates Editions
 =================
 
-MyVisualStoryBook est une application web de création d'histoires interactives.
+Fates-Editions est une application web de création d'histoires interactives.
 
-Version actuelle : V1.3.0
+Version actuelle : V2.0.0
 ----------------
 Vous pouvez actuellement :
-- Se connecter au site.
-- Visualiser votre profil : Vos Brouillons, Vos Parties, Vos Livres publiés.
+- Créer un compte.
+- Vous connecter au site.
+- Changer votre mot de passe.
 - Visualiser la liste des livres publiés par l'ensemble des auteurs du site.
-- Créer des brouillons.
-- Publier vos brouillons.
-- Supprimer vos brouillons et publications.
+- Visualiser vos Livres: vos Brouillons en cours d'écriture,vos Livres publiés.
+- Visualiser vos Parties en cours.
 - Voir le détail de vos livres/brouillons.
+- Créer des brouillons.
 - Modifier le détails des brouillons.
-- Modifier des informations non sensibles sur une publication.
-- Visualiser une synthèse des pages de votre livres.
+- Créer des Objets et des Statistiques propres au livre.
 - Créer et modifier des pages.
 - Créer et modifier des transitions de pages à pages.
-- Visualiser ses parties en cours.
+- Créer des conditions d'affichages des transitions.
+- Publier vos brouillons.
+- Supprimer vos brouillons et dépublier vos publications.
 - Créer une partie depuis la liste des livres.
 - Jouer une partie.
-- Créer un compte.
-- Changer son mot de passe.
+- Reprendre une partie déjà commencé.
 
 Prochains objectifs
 -------------------
 Les objectifs sont :
- - Système de combat
- - Transitions conditionnelles
  - Noter et donner son avis sur un livre
+ - Système de lancé de dé
+ - Système de combat
  - Système de badge

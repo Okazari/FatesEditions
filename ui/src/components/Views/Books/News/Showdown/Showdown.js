@@ -1,10 +1,11 @@
 import React from 'react'
+import Loader from 'components/common/Loader'
+import Button from 'components/common/Button'
 import PlayableBook from '../../common/PlayableBook'
 import styles from './style.scss'
 
-const Showdown = ({ book }) => {
-    // TODO Replace with loader
-  if (!book) return null
+const Showdown = ({ book, onClick }) => {
+  if (!book) return <Loader />
   return (
     <div className={styles.component}>
       <div className={styles.preview}>
@@ -12,9 +13,11 @@ const Showdown = ({ book }) => {
       </div>
       {
         book.synopsis &&
-        <div className={styles.synopsis}>
-          {book.synopsis}
-          <div className={styles.ellipsis} />
+        <div className={styles.content}>
+          <div className={styles.synopsis}>
+            {book.synopsis}
+          </div>
+          <Button domProps={{ onClick }}>Jouer</Button>
         </div>
       }
     </div>

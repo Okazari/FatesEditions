@@ -1,4 +1,5 @@
 import React from 'react'
+import Loader from 'components/common/Loader'
 import styles from './style.scss'
 
 const BookGrid = ({
@@ -9,14 +10,10 @@ const BookGrid = ({
   onDelete,
 }) => {
   const nbColumns = document && Math.floor((document.body.clientWidth - 100) / 240)
-  // TODO Replace with loader
-  if (!tilesList) return null
+  if (!tilesList) return <Loader />
   return (
     <div className={styles.component}>
       <div className={styles.list}>
-        { !!FirstRowComponent &&
-          <FirstRowComponent />
-        }
         { !!FirstTileComponent &&
           <FirstTileComponent />
         }

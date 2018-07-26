@@ -1,0 +1,6 @@
+@import '~styles/colors';
+
+.selected {
+  background-color: $primary-color;
+  color: $background-color;
+}

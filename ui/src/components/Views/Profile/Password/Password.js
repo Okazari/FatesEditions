@@ -21,7 +21,7 @@ const Password = ({ updatePassword, state }) => {
         label="Ancien mot de passe"
         debounce={500}
         domProps={{
-          type: 'text',
+          type: 'password',
           placeholder: 'Votre ancien mot de passe',
           name: 'old',
         }}
@@ -30,7 +30,7 @@ const Password = ({ updatePassword, state }) => {
         label="Nouveau mot de passe"
         debounce={500}
         domProps={{
-          type: 'text',
+          type: 'password',
           placeholder: 'Votre nouveau mot de passe',
           name: 'new',
         }}
@@ -39,6 +39,7 @@ const Password = ({ updatePassword, state }) => {
         label="Confirmation"
         debounce={500}
         domProps={{
+          type: 'password',
           placeholder: 'Confirmation',
           name: 'confirmation',
         }}

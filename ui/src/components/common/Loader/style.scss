@@ -1,0 +1,23 @@
+@import "~styles/colors";
+
+.component {
+  text-align: center;
+  width: 100%;
+  perspective: 200px;
+}
+
+.logo {
+  color: $primary-color;
+  height: 100px;
+  margin: 30px 0;
+  animation: spin 1.2s cubic-bezier(0, .6, 1, .4) infinite normal;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateY(-180deg)
+  }
+  100% {
+    transform: rotateY(+180deg)
+  }
+}

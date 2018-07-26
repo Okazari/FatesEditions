@@ -164,6 +164,7 @@ const typeDefs = `
   
   type Query {
     books(author: ID, draft: Boolean): [Book]
+    showdown: Book
     book(id: ID!): Book
     author: User
     page(bookId: ID!, pageId: ID!): Page
@@ -281,12 +282,15 @@ const resolvers = {
       if (id) filters._id = id
       return Book.findOne(filters)
     }),
+    showdown: (obj, args = {}, context, info) => {
+      return Book.findOne({name: 'Deux mille deux cent vingt deux'})
+    },
     books: (obj, args = {}, context, info) => {
       const { author, draft } = args
       const filters = {}
       if (author) filters.authorId = author
       if (typeof draft === 'boolean') filters.draft = draft
-      return Book.find(filters)
+      return Book.find(filters).sort({ lastModificationDate: -1 })
     },
     author: isAuth((obj, args, context, info) => User.findById(context.user._id)),
     page: isAuth((obj, { bookId, pageId }, context, info) => Book.findById(bookId).then(book => book.pages.id(pageId))),
@@ -302,13 +306,13 @@ const resolvers = {
   },
   User: {
     drafts: isAuth((user) => {
-      return Book.find({ authorId: user.id, draft: true })
+      return Book.find({ authorId: user.id, draft: true }).sort({ lastModificationDate: -1 })
     }),
     publications: isAuth((user) => {
-      return Book.find({ authorId: user.id, draft: false })
+      return Book.find({ authorId: user.id, draft: false }).sort({ lastModificationDate: -1 })
     }),
     games: isAuth((user) => {
-      return Game.find({ playerId: user.id })
+      return Game.find({ playerId: user.id }).sort({ lastModificationDate: -1 })
     }),
   },
   Mutation: {
@@ -318,13 +322,11 @@ const resolvers = {
       })
       return book.save().then(book => ({ id: book.authorId }))
     }),
-    // Book
     updateBook: isAuth((_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true })),
     deleteBook: isAuth((_, { id }) => Book.findByIdAndRemove(id).then(book => ({ id: book.authorId }))),
     publishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }).then(book => ({ id: book.authorId }))),
     unpublishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }).then(book => ({ id: book.authorId }))),
 
-    // createStat: (_, { bookId }) => createBookSubRessource('stats', bookId, new Stat()),
     createStat: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
       return book.addOne('stats', new Stat())
                  .save()

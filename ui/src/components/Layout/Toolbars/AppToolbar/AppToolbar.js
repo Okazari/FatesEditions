@@ -1,12 +1,11 @@
 import React from 'react'
 import ToolbarLink, { ToolbarButton } from 'components/common/ToolbarLink'
+import { Connected, Disconnected } from 'components/common/Authentication'
+import { RouteService } from 'services'
+import logo from 'components/common/logo.svg'
 import styles from './style.scss'
-import logo from '../../../common/logo.svg'
-import { RouteService } from '../../../../services'
 
-const AppToolbar = () => {
-  const isLoggedIn = localStorage.getItem('auth-token')
-
+const AppToolbar = ({ location }) => {
   return (
     <div className={styles.component}>
       <div className={styles.top}>
@@ -16,30 +15,28 @@ const AppToolbar = () => {
           alt="logo"
           src={logo}
         />
-        <ToolbarLink to={RouteService.routes.books()} icon="import_contacts" />
-        <ToolbarLink to={RouteService.routes.write()} icon="mode_edit" />
-        <ToolbarLink to={RouteService.routes.mygames()} icon="play_arrow" />
+        <ToolbarLink to={RouteService.routes.books()} icon="import_contacts" location={location} />
+        <ToolbarLink to={RouteService.routes.write()} icon="mode_edit" location={location} />
+        <ToolbarLink to={RouteService.routes.mygames()} icon="play_arrow" location={location} />
       </div>
-      { isLoggedIn
-        ? (
-          <div className={styles.bottom}>
-            <ToolbarLink to={RouteService.routes.profile()} icon="account_circle" />
-            <div
-              onClick={() => {
-                localStorage.removeItem('auth-token')
-                RouteService.goTo(RouteService.routes.signin())
-              }}
-            >
-              <ToolbarButton icon="power_settings_new" />
-            </div>
+      <Connected>
+        <div className={styles.bottom}>
+          <ToolbarLink to={RouteService.routes.profile()} icon="account_circle" location={location} />
+          <div
+            onClick={() => {
+              localStorage.removeItem('auth-token')
+              RouteService.goTo(RouteService.routes.signin())
+            }}
+          >
+            <ToolbarButton icon="power_settings_new" />
           </div>
-          )
-        : (
-          <div className={styles.bottom}>
-            <ToolbarLink to={RouteService.routes.signin()} icon="power_settings_new" />
-          </div>
-          )
-      }
+        </div>
+      </Connected>
+      <Disconnected>
+        <div className={styles.bottom}>
+          <ToolbarLink to={RouteService.routes.signin()} icon="power_settings_new" />
+        </div>
+      </Disconnected>
     </div>
   )
 }

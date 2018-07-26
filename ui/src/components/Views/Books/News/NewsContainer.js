@@ -2,11 +2,22 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import BookGrid from 'components/common/BookGrid'
+import Loader from 'components/common/Loader'
 import PlayableBook from '../common/PlayableBook'
 import Showdown from './Showdown'
 
 const query = gql`
   query {
+    showdown {
+      id
+      name
+      cover
+      synopsis
+      author {
+        id
+        username
+      }
+    }
     books(draft: false) {
       id
       name
@@ -28,16 +39,22 @@ const NewsContainer = () => {
       fetchPolicy={'network-only'}
     >
       {
-        ({ data: { books } }) => {
-          if (!books) return null
-          const booksCopy = [...books]
-          const firstBook = booksCopy.shift()
+        ({ data }) => {
+          const { books, showdown } = data
+          if (!books) return <Loader />
+          const booksCopy = books.filter(book => book.id !== showdown.id)
           return (
-            <BookGrid
-              FirstRowComponent={() => <Showdown book={firstBook} />}
-              tilesList={booksCopy}
-              TileComponent={PlayableBook}
-            />
+            <div>
+              { !!showdown &&
+                <Showdown book={showdown} />
+              }
+              { !!books &&
+                <BookGrid
+                  tilesList={booksCopy}
+                  TileComponent={PlayableBook}
+                />
+              }
+            </div>
           )
         }
       }
