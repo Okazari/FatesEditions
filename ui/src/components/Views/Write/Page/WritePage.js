@@ -10,7 +10,7 @@ const WritePage = ({ location, loading, children, params }) => {
   const tabs = [tabPrevious, tabInfos, tabContent, tabTransitions]
   return (
     <Layout>
-      <AppToolbar />
+      <AppToolbar location={location.pathname} />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         <TabContent>
