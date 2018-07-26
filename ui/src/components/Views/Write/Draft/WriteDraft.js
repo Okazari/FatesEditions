@@ -11,7 +11,7 @@ const WriteDraft = ({ location, children, params, loading }) => {
   const tabs = [tabPrevious, tabInfos, tabStats, tabItems, tabPages]
   return (
     <Layout>
-      <AppToolbar />
+      <AppToolbar location={location.pathname} />
       <Content>
         <Tabs tabs={tabs} selectedTab={location.pathname} />
         <TabContent>

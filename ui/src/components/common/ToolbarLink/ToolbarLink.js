@@ -8,6 +8,8 @@ const ToolbarLink = ({ to, icon, location }) => {
   if (!!location && location.startsWith(to)) {
     className = styles.selected
   }
+  console.log('location:', location)
+  console.log('to:', to)
   return (
     <RouterLink to={to}>
       <ToolbarButton icon={icon} domProps={{ className }} />
