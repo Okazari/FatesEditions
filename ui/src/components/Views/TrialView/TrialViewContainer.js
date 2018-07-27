@@ -1,6 +1,7 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import Loader from 'components/common/Loader'
 import TrialViewReduxContainer from './TrialViewReduxContainer'
 
 const query = gql`
@@ -92,7 +93,7 @@ const TrialViewContainer = ({ params }) => (
   >
     {
       ({ loading, error, data }) => {
-        if (loading) return null
+        if (loading) return <Loader />
         if (error) return null
         const game = data.tryGame
         return <TrialViewReduxContainer key={game.id} game={game} />
