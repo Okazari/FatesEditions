@@ -19,7 +19,7 @@ Vous pouvez actuellement :
 - Créer et modifier des pages.
 - Créer et modifier des transitions de pages à pages.
 - Créer des conditions d'affichages des transitions.
-- Publier vos brouillons. brouillons.
+- Publier vos brouillons.
 - Supprimer vos brouillons et dépublier vos publications.
 - Créer une partie depuis la liste des livres.
 - Jouer une partie.
