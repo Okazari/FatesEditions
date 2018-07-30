@@ -29,7 +29,7 @@ const SignUpContainer = () => (
           AuthService.setToken(data.signUp)
           RouteService.goTo(RouteService.routes.home())
         }
-        const _signUp = signUpData => console.log('data:', signUpData) || signUp({
+        const _signUp = signUpData => signUp({
           variables: {
             ...signUpData,
           },

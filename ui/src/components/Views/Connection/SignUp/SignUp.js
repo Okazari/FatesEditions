@@ -42,7 +42,7 @@ const SignUp = ({ signUp, state }) => {
         }}
       />
       <Input
-        label='Confirmation du mot de passe'
+        label="Confirmation du mot de passe"
         domProps={{
           placeholder: 'Confirmez votre mot de passe',
           type: 'password',
@@ -58,11 +58,11 @@ const SignUp = ({ signUp, state }) => {
       {
         !!state.data &&
         <div className={styles.success}>
-          {"Connecté"}
+          {'Connecté'}
         </div>
       }
       <Button>
-        { 
+        {
           !state.loading
           ? 'Inscription'
           : 'Chargement'

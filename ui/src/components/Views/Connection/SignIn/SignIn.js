@@ -32,13 +32,13 @@ const SignIn = ({ signIn, state }) => (
     {
       !!state.error &&
       <div className={styles.error}>
-        {"Mauvais nom d'utilisateur ou mot de passe"}
+        {'Mauvais nom d\'utilisateur ou mot de passe'}
       </div>
     }
     {
       !!state.data &&
       <div className={styles.success}>
-        {"Connecté"}
+        {'Connecté'}
       </div>
     }
     <Button>
