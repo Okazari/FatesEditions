@@ -35,8 +35,9 @@ class RouteService {
     writebookpagegeneral: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/general`,
     writebookpagecontent: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/content`,
     writebookpagetransitions: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/transitions`,
-    signin: () => '/connection/signin',
-    signup: () => '/connection/signup',
+    connection: () => '/app/connection',
+    signin: () => '/app/connection/signin',
+    signup: () => '/app/connection/signup',
     profile: () => '/app/profile',
     profilepassword: () => '/app/profile/password',
   }

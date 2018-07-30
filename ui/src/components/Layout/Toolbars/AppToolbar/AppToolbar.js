@@ -1,7 +1,7 @@
 import React from 'react'
 import ToolbarLink, { ToolbarButton } from 'components/common/ToolbarLink'
 import { Connected, Disconnected } from 'components/common/Authentication'
-import { RouteService } from 'services'
+import { RouteService, AuthService } from 'services'
 import logo from 'components/common/logo.svg'
 import styles from './style.scss'
 
@@ -24,8 +24,8 @@ const AppToolbar = ({ location }) => {
           <ToolbarLink to={RouteService.routes.profile()} icon="account_circle" location={location} />
           <div
             onClick={() => {
-              localStorage.removeItem('auth-token')
-              RouteService.goTo(RouteService.routes.oldsignin())
+              AuthService.removeToken()
+              RouteService.goTo(RouteService.routes.signin())
             }}
           >
             <ToolbarButton icon="power_settings_new" />
@@ -34,7 +34,7 @@ const AppToolbar = ({ location }) => {
       </Connected>
       <Disconnected>
         <div className={styles.bottom}>
-          <ToolbarLink to={RouteService.routes.oldsignin()} icon="power_settings_new" />
+          <ToolbarLink to={RouteService.routes.connection()} icon="power_settings_new" location={location} />
         </div>
       </Disconnected>
     </div>

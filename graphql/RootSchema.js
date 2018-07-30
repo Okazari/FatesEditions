@@ -9,6 +9,7 @@ const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
 const Game = require('../models/GameModel.js')
 const SHA512 = require('crypto-js/sha512')
+const jwt = require('jsonwebtoken')
 
 const bookType = `
   name: String
@@ -213,6 +214,8 @@ const typeDefs = `
     updateGame(game: GameInput!): Game
     deleteGame(gameId: ID!): User
     
+    signIn(username: String!, password: String!): String
+    signUp(username: String, email: String, password: String, confirmation: String): String
     updatePassword(oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
   `
@@ -459,6 +462,38 @@ const resolvers = {
       .then(game => new Game(game).save())),
     updateGame: isAuth((_, { game }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game)),
     deleteGame: isAuth((_, { gameId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId }))),
+    
+    signIn: (_, { username, password }) => User.findOne({ username }).then(user => {
+      if (user.password != SHA512(password).toString()
+        || !username 
+        || !password
+      ) throw new Error('Error')
+      user.password = null
+      // TODO Export secret in Config
+      return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+    }),
+
+    signUp: (_, args) => {
+      const { username, email, password, confirmation } = args
+      console.log(args)
+      const empty = !username || !email || !password || !confirmation
+      const isEmail = /(.+)@(.+){2,}\.(.+){2,}/.test(email)
+      const passwordMatch = password === confirmation
+      if (empty) throw new Error('Un ou plusieurs champs sont vides')
+      if (!isEmail) throw new Error('Adresse email invalide')
+      if (!passwordMatch) throw new Error('Les deux mots de passe ne correspondent pas')
+      User.findOne({ username }).then(user => {
+        if (!user) throw new Error('Nom d\'utilisateur déjà pris')
+      })
+      return new User({
+        username,
+        email,
+        password,
+      }).save().then(user => {
+        user.password = null
+        return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+      })
+    },
 
     updatePassword: isAuth((_, { oldPassword, newPassword, confirmation }, context) => {
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''

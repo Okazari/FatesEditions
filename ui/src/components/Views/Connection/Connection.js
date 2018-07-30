@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout, Content, AppToolbar, Tabs, TabContent } from 'components/Layout'
 import { RouteService } from 'services'
 
-const tabSignIn = { label: 'Connection', link: RouteService.routes.signin() }
+const tabSignIn = { label: 'Connexion', link: RouteService.routes.signin() }
 const tabSignUp = { label: 'Inscription', link: RouteService.routes.signup() }
 const tabs = [tabSignIn, tabSignUp]
 
