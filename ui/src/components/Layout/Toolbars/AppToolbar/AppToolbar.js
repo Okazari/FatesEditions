@@ -25,7 +25,7 @@ const AppToolbar = ({ location }) => {
           <div
             onClick={() => {
               localStorage.removeItem('auth-token')
-              RouteService.goTo(RouteService.routes.signin())
+              RouteService.goTo(RouteService.routes.oldsignin())
             }}
           >
             <ToolbarButton icon="power_settings_new" />
@@ -34,7 +34,7 @@ const AppToolbar = ({ location }) => {
       </Connected>
       <Disconnected>
         <div className={styles.bottom}>
-          <ToolbarLink to={RouteService.routes.signin()} icon="power_settings_new" />
+          <ToolbarLink to={RouteService.routes.oldsignin()} icon="power_settings_new" />
         </div>
       </Disconnected>
     </div>

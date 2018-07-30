@@ -22,7 +22,7 @@ import WriteDraft, {
   PageContent,
   PageTransition,
 } from './components/Views/Write'
-import Portal, { SignIn, SignUp, Recover } from './components/Portal'
+import Portal, { SignIn as OldSignIn, SignUp as OldSignUp, Recover } from './components/Portal'
 import { MyGames, GamesList } from './components/Views/MyGames'
 import { GameView, TrialView } from './components/Views'
 import Profile, { Password } from './components/Views/Profile'
@@ -80,8 +80,8 @@ const AppRouter = () => {
             <IndexRedirect to="portal" />
             <Route path="portal" component={Portal}>
               <IndexRedirect to="signin" />
-              <Route path="signin" component={SignIn} />
-              <Route path="signup" component={SignUp} />
+              <Route path="signin" component={OldSignIn} />
+              <Route path="signup" component={OldSignUp} />
               <Route path="recover" component={Recover} />
             </Route>
             <Route component={GameView} path="game/:gameId" />

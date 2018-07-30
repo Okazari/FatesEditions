@@ -71,7 +71,7 @@ const SignUp = () => {
           <AdviceLink
             advice="Déjà inscris ?"
             label="Connecte toi !"
-            link={RouteService.routes.signin()}
+            link={RouteService.routes.oldsignin()}
           />
           <AdviceLink
             advice="Nom d'utilisateur/Mot de passe oublié ?"
