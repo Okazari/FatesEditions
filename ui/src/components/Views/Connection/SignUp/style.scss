@@ -1,18 +1,4 @@
 @import '~styles/colors';
-@import '~styles/sizes';
-@import '~styles/mixins';
-
-.component {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  margin: 20px auto;
-  max-width: 50vw;
-
-  > div {
-    margin-bottom: 10px;
-  }
-}
 
 .error {
   padding: 5px;

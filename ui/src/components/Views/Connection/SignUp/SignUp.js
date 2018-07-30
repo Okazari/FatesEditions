@@ -1,12 +1,11 @@
 import React from 'react'
-import { Input, Button } from 'components/common'
+import { Input, Button, Form } from 'components/common'
 import styles from './style.scss'
 
 const SignUp = ({ signUp, state }) => {
   const errorMessage = state.error ? state.error.graphQLErrors[0].message : ''
   return (
-    <form
-      className={styles.component}
+    <Form
       onSubmit={(e) => {
         e.preventDefault()
         signUp({
@@ -68,7 +67,7 @@ const SignUp = ({ signUp, state }) => {
           : 'Chargement'
         }
       </Button>
-    </form>
+    </Form>
   )
 }
 export default SignUp

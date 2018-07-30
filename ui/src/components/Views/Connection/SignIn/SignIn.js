@@ -1,10 +1,9 @@
 import React from 'react'
-import { Input, Button } from 'components/common'
+import { Input, Button, Form } from 'components/common'
 import styles from './style.scss'
 
 const SignIn = ({ signIn, state }) => (
-  <form
-    className={styles.component}
+  <Form
     onSubmit={(e) => {
       e.preventDefault()
       signIn({
@@ -47,7 +46,7 @@ const SignIn = ({ signIn, state }) => (
         : 'Chargement'
       }
     </Button>
-  </form>
+  </Form>
 )
 
 export default SignIn

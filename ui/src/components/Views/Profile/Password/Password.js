@@ -1,13 +1,12 @@
 import React from 'react'
 import Input from 'components/common/Input'
-import Button from 'components/common/Button'
+import { Button, Form } from 'components/common'
 import styles from './style.scss'
 
 const Password = ({ updatePassword, state }) => {
   const errorText = 'Oups, l\'ancien mot de passe est incorrect ou bien les deux nouveaux mots de passe ne correspondent pas !'
   return (
-    <form
-      className={styles.component}
+    <Form
       onSubmit={(e) => {
         e.preventDefault()
         updatePassword({
@@ -57,7 +56,7 @@ const Password = ({ updatePassword, state }) => {
           : 'Chargement'
         }
       </Button>
-    </form>
+    </Form>
   )
 }
 export default Password

@@ -1,0 +1,11 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 20px auto;
+  max-width: 500px;
+
+  > div {
+    margin-bottom: 10px;
+  }
+}
