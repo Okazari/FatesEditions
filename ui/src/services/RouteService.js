@@ -40,6 +40,7 @@ class RouteService {
     signup: () => '/app/connection/signup',
     profile: () => '/app/profile',
     profilepassword: () => '/app/profile/password',
+    profiledisconnect: () => '/app/profile/disconnect',
   }
 
   goTo = (route) => {

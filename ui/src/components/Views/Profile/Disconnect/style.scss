@@ -1,0 +1,12 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.message {
+  margin: 20px;
+  font-size: 1.3em;
+}

@@ -15,4 +15,5 @@ export Book from './Book'
 export Icon from './Icon'
 export BookGrid from './BookGrid'
 export Form, { Message } from './Form'
+export AlertMessage, { Emphasis } from './AlertMessage'
 

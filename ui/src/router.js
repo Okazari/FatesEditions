@@ -25,7 +25,7 @@ import WriteDraft, {
 import Portal, { SignIn as OldSignIn, SignUp as OldSignUp, Recover } from './components/Portal'
 import { MyGames, GamesList } from './components/Views/MyGames'
 import { GameView, TrialView } from './components/Views'
-import Profile, { Password } from './components/Views/Profile'
+import Profile, { Password, Disconnect } from './components/Views/Profile'
 import Connection, { SignIn, SignUp } from './components/Views/Connection'
 
 // OLD LAYOUT
@@ -75,6 +75,7 @@ const AppRouter = () => {
             <Route path="profile" component={Profile}>
               <IndexRedirect to="password" />
               <Route path="password" component={Password} />
+              <Route path="disconnect" component={Disconnect} />
             </Route>
             <Route path="connection" component={Connection}>
               <IndexRedirect to="signin" />
