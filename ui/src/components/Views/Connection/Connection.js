@@ -10,7 +10,7 @@ const tabs = [tabSignIn, tabSignUp]
 const Message = () => (
   <AlertMessage title={'Vous avez été redirigé'}>
     Pour pouvoir<Emphasis>écrire</Emphasis>votre propre livre ou bien
-    <Emphasis>jouer</Emphasis>au livre déjà publié,
+    <Emphasis>jouer</Emphasis>aux livres déjà publiés,
     vous devez être<Emphasis>connecté.</Emphasis>
   </AlertMessage>
 )
