@@ -15,6 +15,9 @@ const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = fa
   return !!book && (
     <div>
       <div className={styles.component}>
+        <Button domProps={{ onClick: addObject, disabled }}>
+          Ajouter un objet
+        </Button>
         <DataTable headers={headers} className="table-hover">
           {
             book.objects.map((item, index) => (
@@ -29,9 +32,6 @@ const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = fa
             ))
           }
         </DataTable>
-        <Button domProps={{ onClick: addObject, disabled }}>
-          Ajouter un objet
-        </Button>
       </div>
     </div>
   )

@@ -24,7 +24,6 @@ const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
               type: 'text',
               placeholder: 'Titre du livre',
               disabled,
-              required: true,
             }}
           />
           <Input
@@ -36,14 +35,12 @@ const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
               type: 'text',
               placeholder: "url de l'image de couverture",
               disabled,
-              required: true,
             }}
           />
           <GenreList
             genres={genres}
             domProps={{
               value: book.genreId,
-              required: true,
               onChange: genreId => updateBook({ genreId }),
             }}
           />
@@ -54,14 +51,12 @@ const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
               value: book.synopsis,
               onChange: synopsis => updateBook({ synopsis }),
               placeholder: 'Synopsis du livre',
-              required: true,
             }}
           />
           <PageList
             pages={book.pages}
             domProps={{
               value: book.startingPageId,
-              required: true,
               onChange: startingPageId => updateBook({ startingPageId }),
             }}
           />

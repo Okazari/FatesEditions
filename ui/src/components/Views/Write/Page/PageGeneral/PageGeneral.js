@@ -23,7 +23,6 @@ const PageGeneral = ({
           value: page.title,
           onChange: title => updatePage({ title }),
           placeholder: 'Titre',
-          required: true,
         }}
       />
       <TextAreaInput
@@ -34,7 +33,6 @@ const PageGeneral = ({
           value: page.description,
           onChange: description => updatePage({ description }),
           placeholder: 'Mémo',
-          required: true,
         }}
       />
       {/* <Input
@@ -50,11 +48,13 @@ const PageGeneral = ({
         {"Effets à l'arrivée sur la page"}
       </div>
       <div className={styles.effectRow}>
+      <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
+        {'Ajouter un Effet'}
+      </Button>
         {
           page.effects && page.effects.map((effect, index) => {
-            const key = index
             return (<EffectRow
-              key={key}
+              key={effect.id}
               effect={effect}
               index={index}
               book={book}
@@ -64,9 +64,6 @@ const PageGeneral = ({
           })
         }
       </div>
-      <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
-        {'Ajouter un Effet'}
-      </Button>
     </div>
   )
 }

@@ -17,6 +17,9 @@ const DraftStats = ({ book, updateStat, addStat, removeStat, disabled = false })
   return !!book && (
     <div>
       <div className={styles.component}>
+        <Button domProps={{ onClick: addStat, disabled }}>
+          Ajouter une caractéristique
+        </Button>
         <DataTable headers={headers} className="table-hover">
           {
             book.stats.map((stat, index) => (
@@ -31,9 +34,6 @@ const DraftStats = ({ book, updateStat, addStat, removeStat, disabled = false })
             ))
           }
         </DataTable>
-        <Button domProps={{ onClick: addStat, disabled }}>
-          Ajouter une caractéristique
-        </Button>
       </div>
     </div>
   )

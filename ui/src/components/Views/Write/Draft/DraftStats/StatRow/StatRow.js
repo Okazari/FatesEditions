@@ -15,7 +15,6 @@ const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
             onChange: name => updateStat({ id: stat.id, name }),
             placeholder: 'Libellé',
             disabled,
-            required: true,
           }}
         />
       </div>
@@ -28,7 +27,6 @@ const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
             onChange: description => updateStat({ id: stat.id, description }),
             placeholder: 'Description',
             disabled,
-            required: true,
           }}
         />
       </div>
@@ -41,7 +39,6 @@ const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
             onChange: initValue => updateStat({ id: stat.id, initValue }),
             placeholder: 'Valeur initiale',
             disabled,
-            required: true,
           }}
         />
       </div>
@@ -54,7 +51,6 @@ const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
             onChange: min => updateStat({ id: stat.id, min }),
             placeholder: 'Min',
             disabled,
-            required: true,
           }}
         />
       </div>
@@ -67,7 +63,6 @@ const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
             onChange: max => updateStat({ id: stat.id, max }),
             placeholder: 'Max',
             disabled,
-            required: true,
           }}
         />
       </div>
@@ -79,7 +74,6 @@ const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
             checked: stat.visible,
             onChange: visible => updateStat({ id: stat.id, visible }),
             disabled,
-            required: true,
           }}
         />
       </div>
