@@ -48,7 +48,10 @@ class RouteService {
   }
 
   redirect401 = () => {
-    browserHistory.replace(this.routes.signin())
+    browserHistory.replace({
+      pathname: this.routes.connection(),
+      state: { isRedirected: true },
+    })
   }
 }
 
