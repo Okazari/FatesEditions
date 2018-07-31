@@ -22,14 +22,7 @@ const AppToolbar = ({ location }) => {
       <Connected>
         <div className={styles.bottom}>
           <ToolbarLink to={RouteService.routes.profile()} icon="account_circle" location={location} />
-          <div
-            onClick={() => {
-              AuthService.removeToken()
-              RouteService.goTo(RouteService.routes.signin())
-            }}
-          >
-            <ToolbarButton icon="power_settings_new" />
-          </div>
+          <ToolbarLink to={RouteService.routes.connection()} icon="power_settings_new" location={location} />
         </div>
       </Connected>
       <Disconnected>
