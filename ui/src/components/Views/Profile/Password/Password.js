@@ -1,7 +1,6 @@
 import React from 'react'
 import Input from 'components/common/Input'
-import { Button, Form } from 'components/common'
-import styles from './style.scss'
+import { Button, Form, Message } from 'components/common'
 
 const Password = ({ updatePassword, state }) => {
   const errorText = 'Oups, l\'ancien mot de passe est incorrect ou bien les deux nouveaux mots de passe ne correspondent pas !'
@@ -40,16 +39,11 @@ const Password = ({ updatePassword, state }) => {
           name: 'confirmation',
         }}
       />
-      { !!state.error &&
-        <div className={styles.error}>
-          {errorText}
-        </div>
-      }
-      { !!state.data &&
-        <div className={styles.sucess}>
-          {'Changement de mot de passe effectué'}
-        </div>
-      }
+      <Message
+        state={state}
+        errorMessage={errorText}
+        successMessage={'Connecté'}
+      />
       <Button>
         { !state.loading
           ? 'Changer de mot de passe'

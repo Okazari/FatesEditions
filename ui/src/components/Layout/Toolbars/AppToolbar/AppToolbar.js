@@ -1,7 +1,7 @@
 import React from 'react'
-import ToolbarLink, { ToolbarButton } from 'components/common/ToolbarLink'
+import ToolbarLink from 'components/common/ToolbarLink'
 import { Connected, Disconnected } from 'components/common/Authentication'
-import { RouteService, AuthService } from 'services'
+import { RouteService } from 'services'
 import logo from 'components/common/logo.svg'
 import styles from './style.scss'
 

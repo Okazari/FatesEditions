@@ -1,6 +1,5 @@
 import React from 'react'
-import { Input, Button, Form } from 'components/common'
-import styles from './style.scss'
+import { Input, Button, Form, Message } from 'components/common'
 
 const SignIn = ({ signIn, state }) => (
   <Form
@@ -28,18 +27,11 @@ const SignIn = ({ signIn, state }) => (
         name: 'password',
       }}
     />
-    {
-      !!state.error &&
-      <div className={styles.error}>
-        {'Mauvais nom d\'utilisateur ou mot de passe'}
-      </div>
-    }
-    {
-      !!state.data &&
-      <div className={styles.success}>
-        {'Connecté'}
-      </div>
-    }
+    <Message
+      state={state}
+      errorMessage={'Mauvais nom d\'utilisateur ou mot de passe'}
+      successMessage={'Connecté'}
+    />
     <Button>
       { !state.loading
         ? 'CONNEXION'

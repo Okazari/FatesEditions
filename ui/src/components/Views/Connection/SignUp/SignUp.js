@@ -1,6 +1,5 @@
 import React from 'react'
-import { Input, Button, Form } from 'components/common'
-import styles from './style.scss'
+import { Input, Button, Form, Message } from 'components/common'
 
 const SignUp = ({ signUp, state }) => {
   const errorMessage = state.error ? state.error.graphQLErrors[0].message : ''
@@ -48,18 +47,11 @@ const SignUp = ({ signUp, state }) => {
           name: 'confirmation',
         }}
       />
-      {
-        !!state.error &&
-        <div className={styles.error}>
-          {errorMessage}
-        </div>
-      }
-      {
-        !!state.data &&
-        <div className={styles.success}>
-          {'Connecté'}
-        </div>
-      }
+      <Message
+        state={state}
+        errorMessage={errorMessage}
+        successMessage={'Connecté'}
+      />
       <Button>
         {
           !state.loading

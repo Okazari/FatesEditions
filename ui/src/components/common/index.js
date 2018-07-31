@@ -14,5 +14,5 @@ export TextEditor from './TextEditor'
 export Book from './Book'
 export Icon from './Icon'
 export BookGrid from './BookGrid'
-export Form from './Form'
+export Form, { Message } from './Form'
 
