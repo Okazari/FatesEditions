@@ -60,7 +60,7 @@ const GameTransitionContainer = (props) => {
             delete updatedGame.book
             delete updatedGame.__typename
             dispatch(setGame(updatedGame))
-            if (updatedGame.id !== null){
+            if (updatedGame.id !== null) {
               _saveGame(updatedGame)
             }
           }
