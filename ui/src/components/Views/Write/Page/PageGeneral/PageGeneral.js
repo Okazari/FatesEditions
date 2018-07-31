@@ -37,7 +37,7 @@ const PageGeneral = ({
           required: true,
         }}
       />
-      <Input
+      {/* <Input
         label="Lien SoundCloud"
         debounce={500}
         domProps={{
@@ -45,7 +45,7 @@ const PageGeneral = ({
           value: page.backgroundMusic,
           onChange: backgroundMusic => updatePage({ backgroundMusic }),
         }}
-      />
+      /> */}
       <div className={styles.effectTitle}>
         {"Effets à l'arrivée sur la page"}
       </div>
