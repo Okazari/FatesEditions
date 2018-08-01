@@ -218,10 +218,10 @@ const typeDefs = `
     signUp(username: String, email: String, password: String, confirmation: String): String
     updatePassword(oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
-  `
-  const easier = (ressource, save) => {
-    const newSave = () => save().then(() => ressource)
-    return {
+`
+const easier = (ressource, save) => {
+  const newSave = () => save().then(() => ressource)
+  return {
     ressource,
     save: newSave,
     set: newValues => easier(Object.assign(ressource, newValues), save),
@@ -327,7 +327,17 @@ const resolvers = {
     }),
     updateBook: isAuth((_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true })),
     deleteBook: isAuth((_, { id }) => Book.findByIdAndRemove(id).then(book => ({ id: book.authorId }))),
-    publishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }).then(book => ({ id: book.authorId }))),
+    publishBook: isAuth((_, { id }) => findBookById(id).then(book => {
+      const startingPage = book.ressource.pages.find(page => {
+        console.log('page.id: ', page.id)
+        console.log('startingPageId: ', book.ressource.startingPageId)
+        return page.id == book.ressource.startingPageId
+      })
+      if (!startingPage) throw new Error('La page de début est manquante')
+      book.ressource.draft = false 
+      return book.save().then(book => ({ id: book.authorId }))
+    })
+  ),
     unpublishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }).then(book => ({ id: book.authorId }))),
 
     createStat: isAuth((_, { bookId }) => findBookById(bookId).then(book => {

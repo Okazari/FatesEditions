@@ -21,7 +21,7 @@ class Publish extends React.Component {
 
   render() {
     const { draftId } = this.state
-    const { author = {}, publishBook } = this.props
+    const { author = {}, publishBook, error } = this.props
     const drafts = author.drafts
     const draft = drafts && drafts.find(d => d.id === draftId)
     return (
@@ -46,7 +46,7 @@ class Publish extends React.Component {
                   <Book book={draft} />
                 </div>
                 <div className={styles.publish}>
-                  <BookPublication onPublishBook={publishBook} draft={draft} key={`publ${draft.id}`} />
+                  <BookPublication onPublishBook={publishBook} draft={draft} error={error} key={`publ${draft.id}`} />
                 </div>
               </div>
             )

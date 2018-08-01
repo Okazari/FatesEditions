@@ -1,6 +1,5 @@
-//eslint-disable-next-line
 import React from 'react'
-import { graphql, compose } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Publish from './Publish'
 
@@ -22,12 +21,6 @@ const query = gql`
   }
 `
 
-const queryOptions = {
-  props: ({ data: { loading, author } }) => ({
-    author,
-  }),
-}
-
 const mutation = gql`
   mutation publishBook($id: ID!) {
     publishBook(id: $id) {
@@ -42,23 +35,30 @@ const mutation = gql`
   }
 `
 
-const mutationOptions = {
-  name: 'publishBook',
-}
+const PublishContainer = props => (
+  <Query
+    query={query}
+    fetchPolicy={'cache-and-network'}
+  >
+    {
+      ({ data: { author } }) => (
+        <Mutation
+          mutation={mutation}
+        >
+          {
+            (publishBook, { error }) => {
+              const _publishBook = id => publishBook({
+                variables: {
+                  id,
+                },
+              })
+              return <Publish {...props} author={author} error={error} publishBook={_publishBook} />
+            }
+          }
+        </Mutation>
+      )
+    }
+  </Query>
+)
 
-const PublishContainer = (props) => {
-  const { publishBook } = props
-  const _publishBook = id => publishBook({
-    variables: {
-      id,
-    },
-  })
-  return (
-    <Publish {...props} publishBook={_publishBook} />
-  )
-}
-
-export default compose(
-  graphql(query, queryOptions),
-  graphql(mutation, mutationOptions),
-)(PublishContainer)
+export default PublishContainer

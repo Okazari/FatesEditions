@@ -48,9 +48,9 @@ const PageGeneral = ({
         {"Effets à l'arrivée sur la page"}
       </div>
       <div className={styles.effectRow}>
-      <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
-        {'Ajouter un Effet'}
-      </Button>
+        <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
+          {'Ajouter un Effet'}
+        </Button>
         {
           page.effects && page.effects.map((effect, index) => {
             return (<EffectRow
