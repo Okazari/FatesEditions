@@ -1,20 +1,10 @@
 import React from 'react'
-import { Layout, Content, AppToolbar, Tabs, TabContent } from 'components/Layout'
+import { AppLayout } from 'components/common'
 import { RouteService } from 'services'
 
 const tabGames = { label: 'Parties en cours', link: RouteService.routes.mygameslist() }
 const tabs = [tabGames]
 
-const MyGames = ({ location, children }) => (
-  <Layout>
-    <AppToolbar location={location.pathname} />
-    <Content>
-      <Tabs tabs={tabs} selectedTab={location.pathname} />
-      <TabContent>
-        {children}
-      </TabContent>
-    </Content>
-  </Layout>
-)
+const MyGames = props => <AppLayout {...props} tabs={tabs} />
 
 export default MyGames

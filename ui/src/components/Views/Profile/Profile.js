@@ -1,23 +1,11 @@
 import React from 'react'
-import { Layout, Content, AppToolbar, Tabs, TabContent } from 'components/Layout'
+import { AppLayout } from 'components/common'
 import { RouteService } from 'services'
 
 const tabPassword = { label: 'Changer de mot de passe', link: RouteService.routes.profilepassword() }
 const tabDisconnect = { label: 'Déconnexion', link: RouteService.routes.profiledisconnect() }
 const tabs = [tabPassword, tabDisconnect]
 
-const Profile = ({ location, children }) => {
-  return (
-    <Layout>
-      <AppToolbar location={location.pathname} />
-      <Content>
-        <Tabs tabs={tabs} selectedTab={location.pathname} />
-        <TabContent>
-          {children}
-        </TabContent>
-      </Content>
-    </Layout>
-  )
-}
+const Profile = props => <AppLayout {...props} tabs={tabs} />
 
 export default Profile
