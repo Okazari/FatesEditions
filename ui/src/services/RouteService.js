@@ -18,6 +18,7 @@ class RouteService {
     books: () => '/app/books',
     booksnews: () => '/app/books/news',
     bookslibrary: () => '/app/books/library',
+    book: bookId => `/app/books/info/${bookId}`,
     mygames: () => '/app/mygames',
     mygameslist: () => '/app/mygames/list',
     playgame: gameId => `/app/play/${gameId}`,
@@ -45,6 +46,10 @@ class RouteService {
 
   goTo = (route) => {
     browserHistory.push(route)
+  }
+
+  goBack = () => {
+    browserHistory.goBack()
   }
 
   redirect401 = () => {
