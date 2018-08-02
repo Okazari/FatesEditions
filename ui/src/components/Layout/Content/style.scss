@@ -1,5 +1,10 @@
 @import '~styles/sizes';
+@import '~styles/responsive';
 
 .component {
   width: $content-size;
+  @media #{$mobile} {
+    width: auto;
+    height: $content-mobile-size;
+  }
 }

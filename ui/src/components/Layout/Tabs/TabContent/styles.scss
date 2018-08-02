@@ -1,8 +1,12 @@
 @import '~styles/mixins';
 @import '~styles/sizes';
+@import '~styles/responsive';
 
 .component {
   @include scrollbar();
   height: $tab-content-size;
   overflow: auto;
+  @media #{$mobile} {
+    height: $tab-content-mobile-size;
+  }
 }

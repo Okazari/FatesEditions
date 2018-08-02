@@ -1,5 +1,6 @@
-@import '~styles/sizes';
-@import '~styles/colors';
+@import "~styles/sizes";
+@import "~styles/colors";
+@import "~styles/responsive";
 
 .component {
   display: flex;
@@ -7,22 +8,38 @@
   justify-content: space-between;
   width: $toolbar-size;
   background-color: $background-color-light-2;
+  @media #{$mobile} {
+    flex-direction: row;
+    width: auto;
+    height: $toolbar-mobile-size;
+  }
 }
 
 .top {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  @media #{$mobile} {
+    flex-direction: row;
+
+  }
 }
 
 .bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
+  padding: 20px;
+  @media #{$mobile} {
+    flex-direction: row;
+  }
 }
 
 .logo {
-  margin: 20px 0;
+  margin-bottom: 20px;
   height: 70px;
+  @media #{$mobile} {
+    display: none;
+  }
 }

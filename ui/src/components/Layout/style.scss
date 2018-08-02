@@ -1,8 +1,12 @@
 @import '~styles/colors';
 @import '~styles/sizes';
+@import '~styles/responsive';
 
 .component {
   min-height: 100vh;
   background-color: $background-color;
   display: flex;
+  @media #{$mobile} {
+    flex-direction: column-reverse;
+  }
 }
