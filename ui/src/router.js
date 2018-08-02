@@ -27,7 +27,7 @@ import { MyGames, GamesList } from './components/Views/MyGames'
 import { GameView, TrialView } from './components/Views'
 import Profile, { Password, Disconnect } from './components/Views/Profile'
 import Connection, { SignIn, SignUp } from './components/Views/Connection'
-import BookInfo, { BookGeneral } from './components/Views/BookInfo'
+import BookDetails, { BookGeneral } from './components/Views/BookDetails'
 
 // OLD LAYOUT
 import App from './components/Old/App'
@@ -48,7 +48,7 @@ const AppRouter = () => {
               <Route path="news" component={News} />
               <Route path="library" component={Library} />
             </Route>
-            <Route path="books/info/:bookId" component={BookInfo}>
+            <Route path="books/details/:bookId" component={BookDetails}>
               <IndexRedirect to="general" />
               <Route path="general" component={BookGeneral} />
             </Route>
