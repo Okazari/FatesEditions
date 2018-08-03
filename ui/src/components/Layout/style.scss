@@ -3,7 +3,7 @@
 @import '~styles/responsive';
 
 .component {
-  min-height: 100vh;
+  height: 100vh;
   background-color: $background-color;
   display: flex;
   @media #{$mobile} {

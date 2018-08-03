@@ -94,7 +94,7 @@ const GameViewContainer = ({ params }) => {
     >
       {
         ({ loading, error, data }) => {
-          if (loading) return <Loader />
+          if (loading) return <Loader white />
           if (error) return null
           const game = data.game
           return <GameViewReduxContainer key={game.id} game={game} />

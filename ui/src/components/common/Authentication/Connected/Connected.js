@@ -1,4 +1,3 @@
-import React from 'react'
 import { AuthService } from 'services'
 
 const Connected = ({ children }) => {
@@ -6,4 +5,5 @@ const Connected = ({ children }) => {
   if (!connected) return null
   return children
 }
+
 export default Connected

@@ -1,6 +1,7 @@
 @import '~styles/colors';
 @import '~styles/sizes';
 @import '~styles/mixins';
+@import '~styles/responsive';
 
 .component {
   display: flex;
@@ -8,6 +9,10 @@
   height: 400px;
   padding: 20px 0;
   border-bottom: solid 1px $decorator-color;
+  @media #{$mobile} {
+    flex-direction: column;
+    height: auto;
+  }
 }
 
 .preview {

@@ -1,0 +1,16 @@
+@import "~styles/sizes";
+@import "~styles/colors";
+@import "~styles/responsive";
+
+.component {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: $toolbar-size;
+  background-color: $background-color-light-2;
+  @media #{$mobile} {
+    flex-direction: row;
+    width: auto;
+    height: $toolbar-mobile-size;
+  }
+}
