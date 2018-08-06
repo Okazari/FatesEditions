@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
-import classnames from 'classnames'
 import { RouteService } from 'services'
 import { BookGrid, Icon, Book } from 'components/common'
 import styles from './style.scss'
@@ -73,18 +72,19 @@ const BookTile = ({ showDelay, content, onDelete }) => (<Book
 />)
 
 const DraftContainer = ({ createBook, deleteBook, author = {} }) => {
-  const books = author.drafts
   const _createBook = () => createBook()
   const _deleteBook = id => deleteBook({ variables: { id } })
   return (
     <BookGrid
-      tilesList={books}
+      tilesList={author && author.drafts}
       FirstTileComponent={
         () => <div
           onClick={_createBook}
-          className={classnames(styles.book, styles.newBook)}
+          className={styles.book}
         >
-          <Icon icon="library_add" />
+          <div className={styles.newBook}>
+            <Icon icon="library_add" />
+          </div>
         </div>
       }
       TileComponent={BookTile}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Book, AlertMessage, Emphasis } from 'components/common'
+import { Book, BookWrapper, AlertMessage, Emphasis } from 'components/common'
 import DraftList from './DraftList'
 import BookPublication from './BookPublication'
 import styles from './styles.scss'
@@ -43,7 +43,9 @@ class Publish extends React.Component {
             draft && (
               <div className={styles.body} >
                 <div className={styles.bookPreview}>
-                  <Book book={draft} />
+                  <BookWrapper>
+                    <Book book={draft} />
+                  </BookWrapper>
                 </div>
                 <div className={styles.publish}>
                   <BookPublication onPublishBook={publishBook} draft={draft} error={error} key={`publ${draft.id}`} />

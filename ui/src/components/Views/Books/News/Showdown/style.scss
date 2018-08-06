@@ -1,42 +1,51 @@
-@import '~styles/colors';
-@import '~styles/sizes';
-@import '~styles/mixins';
-@import '~styles/responsive';
+@import "~styles/colors";
+@import "~styles/sizes";
+@import "~styles/mixins";
+@import "~styles/responsive";
 
 .component {
-  display: flex;
-  margin: 0 20px;
-  height: 400px;
-  padding: 20px 0;
+  margin: 20px;
   border-bottom: solid 1px $decorator-color;
+}
+
+.grid {
+  margin: 0 auto;
+  padding-bottom: 20px;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 20px;
   @media #{$mobile} {
-    flex-direction: column;
-    height: auto;
+    grid-template-columns: 1fr;
   }
 }
 
-.preview {
-  flex-basis: 200px;
-  flex-shrink: 0;
-  height: 100%;  
-  @media (min-width: 1170px) {
-    flex-basis: 440px;
-  }
-  @media (min-width: 1560px) {
-    flex-basis: 680px;
-  }
+.bookWrapper {
+  position: relative;
+  padding-bottom: 150%;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 40px;
+  font-size: 1.2em;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 2em;
+  text-align: center;
+}
+
+.author {
+  text-align: right;
 }
 
 .synopsis {
-  font-size: 1.2em;
   margin: 10px 0;
   text-align: justify;
   overflow: hidden;
+  flex-shrink: 0;
 }

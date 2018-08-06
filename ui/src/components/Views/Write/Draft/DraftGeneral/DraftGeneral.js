@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Input, Book, TextAreaInput } from 'components/common'
+import { Button, Input, Book, BookWrapper, TextAreaInput } from 'components/common'
 import { RouteService } from 'services'
 import GenreList from './GenreList'
 import PageList from './PageList'
@@ -12,7 +12,9 @@ const DraftGeneral = ({ book, genres, updateBook, disabled = false }) => {
     <div>
       <div className={styles.component}>
         <div className={styles.bookCover}>
-          <Book book={book} />
+          <BookWrapper>
+            <Book book={book} />
+          </BookWrapper>
         </div>
         <div className={styles.bookInformation}>
           <Input

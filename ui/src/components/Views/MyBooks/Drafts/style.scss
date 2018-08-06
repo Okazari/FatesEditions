@@ -10,12 +10,19 @@
 }
 
 .newBook {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: $box-shadow-1;
-  font-size: 45px;
   cursor: pointer;
   transition: transform ease-in 100ms;
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
   }
 }
 
@@ -40,11 +47,10 @@
 }
 
 .book {
+  position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 200px;
-  margin: 20px;
-  height: 300px;
+  width: 100%;
+  padding-bottom: 150%;
 }

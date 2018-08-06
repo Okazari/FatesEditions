@@ -13,21 +13,15 @@
 }
 
 .list {
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: flex-start;
+  margin: 20px;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-auto-rows: 100%;
 }
 
-.book {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  margin: 20px;
-  height: 300px;
-  @media #{$mobile} {
-    width: calc(100vw - 30px);
-    margin: 15px;
-    height: calc((100vw - 30px) * 1.34);
-  }
-}
+// .book {
+//   position: relative;
+//   width: 100%;
+//   padding-bottom: 150%;
+// }

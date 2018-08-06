@@ -1,5 +1,5 @@
 import React from 'react'
-import Loader from 'components/common/Loader'
+import { Loader, BookWrapper } from 'components/common'
 import styles from './style.scss'
 
 const BookGrid = ({
@@ -20,12 +20,11 @@ const BookGrid = ({
           const usedIndex = FirstTileComponent ? index + 1 : index
           const delay = 100 * ((usedIndex % nbColumns) + Math.floor(index / nbColumns) + 1)
           return (
-            <div
+            <BookWrapper
               key={content.id}
-              className={styles.book}
             >
               <TileComponent content={content} showDelay={delay} onDelete={onDelete} />
-            </div>
+            </BookWrapper>
           )
         })
       }
