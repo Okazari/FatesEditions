@@ -1,4 +1,5 @@
 import { browserHistory } from 'react-router'
+import { AuthService } from 'services'
 
 class RouteService {
 
@@ -53,6 +54,7 @@ class RouteService {
   }
 
   redirect401 = () => {
+    AuthService.logout()
     browserHistory.replace({
       pathname: this.routes.connection(),
       state: { isRedirected: true },
