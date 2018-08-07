@@ -13,6 +13,7 @@ const Disconnect = () => (
         onClick: () => AuthService.logout()
           .then(() => RouteService.goTo(RouteService.routes.connection())),
       }}
+      className={styles.button}
     >
       {'Déconnexion'}
     </Button>
