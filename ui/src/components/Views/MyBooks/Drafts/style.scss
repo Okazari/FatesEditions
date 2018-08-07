@@ -21,8 +21,13 @@
   box-shadow: $box-shadow-1;
   cursor: pointer;
   transition: transform ease-in 100ms;
-  &:hover {
-    transform: scale(1.02);
+  > i {
+    font-size: 4em;
+  }
+  @media (hover:hover) {
+    &:hover {
+      transform: scale(0.98);
+    }
   }
 }
 

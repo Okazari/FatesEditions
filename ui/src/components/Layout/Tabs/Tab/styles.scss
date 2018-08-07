@@ -14,11 +14,12 @@
   cursor: pointer;
   text-decoration: none;
 
-
-  &:hover {
-    .tracker {
-      transition: width $standard-duration;
-      width: 100%;
+  @media (hover:hover){
+    &:hover {
+      .tracker {
+        transition: width $standard-duration;
+        width: 100%;
+      }
     }
   }
 }
