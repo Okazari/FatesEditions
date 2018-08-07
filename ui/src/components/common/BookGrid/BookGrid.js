@@ -1,4 +1,5 @@
 import React from 'react'
+import sizeMe from 'react-sizeme'
 import { Loader, BookWrapper } from 'components/common'
 import styles from './style.scss'
 
@@ -7,8 +8,10 @@ const BookGrid = ({
   FirstTileComponent,
   TileComponent,
   onDelete,
+  size,
 }) => {
-  const nbColumns = document && Math.floor((document.body.clientWidth - 100) / 240)
+  //                            Width - padding - grid-gap / minimum-book-size + grid-gap
+  const nbColumns = Math.floor((size.width - 20) / 220)
   if (!tilesList) return <Loader />
   return (
     <div className={styles.list}>
@@ -32,4 +35,4 @@ const BookGrid = ({
   )
 }
 
-export default BookGrid
+export default sizeMe()(BookGrid)

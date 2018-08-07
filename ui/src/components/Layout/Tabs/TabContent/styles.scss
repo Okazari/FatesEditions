@@ -5,7 +5,7 @@
 .component {
   @include scrollbar();
   height: $tab-content-size;
-  overflow: auto;
+  overflow-y: scroll;
   @media #{$mobile} {
     height: $tab-content-mobile-size;
   }

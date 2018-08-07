@@ -1,5 +1,6 @@
 @import '~styles/colors';
 @import '~styles/shadows';
+@import '~styles/responsive';
 
 .link {
   margin: 10px;
@@ -22,5 +23,10 @@
   cursor: pointer;
   &:hover {
     box-shadow: $box-shadow-1;
+  }
+  @media #{$mobile} {
+    width: 50px;
+    height: 50px;
+    font-size: 2em;
   }
 }
