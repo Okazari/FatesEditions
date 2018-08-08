@@ -1,24 +1,7 @@
 class AuthService {
-
-  // login = (credentials) => {
-  //   return fetch('/api/login', {
-  //     method: 'POST',
-  //     body: JSON.stringify(credentials),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  // }
-
-  // subscribe = (credentials) => {
-  //   return fetch('/api/subscribe', {
-  //     method: 'POST',
-  //     body: JSON.stringify(credentials),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  // }
+  getUser = () => {
+    return JSON.parse(window.atob(this.getToken().split('.')[1]));
+  }
 
   setToken = (token) => {
     window.localStorage.setItem('auth-token', token)

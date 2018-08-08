@@ -1,1 +1,1 @@
-export default from './Commentary'
+export default from './CommentaryContainer'

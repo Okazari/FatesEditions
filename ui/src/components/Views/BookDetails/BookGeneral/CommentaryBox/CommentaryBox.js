@@ -5,8 +5,8 @@ import styles from './style.scss'
 
 const CommentaryBox = ({ book }) => (
   <div className={styles.component}>
-    <CommentaryList book={book} />
-    <CommentaryInput />
+    <CommentaryList bookId={book.id} />
+    <CommentaryInput bookId={book.id} />
   </div>
 )
 

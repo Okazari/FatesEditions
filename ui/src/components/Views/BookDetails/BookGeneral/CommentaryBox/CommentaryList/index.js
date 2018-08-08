@@ -1,1 +1,1 @@
-export default from './CommentaryList'
+export default from './CommentaryListContainer'

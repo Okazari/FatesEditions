@@ -1,1 +1,1 @@
-export default from './CommentaryInput'
+export default from './CommentaryInputContainer'

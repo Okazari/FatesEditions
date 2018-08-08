@@ -7,7 +7,8 @@ const User = require('../models/UserModel')
 const Effect = require('../models/EffectModel')
 const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
-const Game = require('../models/GameModel.js')
+const Game = require('../models/GameModel')
+const Commentary = require('../models/CommentaryModel')
 const SHA512 = require('crypto-js/sha512')
 const jwt = require('jsonwebtoken')
 
@@ -68,6 +69,13 @@ const gameType = `
   lastModificationDate : String
 `
 
+const commentaryType = `
+  text: String!
+  authorId: ID
+  creationDate : String
+  lastModificationDate : String
+`
+
 const typeDefs = `
   scalar MAP
 
@@ -78,6 +86,7 @@ const typeDefs = `
     stats: [Stat]
     objects: [Object]
     pages: [Page]
+    commentaries: [Commentary]
   }
 
   type User {
@@ -162,7 +171,13 @@ const typeDefs = `
     stats: MAP
     objects: [ID]
   }
-  
+
+  type Commentary {
+    id: ID
+    ${commentaryType}
+    author: User
+  }
+
   type Query {
     books(author: ID, draft: Boolean): [Book]
     showdown: Book
@@ -214,6 +229,9 @@ const typeDefs = `
     updateGame(game: GameInput!): Game
     deleteGame(gameId: ID!): User
     
+    addComment(bookId: ID! text: String!): Book
+    deleteComment(bookId: ID!, commentId: ID!): Book
+
     signIn(username: String!, password: String!): String
     signUp(username: String, email: String, password: String, confirmation: String): String
     updatePassword(oldPassword: String!, newPassword: String!, confirmation: String!): User
@@ -279,12 +297,12 @@ const isAuth = resolver => (obj, args = {}, context, info) => {
 const resolvers = {
   MAP: GraphQLJSON,
   Query: {
-    book: isAuth((obj, args = {}, context, info) => {
+    book: (obj, args = {}, context, info) => {
       const { id } = args
       const filters = {}
       if (id) filters._id = id
       return Book.findOne(filters)
-    }),
+    },
     showdown: (obj, args = {}, context, info) => {
       return Book.findOne({name: 'Deux mille deux cent vingt deux'})
     },
@@ -305,6 +323,11 @@ const resolvers = {
   Book: {
     author: (book) => {
       return User.findById(book.authorId)
+    }
+  },
+  Commentary: {
+    author: (commentary) => {
+      return User.findById(commentary.authorId)
     }
   },
   User: {
@@ -473,6 +496,15 @@ const resolvers = {
     updateGame: isAuth((_, { game }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game)),
     deleteGame: isAuth((_, { gameId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId }))),
     
+    addComment: isAuth((_, { bookId, text }, context) => findBookById(bookId).then(book => {
+      return book.addOne('commentaries', new Commentary({ text, authorId: context.user._id }))
+                 .save()
+    })),
+    deleteComment: isAuth((_, { bookId, commentId}, context) => findBookById(bookId).then(book => {
+      return book.deleteOne('commentaries', commentId)
+                 .save()
+    })), 
+
     signIn: (_, { username, password }) => User.findOne({ username }).then(user => {
       if (user.password != SHA512(password).toString()
         || !username 
