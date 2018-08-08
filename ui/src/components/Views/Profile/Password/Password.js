@@ -1,11 +1,11 @@
 import React from 'react'
 import Input from 'components/common/Input'
-import { Button, Form, Message } from 'components/common'
+import { Button, NarrowForm, Message } from 'components/common'
 
 const Password = ({ updatePassword, state }) => {
   const errorText = 'Oups, l\'ancien mot de passe est incorrect ou bien les deux nouveaux mots de passe ne correspondent pas !'
   return (
-    <Form
+    <NarrowForm
       onSubmit={(e) => {
         e.preventDefault()
         updatePassword({
@@ -50,7 +50,7 @@ const Password = ({ updatePassword, state }) => {
           : 'Chargement'
         }
       </Button>
-    </Form>
+    </NarrowForm>
   )
 }
 export default Password

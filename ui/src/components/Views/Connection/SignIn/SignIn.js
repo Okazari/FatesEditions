@@ -1,8 +1,8 @@
 import React from 'react'
-import { Input, Button, Form, Message } from 'components/common'
+import { Input, Button, NarrowForm, Message } from 'components/common'
 
 const SignIn = ({ signIn, state }) => (
-  <Form
+  <NarrowForm
     onSubmit={(e) => {
       e.preventDefault()
       signIn({
@@ -38,7 +38,7 @@ const SignIn = ({ signIn, state }) => (
         : 'Chargement'
       }
     </Button>
-  </Form>
+  </NarrowForm>
 )
 
 export default SignIn

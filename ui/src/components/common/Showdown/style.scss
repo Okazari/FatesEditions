@@ -49,3 +49,19 @@
   overflow: hidden;
   flex-shrink: 0;
 }
+
+.buttons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.disabled {
+  background-color: $background-color-light-2;
+  color: $decorator-color;
+  cursor: not-allowed;
+  &:hover {
+    box-shadow: none;
+  } 
+}

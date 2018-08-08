@@ -1,6 +1,5 @@
 import React from 'react'
-import { Loader, Button, BookWrapper } from 'components/common'
-import PlayableBook from '../../common/PlayableBook'
+import { Loader, Button, BookWrapper, PlayableBook } from 'components/common'
 import styles from './style.scss'
 
 const Showdown = ({ book, onClick }) => {
@@ -21,7 +20,10 @@ const Showdown = ({ book, onClick }) => {
                 {book.synopsis}
               </div>
             </div>
-            <Button domProps={{ onClick }}>Jouer</Button>
+            <div className={styles.buttons}>
+              <Button domProps={{ onClick }}>Nouvelle Partie</Button>
+              <Button className={styles.disabled}>Reprendre</Button>
+            </div>
           </div>
         }
       </div>

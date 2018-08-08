@@ -4,9 +4,7 @@ import styles from './styles.scss'
 
 const Button = ({ children, className, domProps }) => {
   const finalClassName = classnames(styles.component, className)
-  return (
-    <button {...domProps} className={finalClassName} > {children} </button>
-  )
+  return <button {...domProps} className={finalClassName}>{children}</button>
 }
 
 export default Button

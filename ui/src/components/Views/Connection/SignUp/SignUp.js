@@ -1,10 +1,10 @@
 import React from 'react'
-import { Input, Button, Form, Message } from 'components/common'
+import { Input, Button, NarrowForm, Message } from 'components/common'
 
 const SignUp = ({ signUp, state }) => {
   const errorMessage = state.error ? state.error.graphQLErrors[0].message : ''
   return (
-    <Form
+    <NarrowForm
       onSubmit={(e) => {
         e.preventDefault()
         signUp({
@@ -59,7 +59,7 @@ const SignUp = ({ signUp, state }) => {
           : 'Chargement'
         }
       </Button>
-    </Form>
+    </NarrowForm>
   )
 }
 export default SignUp
