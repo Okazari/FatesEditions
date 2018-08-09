@@ -10,7 +10,7 @@ const Commentary = ({ commentary, deleteComment }) => {
     new Date(commentary.lastModificationDate),
     { locale: frLocale },
   )
-  const user = AuthService.getUser().user
+  const user = AuthService.getUser()
   return (
     <div className={styles.component}>
       <div className={styles.label}>
@@ -24,7 +24,7 @@ const Commentary = ({ commentary, deleteComment }) => {
         <div className={styles.date}>{date}</div>
       </div>
       <div className={styles.text}>{commentary.text}</div>
-      { user._id === commentary.author.id
+      { user && user._id === commentary.author.id
       ? (<ButtonIcon
         icon="close"
         className={styles.delete}
