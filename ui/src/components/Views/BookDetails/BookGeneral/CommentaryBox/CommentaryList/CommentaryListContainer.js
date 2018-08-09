@@ -28,7 +28,7 @@ const CommentaryListContainer = (props) => {
     <Query
       query={query}
       variables={{
-        bookId
+        bookId,
       }}
     >
       {

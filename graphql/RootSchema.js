@@ -187,6 +187,7 @@ const typeDefs = `
     tryGame(bookId: ID!): Game
     games: [Game]
     game(gameId: ID!): Game
+    lastGame(bookId: ID!): Game
   }
 
   type Mutation {
@@ -319,6 +320,13 @@ const resolvers = {
     tryGame: isAuth((_, { bookId }) => Book.findById(bookId).then(generateGame)),
     games: isAuth((_, {}, context) => Game.find({ playerId: context.user.id })),
     game: isAuth((_, { gameId }) => Game.findById(gameId)),
+    // (bookId: ID!): Game
+    // playerId: context.user.id,
+    lastGame: isAuth((_, { bookId }, context) => {
+      return Game.find({ playerId: context.user._id, 'book._id': { _id: bookId } })
+                 .sort({ lastModificationDate: -1 })
+                 .then(games => games[0])
+    }),
   },
   Book: {
     author: (book) => {

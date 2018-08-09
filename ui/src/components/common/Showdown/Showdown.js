@@ -1,17 +1,16 @@
 import React from 'react'
-import { Loader, Button, BookWrapper, PlayableBook } from 'components/common'
+import { Loader, Button, BookWrapper, LastGameButton } from 'components/common'
 import styles from './style.scss'
 
-const Showdown = ({ book, onClick }) => {
+const Showdown = ({ book, onClick, BookComponent }) => {
   if (!book) return <Loader />
   return (
     <div className={styles.component}>
       <div className={styles.grid}>
         <BookWrapper>
-          <PlayableBook content={book} />
+          <BookComponent content={book} />
         </BookWrapper>
         {
-          book.synopsis && book.name &&
           <div className={styles.content}>
             <div className={styles.detailsWrapper}>
               <div className={styles.title}>{book.name}</div>
@@ -22,7 +21,7 @@ const Showdown = ({ book, onClick }) => {
             </div>
             <div className={styles.buttons}>
               <Button domProps={{ onClick }}>Nouvelle Partie</Button>
-              <Button className={styles.disabled}>Reprendre</Button>
+              <LastGameButton book={book} />
             </div>
           </div>
         }

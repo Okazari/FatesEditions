@@ -10,7 +10,7 @@ const BookGrid = ({
   onDelete,
   size,
 }) => {
-  // Width - padding(10) - grid-gap(10) / minimum-book-size(200) + grid-gap(10)x2 
+  // Width - padding(10) - grid-gap(10) / minimum-book-size(200) + grid-gap(10)x2
   const nbColumns = Math.floor((size.width - 20) / 220)
   if (!tilesList) return <Loader />
   return (

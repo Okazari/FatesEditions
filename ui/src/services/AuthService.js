@@ -1,6 +1,6 @@
 class AuthService {
   getUser = () => {
-    return JSON.parse(window.atob(this.getToken().split('.')[1]));
+    return JSON.parse(window.atob(this.getToken().split('.')[1]))
   }
 
   setToken = (token) => {

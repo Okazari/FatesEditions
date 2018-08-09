@@ -1,7 +1,7 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { BookGrid, Loader, Showdown, PlayableBook } from 'components/common'
+import { BookGrid, Loader, Showdown, ToDetailsBook } from 'components/common'
 
 const query = gql`
   query {
@@ -43,12 +43,12 @@ const NewsContainer = () => {
           return (
             <div>
               { !!showdown &&
-                <Showdown book={showdown} />
+                <Showdown book={showdown} BookComponent={ToDetailsBook} />
               }
               { !!books &&
                 <BookGrid
                   tilesList={booksCopy}
-                  TileComponent={PlayableBook}
+                  TileComponent={ToDetailsBook}
                 />
               }
             </div>

@@ -16,7 +16,6 @@ const mutation = gql`
 
 const CommentaryContainer = (props) => {
   const { bookId } = props
-  console.log(bookId)
   return (
     <Mutation mutation={mutation}>
       {

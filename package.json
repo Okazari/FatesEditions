@@ -90,6 +90,7 @@
     "apollo-link-http": "^1.5.4",
     "classnames": "^2.2.5",
     "d3": "^4.7.1",
+    "date-fns": "^1.29.0",
     "draft-js": "^0.10.0",
     "graphql-tag": "^2.6.1",
     "lodash.debounce": "^4.0.8",

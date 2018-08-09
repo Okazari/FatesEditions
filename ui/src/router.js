@@ -48,7 +48,7 @@ const AppRouter = () => {
               <Route path="news" component={News} />
               <Route path="library" component={Library} />
             </Route>
-            <Route path="books/details/:bookId" component={BookDetails}>
+            <Route path="books/:bookId" component={BookDetails}>
               <IndexRedirect to="general" />
               <Route path="general" component={BookGeneral} />
             </Route>

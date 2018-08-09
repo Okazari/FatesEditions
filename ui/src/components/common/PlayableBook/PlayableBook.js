@@ -2,7 +2,6 @@ import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { RouteService } from 'services'
-import Loader from 'components/common/Loader'
 import Book from 'components/common/Book'
 
 const mutation = gql`
@@ -24,11 +23,9 @@ const PlayableBook = (props) => {
       }}
     >
       {
-        (createGame, { loading, error }) => {
+        (createGame) => {
           const _createGame = bookId => createGame(bookId)
             .then(({ data }) => RouteService.goTo(RouteService.routes.playgame(data.createGame.id)))
-          if (loading) return <Loader />
-          if (error) return null
           return <Book {...props} book={book} onClick={bookId => _createGame(bookId)} />
         }
       }

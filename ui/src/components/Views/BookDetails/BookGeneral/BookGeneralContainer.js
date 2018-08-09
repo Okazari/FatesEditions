@@ -44,7 +44,6 @@ const query = gql`
 
 const BookGeneralContainer = ({ params }) => {
   const { bookId } = params
-  console.log(bookId)
   return (
     <Query query={query} variables={{ id: bookId }}>
       {

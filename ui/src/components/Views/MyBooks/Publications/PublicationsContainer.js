@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
-import { BookGrid, Book } from 'components/common'
+import { BookGrid, ToDetailsBook } from 'components/common'
 
 const query = gql`
   query Author {
@@ -47,9 +47,9 @@ const mutationOptions = {
   name: 'unpublishBook',
 }
 
-const BookTile = ({ showDelay, content, onDelete }) => (<Book
+const BookTile = ({ showDelay, content, onDelete }) => (<ToDetailsBook
   showDelay={showDelay}
-  book={content}
+  content={content}
   onDelete={() => onDelete(content.id)}
 />)
 
@@ -65,7 +65,6 @@ const PublicationsContainer = ({ unpublishBook, author = {} }) => {
       TileComponent={BookTile}
       onDelete={_unpublishBook}
     />
-    // <Publications {...props} unpublishBook={_unpublishBook} />
   )
 }
 

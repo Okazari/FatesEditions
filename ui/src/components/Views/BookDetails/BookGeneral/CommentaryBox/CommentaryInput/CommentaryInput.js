@@ -1,18 +1,16 @@
 import React from 'react'
-import { Form, TextAreaInput, Message, Button } from 'components/common'
-import styles from './style.scss'
+import { Form, TextAreaInput, Button } from 'components/common'
 
 const CommentaryInput = ({ addComment, state }) => (
-    <Form
-      onSubmit={(e) => {
-        e.preventDefault()
-        addComment({
-          text: e.target.text.value,
-        })
-      }}
-      className={styles.component}
-    >
-      <TextAreaInput 
+  <Form
+    onSubmit={(e) => {
+      e.preventDefault()
+      addComment({
+        text: e.target.text.value,
+      })
+    }}
+  >
+    <TextAreaInput
       label="Ajouter un commentaire"
       domProps={{
         placeholder: 'Votre commentaire',

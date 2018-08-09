@@ -9,13 +9,12 @@ import {
   ExitButton,
 } from '../common'
 import styles from './style.scss'
-import logoWhite from '../../../common/logo_white.svg'
 
 const TrialToolbar = () => {
   return (
     <Toolbar className={styles.component}>
       <ToolbarTop>
-        <ToolbarLogo logo={logoWhite} />
+        <ToolbarLogo white />
         <DisplayStats />
         <DisplayObjects />
       </ToolbarTop>

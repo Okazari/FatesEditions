@@ -22,10 +22,9 @@ const ShowdownContainer = (props) => {
       }}
     >
       {
-        (createGame, { loading, error }) => {
+        (createGame) => {
           const _createGame = bookId => createGame(bookId)
             .then(({ data }) => RouteService.goTo(RouteService.routes.playgame(data.createGame.id)))
-          if (error) return null
           return <Showdown {...props} onClick={() => _createGame(book.id)} />
         }
       }
