@@ -1,7 +1,9 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { BookGrid, Loader, GameTile } from 'components/common'
+import BookGrid from 'components/common/BookGrid'
+import Loader from 'components/common/Loader'
+import GameTile from './GameTile'
 
 const query = gql`
   query getGames {

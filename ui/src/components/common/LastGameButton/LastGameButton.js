@@ -1,7 +1,7 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { RouteService } from 'services'
+import { RouteService, AuthService } from 'services'
 import { Button } from 'components/common'
 import styles from './style.scss'
 
@@ -15,6 +15,8 @@ const query = gql`
 `
 
 const LastGameButton = ({ book }) => {
+  const token = AuthService.getToken()
+  if (!token) return <Button className={styles.disabled}>Reprendre</Button>
   return (
     <Query
       query={query}
@@ -24,7 +26,7 @@ const LastGameButton = ({ book }) => {
       fetchPolicy={'network-only'}
     >
       {
-        ({ loading, error, data }) => {
+        ({ error, data }) => {
           let className = styles.disabled
           let onClick = () => null
           if (error) return null
