@@ -21,28 +21,33 @@ mutation createGame($bookId: ID!) {
 }
 `
 
+const CreateGameBook = (props) => {
+  const book = props.content
+  return (
+    <Mutation
+      mutation={mutation}
+      variables={{
+        bookId: book.id,
+      }}
+    >
+      {
+        (createGame) => {
+          const _createGame = bookId => createGame(bookId)
+            .then(({ data }) =>
+              RouteService.goTo(RouteService.routes.playgame(data.createGame.id)))
+          return <Book {...props} book={book} onClick={bookId => _createGame(bookId)} />
+        }
+      }
+    </Mutation>
+  )
+}
+
 // TODO: error returns
 const PlayableBook = (props) => {
   const book = props.content
   const token = AuthService.getToken()
   if (!token) {
-    return (
-      <Mutation
-        mutation={mutation}
-        variables={{
-          bookId: book.id,
-        }}
-      >
-        {
-          (createGame) => {
-            const _createGame = bookId => createGame(bookId)
-              .then(({ data }) =>
-                RouteService.goTo(RouteService.routes.playgame(data.createGame.id)))
-            return <Book {...props} book={book} onClick={bookId => _createGame(bookId)} />
-          }
-        }
-      </Mutation>
-    )
+    return <CreateGameBook {...props} />
   }
   return (
     <Query
@@ -56,13 +61,14 @@ const PlayableBook = (props) => {
           let onClick = () => null
           if (data && data.lastGame && data.lastGame.id) {
             onClick = () => RouteService.goTo(RouteService.routes.playgame(data.lastGame.id))
+            return (
+              <Book
+                {...props} book={book}
+                onClick={onClick}
+              />
+            )
           }
-          return (
-            <Book
-              {...props} book={book}
-              onClick={onClick}
-            />
-          )
+          return <CreateGameBook {...props} />
         }
       }
     </Query>
