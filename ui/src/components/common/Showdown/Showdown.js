@@ -7,9 +7,11 @@ const Showdown = ({ book, onClick, BookComponent }) => {
   return (
     <div className={styles.component}>
       <div className={styles.grid}>
-        <BookWrapper>
-          <BookComponent content={book} />
-        </BookWrapper>
+        <div className={styles.center}>
+          <BookWrapper>
+            <BookComponent content={book} />
+          </BookWrapper>
+        </div>
         {
           <div className={styles.content}>
             <div className={styles.detailsWrapper}>

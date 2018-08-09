@@ -21,6 +21,13 @@
   }
 }
 
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .bookWrapper {
   position: relative;
   padding-bottom: 150%;
@@ -56,13 +63,4 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
-}
-
-.disabled {
-  background-color: $background-color-light-2;
-  color: $decorator-color;
-  cursor: not-allowed;
-  &:hover {
-    box-shadow: none;
-  } 
 }
