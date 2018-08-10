@@ -1,5 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
+import { withStateHandlers } from 'recompose'
 import gql from 'graphql-tag'
 import CommentaryInput from './CommentaryInput'
 
@@ -21,20 +22,36 @@ const mutation = gql`
   }
 `
 
-const CommentaryInputContainer = ({ bookId }) => (
+const CommentaryInputContainer = withStateHandlers(
+  {
+    comment: '',
+  },
+  {
+    onCommentChange: () => (comment) => ({ comment }),
+    onSubmit: ({ comment }, { addComment }) => (e) => {
+       e.preventDefault()
+       addComment(comment)
+       return { 
+         comment: ''
+       }
+    } 
+  }
+)(CommentaryInput)
+
+const CommentaryInputContainerGQL = ({ bookId, ...props }) => (
   <Mutation mutation={mutation}>
     {
       (addComment, state) => {
         const _addComment = comment => addComment({
           variables: {
             bookId,
-            ...comment,
+            text: comment,
           },
         })
-        return <CommentaryInput addComment={_addComment} state={state} />
+        return <CommentaryInputContainer {...props} addComment={_addComment} error={state.error && state.error.graphQLErrors && state.error.graphQLErrors[0] && state.error.graphQLErrors[0].message} />
       }
     }
   </Mutation>
 )
 
-export default CommentaryInputContainer
+export default CommentaryInputContainerGQL

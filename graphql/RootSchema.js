@@ -502,10 +502,13 @@ const resolvers = {
     updateGame: isAuth((_, { game }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game)),
     deleteGame: isAuth((_, { gameId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId }))),
     
-    addComment: isAuth((_, { bookId, text }, context) => findBookById(bookId).then(book => {
-      return book.addOne('commentaries', new Commentary({ text, authorId: context.user._id }))
-                 .save()
-    })),
+    addComment: isAuth((_, { bookId, text }, context) => {
+      if (!text) throw Error('Votre commentaire est vide')
+      return findBookById(bookId).then(book => {
+        return book.addOne('commentaries', new Commentary({ text, authorId: context.user._id }))
+                  .save()
+      })
+    }),
     deleteComment: isAuth((_, { bookId, commentId}, context) => findBookById(bookId).then(book => {
       return book.deleteOne('commentaries', commentId)
                  .save()

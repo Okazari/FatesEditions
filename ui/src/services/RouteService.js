@@ -56,7 +56,7 @@ class RouteService {
 
   redirect401 = () => {
     AuthService.logout()
-    browserHistory.replace({
+    browserHistory.push({
       pathname: this.routes.connection(),
       state: { isRedirected: true },
     })

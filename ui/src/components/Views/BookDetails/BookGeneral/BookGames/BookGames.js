@@ -1,3 +1,6 @@
+// WIP, Not routed yet
+// Should display a list of the Games made by user on this Book
+
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'

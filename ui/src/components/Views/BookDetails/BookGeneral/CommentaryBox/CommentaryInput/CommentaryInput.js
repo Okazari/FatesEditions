@@ -1,27 +1,21 @@
 import React from 'react'
-import { Form, TextAreaInput, Button } from 'components/common'
+import { Form, TextAreaInput, Button, Message } from 'components/common'
 
-const CommentaryInput = ({ addComment, state }) => (
-  <Form
-    onSubmit={(e) => {
-      e.preventDefault()
-      addComment({
-        text: e.target.text.value,
-      })
-    }}
-  >
+
+const CommentaryInput = ({ onSubmit, onCommentChange, onKeyPress, comment }) => (
+  <Form onSubmit={onSubmit}>
     <TextAreaInput
       label="Ajouter un commentaire"
       domProps={{
+        onChange: onCommentChange,
+        onKeyPress: e => (e.charCode === 13 && e.ctrlKey) && onSubmit(e),
         placeholder: 'Votre commentaire',
         name: 'text',
+        value: comment,
       }}
     />
-    {/* <Message
-      state={state}
-      errorMessage={'Une erreur est survenue'}
-      successMessage={'Votre message à bien été envoyé'}
-    /> */}
+    {/* {error && <ErrorMessage msg={error} />}
+    {success && <SuccessMessage msg={success} />} */}
     <Button>
       Envoyer
     </Button>

@@ -3,21 +3,18 @@ import styles from './style.scss'
 
 const Message = ({ state, errorMessage, successMessage }) => {
   const { error, data } = state
-  if (error) {
+  if (error && errorMessage) {
     return (
       <div className={styles.error}>
         {errorMessage}
       </div>
     )
   }
-  if (data) {
-    return (
-      <div className={styles.success}>
-        {successMessage}
-      </div>
-    )
-  }
-  return null
+  return (
+    <div className={styles.success}>
+      {successMessage}
+    </div>
+  )
 }
 
 export default Message

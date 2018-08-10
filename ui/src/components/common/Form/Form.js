@@ -6,7 +6,7 @@ const Form = ({ onSubmit, className, children }) => (
   <div className={styles.component}>
     <form
       className={classnames(styles.form, className)}
-      onSubmit={onSubmit}
+      onSubmit={(e) => e.preventDefault() || onSubmit(e)}
     >
       {children}
     </form>

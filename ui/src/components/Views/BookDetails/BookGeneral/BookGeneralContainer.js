@@ -38,6 +38,16 @@ const query = gql`
         min
         max
       }
+      commentaries {
+        id
+        text
+        lastModificationDate
+        creationDate
+        author {
+          id
+          username
+        }
+      }
     }
   }
 `

@@ -24,15 +24,14 @@ const Commentary = ({ commentary, deleteComment }) => {
         <div className={styles.date}>{date}</div>
       </div>
       <div className={styles.text}>{commentary.text}</div>
-      { user && user._id === commentary.author.id
-      ? (<ButtonIcon
-        icon="close"
-        className={styles.delete}
-        domProps={{
-          onClick: () => deleteComment({ commentId: commentary.id }),
-        }}
-      />)
-      : null
+      { user && user._id === commentary.author.id &&
+        <ButtonIcon
+          icon="close"
+          className={styles.delete}
+          domProps={{
+            onClick: () => deleteComment({ commentId: commentary.id }),
+          }}
+        />
       }
     </div>
   )

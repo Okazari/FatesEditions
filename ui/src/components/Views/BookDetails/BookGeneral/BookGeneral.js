@@ -6,7 +6,7 @@ import styles from './style.scss'
 const BookGeneral = ({ book }) => (
   <div className={styles.component}>
     <Showdown book={book} BookComponent={PlayableBook} />
-    <CommentaryBox book={book} />
+    <CommentaryBox bookId={book.id} />
   </div>
 )
 
