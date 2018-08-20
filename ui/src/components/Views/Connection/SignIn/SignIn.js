@@ -1,7 +1,7 @@
 import React from 'react'
-import { Input, Button, NarrowForm, Message } from 'components/common'
+import { Input, Button, NarrowForm, ErrorMessage } from 'components/common'
 
-const SignIn = ({ signIn, state }) => (
+const SignIn = ({ signIn, error, loading }) => (
   <NarrowForm
     onSubmit={(e) => {
       e.preventDefault()
@@ -27,15 +27,13 @@ const SignIn = ({ signIn, state }) => (
         name: 'password',
       }}
     />
-    <Message
-      state={state}
-      errorMessage={'Mauvais nom d\'utilisateur ou mot de passe'}
-      successMessage={'Connecté'}
-    />
+    {
+      error && <ErrorMessage>{'Mauvais nom d\'utilisateur ou mot de passe'}</ErrorMessage>
+    }
     <Button>
-      { !state.loading
-        ? 'CONNEXION'
-        : 'Chargement'
+      { loading
+        ? 'Chargement'
+        : 'CONNEXION'
       }
     </Button>
   </NarrowForm>

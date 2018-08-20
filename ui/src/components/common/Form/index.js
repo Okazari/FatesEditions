@@ -1,3 +1,4 @@
 export default from './Form'
-export Message from './Message'
+export ErrorMessage from './ErrorMessage'
+export SuccessMessage from './SuccessMessage'
 export NarrowForm from './NarrowForm'

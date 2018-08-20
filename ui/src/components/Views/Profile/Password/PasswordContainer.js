@@ -1,4 +1,3 @@
-//eslint-disable-next-line
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -23,13 +22,18 @@ const mutation = gql`
 const PasswordContainer = () => (
   <Mutation mutation={mutation}>
     {
-      (updatePassword, state) => {
+      (updatePassword, { loading, error, data }) => {
         const _updatePassword = passwordsData => updatePassword({
           variables: {
             ...passwordsData,
           },
         })
-        return <Password updatePassword={_updatePassword} state={state} />
+        return (<Password
+          updatePassword={_updatePassword}
+          error={error.graphQLErrors[0].message || ''}
+          success={data}
+          loading={loading}
+        />)
       }
     }
   </Mutation>

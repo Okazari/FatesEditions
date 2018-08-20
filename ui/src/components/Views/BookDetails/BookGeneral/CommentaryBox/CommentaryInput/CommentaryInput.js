@@ -1,8 +1,8 @@
 import React from 'react'
-import { Form, TextAreaInput, Button, Message } from 'components/common'
+import { Form, TextAreaInput, Button, ErrorMessage } from 'components/common'
 
 
-const CommentaryInput = ({ onSubmit, onCommentChange, onKeyPress, comment }) => (
+const CommentaryInput = ({ onSubmit, onCommentChange, comment, loading, error }) => (
   <Form onSubmit={onSubmit}>
     <TextAreaInput
       label="Ajouter un commentaire"
@@ -14,10 +14,12 @@ const CommentaryInput = ({ onSubmit, onCommentChange, onKeyPress, comment }) => 
         value: comment,
       }}
     />
-    {/* {error && <ErrorMessage msg={error} />}
-    {success && <SuccessMessage msg={success} />} */}
+    {error && <ErrorMessage>{error}</ErrorMessage>}
     <Button>
-      Envoyer
+      { loading
+        ? 'Chargement'
+        : 'Envoyer'
+      }
     </Button>
   </Form>
 )

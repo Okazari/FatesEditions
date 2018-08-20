@@ -1,6 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
-import { withStateHandlers } from 'recompose'
+import { withStateHandlers } from 'recompose'
 import gql from 'graphql-tag'
 import CommentaryInput from './CommentaryInput'
 
@@ -27,28 +27,33 @@ const CommentaryInputContainer = withStateHandlers(
     comment: '',
   },
   {
-    onCommentChange: () => (comment) => ({ comment }),
+    onCommentChange: () => comment => ({ comment }),
     onSubmit: ({ comment }, { addComment }) => (e) => {
-       e.preventDefault()
-       addComment(comment)
-       return { 
-         comment: ''
-       }
-    } 
-  }
+      e.preventDefault()
+      addComment(comment)
+      return {
+        comment: '',
+      }
+    },
+  },
 )(CommentaryInput)
 
 const CommentaryInputContainerGQL = ({ bookId, ...props }) => (
   <Mutation mutation={mutation}>
     {
-      (addComment, state) => {
+      (addComment, { loading, error }) => {
         const _addComment = comment => addComment({
           variables: {
             bookId,
             text: comment,
           },
         })
-        return <CommentaryInputContainer {...props} addComment={_addComment} error={state.error && state.error.graphQLErrors && state.error.graphQLErrors[0] && state.error.graphQLErrors[0].message} />
+        return (<CommentaryInputContainer
+          {...props}
+          addComment={_addComment}
+          loading={loading}
+          error={error.graphQLErrors[0].message || ''}
+        />)
       }
     }
   </Mutation>

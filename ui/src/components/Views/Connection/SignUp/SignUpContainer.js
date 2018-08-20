@@ -23,18 +23,20 @@ const mutation = gql`
 const SignUpContainer = () => (
   <Mutation mutation={mutation}>
     {
-      (signUp, state) => {
-        const { data } = state
-        if (data) {
-          AuthService.setToken(data.signUp)
-          RouteService.goTo(RouteService.routes.home())
-        }
+      (signUp, { loading, error }) => {
         const _signUp = signUpData => signUp({
           variables: {
             ...signUpData,
           },
+        }).then((data) => {
+          AuthService.setToken(data.signUp)
+          RouteService.goTo(RouteService.routes.home())
         })
-        return <SignUp signUp={_signUp} state={state} />
+        return (<SignUp
+          signUp={_signUp}
+          loading={loading}
+          error={error}
+        />)
       }
     }
   </Mutation>
