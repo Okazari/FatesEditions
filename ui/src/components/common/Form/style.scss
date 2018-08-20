@@ -1,0 +1,14 @@
+.component {
+  margin: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0 auto;
+
+  > div {
+    margin-bottom: 10px;
+  }
+}

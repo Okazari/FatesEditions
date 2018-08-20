@@ -3,9 +3,12 @@
 @import '~styles/animations';
 
 .component {
+  position: absolute;
   opacity: 0;
-  width: 100%;
-  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   border-radius: 2px;
@@ -32,16 +35,17 @@
 .coverImage {
   transition: transform $standard-duration;
   height: 100%;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-color: black;
 }
 
 .content {
-  position: relative;
-  bottom: 300px;
-  height: 300px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: flex-end;
 }

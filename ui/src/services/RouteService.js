@@ -1,11 +1,12 @@
 import { browserHistory } from 'react-router'
+import { AuthService } from 'services'
 
 class RouteService {
 
   routes = {
     oldprofile: () => '/old/profile',
-    signin: () => '/old/portal/signin',
-    signup: () => '/old/portal/signup',
+    oldsignin: () => '/old/portal/signin',
+    oldsignup: () => '/old/portal/signup',
     recover: () => '/old/portal/recover',
     playbook: () => '/old/play/books',
     playgames: () => '/old/play/games',
@@ -18,6 +19,8 @@ class RouteService {
     books: () => '/app/books',
     booksnews: () => '/app/books/news',
     bookslibrary: () => '/app/books/library',
+    book: bookId => `/app/books/${bookId}`,
+    bookgeneral: bookId => `/app/books/${bookId}/general`,
     mygames: () => '/app/mygames',
     mygameslist: () => '/app/mygames/list',
     playgame: gameId => `/app/play/${gameId}`,
@@ -35,16 +38,28 @@ class RouteService {
     writebookpagegeneral: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/general`,
     writebookpagecontent: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/content`,
     writebookpagetransitions: (bookId, pageId) => `/app/write/drafts/${bookId}/page/${pageId}/transitions`,
+    connection: () => '/app/connection',
+    signin: () => '/app/connection/signin',
+    signup: () => '/app/connection/signup',
     profile: () => '/app/profile',
     profilepassword: () => '/app/profile/password',
+    profiledisconnect: () => '/app/profile/disconnect',
   }
 
   goTo = (route) => {
     browserHistory.push(route)
   }
 
+  goBack = () => {
+    browserHistory.goBack()
+  }
+
   redirect401 = () => {
-    browserHistory.replace(this.routes.signin())
+    AuthService.logout()
+    browserHistory.push({
+      pathname: this.routes.connection(),
+      state: { isRedirected: true },
+    })
   }
 }
 

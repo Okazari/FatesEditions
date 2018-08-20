@@ -7,8 +7,10 @@ const User = require('../models/UserModel')
 const Effect = require('../models/EffectModel')
 const Transition = require('../models/TransitionModel')
 const ObjectModel = require('../models/ObjectModel')
-const Game = require('../models/GameModel.js')
+const Game = require('../models/GameModel')
+const Commentary = require('../models/CommentaryModel')
 const SHA512 = require('crypto-js/sha512')
+const jwt = require('jsonwebtoken')
 
 const bookType = `
   name: String
@@ -67,6 +69,13 @@ const gameType = `
   lastModificationDate : String
 `
 
+const commentaryType = `
+  text: String!
+  authorId: ID
+  creationDate : String
+  lastModificationDate : String
+`
+
 const typeDefs = `
   scalar MAP
 
@@ -77,6 +86,7 @@ const typeDefs = `
     stats: [Stat]
     objects: [Object]
     pages: [Page]
+    commentaries: [Commentary]
   }
 
   type User {
@@ -161,7 +171,13 @@ const typeDefs = `
     stats: MAP
     objects: [ID]
   }
-  
+
+  type Commentary {
+    id: ID
+    ${commentaryType}
+    author: User
+  }
+
   type Query {
     books(author: ID, draft: Boolean): [Book]
     showdown: Book
@@ -171,6 +187,7 @@ const typeDefs = `
     tryGame(bookId: ID!): Game
     games: [Game]
     game(gameId: ID!): Game
+    lastGame(bookId: ID!): Game
   }
 
   type Mutation {
@@ -213,12 +230,17 @@ const typeDefs = `
     updateGame(game: GameInput!): Game
     deleteGame(gameId: ID!): User
     
+    addComment(bookId: ID! text: String!): Book
+    deleteComment(bookId: ID!, commentId: ID!): Book
+
+    signIn(username: String!, password: String!): String
+    signUp(username: String, email: String, password: String, confirmation: String): String
     updatePassword(oldPassword: String!, newPassword: String!, confirmation: String!): User
   }
-  `
-  const easier = (ressource, save) => {
-    const newSave = () => save().then(() => ressource)
-    return {
+`
+const easier = (ressource, save) => {
+  const newSave = () => save().then(() => ressource)
+  return {
     ressource,
     save: newSave,
     set: newValues => easier(Object.assign(ressource, newValues), save),
@@ -276,12 +298,12 @@ const isAuth = resolver => (obj, args = {}, context, info) => {
 const resolvers = {
   MAP: GraphQLJSON,
   Query: {
-    book: isAuth((obj, args = {}, context, info) => {
+    book: (obj, args = {}, context, info) => {
       const { id } = args
       const filters = {}
       if (id) filters._id = id
       return Book.findOne(filters)
-    }),
+    },
     showdown: (obj, args = {}, context, info) => {
       return Book.findOne({name: 'Deux mille deux cent vingt deux'})
     },
@@ -298,10 +320,20 @@ const resolvers = {
     tryGame: isAuth((_, { bookId }) => Book.findById(bookId).then(generateGame)),
     games: isAuth((_, {}, context) => Game.find({ playerId: context.user.id })),
     game: isAuth((_, { gameId }) => Game.findById(gameId)),
+    lastGame: isAuth((_, { bookId }, context) => {
+      return Game.find({ playerId: context.user._id, 'book._id': { _id: bookId } })
+                 .sort({ lastModificationDate: -1 })
+                 .then(games => games[0])
+    }),
   },
   Book: {
     author: (book) => {
       return User.findById(book.authorId)
+    }
+  },
+  Commentary: {
+    author: (commentary) => {
+      return User.findById(commentary.authorId)
     }
   },
   User: {
@@ -324,7 +356,17 @@ const resolvers = {
     }),
     updateBook: isAuth((_, { book }) => Book.findByIdAndUpdate(book.id, book, { new: true })),
     deleteBook: isAuth((_, { id }) => Book.findByIdAndRemove(id).then(book => ({ id: book.authorId }))),
-    publishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: false }, { new: true }).then(book => ({ id: book.authorId }))),
+    publishBook: isAuth((_, { id }) => findBookById(id).then(book => {
+      const startingPage = book.ressource.pages.find(page => {
+        console.log('page.id: ', page.id)
+        console.log('startingPageId: ', book.ressource.startingPageId)
+        return page.id == book.ressource.startingPageId
+      })
+      if (!startingPage) throw new Error('La page de début est manquante')
+      book.ressource.draft = false 
+      return book.save().then(book => ({ id: book.authorId }))
+    })
+  ),
     unpublishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }).then(book => ({ id: book.authorId }))),
 
     createStat: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
@@ -459,6 +501,50 @@ const resolvers = {
       .then(game => new Game(game).save())),
     updateGame: isAuth((_, { game }) => Game.findByIdAndUpdate(game.id, game, { new: true }).then(game => game)),
     deleteGame: isAuth((_, { gameId }) => Game.findByIdAndRemove(gameId).then(game => ({ id: game.playerId }))),
+    
+    addComment: isAuth((_, { bookId, text }, context) => {
+      if (!text) throw Error('Votre commentaire est vide')
+      return findBookById(bookId).then(book => {
+        return book.addOne('commentaries', new Commentary({ text, authorId: context.user._id }))
+                  .save()
+      })
+    }),
+    deleteComment: isAuth((_, { bookId, commentId}, context) => findBookById(bookId).then(book => {
+      return book.deleteOne('commentaries', commentId)
+                 .save()
+    })), 
+
+    signIn: (_, { username, password }) => User.findOne({ username }).then(user => {
+      if (user.password != SHA512(password).toString()
+        || !username 
+        || !password
+      ) throw new Error('Error')
+      user.password = null
+      // TODO Export secret in Config
+      return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+    }),
+
+    signUp: (_, args) => {
+      const { username, email, password, confirmation } = args
+      console.log(args)
+      const empty = !username || !email || !password || !confirmation
+      const isEmail = /(.+)@(.+){2,}\.(.+){2,}/.test(email)
+      const passwordMatch = password === confirmation
+      if (empty) throw new Error('Un ou plusieurs champs sont vides')
+      if (!isEmail) throw new Error('Adresse email invalide')
+      if (!passwordMatch) throw new Error('Les deux mots de passe ne correspondent pas')
+      User.findOne({ username }).then(user => {
+        if (!user) throw new Error('Nom d\'utilisateur déjà pris')
+      })
+      return new User({
+        username,
+        email,
+        password,
+      }).save().then(user => {
+        user.password = null
+        return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+      })
+    },
 
     updatePassword: isAuth((_, { oldPassword, newPassword, confirmation }, context) => {
       const paramsNotEmpty = oldPassword === '' || newPassword === '' || confirmation === ''

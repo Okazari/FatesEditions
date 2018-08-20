@@ -1,0 +1,66 @@
+@import "~styles/colors";
+@import "~styles/sizes";
+@import "~styles/mixins";
+@import "~styles/responsive";
+
+.component {
+  margin: 20px 20px 0 20px;
+  border-bottom: solid 1px $decorator-color;
+}
+
+.grid {
+  margin: 0 auto;
+  padding-bottom: 20px;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 300px minmax(200px, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 20px;
+  @media #{$mobile} {
+    grid-template-columns: 1fr;
+  }
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookWrapper {
+  position: relative;
+  padding-bottom: 150%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.author {
+  margin-bottom: 30px;
+}
+
+.synopsis {
+  margin: 10px 0;
+  text-align: justify;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.buttons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}

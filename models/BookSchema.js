@@ -1,7 +1,8 @@
 const { Schema } = require('mongoose')
 const Page = require('./PageSchema')
 const Stat = require('./StatSchema')
-const Object = require('./ObjectSchema')
+const Item = require('./ObjectSchema')
+const Commentary = require('./CommentarySchema')
 
 const Book = new Schema({
   name: String,
@@ -15,7 +16,8 @@ const Book = new Schema({
   revision: { type: Number, default: 0 },
   pages: [Page],
   stats: [Stat],
-  objects: [Object],
+  objects: [Item],
+  commentaries: [Commentary],
   creationDate: { type: Date, default: Date.now },
   lastModificationDate: { type: Date, default: Date.now },
 })

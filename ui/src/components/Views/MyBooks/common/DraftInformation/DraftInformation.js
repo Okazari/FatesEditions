@@ -46,7 +46,6 @@ class DraftInformation extends React.Component {
                   onChange: cover => updateResource({ ...book, cover }),
                   placeholder: "url de l'image de couverture",
                   disabled,
-                  required: true,
                 }}
               >
                 <span>URL</span>
@@ -62,13 +61,11 @@ class DraftInformation extends React.Component {
                   type: 'text',
                   placeholder: 'Titre du livre',
                   disabled,
-                  required: true,
                 }}
               />
               <GenreList
                 domProps={{
                   value: book.genreId,
-                  required: true,
                   onChange: genreId => updateResource({ ...book, genreId }),
                 }}
               />
@@ -79,14 +76,12 @@ class DraftInformation extends React.Component {
                   value: book.synopsis,
                   onChange: synopsis => updateResource({ ...book, synopsis }),
                   placeholder: 'Synopsis du livre',
-                  required: true,
                 }}
               />
               <PageList
                 query={{ bookId: book._id }}
                 domProps={{
                   value: book.startingPageId,
-                  required: true,
                   onChange: startingPageId => updateResource({ ...book, startingPageId }),
                 }}
               />

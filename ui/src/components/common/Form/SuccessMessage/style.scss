@@ -1,0 +1,9 @@
+@import '~styles/colors';
+
+.success {
+  padding: 5px;
+  background-color: $background-sucess;
+  color: $white;
+  text-align: center;
+  border-radius: 5px;
+}

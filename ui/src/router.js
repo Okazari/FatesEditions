@@ -22,10 +22,12 @@ import WriteDraft, {
   PageContent,
   PageTransition,
 } from './components/Views/Write'
-import Portal, { SignIn, SignUp, Recover } from './components/Portal'
+import Portal, { SignIn as OldSignIn, SignUp as OldSignUp, Recover } from './components/Portal'
 import { MyGames, GamesList } from './components/Views/MyGames'
 import { GameView, TrialView } from './components/Views'
-import Profile, { Password } from './components/Views/Profile'
+import Profile, { Password, Disconnect } from './components/Views/Profile'
+import Connection, { SignIn, SignUp } from './components/Views/Connection'
+import BookDetails, { BookGeneral } from './components/Views/BookDetails'
 
 // OLD LAYOUT
 import App from './components/Old/App'
@@ -45,6 +47,10 @@ const AppRouter = () => {
               <IndexRedirect to="news" />
               <Route path="news" component={News} />
               <Route path="library" component={Library} />
+            </Route>
+            <Route path="books/:bookId" component={BookDetails}>
+              <IndexRedirect to="general" />
+              <Route path="general" component={BookGeneral} />
             </Route>
             <Route path="mygames" component={MyGames}>
               <IndexRedirect to="list" />
@@ -74,14 +80,20 @@ const AppRouter = () => {
             <Route path="profile" component={Profile}>
               <IndexRedirect to="password" />
               <Route path="password" component={Password} />
+              <Route path="disconnect" component={Disconnect} />
+            </Route>
+            <Route path="connection" component={Connection}>
+              <IndexRedirect to="signin" />
+              <Route path="signin" component={SignIn} />
+              <Route path="signup" component={SignUp} />
             </Route>
           </Route>
           <Route path="old">
             <IndexRedirect to="portal" />
             <Route path="portal" component={Portal}>
               <IndexRedirect to="signin" />
-              <Route path="signin" component={SignIn} />
-              <Route path="signup" component={SignUp} />
+              <Route path="signin" component={OldSignIn} />
+              <Route path="signup" component={OldSignUp} />
               <Route path="recover" component={Recover} />
             </Route>
             <Route component={GameView} path="game/:gameId" />

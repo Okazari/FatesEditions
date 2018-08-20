@@ -1,73 +1,19 @@
 @import '~styles/colors';
 @import '~styles/sizes';
+@import '~styles/mixins';
+@import '~styles/responsive';
 
-// @keyframes slidein {
-//   0% { left: 50vw; width: 0 }
-//   100% { left: 0; width: 100vw }
-// }
-
-// @keyframes fadein {
-//   0% { opacity: 0; }
-//   100% { opacity: 1;  }
-// }
-
-// $openbook: .75s;
-// $fadein: .5s;
-
-.wrapper {
-  position: fixed;
+.content {
+  @include scrollbar();
+  box-sizing: border-box;
+  color: $dark-font-color;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  background-color: $dark-background-color-2;
   display: flex;
-  // background-image: url('https://static.wixstatic.com/media/ed3f4a_be98fafaf91c456fb59d21214c7c5c0d.jpg/v1/fill/w_977,h_794,al_c,q_85,usm_0.66_1.00_0.01/ed3f4a_be98fafaf91c456fb59d21214c7c5c0d.jpg');
-  // background-position: center;
-  // background-size: cover;
-  height: 100vh;
-  z-index: 1050;
-  top: 0;
-  width: $content-size;
-  // animation: slidein $openbook;
-
-  // .rightSide {
-  //   display: flex;
-  //   flex: 50%;
-  //   height: 100vh;
-  // }
-
-  // .leftSide {
-  //   display: flex;
-  //   flex: 50%;
-  //   height: 100vh;
-  // }
-
-  .content {
-    box-sizing: border-box;
-    color: $dark-font-color;
-    width: 100%;
-    padding: 50px;
-    background-color: $dark-background-color-2;
-    display: flex;
-    text-align: justify;
-    justify-content: center;
-    font-size: 1.5em;
-    overflow-y: scroll;
-
-    // .close {
-    //   opacity: 0;
-    //   position: absolute;
-    //   right: 40px;
-    //   cursor: pointer;
-    //   animation: fadein $fadein;
-    //   animation-fill-mode: forwards;
-    //   animation-delay: $openbook;
-    //   top: 10px;
-    // }
-
-    // .mainText {
-    //   opacity: 0;
-    //   max-width: 70%;
-    //   animation: fadein $fadein;
-    //   animation-fill-mode: forwards;
-    //   animation-delay: $openbook;
-    //   text-align: justify;
-    // }
-  }
+  text-align: justify;
+  justify-content: center;
+  font-size: 1.5em;
+  overflow: auto;
 }

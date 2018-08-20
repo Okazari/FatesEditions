@@ -1,33 +1,8 @@
 class AuthService {
-
-  getConnectedUserId = () => {
-    if (this.connectedUserId) return this.connectedUserId
+  getUser = () => {
     const token = this.getToken()
-    if (!token) return ''
-    const [, payload] = token.split('.')
-    const { user: { _id } } = JSON.parse(atob(payload))
-    this.connectedUserId = _id
-    return _id
-  }
-
-  login = (credentials) => {
-    return fetch('/api/login', {
-      method: 'POST',
-      body: JSON.stringify(credentials),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-  }
-
-  subscribe = (credentials) => {
-    return fetch('/api/subscribe', {
-      method: 'POST',
-      body: JSON.stringify(credentials),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    if (!token) return undefined
+    return JSON.parse(window.atob(token.split('.')[1])).user
   }
 
   setToken = (token) => {
@@ -39,7 +14,7 @@ class AuthService {
   }
 
   removeToken = () => {
-    window.localStorage.setItem('auth-token', null)
+    window.localStorage.setItem('auth-token', '')
   }
 
   logout = () => {

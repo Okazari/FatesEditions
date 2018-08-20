@@ -4,14 +4,16 @@
   $size: 2px;
   $foreground-color: $decorator-color;
   $background-color: $white;
+  
+  -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
-      width:  $size;
-      height: $size;
+    width:  $size;
+    height: $size;
   }
 
   &::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background: $foreground-color;
+    border-radius: 10px;
+    background-color: $foreground-color;
   }
 }

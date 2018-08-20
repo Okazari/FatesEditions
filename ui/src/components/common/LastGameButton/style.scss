@@ -1,0 +1,14 @@
+@import '~styles/colors';
+
+.disabled {
+  background-color: $background-color-light-2;
+  color: $decorator-color;
+  cursor: not-allowed;
+  &:hover {
+    box-shadow: none;
+  } 
+}
+
+.abled {
+
+}

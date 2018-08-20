@@ -23,16 +23,13 @@ class DraftPublication extends React.Component {
       this.setState({ percentage: percentage + 20 })
     } else {
       clearInterval(this.interval)
-      if (!draft.startingPageId) this.setState({ error: true })
-      else {
-        onPublishBook(draft.id)
-      }
+      onPublishBook(draft.id)
     }
   }
 
   render() {
-    const { draft } = this.props
-    const { percentage, error } = this.state
+    const { draft, error } = this.props
+    const { percentage } = this.state
     let progressBarStyle = ''
 
     if (percentage >= 100) {
@@ -69,7 +66,7 @@ class DraftPublication extends React.Component {
               Votre livre ne peux pas être publié en {"l'état"}.
               Actuellement la seule raison est {"d'avoir"} oublié de
               <span className={styles.emphasis}>définir une page de début à votre livre.</span>
-              Si ce {"n'est"} pas le cas merci de contacter {"l'administrateur"}.
+              Si ce {"n'est"} pas le cas merci de contacter {"l'administrateur"} à {"l'adresse"} fateseditions@gmail.com.
             </div>
           </div>
         }

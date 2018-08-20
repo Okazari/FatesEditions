@@ -78,7 +78,7 @@ class SignIn extends React.Component {
             <AdviceLink
               advice="Pas encore de compte ?"
               label="Inscris toi !"
-              link={RouteService.routes.signup()}
+              link={RouteService.routes.oldsignup()}
             />
             <AdviceLink
               advice="Nom d'utilisateur/Mot de passe oublié ?"

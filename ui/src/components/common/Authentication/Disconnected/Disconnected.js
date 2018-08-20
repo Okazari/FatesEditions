@@ -1,13 +1,9 @@
-import React from 'react'
+import { AuthService } from 'services'
 
 const Disconnected = ({ children }) => {
-  const connected = localStorage.getItem('auth-token')
+  const connected = AuthService.getToken()
   if (connected) return null
-  return (
-    <div>
-      {children}
-    </div>
-  )
+  return children
 }
 
 export default Disconnected

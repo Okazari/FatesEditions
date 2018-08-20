@@ -1,8 +1,15 @@
 @import '~styles/colors';
+@import '~styles/sizes';
+@import '~styles/responsive';
 
 .component {
   position: relative;
   width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
+  @media #{$mobile} {
+    padding: 0 10px;
+  }
 }
 
 .name {
@@ -10,7 +17,8 @@
 }
 
 .hover {
-
+  max-height: $toolbar-mobile-size;
+  overflow: hidden;
 }
 
 .description {
@@ -26,6 +34,12 @@
   z-index: 99999;
   border-radius: 4px;
   min-width: 600%;
+  @media #{$mobile} {
+    top: unset;
+    bottom: 160%;
+    left: 0;
+    min-width: 300%;
+  }
 }
 
 .description::before {
@@ -39,6 +53,11 @@
   border-right: 10px solid $dark-background-color-3;
   border-bottom: 7px solid transparent;
   transform: translate(0, -50%);
+  @media #{$mobile} {
+    top: 99%;
+    left: 34px;
+    transform: rotate(-0.25turn);
+  }
 }
 
 .hover:hover ~ .description {

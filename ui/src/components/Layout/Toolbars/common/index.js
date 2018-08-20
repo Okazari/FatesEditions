@@ -1,2 +1,7 @@
 export DisplayStats from './DisplayStats'
 export DisplayObjects from './DisplayObjects'
+export Toolbar from './Toolbar'
+export ToolbarLogo from './ToolbarLogo'
+export ToolbarTop from './ToolbarTop'
+export ToolbarBottom from './ToolbarBottom'
+export ExitButton from './ExitButton'

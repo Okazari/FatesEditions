@@ -7,6 +7,9 @@ const PageTransition = ({ book, page, addTransition, removeTransition }) => {
   if (!page) return null
   return (
     <div className={styles.component}>
+      <Button className="md-whiteframe-z1" domProps={{ onClick: addTransition }}>
+        {'Ajouter une transition'}
+      </Button>
       {
         page.transitions && page.transitions.map((transition, index) =>
           <TransitionRow
@@ -19,9 +22,6 @@ const PageTransition = ({ book, page, addTransition, removeTransition }) => {
           />,
         )
       }
-      <Button className="md-whiteframe-z1" domProps={{ onClick: addTransition }}>
-        {'Ajouter une transition'}
-      </Button>
     </div>
   )
 }

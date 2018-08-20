@@ -1,8 +1,7 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import BookGrid from 'components/common/BookGrid'
-import PlayableBook from '../common/PlayableBook'
+import { BookGrid, ToDetailsBook } from 'components/common'
 
 const query = gql`
   query {
@@ -26,7 +25,7 @@ const LibraryContainer = () => {
       fetchPolicy={'cache-and-network'}
     >
       {
-        ({ data: { books } }) => <BookGrid tilesList={books} TileComponent={PlayableBook} />
+        ({ data: { books } }) => <BookGrid tilesList={books} TileComponent={ToDetailsBook} />
       }
     </Query>
   )

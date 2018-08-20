@@ -50,7 +50,7 @@ const GameTransitionContainer = (props) => {
       mutation={mutation}
     >
       {
-        (saveGame, { loading, error }) => {
+        (saveGame) => {
           const updateGame = () => GameService.changePageAndApplyEffects(game, transitionId)
           const _saveGame = gameToSave => saveGame({ variables: {
             game: gameToSave,
@@ -60,10 +60,10 @@ const GameTransitionContainer = (props) => {
             delete updatedGame.book
             delete updatedGame.__typename
             dispatch(setGame(updatedGame))
-            _saveGame(updatedGame)
+            if (updatedGame.id !== null) {
+              _saveGame(updatedGame)
+            }
           }
-          if (loading) return null
-          // if (error) return null
           return (
             <GameTransition
               {...props}
