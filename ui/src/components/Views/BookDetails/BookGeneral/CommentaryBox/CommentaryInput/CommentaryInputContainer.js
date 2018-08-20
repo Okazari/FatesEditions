@@ -52,7 +52,7 @@ const CommentaryInputContainerGQL = ({ bookId, ...props }) => (
           {...props}
           addComment={_addComment}
           loading={loading}
-          error={error.graphQLErrors[0].message || ''}
+          error={error && error.graphQLErrors[0].message}
         />)
       }
     }
