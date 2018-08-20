@@ -1,6 +1,6 @@
 import React from 'react'
 import sizeMe from 'react-sizeme'
-import { Loader, BookWrapper } from 'components/common'
+import { BookWrapper } from 'components/common'
 import styles from './style.scss'
 
 const BookGrid = ({
@@ -12,7 +12,7 @@ const BookGrid = ({
 }) => {
   // Width - padding(10) - grid-gap(10) / minimum-book-size(200) + grid-gap(10)x2
   const nbColumns = Math.floor((size.width - 20) / 220)
-  if (!tilesList) return <Loader />
+  if (!tilesList) return null
   return (
     <div className={styles.list}>
       { !!FirstTileComponent &&

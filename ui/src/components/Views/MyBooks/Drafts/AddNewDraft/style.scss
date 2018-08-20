@@ -3,12 +3,6 @@
 @import '~styles/sizes';
 @import '~styles/mixins';
 
-.list {
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: flex-start;
-}
-
 .newBook {
   position: absolute;
   top: 0;
@@ -27,26 +21,6 @@
   @media (hover:hover) {
     &:hover {
       transform: scale(0.98);
-    }
-  }
-}
-
-.delete {
-  position: relative;
-  height: 0;
-  width: 100%;
-  .action {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    right: 0;
-    z-index: 100;
-    margin: 5px;
-    box-shadow: $box-shadow-1;
-    transition: box-shadow ease-in 100ms;
-    cursor: pointer;
-    &:hover {
-      box-shadow: $box-shadow-2;
     }
   }
 }
