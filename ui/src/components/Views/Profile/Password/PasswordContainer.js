@@ -28,12 +28,14 @@ const PasswordContainer = () => (
             ...passwordsData,
           },
         })
-        return (<Password
-          updatePassword={_updatePassword}
-          error={error.graphQLErrors[0].message || ''}
-          success={data}
-          loading={loading}
-        />)
+        return (
+          <Password
+            updatePassword={_updatePassword}
+            error={error && error.graphQLErrors[0].message}
+            success={data}
+            loading={loading}
+          />
+        )
       }
     }
   </Mutation>
