@@ -61,6 +61,20 @@ const deleteBookMutation = gql`
   }
 `
 
+const publishBookMutation = gql`
+  mutation publishBook($id: ID!) {
+    publishBook(id: $id) {
+      id
+      publications {
+        id
+      }
+      drafts {
+        id
+      }
+    }
+  }
+`
+
 const DraftGeneralContainer = (props) => {
   return (
     <Query
@@ -70,9 +84,8 @@ const DraftGeneralContainer = (props) => {
       }}
     >
       {
-        ({ loading, error, data }) => {
+        ({ loading, data }) => {
           if (loading) return <Loader />
-          if (error) return null
           const { book } = data
           return (
             <Mutation
@@ -100,11 +113,30 @@ const DraftGeneralContainer = (props) => {
                             RouteService.goTo(RouteService.routes.writedrafts())
                           })
                           return (
-                            <DraftGeneral
-                              book={book}
-                              updateBook={_updateBook}
-                              deleteBook={_deleteBook}
-                            />
+                            <Mutation
+                              mutation={publishBookMutation}
+                            >
+                              {
+                                (publishBook, { error }) => {
+                                  const _publishBook = id => publishBook({
+                                    variables: {
+                                      id,
+                                    },
+                                  }).then(() => {
+                                    RouteService.goTo(RouteService.routes.book(id))
+                                  })
+                                  return (
+                                    <DraftGeneral
+                                      book={book}
+                                      updateBook={_updateBook}
+                                      deleteBook={_deleteBook}
+                                      publishBook={_publishBook}
+                                      error={error}
+                                    />
+                                  )
+                                }
+                              }
+                            </Mutation>
                           )
                         }
                       }

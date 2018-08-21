@@ -76,8 +76,6 @@ module.exports = {
     deleteBook: isAuth((_, { id }) => Book.findByIdAndRemove(id).then(book => ({ id: book.authorId }))),
     publishBook: isAuth((_, { id }) => findBookById(id).then(book => {
       const startingPage = book.ressource.pages.find(page => {
-        console.log('page.id: ', page.id)
-        console.log('startingPageId: ', book.ressource.startingPageId)
         return page.id == book.ressource.startingPageId
       })
       if (!startingPage) throw new Error('La page de début est manquante')
