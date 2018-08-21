@@ -5,7 +5,7 @@ import styles from './style.scss'
 
 const Showdown = ({ book, onClick, BookComponent, unpublishBook, unpublishable }) => {
   if (!book) return <Loader />
-  const isAuthor = AuthService.getUser()._id === book.author.id
+  const isAuthor = AuthService.getUser() && AuthService.getUser()._id === book.author.id
   return (
     <div className={styles.component}>
       <div className={styles.grid}>

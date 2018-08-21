@@ -1,15 +1,16 @@
 import React from 'react'
-import { Button,
+import {
+  Button,
   Input,
   Book,
   BookWrapper,
   TextAreaInput,
-  AlertMessage,
-  Emphasis,
 } from 'components/common'
 import { RouteService } from 'services'
 import GenreList from './GenreList'
 import PageList from './PageList'
+import DeleteButton from './DeleteButton'
+import PublishButton from './PublishButton'
 import styles from './styles.scss'
 
 const tryGame = book => RouteService.goTo(RouteService.routes.trialgame(book.id))
@@ -18,7 +19,6 @@ const DraftGeneral = ({
   book,
   genres,
   updateBook,
-  deleteBook,
   publishBook,
   loading,
   error,
@@ -80,52 +80,8 @@ const DraftGeneral = ({
             placeholder: 'Synopsis du livre',
           }}
         />
-        {
-          error
-          ? (
-            <AlertMessage title={'Format de livre incorrect !'}>
-              Votre livre ne peux pas être publié en {"l'état"}.
-              Actuellement la seule raison est {"d'avoir"} oublié de
-              <Emphasis>définir une page de début à votre livre.</Emphasis>
-              Si ce {"n'est"} pas le cas merci de contacter {"l'administrateur"} à {"l'adresse"} fateseditions@gmail.com.
-            </AlertMessage>
-          )
-          : (
-            <AlertMessage title={'Information importante'}>
-              <Emphasis>Publier</Emphasis>
-              votre brouillon déplacera celui-ci dans la section
-              <Emphasis>Mes livres publiés.</Emphasis>
-              Les autres membres pourrons alors trouver votre
-              histoire dans la liste des
-              <Emphasis>livres jouables.</Emphasis>
-              Il ne sera dès lors
-              <Emphasis>plus éditable</Emphasis>
-              à moins de le repasser en brouillon.
-            </AlertMessage>
-          )
-        }
-        <Button
-          domProps={{ onClick: () => publishBook(book.id) }}
-          className={styles.publish}
-        >
-          {
-            loading
-            ? 'Chargement'
-            : 'Publier mon brouillon'
-          }
-        </Button>
-        <AlertMessage title={'Attention !'}>
-          <Emphasis>Supprimer</Emphasis>
-          votre brouillon supprimera celui-ci
-          <Emphasis>définitivement</Emphasis>
-          et de manière<Emphasis>irréversible.</Emphasis>
-        </AlertMessage>
-        <Button
-          domProps={{ onClick: () => deleteBook(book.id) }}
-          className={styles.delete}
-        >
-          Supprimer mon brouillon
-        </Button>
+        <PublishButton bookId={book.id} />
+        <DeleteButton bookId={book.id} />
       </div>
     </div>
   )

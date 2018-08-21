@@ -2,7 +2,6 @@ import React from 'react'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Loader } from 'components/common'
-import { RouteService } from 'services'
 import DraftGeneral from './DraftGeneral'
 
 const query = gql`
@@ -31,7 +30,7 @@ const query = gql`
 `
 
 
-const updateBookMutation = gql`
+const mutation = gql`
   mutation updateBook($book: BookInput!) {
     updateBook(book: $book) {
       id
@@ -40,37 +39,6 @@ const updateBookMutation = gql`
       genreId
       synopsis
       startingPageId
-    }
-  }
-`
-
-const deleteBookMutation = gql`
-  mutation DeleteBook ($id: ID!) {
-    deleteBook(id: $id) {
-      id
-      drafts {
-        id
-        name
-        cover
-        author {
-          id
-          username
-        }
-      }
-    }
-  }
-`
-
-const publishBookMutation = gql`
-  mutation publishBook($id: ID!) {
-    publishBook(id: $id) {
-      id
-      publications {
-        id
-      }
-      drafts {
-        id
-      }
     }
   }
 `
@@ -89,7 +57,7 @@ const DraftGeneralContainer = (props) => {
           const { book } = data
           return (
             <Mutation
-              mutation={updateBookMutation}
+              mutation={mutation}
             >
               {
                 (updateBook) => {
@@ -102,45 +70,10 @@ const DraftGeneralContainer = (props) => {
                     },
                   })
                   return (
-                    <Mutation
-                      mutation={deleteBookMutation}
-                    >
-                      {
-                        (deleteBook) => {
-                          const _deleteBook = id => deleteBook({
-                            variables: { id },
-                          }).then(() => {
-                            RouteService.goTo(RouteService.routes.writedrafts())
-                          })
-                          return (
-                            <Mutation
-                              mutation={publishBookMutation}
-                            >
-                              {
-                                (publishBook, { error }) => {
-                                  const _publishBook = id => publishBook({
-                                    variables: {
-                                      id,
-                                    },
-                                  }).then(() => {
-                                    RouteService.goTo(RouteService.routes.book(id))
-                                  })
-                                  return (
-                                    <DraftGeneral
-                                      book={book}
-                                      updateBook={_updateBook}
-                                      deleteBook={_deleteBook}
-                                      publishBook={_publishBook}
-                                      error={error}
-                                    />
-                                  )
-                                }
-                              }
-                            </Mutation>
-                          )
-                        }
-                      }
-                    </Mutation>
+                    <DraftGeneral
+                      book={book}
+                      updateBook={_updateBook}
+                    />
                   )
                 }
               }
