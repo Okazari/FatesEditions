@@ -5,7 +5,11 @@ import styles from './style.scss'
 
 const BookGeneral = ({ book }) => (
   <div className={styles.component}>
-    <Showdown book={book} BookComponent={PlayableBook} />
+    <Showdown
+      book={book}
+      BookComponent={PlayableBook}
+      unpublishable
+    />
     <CommentaryBox bookId={book.id} />
   </div>
 )

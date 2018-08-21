@@ -85,7 +85,7 @@ module.exports = {
       return book.save().then(book => ({ id: book.authorId }))
     })
   ),
-    unpublishBook: isAuth((_, { id }) => Book.findByIdAndUpdate(id, { draft: true }, { new: true }).then(book => ({ id: book.authorId }))),
+    unpublishBook: isAuth((_, { id }, context) => Book.findOneAndUpdate({ _id: id, authorId: context.user._id }, { draft: true }, { new: true }).then(book => ({ id: book.authorId }))),
 
     createStat: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
       return book.addOne('stats', new Stat())

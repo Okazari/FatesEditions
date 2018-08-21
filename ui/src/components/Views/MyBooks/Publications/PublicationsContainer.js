@@ -29,46 +29,20 @@ const queryOptions = {
   }),
 }
 
-const mutation = gql`
-  mutation unpublishBook($id: ID!) {
-    unpublishBook(id: $id) {
-      id
-      publications {
-        id
-      }
-      drafts {
-        id
-      }
-    }
-  }
-`
+const BookTile = ({ showDelay, content }) => (
+  <ToDetailsBook
+    showDelay={showDelay}
+    content={content}
+  />
+)
 
-const mutationOptions = {
-  name: 'unpublishBook',
-}
-
-const BookTile = ({ showDelay, content, onDelete }) => (<ToDetailsBook
-  showDelay={showDelay}
-  content={content}
-  onDelete={() => onDelete(content.id)}
-/>)
-
-const PublicationsContainer = ({ unpublishBook, author = {} }) => {
-  const _unpublishBook = id => unpublishBook({
-    variables: {
-      id,
-    },
-  })
-  return (
-    <BookGrid
-      tilesList={author && author.publications}
-      TileComponent={BookTile}
-      onDelete={_unpublishBook}
-    />
-  )
-}
+const PublicationsContainer = ({ author = {} }) => (
+  <BookGrid
+    tilesList={author && author.publications}
+    TileComponent={BookTile}
+  />
+)
 
 export default compose(
   graphql(query, queryOptions),
-  graphql(mutation, mutationOptions),
 )(PublicationsContainer)
