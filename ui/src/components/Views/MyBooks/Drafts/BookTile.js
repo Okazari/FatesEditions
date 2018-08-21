@@ -6,12 +6,11 @@ const editDraft = (draftId) => {
   RouteService.goTo(RouteService.routes.writebook(draftId))
 }
 
-const BookTile = ({ showDelay, content, onDelete }) => (
+const BookTile = ({ showDelay, content }) => (
   <Book
     showDelay={showDelay}
     book={content}
     onClick={() => editDraft(content.id)}
-    onDelete={() => onDelete(content.id)}
   />
 )
 

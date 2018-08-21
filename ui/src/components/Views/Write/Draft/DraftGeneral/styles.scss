@@ -1,31 +1,36 @@
+@import '~styles/colors';
+
 .component {
-  align-items: stretch;
   display: inline-flex;
   width: 100%;
   padding: 20px;
+}
 
-  .bookCover {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-    width: 350px;
-    min-height: 400px;
-  }
+.actionPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 20px;
+}
 
-  .bookInformation {
-    display: flex;
-    flex-direction: column;
-    padding: 0 20px;
-    width: 80%;
-    > div {
-      margin-bottom: 10px;
-    }
-  }
+.bookCover {
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 20px;
+}
 
-  .centerFooter {
-    display: flex;
-    justify-content: center;
+.bookInformation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 10px;
+  width: 100%;
+  > div {
+    flex-grow: 0;
+    margin-bottom: 10px;
   }
+}
+
+.delete {
+  background-color: $background-error;
 }
