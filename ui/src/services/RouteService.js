@@ -40,6 +40,7 @@ class RouteService {
     connection: () => '/app/connection',
     signin: () => '/app/connection/signin',
     signup: () => '/app/connection/signup',
+    passwordrecovery: () => '/app/connection/passwordrecovery',
     profile: () => '/app/profile',
     profilepassword: () => '/app/profile/password',
     profiledisconnect: () => '/app/profile/disconnect',

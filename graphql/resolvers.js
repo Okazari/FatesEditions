@@ -10,6 +10,7 @@ const Game = require('../models/GameModel')
 const Commentary = require('../models/CommentaryModel')
 const SHA512 = require('crypto-js/sha512')
 const jwt = require('jsonwebtoken')
+const mailSender = require('../mailSender')
 const helpers = require('./helpers')
 const { findBookById, generateGame, isAuth } = helpers
 
@@ -241,7 +242,6 @@ module.exports = {
 
     signUp: (_, args) => {
       const { username, email, password, confirmation } = args
-      console.log(args)
       const empty = !username || !email || !password || !confirmation
       const isEmail = /(.+)@(.+){2,}\.(.+){2,}/.test(email)
       const passwordMatch = password === confirmation
@@ -254,7 +254,7 @@ module.exports = {
       return new User({
         username,
         email,
-        password,
+        password: SHA512(password).toString(),
       }).save().then(user => {
         user.password = null
         return jwt.sign({ user }, process.env.SECRET, { expiresIn: 3600 })
@@ -267,9 +267,6 @@ module.exports = {
       if (paramsNotEmpty && passwordMatch) {
         throw new Error('Password Error')
       }
-      console.log('context.user in updatePassword : ', context.user)
-      console.log('context.user._id in updatePassword : ', context.user._id)
-      console.log('SHA512(oldPassword) : ', SHA512(oldPassword).toString())
       return User.findOneAndUpdate(
         { _id: context.user._id, password: SHA512(oldPassword).toString()},
         { password: SHA512(newPassword).toString() },
@@ -281,5 +278,33 @@ module.exports = {
         return user
       })
     }),
+
+    passwordRecovery: (_, { email }) => {
+      const isEmail = /(.+)@(.+){2,}\.(.+){2,}/.test(email)
+      if (!isEmail) throw new Error('Adresse email invalide')
+      const newPassword = 'unsafepassword'
+      return User.findOneAndUpdate(
+        { email },
+        { password: SHA512(newPassword).toString() },
+      ).then(user => {
+        if (!user) throw new Error('Utilisateur inconnu')
+        
+        let mailOptions = {
+          from: 'Fates-Editions Password Recovery <fateseditions@gmail.com>',
+          to: email,
+          subject: 'Récupération de mot de passe!',
+          text: `Voici votre mot de passe provisoire: ${newPassword}, N'oubliez pas de le changer rapidement !`, 
+        }
+        
+        mailSender.sendMail(mailOptions, (err, res) => {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log(`Password recuperation mail sent to ${email}, user: ${user}`)
+          }
+        })
+        return true
+      })
+    }
   }
 }

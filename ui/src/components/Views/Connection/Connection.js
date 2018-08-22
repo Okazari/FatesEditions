@@ -4,7 +4,8 @@ import { RouteService } from 'services'
 
 const tabSignIn = { label: 'Connexion', link: RouteService.routes.signin() }
 const tabSignUp = { label: 'Inscription', link: RouteService.routes.signup() }
-const tabs = [tabSignIn, tabSignUp]
+const tabPassword = { label: 'mot de passe perdu?', link: RouteService.routes.passwordrecovery() }
+const tabs = [tabSignIn, tabSignUp, tabPassword]
 
 const Message = () => (
   <AlertMessage title={'Vous avez été redirigé'}>

@@ -35,7 +35,7 @@ const SignUpContainer = () => (
         return (<SignUp
           signUp={_signUp}
           loading={loading}
-          error={error}
+          error={error && error.graphQLErrors[0].message}
         />)
       }
     }

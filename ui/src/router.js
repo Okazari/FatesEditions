@@ -26,7 +26,7 @@ import Portal, { SignIn as OldSignIn, SignUp as OldSignUp, Recover } from './com
 import { MyGames, GamesList } from './components/Views/MyGames'
 import { GameView, TrialView } from './components/Views'
 import Profile, { Password, Disconnect } from './components/Views/Profile'
-import Connection, { SignIn, SignUp } from './components/Views/Connection'
+import Connection, { SignIn, SignUp, PasswordRecovery } from './components/Views/Connection'
 import BookDetails, { BookGeneral } from './components/Views/BookDetails'
 
 // OLD LAYOUT
@@ -86,6 +86,7 @@ const AppRouter = () => {
               <IndexRedirect to="signin" />
               <Route path="signin" component={SignIn} />
               <Route path="signup" component={SignUp} />
+              <Route path="passwordrecovery" component={PasswordRecovery} />
             </Route>
           </Route>
           <Route path="old">

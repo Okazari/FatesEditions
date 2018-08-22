@@ -221,5 +221,6 @@ module.exports = `
     signIn(username: String!, password: String!): String
     signUp(username: String, email: String, password: String, confirmation: String): String
     updatePassword(oldPassword: String!, newPassword: String!, confirmation: String!): User
+    passwordRecovery(email: String!): Boolean
   }
 `
