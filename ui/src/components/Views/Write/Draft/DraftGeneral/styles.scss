@@ -20,6 +20,15 @@
   padding-bottom: 20px;
 }
 
+.disabled {
+  background-color: $background-color-light-2;
+  color: $decorator-color;
+  cursor: not-allowed;
+  &:hover {
+    box-shadow: none;
+  } 
+}
+
 .bookInformation {
   display: flex;
   flex-direction: column;

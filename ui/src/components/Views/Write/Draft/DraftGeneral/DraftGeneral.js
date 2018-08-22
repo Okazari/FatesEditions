@@ -19,11 +19,9 @@ const DraftGeneral = ({
   book,
   genres,
   updateBook,
-  publishBook,
-  loading,
-  error,
   disabled = false,
 }) => {
+  const startingPage = book.pages.find(page => page.id === book.startingPageId)
   return !!book && (
     <div className={styles.component}>
       <div className={styles.actionPanel}>
@@ -39,7 +37,15 @@ const DraftGeneral = ({
             onChange: startingPageId => updateBook({ startingPageId }),
           }}
         />
-        <Button domProps={{ onClick: () => tryGame(book) }}>Essayer mon brouillon</Button>
+        {
+          startingPage
+          ? <Button domProps={{ onClick: () => tryGame(book) }}>
+              Essayer mon brouillon
+            </Button>
+          : <Button className={styles.disabled}>
+              Essayer mon brouillon
+            </Button>
+        }
       </div>
       <div className={styles.bookInformation}>
         <Input
