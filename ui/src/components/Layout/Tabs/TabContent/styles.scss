@@ -3,6 +3,7 @@
 @import '~styles/responsive';
 
 .component {
+  position: relative;
   @include scrollbar();
   height: $tab-content-size;
   overflow-y: scroll;
