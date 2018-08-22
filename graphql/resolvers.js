@@ -236,8 +236,7 @@ module.exports = {
         || !password
       ) throw new Error('Error')
       user.password = null
-      // TODO Export secret in Config
-      return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+      return jwt.sign({ user }, process.env.SECRET, { expiresIn: 3600 })
     }),
 
     signUp: (_, args) => {
@@ -258,7 +257,7 @@ module.exports = {
         password,
       }).save().then(user => {
         user.password = null
-        return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+        return jwt.sign({ user }, process.env.SECRET, { expiresIn: 3600 })
       })
     },
 

@@ -9,6 +9,10 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const graphqlHTTP = require('express-graphql')
 
+if (process.env.SECRET === undefined) {
+  process.env.SECRET = 'mysecretstory'
+}
+
 let uriMongo = `mongodb://${process.env.IP || 'localhost'}:27017/myvirtualstorybook`
 if (process.env.MONGODB_ADDON_URI) {
   uriMongo = process.env.MONGODB_ADDON_URI
@@ -51,11 +55,11 @@ app.use('/api', portal)
 
 app.use((req, res, next) => {
   try {
-    const payload = jwt.verify(req.get('Authorization'), 'mysecretstory')
+    const payload = jwt.verify(req.get('Authorization'), process.env.SECRET)
     req.payload = payload
     const { user } = payload
     user.password = null
-    const token = jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+    const token = jwt.sign({ user }, process.env.SECRET, { expiresIn: 3600 })
     console.log(`${payload.user.username} ${payload.user._id} ${payload.exp}`)
     res.set('Auth-token', token)
     req.locals = {

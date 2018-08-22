@@ -1,5 +1,7 @@
 process.env.NODE_ENV = 'development';
 
+console.log('process.env in start script', process.env.NODE_ENV)
+
 var path = require('path');
 var chalk = require('chalk');
 var webpack = require('webpack');
