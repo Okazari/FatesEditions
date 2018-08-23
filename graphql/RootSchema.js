@@ -524,9 +524,7 @@ const resolvers = {
       return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
     }),
 
-    signUp: (_, args) => {
-      const { username, email, password, confirmation } = args
-      console.log(args)
+    signUp: (_, { username, email, password, confirmation }) => {
       const empty = !username || !email || !password || !confirmation
       const isEmail = /(.+)@(.+){2,}\.(.+){2,}/.test(email)
       const passwordMatch = password === confirmation
@@ -539,7 +537,7 @@ const resolvers = {
       return new User({
         username,
         email,
-        password,
+        password: SHA512(password).toString(),
       }).save().then(user => {
         user.password = null
         return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
