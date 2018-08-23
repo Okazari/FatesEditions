@@ -249,7 +249,7 @@ module.exports = {
       if (!isEmail) throw new Error('Adresse email invalide')
       if (!passwordMatch) throw new Error('Les deux mots de passe ne correspondent pas')
       User.findOne({ username }).then(user => {
-        if (!user) throw new Error('Nom d\'utilisateur déjà pris')
+        if (user) throw new Error('Nom d\'utilisateur déjà pris')
       })
       return new User({
         username,
@@ -257,7 +257,7 @@ module.exports = {
         password: SHA512(password).toString(),
       }).save().then(user => {
         user.password = null
-        return jwt.sign({ user }, process.env.SECRET, { expiresIn: 3600 })
+        return jwt.sign({ user }, process.env.SECRET, { expiresIn: 3600 }) 
       })
     },
 
@@ -282,7 +282,7 @@ module.exports = {
     passwordRecovery: (_, { email }) => {
       const isEmail = /(.+)@(.+){2,}\.(.+){2,}/.test(email)
       if (!isEmail) throw new Error('Adresse email invalide')
-      const newPassword = 'unsafepassword'
+      const newPassword = Math.random().toString(36).substr(2, 8)
       return User.findOneAndUpdate(
         { email },
         { password: SHA512(newPassword).toString() },
@@ -290,17 +290,17 @@ module.exports = {
         if (!user) throw new Error('Utilisateur inconnu')
         
         let mailOptions = {
-          from: 'Fates-Editions Password Recovery <fateseditions@gmail.com>',
+          from: 'Fates-Editions <fateseditions@gmail.com>',
           to: email,
-          subject: 'Récupération de mot de passe!',
-          text: `Voici votre mot de passe provisoire: ${newPassword}, N'oubliez pas de le changer rapidement !`, 
+          subject: 'Récupération de mot de passe',
+          text: `Voici votre mot de passe provisoire: ${newPassword}, N'oubliez pas de le changer rapidement ! l'Equipe Fates-Editions.`,
         }
         
         mailSender.sendMail(mailOptions, (err, res) => {
           if (err) {
             console.log(err)
           } else {
-            console.log(`Password recuperation mail sent to ${email}, user: ${user}`)
+            console.log(`Password recovery mail sent to ${email}, user: ${user}`)
           }
         })
         return true

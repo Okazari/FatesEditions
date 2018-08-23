@@ -12,7 +12,7 @@ const mutation = gql`
 const PasswordRecoveryContainer = () => (
   <Mutation mutation={mutation}>
     {
-      (recoverPassword, { loading, error }) => {
+      (recoverPassword, { loading, error, data }) => {
         const _recoverPassword = email => recoverPassword({
           variables: {
             ...email,
@@ -22,7 +22,8 @@ const PasswordRecoveryContainer = () => (
           <PasswordRecovery
             recoverPassword={_recoverPassword}
             loading={loading}
-            error={error}
+            error={error && error.graphQLErrors[0].message}
+            success={data && data.passwordRecovery}
           />
         )
       }

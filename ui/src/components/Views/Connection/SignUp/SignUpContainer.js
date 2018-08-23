@@ -28,7 +28,7 @@ const SignUpContainer = () => (
           variables: {
             ...signUpData,
           },
-        }).then((data) => {
+        }).then(({ data }) => {
           AuthService.setToken(data.signUp)
           RouteService.goTo(RouteService.routes.home())
         })

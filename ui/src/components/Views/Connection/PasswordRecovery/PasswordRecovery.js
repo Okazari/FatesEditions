@@ -1,7 +1,7 @@
 import React from 'react'
-import { Input, Button, NarrowForm, ErrorMessage } from 'components/common'
+import { Input, Button, NarrowForm, ErrorMessage, SuccessMessage } from 'components/common'
 
-const PasswordRecovery = ({ recoverPassword, error, loading }) => (
+const PasswordRecovery = ({ recoverPassword, loading, error, success }) => (
   <NarrowForm
     onSubmit={(e) => {
       e.preventDefault()
@@ -13,13 +13,16 @@ const PasswordRecovery = ({ recoverPassword, error, loading }) => (
     <Input
       label="Email"
       domProps={{
-        placeholder: "Entrez votre Email",
+        placeholder: 'Entrez votre Email',
         type: 'text',
         name: 'email',
       }}
     />
     {
-      error && <ErrorMessage>{'Aucun utilisateur correspondant'}</ErrorMessage>
+      error && <ErrorMessage>{error}</ErrorMessage>
+    }
+    {
+      success && <SuccessMessage>{'Votre mot de passe provisoire vous à été envoyé'}</SuccessMessage>
     }
     <Button>
       { loading
