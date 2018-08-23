@@ -32,11 +32,13 @@ const SignUpContainer = () => (
           AuthService.setToken(data.signUp)
           RouteService.goTo(RouteService.routes.home())
         })
-        return (<SignUp
-          signUp={_signUp}
-          loading={loading}
-          error={error && error.graphQLErrors[0].message}
-        />)
+        return (
+          <SignUp
+            signUp={_signUp}
+            loading={loading}
+            error={error && error.graphQLErrors[0].message}
+          />
+        )
       }
     }
   </Mutation>
