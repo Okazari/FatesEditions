@@ -531,16 +531,16 @@ const resolvers = {
       if (empty) throw new Error('Un ou plusieurs champs sont vides')
       if (!isEmail) throw new Error('Adresse email invalide')
       if (!passwordMatch) throw new Error('Les deux mots de passe ne correspondent pas')
-      User.findOne({ username }).then(user => {
-        if (!user) throw new Error('Nom d\'utilisateur déjà pris')
-      })
-      return new User({
-        username,
-        email,
-        password: SHA512(password).toString(),
-      }).save().then(user => {
-        user.password = null
-        return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+      return User.findOne({ username }).then(user => {
+        if (user) throw new Error('Nom d\'utilisateur déjà pris')
+        return new User({
+          username,
+          email,
+          password: SHA512(password).toString(),
+        }).save().then(user => {
+          user.password = null
+          return jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+        })
       })
     },
 
