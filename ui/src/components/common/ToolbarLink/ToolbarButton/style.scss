@@ -30,3 +30,8 @@
     font-size: 2em;
   }
 }
+
+.dark {
+  background-color: $dark-background-color-2;
+  color: $dark-primary-color !important;
+}

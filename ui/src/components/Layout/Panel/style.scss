@@ -1,0 +1,11 @@
+@import '~styles/sizes.scss';
+@import '~styles/responsive';
+
+.panel {
+  width: $content-size;
+  background-color: red;
+  @media #{$mobile} {
+    width: auto;
+    height: 100vh;
+  }
+}
