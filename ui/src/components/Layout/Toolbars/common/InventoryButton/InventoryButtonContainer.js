@@ -2,10 +2,7 @@ import { connect } from 'react-redux'
 import { panelState } from 'redux/actions'
 import InventoryButton from './InventoryButton'
 
-const mapStateToProps = (state) => {
-  const { panelIsOpen } = state.ui
-  return { panelIsOpen }
-}
+const mapStateToProps = ({ ui: { panelIsOpen } }) => ({ panelIsOpen })
 
 const mapDispatchToProps = (dispatch) => {
   const onClick = bool => dispatch(panelState(bool))

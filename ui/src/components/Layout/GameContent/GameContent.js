@@ -1,12 +1,13 @@
 import React from 'react'
 import styles from './style.scss'
 
-const Panel = ({ children }) => {
+const Content = ({ children }) => {
   return (
-    <div className={styles.panel}>
+    <div className={styles.component}>
       {children}
     </div>
   )
 }
 
-export default Panel
+
+export default Content

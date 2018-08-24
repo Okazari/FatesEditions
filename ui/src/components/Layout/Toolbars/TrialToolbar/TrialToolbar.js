@@ -1,7 +1,5 @@
 import React from 'react'
 import {
-  DisplayStats,
-  DisplayObjects,
   Toolbar,
   ToolbarTop,
   ToolbarBottom,
@@ -15,8 +13,6 @@ const TrialToolbar = () => {
     <Toolbar className={styles.component}>
       <ToolbarTop>
         <ToolbarLogo white />
-        <DisplayStats />
-        <DisplayObjects />
       </ToolbarTop>
       <ToolbarBottom>
         <ExitButton />

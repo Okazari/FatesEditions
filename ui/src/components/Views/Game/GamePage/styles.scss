@@ -1,5 +1,10 @@
+@import '~styles/colors';
+@import '~styles/sizes';
+@import '~styles/mixins';
+@import '~styles/responsive';
+
 .component {
-  width: 100%;
+  padding: 50px;
 }
 
 .gameTransitions {
