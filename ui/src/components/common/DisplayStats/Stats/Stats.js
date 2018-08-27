@@ -1,18 +1,18 @@
 import React from 'react'
 import styles from './style.scss'
 
-const Stats = ({ stat, value }) => {
+const Stats = ({ descriptionVisible, stat, value, toggleDescription }) => {
   const { name, description, visible } = stat
   if (!visible) return null
   return (
     <div className={styles.component}>
-      <div className={styles.hover}>
+      <div onClick={() => description && toggleDescription()}>
         <div className={styles.name}>{name}</div>
         <div>{value}</div>
+        { descriptionVisible &&
+          <div className={styles.description}>{description}</div>
+        }
       </div>
-      { !!description &&
-        <div className={styles.description}>{description}</div>
-      }
     </div>
   )
 }

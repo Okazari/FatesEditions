@@ -83,7 +83,7 @@ query getGame($gameId: ID!) {
 }
 `
 
-// TODO: Add loading and error returns
+// TODO: Add error returns
 const GameViewContainer = ({ params }) => {
   return (
     <Query

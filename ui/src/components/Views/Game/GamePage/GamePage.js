@@ -26,11 +26,13 @@ class GamePage extends React.Component {
           this.node = node
         }}
       >
-        <Editor
-          editorState={EditorState.createWithContent(pageContent)}
-          blockRendererFn={blockRenderer}
-          readOnly
-        />
+        <div className={styles.editorWrapper}>
+          <Editor
+            editorState={EditorState.createWithContent(pageContent)}
+            blockRendererFn={blockRenderer}
+            readOnly
+          />
+        </div>
         <div className={styles.gameTransitions}>
           {
             !!page.transitions && page.transitions.map(transitionId => <GameTransition

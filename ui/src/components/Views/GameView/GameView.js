@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Layout, GameContent, Panel, GameToolbar } from 'components/Layout'
-import { DisplayStats, DisplayObjects } from 'components/common'
+import { DisplayStats, DisplayItems } from 'components/common'
 import Game from 'components/Views/Game'
 
 const mapStateToProps = ({ ui: { panelIsOpen } }) => ({ panelIsOpen })
@@ -14,9 +14,9 @@ const GameView = (props) => {
       <GameContent>
         {
           panelIsOpen &&
-          <Panel {...props}>
+          <Panel>
             <DisplayStats />
-            <DisplayObjects />
+            <DisplayItems />
           </Panel>
         }
         <Game {...props} />

@@ -1,0 +1,14 @@
+@import '~styles/mixins';
+
+.inventory {
+  @include scrollbar();
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  justify-content: flex-start;
+  font-size: 1.35rem;
+  overflow: auto;
+}

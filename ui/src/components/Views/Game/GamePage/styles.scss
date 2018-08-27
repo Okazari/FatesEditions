@@ -4,10 +4,38 @@
 @import '~styles/responsive';
 
 .component {
+
+}
+
+.editorWrapper {
+  max-width: 900px;
   padding: 50px;
+  margin: 0 auto;
+  padding: 50px;
+  @media #{$mobile} {
+    padding: 30px 20px;
+  }
 }
 
 .gameTransitions {
-  width: 100%;
-  margin: 20px 0;
+  position: fixed;
+  left: 77%;
+  top: 0;
+  right: 60px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  @media #{$narrow-game} {
+    position: static;
+    max-width: 1000px;
+    padding-left: 50px;
+    padding-right: 50px;
+    left: none;
+    top: none;
+  }
+  @media #{$mobile} {
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+  }
 }

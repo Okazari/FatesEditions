@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withStateHandlers } from 'recompose'
 import Stats from './Stats'
 
 const mapStateToProps = ({ game }, { id, value }) => ({
@@ -6,4 +7,14 @@ const mapStateToProps = ({ game }, { id, value }) => ({
   value,
 })
 
-export default connect(mapStateToProps)(Stats)
+const StatsContainer = withStateHandlers(
+  {
+    descriptrionVisible: false,
+  },
+  {
+    toggleDescription: ({ descriptionVisible }) =>
+      () => ({ descriptionVisible: !descriptionVisible }),
+  },
+)(Stats)
+
+export default connect(mapStateToProps)(StatsContainer)

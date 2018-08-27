@@ -82,7 +82,7 @@ const query = gql`
     }
   }
 `
-// TODO: Add loading and error returns
+// TODO: Add error returns
 const TrialViewContainer = ({ params }) => (
   <Query
     query={query}

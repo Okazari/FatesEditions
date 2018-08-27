@@ -48,12 +48,14 @@ const CommentaryInputContainerGQL = ({ bookId, ...props }) => (
             text: comment,
           },
         })
-        return (<CommentaryInputContainer
-          {...props}
-          addComment={_addComment}
-          loading={loading}
-          error={error && error.graphQLErrors[0].message}
-        />)
+        return (
+          <CommentaryInputContainer
+            {...props}
+            addComment={_addComment}
+            loading={loading}
+            error={error && error.graphQLErrors[0].message}
+          />
+        )
       }
     }
   </Mutation>

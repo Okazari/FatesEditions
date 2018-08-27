@@ -1,0 +1,18 @@
+@import '~styles/colors';
+
+.component {
+  text-align: center;
+  color: $dark-primary-color;
+}
+
+.itemsGrid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  padding: 0 20px 20px 20px;
+}
+
+.title {
+  font-weight: bold;
+  width: 100%;
+}

@@ -4,6 +4,7 @@ import {
   ToolbarTop,
   ToolbarBottom,
   ToolbarLogo,
+  InventoryButton,
   ExitButton,
 } from '../common'
 import styles from './style.scss'
@@ -13,6 +14,7 @@ const TrialToolbar = () => {
     <Toolbar className={styles.component}>
       <ToolbarTop>
         <ToolbarLogo white />
+        <InventoryButton />
       </ToolbarTop>
       <ToolbarBottom>
         <ExitButton />
