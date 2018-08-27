@@ -237,7 +237,7 @@ module.exports = {
         || !password
       ) throw new Error('Error')
       user.password = null
-      return jwt.sign({ user }, process.env.SECRET, { expiresIn: 3600 })
+      return jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: 3600 })
     }),
 
     signUp: (_, args) => {
@@ -257,7 +257,7 @@ module.exports = {
         password: SHA512(password).toString(),
       }).save().then(user => {
         user.password = null
-        return jwt.sign({ user }, process.env.SECRET, { expiresIn: 3600 }) 
+        return jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: 3600 }) 
       })
     },
 
