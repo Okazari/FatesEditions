@@ -2,9 +2,8 @@
 @import '~styles/responsive';
 
 .component {
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  display: flex;
+  flex-direction: column;
   padding-top: 50px;
   padding-right: 20px;
   padding-bottom: 20px;
@@ -14,4 +13,10 @@
   @media #{$mobile} {
     padding-top: 20px;
   }
+}
+
+.label {
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 10px;
 }
