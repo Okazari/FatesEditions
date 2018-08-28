@@ -15,3 +15,8 @@ export const panelState = bool => ({
   type: 'PANEL_STATE',
   panelIsOpen: bool,
 })
+
+export const statsOrItems = bool => ({
+  type: 'STATS_OR_ITEMS',
+  displayStats: bool,
+})

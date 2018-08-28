@@ -4,7 +4,8 @@ import {
   ToolbarTop,
   ToolbarBottom,
   ToolbarLogo,
-  InventoryButton,
+  DisplayStatsButton,
+  DisplayItemsButton,
   ExitButton,
 } from '../common'
 import styles from './style.scss'
@@ -14,7 +15,8 @@ const GameToolbar = (props) => {
     <Toolbar className={styles.component}>
       <ToolbarTop>
         <ToolbarLogo white />
-        <InventoryButton />
+        <DisplayStatsButton />
+        <DisplayItemsButton />
       </ToolbarTop>
       <ToolbarBottom>
         <ExitButton />

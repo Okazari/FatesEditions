@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Layout, GameContent, Panel, TrialToolbar } from 'components/Layout'
-import { Inventory, DisplayItems } from 'components/common'
+import { Inventory, DisplayStats, DisplayItems } from 'components/common'
 import Game from 'components/Views/Game'
 
-const mapStateToProps = ({ ui: { panelIsOpen } }) => ({ panelIsOpen })
+const mapStateToProps = ({ ui: { panelIsOpen, displayStats } }) => ({ panelIsOpen, displayStats })
 
 const TrialView = (props) => {
-  const { panelIsOpen } = props
+  const { panelIsOpen, displayStats } = props
   return (
     <Layout>
       <TrialToolbar />
@@ -16,7 +16,10 @@ const TrialView = (props) => {
           panelIsOpen &&
           <Panel>
             <Inventory>
-              <DisplayItems />
+              { displayStats
+                ? <DisplayStats />
+                : <DisplayItems />
+              }
             </Inventory>
           </Panel>
         }

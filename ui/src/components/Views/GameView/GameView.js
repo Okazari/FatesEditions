@@ -4,10 +4,10 @@ import { Layout, GameContent, Panel, GameToolbar } from 'components/Layout'
 import { DisplayStats, DisplayItems } from 'components/common'
 import Game from 'components/Views/Game'
 
-const mapStateToProps = ({ ui: { panelIsOpen } }) => ({ panelIsOpen })
+const mapStateToProps = ({ ui: { panelIsOpen, displayStats } }) => ({ panelIsOpen, displayStats })
 
 const GameView = (props) => {
-  const { panelIsOpen } = props
+  const { panelIsOpen, displayStats } = props
   return (
     <Layout>
       <GameToolbar />
@@ -15,8 +15,10 @@ const GameView = (props) => {
         {
           panelIsOpen &&
           <Panel>
-            <DisplayStats />
-            <DisplayItems />
+            { displayStats
+              ? <DisplayStats />
+              : <DisplayItems />
+            }
           </Panel>
         }
         <Game {...props} />

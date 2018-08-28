@@ -26,6 +26,11 @@ const ui = (state = {}, action) => {
         ...state,
         panelIsOpen: action.panelIsOpen,
       })
+    case 'STATS_OR_ITEMS':
+      return ({
+        ...state,
+        displayStats: action.displayStats,
+      })
     default:
       return state
   }
