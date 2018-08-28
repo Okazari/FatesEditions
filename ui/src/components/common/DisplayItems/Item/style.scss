@@ -1,8 +1,38 @@
 @import '~styles/colors';
 
-.component {
+.row {
   position: relative;
-  text-align: center;
-  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.icon {
+  color: $dark-primary-color;
+  padding-right: 20px;
+}
+
+.name {
+  text-align: left;
+  flex-grow: 1;
+}
+
+.value {
+  font-weight: bold;
+  padding: 0 20px;
+}
+
+.status {
+  width: 10px;
+  font-size: 1.5rem;
+  line-height: 1rem;
+}
+
+.description {
   width: 100%;
+  text-align: justify;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 0.1px dotted;
 }
