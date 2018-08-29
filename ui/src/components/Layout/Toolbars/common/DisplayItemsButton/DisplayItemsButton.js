@@ -20,6 +20,7 @@ const DisplayItemsButton = ({ dispatch, panelIsOpen, displayStats }) => {
       <ToolbarButton
         icon="business_center"
         dark
+        selected={panelIsOpen && !displayStats}
       />
     </div>
   )

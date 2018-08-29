@@ -20,6 +20,7 @@ const DisplayStatsButton = ({ dispatch, panelIsOpen, displayStats }) => {
       <ToolbarButton
         icon="equalizer"
         dark
+        selected={panelIsOpen && displayStats}
       />
     </div>
   )

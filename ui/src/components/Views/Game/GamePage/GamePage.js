@@ -33,13 +33,15 @@ class GamePage extends React.Component {
             readOnly
           />
         </div>
-        <div className={styles.gameTransitions}>
-          {
-            !!page.transitions && page.transitions.map(transitionId => <GameTransition
-              key={transitionId}
-              transitionId={transitionId}
-            />)
-          }
+        <div className={styles.transitionsPlaceholder}>
+          <div className={styles.gameTransitions}>
+            {
+              !!page.transitions && page.transitions.map(transitionId => <GameTransition
+                key={transitionId}
+                transitionId={transitionId}
+              />)
+            }
+          </div>
         </div>
       </div>
     )

@@ -4,6 +4,10 @@
 @import '~styles/responsive';
 
 .panel {
-  width: 100%;
-  background-color: $dark-background-color-1;
+  width: 40vw;
+  background-color: $dark-background-color-2;
+  @media #{$mobile} {
+    width: 100vw;
+    background-color: $dark-background-color-1;
+  }
 }
