@@ -11,12 +11,7 @@ export const setBook = book => ({
   normalizedBook: normalize(book, bookSchema).entities,
 })
 
-export const panelState = bool => ({
-  type: 'PANEL_STATE',
-  panelIsOpen: bool,
-})
-
-export const statsOrItems = bool => ({
-  type: 'STATS_OR_ITEMS',
-  displayStats: bool,
+export const switchPanel = key => ({
+  type: 'SWITCH_PANEL',
+  key,
 })

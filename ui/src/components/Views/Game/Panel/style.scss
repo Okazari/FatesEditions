@@ -1,0 +1,11 @@
+@import '~styles/sizes';
+@import '~styles/colors';
+@import '~styles/mixins';
+@import '~styles/responsive';
+
+.panel {
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  flex-shrink: 1000;
+}

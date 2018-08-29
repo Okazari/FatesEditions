@@ -1,0 +1,13 @@
+@import '~styles/colors';
+@import '~styles/sizes';
+@import '~styles/mixins';
+@import '~styles/responsive';
+
+.component {
+  max-width: 900px;
+  padding: 50px;
+  @media #{$mobile} {
+    padding: 30px 20px;
+  }
+  flex-shrink: 0;
+}

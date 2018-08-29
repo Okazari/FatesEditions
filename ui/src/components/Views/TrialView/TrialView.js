@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Layout, GameContent, Panel, TrialToolbar } from 'components/Layout'
+import { Layout, GameContent, Panel, GameToolbar } from 'components/Layout'
 import { Inventory, DisplayStats, DisplayItems } from 'components/common'
 import Game from 'components/Views/Game'
 
@@ -10,7 +10,7 @@ const TrialView = (props) => {
   const { panelIsOpen, displayStats } = props
   return (
     <Layout>
-      <TrialToolbar />
+      <GameToolbar />
       <GameContent>
         {
           panelIsOpen &&

@@ -1,1 +1,1 @@
-export default from './GameToolbar'
+export default from './GameToolbarContainer'

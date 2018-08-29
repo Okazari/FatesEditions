@@ -21,15 +21,16 @@ const game = (state = {}, action) => {
 
 const ui = (state = {}, action) => {
   switch (action.type) {
-    case 'PANEL_STATE':
+    case 'SWITCH_PANEL':
+      if (state.panelState === action.key) {
+        return ({
+          ...state,
+          panelState: null,
+        })
+      }
       return ({
         ...state,
-        panelIsOpen: action.panelIsOpen,
-      })
-    case 'STATS_OR_ITEMS':
-      return ({
-        ...state,
-        displayStats: action.displayStats,
+        panelState: action.key,
       })
     default:
       return state

@@ -1,22 +1,29 @@
 import React from 'react'
+import { GamePanels, ToolbarButton } from 'components/common'
 import {
   Toolbar,
   ToolbarTop,
   ToolbarBottom,
   ToolbarLogo,
-  DisplayStatsButton,
-  DisplayItemsButton,
   ExitButton,
 } from '../common'
 import styles from './style.scss'
 
-const GameToolbar = (props) => {
+const GameToolbar = ({ switchPanel }) => {
   return (
     <Toolbar className={styles.component}>
       <ToolbarTop>
         <ToolbarLogo white />
-        <DisplayStatsButton />
-        <DisplayItemsButton />
+        { GamePanels.map(panel => (
+          <ToolbarButton
+            key={panel.key}
+            icon={panel.icon}
+            dark
+            domProps={{
+              onClick: () => switchPanel(panel.key),
+            }}
+          />
+        ))}
       </ToolbarTop>
       <ToolbarBottom>
         <ExitButton />

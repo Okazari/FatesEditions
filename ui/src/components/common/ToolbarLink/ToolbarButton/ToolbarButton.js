@@ -3,16 +3,16 @@ import classnames from 'classnames'
 import { Icon } from 'components/common'
 import styles from './style.scss'
 
-const ToolbarButton = ({ domProps, icon, dark, selected }) => {
+const ToolbarButton = ({ domProps, iconDomProps, icon, dark, selected }) => {
   const className = classnames(
     dark && styles.dark,
     selected && styles.selected,
-    domProps && domProps.className,
+    iconDomProps && iconDomProps.className,
     styles.icon,
   )
   return (
-    <div className={styles.link}>
-      <Icon domProps={{ className }} icon={icon} />
+    <div {...domProps} className={styles.link}>
+      <Icon domProps={{ ...iconDomProps, className }} icon={icon} />
     </div>
   )
 }

@@ -1,0 +1,10 @@
+@import "~styles/responsive";
+
+.transitionsList {
+  position: sticky;
+  top: 0;
+  padding: 50px;
+  @media #{$mobile} {
+    padding: 50px 20px;
+  }
+}

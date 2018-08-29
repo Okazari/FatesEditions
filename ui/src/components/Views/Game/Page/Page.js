@@ -1,10 +1,9 @@
 import React from 'react'
 import { convertFromRaw, Editor, EditorState, ContentState } from 'draft-js'
 import Image from 'components/common/TextEditor/Image'
-import GameTransition from './GameTransition'
-import styles from './styles.scss'
+import styles from './style.scss'
 
-class GamePage extends React.Component {
+class Page extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.page.id !== this.props.page.id) {
       this.node.parentNode.scrollTop = 0
@@ -26,26 +25,14 @@ class GamePage extends React.Component {
           this.node = node
         }}
       >
-        <div className={styles.editorWrapper}>
-          <Editor
-            editorState={EditorState.createWithContent(pageContent)}
-            blockRendererFn={blockRenderer}
-            readOnly
-          />
-        </div>
-        <div className={styles.transitionsPlaceholder}>
-          <div className={styles.gameTransitions}>
-            {
-              !!page.transitions && page.transitions.map(transitionId => <GameTransition
-                key={transitionId}
-                transitionId={transitionId}
-              />)
-            }
-          </div>
-        </div>
+        <Editor
+          editorState={EditorState.createWithContent(pageContent)}
+          blockRendererFn={blockRenderer}
+          readOnly
+        />
       </div>
     )
   }
 }
 
-export default GamePage
+export default Page

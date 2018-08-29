@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import { connect } from 'react-redux'
 import { setGame } from 'redux/actions'
 import { GameService } from 'services'
-import GameTransition from './GameTransition'
+import Transition from './Transition'
 
 const mapStateToProps = ({ game }, { transitionId }) => {
   const transition = game.book.transition[transitionId]
@@ -43,7 +43,7 @@ mutation saveGame($game: GameInput!) {
 }
 `
 
-const GameTransitionContainer = (props) => {
+const TransitionContainer = (props) => {
   const { game, transitionId, dispatch } = props
   return (
     <Mutation
@@ -65,7 +65,7 @@ const GameTransitionContainer = (props) => {
             }
           }
           return (
-            <GameTransition
+            <Transition
               {...props}
               onClick={onClick}
             />
@@ -76,4 +76,4 @@ const GameTransitionContainer = (props) => {
   )
 }
 
-export default connect(mapStateToProps)(GameTransitionContainer)
+export default connect(mapStateToProps)(TransitionContainer)
