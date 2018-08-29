@@ -2,8 +2,8 @@ import React from 'react'
 import { browserHistory } from 'react-router'
 import { ToolbarButton } from 'components/common/ToolbarLink'
 
-const ExitButton = ({ panelIsOpen, closePanel }) => {
-  const onClick = panelIsOpen ? closePanel : browserHistory.goBack
+const ExitButton = ({ panelState, closePanel }) => {
+  const onClick = panelState ? closePanel : browserHistory.goBack
   return (
     <div onClick={onClick}>
       <ToolbarButton

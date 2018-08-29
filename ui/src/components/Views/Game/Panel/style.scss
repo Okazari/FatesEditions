@@ -4,8 +4,11 @@
 @import '~styles/responsive';
 
 .panel {
+  @include scrollbar();
   box-sizing: border-box;
   position: sticky;
   top: 0;
   flex-shrink: 1000;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

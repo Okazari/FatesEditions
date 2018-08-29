@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-import { panelState } from 'redux/actions'
+import { switchPanel } from 'redux/actions'
 import ExitButton from './ExitButton'
 
-const mapStateToProps = ({ ui: { panelIsOpen } }) => ({ panelIsOpen })
+const mapStateToProps = ({ ui: { panelState } }) => ({ panelState })
 
 const mapDispatchToProps = (dispatch) => {
-  const closePanel = () => dispatch(panelState(false))
+  const closePanel = () => dispatch(switchPanel(null))
   return {
     closePanel,
   }

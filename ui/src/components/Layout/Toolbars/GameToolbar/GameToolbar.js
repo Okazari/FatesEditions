@@ -9,7 +9,7 @@ import {
 } from '../common'
 import styles from './style.scss'
 
-const GameToolbar = ({ switchPanel }) => {
+const GameToolbar = ({ panelState, switchPanel }) => {
   return (
     <Toolbar className={styles.component}>
       <ToolbarTop>
@@ -19,6 +19,7 @@ const GameToolbar = ({ switchPanel }) => {
             key={panel.key}
             icon={panel.icon}
             dark
+            selected={panelState === panel.key}
             domProps={{
               onClick: () => switchPanel(panel.key),
             }}

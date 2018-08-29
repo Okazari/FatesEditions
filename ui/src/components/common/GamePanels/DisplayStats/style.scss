@@ -1,9 +1,10 @@
 @import '~styles/colors';
+@import '~styles/mixins';
 @import '~styles/responsive';
 
 .component {
   max-width: 500px;
-  padding: 50px 0 50px 50px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   color: $dark-primary-color;
