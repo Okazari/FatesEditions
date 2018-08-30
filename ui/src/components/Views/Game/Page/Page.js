@@ -5,8 +5,9 @@ import styles from './style.scss'
 
 class Page extends React.Component {
   componentDidUpdate(prevProps) {
+    const { resetScrolling } = this.props
     if (prevProps.page.id !== this.props.page.id) {
-      this.node.parentNode.scrollTop = 0
+      resetScrolling()
     }
   }
 
@@ -24,6 +25,7 @@ class Page extends React.Component {
         ref={(node) => {
           this.node = node
         }}
+        id="page"
       >
         <Editor
           editorState={EditorState.createWithContent(pageContent)}

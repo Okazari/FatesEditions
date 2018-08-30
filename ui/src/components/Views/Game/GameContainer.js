@@ -7,5 +7,4 @@ const mapStateToProps = ({
   },
 }) => ({ panelState })
 
-
 export default connect(mapStateToProps)(Game)

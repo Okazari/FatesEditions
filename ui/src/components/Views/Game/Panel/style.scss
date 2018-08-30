@@ -5,6 +5,9 @@
 
 .panel {
   @include scrollbar();
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   box-sizing: border-box;
   position: sticky;
   top: 0;

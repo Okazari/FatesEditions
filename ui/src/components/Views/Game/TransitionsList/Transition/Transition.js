@@ -1,36 +1,60 @@
 import React from 'react'
 import classnames from 'classnames'
-import Button from 'components/common/Button'
+import { Button } from 'components/common'
 import styles from './styles.scss'
 
-const GameTransition = ({
-  visible,
-  onClick,
-  text,
-  errors,
-}) => {
-  const className = classnames(styles.component, {
-    [styles.disabled]: errors.length > 0,
-  })
-  if (!visible) return null
-  return (
-    <Button
-      domProps={{
-        onClick,
-      }}
-      className={className}
-    >
-      {text}
-      {
-        errors.map(error => <div
-          className={styles.error}
-          key={
-            `${error.message}${error.columnNumber}-${error.lineNumber}`
-          }
-        >{error.message}</div>)}
-    </Button>
-  )
-}
+class Transition extends React.Component {
+  constructor(props) {
+    super(props)
+    const { delay } = props
+    this.state = { displayed: false }
+    this.timeOut = setTimeout(() => {
+      this.setState({ displayed: true })
+    }, delay)
+  }
 
-export default GameTransition
+  componentWillUnmount() {
+    clearTimeout(this.timeOut)
+  }
+
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.transitionId !== prevProps.transitionId) {
+  //     this.setState({ displayed: false }, () => console.log(this.state) )
+  //   }
+  // }
+
+  render() {
+    const {
+      visible,
+      onClick,
+      text,
+      errors,
+    } = this.props
+
+    const { displayed } = this.state
+    const className = classnames(styles.component, {
+      [styles.disabled]: errors.length > 0,
+      [styles.displayed]: displayed,
+    })
+    if (!visible) return null
+    return (
+      <Button
+        domProps={{
+          onClick,
+        }}
+        className={className}
+      >
+        {text}
+        {
+          errors.map(error => <div
+            className={styles.error}
+            key={
+              `${error.message}${error.columnNumber}-${error.lineNumber}`
+            }
+          >{error.message}</div>)}
+      </Button>
+    )
+  }
+}
+export default Transition
 

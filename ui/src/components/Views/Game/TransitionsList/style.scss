@@ -2,8 +2,8 @@
 
 .transitionsList {
   max-width: 900px;
-  padding: 50px;
+  padding: 50px 50px 50px 0;
   @media #{$mobile} {
-    padding: 50px 20px;
+    padding: 50px 20px 50px 0;
   }
 }
