@@ -19,7 +19,10 @@ const Item = ({ item, descriptionVisible, toggleDescription }) => {
         </div>
       </div>
       { descriptionVisible &&
-        <div className={styles.description}>{description}</div>
+        <div className={styles.description}>
+          <div className={styles.fullName}>{name} :</div>
+          {description}
+        </div>
       }
     </div>
   )

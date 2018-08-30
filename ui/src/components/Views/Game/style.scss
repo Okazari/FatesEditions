@@ -22,7 +22,23 @@
 }
 
 .panelIsOpen {
-  @media #{$mobile} {
+  @media #{$tablet} {
     display: none;
   }
+}
+
+.inFlowTransitions {
+  display: none;
+  @media #{$lt-wide} {
+    display: block;
+  }
+}
+
+.fixedTransitions {
+  position: sticky;
+  top: 0;
+  @media #{$lt-wide} {
+    display: none;
+  }
+  flex-shrink: 4;
 }

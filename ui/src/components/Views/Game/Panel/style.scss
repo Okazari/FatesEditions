@@ -8,7 +8,11 @@
   box-sizing: border-box;
   position: sticky;
   top: 0;
-  flex-shrink: 1000;
+  flex-shrink: 4;
+  padding-left: 50px;
   overflow-y: auto;
   overflow-x: hidden;
+  @media #{$mobile} {
+    padding-left: 20px;
+  }
 }
