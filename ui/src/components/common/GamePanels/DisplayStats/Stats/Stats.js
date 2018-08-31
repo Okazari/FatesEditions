@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon } from 'components/common'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './style.scss'
 
 const Stats = ({ descriptionVisible, stat, value, toggleDescription }) => {
@@ -8,7 +8,11 @@ const Stats = ({ descriptionVisible, stat, value, toggleDescription }) => {
   return (
     <div onClick={() => description && toggleDescription()}>
       <div className={styles.row}>
-        <Icon className={styles.icon} icon="build" />
+        <div className={styles.icon}> 
+          <FontAwesomeIcon
+            icon="arrow-left"
+          />
+        </div>
         <div className={styles.name}>{name}</div>
         <div className={styles.value}>{value}</div>
         <div className={styles.status}>
