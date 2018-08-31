@@ -10,12 +10,12 @@
   text-transform: none;
   font-size: 1.35rem;
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity $standard-duration, transform $standard-duration;
+  transform: translateY(10px) scale(1.05);
+  transition: opacity $fast-duration, transform $fast-duration;
  }
 
 .displayed {
-  transform: translateY(0px);
+  transform: translateY(0px) scale(1);
   opacity: 1;
 }
 

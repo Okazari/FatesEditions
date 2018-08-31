@@ -22,7 +22,7 @@
 }
 
 .panelIsOpen {
-  @media #{$tablet} {
+  @media #{$lt-desktop} {
     display: none;
   }
 }
