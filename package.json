@@ -83,6 +83,9 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
+    "@fortawesome/free-solid-svg-icons": "^5.3.1",
+    "@fortawesome/react-fontawesome": "^0.1.2",
     "apollo-cache-inmemory": "^1.2.5",
     "apollo-client-preset": "^1.0.5",
     "apollo-link": "^1.2.2",
