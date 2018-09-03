@@ -30,6 +30,7 @@ const query = gql`
           max
           min
           visible
+          icon
         }
         objects {
           id
@@ -37,6 +38,7 @@ const query = gql`
           description
           atStart
           visible
+          icon
         }
         author {
           id

@@ -30,6 +30,7 @@ query getGame($gameId: ID!) {
         max
         min
         visible
+        icon
       }
       objects {
         id
@@ -37,6 +38,7 @@ query getGame($gameId: ID!) {
         description
         atStart
         visible
+        icon
       }
       author {
         id

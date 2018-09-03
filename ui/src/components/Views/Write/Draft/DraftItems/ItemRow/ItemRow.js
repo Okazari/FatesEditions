@@ -1,11 +1,30 @@
 import React from 'react'
 import { ButtonIcon, Input, DataRow } from 'components/common'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Select from 'react-select'
 import styles from '../styles.scss'
 
 const ItemRow = ({ index, item = {}, disabled, updateObject, deleteObject }) => {
+  const icons = library.definitions.fas
+  const options = Object.keys(icons).map(name => ({
+    value: name,
+    label: <FontAwesomeIcon icon={name} />,
+  }))
   const onDelete = () => deleteObject(item)
   return (
     <DataRow>
+      <div>
+        <Select 
+          className={styles.select}
+          value={{
+            value: item.icon,
+            label: <FontAwesomeIcon icon={item.icon} />, 
+          }}
+          onChange={icon => updateObject({ id: item.id, icon: icon.value })}
+          options={options}
+        />
+      </div>
       <div>
         <Input
           debounce={500}

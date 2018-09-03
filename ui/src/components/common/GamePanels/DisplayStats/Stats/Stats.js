@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './style.scss'
 
 const Stats = ({ descriptionVisible, stat, value, toggleDescription }) => {
-  const { name, description, visible } = stat
+  const { icon, name, description, visible } = stat
   if (!visible) return null
+  console.log('icon in displayStat', icon)
   return (
     <div onClick={() => description && toggleDescription()}>
       <div className={styles.row}>
         <div className={styles.icon}>
           <FontAwesomeIcon
-            icon="arrow-left"
+            icon={icon}
           />
         </div>
         <div className={styles.name}>{name}</div>

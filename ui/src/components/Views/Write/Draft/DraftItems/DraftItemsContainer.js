@@ -9,6 +9,7 @@ const coreObject = `
   description
   atStart
   visible
+  icon
 `
 
 const core = `
