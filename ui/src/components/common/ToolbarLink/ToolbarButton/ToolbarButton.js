@@ -5,10 +5,12 @@ import styles from './style.scss'
 
 const ToolbarButton = ({ domProps, iconDomProps, icon, dark, selected }) => {
   const className = classnames(
-    dark && styles.dark,
-    selected && styles.selected,
-    iconDomProps && iconDomProps.className,
     styles.icon,
+    {
+      [styles.dark]: dark,
+      [styles.selected]: selected,
+      [iconDomProps && iconDomProps.className]: iconDomProps,
+    },
   )
   return (
     <div {...domProps} className={styles.link}>

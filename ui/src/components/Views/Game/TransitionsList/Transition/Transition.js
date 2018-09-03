@@ -17,12 +17,6 @@ class Transition extends React.Component {
     clearTimeout(this.timeOut)
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.transitionId !== prevProps.transitionId) {
-  //     this.setState({ displayed: false }, () => console.log(this.state) )
-  //   }
-  // }
-
   render() {
     const {
       visible,

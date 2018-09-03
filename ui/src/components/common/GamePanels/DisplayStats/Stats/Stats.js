@@ -8,7 +8,7 @@ const Stats = ({ descriptionVisible, stat, value, toggleDescription }) => {
   return (
     <div onClick={() => description && toggleDescription()}>
       <div className={styles.row}>
-        <div className={styles.icon}> 
+        <div className={styles.icon}>
           <FontAwesomeIcon
             icon="arrow-left"
           />

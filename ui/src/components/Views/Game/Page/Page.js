@@ -22,9 +22,6 @@ class Page extends React.Component {
     return (
       <div
         className={styles.component}
-        ref={(node) => {
-          this.node = node
-        }}
         id="page"
       >
         <Editor

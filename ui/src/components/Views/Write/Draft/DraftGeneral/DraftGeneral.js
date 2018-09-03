@@ -7,6 +7,7 @@ import {
   TextAreaInput,
 } from 'components/common'
 import { RouteService } from 'services'
+import classnames from 'classnames'
 import GenreList from './GenreList'
 import PageList from './PageList'
 import DeleteButton from './DeleteButton'
@@ -37,15 +38,13 @@ const DraftGeneral = ({
             onChange: startingPageId => updateBook({ startingPageId }),
           }}
         />
-        {
-          startingPage
-          ? <Button domProps={{ onClick: () => tryGame(book) }}>
-              Essayer mon brouillon
-            </Button>
-          : <Button className={styles.disabled}>
-              Essayer mon brouillon
-            </Button>
-        }
+        <Button
+          domProps={{ onClick: () => tryGame(book) }}
+          className={classnames({ [styles.disabled]: startingPage })}
+          disabled={startingPage}
+        >
+          Essayer mon brouillon
+        </Button>
       </div>
       <div className={styles.bookInformation}>
         <Input

@@ -10,8 +10,8 @@
   text-transform: none;
   font-size: 1.35rem;
   opacity: 0;
-  transform: translateY(10px) scale(1.05);
-  transition: opacity $fast-duration, transform $fast-duration;
+  transform: translateY(30px) scale(0.9);
+  transition: opacity $fast-duration ease-in-out, transform $fast-duration ease-in-out;
  }
 
 .displayed {

@@ -13,7 +13,7 @@ const ForbiddenLink = ({ icon }) => (
   >
     <ToolbarButton
       icon={icon}
-      domProps={{ className: styles.forbidden }}
+      iconDomProps={{ className: styles.forbidden }}
     />
   </RouterLink>
 )

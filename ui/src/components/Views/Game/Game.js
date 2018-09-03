@@ -36,7 +36,7 @@ class Game extends React.Component {
   }
 
   isBottom = (el) => {
-    return el.getBoundingClientRect().bottom <= window.innerHeight + 1
+    return el.getBoundingClientRect().bottom <= window.innerHeight + 50
   }
 
   trackScrolling() {

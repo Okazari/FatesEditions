@@ -3,12 +3,11 @@ import Transition from './Transition'
 import styles from './style.scss'
 
 const TransitionsList = ({ transitions }) => {
-  const length = transitions.length
   return (
     <div className={styles.transitionsList}>
       {
         !!transitions && transitions.map((transitionId, index) => {
-          const delay = Math.floor(150 / length) * index + 100
+          const delay = 50 * index + 100
           return (
             <Transition
               key={transitionId}
