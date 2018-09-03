@@ -40,8 +40,7 @@ const DraftGeneral = ({
         />
         <Button
           domProps={{ onClick: () => tryGame(book) }}
-          className={classnames({ [styles.disabled]: startingPage })}
-          disabled={startingPage}
+          disabled={!startingPage}
         >
           Essayer mon brouillon
         </Button>

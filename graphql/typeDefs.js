@@ -18,6 +18,7 @@ const statType = `
   max: Int
   min: Int
   visible: Boolean
+  icon: String
 `
 
 const objectType = `
@@ -25,6 +26,7 @@ const objectType = `
   description: String
   atStart: Boolean
   visible: Boolean
+  icon: String
 `
 
 const pageType = `

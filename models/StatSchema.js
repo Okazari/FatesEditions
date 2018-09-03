@@ -6,5 +6,6 @@ module.exports = new Schema({
   max: Number,
   min: Number,
   name: String,
+  icon: String,
   visible: { type: Boolean, default: true },
 })
