@@ -5,7 +5,6 @@ import styles from './style.scss'
 const Stats = ({ descriptionVisible, stat, value, toggleDescription }) => {
   const { icon, name, description, visible } = stat
   if (!visible) return null
-  console.log('icon in displayStat', icon)
   return (
     <div onClick={() => description && toggleDescription()}>
       <div className={styles.row}>

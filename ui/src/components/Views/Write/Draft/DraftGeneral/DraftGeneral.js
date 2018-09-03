@@ -7,7 +7,6 @@ import {
   TextAreaInput,
 } from 'components/common'
 import { RouteService } from 'services'
-import classnames from 'classnames'
 import GenreList from './GenreList'
 import PageList from './PageList'
 import DeleteButton from './DeleteButton'

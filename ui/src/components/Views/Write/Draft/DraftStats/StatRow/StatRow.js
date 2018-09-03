@@ -15,11 +15,11 @@ const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
   return (
     <DataRow>
       <div>
-        <Select 
+        <Select
           className={styles.select}
           value={{
             value: stat.icon,
-            label: <FontAwesomeIcon icon={stat.icon} />, 
+            label: <FontAwesomeIcon icon={stat.icon} />,
           }}
           onChange={icon => updateStat({ id: stat.id, icon: icon.value })}
           options={options}
