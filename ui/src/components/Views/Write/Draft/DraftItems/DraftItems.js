@@ -4,7 +4,7 @@ import ItemRow from './ItemRow'
 import styles from './styles.scss'
 
 const headers = [
-  { type: 'Icône', key: 'icon' },
+  { type: 'Icône', key: 'icon', className: styles.small },
   { type: 'Nom', key: 'name' },
   { type: 'Description', key: 'description', className: styles.large },
   { type: 'Début', key: 'start', className: styles.small },
