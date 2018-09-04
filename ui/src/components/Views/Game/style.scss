@@ -19,6 +19,7 @@
 
 .wrapper {
   margin: auto 0;
+  perspective: 10000px;
 }
 
 .panelIsOpen {
@@ -47,10 +48,24 @@
     display: none;
   }
   flex-shrink: 4;
-  transition: width $fast-duration ease-out, opacity $fast-duration ease-out;
+  // transition: width $fast-duration ease-out;
 }
 
 .bottomReached {
-  opacity: 100;
-  width: 40%;
+  animation-name: bottomReached;
+  animation-duration: $fast-duration;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bottomReached {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+  100% {
+    opacity: 100;
+    width: 40%;
+  }
 }
