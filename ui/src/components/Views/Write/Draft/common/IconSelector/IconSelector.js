@@ -17,26 +17,26 @@ const IconSelector = ({ id, icon, update }) => {
         value: icon,
         label: <FontAwesomeIcon icon={icon} />,
       }}
-      onChange={icon => update({ id, icon: icon.value })}
+      onChange={selectedIcon => update({ id, icon: selectedIcon.value })}
       options={options}
       styles={{
         control: () => ({
-            display: 'flex',
-            width: '100%',
-            backgroundColor: '#F8F8F8',
-            padding: '2px',
-            borderBottom: 'dashed 1px #000',
-            overflowX: 'hidden',
-          }),
-        option: (base) => ({
+          display: 'flex',
+          width: '100%',
+          backgroundColor: '#F8F8F8',
+          padding: '2px',
+          borderBottom: 'dashed 1px #000',
+          overflowX: 'hidden',
+        }),
+        option: base => ({
           ...base,
           backgroundColor: '#F8F8F8',
           overflowX: 'hidden',
         }),
-        dropdownIndicator: (base) => ({
+        dropdownIndicator: base => ({
           ...base,
           padding: '0',
-        })
+        }),
       }}
     />
   )
