@@ -1,14 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import * as freeSVG from '@fortawesome/free-solid-svg-icons'
+import { FontAwesome } from 'services'
 import AppRouter from './router'
 
-// font-awesome initialization
-Object.values(freeSVG)
-  .filter(fa => !!fa.icon)
-  .forEach(fa => library.add(fa))
+FontAwesome.init()
 
 ReactDOM.render(
   (
