@@ -21,7 +21,9 @@ class Game extends React.Component {
   }
 
   resetScrolling() {
-    this.gameWindow.scrollTop = 0
+    if (this.gameWindow) {
+      this.gameWindow.scrollTop = 0
+    }
     this.setState(
       { bottomReached: false },
       () => {
