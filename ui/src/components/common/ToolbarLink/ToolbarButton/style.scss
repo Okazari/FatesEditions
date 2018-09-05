@@ -30,3 +30,13 @@
     font-size: 2em;
   }
 }
+
+.dark {
+  background-color: $dark-background-color-2;
+  color: $dark-primary-color !important;
+}
+
+.selected {
+  background-color: $dark-primary-color;
+  color: $dark-background-color-2 !important;
+}

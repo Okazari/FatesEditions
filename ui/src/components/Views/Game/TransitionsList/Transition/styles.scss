@@ -1,0 +1,28 @@
+@import '~styles/colors';
+@import '~styles/animations';
+
+.component {
+  text-align: left;
+  background-color: $dark-background-color-1;
+  padding: 10px 30px;
+  margin: 10px 0;
+  width: 100%;
+  text-transform: none;
+  font-size: 1.35rem;
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  transition: opacity $fast-duration ease-in-out, transform $fast-duration ease-in-out;
+ }
+
+.displayed {
+  transform: translateY(0px) scale(1);
+  opacity: 1;
+}
+
+.error {
+  text-align: right;
+}
+
+.disabled {
+  background-color: $dark-background-color-3;
+}

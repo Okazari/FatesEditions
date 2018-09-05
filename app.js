@@ -8,6 +8,15 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const graphqlHTTP = require('express-graphql')
+const mailCredentials = require('./mailSender/mailCredentials')
+
+if (process.env.JWT_SECRET === undefined) {
+  process.env.JWT_SECRET = 'mysecretstory'
+  process.env.MAIL_USER = mailCredentials.user
+  process.env.MAIL_CLIENT_ID = mailCredentials.clientId
+  process.env.MAIL_CLIENT_SECRET = mailCredentials.clientSecret
+  process.env.MAIL_REFRESH_TOKEN = mailCredentials.refreshToken
+}
 
 let uriMongo = `mongodb://${process.env.IP || 'localhost'}:27017/myvirtualstorybook`
 if (process.env.MONGODB_ADDON_URI) {
@@ -51,11 +60,11 @@ app.use('/api', portal)
 
 app.use((req, res, next) => {
   try {
-    const payload = jwt.verify(req.get('Authorization'), 'mysecretstory')
+    const payload = jwt.verify(req.get('Authorization'), process.env.JWT_SECRET)
     req.payload = payload
     const { user } = payload
     user.password = null
-    const token = jwt.sign({ user }, 'mysecretstory', { expiresIn: 3600 })
+    const token = jwt.sign({ user }, process.env.JWT_SECRET, { expiresIn: 3600 })
     console.log(`${payload.user.username} ${payload.user._id} ${payload.exp}`)
     res.set('Auth-token', token)
     req.locals = {

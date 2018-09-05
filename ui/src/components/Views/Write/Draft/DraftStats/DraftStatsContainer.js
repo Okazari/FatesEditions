@@ -11,6 +11,7 @@ const coreStat = `
   initValue
   min
   max
+  icon
 `
 
 const core = `

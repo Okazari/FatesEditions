@@ -1,16 +1,32 @@
 import React from 'react'
-import { Layout, Content, TrialToolbar } from 'components/Layout'
+import { connect } from 'react-redux'
+import { Layout, GameContent, Panel, GameToolbar } from 'components/Layout'
+import { Inventory, DisplayStats, DisplayItems } from 'components/common'
 import Game from 'components/Views/Game'
 
+const mapStateToProps = ({ ui: { panelIsOpen, displayStats } }) => ({ panelIsOpen, displayStats })
+
 const TrialView = (props) => {
+  const { panelIsOpen, displayStats } = props
   return (
     <Layout>
-      <TrialToolbar {...props} />
-      <Content>
+      <GameToolbar />
+      <GameContent>
+        {
+          panelIsOpen &&
+          <Panel>
+            <Inventory>
+              { displayStats
+                ? <DisplayStats />
+                : <DisplayItems />
+              }
+            </Inventory>
+          </Panel>
+        }
         <Game {...props} />
-      </Content>
+      </GameContent>
     </Layout>
   )
 }
 
-export default TrialView
+export default connect(mapStateToProps)(TrialView)

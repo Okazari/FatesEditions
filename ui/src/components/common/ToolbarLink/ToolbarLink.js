@@ -10,7 +10,7 @@ const ToolbarLink = ({ to, icon, location }) => {
   }
   return (
     <RouterLink to={to}>
-      <ToolbarButton icon={icon} domProps={{ className }} />
+      <ToolbarButton icon={icon} iconDomProps={{ className }} />
     </RouterLink>
   )
 }

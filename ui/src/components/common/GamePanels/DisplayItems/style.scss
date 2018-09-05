@@ -1,0 +1,20 @@
+@import '~styles/colors';
+@import '~styles/responsive';
+
+.component {
+  max-width: 500px;
+  padding: 50px 50px 50px 0;
+  display: flex;
+  flex-direction: column;
+  color: $dark-primary-color;
+  font-size: 1.2rem;
+  @media #{$mobile} {
+    padding: 20px 20px 20px 0;
+  }
+}
+
+.title {
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 10px;
+}

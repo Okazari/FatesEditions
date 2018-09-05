@@ -1,6 +1,8 @@
 @import "~styles/colors";
 
 .component {
+  position: absolute;
+  // height: 150%;
   text-align: center;
   width: 100%;
   perspective: 200px;

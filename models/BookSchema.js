@@ -5,7 +5,7 @@ const Item = require('./ObjectSchema')
 const Commentary = require('./CommentarySchema')
 
 const Book = new Schema({
-  name: String,
+  name: { type: String, default: 'Livre sans titre'},
   tags: [String],
   synopsis: String,
   cover: String,

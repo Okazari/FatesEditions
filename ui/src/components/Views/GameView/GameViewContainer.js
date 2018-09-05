@@ -30,6 +30,7 @@ query getGame($gameId: ID!) {
         max
         min
         visible
+        icon
       }
       objects {
         id
@@ -37,6 +38,7 @@ query getGame($gameId: ID!) {
         description
         atStart
         visible
+        icon
       }
       author {
         id
@@ -83,7 +85,7 @@ query getGame($gameId: ID!) {
 }
 `
 
-// TODO: Add loading and error returns
+// TODO: Add error returns
 const GameViewContainer = ({ params }) => {
   return (
     <Query

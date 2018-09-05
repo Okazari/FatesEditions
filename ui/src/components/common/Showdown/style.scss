@@ -51,6 +51,18 @@
   margin-bottom: 30px;
 }
 
+.unpublish {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 15px 5px 10px;
+  > i {
+    padding-right: 10px;
+    color: $white;
+  }
+  background-color: $background-error;
+  color: $white;
+}
+
 .synopsis {
   margin: 10px 0;
   text-align: justify;

@@ -1,0 +1,71 @@
+@import '~styles/colors';
+@import '~styles/sizes';
+@import '~styles/mixins';
+@import '~styles/responsive';
+@import '~styles/animations';
+
+.content {
+  @include scrollbar();
+  box-sizing: border-box;
+  color: $dark-font-color;
+  width: 100%;
+  min-height: 100%;
+  background-color: $dark-background-color-2;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.35rem;
+  overflow: auto;
+}
+
+.wrapper {
+  margin: auto 0;
+  perspective: 5000px;
+}
+
+.panelIsOpen {
+  @media #{$lt-desktop} {
+    display: none;
+  }
+}
+
+.inFlowTransitions {
+  display: none;
+  @media #{$lt-wide} {
+    display: block;
+  }
+}
+
+.fixedTransitions {
+  width: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // overflow: hidden;
+  position: sticky;
+  opacity: 0;
+  top: 0;
+  @media #{$lt-wide} {
+    display: none;
+  }
+  flex-shrink: 4;
+  // transition: width $fast-duration ease-out;
+}
+
+.bottomReached {
+  animation-name: bottomReached;
+  animation-duration: $fast-duration;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes bottomReached {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+  100% {
+    opacity: 100;
+    width: 40%;
+  }
+}

@@ -17,13 +17,15 @@ const GameTile = ({ content, showDelay, deleteGame }) => {
   const infos = [title, date]
   const onClick = () => RouteService.goTo(RouteService.routes.playgame(content.id))
   const onDelete = () => deleteGame()
-  return (<Book
-    showDelay={showDelay}
-    book={content.book}
-    infos={infos}
-    onClick={onClick}
-    onDelete={onDelete}
-  />)
+  return (
+    <Book
+      showDelay={showDelay}
+      book={content.book}
+      infos={infos}
+      onClick={onClick}
+      onDelete={onDelete}
+    />
+  )
 }
 
 export default GameTile

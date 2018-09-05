@@ -13,4 +13,13 @@
   &:hover {
     box-shadow: $box-shadow-1;
   }
+  &:disabled {
+    background-color: $background-color-light-2;
+    color: $decorator-color;
+    cursor: not-allowed;
+    &:hover {
+      box-shadow: none;
+    } 
+  }
 }
+

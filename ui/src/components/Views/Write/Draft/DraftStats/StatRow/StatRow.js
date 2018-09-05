@@ -1,11 +1,15 @@
 import React from 'react'
 import { Input, ButtonIcon, DataRow } from 'components/common'
+import { IconSelector } from '../../common'
 import styles from '../styles.scss'
 
 const StatRow = ({ stat, index, disabled, updateStat, removeStat }) => {
   const onDelete = () => removeStat(stat)
   return (
     <DataRow>
+      <div className={styles.small}>
+        <IconSelector id={stat.id} icon={stat.icon} update={updateStat} />
+      </div>
       <div>
         <Input
           debounce={500}

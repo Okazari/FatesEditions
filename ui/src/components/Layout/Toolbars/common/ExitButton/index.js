@@ -1,1 +1,1 @@
-export default from './ExitButton'
+export default from './ExitButtonContainer'

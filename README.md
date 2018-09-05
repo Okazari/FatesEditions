@@ -32,3 +32,16 @@ Les objectifs sont :
  - Système de lancé de dé
  - Système de combat
  - Système de badge
+
+
+--------------------
+
+Pour developper le projet en local, 
+créer en local un fichier mailSender/mailCredentials.js
+
+module.exports = {
+  user: 'fakeemail@toto.com',
+  clientId: 'fakeClientID',
+  clientSecret: 'fakeClientSecret',
+  refreshToken: 'fakeRefreshToken',
+}

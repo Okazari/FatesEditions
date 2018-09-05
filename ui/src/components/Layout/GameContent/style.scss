@@ -1,0 +1,11 @@
+@import '~styles/sizes';
+@import '~styles/responsive';
+
+.component {
+  display: flex;
+  width: $content-size;
+  @media #{$mobile} {
+    width: auto;
+    height: $content-mobile-size;
+  }
+}

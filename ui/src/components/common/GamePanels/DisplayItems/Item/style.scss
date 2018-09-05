@@ -1,0 +1,42 @@
+@import '~styles/colors';
+
+.row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.icon {
+  width: 40px;
+  color: $dark-primary-color;
+  padding-right: 20px;
+}
+
+.name {
+  text-align: left;
+  flex-grow: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.status {
+  width: 10px;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  padding: 0 20px;
+}
+
+.description {
+  width: 100%;
+  text-align: justify;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 0.1px dotted;
+}
+
+.fullName {
+  font-weight: bold;
+}

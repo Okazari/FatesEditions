@@ -1,31 +1,50 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
 .component {
-  align-items: stretch;
   display: inline-flex;
   width: 100%;
   padding: 20px;
+}
 
-  .bookCover {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-    width: 350px;
-    min-height: 400px;
-  }
+.actionPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 50%;
+  max-width: 350px;
+}
 
-  .bookInformation {
-    display: flex;
-    flex-direction: column;
-    padding: 0 20px;
-    width: 80%;
-    > div {
-      margin-bottom: 10px;
-    }
-  }
+.bookCover {
+  width: 100%;
+  padding-bottom: 20px;
+}
 
-  .centerFooter {
-    display: flex;
-    justify-content: center;
+.bookInformation {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-left: 30px;
+  width: 100%;
+  > div {
+    flex-grow: 0;
+    margin-bottom: 10px;
   }
+}
+
+.delete {
+  margin-top: 5px;
+  background-color: $background-error;
+}
+
+.publish {
+  margin: 5px 0 20px 0;
+}
+
+.alertMessage {
+  padding: 10px;
+  box-shadow: $box-shadow-1;
+  background-color: $background-error;
+  margin-bottom: 10px;
+  color: $white;
 }

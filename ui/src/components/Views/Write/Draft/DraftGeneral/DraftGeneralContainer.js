@@ -1,10 +1,10 @@
 import React from 'react'
-import { graphql, compose } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Loader } from 'components/common'
 import DraftGeneral from './DraftGeneral'
 
 const query = gql`
-
   query BookById ($id: ID!) {
     book(id: $id) {
       id
@@ -29,17 +29,6 @@ const query = gql`
   }
 `
 
-const queryOptions = {
-  options: ({ params }) => ({
-    variables: {
-      id: params.draftId,
-    },
-  }),
-  props: ({ data: { book }, ...rest }) => ({
-    ...rest,
-    book,
-  }),
-}
 
 const mutation = gql`
   mutation updateBook($book: BookInput!) {
@@ -54,24 +43,47 @@ const mutation = gql`
   }
 `
 
-const mutationOptions = {
-  name: 'updateBook',
-}
-
 const DraftGeneralContainer = (props) => {
-  const { updateBook, book } = props
-  const _updateBook = updatedBook => updateBook({
-    variables: {
-      book: {
-        id: book.id,
-        ...updatedBook,
-      },
-    },
-  })
-  return <DraftGeneral {...props} updateBook={_updateBook} />
+  return (
+    <Query
+      query={query}
+      variables={{
+        id: props.params.draftId,
+      }}
+    >
+      {
+        ({ loading, data }) => {
+          if (loading) return <Loader />
+          const { book } = data
+          return (
+            <Mutation
+              mutation={mutation}
+            >
+              {
+                (updateBook) => {
+                  const _updateBook = updatedBook => updateBook({
+                    variables: {
+                      book: {
+                        id: book.id,
+                        ...updatedBook,
+                      },
+                    },
+                  })
+                  return (
+                    <DraftGeneral
+                      book={book}
+                      updateBook={_updateBook}
+                    />
+                  )
+                }
+              }
+            </Mutation>
+          )
+        }
+      }
+    </Query>
+  )
 }
 
-export default compose(
-  graphql(query, queryOptions),
-  graphql(mutation, mutationOptions),
-)(DraftGeneralContainer)
+export default DraftGeneralContainer
+

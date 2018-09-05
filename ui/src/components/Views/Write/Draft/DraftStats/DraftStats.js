@@ -4,6 +4,7 @@ import StatRow from './StatRow'
 import styles from './styles.scss'
 
 const headers = [
+  { type: 'Icône', key: 'icon', className: styles.small },
   { type: 'Nom', key: 'name' },
   { type: 'Description', key: 'description', className: styles.large },
   { type: 'Valeur initiale', key: 'initial' },

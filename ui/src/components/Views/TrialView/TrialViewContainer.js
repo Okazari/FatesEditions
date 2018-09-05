@@ -30,6 +30,7 @@ const query = gql`
           max
           min
           visible
+          icon
         }
         objects {
           id
@@ -37,6 +38,7 @@ const query = gql`
           description
           atStart
           visible
+          icon
         }
         author {
           id
@@ -82,7 +84,7 @@ const query = gql`
     }
   }
 `
-// TODO: Add loading and error returns
+// TODO: Add error returns
 const TrialViewContainer = ({ params }) => (
   <Query
     query={query}

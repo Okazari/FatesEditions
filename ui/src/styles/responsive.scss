@@ -1,2 +1,11 @@
-$mobile: "(max-width: 767px)";
-$tablet: "(min-width: 768px) and (max-width: 1023px)";
+$wide: "(min-width: 1680px)";
+$lt-wide: "(max-width: 1680px)";
+$desktop: "(min-width: 1023px) and (max-width: 1680px)";
+
+$lt-desktop: "(max-width: 1024px)";
+$gt-tablet: "(min-width: 1025px)";
+$tablet: "(min-width: 768px) and (max-width: 1024px)";
+
+$gt-mobile: "(min-width: 769px)";
+$mobile: "(max-width: 768px)";
+

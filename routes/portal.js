@@ -12,9 +12,8 @@ router.post('/login', (req, res, next) => {
       if (!player || SHA512(req.body.password) != player.password) {
         res.sendStatus(403)
       } else {
-        // TODO Exporter le secret dans la config
         player.password = null
-        const token = jwt.sign({ user: player }, 'mysecretstory', { expiresIn: 3600 })
+        const token = jwt.sign({ user: player }, process.env.JWT_SECRET, { expiresIn: 3600 })
         res.send({ token, user: player })
       }
     }, err => next(err))
@@ -83,8 +82,7 @@ router.post('/subscribe', (req, res, next) => {
         newPlayer.password = SHA512(req.body.password)
         newPlayer.tour = true
         newPlayer.save((err, p) => {
-          // TODO Exporter le secret dans la config
-          const token = jwt.sign({ user: p }, 'mysecretstory', { expiresIn: 3600 })
+          const token = jwt.sign({ user: p }, process.env.JWT_SECRET, { expiresIn: 3600 })
           res.send({ token, user: p })
         })
       } else {

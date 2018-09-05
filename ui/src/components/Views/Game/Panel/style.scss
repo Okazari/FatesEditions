@@ -1,0 +1,21 @@
+@import '~styles/sizes';
+@import '~styles/colors';
+@import '~styles/mixins';
+@import '~styles/responsive';
+
+.panel {
+  @include scrollbar();
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  flex-shrink: 4;
+  padding-left: 50px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @media #{$mobile} {
+    padding-left: 20px;
+  }
+}
