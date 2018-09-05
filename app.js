@@ -8,16 +8,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const graphqlHTTP = require('express-graphql')
-const mailCredentials = require('./mailSender/mailCredentials')
-
-if (process.env.JWT_SECRET === undefined) {
-  process.env.JWT_SECRET = 'mysecretstory'
-  process.env.MAIL_USER = mailCredentials.user
-  process.env.MAIL_CLIENT_ID = mailCredentials.clientId
-  process.env.MAIL_CLIENT_SECRET = mailCredentials.clientSecret
-  process.env.MAIL_REFRESH_TOKEN = mailCredentials.refreshToken
-}
-
+  
 let uriMongo = `mongodb://${process.env.IP || 'localhost'}:27017/myvirtualstorybook`
 if (process.env.MONGODB_ADDON_URI) {
   uriMongo = process.env.MONGODB_ADDON_URI
