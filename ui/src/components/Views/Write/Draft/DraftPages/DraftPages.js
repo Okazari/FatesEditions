@@ -13,7 +13,10 @@ const headers = [
 const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage }) => {
   return (
     <div className={styles.component}>
-      <Button domProps={{ onClick: addPage, disabled }}>
+      <Button
+        domProps={{ onClick: addPage, disabled }}
+        className={styles.button}  
+      >
         Ajouter une page
       </Button>
       <DataTable className="table-hover" headers={headers}>

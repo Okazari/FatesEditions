@@ -18,7 +18,10 @@ const DraftStats = ({ book, updateStat, addStat, removeStat, disabled = false })
   return !!book && (
     <div>
       <div className={styles.component}>
-        <Button domProps={{ onClick: addStat, disabled }}>
+        <Button
+          domProps={{ onClick: addStat, disabled }}
+          className={styles.button}
+        >
           Ajouter une caractéristique
         </Button>
         <DataTable headers={headers} className="table-hover">

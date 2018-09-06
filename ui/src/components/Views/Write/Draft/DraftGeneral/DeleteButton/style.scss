@@ -1,6 +1,15 @@
-@import '~styles/colors';
+@import "~styles/colors";
+
+.component {
+  display: flex;
+  flex-direction: column;
+  > div {
+    margin: 10px 0;
+  }
+}
 
 .delete {
-  width: 100%;
+  margin: 0 auto;
+  padding: 5px 100px;
   background-color: $background-error;
 }

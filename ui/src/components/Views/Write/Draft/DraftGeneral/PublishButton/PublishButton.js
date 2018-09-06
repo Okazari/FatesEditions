@@ -3,7 +3,7 @@ import { AlertMessage, Emphasis, Button } from 'components/common'
 import styles from './style.scss'
 
 const PublishButton = ({ onClick, loading, error }) => (
-  <div>
+  <div className={styles.component}>
     {
       error
       ? (

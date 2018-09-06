@@ -1,5 +1,5 @@
 .component {
-  align-items: stretch;
+  align-items: center;
   display: inline-flex;
   flex-direction: column;
   width: 100%;
@@ -15,6 +15,12 @@
   }
 }
 
+.button {
+  padding: 5px 100px;
+  margin-bottom: 10px;
+}
+
 .select {
   width: 100%;
+  margin: 0 auto;
 }

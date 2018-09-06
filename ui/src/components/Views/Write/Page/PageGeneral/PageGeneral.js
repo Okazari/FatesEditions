@@ -35,20 +35,11 @@ const PageGeneral = ({
           placeholder: 'Mémo',
         }}
       />
-      {/* <Input
-        label="Lien SoundCloud"
-        debounce={500}
-        domProps={{
-          placeholder: 'Lien SoundCloud de votre musique de fond',
-          value: page.backgroundMusic,
-          onChange: backgroundMusic => updatePage({ backgroundMusic }),
-        }}
-      /> */}
       <div className={styles.effectTitle}>
         {"Effets à l'arrivée sur la page"}
       </div>
       <div className={styles.effectRow}>
-        <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
+        <Button className={styles.button} domProps={{ onClick: addEffect }} >
           {'Ajouter un Effet'}
         </Button>
         {

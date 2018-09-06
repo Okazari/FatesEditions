@@ -3,7 +3,7 @@ import { AlertMessage, Emphasis, Button } from 'components/common'
 import styles from './style.scss'
 
 const DeleteButton = ({ onClick }) => (
-  <div>
+  <div className={styles.component}>
     <AlertMessage title={'Attention !'}>
       <Emphasis>Supprimer</Emphasis>
       votre brouillon supprimera celui-ci

@@ -16,8 +16,11 @@ const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = fa
   return !!book && (
     <div>
       <div className={styles.component}>
-        <Button domProps={{ onClick: addObject, disabled }}>
-          Ajouter un objet
+        <Button
+          domProps={{ onClick: addObject, disabled }}
+          className={styles.button} 
+        >
+          Ajouter un objet / une compétence
         </Button>
         <DataTable headers={headers} className="table-hover">
           {

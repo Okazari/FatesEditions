@@ -7,7 +7,7 @@ const PageTransition = ({ book, page, addTransition, removeTransition }) => {
   if (!page) return null
   return (
     <div className={styles.component}>
-      <Button className="md-whiteframe-z1" domProps={{ onClick: addTransition }}>
+      <Button className={styles.button} domProps={{ onClick: addTransition }}>
         {'Ajouter une transition'}
       </Button>
       {
