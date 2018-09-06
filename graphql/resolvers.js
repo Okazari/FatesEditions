@@ -115,6 +115,13 @@ module.exports = {
                  .set(page)
                  .save()
     })),
+    updatePageReturnBook: isAuth((_, { bookId, page }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', page.id)
+                 .set(page)
+                 .save()
+                 .then(() => book.ressource)
+    })),
+
     deletePage: isAuth((_, { bookId, pageId }) => findBookById(bookId).then(book => {
       book.ressource.pages.forEach(page => {
         page.transitions.forEach(transition => {

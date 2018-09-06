@@ -8,17 +8,16 @@ const tabDrafts = { label: 'Mes brouillons', link: RouteService.routes.writedraf
 const tabBooks = { label: 'Mes livres publiés', link: RouteService.routes.writepublications() }
 const tabs = [tabDrafts, tabBooks]
 
-const MyBooks = props => {
-  return (
-    <div>
-      <div className={styles.app}>
-        <AppLayout {...props} tabs={tabs} />
-      </div>
-      <div className={styles.forbidden}>
-        <Forbidden {...props} />
-      </div>
+const MyBooks = props => (
+  <div>
+    <div className={styles.app}>
+      <AppLayout {...props} tabs={tabs} />
     </div>
-  )
-}
+    <div className={styles.forbidden}>
+      <Forbidden {...props} />
+    </div>
+  </div>
+)
+
 
 export default MyBooks

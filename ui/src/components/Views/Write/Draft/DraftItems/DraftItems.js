@@ -18,7 +18,7 @@ const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = fa
       <div className={styles.component}>
         <Button
           domProps={{ onClick: addObject, disabled }}
-          className={styles.button} 
+          className={styles.button}
         >
           Ajouter un objet / une compétence
         </Button>

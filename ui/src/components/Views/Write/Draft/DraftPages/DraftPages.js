@@ -10,12 +10,12 @@ const headers = [
   { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
-const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage }) => {
+const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage, updatePage }) => {
   return (
     <div className={styles.component}>
       <Button
         domProps={{ onClick: addPage, disabled }}
-        className={styles.button}  
+        className={styles.button}
       >
         Ajouter une page
       </Button>
@@ -28,6 +28,7 @@ const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage }) => 
               bookId={book.id}
               disabled={disabled}
               removePage={removePage}
+              updatePage={updatePage}
             />,
           )
         }

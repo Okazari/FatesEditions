@@ -187,6 +187,7 @@ module.exports = `
     createPage(bookId: ID!): Book
     createPageReturnPage(bookId: ID!): Page
     updatePage(bookId: ID!, page: PageInput!): Page
+    updatePageReturnBook(bookId: ID!, page: PageInput!): Book
     deletePage(bookId: ID!, pageId: ID!): Book
     
     createPageEffect(bookId: ID!, pageId: ID!): Page
