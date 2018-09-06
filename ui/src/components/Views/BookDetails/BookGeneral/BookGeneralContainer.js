@@ -48,6 +48,7 @@ const query = gql`
           username
         }
       }
+      lastModificationDate
     }
   }
 `
