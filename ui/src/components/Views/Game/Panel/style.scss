@@ -17,5 +17,6 @@
   overflow-x: hidden;
   @media #{$mobile} {
     padding-left: 20px;
+    width: 100%;
   }
 }
