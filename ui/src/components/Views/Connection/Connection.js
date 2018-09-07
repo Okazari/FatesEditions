@@ -5,11 +5,11 @@ import styles from './style.scss'
 
 const tabSignIn = { label: 'Connexion', link: RouteService.routes.signin() }
 const tabSignUp = { label: 'Inscription', link: RouteService.routes.signup() }
-const tabPassword = { label: 'mot de passe perdu?', link: RouteService.routes.passwordrecovery() }
+const tabPassword = { label: 'mot de passe perdu ?', link: RouteService.routes.passwordrecovery() }
 const tabs = [tabSignIn, tabSignUp, tabPassword]
 
 const Message = () => (
-  <AlertMessage 
+  <AlertMessage
     title={'Vous avez été redirigé'}
     className={styles.alertMessage}
   >

@@ -14,7 +14,7 @@ class AuthService {
   }
 
   removeToken = () => {
-    window.localStorage.setItem('auth-token', '')
+    window.localStorage.removeItem('auth-token')
   }
 
   logout = () => {

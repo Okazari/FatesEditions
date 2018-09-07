@@ -7,7 +7,7 @@ import RouteService from './RouteService'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import HttpService from './HttpService'
 
-const errorMiddleware = onError(({ response, graphQLErrors, networkError }) => {
+const errorMiddleware = onError(({ response, graphQLErrors }) => {
   if (graphQLErrors) {
     const unauthorized = !!graphQLErrors.find(({ code }) => code === 401)
     if(unauthorized) {
@@ -15,7 +15,7 @@ const errorMiddleware = onError(({ response, graphQLErrors, networkError }) => {
       response.errors = null
     }
   }
-});
+})
 
 const client = new ApolloClient({
   link: concat(errorMiddleware, new HttpLink({
