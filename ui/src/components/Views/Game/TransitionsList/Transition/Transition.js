@@ -32,21 +32,23 @@ class Transition extends React.Component {
     })
     if (!visible) return null
     return (
-      <Button
-        domProps={{
-          onClick,
-        }}
-        className={className}
-      >
-        {text}
-        {
-          errors.map(error => <div
-            className={styles.error}
-            key={
-              `${error.message}${error.columnNumber}-${error.lineNumber}`
-            }
-          >{error.message}</div>)}
-      </Button>
+      <div>
+        <Button
+          domProps={{
+            onClick,
+          }}
+          className={className}
+        >
+          {text}
+          {
+            errors.map(error => <div
+              className={styles.error}
+              key={
+                `${error.message}${error.columnNumber}-${error.lineNumber}`
+              }
+            >{error.message}</div>)}
+        </Button>
+      </div>
     )
   }
 }

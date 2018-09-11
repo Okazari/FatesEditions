@@ -1,5 +1,6 @@
 import React from 'react'
 import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-router'
+import { Roulette } from 'services/Roulette'
 
 // Apollo
 import { ApolloProvider } from 'react-apollo'
@@ -40,6 +41,8 @@ const AppRouter = () => {
   return (
     <ApolloProvider client={ApolloClient} >
       <Provider store={store}>
+      <div>
+        <Roulette />
         <Router history={browserHistory}>
           <Route path="app">
             <IndexRedirect to="books" />
@@ -123,6 +126,7 @@ const AppRouter = () => {
             </Route>
           </Route>
         </Router>
+      </div>
       </Provider>
     </ApolloProvider>
   )
