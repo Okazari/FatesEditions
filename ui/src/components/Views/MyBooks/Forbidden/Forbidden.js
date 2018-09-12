@@ -10,7 +10,7 @@ const Forbidden = props => (
     <AppLayout {...props} tabs={tabs}>
       <AlertMessage
         title={'Edition des brouillons sur mobile et tablette impossible.'}
-        className={styles.forbidden} 
+        className={styles.forbidden}
       >
         La partie<Emphasis>édition</Emphasis>de livre {"n'est"} pas disponible sur les appareils
         <Emphasis>mobiles</Emphasis>et les<Emphasis>tablettes.</Emphasis>

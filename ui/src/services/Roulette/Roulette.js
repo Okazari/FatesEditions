@@ -1,85 +1,71 @@
 import React from 'react'
-import classnames from 'classnames'
+import posed from 'react-pose'
 import styles from './style.scss'
 
-class Number extends React.Component { 
-  constructor(props) {
-    super(props)
-    const { min, max } = props
-    this.state = {
-      number: Math.floor(Math.random() * (max - min) + min),
-    }
-    this.timeOut1 = setTimeout(
-      () => this.setState({ number: Math.floor(Math.random() * (max - min) + min) }),
-      100,
-    )
-    // this.timeOut2 = setTimeout(
-    //   () => this.setState({ number: Math.floor(Math.random() * (max - min) + min) }),
-    //   300,
-    // )
-    // this.timeOut3 = setTimeout(
-    //   () => this.setState({ number: Math.floor(Math.random() * (max - min) + min) }),
-    //   700,
-    // )
-    // this.timeOut4 = setTimeout(
-    //   () => this.setState({ number: Math.floor(Math.random() * (max - min) + min) }),
-    //   1600,
-    // )
-  }
+const Overlay = posed.div({
+  hidden: {
+    opacity: 0,
+    delayChildren: 600,
+  },
+  visible: {
+    opacity: 1,
+    delayChildren: 0,
+  },
+})
 
-  randomInRange = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min)
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeOut)
-  }
-
-  render() {
-    const { min, max, className } = this.props
-    const { play } = this.state
-    const finalClassName = classnames(className, {
-      [styles.animate]: play,
-    })
-
-    // this.timeOut = setTimeout(
-    //   () => this.setState(() => ({ number: this.randomInRange(min, max) })),
-    //   0,
-    // )
-
-
-   return (
-     <div className={finalClassName}>{this.randomInRange(min, max)}</div>
-    )
-  }
-}
+const Carousel = posed.div({
+  hidden: { transform: ({ zOffset }) => `translateZ(-${zOffset}px) rotateX(${2 * 360}deg)` },
+  visible: {
+    transform: ({ zOffset }) => `translateZ(-${zOffset}px) rotateX(0deg)`,
+    transition: { duration: 10000, ease: [0, 1, 0, 1] },
+  },
+})
 
 class Roulette extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      start: true,
-      slowdown: false,
-      stop: false,
-    }
-  }
+  state = { isVisible: false }
 
+  onClick = () => this.setState({ isVisible: !this.state.isVisible })
 
   render() {
-    const { min = 0, max = 20 } = this.props
+    const { cellHeight = 150, min = 0, max = 20 } = this.props
+    const { isVisible } = this.state
+    const numberOfCells = max - min
+
+    const allValues = Array.from(new Array(numberOfCells), (val, index) => index + min)
+    const zOffset = Math.ceil(cellHeight / (2 * Math.PI / numberOfCells))
+    const theta = 360 / numberOfCells
+
     return (
-      <div className={styles.overlay}>
-      <div className={styles.arrow}></div>
+      <Overlay
+        className={styles.overlay}
+        pose={isVisible ? 'visible' : 'hidden'}
+        onClick={this.onClick}
+      >
         <div className={styles.overflow}>
-          <div className={styles.roulette}>
-            <Number className={styles.one} min={min} max={max} />
-            <Number className={styles.two} min={min} max={max} />
-            <Number className={styles.three} min={min} max={max} />
-            <Number className={styles.four} min={min} max={max} />
-            <Number className={styles.five} min={min} max={max} />
+          <div className={styles.perspective}>
+            <Carousel
+              zOffset={zOffset}
+              className={styles.carousel}
+            >
+              {
+                allValues.map((number, index) => {
+                  const angle = index * theta
+                  return (
+                    <div
+                      className={styles.cell}
+                      style={{
+                        transform: `rotateX(${angle}deg) translateZ(${zOffset}px)`,
+                      }}
+                    >
+                      {number}
+                    </div>
+                  )
+                })
+              }
+            </Carousel>
           </div>
         </div>
-      </div>
+      </Overlay>
     )
   }
 }

@@ -1,8 +1,5 @@
 class RouletteService {
-  roll() {
-    return 'rolling dice'
-  }
-
+  roll = () => 'rolling dice'
 }
 
-export default new RouletteService
+export default new RouletteService()
