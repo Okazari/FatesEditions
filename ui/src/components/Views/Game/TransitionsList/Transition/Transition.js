@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Button } from 'components/common'
+import RouletteService from 'services'
 import styles from './styles.scss'
 
 class Transition extends React.Component {

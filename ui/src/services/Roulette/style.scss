@@ -1,5 +1,6 @@
 .overlay {
   position: absolute;
+  display: none;
   top: 0;
   bottom: 0;
   left: 0;
@@ -13,19 +14,39 @@
 }
 
 .overflow {
-  width: 500px;
+  position: relative;
+  width: 300px;
   height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
+ 
+.arrowLeft {
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-left: 30px solid #333;
+  border-bottom: 15px solid transparent;
+}
+
+.arrowRight {
+  position: absolute;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-right: 30px solid #333;
+  border-bottom: 15px solid transparent;
+}
 
 .perspective {
   position: relative;
   // border: 1px solid red;
-  width: 500px;
-  height: 150px;
+  width: 300px;
   perspective: 1000px;
 }
 
@@ -40,8 +61,7 @@
 .cell {
   display: block;
   position: absolute;
-  width: 500px;
-  height: 150px;
+  width: 300px;
   color: white;
   font-size: 8rem;
   text-align: center;
