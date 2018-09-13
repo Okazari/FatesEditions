@@ -96,10 +96,7 @@ app.use('/api/game', game)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  const err = new Error('Not Found')
-  err.status = 404
   res.redirect('/app')
-  next(err)
 })
 
 // error handlers
