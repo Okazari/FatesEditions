@@ -2,14 +2,13 @@ import React from 'react'
 import posed from 'react-pose'
 import styles from './style.scss'
 
+// TODO: externalised posed config
 const Overlay = posed.div({
   hidden: {
-    display: 'none',
     opacity: 0,
     delayChildren: 600,
   },
   visible: {
-    display: 'block',
     opacity: 1,
     delayChildren: 0,
   },
@@ -23,13 +22,16 @@ const Carousel = posed.div({
   },
 })
 
+const arrowDelay = 3000
+const arrowDuration = 1500
+
 const ArrowLeft = posed.div({
   hidden: { opacity: 0, left: '0px' },
   visible: {
     opacity: 1,
     left: '30px',
-    delay: 4000,
-    transition: { duration: 1000 },
+    delay: arrowDelay,
+    transition: { duration: arrowDuration },
   },
 })
 
@@ -38,8 +40,7 @@ const ArrowRight = posed.div({
   visible: {
     opacity: 1,
     right: '30px',
-    delay: 4000,
-    transition: { duration: 1000 },
+    delay: arrowDelay,
   },
 })
 
@@ -52,6 +53,9 @@ const Roulette = ({ onClick, visible, values = [], cellHeight = 150 }) => {
     <Overlay
       className={styles.overlay}
       pose={visible ? 'visible' : 'hidden'}
+      style={{
+        pointerEvents: visible ? 'auto' : 'none',
+      }}
       onClick={onClick}
     >
       <div className={styles.overflow}>

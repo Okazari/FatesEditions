@@ -1,3 +1,5 @@
+@import '~styles/colors';
+
 .overlay {
   position: absolute;
   display: none;
@@ -29,7 +31,7 @@
   width: 0;
   height: 0;
   border-top: 15px solid transparent;
-  border-left: 30px solid #333;
+  border-left: 30px solid $dark-font-color;
   border-bottom: 15px solid transparent;
 }
 
@@ -39,7 +41,7 @@
   width: 0;
   height: 0;
   border-top: 15px solid transparent;
-  border-right: 30px solid #333;
+  border-right: 30px solid $dark-font-color;
   border-bottom: 15px solid transparent;
 }
 
@@ -62,10 +64,9 @@
   display: block;
   position: absolute;
   width: 300px;
-  color: white;
+  color: $dark-font-color;
   font-size: 8rem;
   text-align: center;
-  vertical-align: middle;
   line-height: 130px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;

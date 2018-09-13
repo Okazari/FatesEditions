@@ -2,6 +2,11 @@
 @import '~styles/animations';
 
 .component {
+  display: flex;
+  align-items: center;
+}
+
+.transition {
   text-align: left;
   background-color: $dark-background-color-1;
   padding: 10px 30px;

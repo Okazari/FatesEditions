@@ -29,35 +29,36 @@ class RouletteService {
   }
 
   getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min)
+    return Math.floor(Math.random() * (max + 1 - min)) + min
   }
 
-  // TODO: getShuffledArray
   getShuffledArray = (min, max, result) => {
     const array = shuffle(
       Array.from(
-        newArray(max - min),
+        new Array(max + 1 - min),
         (val, index) => index + min,
-      )
+      ),
     )
-    array.unshift(array.splice(array.findIndex(result), 1))
+    array.unshift(array.splice(array.findIndex(elem => elem === result), 1)[0])
+    array.splice(20, array.length)
     return array
-  } 
+  }
 
   launchRoulette = (min, max) => {
-    return new Promise(resolve => {
-      const result = getRandomNumber(min, max)
+    return new Promise((resolve) => {
+      const result = this.getRandomNumber(min, max)
       this._setState({
         visible: true,
-        values: getShuffledArray(min, max, result),
+        values: this.getShuffledArray(min, max, result),
         onComplete: () => {
-          this._setState({ visible: false })
+          this._setState({
+            visible: false,
+          })
           resolve(result)
-        }
+        },
       })
     })
   }
 }
 
 export default new RouletteService()
-

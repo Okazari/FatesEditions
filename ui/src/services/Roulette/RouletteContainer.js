@@ -6,9 +6,8 @@ class RouletteContainer extends React.Component {
   state = {
     visible: false,
   }
-  
+
   componentDidMount() {
-    console.log(RouletteService)
     RouletteService._subscribe({
       next: state => this.setState(state),
       error: () => {},
@@ -18,10 +17,10 @@ class RouletteContainer extends React.Component {
   onClick = () => this.state.onComplete()
 
   render() {
-    const { visible, onClick, values } = this.state
+    const { visible, values } = this.state
     return (
       <Roulette
-        onClick={onClick}
+        onClick={this.onClick}
         visible={visible}
         values={values}
       />
