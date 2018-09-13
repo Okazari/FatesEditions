@@ -41,6 +41,7 @@ const ArrowRight = posed.div({
     opacity: 1,
     right: '30px',
     delay: arrowDelay,
+    transition: { duration: arrowDuration },
   },
 })
 

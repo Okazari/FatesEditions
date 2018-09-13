@@ -70,6 +70,7 @@ class Transition extends React.Component {
         <RollButton
           onClick={this.roll}
           result={result}
+          displayed={displayed}
         />
       </div>
     )
