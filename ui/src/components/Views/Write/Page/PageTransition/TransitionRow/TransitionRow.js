@@ -11,13 +11,8 @@ const TransitionRow = ({
   pageId,
   transition,
   index,
-  addEffect,
-  removeEffect,
-  addCondition,
-  removeCondition,
   updateTransition,
   updateResource,
-  addPage,
   onLinkNewPage,
   removeTransition,
 }) => {

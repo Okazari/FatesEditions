@@ -1,7 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Button } from 'components/common'
-import { RouletteService } from 'services'
 import RollButton from './RollButton'
 import styles from './style.scss'
 
@@ -11,21 +10,14 @@ class Transition extends React.Component {
     const { delay } = props
     this.state = {
       displayed: false,
-      result: null,
     }
     this.timeOut = setTimeout(() => {
       this.setState({ displayed: true })
     }, delay)
-    this.roll = this.roll.bind(this)
   }
 
   componentWillUnmount() {
     clearTimeout(this.timeOut)
-  }
-
-  roll() {
-    RouletteService.launchRoulette(0, 20)
-                   .then(result => this.setState({ result }))
   }
 
   render() {
@@ -35,11 +27,8 @@ class Transition extends React.Component {
       text,
       errors,
     } = this.props
+    const { displayed } = this.state
 
-    const {
-      displayed,
-      result,
-    } = this.state
     const className = classnames(styles.transition, {
       [styles.disabled]: errors.length > 0,
       [styles.displayed]: displayed,
@@ -68,8 +57,8 @@ class Transition extends React.Component {
           }
         </Button>
         <RollButton
-          onClick={this.roll}
-          result={result}
+          min={0}
+          max={20}
           displayed={displayed}
         />
       </div>
