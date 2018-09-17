@@ -5,8 +5,16 @@
 }
 
 .row {
-  display: flex;
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
   flex: 1;
+}
+
+.small {
+  max-width: 60px;
+  display: flex;
+  justify-content: center;
 }
 
 .selectInput {

@@ -12,7 +12,6 @@ const mapStateToProps = ({ game }, { transitionId }) => {
     ...transition,
     conditions: transition.conditions.map(id => game.book.condition[id]),
   }
-  const text = transition.text
   let visible = true
   const errors = []
 
@@ -25,9 +24,8 @@ const mapStateToProps = ({ game }, { transitionId }) => {
 
   return {
     visible,
-    text,
+    transition: mappedTransition,
     game,
-    transitionId,
     errors,
   }
 }
@@ -44,14 +42,14 @@ mutation saveGame($game: GameInput!) {
 `
 
 const TransitionContainer = (props) => {
-  const { game, transitionId, dispatch } = props
+  const { game, transition, dispatch } = props
   return (
     <Mutation
       mutation={mutation}
     >
       {
         (saveGame) => {
-          const updateGame = () => GameService.changePageAndApplyEffects(game, transitionId)
+          const updateGame = () => GameService.changePageAndApplyEffects(game, transition.id)
           const _saveGame = gameToSave => saveGame({ variables: {
             game: gameToSave,
           } })

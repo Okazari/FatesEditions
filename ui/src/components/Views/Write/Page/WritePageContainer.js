@@ -11,6 +11,7 @@ const query = gql`
       description
       backgroundMusic
       roll {
+        active
         min
         max
         modifier

@@ -12,7 +12,6 @@ const PageGeneral = ({
   updatePage,
 }) => {
   if (!page) return <div />
-  console.log('Page in PageGeneral', page)
   return (
     <div className={styles.component}>
       <Input

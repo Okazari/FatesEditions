@@ -68,6 +68,7 @@ const applyEffects = (game, effects) =>
 
 const getTransitionEffects = (game, transitionId) =>
   game.book.transition[transitionId].effects.map(id => game.book.effect[id])
+
 const applyTransitionEffects = (game, transitionId) =>
   applyEffects(game, getTransitionEffects(game, transitionId))
 

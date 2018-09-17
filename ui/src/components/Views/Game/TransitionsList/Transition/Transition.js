@@ -24,9 +24,11 @@ class Transition extends React.Component {
     const {
       visible,
       onClick,
-      text,
+      transition,
       errors,
+      game,
     } = this.props
+
     const { displayed } = this.state
 
     const className = classnames(styles.transition, {
@@ -42,7 +44,7 @@ class Transition extends React.Component {
           }}
           className={className}
         >
-          {text}
+          {transition.text}
           {
             errors.map(error => (
               <div
@@ -56,11 +58,14 @@ class Transition extends React.Component {
             ))
           }
         </Button>
-        <RollButton
-          min={0}
-          max={20}
-          displayed={displayed}
-        />
+        {
+          transition.roll && transition.roll.active &&
+          <RollButton
+            stats={game.stats}
+            roll={transition.roll}
+            displayed={displayed}
+          />
+        }
       </div>
     )
   }

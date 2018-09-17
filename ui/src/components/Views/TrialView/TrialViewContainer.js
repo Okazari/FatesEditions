@@ -49,6 +49,12 @@ const query = gql`
           title
           description
           text
+          roll {
+            min
+            max
+            modifier
+            stat
+          }
           effects {
             id
             operator
@@ -62,6 +68,13 @@ const query = gql`
             toPage
             text
             conditionOperator
+            roll {
+              active
+              min
+              max
+              modifier
+              stat
+            }
             effects {
               id
               operator

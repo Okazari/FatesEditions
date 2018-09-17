@@ -6,7 +6,8 @@ import styles from './style.scss'
 const rollModifiers = EffectService.roll
 
 const RollRow = ({ book, roll, update }) => {
-  roll = {
+  const _roll = {
+    active: false,
     min: null,
     max: null,
     modifier: '',
@@ -14,18 +15,27 @@ const RollRow = ({ book, roll, update }) => {
     ...roll,
   }
 
-  const _update = rollData => update({ roll: { ...rollData } }) 
+  const _update = rollData => update({ roll: { ...rollData } })
 
   return (
     <div className={styles.component}>
       <span>Lancer de dé</span>
       <div className={styles.row}>
         <Input
+          className={styles.small}
+          domProps={{
+            type: 'checkbox',
+            value: _roll.active,
+            checked: _roll.active,
+            onChange: active => _update({ active }),
+          }}
+        />
+        <Input
           classname={styles.input}
           debounce={500}
           domProps={{
             type: 'number',
-            value: roll.min,
+            value: _roll.min,
             onChange: min => _update({ min }),
             placeholder: 'min',
           }}
@@ -35,7 +45,7 @@ const RollRow = ({ book, roll, update }) => {
           debounce={500}
           domProps={{
             type: 'number',
-            value: roll.max,
+            value: _roll.max,
             onChange: max => _update({ max }),
             placeholder: 'max',
           }}
@@ -44,7 +54,7 @@ const RollRow = ({ book, roll, update }) => {
           debounce={500}
           className={styles.selectInput}
           domProps={{
-            value: roll.modifier,
+            value: _roll.modifier,
             onChange: modifier => _update({ modifier }),
           }}
         >
@@ -62,7 +72,7 @@ const RollRow = ({ book, roll, update }) => {
           debounce={500}
           className={styles.selectInput}
           domProps={{
-            value: roll.stat,
+            value: _roll.stat,
             onChange: stat => _update({ stat }),
           }}
         >

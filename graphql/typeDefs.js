@@ -44,6 +44,7 @@ const effectType = `
 `
 
 const rollType = `
+  active: Boolean
   min: Int
   max: Int
   modifier: String

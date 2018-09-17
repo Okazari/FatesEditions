@@ -25,6 +25,7 @@ const core = `
       type
     }
     roll {
+      active
       min
       max
       modifier
