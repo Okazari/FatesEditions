@@ -1,0 +1,24 @@
+.component {
+  &> span {
+    font-weight: bold;
+  }
+}
+
+.row {
+  display: flex;
+  flex: 1;
+}
+
+.selectInput {
+  flex-direction: row;
+  flex: 1;
+  &>select {
+    flex: 1;
+    margin: 0 10px;
+  }
+}
+
+.input {
+  flex: 1;
+  margin: 0 10px;
+}

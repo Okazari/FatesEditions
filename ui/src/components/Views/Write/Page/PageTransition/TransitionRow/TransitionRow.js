@@ -4,6 +4,7 @@ import { RouteService } from 'services'
 import { Box, BoxHeader, BoxBody } from 'components/common/Box'
 import TransitionCondition from './TransitionCondition'
 import TransitionEffect from './TransitionEffect'
+import RollRow from '../../common/RollRow'
 import styles from './styles.scss'
 
 const TransitionRow = ({
@@ -12,7 +13,6 @@ const TransitionRow = ({
   transition,
   index,
   updateTransition,
-  updateResource,
   onLinkNewPage,
   removeTransition,
 }) => {
@@ -97,7 +97,11 @@ const TransitionRow = ({
           pageId={pageId}
           transition={transition}
           index={index}
-          updateResource={updateResource}
+        />
+        <RollRow
+          book={book}
+          roll={transition.roll}
+          update={updateTransition}
         />
       </BoxBody>
     </Box>

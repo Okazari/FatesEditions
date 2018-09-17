@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, SelectInput } from '../../../../../../common'
+import { Input, SelectInput } from 'components/common'
 import styles from './styles.scss'
 
 const StatInput = ({ stats, effect, index, updateResource }) => {
@@ -39,6 +39,7 @@ const StatInput = ({ stats, effect, index, updateResource }) => {
           placeholder: 'Valeur de la condition',
         }}
       />
+      TOTO
     </div>
   )
 }

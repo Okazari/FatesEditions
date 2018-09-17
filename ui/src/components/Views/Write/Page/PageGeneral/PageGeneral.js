@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input, TextAreaInput, Button } from 'components/common'
 import styles from './styles.scss'
-import EffectRow from '../common/EffectRow'
+import { EffectRow, RollRow } from '../common'
 
 const PageGeneral = ({
   page,
@@ -12,7 +12,7 @@ const PageGeneral = ({
   updatePage,
 }) => {
   if (!page) return <div />
-
+  console.log('Page in PageGeneral', page)
   return (
     <div className={styles.component}>
       <Input
@@ -55,6 +55,11 @@ const PageGeneral = ({
           })
         }
       </div>
+      <RollRow
+        book={book}
+        roll={page.roll}
+        update={updatePage}
+      />
     </div>
   )
 }

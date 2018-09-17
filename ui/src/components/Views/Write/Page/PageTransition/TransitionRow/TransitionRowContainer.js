@@ -23,6 +23,12 @@ const core = `
     value
     type
   }
+  roll {
+    min
+    max
+    modifier
+    stat
+  }
 `
 const updateTransitionMutation = gql`
   mutation updatePageTransition($bookId: ID!, $pageId: ID!, $transition: TransitionInput!) {

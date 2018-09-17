@@ -97,6 +97,29 @@ class EffectService {
       sumConditions: (a, b) => a || b,
     },
   }
+
+  roll = {
+    inc: {
+      label: 'plus',
+      value: 'inc',
+      exec: (value, modifier) => Math.round(parseFloat(value) + parseFloat(modifier)),
+    },
+    dec: {
+      label: 'moins',
+      value: 'dec',
+      exec: (value, modifier) => Math.round(parseFloat(value) - parseFloat(modifier)),
+    },
+    mul: {
+      label: 'multiplié par',
+      value: 'mul',
+      exec: (value, modifier) => Math.round(parseFloat(value) * parseFloat(modifier)),
+    },
+    div: {
+      label: 'divisé par',
+      value: 'div',
+      exec: (value, modifier) => Math.round(parseFloat(value) / parseFloat(modifier)),
+    },
+  }
 }
 
 export default new EffectService()

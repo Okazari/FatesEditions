@@ -43,6 +43,13 @@ const effectType = `
   type: String
 `
 
+const rollType = `
+  min: Int
+  max: Int
+  modifier: String
+  stat: String
+`
+
 const transitionType = `
   fromPage: ID
   toPage: ID
@@ -114,11 +121,13 @@ module.exports = `
     ${pageType}
     effects: [Effect]
     transitions: [Transition]
+    roll: Roll
   }
 
   input PageInput {
     id: ID!
     ${pageType}
+    roll: RollInput
   }
 
   type Effect {
@@ -131,16 +140,28 @@ module.exports = `
     ${effectType}
   }
 
+  type Roll {
+    id: ID
+    ${rollType}
+  }
+
+  input RollInput {
+    id: ID
+    ${rollType}
+  }
+
   type Transition {
     id: ID
     ${transitionType}
     effects: [Effect]
     conditions: [Effect]
+    roll: Roll
   }
 
   input TransitionInput {
     id: ID!
     ${transitionType}
+    roll: RollInput
   }
 
   type Game {

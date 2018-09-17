@@ -24,6 +24,12 @@ const core = `
       value
       type
     }
+    roll {
+      min
+      max
+      modifier
+      stat
+    }
   }
 `
 

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Input, SelectInput } from 'components/common'
-import EffectService from 'services/EffectService'
+import { EffectService } from 'services'
 import styles from './styles.scss'
 
 const statEffect = EffectService.effect.stat
 
-const StatInput = ({ stats, effect, index, updateEffect }) => {
+const StatInput = ({ stats, effect, updateEffect }) => {
   return (
     <div className={styles.component}>
       <SelectInput

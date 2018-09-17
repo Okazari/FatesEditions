@@ -16,6 +16,12 @@ const corePage = `
   title
   description
   backgroundMusic
+  roll {
+    min
+    max
+    modifier
+    stat
+  }
 `
 
 const query = gql`
