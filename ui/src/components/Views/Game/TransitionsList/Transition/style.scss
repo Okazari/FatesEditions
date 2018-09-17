@@ -18,7 +18,11 @@
   transform: translateY(30px) scale(0.9);
   transition: opacity $fast-duration ease-in-out, transform $fast-duration ease-in-out;
   z-index: 1;
- }
+}
+
+.rollButton {
+  margin: 10px 0 10px 20px;
+}
 
 .displayed {
   transform: translateY(0px) scale(1);

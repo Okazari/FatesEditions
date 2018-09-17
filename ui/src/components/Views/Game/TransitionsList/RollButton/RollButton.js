@@ -4,8 +4,8 @@ import { Button } from 'components/common'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './style.scss'
 
-const RollButton = ({ onClick, result, displayed }) => {
-  const buttonClassName = classnames(styles.component, {
+const RollButton = ({ onClick, result, displayed, className }) => {
+  const buttonClassName = classnames(styles.component, className, {
     [styles.displayed]: displayed,
   })
 

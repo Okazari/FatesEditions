@@ -50,6 +50,7 @@ query getGame($gameId: ID!) {
         description
         text
         roll {
+          active
           min
           max
           modifier

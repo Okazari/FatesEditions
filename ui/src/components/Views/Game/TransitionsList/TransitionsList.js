@@ -1,8 +1,9 @@
 import React from 'react'
+import RollButton from './RollButton'
 import Transition from './Transition'
 import styles from './style.scss'
 
-const TransitionsList = ({ transitions }) => {
+const TransitionsList = ({ transitions, page, stats }) => {
   return (
     <div className={styles.transitionsList}>
       {
@@ -16,6 +17,16 @@ const TransitionsList = ({ transitions }) => {
             />
           )
         })
+      }
+      {
+
+        page.roll && page.roll.active &&
+        <RollButton
+          stats={stats}
+          roll={page.roll}
+          displayed
+          className={styles.rollButton}
+        />
       }
     </div>
   )

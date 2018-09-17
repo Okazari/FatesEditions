@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { Button } from 'components/common'
-import RollButton from './RollButton'
+import RollButton from '../RollButton'
 import styles from './style.scss'
 
 class Transition extends React.Component {
@@ -64,6 +64,7 @@ class Transition extends React.Component {
             stats={game.stats}
             roll={transition.roll}
             displayed={displayed}
+            className={styles.rollButton}
           />
         }
       </div>
