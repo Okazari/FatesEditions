@@ -19,7 +19,6 @@ const TransitionsList = ({ transitions, page, stats }) => {
         })
       }
       {
-
         page.roll && page.roll.active &&
         <RollButton
           stats={stats}
