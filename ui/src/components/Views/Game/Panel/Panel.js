@@ -1,6 +1,9 @@
 import React from 'react'
+import posed from 'react-pose'
 import { GamePanels } from 'components/common'
 import styles from './style.scss'
+
+
 
 const Panel = ({ panelState }) => {
   return (
