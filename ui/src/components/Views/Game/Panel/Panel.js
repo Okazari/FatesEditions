@@ -9,9 +9,12 @@ const Panel = ({ panelState }) => {
   return (
     <div className={styles.panel}>
       {
-        GamePanels
-          .filter(panel => panelState === panel.key)
-          .map(panel => <panel.component key={panel.key} />)
+        GamePanels.reduce(
+          (acc, panel) => panelState === panel.key
+            ? [...acc, <panel.component key={panel.key} />]
+            : acc,
+          [],
+        )
       }
     </div>
   )
