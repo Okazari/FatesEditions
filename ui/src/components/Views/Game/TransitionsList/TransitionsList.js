@@ -1,19 +1,30 @@
 import React from 'react'
+import posed from 'react-pose'
 import RollButton from './RollButton'
 import Transition from './Transition'
 import styles from './style.scss'
 
-const TransitionsList = ({ transitions, page, stats }) => {
+const List = posed.div({
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    delayChildren: 300,
+    staggerChildren: 50,
+  },
+})
+
+const TransitionsList = ({ transitions, page, stats, visible }) => {
   return (
-    <div className={styles.transitionsList}>
+    <List
+      className={styles.transitionsList}
+      pose={visible ? 'visible' : 'hidden'}
+    >
       {
-        !!transitions && transitions.map((transitionId, index) => {
-          const delay = 50 * index + 100
+        !!transitions && transitions.map((transitionId) => {
           return (
             <Transition
               key={transitionId}
               transitionId={transitionId}
-              delay={delay}
             />
           )
         })
@@ -23,11 +34,10 @@ const TransitionsList = ({ transitions, page, stats }) => {
         <RollButton
           stats={stats}
           roll={page.roll}
-          displayed
           className={styles.rollButton}
         />
       }
-    </div>
+    </List>
   )
 }
 export default TransitionsList

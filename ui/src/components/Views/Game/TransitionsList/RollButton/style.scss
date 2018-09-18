@@ -2,21 +2,14 @@
 @import '~styles/animations';
 
 .component {
+  position: relative;
   box-sizing: border-box; 
   display: flex;
   flex-direction: column;
   background-color: $dark-background-color-1;
   padding: 30px;
   border-radius: 1000px;
-  opacity: 0;
-  transform: translateX(-200px) scale(0.8);
-  transition: transform $standard-duration ease-in-out $standard-duration, opacity $fast-duration ease-in-out $standard-duration;
   overflow: hidden;
-}
-
-.displayed {
-  transform: translateX(0) scale(1);
-  opacity: 1;
 }
 
 .result {

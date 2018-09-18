@@ -68,17 +68,15 @@ class Game extends React.Component {
         <div className={wrapperClassName}>
           <Page resetScrolling={this.resetScrolling} />
           <div className={styles.inFlowTransitions}>
-            {
-              bottomReached &&
-              <TransitionsList />
-            }
+            <TransitionsList
+              visible={bottomReached}
+            />
           </div>
         </div>
         <div className={fixedClassName}>
-          {
-            bottomReached &&
-            <TransitionsList />
-          }
+          <TransitionsList
+            visible={bottomReached}
+          />
         </div>
       </div>
     )
