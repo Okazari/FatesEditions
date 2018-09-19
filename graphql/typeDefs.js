@@ -44,7 +44,6 @@ const effectType = `
 `
 
 const rollType = `
-  active: Boolean
   min: Int
   max: Int
   modifier: String
@@ -122,13 +121,12 @@ module.exports = `
     ${pageType}
     effects: [Effect]
     transitions: [Transition]
-    roll: Roll
+    rolls: [Roll]
   }
 
   input PageInput {
     id: ID!
     ${pageType}
-    roll: RollInput
   }
 
   type Effect {
@@ -147,7 +145,7 @@ module.exports = `
   }
 
   input RollInput {
-    id: ID
+    id: ID!
     ${rollType}
   }
 
@@ -156,13 +154,12 @@ module.exports = `
     ${transitionType}
     effects: [Effect]
     conditions: [Effect]
-    roll: Roll
+    rolls: [Roll]
   }
 
   input TransitionInput {
     id: ID!
     ${transitionType}
-    roll: RollInput
   }
 
   type Game {
@@ -198,7 +195,7 @@ module.exports = `
     game(gameId: ID!): Game
     lastGame(bookId: ID!): Game
   }
-
+  
   type Mutation {
     createBook: User
     updateBook(book: BookInput!): Book
@@ -206,6 +203,14 @@ module.exports = `
     publishBook(id: ID!): User
     unpublishBook(id: ID!): User
 
+    createStat(bookId: ID!): Book
+    updateStat(bookId: ID!, stat: StatInput!): Stat
+    deleteStat(bookId: ID!, statId: ID!): Book
+    
+    createObject(bookId: ID!): Book
+    updateObject(bookId: ID!, object: ObjectInput!): Object
+    deleteObject(bookId: ID!, objectId: ID!): Book
+    
     createPage(bookId: ID!): Book
     createPageReturnPage(bookId: ID!): Page
     updatePage(bookId: ID!, page: PageInput!): Page
@@ -216,17 +221,13 @@ module.exports = `
     updatePageEffect(bookId: ID!, pageId: ID!, effect: EffectInput!): Effect
     deletePageEffect(bookId: ID!, pageId: ID!, effectId: ID!): Page
     
+    createPageRoll(bookId: ID!, pageId: ID!): Page
+    updatePageRoll(bookId: ID!, pageId: ID!, roll: RollInput!): Roll
+    deletePageRoll(bookId: ID!, pageId: ID!, roll: ID!): Page
+
     createPageTransition(bookId: ID!, pageId: ID!): Page
     updatePageTransition(bookId: ID!, pageId: ID!, transition: TransitionInput!): Transition
     deletePageTransition(bookId: ID!, pageId: ID!, transitionId: ID!): Page
-    
-    createStat(bookId: ID!): Book
-    updateStat(bookId: ID!, stat: StatInput!): Stat
-    deleteStat(bookId: ID!, statId: ID!): Book
-    
-    createObject(bookId: ID!): Book
-    updateObject(bookId: ID!, object: ObjectInput!): Object
-    deleteObject(bookId: ID!, objectId: ID!): Book
     
     createPageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
     updatePageTransitionEffect(bookId: ID!, pageId: ID!, transitionId: ID!, effect: EffectInput!): Effect
@@ -235,6 +236,10 @@ module.exports = `
     createPageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
     updatePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, condition: EffectInput!): Effect
     deletePageTransitionCondition(bookId: ID!, pageId: ID!, transitionId: ID!, conditionId: ID!): Transition
+    
+    createPageTransitionRoll(bookId: ID!, pageId: ID!, transitionId: ID!): Transition,
+    updatePageTransitionRoll(bookId: ID!, pageId: ID!, transitionId: ID!, roll: RollInput!): Roll
+    deletePageTransitionRoll(bookId: ID!, pageId: ID!, transitionId: ID!, rollId: ID!): Transition
     
     createGame(bookId: ID!): Game
     updateGame(game: GameInput!): Game

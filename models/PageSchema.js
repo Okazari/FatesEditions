@@ -9,7 +9,7 @@ module.exports = new Schema({
   text: String,
   description: String,
   backgroundMusic: String,
-  transitions: {type:[Transition], default: []},
-  effects: [Effect],
-  roll: Roll,
+  transitions: { type: [Transition], default: [] },
+  effects: { type: [Effect], default: [] },
+  rolls: { type: [Roll], default: [] }, 
 }, { minimize: false })

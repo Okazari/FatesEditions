@@ -9,5 +9,5 @@ module.exports = new Schema({
   conditions: { type: [Effect], default: [] },
   conditionOperator: { type: String, default: 'and' },
   effects: { type: [Effect], default: [] },
-  roll: Roll, 
+  rolls: { type: [Roll], default: [] }, 
 }, { minimize: false })
