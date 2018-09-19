@@ -28,10 +28,6 @@ const ConditionInput = ({ book, condition, index, updateCondition, removeConditi
   return (
     <div className={styles.component}>
       {renderInput()}
-      <ButtonIcon
-        icon="delete"
-        domProps={{ onClick: () => removeCondition(condition.id) }}
-      />
     </div>
   )
 }

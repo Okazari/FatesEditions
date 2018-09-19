@@ -23,19 +23,11 @@ import WriteDraft, {
   PageContent,
   PageTransition,
 } from './components/Views/Write'
-import Portal, { SignIn as OldSignIn, SignUp as OldSignUp, Recover } from './components/Portal'
 import { MyGames, GamesList } from './components/Views/MyGames'
 import { GameView, TrialView } from './components/Views'
 import Profile, { Password, Disconnect } from './components/Views/Profile'
 import Connection, { SignIn, SignUp, PasswordRecovery } from './components/Views/Connection'
 import BookDetails, { BookGeneral } from './components/Views/BookDetails'
-
-// OLD LAYOUT
-import App from './components/Old/App'
-import { PlayBooks, PlayGames } from './components/Old/Play'
-import { ShareBook, SharePublications, ShareEditBook } from './components/Old/Share'
-import { WriteBook, WriteDrafts, WritePage as OldWritePage } from './components/Old/Write'
-import { Profile as OldProfile } from './components/Old/Profile'
 
 const AppRouter = () => {
   return (
@@ -90,39 +82,6 @@ const AppRouter = () => {
                 <Route path="signin" component={SignIn} />
                 <Route path="signup" component={SignUp} />
                 <Route path="passwordrecovery" component={PasswordRecovery} />
-              </Route>
-            </Route>
-            <Route path="old">
-              <IndexRedirect to="portal" />
-              <Route path="portal" component={Portal}>
-                <IndexRedirect to="signin" />
-                <Route path="signin" component={OldSignIn} />
-                <Route path="signup" component={OldSignUp} />
-                <Route path="recover" component={Recover} />
-              </Route>
-              <Route component={GameView} path="game/:gameId" />
-              <Route component={App}>
-                <IndexRedirect to="play" />
-                <Route path="play" >
-                  <IndexRedirect to="books" />
-                  <Route path="books" component={PlayBooks} />
-                  <Route path="Games" component={PlayGames} />
-                </Route>
-                <Route path="write" >
-                  <IndexRedirect to="drafts" />
-                  <Route path="drafts" component={WriteDrafts} />
-                  <Route path="book/:bookId" component={WriteBook} />
-                  <Route path="book/:bookId/page/:pageId" component={OldWritePage} />
-                </Route>
-                <Route path="share" >
-                  <IndexRedirect to="book" />
-                  <Route path="book" component={ShareBook} />
-                  <Route path="publications" component={SharePublications} />
-                  <Route path="edit/:bookId" component={ShareEditBook} />
-                </Route>
-                <Route path="profile" >
-                  <IndexRoute component={OldProfile} />
-                </Route>
               </Route>
             </Route>
           </Router>

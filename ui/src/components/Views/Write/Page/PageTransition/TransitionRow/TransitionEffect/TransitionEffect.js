@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'components/common'
-import EffectRow from './EffectRow'
+import { RowWithDeleteButton, EffectRow } from 'components/Views/Write/Page/common'
 import styles from './styles.scss'
 
 const TransitionEffect = ({
@@ -14,15 +14,18 @@ const TransitionEffect = ({
     <div className={styles.component}>
       <span>Effets</span>
       {transition.effects.map((effect, effectIndex) =>
-        <EffectRow
+        <RowWithDeleteButton
           key={effect.id}
-          effect={effect}
-          index={effectIndex}
-          book={book}
-          pageId={pageId}
-          transitionId={transition.id}
-          removeEffect={removeEffect}
-        />)}
+          removeRow={() => removeEffect(effect.id)}
+        >
+          <EffectRow
+            effect={effect}
+            index={effectIndex}
+            book={book}
+            pageId={pageId}
+            transitionId={transition.id}
+          />
+        </RowWithDeleteButton>)}
       <div className={styles.centerButton}>
         <Button
           domProps={{ onClick: addEffect }}

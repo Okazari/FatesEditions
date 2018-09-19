@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, SelectInput } from 'components/common'
+import { RowWithDeleteButton } from 'components/Views/Write/Page/common'
 import EffectService from 'services/EffectService'
 import ConditionRow from './ConditionRow'
 import styles from './styles.scss'
@@ -40,15 +41,18 @@ const TransitionCondition = ({
       <div className={styles.conditionEffect}>
         {
           transition.conditions.map((condition, conditionIndex) =>
+          <RowWithDeleteButton
+            key={condition.id}
+            removeRow={() => removeCondition(condition.id)}
+          >
             <ConditionRow
-              key={condition.id}
               book={book}
               pageId={pageId}
               transitionId={transition.id}
               condition={condition}
               index={conditionIndex}
-              removeCondition={removeCondition}
-            />,
+            />
+          </RowWithDeleteButton>,
           )
         }
         <Button
