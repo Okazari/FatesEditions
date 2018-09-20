@@ -32,19 +32,20 @@
   }
 }
 
+.actionWarning {
+  display: flex;
+  flex-direction: column;
+  > div {
+    margin: 10px 0;
+  }
+}
+
+.button {
+  min-width: 300px;
+  align-self: center;
+  padding: 5px 50px;
+}
+
 .delete {
-  margin-top: 5px;
   background-color: $background-error;
-}
-
-.publish {
-  margin: 5px 0 20px 0;
-}
-
-.alertMessage {
-  padding: 10px;
-  box-shadow: $box-shadow-1;
-  background-color: $background-error;
-  margin-bottom: 10px;
-  color: $white;
 }
