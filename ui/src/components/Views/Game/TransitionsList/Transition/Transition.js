@@ -53,6 +53,7 @@ const Transition = ({
       {
         transition.rolls.map(roll => (
           <RollButton
+            key={roll.id}
             stats={game.stats}
             roll={roll}
             className={styles.rollButton}

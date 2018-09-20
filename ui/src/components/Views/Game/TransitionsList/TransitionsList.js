@@ -31,6 +31,7 @@ const TransitionsList = ({ transitions, page, stats, visible }) => (
     {
       page.rolls.map(roll => (
         <RollButton
+          key={roll.id}
           stats={stats}
           roll={roll}
           className={styles.rollButton}
