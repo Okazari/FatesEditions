@@ -1,5 +1,5 @@
 import React from 'react'
-import { AlertMessage, Emphasis, Button } from 'components/common'
+import { AlertMessage, Emphasis, WideButton } from 'components/common'
 import styles from '../style.scss'
 
 const PublishButton = ({ onClick, loading, error }) => (
@@ -28,7 +28,7 @@ const PublishButton = ({ onClick, loading, error }) => (
         </AlertMessage>
       )
     }
-    <Button
+    <WideButton
       domProps={{ onClick }}
       className={styles.button}
     >
@@ -37,7 +37,7 @@ const PublishButton = ({ onClick, loading, error }) => (
         ? 'Chargement'
         : 'Publier'
       }
-    </Button>
+    </WideButton>
   </div>
 )
 

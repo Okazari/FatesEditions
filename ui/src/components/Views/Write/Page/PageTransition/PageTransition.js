@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'components/common'
+import { WideButton } from 'components/common'
 import TransitionRow from './TransitionRow'
 import styles from './styles.scss'
 
@@ -7,9 +7,9 @@ const PageTransition = ({ book, page, addTransition, removeTransition }) => {
   if (!page) return null
   return (
     <div className={styles.component}>
-      <Button className={styles.button} domProps={{ onClick: addTransition }}>
+      <WideButton className={styles.button} domProps={{ onClick: addTransition }}>
         {'Ajouter une transition'}
-      </Button>
+      </WideButton>
       {
         page.transitions && page.transitions.map((transition, index) =>
           <TransitionRow

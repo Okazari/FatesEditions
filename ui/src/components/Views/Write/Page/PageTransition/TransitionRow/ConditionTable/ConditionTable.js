@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, SelectInput } from 'components/common'
+import { WideButton, SelectInput } from 'components/common'
 import { RowWithDeleteButton } from 'components/Views/Write/Page/common'
 import EffectService from 'services/EffectService'
 import ConditionRow from './ConditionRow'
@@ -55,14 +55,14 @@ const ConditionTable = ({
             </RowWithDeleteButton>,
           )
         }
-        <Button
+        <WideButton
           className={styles.button}
           domProps={{
             onClick: addCondition,
           }}
         >
           {'Ajouter une Condition'}
-        </Button>
+        </WideButton>
       </div>
     </div>
   )

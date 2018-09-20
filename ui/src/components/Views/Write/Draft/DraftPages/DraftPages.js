@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonIcon, DataTable } from 'components/common'
+import { WideButton, ButtonIcon, DataTable } from 'components/common'
 import PageRow from './PageRow'
 import styles from './styles.scss'
 
@@ -13,12 +13,12 @@ const headers = [
 const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage, updatePage }) => {
   return (
     <div className={styles.component}>
-      <Button
+      <WideButton
         domProps={{ onClick: addPage, disabled }}
-        className={styles.button}
+        // className={styles.button}
       >
         Ajouter une page
-      </Button>
+      </WideButton>
       <DataTable className="table-hover" headers={headers}>
         {
           book.pages.map(page =>

@@ -1,6 +1,9 @@
 import React from 'react'
-import { Button } from 'components/common'
-import { RowWithDeleteButton, EffectRow } from 'components/Views/Write/Page/common'
+import { WideButton } from 'components/common'
+import {
+  RowWithDeleteButton,
+  EffectRow,
+} from 'components/Views/Write/Page/common'
 import styles from './styles.scss'
 
 const EffectTable = ({
@@ -31,11 +34,11 @@ const EffectTable = ({
         ))
       }
       <div className={styles.centerButton}>
-        <Button
+        <WideButton
           domProps={{ onClick: addEffect }}
         >
           {'Ajouter un effet'}
-        </Button>
+        </WideButton>
       </div>
     </div>
   )

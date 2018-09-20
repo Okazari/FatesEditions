@@ -1,12 +1,12 @@
 import React from 'react'
-import { Button } from 'components/common'
+import { WideButton } from 'components/common'
 import {
   RowWithDeleteButton,
   RollRow,
 } from 'components/Views/Write/Page/common'
 import styles from './style.scss'
 
-const TransitionRoll = ({
+const RollTable = ({
   book,
   rolls,
   addRoll,
@@ -30,11 +30,11 @@ const TransitionRoll = ({
           </RowWithDeleteButton>
         ))) : (
           <div className={styles.centerButton}>
-            <Button
+            <WideButton
               domProps={{ onClick: addRoll }}
             >
               Ajouter un Lancer de dé
-            </Button>
+            </WideButton>
           </div>
         )
       }
@@ -42,4 +42,4 @@ const TransitionRoll = ({
   )
 }
 
-export default TransitionRoll
+export default RollTable

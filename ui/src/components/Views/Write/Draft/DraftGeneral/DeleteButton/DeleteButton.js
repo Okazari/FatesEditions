@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { AlertMessage, Emphasis, Button } from 'components/common'
+import { AlertMessage, Emphasis, WideButton } from 'components/common'
 import styles from '../style.scss'
 
 const buttonClassName = classnames(styles.button, styles.delete)
@@ -13,12 +13,12 @@ const DeleteButton = ({ onClick }) => (
       <Emphasis>définitivement</Emphasis>
       et de manière<Emphasis>irréversible.</Emphasis>
     </AlertMessage>
-    <Button
+    <WideButton
       domProps={{ onClick }}
       className={buttonClassName}
     >
       Supprimer
-    </Button>
+    </WideButton>
   </div>
 )
 
