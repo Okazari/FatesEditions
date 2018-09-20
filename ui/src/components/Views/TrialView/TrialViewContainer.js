@@ -49,8 +49,7 @@ const query = gql`
           title
           description
           text
-          roll {
-            active
+          rolls {
             min
             max
             modifier
@@ -69,8 +68,7 @@ const query = gql`
             toPage
             text
             conditionOperator
-            roll {
-              active
+            rolls {
               min
               max
               modifier

@@ -13,31 +13,30 @@ const List = posed.div({
   },
 })
 
-const TransitionsList = ({ transitions, page, stats, visible }) => {
-  return (
-    <List
-      className={styles.transitionsList}
-      pose={visible ? 'visible' : 'hidden'}
-    >
-      {
-        !!transitions && transitions.map((transitionId) => {
-          return (
-            <Transition
-              key={transitionId}
-              transitionId={transitionId}
-            />
-          )
-        })
-      }
-      {
-        page.roll && page.roll.active &&
+const TransitionsList = ({ transitions, page, stats, visible }) => (
+  <List
+    className={styles.transitionsList}
+    pose={visible ? 'visible' : 'hidden'}
+  >
+    {
+      !!transitions && transitions.map((transitionId) => {
+        return (
+          <Transition
+            key={transitionId}
+            transitionId={transitionId}
+          />
+        )
+      })
+    }
+    {
+      page.rolls.map(roll => (
         <RollButton
           stats={stats}
-          roll={page.roll}
+          roll={roll}
           className={styles.rollButton}
         />
-      }
-    </List>
-  )
-}
+      ))
+    }
+  </List>
+)
 export default TransitionsList

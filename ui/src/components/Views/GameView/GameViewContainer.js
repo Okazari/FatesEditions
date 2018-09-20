@@ -49,8 +49,7 @@ query getGame($gameId: ID!) {
         title
         description
         text
-        roll {
-          active
+        rolls {
           min
           max
           modifier
@@ -69,8 +68,7 @@ query getGame($gameId: ID!) {
           toPage
           text
           conditionOperator
-          roll {
-            active
+          rolls {
             min
             max
             modifier
