@@ -10,8 +10,7 @@ const query = gql`
       title
       description
       backgroundMusic
-      roll {
-        active
+      rolls {
         min
         max
         modifier
@@ -42,6 +41,12 @@ const query = gql`
           subject
           value
           type
+        }
+        rolls {
+          min
+          max
+          modifier
+          stat
         }
       }
     }

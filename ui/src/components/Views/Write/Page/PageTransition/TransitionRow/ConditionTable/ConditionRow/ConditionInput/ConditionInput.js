@@ -1,5 +1,4 @@
 import React from 'react'
-import { ButtonIcon } from 'components/common'
 import ConditionObjectInput from './ConditionObjectInput'
 import ConditionStatInput from './ConditionStatInput'
 import styles from './styles.scss'

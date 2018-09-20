@@ -177,7 +177,7 @@ module.exports = {
                  .set(roll)
                  .save()
     })),
-    deletePageRoll: isAuth((_, { bookId, pageId, roll }) => findBookById(bookId).then(book => {
+    deletePageRoll: isAuth((_, { bookId, pageId, rollId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .deleteOne('rolls', rollId)
                  .save()

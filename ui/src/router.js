@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, IndexRedirect, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRedirect, browserHistory } from 'react-router'
 import { RouletteContainer } from 'services/Roulette'
 
 // Apollo

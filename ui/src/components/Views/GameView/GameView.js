@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout, GameContent, GameToolbar } from 'components/Layout'
 import Game from 'components/Views/Game'
 
-const GameView = (props) => (
+const GameView = props => (
   <Layout>
     <GameToolbar />
     <GameContent>

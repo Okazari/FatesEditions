@@ -1,14 +1,12 @@
 import React from 'react'
-import { Input, TextAreaInput, Button } from 'components/common'
+import { Input, TextAreaInput } from 'components/common'
 import styles from './styles.scss'
-import { EffectRow, RollRow } from '../common'
+import EffectTable from './EffectTable'
+import RollTable from './RollTable'
 
 const PageGeneral = ({
   page,
   book,
-  updateEffect,
-  addEffect,
-  removeEffect,
   updatePage,
 }) => {
   if (!page) return <div />
@@ -34,30 +32,15 @@ const PageGeneral = ({
           placeholder: 'Mémo',
         }}
       />
-      <div className={styles.effectTitle}>
-        {"Effets à l'arrivée sur la page"}
-      </div>
-      <div className={styles.effectRow}>
-        <Button className={styles.button} domProps={{ onClick: addEffect }} >
-          {'Ajouter un Effet'}
-        </Button>
-        {
-          page.effects && page.effects.map((effect, index) => {
-            return (<EffectRow
-              key={effect.id}
-              effect={effect}
-              index={index}
-              book={book}
-              updateEffect={updateEffect}
-              removeEffect={effectId => removeEffect(effectId)}
-            />)
-          })
-        }
-      </div>
-      <RollRow
+      <EffectTable
         book={book}
-        roll={page.roll}
-        update={updatePage}
+        pageId={page.id}
+        effects={page.effects}
+      />
+      <RollTable
+        book={book}
+        pageId={page.id}
+        rolls={page.rolls}
       />
     </div>
   )

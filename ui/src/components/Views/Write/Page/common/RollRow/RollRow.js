@@ -5,81 +5,59 @@ import styles from './style.scss'
 
 const rollModifiers = EffectService.roll
 
-const RollRow = ({ book, roll, update }) => {
-  const _roll = {
-    active: false,
-    min: null,
-    max: null,
-    modifier: '',
-    stat: '',
-    ...roll,
-  }
-
-  const _update = rollData => update({ roll: { ...rollData } })
-
+const RollRow = ({ book, roll, updateRoll }) => {
+  const _updateRoll = changes => updateRoll({ id: roll.id, ...changes })
   return (
     <div className={styles.component}>
-      <span>Lancer de dé</span>
-      <div className={styles.row}>
-        <Input
-          className={styles.small}
-          domProps={{
-            type: 'checkbox',
-            value: _roll.active,
-            checked: _roll.active,
-            onChange: active => _update({ active }),
-          }}
-        />
-        <Input
-          classname={styles.input}
-          debounce={500}
-          domProps={{
-            type: 'number',
-            value: _roll.min,
-            onChange: min => _update({ min }),
-            placeholder: 'min',
-          }}
-        />
-        <Input
-          classname={styles.input}
-          debounce={500}
-          domProps={{
-            type: 'number',
-            value: _roll.max,
-            onChange: max => _update({ max }),
-            placeholder: 'max',
-          }}
-        />
-        <SelectInput
-          debounce={500}
-          className={styles.selectInput}
-          domProps={{
-            value: _roll.modifier,
-            onChange: modifier => _update({ modifier }),
-          }}
-        >
-          <option disabled value="">Choisir un operateur</option>
-          {
-            Object.entries(rollModifiers).map(([key, effectModel]) => {
-              if (typeof effectModel === 'object') {
-                return <option key={key} value={key}>{effectModel.label}</option>
-              }
-              return null
-            })
-          }
-        </SelectInput>
-        <SelectInput
-          debounce={500}
-          className={styles.selectInput}
-          domProps={{
-            value: _roll.stat,
-            onChange: stat => _update({ stat }),
-          }}
-        >
-          <option disabled value="">Choisir une statistique</option>
-          {book.stats.map(({ id, name }) => <option key={id} value={id}>{name}</option>)}
-        </SelectInput>
-      </div>
+      <Input
+        classname={styles.input}
+        debounce={500}
+        domProps={{
+          type: 'number',
+          value: roll.min,
+          onChange: min => _updateRoll({ min }),
+          placeholder: 'min',
+        }}
+      />
+      <Input
+        classname={styles.input}
+        debounce={500}
+        domProps={{
+          type: 'number',
+          value: roll.max,
+          onChange: max => _updateRoll({ max }),
+          placeholder: 'max',
+        }}
+      />
+      <SelectInput
+        debounce={500}
+        className={styles.selectInput}
+        domProps={{
+          value: roll.modifier,
+          onChange: modifier => _updateRoll({ modifier }),
+        }}
+      >
+        <option value="">sans modificateur</option>
+        {
+          Object.entries(rollModifiers).map(([key, effectModel]) => {
+            if (typeof effectModel === 'object') {
+              return <option key={key} value={key}>{effectModel.label}</option>
+            }
+            return null
+          })
+        }
+      </SelectInput>
+      <SelectInput
+        debounce={500}
+        className={styles.selectInput}
+        domProps={{
+          value: roll.stat,
+          onChange: stat => _updateRoll({ stat }),
+        }}
+      >
+        <option disabled value="">Choisir une statistique</option>
+        {book.stats.map(({ id, name }) => <option key={id} value={id}>{name}</option>)}
+      </SelectInput>
     </div>
   )
 }

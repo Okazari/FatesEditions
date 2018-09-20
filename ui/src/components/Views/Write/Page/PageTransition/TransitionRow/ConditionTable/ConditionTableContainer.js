@@ -1,7 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import TransitionCondition from './TransitionCondition'
+import ConditionTable from './ConditionTable'
 
 const core = `
   id
@@ -48,7 +48,7 @@ const removeConditionMutationOptions = {
   name: 'removeCondition',
 }
 
-const TransitionConditionContainer = (props) => {
+const ConditionTableContainer = (props) => {
   const { book = {}, pageId = '', transition = {}, addCondition, removeCondition } = props
   const bookId = book.id
 
@@ -70,7 +70,7 @@ const TransitionConditionContainer = (props) => {
   })
 
   return (
-    <TransitionCondition
+    <ConditionTable
       {...props}
       addCondition={_addCondition}
       removeCondition={_removeCondition}
@@ -81,4 +81,4 @@ const TransitionConditionContainer = (props) => {
 export default compose(
   graphql(addConditionMutation, addConditionMutationOptions),
   graphql(removeConditionMutation, removeConditionMutationOptions),
-)(TransitionConditionContainer)
+)(ConditionTableContainer)

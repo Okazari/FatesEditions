@@ -2,9 +2,9 @@ import React from 'react'
 import { Button, ButtonIcon, SelectInput, TextAreaInput } from 'components/common'
 import { RouteService } from 'services'
 import { Box, BoxHeader, BoxBody } from 'components/common/Box'
-import TransitionCondition from './TransitionCondition'
-import TransitionEffect from './TransitionEffect'
-import RollRow from '../../common/RollRow'
+import ConditionTable from './ConditionTable'
+import EffectTable from './EffectTable'
+import RollTable from './RollTable'
 import styles from './styles.scss'
 
 const TransitionRow = ({
@@ -85,23 +85,26 @@ const TransitionRow = ({
             placeholder: 'Texte de la transition',
           }}
         />
-        <TransitionCondition
+        <ConditionTable
           book={book}
           pageId={pageId}
           transition={transition}
           index={index}
           updateTransition={updateTransition}
         />
-        <TransitionEffect
+        <EffectTable
           book={book}
           pageId={pageId}
           transition={transition}
+          effects={transition.effects}
           index={index}
         />
-        <RollRow
+        <RollTable
           book={book}
-          roll={transition.roll}
-          update={updateTransition}
+          pageId={pageId}
+          transition={transition}
+          rolls={transition.rolls}
+          index={index}
         />
       </BoxBody>
     </Box>

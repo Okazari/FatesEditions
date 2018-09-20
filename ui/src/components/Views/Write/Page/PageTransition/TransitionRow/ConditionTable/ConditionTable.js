@@ -7,7 +7,7 @@ import styles from './styles.scss'
 
 const operatorConditions = EffectService.conditionOperator
 
-const TransitionCondition = ({
+const ConditionTable = ({
   book,
   transition,
   pageId,
@@ -41,18 +41,18 @@ const TransitionCondition = ({
       <div className={styles.conditionEffect}>
         {
           transition.conditions.map((condition, conditionIndex) =>
-          <RowWithDeleteButton
-            key={condition.id}
-            removeRow={() => removeCondition(condition.id)}
-          >
-            <ConditionRow
-              book={book}
-              pageId={pageId}
-              transitionId={transition.id}
-              condition={condition}
-              index={conditionIndex}
-            />
-          </RowWithDeleteButton>,
+            <RowWithDeleteButton
+              key={condition.id}
+              removeRow={() => removeCondition(condition.id)}
+            >
+              <ConditionRow
+                book={book}
+                pageId={pageId}
+                transitionId={transition.id}
+                condition={condition}
+                index={conditionIndex}
+              />
+            </RowWithDeleteButton>,
           )
         }
         <Button
@@ -68,4 +68,4 @@ const TransitionCondition = ({
   )
 }
 
-export default TransitionCondition
+export default ConditionTable

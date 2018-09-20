@@ -1,1 +1,0 @@
-// TODO: Plugin GraphQL

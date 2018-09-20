@@ -24,8 +24,8 @@ const core = `
       value
       type
     }
-    roll {
-      active
+    rolls {
+      id
       min
       max
       modifier

@@ -223,7 +223,7 @@ module.exports = `
     
     createPageRoll(bookId: ID!, pageId: ID!): Page
     updatePageRoll(bookId: ID!, pageId: ID!, roll: RollInput!): Roll
-    deletePageRoll(bookId: ID!, pageId: ID!, roll: ID!): Page
+    deletePageRoll(bookId: ID!, pageId: ID!, rollId: ID!): Page
 
     createPageTransition(bookId: ID!, pageId: ID!): Page
     updatePageTransition(bookId: ID!, pageId: ID!, transition: TransitionInput!): Transition
