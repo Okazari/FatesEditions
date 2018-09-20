@@ -7,7 +7,7 @@ import Icon from '../Icon'
 const ButtonIcon = ({ icon, subLabel, className, domProps }) => {
   const finalClassName = classnames(styles.component, className)
   return (
-    <Button domProps={domProps} className={finalClassName} >
+    <Button domProps={domProps} className={finalClassName} disabled={domProps.disabled}>
       <Icon className={styles.icon} icon={icon} />
       {subLabel}
     </Button>
