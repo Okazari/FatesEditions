@@ -51,12 +51,13 @@ const Transition = ({
         }
       </Button>
       {
-        transition.roll && transition.roll.active &&
-        <RollButton
-          stats={game.stats}
-          roll={transition.roll}
-          className={styles.rollButton}
-        />
+        transition.rolls.map(roll => (
+          <RollButton
+            stats={game.stats}
+            roll={roll}
+            className={styles.rollButton}
+          />
+        ))
       }
     </AnimatedTransition>
   )
