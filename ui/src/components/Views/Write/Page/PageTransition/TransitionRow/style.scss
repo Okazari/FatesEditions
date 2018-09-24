@@ -3,14 +3,25 @@
 .component {
   margin-bottom: 20px;
   border-radius: 10px;
-  background-color: $background-color-dark-2;
+  background-color: $background-color-dark-1;
 }
 
 .header {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
+  flex-direction: column;
   padding: 10px;
+  &> div {
+    margin-bottom: 10px;
+  }
+  & div:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.row {
+  display: flex;
 }
 
 .deleteButton {
@@ -26,8 +37,30 @@
   transition: all .3s ease-in-out;
   background-color: $background-color;
   &:hover {
-    background-color: $background-color-dark-2;
+    background-color: $background-color-dark-1;
   }
+}
+
+.destination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &> span {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  &> div {
+    margin-right: 10px;
+  }
+}
+
+.selectPage {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.renderButton {
+  padding: 5px 20px;
 }
 
 .icon {

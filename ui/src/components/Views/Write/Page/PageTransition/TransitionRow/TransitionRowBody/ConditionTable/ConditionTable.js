@@ -3,7 +3,7 @@ import { WideButton, SelectInput } from 'components/common'
 import { RowWithDeleteButton } from 'components/Views/Write/Page/common'
 import EffectService from 'services/EffectService'
 import ConditionRow from './ConditionRow'
-import styles from './styles.scss'
+import styles from './style.scss'
 
 const operatorConditions = EffectService.conditionOperator
 

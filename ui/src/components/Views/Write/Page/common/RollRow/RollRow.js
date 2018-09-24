@@ -10,8 +10,8 @@ const RollRow = ({ book, roll, updateRoll }) => {
   return (
     <div className={styles.component}>
       <Input
-        classname={styles.input}
         debounce={500}
+        className={styles.input}
         domProps={{
           type: 'number',
           value: roll.min,
@@ -20,8 +20,8 @@ const RollRow = ({ book, roll, updateRoll }) => {
         }}
       />
       <Input
-        classname={styles.input}
         debounce={500}
+        className={styles.input}
         domProps={{
           type: 'number',
           value: roll.max,

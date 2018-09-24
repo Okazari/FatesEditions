@@ -2,31 +2,10 @@
 
 .component {
   width: 100%;
-  padding: 20px;
-  background-color: $background-color-dark-2;
+  padding: 0 20px;
+  background-color: $background-color-dark-1;
   overflow: hidden;
-}
-
-.destination {
-  &>span {
-    flex: 0.12;
-    font-weight: bold;
-  }
-  .destinationRow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-.selectPage {
-  min-width: 400px;
-}
-
-.body {
-  flex-direction: column;
-  flex: 1;
-  &>div {
-    margin-top: 0;
+  &> div:last-child {
+    padding-bottom: 20px;    
   }
 }
