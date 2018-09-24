@@ -1,4 +1,6 @@
 import {
+  faAngleUp,
+  faAngleDown,
   faAddressCard,
   faAdjust,
   faAmbulance,
@@ -152,6 +154,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 export default {
   init: () => library.add(
+    faAngleUp,
+    faAngleDown,
     faAddressCard,
     faAdjust,
     faAmbulance,

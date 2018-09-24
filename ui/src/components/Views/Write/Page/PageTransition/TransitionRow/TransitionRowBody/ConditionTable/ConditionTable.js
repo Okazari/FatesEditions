@@ -19,24 +19,28 @@ const ConditionTable = ({
     <div>
       <div className={styles.conditionHeader}>
         <span className={styles.title}>Conditions</span>
-        <span> Opérateur de condition : </span>
-        <SelectInput
-          debounce={500}
-          domProps={{
-            value: transition.conditionOperator,
-            onChange: conditionOperator =>
-              updateTransition({ conditionOperator }),
-          }}
-        >
-          {
-            Object.entries(operatorConditions).map(([key, operatorModel]) => {
-              if (typeof operatorModel === 'object') {
-                return <option key={key} value={key}>{operatorModel.label}</option>
+        { transition.conditions.length > 0 &&
+          <div>
+            <span> Opérateur de condition : </span>
+            <SelectInput
+              debounce={500}
+              domProps={{
+                value: transition.conditionOperator,
+                onChange: conditionOperator =>
+                  updateTransition({ conditionOperator }),
+              }}
+            >
+              {
+                Object.entries(operatorConditions).map(([key, operatorModel]) => {
+                  if (typeof operatorModel === 'object') {
+                    return <option key={key} value={key}>{operatorModel.label}</option>
+                  }
+                  return null
+                })
               }
-              return null
-            })
-          }
-        </SelectInput>
+            </SelectInput>
+          </div>
+        }
       </div>
       <div className={styles.conditionEffect}>
         {
