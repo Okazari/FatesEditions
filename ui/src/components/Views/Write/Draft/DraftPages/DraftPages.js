@@ -1,7 +1,11 @@
 import React from 'react'
+import posed, { PoseGroup } from 'react-pose'
 import { WideButton, ButtonIcon, DataTable } from 'components/common'
+import { dataRow } from 'styles/reactPoseAnimation'
 import PageRow from './PageRow'
 import styles from './styles.scss'
+
+const AnimatedPageRow = posed.div(dataRow)
 
 const headers = [
   { type: <ButtonIcon domProps={{ disabled: true }} icon="mode_edit" />, key: 'edit', className: styles.small },
@@ -20,18 +24,22 @@ const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage, updat
         Ajouter une page
       </WideButton>
       <DataTable className="table-hover" headers={headers}>
-        {
-          book.pages.map(page =>
-            <PageRow
-              page={page}
-              key={page.id}
-              bookId={book.id}
-              disabled={disabled}
-              removePage={removePage}
-              updatePage={updatePage}
-            />,
-          )
-        }
+        <PoseGroup>
+          {
+            book.pages.map(page => (
+              <AnimatedPageRow key={page.id}>
+                <PageRow
+                  page={page}
+                  key={page.id}
+                  bookId={book.id}
+                  disabled={disabled}
+                  removePage={removePage}
+                  updatePage={updatePage}
+                />
+              </AnimatedPageRow>
+            ))
+          }
+        </PoseGroup>
       </DataTable>
     </div>
   )
