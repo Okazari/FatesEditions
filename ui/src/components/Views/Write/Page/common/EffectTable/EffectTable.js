@@ -1,10 +1,14 @@
 import React from 'react'
+import posed, { PoseGroup } from 'react-pose'
 import { WideButton } from 'components/common'
 import {
   RowWithDeleteButton,
   EffectRow,
 } from 'components/Views/Write/Page/common'
+import { dataRow } from 'styles/reactPoseAnimation'
 import styles from './styles.scss'
+
+const AnimatedEffectRow = posed.div(dataRow)
 
 const EffectTable = ({
   book,
@@ -17,22 +21,23 @@ const EffectTable = ({
   return (
     <div className={styles.component}>
       <span>Effets</span>
-      {
-        effects.map((effect, effectIndex) => (
-          <RowWithDeleteButton
-            key={effect.id}
-            removeRow={() => removeEffect(effect.id)}
-          >
-            <EffectRow
-              effect={effect}
-              index={effectIndex}
-              book={book}
-              pageId={pageId}
-              updateEffect={updateEffect}
-            />
-          </RowWithDeleteButton>
-        ))
-      }
+      <PoseGroup>
+        {
+          effects.map((effect, effectIndex) => (
+            <AnimatedEffectRow key={effect.id}>
+              <RowWithDeleteButton removeRow={() => removeEffect(effect.id)}>
+                <EffectRow
+                  effect={effect}
+                  index={effectIndex}
+                  book={book}
+                  pageId={pageId}
+                  updateEffect={updateEffect}
+                />
+              </RowWithDeleteButton>
+            </AnimatedEffectRow>
+          ))
+        }
+      </PoseGroup>
       <div className={styles.centerButton}>
         <WideButton
           domProps={{ onClick: addEffect }}

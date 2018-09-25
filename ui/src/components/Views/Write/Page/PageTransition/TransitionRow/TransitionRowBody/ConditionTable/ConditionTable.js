@@ -1,9 +1,13 @@
 import React from 'react'
+import posed, { PoseGroup } from 'react-pose'
 import { WideButton, SelectInput } from 'components/common'
 import { RowWithDeleteButton } from 'components/Views/Write/Page/common'
 import EffectService from 'services/EffectService'
+import { dataRow } from 'styles/reactPoseAnimation'
 import ConditionRow from './ConditionRow'
 import styles from './style.scss'
+
+const AnimatedConditionRow = posed.div(dataRow)
 
 const operatorConditions = EffectService.conditionOperator
 
@@ -43,22 +47,23 @@ const ConditionTable = ({
         }
       </div>
       <div className={styles.conditionEffect}>
-        {
-          transition.conditions.map((condition, conditionIndex) =>
-            <RowWithDeleteButton
-              key={condition.id}
-              removeRow={() => removeCondition(condition.id)}
-            >
-              <ConditionRow
-                book={book}
-                pageId={pageId}
-                transitionId={transition.id}
-                condition={condition}
-                index={conditionIndex}
-              />
-            </RowWithDeleteButton>,
-          )
-        }
+        <PoseGroup>
+          {
+            transition.conditions.map((condition, conditionIndex) => (
+              <AnimatedConditionRow key={condition.id}>
+                <RowWithDeleteButton removeRow={() => removeCondition(condition.id)}>
+                  <ConditionRow
+                    book={book}
+                    pageId={pageId}
+                    transitionId={transition.id}
+                    condition={condition}
+                    index={conditionIndex}
+                  />
+                </RowWithDeleteButton>
+              </AnimatedConditionRow>
+            ))
+          }
+        </PoseGroup>
         <WideButton
           className={styles.button}
           domProps={{
