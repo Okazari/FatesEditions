@@ -9,6 +9,7 @@ const AnimatedTransition = posed.div({
   hidden: {
     opacity: 0,
     y: 20,
+    transition: { duration: 0 },
   },
   visible: {
     opacity: 1,

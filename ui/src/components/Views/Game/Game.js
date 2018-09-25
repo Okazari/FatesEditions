@@ -28,7 +28,7 @@ class Game extends React.Component {
       { bottomReached: false },
       () => {
         this.gameWindow.addEventListener('scroll', this.trackScrolling)
-        this.trackScrolling()
+        this.trackScrolling(500)
       },
     )
   }
@@ -41,10 +41,15 @@ class Game extends React.Component {
     return el.getBoundingClientRect().bottom <= window.innerHeight + 50
   }
 
-  trackScrolling() {
+  trackScrolling(timeOut) {
     const wrappedElement = document.getElementById('page')
     if (this.isBottom(wrappedElement)) {
-      this.setState({ bottomReached: true })
+      if (timeOut) {
+        setTimeout(() => this.setState({ bottomReached: true }), timeOut)
+      } else {
+        this.setState({ bottomReached: true })
+      }
+
       this.gameWindow.removeEventListener('scroll', this.trackScrolling)
     }
   }
