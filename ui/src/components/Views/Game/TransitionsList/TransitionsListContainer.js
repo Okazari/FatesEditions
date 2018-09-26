@@ -3,7 +3,7 @@ import TransitionsList from './TransitionsList'
 
 const mapStateToProps = ({ game }) => ({
   transitions: game.book.page[game.currentPageId].transitions,
-  page: game.book.page[game.currentPageId],
+  rolls: game.book.page[game.currentPageId].rolls,
   stats: game.stats,
 })
 
