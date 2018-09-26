@@ -1,9 +1,21 @@
 import React from 'react'
+import posed from 'react-pose'
 import classnames from 'classnames'
 import Panel from './Panel'
 import Page from './Page'
 import TransitionsList from './TransitionsList'
 import styles from './style.scss'
+
+const AnimatedFixedTransitions = posed.div({
+  hidden: {
+    width: '0%',
+    transition: { duration: 0 },
+  },
+  visible: {
+    width: '40%',
+    transition: { duration: 300 },
+  },
+})
 
 class Game extends React.Component {
   constructor(props) {
@@ -58,10 +70,6 @@ class Game extends React.Component {
     const { panelState } = this.props
     const { bottomReached } = this.state
     const wrapperClassName = classnames(panelState && styles.panelIsOpen, styles.wrapper)
-    const fixedClassName = classnames(
-      bottomReached && styles.bottomReached,
-      styles.fixedTransitions,
-    )
     return (
       <div
         className={styles.content}
@@ -72,17 +80,19 @@ class Game extends React.Component {
         <Panel />
         <div className={wrapperClassName}>
           <Page resetScrolling={this.resetScrolling} />
-          <div className={styles.inFlowTransitions}>
-            <TransitionsList
-              visible={bottomReached}
-            />
-          </div>
-        </div>
-        <div className={fixedClassName}>
           <TransitionsList
+            className={styles.inFlowTransitions}
             visible={bottomReached}
           />
         </div>
+        <AnimatedFixedTransitions
+          className={styles.fixedTransitions}
+          pose={bottomReached ? 'visible' : 'hidden'}
+        >
+          <TransitionsList
+            visible={bottomReached}
+          />
+        </AnimatedFixedTransitions>
       </div>
     )
   }

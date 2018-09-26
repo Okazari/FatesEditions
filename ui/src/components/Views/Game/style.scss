@@ -32,20 +32,25 @@
   display: none;
   @media #{$lt-wide} {
     display: block;
+    padding: 50px 50px 50px 0;
+  }
+  @media #{$mobile} {
+    padding: 50px 20px 50px 0;
   }
 }
 
 .fixedTransitions {
-  width: 0%;
+  // width: 0%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // overflow: hidden;
+  overflow: hidden;
+  max-height: 100vh;
   position: sticky;
-  opacity: 0;
   top: 0;
+  padding: 50px 40px 50px 10px;
   @media #{$lt-wide} {
-    display: none;
+   display: none;
   }
   flex-shrink: 4;
   // transition: width $fast-duration ease-out;
@@ -65,7 +70,7 @@
     width: 0;
   }
   100% {
-    opacity: 100;
+    opacity: 1;
     width: 40%;
   }
 }
