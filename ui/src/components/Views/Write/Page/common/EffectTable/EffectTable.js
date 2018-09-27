@@ -20,7 +20,16 @@ const EffectTable = ({
 }) => {
   return (
     <div className={styles.component}>
-      <span>Effets</span>
+      <div className={styles.centerButton}>
+        <WideButton
+          domProps={{ onClick: addEffect }}
+        >
+          {'Ajouter un effet'}
+        </WideButton>
+      </div>
+      {/* { effects.length > 0 &&
+        <span>Effets</span>
+      } */}
       <PoseGroup>
         {
           effects.map((effect, effectIndex) => (
@@ -38,13 +47,6 @@ const EffectTable = ({
           ))
         }
       </PoseGroup>
-      <div className={styles.centerButton}>
-        <WideButton
-          domProps={{ onClick: addEffect }}
-        >
-          {'Ajouter un effet'}
-        </WideButton>
-      </div>
     </div>
   )
 }

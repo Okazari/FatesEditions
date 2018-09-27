@@ -26,6 +26,12 @@
   display: flex;
 }
 
+.textArea {
+  height: 70px;
+  flex: 1;
+  margin-bottom: 0;
+}
+
 .deleteButton {
   margin-left: 20px;
 }
@@ -51,7 +57,7 @@
 }
 
 .summaryNumber {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   width: 30px;
   height: 30px;
   border: 1px solid $primary-color;

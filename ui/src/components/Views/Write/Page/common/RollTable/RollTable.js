@@ -19,7 +19,9 @@ const RollTable = ({
 }) => {
   return (
     <div className={styles.component}>
-      <span>Lancer de dé</span>
+      { rolls.length > 0 &&
+        <span>Lancer de dé</span>
+      }
       <PoseGroup>
         { rolls.length > 0
           ? (rolls.map(roll => (

@@ -1,7 +1,7 @@
 import React from 'react'
 import posed from 'react-pose'
 import { RouteService } from 'services'
-import { Input, ButtonIcon, Button, SelectInput } from 'components/common'
+import { TextAreaInput, ButtonIcon, Button, SelectInput } from 'components/common'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TransitionRowBody from './TransitionRowBody'
 import styles from './style.scss'
@@ -74,7 +74,8 @@ const TransitionRow = (props) => {
     >
       <div className={styles.header}>
         <div className={styles.row}>
-          <Input
+          <TextAreaInput
+            className={styles.textArea}
             debounce={500}
             domProps={{
               value: transition.text,

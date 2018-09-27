@@ -21,8 +21,18 @@ const ConditionTable = ({
 }) => {
   return (
     <div>
+      <div className={styles.centerButton}>
+        <WideButton
+          className={styles.button}
+          domProps={{
+            onClick: addCondition,
+          }}
+        >
+          {'Ajouter une Condition'}
+        </WideButton>
+      </div>
       <div className={styles.conditionHeader}>
-        <span className={styles.title}>Conditions</span>
+        {/* <span className={styles.title}>Conditions</span> */}
         { transition.conditions.length > 0 &&
           <div>
             <span> Opérateur de condition : </span>
@@ -64,14 +74,6 @@ const ConditionTable = ({
             ))
           }
         </PoseGroup>
-        <WideButton
-          className={styles.button}
-          domProps={{
-            onClick: addCondition,
-          }}
-        >
-          {'Ajouter une Condition'}
-        </WideButton>
       </div>
     </div>
   )
