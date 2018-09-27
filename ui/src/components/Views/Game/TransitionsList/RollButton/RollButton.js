@@ -17,7 +17,9 @@ const AnimatedButton = posed.div({
 })
 
 const RollButton = ({ onClick, result, className }) => {
-  const buttonClassName = classnames(styles.component, styles.jiggle, className)
+  const buttonClassName = classnames(styles.component, {
+    [styles.jiggle]: !result,
+  }, className)
 
   const resultClassName = classnames(styles.result, {
     [styles.displayResult]: result !== null,
