@@ -112,13 +112,27 @@ const TransitionRow = (props) => {
         pose={visible ? 'visible' : 'hidden'}
       />
       <div
-        className={styles.collapseButton}
+        className={styles.summary}
         onClick={() => setVisible(!visible)}
       >
-        <FontAwesomeIcon
-          className={styles.icon}
-          icon={icon}
-        />
+        <div className={styles.summaryDisplay}>
+          <div className={styles.summaryLabel}>Conditions</div>
+          <div className={styles.summaryNumber}>{transition.conditions.length}</div>
+        </div>
+        <div className={styles.summaryDisplay}>
+          <div className={styles.summaryLabel}>Effets</div>
+          <div className={styles.summaryNumber}>{transition.effects.length}</div>
+        </div>
+        <div className={styles.summaryDisplay}>
+          <div className={styles.summaryLabel}>Lancers</div>
+          <div className={styles.summaryNumber}>{transition.rolls.length}</div>
+        </div>
+        <div className={styles.collapseButton}>
+          <FontAwesomeIcon
+            className={styles.icon}
+            icon={icon}
+          />
+        </div>
       </div>
     </div>
   )

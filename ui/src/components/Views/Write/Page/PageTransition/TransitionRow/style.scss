@@ -1,14 +1,16 @@
 @import '~styles/colors';
 
 .component {
-  margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 50px;
   border-radius: 10px;
-  background-color: $background-color-dark-1;
+  background-color: $background-color-dark-2;
+  border-radius: 5px;
+  z-index: 2;
 }
 
 .header {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -28,20 +30,62 @@
   margin-left: 20px;
 }
 
-.collapseButton {
-  width: 100%;
+.summary {
   display: flex;
-  justify-content: center;
-  padding: 10px 0;
-  color: $primary-color;
-  transition: all .3s ease-in-out;
-  background-color: $background-color;
-  &:hover {
-    background-color: $background-color-dark-1;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  &:hover > icon {
+    transform: scale(1.5);
   }
 }
 
+.summaryDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.summaryLabel {
+  text-transform: uppercase;
+  padding-right: 10px;
+}
+
+.summaryNumber {
+  font-size: 1.2rem;
+  width: 30px;
+  height: 30px;
+  border: 1px solid $primary-color;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.collapseButton {
+  z-index: -1;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  margin: 0 auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 15px;
+  color: $primary-color;
+  transition: all .2s ease-in-out;
+  background-color: $background-color-dark-2;
+  &:hover {
+    padding-bottom: 10px;
+  }
+}
+
+
 .destination {
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;

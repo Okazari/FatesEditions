@@ -3,9 +3,8 @@
 .component {
   width: 100%;
   padding: 0 20px;
-  background-color: $background-color-dark-1;
   overflow: hidden;
   &> div:last-child {
-    padding-bottom: 20px;    
+    padding-bottom: 10px;    
   }
 }
