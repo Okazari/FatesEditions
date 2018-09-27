@@ -4,7 +4,7 @@ export const dataRow = {
     opacity: 1,
   },
   exit: {
-    y: -50,
+    y: -20,
     opacity: 0,
   },
 }
