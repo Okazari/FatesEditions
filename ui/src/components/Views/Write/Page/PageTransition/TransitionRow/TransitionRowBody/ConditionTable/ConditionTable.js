@@ -32,7 +32,6 @@ const ConditionTable = ({
         </WideButton>
       </div>
       <div className={styles.conditionHeader}>
-        {/* <span className={styles.title}>Conditions</span> */}
         { transition.conditions.length > 0 &&
           <div>
             <span> Opérateur de condition : </span>

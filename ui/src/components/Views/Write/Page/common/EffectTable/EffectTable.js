@@ -27,9 +27,6 @@ const EffectTable = ({
           {'Ajouter un effet'}
         </WideButton>
       </div>
-      {/* { effects.length > 0 &&
-        <span>Effets</span>
-      } */}
       <PoseGroup>
         {
           effects.map((effect, effectIndex) => (
