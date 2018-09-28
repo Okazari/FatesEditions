@@ -98,7 +98,7 @@ module.exports = {
     })),
     deleteStat: isAuth((_, { bookId, statId }) => findBookById(bookId).then(book => {
       return book.deleteOne('stats', statId)
-      .save()
+                 .save()
     })),
     
     createObject: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
@@ -190,14 +190,14 @@ module.exports = {
     })),
     updatePageTransition: isAuth((_, { bookId, pageId, transition }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
-      .selectOne('transitions', transition.id)
-      .set(transition)
-      .save()
+                 .selectOne('transitions', transition.id)
+                 .set(transition)
+                 .save()
     })),
     deletePageTransition: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
-      .deleteOne('transitions', transitionId)
-      .save()
+                 .deleteOne('transitions', transitionId)
+                 .save()
     })),
     
     createPageTransitionEffect: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {

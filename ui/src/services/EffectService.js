@@ -120,6 +120,24 @@ class EffectService {
       exec: (value, modifier) => Math.round(parseFloat(value) / parseFloat(modifier)),
     },
   }
+
+  getStat = (roll, stats) => stats[roll.stat]
+  getModifiedMin = (roll, stat) => this.roll[roll.modifier].exec(roll.min, stat)
+  getModifiedMax = (roll, stat) => this.roll[roll.modifier].exec(roll.max, stat)
+
+  getRollMin = (roll, stats) => {
+    const stat = this.getStat(roll, stats)
+    return roll.modifier
+      ? this.getModifiedMin(roll, stat)
+      : roll.min
+  }
+
+  getRollMax = (roll, stats) => {
+    const stat = this.getStat(roll, stats)
+    return roll.modifier
+      ? this.getModifiedMax(roll, stat)
+      : roll.max
+  }
 }
 
 export default new EffectService()

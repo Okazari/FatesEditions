@@ -1,11 +1,7 @@
 import React from 'react'
-import posed, { PoseGroup } from 'react-pose'
-import { WideButton, ButtonIcon, DataTable } from 'components/common'
-import { dataRow } from 'styles/reactPoseAnimation'
+import { WideButton, ButtonIcon, DataTable, AnimatedList } from 'components/common'
 import StatRow from './StatRow'
 import styles from './styles.scss'
-
-const AnimatedStatRow = posed.div(dataRow)
 
 const headers = [
   { type: 'Icône', key: 'icon', className: styles.small },
@@ -28,22 +24,17 @@ const DraftStats = ({ book, updateStat, addStat, removeStat, disabled = false })
           Ajouter une caractéristique
         </WideButton>
         <DataTable headers={headers} className="table-hover">
-          <PoseGroup>
+          <AnimatedList list={book.stats}>
             {
-              book.stats.map((stat, index) => (
-                <AnimatedStatRow key={stat.id}>
-                  <StatRow
-                    key={stat.id}
-                    index={index}
-                    stat={stat}
-                    disabled={disabled}
-                    updateStat={updateStat}
-                    removeStat={removeStat}
-                  />
-                </AnimatedStatRow>
-              ))
+              (stat, index) => <StatRow
+                index={index}
+                stat={stat}
+                disabled={disabled}
+                updateStat={updateStat}
+                removeStat={removeStat}
+              />
             }
-          </PoseGroup>
+          </AnimatedList>
         </DataTable>
       </div>
     </div>

@@ -1,14 +1,12 @@
 import React from 'react'
-import posed, { PoseGroup } from 'react-pose'
-import { WideButton } from 'components/common'
+import posed from 'react-pose'
+import { WideButton, AnimatedList } from 'components/common'
 import {
   RowWithDeleteButton,
   RollRow,
 } from 'components/Views/Write/Page/common'
-import { dataRow } from 'styles/reactPoseAnimation'
 import styles from './style.scss'
 
-const AnimatedRollRow = posed.div(dataRow)
 const AnimatedAddRollButton = posed.div({
   hiddenButton: {
     height: 0,
@@ -64,21 +62,19 @@ const RollTable = ({
       { rolls.length > 0 &&
         <span key="label">Lancer de dé</span>
       }
-      <PoseGroup>
+      <AnimatedList list={rolls}>
         {
-          rolls.map(roll => (
-            <AnimatedRollRow key={roll.id}>
-              <RowWithDeleteButton removeRow={() => removeRoll(roll.id)}>
-                <RollRow
-                  book={book}
-                  roll={roll}
-                  updateRoll={updateRoll}
-                />
-              </RowWithDeleteButton>
-            </AnimatedRollRow>
-          ))
+          roll => (
+            <RowWithDeleteButton removeRow={() => removeRoll(roll.id)}>
+              <RollRow
+                book={book}
+                roll={roll}
+                updateRoll={updateRoll}
+              />
+            </RowWithDeleteButton>
+          )
         }
-      </PoseGroup>
+      </AnimatedList>
     </div>
   )
 }

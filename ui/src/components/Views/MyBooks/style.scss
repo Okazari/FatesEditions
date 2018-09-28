@@ -7,8 +7,7 @@
 }
 
 .forbidden {
-  display: none;
-  @media #{$lt-desktop} {
-    display: block;
+  @media #{$gt-tablet} {
+    display: none;
   }
 }

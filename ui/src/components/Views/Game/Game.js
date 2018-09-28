@@ -40,7 +40,7 @@ class Game extends React.Component {
       { bottomReached: false },
       () => {
         this.gameWindow.addEventListener('scroll', this.trackScrolling)
-        this.trackScrolling(500)
+        this.trackScrolling(300)
       },
     )
   }

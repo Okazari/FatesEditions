@@ -50,6 +50,7 @@ const query = gql`
           description
           text
           rolls {
+            id
             min
             max
             modifier
@@ -69,6 +70,7 @@ const query = gql`
             text
             conditionOperator
             rolls {
+              id
               min
               max
               modifier
@@ -107,7 +109,7 @@ const TrialViewContainer = ({ params }) => (
   >
     {
       ({ loading, error, data }) => {
-        if (loading) return <Loader />
+        if (loading) return <Loader white />
         if (error) return null
         const game = data.tryGame
         return <TrialViewReduxContainer key={game.id} game={game} />

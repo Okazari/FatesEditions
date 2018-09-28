@@ -5,7 +5,7 @@ import RollButton from './RollButton'
 import Transition from './Transition'
 import styles from './style.scss'
 
-const List = posed.div({
+const StaggeredChildrenList = posed.div({
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -17,7 +17,7 @@ const List = posed.div({
 const TransitionsList = ({ transitions, rolls, stats, visible, className }) => {
   const finalClassName = classnames(styles.transitionsList, className)
   return (
-    <List
+    <StaggeredChildrenList
       className={finalClassName}
       pose={visible ? 'visible' : 'hidden'}
     >
@@ -32,7 +32,7 @@ const TransitionsList = ({ transitions, rolls, stats, visible, className }) => {
         ))
       }
       {
-        !!transitions && transitions.map((transitionId) => {
+        transitions.map((transitionId) => {
           return (
             <Transition
               key={transitionId}
@@ -41,7 +41,7 @@ const TransitionsList = ({ transitions, rolls, stats, visible, className }) => {
           )
         })
       }
-    </List>
+    </StaggeredChildrenList>
   )
 }
 export default TransitionsList

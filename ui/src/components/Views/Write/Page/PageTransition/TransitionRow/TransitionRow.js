@@ -27,7 +27,6 @@ const Body = posed(TransitionRowBody)({
 
 const TransitionRow = (props) => {
   const {
-    hostRef,
     book,
     transition,
     updateTransition,
@@ -68,10 +67,7 @@ const TransitionRow = (props) => {
   const icon = visible ? 'angle-up' : 'angle-down'
   const doRemoveTransition = () => removeTransition(transition.id)
   return !!book && (
-    <div
-      className={styles.component}
-      ref={hostRef}
-    >
+    <div className={styles.component}>
       <div className={styles.header}>
         <div className={styles.row}>
           <TextAreaInput

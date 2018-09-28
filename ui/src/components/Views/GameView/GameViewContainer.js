@@ -50,6 +50,7 @@ query getGame($gameId: ID!) {
         description
         text
         rolls {
+          id
           min
           max
           modifier
@@ -69,6 +70,7 @@ query getGame($gameId: ID!) {
           text
           conditionOperator
           rolls {
+            id
             min
             max
             modifier
