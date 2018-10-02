@@ -1,6 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
+import { withState } from 'recompose'
 import { RouteService } from 'services'
 import TransitionRow from './TransitionRow'
 
@@ -22,6 +23,13 @@ const core = `
     subject
     value
     type
+  }
+  rolls {
+    id
+    min
+    max
+    modifier
+    stat
   }
 `
 const updateTransitionMutation = gql`
@@ -77,6 +85,7 @@ const TransitionRowContainer = (props) => {
 }
 
 export default compose(
+  withState('visible', 'setVisible', false),
   graphql(updateTransitionMutation, updateTransitionMutationOptions),
   graphql(addMutation, addMutationOptions),
 )(TransitionRowContainer)

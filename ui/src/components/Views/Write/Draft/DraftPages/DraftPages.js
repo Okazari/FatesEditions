@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonIcon, DataTable } from 'components/common'
+import { WideButton, ButtonIcon, DataTable, AnimatedList } from 'components/common'
 import PageRow from './PageRow'
 import styles from './styles.scss'
 
@@ -10,24 +10,26 @@ const headers = [
   { type: <ButtonIcon domProps={{ disabled: true }} icon="delete" />, key: 'delete', className: styles.small },
 ]
 
-const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage }) => {
+const DraftPages = ({ book = { pages: [] }, disabled, addPage, removePage, updatePage }) => {
   return (
     <div className={styles.component}>
-      <Button domProps={{ onClick: addPage, disabled }}>
+      <WideButton
+        domProps={{ onClick: addPage, disabled }}
+      >
         Ajouter une page
-      </Button>
+      </WideButton>
       <DataTable className="table-hover" headers={headers}>
-        {
-          book.pages.map(page =>
-            <PageRow
+        <AnimatedList list={book.pages}>
+          {
+            page => <PageRow
               page={page}
-              key={page.id}
               bookId={book.id}
               disabled={disabled}
               removePage={removePage}
-            />,
-          )
-        }
+              updatePage={updatePage}
+            />
+          }
+        </AnimatedList>
       </DataTable>
     </div>
   )

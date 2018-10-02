@@ -14,6 +14,7 @@ const query = gql`
         id
         username
       }
+      lastModificationDate
     }
     books(draft: false) {
       id

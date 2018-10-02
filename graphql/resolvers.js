@@ -5,6 +5,7 @@ const Stat = require('../models/StatModel')
 const User = require('../models/UserModel')
 const Effect = require('../models/EffectModel')
 const Transition = require('../models/TransitionModel')
+const Roll = require('../models/RollModel')
 const ObjectModel = require('../models/ObjectModel')
 const Game = require('../models/GameModel')
 const Commentary = require('../models/CommentaryModel')
@@ -99,22 +100,43 @@ module.exports = {
       return book.deleteOne('stats', statId)
                  .save()
     })),
+    
+    createObject: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
+      return book.addOne('objects', new ObjectModel())
+                  .save()
+    })),
+    updateObject: isAuth((_, { bookId, object }) => findBookById(bookId).then(book => {
+      return book.selectOne('objects', object.id)
+                  .set(object)
+                  .save()
+    })),
+    deleteObject: isAuth((_, { bookId, objectId }) => findBookById(bookId).then(book => {
+      return book.deleteOne('objects', objectId)
+                  .save()
+    })),
 
+    createPage: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
+      return book.addOne('pages', new Page())
+                 .save()
+    })),
     createPageReturnPage: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
       const page = new Page()
       return book.addOne('pages', page)
                  .save()
                  .then(() => page)
     })),
-    createPage: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
-      return book.addOne('pages', new Page())
-                 .save()
-    })),
     updatePage: isAuth((_, { bookId, page }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', page.id)
                  .set(page)
                  .save()
     })),
+    updatePageReturnBook: isAuth((_, { bookId, page }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', page.id)
+                 .set(page)
+                 .save()
+                 .then(() => book.ressource)
+    })),
+
     deletePage: isAuth((_, { bookId, pageId }) => findBookById(bookId).then(book => {
       book.ressource.pages.forEach(page => {
         page.transitions.forEach(transition => {
@@ -124,20 +146,6 @@ module.exports = {
         })
       })
       return book.deleteOne('pages', pageId)
-                 .save()
-    })),
-
-    createObject: isAuth((_, { bookId }) => findBookById(bookId).then(book => {
-      return book.addOne('objects', new ObjectModel())
-                 .save()
-    })),
-    updateObject: isAuth((_, { bookId, object }) => findBookById(bookId).then(book => {
-      return book.selectOne('objects', object.id)
-                 .set(object)
-                 .save()
-    })),
-    deleteObject: isAuth((_, { bookId, objectId }) => findBookById(bookId).then(book => {
-      return book.deleteOne('objects', objectId)
                  .save()
     })),
 
@@ -157,6 +165,23 @@ module.exports = {
                  .deleteOne('effects', effectId)
                  .save()
     })),
+    
+    createPageRoll: isAuth((_, { bookId, pageId }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId)
+                 .addOne('rolls', new Roll())
+                 .save()
+    })),
+    updatePageRoll: isAuth((_, { bookId, pageId, roll }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId)
+                 .selectOne('rolls', roll.id)
+                 .set(roll)
+                 .save()
+    })),
+    deletePageRoll: isAuth((_, { bookId, pageId, rollId }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId)
+                 .deleteOne('rolls', rollId)
+                 .save()
+    })),
 
     createPageTransition: isAuth((_, { bookId, pageId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
@@ -172,6 +197,26 @@ module.exports = {
     deletePageTransition: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .deleteOne('transitions', transitionId)
+                 .save()
+    })),
+    
+    createPageTransitionEffect: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId)
+                 .selectOne('transitions', transitionId)
+                 .addOne('effects', new Effect())
+                 .save()
+    })),
+    updatePageTransitionEffect: isAuth((_, { bookId, pageId, transitionId, effect }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId)
+                 .selectOne('transitions', transitionId)
+                 .selectOne('effects', effect.id)
+                 .set(effect)
+                 .save()
+    })),
+    deletePageTransitionEffect: isAuth((_, { bookId, pageId, transitionId, effectId }) => findBookById(bookId).then(book => {
+      return book.selectOne('pages', pageId)
+                 .selectOne('transitions', transitionId)
+                 .deleteOne('effects', effectId)
                  .save()
     })),
 
@@ -194,25 +239,27 @@ module.exports = {
                  .deleteOne('conditions', conditionId)
                  .save()
     })),
-    createPageTransitionEffect: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
+
+    createPageTransitionRoll: isAuth((_, { bookId, pageId, transitionId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
-                 .addOne('effects', new Effect())
+                 .addOne('rolls', new Roll())
                  .save()
     })),
-    updatePageTransitionEffect: isAuth((_, { bookId, pageId, transitionId, effect }) => findBookById(bookId).then(book => {
+    updatePageTransitionRoll: isAuth((_, { bookId, pageId, transitionId, roll }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
-                 .selectOne('effects', effect.id)
-                 .set(effect)
+                 .selectOne('rolls', roll.id)
+                 .set(roll)
                  .save()
     })),
-    deletePageTransitionEffect: isAuth((_, { bookId, pageId, transitionId, effectId }) => findBookById(bookId).then(book => {
+    deletePageTransitionRoll: isAuth((_, { bookId, pageId, transitionId, rollId }) => findBookById(bookId).then(book => {
       return book.selectOne('pages', pageId)
                  .selectOne('transitions', transitionId)
-                 .deleteOne('effects', effectId)
+                 .deleteOne('rolls', rollId)
                  .save()
     })),
+
     createGame: isAuth((_, { bookId}, context) => Book.findById(bookId)
       .then(book => generateGame(book, context.user._id))
       .then(game => new Game(game).save())),

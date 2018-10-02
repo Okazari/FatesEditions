@@ -1,0 +1,12 @@
+.component {
+  &>span {
+    font-weight: bold;
+  }
+  .centerButton {
+    text-align: center;
+  }
+}
+
+.animatedAddRollButton {
+  overflow: hidden;
+}

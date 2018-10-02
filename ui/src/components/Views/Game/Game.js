@@ -1,9 +1,21 @@
 import React from 'react'
+import posed from 'react-pose'
 import classnames from 'classnames'
 import Panel from './Panel'
 import Page from './Page'
 import TransitionsList from './TransitionsList'
 import styles from './style.scss'
+
+const AnimatedFixedTransitions = posed.div({
+  hidden: {
+    width: '0%',
+    transition: { duration: 0 },
+  },
+  visible: {
+    width: '40%',
+    transition: { duration: 300 },
+  },
+})
 
 class Game extends React.Component {
   constructor(props) {
@@ -28,7 +40,7 @@ class Game extends React.Component {
       { bottomReached: false },
       () => {
         this.gameWindow.addEventListener('scroll', this.trackScrolling)
-        this.trackScrolling()
+        this.trackScrolling(300)
       },
     )
   }
@@ -41,10 +53,15 @@ class Game extends React.Component {
     return el.getBoundingClientRect().bottom <= window.innerHeight + 50
   }
 
-  trackScrolling() {
+  trackScrolling(timeOut) {
     const wrappedElement = document.getElementById('page')
     if (this.isBottom(wrappedElement)) {
-      this.setState({ bottomReached: true })
+      if (timeOut) {
+        setTimeout(() => this.setState({ bottomReached: true }), timeOut)
+      } else {
+        this.setState({ bottomReached: true })
+      }
+
       this.gameWindow.removeEventListener('scroll', this.trackScrolling)
     }
   }
@@ -53,10 +70,6 @@ class Game extends React.Component {
     const { panelState } = this.props
     const { bottomReached } = this.state
     const wrapperClassName = classnames(panelState && styles.panelIsOpen, styles.wrapper)
-    const fixedClassName = classnames(
-      bottomReached && styles.bottomReached,
-      styles.fixedTransitions,
-    )
     return (
       <div
         className={styles.content}
@@ -67,19 +80,19 @@ class Game extends React.Component {
         <Panel />
         <div className={wrapperClassName}>
           <Page resetScrolling={this.resetScrolling} />
-          <div className={styles.inFlowTransitions}>
-            {
-              bottomReached &&
-              <TransitionsList />
-            }
-          </div>
+          <TransitionsList
+            className={styles.inFlowTransitions}
+            visible={bottomReached}
+          />
         </div>
-        <div className={fixedClassName}>
-          {
-            bottomReached &&
-            <TransitionsList />
-          }
-        </div>
+        <AnimatedFixedTransitions
+          className={styles.fixedTransitions}
+          pose={bottomReached ? 'visible' : 'hidden'}
+        >
+          <TransitionsList
+            visible={bottomReached}
+          />
+        </AnimatedFixedTransitions>
       </div>
     )
   }

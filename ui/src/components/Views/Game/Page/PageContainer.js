@@ -1,5 +1,9 @@
 import { connect } from 'react-redux'
-import { compose, withStateHandlers, withPropsOnChange } from 'recompose'
+import {
+  compose,
+  withStateHandlers,
+  withPropsOnChange,
+} from 'recompose'
 import Page from './Page'
 
 const mapStateToProps = ({

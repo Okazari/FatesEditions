@@ -1,0 +1,118 @@
+@import '~styles/colors';
+
+.component {
+  position: relative;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  background-color: $background-color-dark-2;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+.header {
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  &> div {
+    margin-bottom: 10px;
+  }
+  & div:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.textArea {
+  height: 70px;
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.deleteButton {
+  margin-left: 20px;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  &:hover > icon {
+    transform: scale(1.5);
+  }
+}
+
+.summaryDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.summaryLabel {
+  text-transform: uppercase;
+  padding-right: 10px;
+}
+
+.summaryNumber {
+  font-size: 1.1rem;
+  width: 30px;
+  height: 30px;
+  border: 1px solid $primary-color;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+.collapseButton {
+  z-index: -1;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  margin: 0 auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 15px;
+  color: $primary-color;
+  transition: all .2s ease-in-out;
+  background-color: $background-color-dark-2;
+  &:hover {
+    padding-bottom: 10px;
+  }
+}
+
+
+.destination {
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &> span {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  &> div {
+    margin-right: 10px;
+  }
+}
+
+.selectPage {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.renderButton {
+  padding: 5px 20px;
+}
+
+.icon {
+  font-size: 1.5rem;
+}

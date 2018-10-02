@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonIcon, DataTable } from 'components/common'
+import { WideButton, ButtonIcon, DataTable, AnimatedList } from 'components/common'
 import ItemRow from './ItemRow'
 import styles from './styles.scss'
 
@@ -16,22 +16,23 @@ const DraftItems = ({ book, addObject, removeObject, updateObject, disabled = fa
   return !!book && (
     <div>
       <div className={styles.component}>
-        <Button domProps={{ onClick: addObject, disabled }}>
-          Ajouter un objet
-        </Button>
+        <WideButton
+          domProps={{ onClick: addObject, disabled }}
+        >
+          Ajouter un objet / une compétence
+        </WideButton>
         <DataTable headers={headers} className="table-hover">
-          {
-            book.objects.map((item, index) => (
-              <ItemRow
-                key={item.id}
+          <AnimatedList list={book.objects}>
+            {
+              (item, index) => <ItemRow
                 index={index}
                 item={item}
                 disabled={disabled}
                 updateObject={updateObject}
                 deleteObject={removeObject}
               />
-            ))
-          }
+            }
+          </AnimatedList>
         </DataTable>
       </div>
     </div>

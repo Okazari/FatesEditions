@@ -13,7 +13,7 @@ let uriMongo = `mongodb://${process.env.IP || 'localhost'}:27017/myvirtualstoryb
 if (process.env.MONGODB_ADDON_URI) {
   uriMongo = process.env.MONGODB_ADDON_URI
 }
-mongoose.connect(uriMongo)
+mongoose.connect(uriMongo, { useMongoClient: true })
 
 const app = express()
 

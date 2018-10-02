@@ -1,0 +1,30 @@
+@import '~styles/colors';
+@import '~styles/animations';
+
+.component {
+  display: flex;
+  align-items: center;
+}
+
+.transition {
+  text-align: left;
+  background-color: $dark-background-color-1;
+  padding: 10px 30px;
+  margin: 10px 0;
+  width: 100%;
+  text-transform: none;
+  font-size: 1.35rem;
+  z-index: 1;
+}
+
+.rollButton {
+  margin: 10px 0 10px 20px;
+}
+
+.error {
+  text-align: right;
+}
+
+.disabled {
+  background-color: $dark-background-color-3;
+}

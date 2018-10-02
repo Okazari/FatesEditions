@@ -1,0 +1,13 @@
+@import '~styles/colors';
+
+.component {
+  width: 100%;
+  padding: 0 20px;
+  overflow: hidden;
+  &> div {
+    padding-bottom: 10px;
+  }
+  &> div:last-child {
+    padding-bottom: 10px;    
+  }
+}

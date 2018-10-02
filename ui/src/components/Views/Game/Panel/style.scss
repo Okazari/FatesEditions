@@ -19,3 +19,9 @@
     padding-left: 20px;
   }
 }
+
+.opened {
+  @media #{$mobile} {
+    width: 100%;
+  }
+}

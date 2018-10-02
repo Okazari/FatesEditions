@@ -11,7 +11,7 @@ import GenreList from './GenreList'
 import PageList from './PageList'
 import DeleteButton from './DeleteButton'
 import PublishButton from './PublishButton'
-import styles from './styles.scss'
+import styles from './style.scss'
 
 const tryGame = book => RouteService.goTo(RouteService.routes.trialgame(book.id))
 
@@ -41,7 +41,7 @@ const DraftGeneral = ({
           domProps={{ onClick: () => tryGame(book) }}
           disabled={!startingPage}
         >
-          Essayer mon brouillon
+          Essayer
         </Button>
       </div>
       <div className={styles.bookInformation}>

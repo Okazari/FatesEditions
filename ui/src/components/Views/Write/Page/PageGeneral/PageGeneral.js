@@ -1,18 +1,15 @@
 import React from 'react'
-import { Input, TextAreaInput, Button } from 'components/common'
+import { Input, TextAreaInput } from 'components/common'
 import styles from './styles.scss'
-import EffectRow from '../common/EffectRow'
+import EffectTable from './EffectTable'
+import RollTable from './RollTable'
 
 const PageGeneral = ({
   page,
   book,
-  updateEffect,
-  addEffect,
-  removeEffect,
   updatePage,
 }) => {
   if (!page) return <div />
-
   return (
     <div className={styles.component}>
       <Input
@@ -35,35 +32,16 @@ const PageGeneral = ({
           placeholder: 'Mémo',
         }}
       />
-      {/* <Input
-        label="Lien SoundCloud"
-        debounce={500}
-        domProps={{
-          placeholder: 'Lien SoundCloud de votre musique de fond',
-          value: page.backgroundMusic,
-          onChange: backgroundMusic => updatePage({ backgroundMusic }),
-        }}
-      /> */}
-      <div className={styles.effectTitle}>
-        {"Effets à l'arrivée sur la page"}
-      </div>
-      <div className={styles.effectRow}>
-        <Button className="md-whiteframe-z1" domProps={{ onClick: addEffect }} >
-          {'Ajouter un Effet'}
-        </Button>
-        {
-          page.effects && page.effects.map((effect, index) => {
-            return (<EffectRow
-              key={effect.id}
-              effect={effect}
-              index={index}
-              book={book}
-              updateEffect={updateEffect}
-              removeEffect={effectId => removeEffect(effectId)}
-            />)
-          })
-        }
-      </div>
+      <EffectTable
+        book={book}
+        pageId={page.id}
+        effects={page.effects}
+      />
+      <RollTable
+        book={book}
+        pageId={page.id}
+        rolls={page.rolls}
+      />
     </div>
   )
 }

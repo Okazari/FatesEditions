@@ -1,0 +1,83 @@
+@import '~styles/colors';
+@import '~styles/animations';
+
+.component {
+  position: relative;
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  background-color: $dark-background-color-1;
+  padding: 30px;
+  border-radius: 1000px;
+  transform: rotate(0deg) translateY(0px);
+  transform-origin: bottom;
+  overflow: hidden;
+}
+
+.jiggle {
+  animation-name: jiggle;
+  animation-duration: 7000ms;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+@keyframes jiggle {
+  0% {
+    transform: rotate(0deg) translateY(0px);
+  }
+  57% {
+    transform: rotate(0deg) translateY(0px);
+  }
+  60% {
+    transform: rotate(12deg) translateY(-5px);
+  }
+  62% {
+    transform: rotate(-12deg) translateY(-5px);
+  }
+  64% {
+    transform: rotate(10deg) translateY(-5px);
+  }
+  66% {
+    transform: rotate(-10deg) translateY(-5px);
+  }
+  68% {
+    transform: rotate(6deg) translateY(-5px);
+  }
+  70% {
+    transform: rotate(-6deg) translateY(-5px);
+  }
+  75% {
+    transform: rotate(0deg) translateY(-5px);
+  }
+  85% {
+    transform: rotate(0deg) translateY(0px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0px);
+  }
+}
+
+.result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%);
+  transition: transform $standard-duration ease-in-out;
+}
+
+.displayResult {
+  transform: translate(-50%, -50%);
+}
+
+.dice {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform $standard-duration ease-in-out;
+}
+
+.displayDice {
+  transform: translate(-50%, 150%);
+}

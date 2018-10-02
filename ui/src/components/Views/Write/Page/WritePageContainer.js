@@ -10,6 +10,12 @@ const query = gql`
       title
       description
       backgroundMusic
+      rolls {
+        min
+        max
+        modifier
+        stat
+      }
       effects {
         id
         operator
@@ -35,6 +41,12 @@ const query = gql`
           subject
           value
           type
+        }
+        rolls {
+          min
+          max
+          modifier
+          stat
         }
       }
     }

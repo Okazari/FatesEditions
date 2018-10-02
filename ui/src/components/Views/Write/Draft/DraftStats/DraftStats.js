@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, ButtonIcon, DataTable } from 'components/common'
+import { WideButton, ButtonIcon, DataTable, AnimatedList } from 'components/common'
 import StatRow from './StatRow'
 import styles from './styles.scss'
 
@@ -18,22 +18,23 @@ const DraftStats = ({ book, updateStat, addStat, removeStat, disabled = false })
   return !!book && (
     <div>
       <div className={styles.component}>
-        <Button domProps={{ onClick: addStat, disabled }}>
+        <WideButton
+          domProps={{ onClick: addStat, disabled }}
+        >
           Ajouter une caractéristique
-        </Button>
+        </WideButton>
         <DataTable headers={headers} className="table-hover">
-          {
-            book.stats.map((stat, index) => (
-              <StatRow
-                key={stat.id}
+          <AnimatedList list={book.stats}>
+            {
+              (stat, index) => <StatRow
                 index={index}
                 stat={stat}
                 disabled={disabled}
                 updateStat={updateStat}
                 removeStat={removeStat}
               />
-            ))
-          }
+            }
+          </AnimatedList>
         </DataTable>
       </div>
     </div>

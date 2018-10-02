@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, TextAreaInput, Button, ErrorMessage } from 'components/common'
-
+import styles from './style.scss'
 
 const CommentaryInput = ({ onSubmit, onCommentChange, comment, loading, error }) => (
   <Form onSubmit={onSubmit}>
@@ -15,7 +15,7 @@ const CommentaryInput = ({ onSubmit, onCommentChange, comment, loading, error })
       }}
     />
     {error && <ErrorMessage>{error}</ErrorMessage>}
-    <Button>
+    <Button className={styles.button}>
       { loading
         ? 'Chargement'
         : 'Envoyer'

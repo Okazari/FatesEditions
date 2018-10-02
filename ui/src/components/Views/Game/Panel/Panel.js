@@ -1,10 +1,14 @@
 import React from 'react'
+import classnames from 'classnames'
 import { GamePanels } from 'components/common'
 import styles from './style.scss'
 
 const Panel = ({ panelState }) => {
+  const finalClassName = classnames(styles.panel, {
+    [styles.opened]: panelState,
+  })
   return (
-    <div className={styles.panel}>
+    <div className={finalClassName}>
       {
         GamePanels
           .filter(panel => panelState === panel.key)

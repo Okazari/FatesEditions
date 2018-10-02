@@ -1,21 +1,24 @@
 import React from 'react'
-import { AlertMessage, Emphasis, Button } from 'components/common'
-import styles from './style.scss'
+import classnames from 'classnames'
+import { AlertMessage, Emphasis, WideButton } from 'components/common'
+import styles from '../style.scss'
+
+const buttonClassName = classnames(styles.button, styles.delete)
 
 const DeleteButton = ({ onClick }) => (
-  <div>
+  <div className={styles.actionWarning}>
     <AlertMessage title={'Attention !'}>
       <Emphasis>Supprimer</Emphasis>
       votre brouillon supprimera celui-ci
       <Emphasis>définitivement</Emphasis>
       et de manière<Emphasis>irréversible.</Emphasis>
     </AlertMessage>
-    <Button
+    <WideButton
       domProps={{ onClick }}
-      className={styles.delete}
+      className={buttonClassName}
     >
-      Supprimer mon brouillon
-    </Button>
+      Supprimer
+    </WideButton>
   </div>
 )
 

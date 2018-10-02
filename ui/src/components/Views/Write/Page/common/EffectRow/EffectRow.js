@@ -11,7 +11,6 @@ const EffectRow = ({ book, effect, index, updateEffect, removeEffect }) => {
     updateEffect({ id: effect.id, ...changes })
   }
 
-
   return !!book && (
     <div className={styles.component}>
       <div>

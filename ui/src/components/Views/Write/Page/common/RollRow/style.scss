@@ -1,0 +1,29 @@
+.component {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  flex: 1;
+  &> span {
+    font-weight: bold;
+  }
+}
+
+.small {
+  max-width: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.selectInput {
+  flex: 1;
+  margin-bottom: 0;
+  &>select {
+    flex: 1;
+    margin: 0 10px;
+  }
+}
+
+.input {
+  flex: 1;
+  margin: 0 10px;
+}
