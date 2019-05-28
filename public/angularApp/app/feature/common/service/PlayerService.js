@@ -7,9 +7,9 @@ myVirtualStoryBookApp.service("PlayerService", ['BookService','GameService','$ht
         
         service.player = {};
         
-        service.player.data = JSON.parse($window.localStorage.getItem('user')); 
+        service.player.data = JSON.parse('{"_id":"5637460ecfef2d4b0ee30772","password":null,"email":"benjamin.plouzennec@zenika.com","username":"Zenika","__v":0}'); 
         if(service.player.data === null){
-            $state.go("signin");
+                $state.go("signin");
         };
         
         service.player.books = {};

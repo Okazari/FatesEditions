@@ -17,6 +17,12 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/count', function(req, res, next) {
+    Game.count({},function(err, number) {
+        res.status(200).json(number);
+    });
+});
+
 router.get('/:gameId', function(req, res, next) {
     Game.findOne({_id:req.params.gameId},function(err, game) {
         if (err) res.send(err);

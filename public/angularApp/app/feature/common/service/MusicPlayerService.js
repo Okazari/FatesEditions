@@ -64,7 +64,7 @@ myVirtualStoryBookApp.service("MusicPlayerService", ['$http',
         };
         
         service.music.isSame = function(string){
-            return (string.split("//")[1] === (service.music.trackUrl.split("//")[1]) || string == service.music.id);
+            return angular.isDefined(service.music.trackUrl) && (string.split("//")[1] === (service.music.trackUrl.split("//")[1]) || string == service.music.id);
         }
         
         service.music.play = function(force){

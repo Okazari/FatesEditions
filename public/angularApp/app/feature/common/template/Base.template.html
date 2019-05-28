@@ -1,6 +1,6 @@
 <div class="wrapper" style="position: static;" ng-swipe-disable-mouse ng-swipe-right="showSlidebar()" ng-swipe-left="hideSlidebar()">
     <header class="main-header md-whiteframe-z2">
-        <a ui-sref="app.play.books" class="logo"><img class="logo-header" src="/app/images/logo.png"><b style="font-size:0.8em;">MyVirtualStoryBook</b></a>
+        <a href="https://myvirtualstorybook-mvsb-2.c9.io/" class="logo"><img class="logo-header" src="/app/images/logo.png"><b style="font-size:0.8em;">MyVirtualStoryBook</b></a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
           <!-- Sidebar toggle button-->
@@ -58,7 +58,7 @@
             </a>
             <ul class="treeview-menu" ng-class="{'menu-open':!menu.play.collapse}">
               <li id="menu-choosebook"><a ng-click="toggleSlidebar()" ui-sref="app.play.books"><i class="fa fa-circle-o"></i>Choisir un livre</a></li>
-              <li id="menu-choosegame"><a ng-click="toggleSlidebar()" ui-sref="app.play.games"><i class="fa fa-circle-o"></i>Reprendre une partie</a></li>
+              <li id="menu-choosegame"><a ng-click="toggleSlidebar()"><i class="fa fa-circle-o"></i>Reprendre une partie</a></li>
             </ul>
           </li>
           <li class="treeview" ng-class="{'active':!menu.write.collapse}">
@@ -66,7 +66,7 @@
               <i class="fa fa-pencil"></i> <span>Ecrire</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu" ng-class="{'menu-open':!menu.write.collapse}">
-              <li id="menu-createbook"><a ng-click="newBook();toggleSlidebar();"><i class="fa fa-circle-o"></i>Créer un livre</a></li>
+              <li id="menu-createbook"><a ng-click="toggleSlidebar();"><i class="fa fa-circle-o"></i>Créer un livre</a></li>
               <li id="menu-choosedraft"><a ng-click="toggleSlidebar()" ui-sref="app.write.drafts"><i class="fa fa-circle-o"></i>Voir mes brouillons</a></li>
               <li ng-show="!loaders.books" ng-repeat="book in playerDrafts.list | filter:{draft:true}"><a ng-click="toggleSlidebar()" ui-sref="app.write.book({id:book._id})"><i class="fa fa-{{genres.list[book.genreId].icon}}"></i>{{book.name}}</a></li>
               <li ng-show="loaders.books"><a><i class="fa fa-refresh"></i>Rafraichissement des livres</a></li>
@@ -78,8 +78,8 @@
             </a>
             <ul class="treeview-menu" ng-class="{'menu-open':!menu.share.collapse}">
               <li id="menu-sharebook"><a ng-click="toggleSlidebar()" ui-sref="app.share.book"><i class="fa fa-circle-o"></i>Partager un livre</a></li>
-              <li id="menu-sharedbook"><a ng-click="toggleSlidebar()" ui-sref="app.share.publication"><i class="fa fa-circle-o"></i>Voir mes livres partagés</a></li>
-              <li ng-show="!loaders.books" ng-repeat="book in playerDrafts.list | filter:{draft:false}"><a ng-click="toggleSlidebar()" ui-sref="app.write.book({id:book._id})"><i class="fa fa-{{genres.list[book.genreId].icon}}"></i>{{book.name}}</a></li>
+              <li id="menu-sharedbook"><a ng-click="toggleSlidebar()"><i class="fa fa-circle-o"></i>Voir mes livres partagés</a></li>
+              <li ng-show="!loaders.books" ng-repeat="book in playerDrafts.list | filter:{draft:false}"><a ng-click="toggleSlidebar()" ><i class="fa fa-{{genres.list[book.genreId].icon}}"></i>{{book.name}}</a></li>
               <li ng-show="loaders.books"><a><i class="fa fa-refresh"></i>Rafraichissement des livres</a></li>
             </ul>
           </li>
