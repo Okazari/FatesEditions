@@ -1,11 +1,25 @@
-Fates Editions
-=================
+# Fates Editions
 
 Fates-Editions est une application web de création d'histoires interactives.
 
-Version actuelle : V2.0.0
-----------------
+Refonte technique pour passer sur une stack javascript récente.
+
+- Typescript
+- Next.js
+- Nest
+- GraphQL
+- PostgreSQL
+
+## Version actuelle - EN CONSTRUCTION : V3.0.0
+
 Vous pouvez actuellement :
+
+- NADA
+
+## Prochains objectifs
+
+Les objectifs sont :
+
 - Créer un compte.
 - Vous connecter au site.
 - Changer votre mot de passe.
@@ -24,24 +38,8 @@ Vous pouvez actuellement :
 - Créer une partie depuis la liste des livres.
 - Jouer une partie.
 - Reprendre une partie déjà commencé.
-
-Prochains objectifs
--------------------
-Les objectifs sont :
- - Noter et donner son avis sur un livre
- - Système de lancé de dé
- - Système de combat
- - Système de badge
-
-
---------------------
-
-Pour developper le projet en local, 
-créer en local un fichier mailSender/mailCredentials.js
-
-module.exports = {
-  user: 'fakeemail@toto.com',
-  clientId: 'fakeClientID',
-  clientSecret: 'fakeClientSecret',
-  refreshToken: 'fakeRefreshToken',
-}
+- Noter et donner son avis sur un livre
+- Système de lancé de dé
+- Système de combat
+- Système de badge
+- Statistiques de jeux
