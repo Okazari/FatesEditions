@@ -1,9 +1,10 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+const mongoose = require('mongoose')
 
-var GenreSchema   = new Schema({
-    name: String,
-    icon: String,
-});
+const { Schema } = mongoose
 
-module.exports = mongoose.model('Genre', GenreSchema);
+const GenreSchema = new Schema({
+  name: String,
+  icon: String,
+})
+
+module.exports = mongoose.model('Genre', GenreSchema)

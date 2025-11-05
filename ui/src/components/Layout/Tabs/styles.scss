@@ -1,0 +1,21 @@
+@import '~styles/colors';
+@import '~styles/sizes';
+@import '~styles/responsive';
+
+.component {
+  display: flex;
+  justify-content: center;
+  height: $tab-size;
+  @media #{$mobile} {
+    height: $tab-mobile-size;
+  }
+}
+
+.wrapper {
+  display: flex;
+  min-width: 40%;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: center;
+  border-bottom: solid 1px $decorator-color;
+}

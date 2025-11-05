@@ -1,0 +1,21 @@
+.component {
+  display: flex;
+  flex: 1;
+}
+
+.selectInput {
+  flex-direction: row;
+  flex: 1;
+  margin: 0 10px;
+  &>select {
+    flex: 1;
+  }
+}
+
+.input {
+  flex: 1;
+  margin: 0 10px;
+  &>input {
+    height: 100%;
+  }
+}

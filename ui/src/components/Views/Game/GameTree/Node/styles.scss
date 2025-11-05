@@ -1,0 +1,21 @@
+.line {
+  stroke: black;
+  stroke-width: 0.5px;
+}
+
+.path {
+  stroke: white;
+  stroke-width: 0.8px;
+}
+
+.hover {
+  fill: white;
+  stroke: white;
+  text {
+    stroke: none;
+  }
+  .line {
+    stroke: white;
+    stroke-width: 0.5px;
+  }
+}

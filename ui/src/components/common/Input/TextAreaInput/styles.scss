@@ -1,0 +1,23 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.component {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  textarea {
+    height: 150px;
+    outline-color: transparent;
+    background-color: transparent;
+    border: 0;
+    padding: 5px;
+    background-color: $background-color-light-2;
+    border-radius: 3px;
+    resize: none;
+    border-bottom: dashed 1px $black;
+    &:focus{
+      border-bottom: solid 1px $black;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@import '~styles/responsive';
+
+.app {
+  @media #{$lt-desktop} {
+    display: none;
+  }
+}
+
+.forbidden {
+  @media #{$gt-tablet} {
+    display: none;
+  }
+}

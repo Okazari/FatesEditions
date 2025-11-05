@@ -1,0 +1,25 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.component {
+  border: 0;
+  padding: 5px;
+  background-color: $primary-color;
+  color: $transparent-white;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  border-radius: 5px;
+  transition: box-shadow ease-in 100ms;
+  &:hover {
+    box-shadow: $box-shadow-1;
+  }
+  &:disabled {
+    background-color: $background-color-light-2;
+    color: $decorator-color;
+    cursor: not-allowed;
+    &:hover {
+      box-shadow: none;
+    } 
+  }
+}
+

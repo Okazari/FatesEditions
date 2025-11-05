@@ -1,0 +1,18 @@
+@import '~styles/colors';
+
+.component {
+  border: 0;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $primary-color;
+  background-color: $background-color-light-2;
+  border-radius: 5px;
+}
+
+.icon {
+  text-transform: lowercase;
+}

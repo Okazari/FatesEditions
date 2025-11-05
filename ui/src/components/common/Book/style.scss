@@ -1,0 +1,84 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+@import '~styles/animations';
+
+.component {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  font-size: 1.4em;
+  cursor: pointer;
+  transform: rotateZ(360deg);
+  transition: width $standard-duration, height $standard-duration, opacity $standard-duration;
+  &:hover {
+    .coverImage {
+      transform: scale(1.1);
+    }
+  }
+  &.displayed {
+    opacity: 1;
+  }
+}
+
+.cover {
+  height: 100%;
+  overflow: hidden;
+  box-shadow: $box-shadow-1;
+}
+
+.coverImage {
+  transition: transform $standard-duration;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: black;
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.contentTitle {
+  width: 100%;
+  color: $transparent-white;
+  background-color: $transparent-black;
+  padding: 10px;
+}
+
+.bookName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete {
+  position: relative;
+  height: 0;
+  width: 100%;
+  .action {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    z-index: 100;
+    margin: 5px;
+    font-size: 50px;
+    box-shadow: $box-shadow-1;
+    transition: box-shadow ease-in 100ms;
+    cursor: pointer;
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
+  }
+}

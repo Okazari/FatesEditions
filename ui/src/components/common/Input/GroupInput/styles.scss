@@ -1,0 +1,34 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.component {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+
+  input {
+    border: none;
+    outline-color: transparent;
+    background-color: $background-color-light-1;
+    border-radius: 3px;
+    border-bottom: dashed 1px $black;
+    padding: 6px;
+    width: 100%;
+    &:focus{
+      border-bottom: solid 1px $black;
+    }
+  }
+
+  span {
+    align-self: center;
+    border: 1px solid $grey-darken-20;
+    padding: 6px 10px;
+  }
+
+  &>button:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

@@ -1,0 +1,35 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+@import '~styles/sizes';
+@import '~styles/mixins';
+
+.newBook {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: $box-shadow-1;
+  cursor: pointer;
+  transition: transform ease-in 100ms;
+  > i {
+    font-size: 4em;
+  }
+  @media (hover:hover) {
+    &:hover {
+      transform: scale(0.98);
+    }
+  }
+}
+
+.book {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 150%;
+}

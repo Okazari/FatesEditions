@@ -1,0 +1,27 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.component {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  input {
+    border: none;
+    outline-color: transparent;
+    margin: 0;
+    background-color: $background-color-light-2;
+    border-radius: 3px;
+    border-bottom: dashed 1px $black;
+    height: 40px;
+    padding: 6px;
+    width: 100%;
+    &:focus{
+      border-bottom: solid 1px $black;
+    }
+  }
+
+  input[type="checkbox"] {
+    height: 20px;
+  }
+}

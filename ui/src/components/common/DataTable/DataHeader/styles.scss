@@ -1,0 +1,11 @@
+.component {
+  display: flex;
+
+  .headerEntry {
+    flex: 1;
+    margin: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+}

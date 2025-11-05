@@ -1,0 +1,33 @@
+@import '~styles/colors';
+@import '~styles/shadows';
+
+.component {
+  background-color: $white;
+  border-radius: 3px;
+  box-shadow: $box-shadow-1;
+  width: 500px;
+
+  .message {
+    display: flex;
+    font-size: 1.1em;
+    justify-content: center;
+  }
+
+  .messageErr {
+    @extend .message;
+    color: $red;
+  }
+
+  &>div {
+    margin: 0;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .button {
+    margin-top: 10px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,21 @@
+.component {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+
+  .large {
+    flex: 2;
+  }
+
+  .small {
+    max-width: 60px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.select {
+  width: 100%;
+}

@@ -1,13 +1,4 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+const mongoose = require('mongoose')
+const TransitionSchema = require('./TransitionSchema')
 
-var TransitionSchema   = new Schema({
-    fromPage: String,
-    toPage: String,
-    text: String,
-    conditions: [Schema.Types.Mixed],
-    conditionOperator: String,
-    effects: [Schema.Types.Mixed]
-});
-
-module.exports = mongoose.model('Transition', TransitionSchema);
+module.exports = mongoose.model('Transition', TransitionSchema)

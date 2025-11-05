@@ -1,0 +1,52 @@
+// New layout
+
+$background-color-dark-1: #E1E1E1;
+$background-color-dark-2: #DADADA;
+$background-color: #E8E8E8;
+$background-color-light-1: #EFEFEF;
+$background-color-light-2: #F8F8F8;
+
+$primary-color: #893168;
+$secondary-color: #2a4494;
+
+$font-color: #4a4a4a;
+$decorator-color: #979797;
+
+$transparent-black: rgba(0,0,0,.6);
+$transparent-white: rgba(255,255,255,.9);
+$white: #fff;
+
+$background-error: #BB1600;
+$background-sucess: rgb(2, 129, 2);
+
+// dark-ui
+
+$dark-background-color-1: #333;
+$dark-background-color-2: #222;
+$dark-background-color-3: #444;
+$dark-background-color-4: #555;
+$dark-transparent-black: rgba(0,0,0,.95);
+
+$dark-font-color: #CCC;
+
+$dark-primary-color: $dark-font-color;
+$dark-secondary-color: $secondary-color;
+
+
+
+
+
+// Old values
+
+$blue-grey: #ecf0f5;
+
+$grey: #ececec;
+$grey-darken-20: darken($grey, 20);
+$grey-darken-40: darken($grey, 70);
+
+$black: #000;
+$light-black: rgba(0,0,0,0.5);
+$heavy-black: rgba(0,0,0,0.8);
+$red: #f00;
+$blue: #2e6da4;
+$light-blue: #3c8dbc;

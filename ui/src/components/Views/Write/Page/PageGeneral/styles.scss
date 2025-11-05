@@ -1,0 +1,25 @@
+.component {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+
+  > div {
+    margin-bottom: 10px;
+  }
+
+  .effectRow {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .effectTitle {
+    font-weight: bold;
+  }
+}
+
+.button {
+  margin: 0 auto 20px auto;
+  padding: 5px 100px;
+}

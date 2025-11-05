@@ -1,0 +1,9 @@
+@import "~styles/responsive";
+
+.logo {
+  margin-bottom: 20px;
+  height: 70px;
+  @media #{$mobile} {
+    display: none;
+  }
+}
